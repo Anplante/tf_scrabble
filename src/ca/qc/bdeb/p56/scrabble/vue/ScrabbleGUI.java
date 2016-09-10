@@ -1,7 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.vue;
 
-import ca.qc.bdeb.p56.scrabble.model.Board;
-import ca.qc.bdeb.p56.scrabble.model.Tile;
+import ca.qc.bdeb.p56.scrabble.model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,24 +20,24 @@ public class ScrabbleGUI extends JFrame {
 
     JLabel[][] grid;
     JPanel[][] squares;
+    GameManager gameManager;
+    Game gameModel;
+    BoardManager boardManager;
 
+
+
+
+    public ScrabbleGUI(GameManager gameManager, Dimension screenSize)
     {
-
-    }
-
-
-    public ScrabbleGUI()
-    {
+        this.gameManager = gameManager;
 
         setLayout(new BorderLayout());
-
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation(screenSize.width / 4, screenSize.height / 4);
 
         gridPanel = new JPanel();
-        squares = new JPanel[Board.BOARD_SIZE][Board.BOARD_SIZE];
-        grid = new JLabel[Board.BOARD_SIZE][Board.BOARD_SIZE];
-
+        squares = new JPanel[15][15];
+        grid = new JLabel[15][15];
+        createGame();
         initGrid();
         add(gridPanel);
 
@@ -51,15 +50,14 @@ public class ScrabbleGUI extends JFrame {
 
 
     private void initGrid() {
-        gridPanel.setLayout(new GridLayout(Board.BOARD_SIZE, Board.BOARD_SIZE));
-        board = new Board();            ////////// ailleurs stp
-        for (int row = 0; row < Board.BOARD_SIZE; row++) {
-            for (int column = 0; column < Board.BOARD_SIZE; column++) {
-                Tile tile = board.getTile(row, column);
+        gridPanel.setLayout(new GridLayout(15, 15));
+
+        for (int row = 0; row < 15; row++) {
+            for (int column = 0; column < 15; column++) {
                 JPanel panel = new JPanel();
                 panel.setSize(50, 50);
                 panel.setBorder(BorderFactory.createEtchedBorder());
-                JLabel label = new JLabel(getContent(tile));
+                JLabel label = new JLabel(""+String.valueOf(gameModel.getContentSquare(row, column)));
                 panel.add(label);
                 squares[row][column] = panel;
                 grid[row][column] = label;
@@ -68,23 +66,20 @@ public class ScrabbleGUI extends JFrame {
         }
     }
 
-    private String getContent(Tile tile) {
-        char content = tile.getContent();
-        if (Character.isLetter(content)) {
-            return ""+content;
-        } else {
-            switch(content) {
-                case Tile.THREE_WORD_BONUS :
-                    return "3W";
-                case Tile.TWO_WORD_BONUS :
-                    return "2W";
-                case Tile.THREE_LETTER_BONUS :
-                    return "3L";
-                case Tile.TWO_LETTER_BONUS :
-                    return "2L";
-            }
-        }
-        return "";
+    private void createGame()
+    {
+        initGame();
+        // initilaiser player rack
+        // initiate scoreboard
+        // etc
+
     }
+
+    private void initGame()
+    {
+        gameModel = gameManager.createGame();
+        gameModel.startGame();
+    }
+
 
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <game>
+        <Square>
+            <letter text="A" value="1" />
+            <letter text="B" value="3" />
+            <letter text="C" value="3" />
+            <letter text="D" value="2" />
+            <letter text="E" value="1" />
+            <letter text="F" value="4" />
+            <letter text="G" value="2" />
+            <letter text="H" value="4" />
+            <letter text="I" value="1" />
+            <letter text="J" value="8" />
+            <letter text="K" value="5" />
+            <letter text="L" value="1" />
+            <letter text="M" value="3" />
+            <letter text="N" value="1" />
+            <letter text="O" value="1" />
+            <letter text="P" value="3" />
+            <letter text="Q" value="10" />
+            <letter text="R" value="1" />
+            <letter text="S" value="1" />
+            <letter text="T" value="1" />
+            <letter text="U" value="1" />
+            <letter text="V" value="4" />
+            <letter text="W" value="4" />
+            <letter text="X" value="8" />
+            <letter text="Y" value="4" />
+            <letter text="Z" value="10" />
+        </Square>
+        <dictionary filename="twl06.txt" />
+        <premiums>
+            <premium name="TW" type="wordscore" multiplier="3" />
+            <premium name="DW" type="wordscore" multiplier="2" />
+            <premium name="TL" type="letterscore" multiplier="3" />
+            <premium name="DL" type="letterscore" multiplier="2" />
+        </premiums>
+        <board>
+            <premium row="0" col="0" name="TW" />
+            <premium row="0" col="7" name="TW" />
+            <premium row="0" col="14" name="TW" />
+            <premium row="7" col="0" name="TW" />
+            <premium row="7" col="14" name="TW" />
+            <premium row="14" col="0" name="TW" />
+            <premium row="14" col="7" name="TW" />
+            <premium row="14" col="14" name="TW" />
+        </board>
+    </game>

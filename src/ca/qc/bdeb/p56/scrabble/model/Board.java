@@ -5,33 +5,50 @@ package ca.qc.bdeb.p56.scrabble.model;
  */
 public class Board {
 
-    public static final int BOARD_SIZE = 15;
-
-    Tile[][] board;
 
 
-    public Board() {
-        InitBoard();
+    Square[][] board;
+
+
+    public Board(int size) {
+        board = new Square[size][size];
+        initBoard();
     }
 
-
-    private void InitBoard() {
-
-        board = new Tile[BOARD_SIZE][BOARD_SIZE];
-
-
-        for (int row = 0; row < BOARD_SIZE; row++) {
-            for (int column = 0; column < BOARD_SIZE; column++) {
-                board[row][column] = new Tile(Character.MIN_VALUE, row, column);
-                Tile square = board[row][column];
+    private void initBoard() {
+        for (int row = 0; row < board.length ;row++) {
+            for (int column = 0; column <board.length; column++) {
+                board[row][column] = new Square(Character.MIN_VALUE, row, column);
+                Square square = board[row][column];
             }
         }
     }
 
-
-    public Tile getTile(int row, int column) {
-        return board[row][column];
+    public char getContentSquare(int row, int column)
+    {
+        return board[row][column].getContent();
     }
 
+    private void setNeighbours()
+    {
+        for (int row = 0; row < board.length; row++) {
+            for (int column = 0; column < board.length; column++) {
 
+                Square currentSquare = board[row][column];
+
+                Square adjacentUp = (row <= 0) ? null : board[row - 1][column];
+                Square adjacentDown = (row >=board.length - 1) ? null : board[row + 1][column];
+                Square adjacenLeft = (column <= 0) ? null : board[row][column - 1];
+                Square adjacentRight = (column >= board.length- 1) ? null : board[row][column + 1];
+
+
+                currentSquare.setNeighbours( adjacenLeft, adjacentRight, adjacentUp, adjacentDown);
+
+            }
+        }
+    }
+
+    public Square getSquare(int row, int column) {
+        return board[row][column];
+    }
 }
