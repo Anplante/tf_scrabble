@@ -19,12 +19,7 @@ public class BoardManager {
 
     public static final int BOARD_SIZE = 15;
 
-    private final String GAME_FILE = "src/resources/scrabbleParameters.xml";
-
-    private Board board;
-
     private Map<String, Premium> premiums;
-
     private static Map<String, Premium.Type> premiumTypeMap;
 
     static {
@@ -32,6 +27,10 @@ public class BoardManager {
         premiumTypeMap.put("letterscore", Premium.Type.LETTER_SCORE);
         premiumTypeMap.put("wordscore", Premium.Type.WORD_SCORE);
     }
+
+
+    private Board board;
+
 
     public BoardManager()
     {
@@ -42,67 +41,31 @@ public class BoardManager {
         return board;
     }
 
-    public void createBoard() {
+    public void createBoard(Element rootElement) {
 
         board = new Board(BOARD_SIZE);
 
-        try{
 
-            File fXmlFile = new File(GAME_FILE);
-            System.out.println(fXmlFile);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(fXmlFile);
+        Element premiumsElement = (Element) rootElement.getElementsByTagName("premiums").item(0);
+        initPremiums(premiumsElement);
 
-            Element rootElement = doc.getDocumentElement();
-            rootElement.normalize();
+        Element boardElement = (Element) rootElement.getElementsByTagName("board").item(0);
 
-            Element premiumsElement = (Element) doc.getElementsByTagName("premiums").item(0);
-            initPremiums(premiumsElement);
+        NodeList premiumsNodes = boardElement.getElementsByTagName("premium");
 
-            Element boardElement = (Element) doc.getElementsByTagName("board").item(0);
-
-            NodeList premiumsNodes = boardElement.getElementsByTagName("premium");
-
-            for(int i = 0; i < premiumsNodes.getLength(); i++)
-            {
-                Element activeElement = (Element) premiumsNodes.item(i);
-
-                String identifier = activeElement.getAttribute("name");
-                int row = Integer.parseInt(activeElement.getAttribute("row"));
-                int column = Integer.parseInt(activeElement.getAttribute("col"));
-
-                Premium premium = premiums.get(identifier);
-                System.out.println(row + " " + column);
-                board.getSquare(row, column).setPremium(premium);
-            }
-        }
-        catch (Exception e)
+        for(int i = 0; i < premiumsNodes.getLength(); i++)
         {
-            e.printStackTrace();
-        }
-
-    }
-
-    private void initPremiums(Element premiumElement)
-    {
-        premiums = new TreeMap<String, Premium>();
-
-        NodeList premiumNodes = premiumElement.getElementsByTagName("premium");
-
-        for(int i = 0; i < premiumNodes.getLength(); i++)
-        {
-           Element activeElement = (Element) premiumNodes.item(i);
+            Element activeElement = (Element) premiumsNodes.item(i);
 
             String identifier = activeElement.getAttribute("name");
-            String type = activeElement.getAttribute("type");
-            int multiplier = Integer.parseInt(activeElement.getAttribute("multiplier"));
+            int row = Integer.parseInt(activeElement.getAttribute("row"));
+            int column = Integer.parseInt(activeElement.getAttribute("col"));
 
-            Premium.Type premiumType = premiumTypeMap.get(type);
-            Premium premium = new Premium(premiumType, multiplier);
-            premiums.put(identifier, premium);
+            Premium premium = premiums.get(identifier);
+            board.getSquare(row, column).setPremium(premium);
         }
     }
+
 
     public String getContentSquare(int row, int column) {
 
@@ -124,13 +87,30 @@ public class BoardManager {
                     if (premiumContent.equals(premium.getValue())) {
                         value = premium.getKey();
                     }
-
                 }
-
-
             }
         }
-
         return value;
     }
+
+    private void initPremiums(Element premiumElement)
+    {
+        premiums = new TreeMap<String, Premium>();
+
+        NodeList premiumNodes = premiumElement.getElementsByTagName("premium");
+
+        for(int i = 0; i < premiumNodes.getLength(); i++)
+        {
+            Element activeElement = (Element) premiumNodes.item(i);
+
+            String identifier = activeElement.getAttribute("name");
+            String type = activeElement.getAttribute("type");
+            int multiplier = Integer.parseInt(activeElement.getAttribute("multiplier"));
+
+            Premium.Type premiumType = premiumTypeMap.get(type);
+            Premium premium = new Premium(premiumType, multiplier);
+            premiums.put(identifier, premium);
+        }
+    }
+
 }

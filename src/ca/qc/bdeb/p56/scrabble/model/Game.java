@@ -1,5 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
+import org.w3c.dom.Element;
+
 import java.util.List;
 import java.util.Random;
 
@@ -15,10 +17,10 @@ public class Game {
     private Random randomGenerator;
 
 
-    public Game()
+    public Game(Element rootElement)
     {
 
-        boardManager = createBoard();
+        boardManager = createBoard(rootElement);
     }
 
     public String getContentSquare(int row, int column)
@@ -26,10 +28,10 @@ public class Game {
         return boardManager.getContentSquare(row, column);
     }
 
-    private BoardManager createBoard()
+    private BoardManager createBoard(Element rootElement)
     {
         BoardManager newBoardManager = new BoardManager();
-        newBoardManager.createBoard();
+        newBoardManager.createBoard(rootElement);
 
         return newBoardManager;
     }

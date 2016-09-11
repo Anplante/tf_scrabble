@@ -2,32 +2,33 @@
 
     <game>
         <Square>
-            <letter text="A" value="1" />
-            <letter text="B" value="3" />
-            <letter text="C" value="3" />
-            <letter text="D" value="2" />
-            <letter text="E" value="1" />
-            <letter text="F" value="4" />
-            <letter text="G" value="2" />
-            <letter text="H" value="4" />
-            <letter text="I" value="1" />
-            <letter text="J" value="8" />
-            <letter text="K" value="5" />
-            <letter text="L" value="1" />
-            <letter text="M" value="3" />
-            <letter text="N" value="1" />
-            <letter text="O" value="1" />
-            <letter text="P" value="3" />
-            <letter text="Q" value="10" />
-            <letter text="R" value="1" />
-            <letter text="S" value="1" />
-            <letter text="T" value="1" />
-            <letter text="U" value="1" />
-            <letter text="V" value="4" />
-            <letter text="W" value="4" />
-            <letter text="X" value="8" />
-            <letter text="Y" value="4" />
-            <letter text="Z" value="10" />
+            <letter text="A" value="1" amount="9"/>
+            <letter text="B" value="3" amount="2"/>
+            <letter text="C" value="3" amount="2"/>
+            <letter text="D" value="2" amount="3"/>
+            <letter text="E" value="1" amount="15"/>
+            <letter text="F" value="4" amount="2"/>
+            <letter text="G" value="2" amount="2"/>
+            <letter text="H" value="4" amount="2"/>
+            <letter text="I" value="1" amount="8"/>
+            <letter text="J" value="8"  amount="1"/>
+            <letter text="K" value="10" amount="1"/>
+            <letter text="L" value="1" amount="5"/>
+            <letter text="M" value="2" amount="3"/>
+            <letter text="N" value="1" amount="6"/>
+            <letter text="O" value="1" amount="6"/>
+            <letter text="P" value="3" amount="2"/>
+            <letter text="Q" value="8" amount="1"/>
+            <letter text="R" value="1" amount="6"/>
+            <letter text="S" value="1" amount="6"/>
+            <letter text="T" value="1" amount="6"/>
+            <letter text="U" value="1" amount="6"/>
+            <letter text="V" value="4" amount="2"/>
+            <letter text="W" value="10" amount="1"/>
+            <letter text="X" value="10" amount="1"/>
+            <letter text="Y" value="10" amount="1"/>
+            <letter text="Z" value="10" amount="1"/>
+            <Letter text=" " value="0" amount ="2"/>
         </Square>
         <dictionary filename="twl06.txt" />
         <premiums>
@@ -100,11 +101,5 @@
             <premium row="12" col="12" name="DW"/>
             <premium row="13" col="1" name="DW"/>
             <premium row="13" col="13" name="DW"/>
-
-
-
-
-
-
         </board>
     </game>
