@@ -21,6 +21,7 @@ public class Square {
     private int posRow;
     private int posColumn;
     private char content;
+    private Tile tileOn;
     private Premium premium;
 
 
@@ -30,6 +31,7 @@ public class Square {
         this.content = content;
         this.posRow = row;
         this.posColumn = column;
+        this.tileOn = null;
     }
 
 
@@ -50,7 +52,6 @@ public class Square {
     {
         return content;
     }
-
 
     public void setPremium(Premium premium) {
         this.premium = premium;
