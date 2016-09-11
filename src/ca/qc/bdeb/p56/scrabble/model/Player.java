@@ -13,7 +13,7 @@ public class Player implements Observable {
 
 
     private Game game;
-   // private final List<Tile> lettersOnHand;
+   // private final List<Letter> lettersOnHand;
 
     public Player(Game game)
     {

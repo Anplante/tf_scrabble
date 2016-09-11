@@ -21,7 +21,7 @@ public class Square {
     private int posRow;
     private int posColumn;
     private char content;
-    private Tile tileOn;
+    private Letter letterOn;
     private Premium premium;
 
 
@@ -31,7 +31,7 @@ public class Square {
         this.content = content;
         this.posRow = row;
         this.posColumn = column;
-        this.tileOn = null;
+        this.letterOn = null;
     }
 
 

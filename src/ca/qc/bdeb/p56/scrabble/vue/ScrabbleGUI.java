@@ -10,16 +10,17 @@ import java.awt.*;
  */
 public class ScrabbleGUI extends JFrame {
 
-    public static final int SQUARE_SIZE = 10;
+    private final double RATIO_BOARD_ZONE = 0.12;
+    private final double RATIO_PANEL_INFORMATION = 0.20;
+    private final double RATIO_LETTER_RACK_ZONE = 0.12;
+    private final int BOARD_ZONE_HEIGHT;
+    private final int LETTER_RACK_ZONE_HEIGHT;
 
+    PanelLetterRackZone panelLetterRack;
 
-    Board board; //test commit
-    int deux;
-    int trois;
+    Board board;
     JPanel gridPanel;
 
-    JLabel[][] grid;
-    JPanel[][] squares;
     GameManager gameManager;
     Game gameModel;
     BoardManager boardManager;
@@ -27,23 +28,53 @@ public class ScrabbleGUI extends JFrame {
 
 
 
-    public ScrabbleGUI(GameManager gameManager, Dimension screenSize)
+    public ScrabbleGUI(GameManager gameManager, Rectangle bounds)
     {
         this.gameManager = gameManager;
+        createGame();
+        setBounds(bounds);
+        BOARD_ZONE_HEIGHT = (int) (bounds.height * RATIO_BOARD_ZONE) > 100 ? (int) (bounds.height*RATIO_BOARD_ZONE) :  100;
+        LETTER_RACK_ZONE_HEIGHT = (int) (bounds.height * RATIO_LETTER_RACK_ZONE) > 100 ? (int) (bounds.height*RATIO_LETTER_RACK_ZONE) : 100;
 
-        setLayout(new BorderLayout());
-        setLocation(screenSize.width / 4, screenSize.height / 4);
+        //setUndecorated(true);
+        setResizable(false);
+        setLayout(null);
+
+        initializeComponents();
+
+
+    }
+
+    private void initializeComponents() {
+        createPanelLetterRack();
+        createPanelBoard();
+    }
+
+
+
+
+    private void createPanelLetterRack() {
+
+        int x = 0;
+        int y = getHeight() - LETTER_RACK_ZONE_HEIGHT;
+        int witdhBoard = (int) (getWidth() - getWidth() * RATIO_PANEL_INFORMATION);
+
+        panelLetterRack = new PanelLetterRackZone();
+        panelLetterRack.setLayout(null);
+        panelLetterRack.setLocation(x,y);
+        panelLetterRack.setSize(witdhBoard, LETTER_RACK_ZONE_HEIGHT);
+        add(panelLetterRack);
+    }
+
+    private void createPanelBoard() {
 
         gridPanel = new JPanel();
-        squares = new JPanel[15][15];
-        grid = new JLabel[15][15];
-        createGame();
-        initGrid();
+        gridPanel.setLocation(100,0);
+        int widthBoard = (int) (getWidth() - getWidth() * RATIO_PANEL_INFORMATION) - 100;
+        int y = getHeight() - LETTER_RACK_ZONE_HEIGHT- BOARD_ZONE_HEIGHT;
+        gridPanel.setSize(widthBoard, y);
         add(gridPanel);
-
-        setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
+        initGrid();
 
     }
 
@@ -54,14 +85,10 @@ public class ScrabbleGUI extends JFrame {
 
         for (int row = 0; row < 15; row++) {
             for (int column = 0; column < 15; column++) {
-                JPanel panel = new JPanel();
-                panel.setSize(50, 50);
-                panel.setBorder(BorderFactory.createEtchedBorder());
-                JLabel label = new JLabel(""+String.valueOf(gameModel.getContentSquare(row, column)));
-                panel.add(label);
-                squares[row][column] = panel;
-                grid[row][column] = label;
-                gridPanel.add(panel);
+
+                LabelSquare label = new LabelSquare(""+String.valueOf(gameModel.getContentSquare(row, column)));
+
+                gridPanel.add(label);
             }
         }
     }
@@ -77,7 +104,7 @@ public class ScrabbleGUI extends JFrame {
 
     private void initGame()
     {
-        gameModel = gameManager.createGame();
+        gameModel = gameManager.createNewGame();
         gameModel.startGame();
     }
 
