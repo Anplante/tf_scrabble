@@ -48,13 +48,10 @@ public class ScrabbleGUI extends JFrame {
     private void createPanelLetterRack() {
 
         int x = 0;
-        int y = getHeight() - LETTER_RACK_ZONE_HEIGHT;
+        int y = getHeight() - LETTER_RACK_ZONE_HEIGHT*2;
         int witdhBoard = (int) (getWidth() - getWidth() * RATIO_PANEL_INFORMATION);
-
-        panelLetterRack = new PanelLetterRackZone();
-        panelLetterRack.setLayout(null);
-        panelLetterRack.setLocation(x,y);
-        panelLetterRack.setSize(witdhBoard, LETTER_RACK_ZONE_HEIGHT);
+        Rectangle boundsZoneLetterRack = new Rectangle(x, y, witdhBoard, BOARD_ZONE_HEIGHT);
+        panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack);
 
         panelLetterRack.setPlayer(gameModel.getActivePlayer());
         panelLetterRack.setGame(gameModel);
@@ -77,6 +74,7 @@ public class ScrabbleGUI extends JFrame {
 
 
     private void initGrid() {
+
         gridPanel.setLayout(new GridLayout(15, 15));
 
         for (int row = 0; row < 15; row++) {

@@ -18,7 +18,7 @@ public class Board {
     private void initBoard() {
         for (int row = 0; row < board.length ;row++) {
             for (int column = 0; column <board.length; column++) {
-                board[row][column] = new Square(Character.MIN_VALUE, row, column);
+                board[row][column] = new Square();
                 Square square = board[row][column];
             }
         }
@@ -26,7 +26,7 @@ public class Board {
 
     public char getContentSquare(int row, int column)
     {
-        return board[row][column].getContent();
+        return board[row][column].getLetterOn();
     }
 
     private void setNeighbours()

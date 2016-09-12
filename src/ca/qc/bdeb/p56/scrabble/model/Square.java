@@ -20,17 +20,13 @@ public class Square {
 
     private int posRow;
     private int posColumn;
-    private char content;
     private Letter letterOn;
     private Premium premium;
 
 
 
-    public Square(char content, int row, int column)
+    public Square()
     {
-        this.content = content;
-        this.posRow = row;
-        this.posColumn = column;
         this.letterOn = null;
     }
 
@@ -47,11 +43,17 @@ public class Square {
     }
 
 
-
-    public char getContent()
+    public char getLetterOn()
     {
-        return content;
+        if(letterOn != null)
+        {
+            return letterOn.getLetter();
+        }
+        else{
+            return Character.MIN_VALUE;
+        }
     }
+
 
     public void setPremium(Premium premium) {
         this.premium = premium;

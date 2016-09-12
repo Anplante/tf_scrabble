@@ -73,7 +73,7 @@ public class BoardManager {
 
         Square square = board.getSquare(row, column);
 
-        char content = square.getContent();
+        char content = square.getLetterOn();
 
         if(content != Character.MIN_VALUE)
         {
