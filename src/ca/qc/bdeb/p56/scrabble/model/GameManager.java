@@ -7,6 +7,8 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -20,7 +22,7 @@ public class GameManager {
     private final String GAME_FILE = "src/resources/scrabbleParameters.xml";
 
 
-    private static Map<Letter, Integer > alphabetBag;
+    private List<Letter> alphabetBag;
 
     public GameManager()
     {
@@ -38,8 +40,8 @@ public class GameManager {
             Document doc = dBuilder.parse(fXmlFile);
             Element rootElement = doc.getDocumentElement();
             rootElement.normalize();
-            game = new Game(rootElement);
-
+            initAlphabetBag(rootElement);
+            game = new Game(rootElement, alphabetBag);
         }
         catch (Exception e)
         {
@@ -50,7 +52,7 @@ public class GameManager {
 
     private void initAlphabetBag(Element rootElement)
     {
-        alphabetBag = new TreeMap<Letter, Integer>();
+        alphabetBag = new ArrayList<Letter>();
 
         Element alphabetsElement = (Element) rootElement.getElementsByTagName("square").item(0);
 
@@ -61,16 +63,16 @@ public class GameManager {
             Element activeElement = (Element) alphabetsNodes.item(i);
 
 
-            char caracter = activeElement.getAttribute("name").charAt(0);
+            char caracter = activeElement.getAttribute("text").charAt(0);
             int value = Integer.parseInt(activeElement.getAttribute("value"));
             Letter letter = new Letter(caracter, value);
 
             int amount = Integer.parseInt(activeElement.getAttribute("amount"));
 
-
-                alphabetBag.put(letter, amount);
-
-
+            for(int j = 0; j < amount; j++)
+            {
+                alphabetBag.add(letter);   // Potentiellement un probleme, car c'est la meme reference pour chaque lettre
+            }
         }
     }
 }

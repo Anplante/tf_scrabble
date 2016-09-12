@@ -13,4 +13,10 @@ public class Letter {
         this.letter = letter;
         this.value = value;
     }
+
+    public char getLetter()
+    {
+        return letter;
+    }
+
 }

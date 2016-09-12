@@ -2,6 +2,7 @@ package ca.qc.bdeb.p56.scrabble.model;
 
 import org.w3c.dom.Element;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -13,14 +14,23 @@ public class Game {
     private BoardManager boardManager;
     private List<Player> players;
     private int activePlayer;
+    private static List<Letter> alphabetBag;
 
-    private Random randomGenerator;
+    private static final Random randomGenerator = new Random();
 
 
-    public Game(Element rootElement)
+
+    public Game(Element rootElement, List<Letter> alphabetBag)
     {
 
         boardManager = createBoard(rootElement);
+        this.alphabetBag = alphabetBag;
+
+
+        // tests
+        players = new ArrayList<Player>();
+        players.add(new Player(this));
+        players.add(new Player(this));
     }
 
     public String getContentSquare(int row, int column)
@@ -38,5 +48,24 @@ public class Game {
 
 
     public void startGame() {
+
+
+        activePlayer = randomGenerator.nextInt(players.size());
+        initPlayerRack();
+    }
+
+
+
+    private void initPlayerRack() {
+
+            for (int i = 0; i < 7; i++) {
+                for (int j = 0; j < players.size(); j++) {
+                players.get(j % 2).addLetter(alphabetBag.get(randomGenerator.nextInt(alphabetBag.size())));
+            }
+        }
+    }
+
+    public Player getActivePlayer() {
+        return players.get(activePlayer);
     }
 }

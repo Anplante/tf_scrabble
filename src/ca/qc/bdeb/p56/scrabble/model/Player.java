@@ -3,6 +3,7 @@ package ca.qc.bdeb.p56.scrabble.model;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -13,14 +14,21 @@ public class Player implements Observable {
 
 
     private Game game;
+    private List<Letter> letters;
+
    // private final List<Letter> lettersOnHand;
 
     public Player(Game game)
     {
         this.game = game;
+        letters = new ArrayList<Letter>();
     }
 
 
+    public void addLetter(Letter letter)
+    {
+        letters.add(letter);
+    }
 
     @Override
     public void ajouterObservateur(Observateur o) {
@@ -40,5 +48,9 @@ public class Player implements Observable {
     @Override
     public void aviserObservateurs(Enum<?> e, Object o) {
 
+    }
+
+    public List<Letter> getLetters() {
+        return letters;
     }
 }

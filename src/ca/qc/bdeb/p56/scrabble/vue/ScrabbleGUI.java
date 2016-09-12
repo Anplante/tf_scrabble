@@ -17,15 +17,11 @@ public class ScrabbleGUI extends JFrame {
     private final int LETTER_RACK_ZONE_HEIGHT;
 
     PanelLetterRackZone panelLetterRack;
-
     Board board;
     JPanel gridPanel;
-
     GameManager gameManager;
     Game gameModel;
     BoardManager boardManager;
-
-
 
 
     public ScrabbleGUI(GameManager gameManager, Rectangle bounds)
@@ -41,16 +37,12 @@ public class ScrabbleGUI extends JFrame {
         setLayout(null);
 
         initializeComponents();
-
-
     }
 
     private void initializeComponents() {
         createPanelLetterRack();
         createPanelBoard();
     }
-
-
 
 
     private void createPanelLetterRack() {
@@ -63,6 +55,10 @@ public class ScrabbleGUI extends JFrame {
         panelLetterRack.setLayout(null);
         panelLetterRack.setLocation(x,y);
         panelLetterRack.setSize(witdhBoard, LETTER_RACK_ZONE_HEIGHT);
+
+        panelLetterRack.setPlayer(gameModel.getActivePlayer());
+        panelLetterRack.setGame(gameModel);
+        panelLetterRack.changementEtat();
         add(panelLetterRack);
     }
 
