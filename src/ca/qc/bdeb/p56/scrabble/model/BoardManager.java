@@ -113,4 +113,7 @@ public class BoardManager {
         }
     }
 
+    public Square getSquare(int row, int column) {
+        return board.getSquare(row, column);
+    }
 }

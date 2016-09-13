@@ -52,6 +52,7 @@ public class Game {
 
         activePlayer = randomGenerator.nextInt(players.size());
         initPlayerRack();
+        getActivePlayer().setState(new PhaseSelect(getActivePlayer()));
     }
 
 
@@ -67,5 +68,17 @@ public class Game {
 
     public Player getActivePlayer() {
         return players.get(activePlayer);
+    }
+
+    public Square getSquare(int row, int column) {
+        return boardManager.getSquare(row, column);
+    }
+
+    public void playTile(Square square) {
+       getActivePlayer().playTile(square);
+    }
+
+    public void selectLetter(Letter letter) {
+        getActivePlayer().selectLetter(letter);
     }
 }

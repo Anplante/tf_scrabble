@@ -62,4 +62,8 @@ public class Square {
     public Premium getPremium() {
         return premium;
     }
+
+    public void setLetter(Letter letter) {
+        this.letterOn = letter;
+    }
 }

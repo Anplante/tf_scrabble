@@ -80,7 +80,7 @@ public class ScrabbleGUI extends JFrame {
         for (int row = 0; row < 15; row++) {
             for (int column = 0; column < 15; column++) {
 
-                LabelSquare label = new LabelSquare(""+String.valueOf(gameModel.getContentSquare(row, column)));
+                LabelSquare label = new LabelSquare(gameModel.getSquare(row, column), gameModel);
 
                 gridPanel.add(label);
             }

@@ -23,8 +23,9 @@ public class PanelLetterRackZone extends JPanel implements Observateur{
 
         super();
         player = null;
-        setSize(boundsZoneLetterRack.width, boundsZoneLetterRack.height);
-        setLocation(boundsZoneLetterRack.x, boundsZoneLetterRack.y);
+        setBounds(boundsZoneLetterRack);
+        //setSize(boundsZoneLetterRack.width, boundsZoneLetterRack.height);
+        //setLocation(boundsZoneLetterRack.x, boundsZoneLetterRack.y);
         setLayout(null);
 
     }
@@ -56,23 +57,11 @@ public class PanelLetterRackZone extends JPanel implements Observateur{
 
         for(Letter letter : letters)
         {
-            // Possibilite de creer une label pour ca
-            JLabel label = new JLabel(""+ letter.getLetter(), SwingConstants.CENTER);
-            label.setSize(50, 50);
-            label.setBounds(x, y, 50, 50);
-            //label.setBackground(Color.YELLOW);
-            label.setOpaque(true);
-            add(label);
-            x += 60;
 
-            label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            label.setBorder(BorderFactory.createEtchedBorder());
-            addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent mouseEvent) {
-                }
-            });
-        }
+            LabelTile tile = new LabelTile(game, letter, new Rectangle(x, y, 50, 50) );
+            add(tile);
+            x += 60;
+       }
     }
 
     @Override
