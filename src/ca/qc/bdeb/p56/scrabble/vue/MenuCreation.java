@@ -22,6 +22,7 @@ public class MenuCreation extends  JFrame {
         Insets insets = fenetre.getInsets();
         fenetre = null;
         panelMenu = new JPanel();
+        panelMenu.setLayout(new BorderLayout());
         this.setSize(new Dimension(insets.left + insets.right + 500,
                 insets.top + insets.bottom + 500));
         this.setVisible(true);
@@ -43,20 +44,25 @@ public class MenuCreation extends  JFrame {
 
     private void ajouterBoutons() {
         btnConfirm = new JButton();
+        btnConfirm.setVisible(true);
+        btnConfirm.setSize(50,50);
+        panelMenu.add(btnConfirm,BorderLayout.SOUTH);
     }
 
     private void ajouterLabelNom() {
         lblNom = new JLabel();
         lblNom.setText("Nom du Joueur : ");
+        lblNom.setLocation(50,50);
+        lblNom.setSize(lblNom.getPreferredSize());
         lblNom.setVisible(true);
-        lblNom.setLocation(10, 300);
         panelMenu.add(lblNom);
     }
 
     private void ajouterTextBox() {
-        panelMenu.setLocation(100,0);
+        panelMenu.setLocation(0,0);
         panelMenu.setSize(new Dimension(500, 500));
         txtNom = new JTextField("Entrez votre nom", 30);
+        txtNom.setBounds(150,50,180,30);
         txtNom.setVisible(true);
         txtNom.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
