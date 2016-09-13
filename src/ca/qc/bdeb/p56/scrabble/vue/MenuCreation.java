@@ -1,7 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.vue;
 
-import javax.swing.*;
-import java.awt.*;
+        import javax.swing.*;
+        import java.awt.*;
 
 /**
  * Created by Antoine on 9/12/2016.
