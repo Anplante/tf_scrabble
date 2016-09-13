@@ -50,7 +50,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur{
     public void changementEtat() {
 
 
-        int x = (getWidth() /2);
+        int x = ((getWidth()) /2) - 150;
         int y = (getHeight()- 50)/2;
 
         List<Letter> letters = player.getLetters();

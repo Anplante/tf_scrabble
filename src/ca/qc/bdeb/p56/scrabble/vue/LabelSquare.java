@@ -34,7 +34,7 @@ public class LabelSquare extends JLabel {
 
         addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent mouseEvent) {
+            public void mousePressed(MouseEvent mouseEvent) {
                 game.playTile(square);
                 setText(""+String.valueOf(square.getLetterOn()));
             }

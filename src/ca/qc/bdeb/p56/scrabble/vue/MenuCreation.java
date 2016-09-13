@@ -17,42 +17,56 @@ public class MenuCreation extends  JFrame {
 
     public MenuCreation() {
 
+        super();
+
+        setLayout(null);
+
         JFrame fenetre = new JFrame();
         fenetre.pack();
         Insets insets = fenetre.getInsets();
         fenetre = null;
-        panelMenu = new JPanel();
-        panelMenu.setLayout(new BorderLayout());
-        this.setSize(new Dimension(insets.left + insets.right + 500,
+        setSize(new Dimension(insets.left + insets.right + 500,
                 insets.top + insets.bottom + 500));
-        this.setVisible(true);
-        setResizable(false);
-        setLayout(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+       // panelMenu.setLayout(new BorderLayout());
+
 
         initializeComponents();
 
-        add(panelMenu);
+
+
+        setVisible(true);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+
+
+
     }
 
 
     private void initializeComponents() {
+        panelMenu = new JPanel();
+        panelMenu.setLayout(null);
         ajouterTextBox();
         ajouterLabelNom();
         ajouterBoutons();
+
+        add(panelMenu);
     }
 
     private void ajouterBoutons() {
         btnConfirm = new JButton();
         btnConfirm.setVisible(true);
-        btnConfirm.setSize(50,50);
-        panelMenu.add(btnConfirm,BorderLayout.SOUTH);
+        btnConfirm.setSize(100,50);
+        btnConfirm.setLocation(225,350);
+        panelMenu.add(btnConfirm);
     }
 
     private void ajouterLabelNom() {
         lblNom = new JLabel();
         lblNom.setText("Nom du Joueur : ");
-        lblNom.setLocation(50,50);
+        lblNom.setLocation(5,50);
         lblNom.setSize(lblNom.getPreferredSize());
         lblNom.setVisible(true);
         panelMenu.add(lblNom);
@@ -61,9 +75,9 @@ public class MenuCreation extends  JFrame {
     private void ajouterTextBox() {
         panelMenu.setLocation(0,0);
         panelMenu.setSize(new Dimension(500, 500));
-        txtNom = new JTextField("Entrez votre nom", 30);
-        txtNom.setBounds(150,50,180,30);
-        txtNom.setVisible(true);
+        txtNom = new JTextField("", 30);
+        txtNom.setBounds(50,50,180,30);
+
         txtNom.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String input = txtNom.getText();
