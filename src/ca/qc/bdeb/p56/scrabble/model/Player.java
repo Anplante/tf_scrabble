@@ -15,6 +15,7 @@ public class Player implements Observable {
 
     private Game game;
     private List<Letter> letters;
+    private Phase currentState;
 
    // private final List<Letter> lettersOnHand;
 
@@ -52,5 +53,25 @@ public class Player implements Observable {
 
     public List<Letter> getLetters() {
         return letters;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+
+    protected void setState(Phase newPhase)
+    {
+        currentState = newPhase;
+    }
+
+
+    public void playTile(Square square) {
+
+        currentState.playTile(square);
+    }
+
+    public void selectLetter(Letter letter) {
+        currentState.selectTile(letter);
     }
 }
