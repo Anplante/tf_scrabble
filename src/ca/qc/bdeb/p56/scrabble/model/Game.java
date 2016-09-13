@@ -49,7 +49,6 @@ public class Game {
 
     public void startGame() {
 
-
         activePlayer = randomGenerator.nextInt(players.size());
         initPlayerRack();
         getActivePlayer().setState(new PhaseSelect(getActivePlayer()));
@@ -64,6 +63,16 @@ public class Game {
                 players.get(j % 2).addLetter(alphabetBag.get(randomGenerator.nextInt(alphabetBag.size())));
             }
         }
+    }
+
+    public int lettersLeft()
+    {
+        return alphabetBag.size();
+    }
+
+    public int getPlayersLeft()
+    {
+        return players.size();
     }
 
     public Player getActivePlayer() {

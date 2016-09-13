@@ -25,7 +25,6 @@ public class Player implements Observable {
         letters = new ArrayList<Letter>();
     }
 
-
     public void addLetter(Letter letter)
     {
         letters.add(letter);

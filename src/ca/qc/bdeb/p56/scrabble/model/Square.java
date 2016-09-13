@@ -54,6 +54,11 @@ public class Square {
         }
     }
 
+    public Letter getLetter()
+    {
+      return letterOn;
+    }
+
 
     public void setPremium(Premium premium) {
         this.premium = premium;
