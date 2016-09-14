@@ -60,7 +60,9 @@ public class Game {
 
             for (int i = 0; i < 7; i++) {
                 for (int j = 0; j < players.size(); j++) {
-                players.get(j % 2).addLetter(alphabetBag.get(randomGenerator.nextInt(alphabetBag.size())));
+                    Letter letter = alphabetBag.get(randomGenerator.nextInt(alphabetBag.size()));
+                players.get(j % 2).addLetter(letter);
+                    alphabetBag.remove(letter);
             }
         }
     }
