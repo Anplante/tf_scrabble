@@ -5,6 +5,7 @@ import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import java.security.KeyPairGeneratorSpi;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -19,6 +20,7 @@ public class Player implements Observable {
     private State currentState;
     private int score;
     private boolean active;
+    private transient LinkedList<Observateur> observateurs;  //transient = not be serialized
 
    // private final List<Letter> lettersOnHand;
 
@@ -28,6 +30,7 @@ public class Player implements Observable {
         letters = new ArrayList<Letter>();
         setState(new StatePending(this));
         active = false;
+        observateurs = new LinkedList<>();
     }
 
     public void addLetter(Letter letter)
@@ -36,18 +39,22 @@ public class Player implements Observable {
     }
 
     @Override
-    public void ajouterObservateur(Observateur o) {
+    public void ajouterObservateur(Observateur ob) {
 
+            observateurs.add(ob);
     }
 
     @Override
-    public void retirerObservateur(Observateur o) {
-
+    public void retirerObservateur(Observateur ob) {
+        observateurs.remove(ob);
     }
 
     @Override
     public void aviserObservateurs() {
-
+        for(Observateur ob : observateurs)
+        {
+            ob.changementEtat();
+        }
     }
 
     @Override
@@ -106,5 +113,9 @@ public class Player implements Observable {
     }
     public int getScore() {
         return score;
+    }
+
+    public void remove(Letter letterSelected) {
+        letters.remove(letterSelected);
     }
 }

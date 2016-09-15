@@ -26,6 +26,8 @@ public class StateSelect extends State {
         if(letterSelected != null)
         {
             square.setLetter(letterSelected);
+            getPlayer().remove(letterSelected);
+            getPlayer().aviserObservateurs();
         }
 
     }

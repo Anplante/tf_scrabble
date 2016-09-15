@@ -24,10 +24,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur{
         super();
         player = null;
         setBounds(boundsZoneLetterRack);
-        //setSize(boundsZoneLetterRack.width, boundsZoneLetterRack.height);
-        //setLocation(boundsZoneLetterRack.x, boundsZoneLetterRack.y);
         setLayout(null);
-
     }
 
 
@@ -49,6 +46,15 @@ public class PanelLetterRackZone extends JPanel implements Observateur{
     @Override
     public void changementEtat() {
 
+        if(player != game.getActivePlayerIndex())
+        {
+            setPlayer(game.getActivePlayerIndex());
+        }
+
+
+        for (Component comp : getComponents()) {
+            remove(comp);
+        }
 
         int x = ((getWidth()) /2) - 150;
         int y = (getHeight()- 50)/2;
@@ -57,11 +63,12 @@ public class PanelLetterRackZone extends JPanel implements Observateur{
 
         for(Letter letter : letters)
         {
-
             LabelTile tile = new LabelTile(game, letter, new Rectangle(x, y, 50, 50) );
             add(tile);
             x += 60;
        }
+
+        repaint();
     }
 
     @Override
