@@ -15,7 +15,7 @@ import static org.junit.Assert.assertNotEquals;
 /**
  * Created by 1467160 on 2016-09-15.
  */
-public class MenuCreationTest {
+public class PanelEditGameTest {
 
     private JTextField txtInput = new JTextField(20);
 

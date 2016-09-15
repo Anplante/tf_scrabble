@@ -8,7 +8,7 @@ package ca.qc.bdeb.p56.scrabble.vue;
 /**
  * Created by Antoine on 9/12/2016.
  */
-public class MenuCreation extends  JFrame {
+public class PanelEditGame extends  JFrame {
 
     private JPanel panelMenu;
     private JTextField txtNom;
@@ -19,7 +19,7 @@ public class MenuCreation extends  JFrame {
     private String[] nombreDeAi = { "1", "2", "3"};
     private JComboBox cmbNombreAi = new JComboBox();
 
-    public MenuCreation() {
+    public PanelEditGame() {
 
         super();
 
