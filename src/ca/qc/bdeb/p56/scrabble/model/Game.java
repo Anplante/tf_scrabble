@@ -13,7 +13,7 @@ public class Game {
 
     private BoardManager boardManager;
     private List<Player> players;
-    private int activePlayer;
+    private int activePlayerIndex;
     private static List<Letter> alphabetBag;
 
     private static final Random randomGenerator = new Random();
@@ -49,12 +49,30 @@ public class Game {
 
     public void startGame() {
 
-        activePlayer = randomGenerator.nextInt(players.size());
+        activePlayerIndex = randomGenerator.nextInt(players.size());
         initPlayerRack();
-        getActivePlayer().setState(new PhaseSelect(getActivePlayer()));
+
+        for (Player player : players) {
+            player.getState().initialize(); // rien pour le moment
+        }
+        goToNextState();
     }
 
 
+    public void goToNextState()
+    {
+        getActivePlayerIndex().nextState();
+
+        while(!getActivePlayerIndex().isActivated())
+        {
+            activateNextPlayer();
+        }
+    }
+
+    private void activateNextPlayer() {
+        activePlayerIndex = (activePlayerIndex + 1) % players.size();
+        getActivePlayerIndex().nextState();
+    }
 
     private void initPlayerRack() {
 
@@ -77,8 +95,8 @@ public class Game {
         return players.size();
     }
 
-    public Player getActivePlayer() {
-        return players.get(activePlayer);
+    public Player getActivePlayerIndex() {
+        return players.get(activePlayerIndex);
     }
 
     public Square getSquare(int row, int column) {
@@ -86,10 +104,14 @@ public class Game {
     }
 
     public void playTile(Square square) {
-       getActivePlayer().playTile(square);
+       getActivePlayerIndex().playTile(square);
     }
 
     public void selectLetter(Letter letter) {
-        getActivePlayer().selectLetter(letter);
+        getActivePlayerIndex().selectLetter(letter);
+    }
+
+    public List<Player> getPlayers() {
+        return players;
     }
 }

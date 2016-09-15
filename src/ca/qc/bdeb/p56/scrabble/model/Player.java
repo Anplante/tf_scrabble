@@ -3,6 +3,7 @@ package ca.qc.bdeb.p56.scrabble.model;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
+import java.security.KeyPairGeneratorSpi;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +13,12 @@ import java.util.List;
  */
 public class Player implements Observable {
 
-
+    private String name = "lol";
     private Game game;
     private List<Letter> letters;
-    private Phase currentState;
+    private State currentState;
+    private int score;
+    private boolean active;
 
    // private final List<Letter> lettersOnHand;
 
@@ -23,6 +26,8 @@ public class Player implements Observable {
     {
         this.game = game;
         letters = new ArrayList<Letter>();
+        setState(new StatePending(this));
+        active = false;
     }
 
     public void addLetter(Letter letter)
@@ -59,9 +64,9 @@ public class Player implements Observable {
     }
 
 
-    protected void setState(Phase newPhase)
+    protected void setState(State newState)
     {
-        currentState = newPhase;
+        currentState = newState;
     }
 
 
@@ -72,5 +77,34 @@ public class Player implements Observable {
 
     public void selectLetter(Letter letter) {
         currentState.selectTile(letter);
+    }
+
+    public State getState() {
+        return currentState;
+    }
+
+    public void nextState() {
+        currentState.execute();
+        State newState =  currentState.getNextState();
+        currentState = newState;
+        newState.initialize();
+        // aviserobservateur
+    }
+
+    public boolean isActivated() {
+        return active;
+    }
+
+    public void setActive(boolean active)
+    {
+        this.active = active;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+    public int getScore() {
+        return score;
     }
 }

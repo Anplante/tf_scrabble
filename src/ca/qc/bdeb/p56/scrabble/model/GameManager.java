@@ -32,7 +32,6 @@ public class GameManager {
 
     public Game createNewGame()
     {
-
         try{
             File fXmlFile = new File(GAME_FILE);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -62,7 +61,6 @@ public class GameManager {
         {
             Element activeElement = (Element) alphabetsNodes.item(i);
 
-
             char caracter = activeElement.getAttribute("text").charAt(0);
             int value = Integer.parseInt(activeElement.getAttribute("value"));
             Letter letter = new Letter(caracter, value);
@@ -71,7 +69,7 @@ public class GameManager {
 
             for(int j = 0; j < amount; j++)
             {
-                alphabetBag.add(letter);   // Potentiellement un probleme, car c'est la meme reference pour chaque lettre
+                alphabetBag.add(letter);   // c'est la meme reference pour chaque lettre
             }
         }
     }

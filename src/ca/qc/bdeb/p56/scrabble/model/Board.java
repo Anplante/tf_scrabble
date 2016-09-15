@@ -19,9 +19,9 @@ public class Board {
         for (int row = 0; row < board.length ;row++) {
             for (int column = 0; column <board.length; column++) {
                 board[row][column] = new Square();
-                Square square = board[row][column];
             }
         }
+        setNeighbours();
     }
 
     public char getContentSquare(int row, int column)

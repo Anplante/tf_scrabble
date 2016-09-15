@@ -3,6 +3,7 @@ package ca.qc.bdeb.p56.scrabble.vue;
 import ca.qc.bdeb.p56.scrabble.model.*;
 
 import javax.swing.*;
+import java.util.List;
 import java.awt.*;
 
 /**
@@ -23,25 +24,59 @@ public class ScrabbleGUI extends JFrame {
     Game gameModel;
     BoardManager boardManager;
 
+    private JPanel panelInformation;
+
 
     public ScrabbleGUI(GameManager gameManager, Rectangle bounds)
     {
         this.gameManager = gameManager;
-        createGame();
         setBounds(bounds);
         BOARD_ZONE_HEIGHT = (int) (bounds.height * RATIO_BOARD_ZONE) > 100 ? (int) (bounds.height*RATIO_BOARD_ZONE) :  100;
         LETTER_RACK_ZONE_HEIGHT = (int) (bounds.height * RATIO_LETTER_RACK_ZONE) > 100 ? (int) (bounds.height*RATIO_LETTER_RACK_ZONE) : 100;
+        setLayout(null);
+        createGame();
+        initializeComponents();
+        addPlayersInfo();
+
 
         //setUndecorated(true);
         setResizable(false);
-        setLayout(null);
 
-        initializeComponents();
+
+
     }
 
     private void initializeComponents() {
         createPanelLetterRack();
         createPanelBoard();
+        createPanelInformation();
+
+    }
+
+    private void createPanelInformation() {
+
+        int y = getHeight() - LETTER_RACK_ZONE_HEIGHT - BOARD_ZONE_HEIGHT;
+        int witdh = (int) (getWidth() - getWidth()* RATIO_PANEL_INFORMATION);
+        int x = witdh;
+
+        panelInformation = new JPanel();
+        panelInformation.setLocation(x,0);
+        panelInformation.setSize(getWidth() - witdh, y);
+        add(panelInformation);
+    }
+
+    private void addPlayersInfo()
+    {
+
+        List<Player> players = gameModel.getPlayers();
+
+        for(Player player : players)
+        {
+            PanelPlayerInfo playerInfo = new PanelPlayerInfo(player);
+            panelInformation.add(playerInfo);
+        }
+        panelInformation.revalidate();
+
     }
 
 
@@ -53,7 +88,7 @@ public class ScrabbleGUI extends JFrame {
         Rectangle boundsZoneLetterRack = new Rectangle(x, y, witdhBoard, BOARD_ZONE_HEIGHT);
         panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack);
 
-        panelLetterRack.setPlayer(gameModel.getActivePlayer());
+        panelLetterRack.setPlayer(gameModel.getActivePlayerIndex());
         panelLetterRack.setGame(gameModel);
         panelLetterRack.changementEtat();
         add(panelLetterRack);
@@ -90,6 +125,7 @@ public class ScrabbleGUI extends JFrame {
     private void createGame()
     {
         initGame();
+
         // initilaiser player rack
         // initiate scoreboard
         // etc

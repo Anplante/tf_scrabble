@@ -3,7 +3,7 @@ package ca.qc.bdeb.p56.scrabble.Shared;
 /**
  * Created by TheFrenchOne on 9/12/2016.
  */
-public enum IDPhase {
+public enum IDState {
 
     DRAW("Draw"),
     WAIT("Wait"),
@@ -12,7 +12,7 @@ public enum IDPhase {
 
     private String name;
 
-    private IDPhase(String name)
+    private IDState(String name)
     {
         this.name = name;
     }
