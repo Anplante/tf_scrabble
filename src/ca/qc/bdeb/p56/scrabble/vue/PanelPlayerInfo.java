@@ -12,12 +12,8 @@ import java.awt.*;
 public class PanelPlayerInfo extends JPanel implements Observateur{
 
     private Player playerModel;
-
-
     private JLabel lblName;
     private JLabel lblScore;
-
-
 
     public PanelPlayerInfo(Player player){
 
@@ -25,15 +21,13 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         player.ajouterObservateur(this);
         initComponents();
         changementEtat();
-
     }
 
     private void initComponents() {
-        lblName = new JLabel();
-        lblScore = new JLabel();
 
         setLayout(new GridLayout(2,2));
-
+        lblName = new JLabel();
+        lblScore = new JLabel();
         add(lblName);
         add(lblScore);
     }
@@ -47,6 +41,5 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
 
     @Override
     public void changementEtat(Enum<?> e, Object o) {
-
     }
 }

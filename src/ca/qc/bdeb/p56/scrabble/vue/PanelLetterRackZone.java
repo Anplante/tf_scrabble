@@ -51,7 +51,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur{
             setPlayer(game.getActivePlayerIndex());
         }
 
-
         for (Component comp : getComponents()) {
             remove(comp);
         }
@@ -67,7 +66,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur{
             add(tile);
             x += 60;
        }
-
         repaint();
     }
 

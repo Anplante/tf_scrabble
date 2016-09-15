@@ -19,7 +19,7 @@ public class GameManager {
 
     private Game game;
 
-    private final String GAME_FILE = "src/resources/scrabbleParameters.xml";
+    private final String GAME_FILE = "resources/scrabbleParameters.xml";
 
 
     private List<Letter> alphabetBag;
@@ -53,7 +53,7 @@ public class GameManager {
     {
         alphabetBag = new ArrayList<Letter>();
 
-        Element alphabetsElement = (Element) rootElement.getElementsByTagName("square").item(0);
+        Element alphabetsElement = (Element) rootElement.getElementsByTagName("frenchAlphabet").item(0);
 
         NodeList alphabetsNodes = alphabetsElement.getElementsByTagName("letter");
 

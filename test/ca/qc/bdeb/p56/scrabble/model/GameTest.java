@@ -12,14 +12,11 @@ import static org.junit.Assert.assertNotEquals;
  */
 public class GameTest {
 
-
     private GameManager gameManager;
     private Game game;
 
     public GameTest()
     {
-
-
     }
 
     @Before
@@ -27,26 +24,25 @@ public class GameTest {
 
         gameManager = new GameManager();
         game = gameManager.createNewGame();
+        game.startGame();
     }
 
     @After
     public void tearDown() throws Exception {
-
-
     }
-
 
     @Test
     public void testSelectTile()
     {
         Letter letter1 = new Letter('a', 2);
         Letter letter2 = new Letter ('b', 3);
+
         Square square = new Square();
         square.setLetter(letter2);
 
         assertNotEquals(letter1, letter2);
         assertNotEquals(letter1.getLetter(), square.getLetterOn());
-    game.startGame();
+
         game.selectLetter(letter1);
         game.playTile(square);
 
@@ -56,8 +52,6 @@ public class GameTest {
     @Test
     public void testAlphabetBagsSize()
     {
-        game.startGame();
-        assertEquals(100, game.lettersLeft() + 7*game.getPlayersLeft());
+        assertEquals(100, game.lettersLeft() + 7 * game.getPlayersLeft());
     }
-
 }

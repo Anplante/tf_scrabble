@@ -30,11 +30,15 @@ public class StateSelect extends State {
             getPlayer().aviserObservateurs();
         }
 
+        tileSelected = true;
     }
 
     @Override
     protected State getNextState() {
-        return null;
+
+        State newState = new StatePending(getPlayer());
+      
+        return newState;
     }
 
     @Override

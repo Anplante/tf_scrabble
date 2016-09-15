@@ -11,17 +11,14 @@ public class Premium {
         WORD_SCORE
     }
 
-
     private Type type;
     private int multiplier;
-
 
     public Premium(Type type, int multiplier)
     {
         this.type = type;
         this.multiplier = multiplier;
     }
-
 
     public Type getType()
     {

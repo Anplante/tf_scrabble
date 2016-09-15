@@ -5,10 +5,7 @@ package ca.qc.bdeb.p56.scrabble.model;
  */
 public class Board {
 
-
-
     Square[][] board;
-
 
     public Board(int size) {
         board = new Square[size][size];
