@@ -27,9 +27,9 @@ public class ScrabbleGUI extends JFrame {
     private JPanel panelInformation;
 
 
-    public ScrabbleGUI(GameManager gameManager, Rectangle bounds)
+    public ScrabbleGUI(Game game, Rectangle bounds)
     {
-        this.gameManager = gameManager;
+        this.gameModel = game;
         setBounds(bounds);
         BOARD_ZONE_HEIGHT = (int) (bounds.height * RATIO_BOARD_ZONE) > 100 ? (int) (bounds.height*RATIO_BOARD_ZONE) :  100;
         LETTER_RACK_ZONE_HEIGHT = (int) (bounds.height * RATIO_LETTER_RACK_ZONE) > 100 ? (int) (bounds.height*RATIO_LETTER_RACK_ZONE) : 100;
@@ -134,7 +134,7 @@ public class ScrabbleGUI extends JFrame {
 
     private void initGame()
     {
-        gameModel = gameManager.createNewGame();
+       // gameModel = gameManager.createNewGame();
         gameModel.startGame();
     }
 

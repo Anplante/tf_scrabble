@@ -23,8 +23,9 @@ public class PanelEditGame extends  JFrame {
     private JLabel lblNombreAI;
     private String[] nombreDeAi = { "1", "2", "3"};
     private JComboBox cmbNombreAi = new JComboBox();
-    private GameManager game = new GameManager();
+    private GameManager gameManager = new GameManager();
     private Player player;
+    private Game game;
 
     public PanelEditGame() {
 
@@ -110,12 +111,13 @@ public class PanelEditGame extends  JFrame {
 
     private void setPlayer() {
         Game jeu = null;
-        jeu = game.createNewGame();
-        player = new Player(jeu, txtNom.getText());
-        jeu.addPlayer(player);
+        game = gameManager.createNewGame();
+        player = new Player(game, txtNom.getText());
+        game.addPlayer(player);
         int limit = (int) cmbNombreAi.getSelectedIndex();
+        ++limit;
         for (int i = 0; i < limit; i++) {
-            jeu.addPlayer(new AiPlayer(jeu,"AI"));
+            game.addPlayer(new AiPlayer(jeu,"AI"));
         }
 
     }
