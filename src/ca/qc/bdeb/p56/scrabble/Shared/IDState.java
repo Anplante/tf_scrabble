@@ -8,7 +8,8 @@ public enum IDState {
     DRAW("Draw"),
     WAIT("Wait"),
     SELECT("Select"),
-    EXCHANGE("Exchange");
+    EXCHANGE("Exchange"),
+    PLAY_TILE("Play tile");
 
     private String name;
 

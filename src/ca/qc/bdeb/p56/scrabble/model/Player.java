@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Player implements Observable {
 
-    private String name = "lol";
+    private String name;
     private Game game;
     private List<Letter> letters;
     private State currentState;
@@ -80,11 +80,11 @@ public class Player implements Observable {
 
     public void playTile(Square square) {
 
-        currentState.playTile(square);
+        currentState.selectMode(square);
     }
 
     public void selectLetter(Letter letter) {
-        currentState.selectTile(letter);
+        currentState.selectMode(letter);
     }
 
     public State getState() {
@@ -92,6 +92,7 @@ public class Player implements Observable {
     }
 
     public void nextState() {
+
         currentState.execute();
         State newState =  currentState.getNextState();
         currentState = newState;

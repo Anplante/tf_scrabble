@@ -8,19 +8,22 @@ import ca.qc.bdeb.p56.scrabble.Shared.IDState;
 public class StatePending extends State {
 
 
+
+    private Letter letter;
+
     public StatePending(Player player)
     {
         super(player, IDState.WAIT);
     }
-    @Override
-    protected void selectTile(Letter letter) {
 
+    @Override
+    protected void selectMode(Object modeSelected) {
     }
 
-    @Override
+    /*@Override
     protected void playTile(Square square) {
 
-    }
+    }*/
 
     @Override
     protected State getNextState() {
@@ -32,7 +35,7 @@ public class StatePending extends State {
 
     @Override
     protected boolean readyForNextState() {
-        return false;
+        return true;
     }
 
     @Override

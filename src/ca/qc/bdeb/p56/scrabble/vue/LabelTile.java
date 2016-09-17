@@ -36,6 +36,7 @@ public class LabelTile extends JLabel {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 gameModel.selectLetter(letter);
+                gameModel.goToNextState();
                 setText("");  // solution temporaire pour le sprint de mardi, utiliser obersaveteur.
             }
         });

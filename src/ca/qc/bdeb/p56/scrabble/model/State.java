@@ -37,8 +37,8 @@ public abstract class State {
         return game;
     }
 
-    protected abstract void selectTile(Letter letter);
-    protected abstract void playTile(Square square);
+    protected abstract void selectMode(Object itemSelected);
+   // protected abstract void playTile(Square square);
     protected abstract State getNextState();
     protected abstract boolean readyForNextState();
 
