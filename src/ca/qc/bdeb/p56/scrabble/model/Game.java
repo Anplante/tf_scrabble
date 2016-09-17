@@ -29,8 +29,8 @@ public class Game {
 
         // tests
         players = new ArrayList<Player>();
-        players.add(new Player(this));
-        players.add(new Player(this));
+        //players.add(new Player(this));
+        //players.add(new Player(this));
     }
 
     public String getContentSquare(int row, int column)
@@ -67,6 +67,10 @@ public class Game {
         {
             activateNextPlayer();
         }
+    }
+
+    public void addPlayer(Player player) {
+        players.add(player);
     }
 
     private void activateNextPlayer() {

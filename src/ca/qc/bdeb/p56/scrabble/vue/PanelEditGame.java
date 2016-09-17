@@ -1,5 +1,10 @@
 package ca.qc.bdeb.p56.scrabble.vue;
 
+        import ca.qc.bdeb.p56.scrabble.ai.AiPlayer;
+        import ca.qc.bdeb.p56.scrabble.model.Game;
+        import ca.qc.bdeb.p56.scrabble.model.GameManager;
+        import ca.qc.bdeb.p56.scrabble.model.Player;
+
         import javax.swing.*;
         import java.awt.*;
         import java.awt.event.ActionEvent;
@@ -14,10 +19,12 @@ public class PanelEditGame extends  JFrame {
     private JTextField txtNom;
     private JButton btnConfirm;
     private JLabel lblNom;
-    private JButton btnAnnuler;
+    private JButton btnCancel;
     private JLabel lblNombreAI;
     private String[] nombreDeAi = { "1", "2", "3"};
     private JComboBox cmbNombreAi = new JComboBox();
+    private GameManager game = new GameManager();
+    private Player player;
 
     public PanelEditGame() {
 
@@ -72,24 +79,25 @@ public class PanelEditGame extends  JFrame {
         panelMenu.add(cmbNombreAi);
     }
     private void ajouterBoutons() {
-        btnAnnuler = new JButton();
+        btnCancel = new JButton();
         btnConfirm = new JButton();
-        btnAnnuler.setVisible(true);
+        btnCancel.setVisible(true);
         btnConfirm.setVisible(true);
-        btnAnnuler.setSize(100,50);
+        btnCancel.setSize(100,50);
         btnConfirm.setSize(100,50);
-        btnAnnuler.setText("Annuler");
+        btnCancel.setText("Annuler");
         btnConfirm.setText("Confirmer");
-        btnAnnuler.setLocation(250, 325);
+        btnCancel.setLocation(250, 325);
         btnConfirm.setLocation(50,325);
         btnConfirm.addActionListener( new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                System.out.println("allotest123");
+                setPlayer();
+                initializeGame();
             }
         });
-        btnAnnuler.addActionListener( new ActionListener()
+        btnCancel.addActionListener( new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
@@ -97,7 +105,26 @@ public class PanelEditGame extends  JFrame {
             }
         });
         panelMenu.add(btnConfirm);
-        panelMenu.add(btnAnnuler);
+        panelMenu.add(btnCancel);
+    }
+
+    private void setPlayer() {
+        Game jeu = null;
+        jeu = game.createNewGame();
+        player = new Player(jeu, txtNom.getText());
+        jeu.addPlayer(player);
+        int limit = (int) cmbNombreAi.getSelectedIndex();
+        for (int i = 0; i < limit; i++) {
+            jeu.addPlayer(new AiPlayer(jeu,"AI"));
+        }
+
+    }
+
+    private void initializeGame() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        ScrabbleGUI gameGUI = new ScrabbleGUI(game, new Rectangle(screenSize));
+        gameGUI.setVisible(true);
+        gameGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     private void ajouterLesLabels() {

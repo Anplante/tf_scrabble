@@ -24,8 +24,9 @@ public class Player implements Observable {
 
    // private final List<Letter> lettersOnHand;
 
-    public Player(Game game)
+    public Player(Game game, String name)
     {
+        this.name  = name;
         this.game = game;
         letters = new ArrayList<Letter>();
         setState(new StatePending(this));
