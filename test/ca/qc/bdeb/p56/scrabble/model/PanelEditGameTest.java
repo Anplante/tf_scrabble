@@ -21,12 +21,17 @@ import static org.junit.Assert.assertNotEquals;
 public class PanelEditGameTest {
 
     private PanelEditGame frame;
+    private JButton btnAccept;
     private JTextField txtInput;
+    private Player player;
+    private JComboBox cmbNombreAi;
 
     @Before
     public void setUp()  throws Exception {
         frame = new PanelEditGame();
         txtInput = (JTextField) TestUtils.getChildNamed(frame, "textBox");
+        btnAccept = (JButton) TestUtils.getChildNamed(frame, "Confirm");
+        cmbNombreAi = (JComboBox) TestUtils.getChildNamed(frame, "choix");
     }
 
     @After
@@ -35,6 +40,20 @@ public class PanelEditGameTest {
 
     }
 
+    @Test
+    public void testComboBox() {
+        cmbNombreAi.setSelectedIndex(2);
+        btnAccept.doClick();
+        assertEquals("3", cmbNombreAi.getSelectedItem());
+        assertEquals(4, frame.getLenghtPlayers());
+    }
+
+    @Test
+    public void testCreatePlayer() {
+        txtInput.setText("Antoine");
+        btnAccept.doClick();
+        assertEquals(frame.getPlayer().getName(), txtInput.getText());
+    }
 
     @Test
     public void champInputGereEnter() {
