@@ -120,6 +120,7 @@ public class PanelEditGame extends  JFrame {
         panelMenu.setLocation(0,0);
         panelMenu.setSize(new Dimension(400, 400));
         txtNom = new JTextField("", 30);
+        txtNom.setName("textBox");
         txtNom.setBounds(150,20,180,30);
 
         txtNom.addActionListener(new ActionListener() {

@@ -1,10 +1,13 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
+import ca.qc.bdeb.p56.scrabble.vue.PanelEditGame;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.swing.*;
+
+import java.awt.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,12 +20,13 @@ import static org.junit.Assert.assertNotEquals;
  */
 public class PanelEditGameTest {
 
-    private JTextField txtInput = new JTextField(20);
-
+    private PanelEditGame frame;
+    private JTextField txtInput;
 
     @Before
     public void setUp()  throws Exception {
-
+        frame = new PanelEditGame();
+        txtInput = (JTextField) TestUtils.getChildNamed(frame, "textBox");
     }
 
     @After
@@ -33,9 +37,11 @@ public class PanelEditGameTest {
 
 
     @Test
-    public void testConfirmer()
-    {
+    public void champInputGereEnter() {
+        txtInput.setText("Testing");
+        txtInput.postActionEvent();
 
+        assertEquals("Testing", txtInput.getText());
     }
 
     private void setupTxtInput() {
