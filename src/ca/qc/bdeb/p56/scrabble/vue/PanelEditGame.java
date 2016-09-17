@@ -24,6 +24,7 @@ public class PanelEditGame extends  JFrame {
     private String[] nombreDeAi = { "1", "2", "3"};
     private JComboBox cmbNombreAi = new JComboBox();
     private GameManager gameManager = new GameManager();
+
     private Player player;
     private Game game;
 
@@ -71,6 +72,7 @@ public class PanelEditGame extends  JFrame {
 
     private void ajouterComboBox() {
         cmbNombreAi = new JComboBox();
+        cmbNombreAi.setName("choix");
         for (int i = 0; i < nombreDeAi.length; i++) {
             cmbNombreAi.addItem(nombreDeAi[i]);
         }
@@ -90,6 +92,8 @@ public class PanelEditGame extends  JFrame {
         btnConfirm.setText("Confirmer");
         btnCancel.setLocation(250, 325);
         btnConfirm.setLocation(50,325);
+        btnConfirm.setName("Confirm");
+        btnCancel.setName("Cancel");
         btnConfirm.addActionListener( new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -159,5 +163,13 @@ public class PanelEditGame extends  JFrame {
             }
         });
         panelMenu.add(txtNom);
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public int getLenghtPlayers() {
+        return game.getPlayers().size();
     }
 }
