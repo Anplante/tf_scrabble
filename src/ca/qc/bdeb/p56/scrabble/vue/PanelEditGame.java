@@ -34,6 +34,7 @@ public class PanelEditGame extends  JFrame {
 
         setLayout(null);
 
+
         JFrame fenetre = new JFrame();
         this.setTitle("Menu");
         fenetre.pack();
@@ -47,6 +48,10 @@ public class PanelEditGame extends  JFrame {
 
         initializeComponents();
 
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
 
 
         setVisible(true);

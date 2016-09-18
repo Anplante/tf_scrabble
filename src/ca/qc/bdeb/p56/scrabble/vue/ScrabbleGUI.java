@@ -3,6 +3,8 @@ package ca.qc.bdeb.p56.scrabble.vue;
 import ca.qc.bdeb.p56.scrabble.model.*;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.*;
 
@@ -64,6 +66,13 @@ public class ScrabbleGUI extends JFrame {
         btnFinish.setLocation(x + 25,785 );
         btnFinish.setText("Finir tour");
         btnFinish.setVisible(true);
+        btnFinish.addActionListener( new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                gameModel.goToNextState();
+            }
+        });
         add(btnFinish);
     }
 
