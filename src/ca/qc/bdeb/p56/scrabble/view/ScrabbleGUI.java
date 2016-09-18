@@ -59,18 +59,19 @@ public class ScrabbleGUI extends JFrame {
 
     private void createButton() {
         btnFinish = new JButton();
+        btnFinish.setVisible(true);
         int witdh = (int) (getWidth() - getWidth()* RATIO_PANEL_INFORMATION);
         int x = witdh;
         btnFinish.setSize(100,30);
         btnFinish.setName("finish");
         btnFinish.setLocation(x + 25,785 );
         btnFinish.setText("Finir tour");
-        btnFinish.setVisible(true);
         btnFinish.addActionListener( new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                gameModel.goToNextState();
+                // FIXME: le state est tout le temps null
+                gameModel.activateNextPlayer();
             }
         });
         add(btnFinish);

@@ -42,6 +42,10 @@ public class Game {
         return newBoardManager;
     }
 
+    public void saveHumanPlayers(String playerName) {
+        players.add(new Player(this, playerName));
+    }
+
 
     public void startGame() {
 
@@ -68,9 +72,10 @@ public class Game {
     }
 
 
-    private void activateNextPlayer() {
+    public void activateNextPlayer() {
         activePlayerIndex = (activePlayerIndex + 1) % players.size();
-        getActivePlayer().nextState();
+        // TODO: changement des states des joueurs
+        //getActivePlayer().nextState();
     }
 
     private void initPlayerRack() {
