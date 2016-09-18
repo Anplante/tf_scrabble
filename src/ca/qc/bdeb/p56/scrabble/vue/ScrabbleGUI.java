@@ -61,7 +61,7 @@ public class ScrabbleGUI extends JFrame {
         int x = witdh;
         btnFinish.setSize(100,30);
         btnFinish.setName("finish");
-        btnFinish.setLocation(x,770 );
+        btnFinish.setLocation(x + 25,785 );
         btnFinish.setText("Finir tour");
         btnFinish.setVisible(true);
         add(btnFinish);
