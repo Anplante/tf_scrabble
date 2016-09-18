@@ -4,6 +4,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
@@ -23,7 +26,10 @@ public class GameTest {
     public void setUp()  throws Exception {
 
         gameManager = new GameManager();
-        game = gameManager.createNewGame();
+
+        List<Player> players = new ArrayList<Player>();
+        players.add(new Player(game, "Louis"));
+        game = gameManager.createNewGame(players);
         game.startGame();
     }
 
@@ -44,6 +50,7 @@ public class GameTest {
         assertNotEquals(letter1.getLetter(), square.getLetterOn());
 
         game.selectLetter(letter1);
+        game.goToNextState();
         game.playTile(square);
 
         assertEquals(letter1.getLetter(), square.getLetterOn());

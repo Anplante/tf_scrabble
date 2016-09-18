@@ -1,4 +1,4 @@
-package ca.qc.bdeb.p56.scrabble.vue;
+package ca.qc.bdeb.p56.scrabble.view;
 
 import javax.swing.*;
 

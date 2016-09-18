@@ -1,4 +1,4 @@
-package ca.qc.bdeb.p56.scrabble.Shared;
+package ca.qc.bdeb.p56.scrabble.shared;
 
 /**
  * Created by TheFrenchOne on 9/12/2016.

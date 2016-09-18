@@ -1,8 +1,6 @@
-package ca.qc.bdeb.p56.scrabble.vue;
+package ca.qc.bdeb.p56.scrabble.view;
 
-import ca.qc.bdeb.p56.scrabble.model.Board;
 import ca.qc.bdeb.p56.scrabble.model.Game;
-import ca.qc.bdeb.p56.scrabble.model.Letter;
 import ca.qc.bdeb.p56.scrabble.model.Square;
 
 import javax.swing.*;
@@ -21,11 +19,11 @@ public class LabelSquare extends JLabel {
     Square square;
 
 
-    public LabelSquare(Square square, Game game)
+    public LabelSquare(Square square, Game gameModel)
     {
 
         super(""+String.valueOf(square.getLetterOn()), SwingConstants.CENTER);
-        this.game = game;
+        this.game = gameModel;
         this.square = square;
         setSize(50, 50);
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -35,9 +33,12 @@ public class LabelSquare extends JLabel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
-                game.playTile(square);
-                setText(""+String.valueOf(square.getLetterOn()));
-                game.goToNextState();
+
+                gameModel.playTile(square);
+
+                    setText(""+String.valueOf(square.getLetterOn()));
+                    gameModel.goToNextState();
+
             }
         });
     }

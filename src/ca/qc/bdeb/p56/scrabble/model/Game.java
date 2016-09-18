@@ -20,7 +20,7 @@ public class Game {
 
 
 
-    public Game(Element rootElement, List<Letter> alphabetBag)
+    public Game(Element rootElement, List<Letter> alphabetBag, List<Player> players)
     {
 
         boardManager = createBoard(rootElement);
@@ -28,9 +28,8 @@ public class Game {
 
 
         // tests
-        players = new ArrayList<Player>();
-        //players.add(new Player(this));
-        //players.add(new Player(this));
+        this.players = players;
+
     }
 
     public String getContentSquare(int row, int column)
@@ -61,21 +60,20 @@ public class Game {
 
     public void goToNextState()
     {
-        getActivePlayerIndex().nextState();
+        if(isReadyForNextPhase()){
+            getActivePlayer().nextState();
 
-        while(!getActivePlayerIndex().isActivated())
-        {
-            activateNextPlayer();
+            while(!getActivePlayer().isActivated())
+            {
+                activateNextPlayer();
+            }
         }
     }
 
-    public void addPlayer(Player player) {
-        players.add(player);
-    }
 
     private void activateNextPlayer() {
         activePlayerIndex = (activePlayerIndex + 1) % players.size();
-        getActivePlayerIndex().nextState();
+        getActivePlayer().nextState();
     }
 
     private void initPlayerRack() {
@@ -99,7 +97,7 @@ public class Game {
         return players.size();
     }
 
-    public Player getActivePlayerIndex() {
+    public Player getActivePlayer() {
         return players.get(activePlayerIndex);
     }
 
@@ -108,14 +106,18 @@ public class Game {
     }
 
     public void playTile(Square square) {
-       getActivePlayerIndex().playTile(square);
+       getActivePlayer().playTile(square);
     }
 
     public void selectLetter(Letter letter) {
-        getActivePlayerIndex().selectLetter(letter);
+        getActivePlayer().selectLetter(letter);
     }
 
     public List<Player> getPlayers() {
         return players;
+    }
+
+    public boolean isReadyForNextPhase() {
+        return getActivePlayer().getState().readyForNextState();
     }
 }

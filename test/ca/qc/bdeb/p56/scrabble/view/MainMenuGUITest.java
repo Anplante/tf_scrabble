@@ -1,13 +1,12 @@
-package ca.qc.bdeb.p56.scrabble.model;
+package ca.qc.bdeb.p56.scrabble.view;
 
-import ca.qc.bdeb.p56.scrabble.vue.PanelEditGame;
+import ca.qc.bdeb.p56.scrabble.model.Player;
+import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.swing.*;
-
-import java.awt.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,9 +17,9 @@ import static org.junit.Assert.assertNotEquals;
 /**
  * Created by 1467160 on 2016-09-15.
  */
-public class PanelEditGameTest {
+public class MainMenuGUITest {
 
-    private PanelEditGame frame;
+    private MainMenuGUI frame;
     private JButton btnAccept;
     private JTextField txtInput;
     private Player player;
@@ -28,7 +27,7 @@ public class PanelEditGameTest {
 
     @Before
     public void setUp()  throws Exception {
-        frame = new PanelEditGame();
+        frame = new MainMenuGUI();
         txtInput = (JTextField) TestUtils.getChildNamed(frame, "textBox");
         btnAccept = (JButton) TestUtils.getChildNamed(frame, "Confirm");
         cmbNombreAi = (JComboBox) TestUtils.getChildNamed(frame, "choix");

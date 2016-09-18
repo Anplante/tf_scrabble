@@ -1,4 +1,4 @@
-package ca.qc.bdeb.p56.scrabble.vue;
+package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
 
@@ -88,7 +88,7 @@ public class ScrabbleGUI extends JFrame {
         Rectangle boundsZoneLetterRack = new Rectangle(x, y, witdhBoard, BOARD_ZONE_HEIGHT);
         panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack);
 
-        panelLetterRack.setPlayer(gameModel.getActivePlayerIndex());
+        panelLetterRack.setPlayer(gameModel.getActivePlayer());
         panelLetterRack.setGame(gameModel);
         panelLetterRack.changementEtat();
         add(panelLetterRack);

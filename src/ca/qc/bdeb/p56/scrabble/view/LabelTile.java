@@ -1,4 +1,4 @@
-package ca.qc.bdeb.p56.scrabble.vue;
+package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.Letter;
@@ -18,9 +18,8 @@ public class LabelTile extends JLabel {
     private Letter letter;
 
 
-    public LabelTile(Game gameModel, Letter letter, Rectangle bounds)
-    {
-        super(""+ letter.getLetter(), SwingConstants.CENTER);
+    public LabelTile(Game gameModel, Letter letter, Rectangle bounds) {
+        super("" + letter.getLetter(), SwingConstants.CENTER);
         this.gameModel = gameModel;
         this.letter = letter;
 
@@ -35,9 +34,11 @@ public class LabelTile extends JLabel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
+
                 gameModel.selectLetter(letter);
                 gameModel.goToNextState();
-                setText("");  // solution temporaire pour le sprint de mardi, utiliser obersaveteur.
+
+                // TODO Louis: avertir l'observateur du lettre qu'elle a été sélectionné
             }
         });
     }

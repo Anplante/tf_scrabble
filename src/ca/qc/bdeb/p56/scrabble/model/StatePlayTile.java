@@ -1,6 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
-import ca.qc.bdeb.p56.scrabble.Shared.IDState;
+import ca.qc.bdeb.p56.scrabble.shared.IDState;
 
 /**
  * Created by TheFrenchOne on 9/17/2016.
@@ -9,11 +9,13 @@ public class StatePlayTile extends State {
 
 
     private Letter letterSelected;
+    boolean readyToChange;
 
     public StatePlayTile(Player currentPlayer, Letter letterSelected)
     {
         super(currentPlayer, IDState.PLAY_TILE);
         this.letterSelected = letterSelected;
+        readyToChange = false;
     }
 
 
@@ -27,13 +29,10 @@ public class StatePlayTile extends State {
             square.setLetter(letterSelected);
             getPlayer().remove(letterSelected);
             getPlayer().aviserObservateurs();
+            readyToChange = true;
         }
     }
 
-  /*  @Override
-    protected void playTile(Square square) {
-
-    }*/
 
     @Override
     protected State getNextState() {
@@ -45,6 +44,6 @@ public class StatePlayTile extends State {
 
     @Override
     protected boolean readyForNextState() {
-        return true;
+        return  readyToChange;
     }
 }

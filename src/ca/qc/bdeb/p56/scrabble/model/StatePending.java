@@ -1,6 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
-import ca.qc.bdeb.p56.scrabble.Shared.IDState;
+import ca.qc.bdeb.p56.scrabble.shared.IDState;
 
 /**
  * Created by TheFrenchOne on 9/14/2016.
