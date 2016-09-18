@@ -60,7 +60,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur{
 
         for(Letter letter : letters)
         {
-            LabelTile tile = new LabelTile(game, letter, new Rectangle(x, y, 50, 50) );
+            BtnTile tile = new BtnTile(game, letter, new Rectangle(x, y, 50, 50) );
             add(tile);
             x += 60;
        }

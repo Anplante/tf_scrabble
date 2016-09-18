@@ -45,11 +45,7 @@ public class MainMenuGUI extends JFrame {
         setSize(new Dimension(insets.left + insets.right + 400,
                 insets.top + insets.bottom + 400));
 
-        // panelMenu.setLayout(new BorderLayout());
-
-
         initializeComponents();
-
 
         setVisible(true);
         setResizable(false);
@@ -130,7 +126,7 @@ public class MainMenuGUI extends JFrame {
         ScrabbleGUI gameGUI = new ScrabbleGUI(game, new Rectangle(screenSize));
         gameGUI.setVisible(true);
         setVisible(false);
-        gameGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        gameGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
 

@@ -32,10 +32,7 @@ public class Game {
 
     }
 
-    public String getContentSquare(int row, int column)
-    {
-        return boardManager.getContentSquare(row, column);
-    }
+
 
     private BoardManager createBoard(Element rootElement)
     {
@@ -81,7 +78,7 @@ public class Game {
             for (int i = 0; i < 7; i++) {
                 for (int j = 0; j < players.size(); j++) {
                     Letter letter = alphabetBag.get(randomGenerator.nextInt(alphabetBag.size()));
-                players.get(j % 2).addLetter(letter);
+                players.get(j).addLetter(letter);
                     alphabetBag.remove(letter);
             }
         }
@@ -101,8 +98,15 @@ public class Game {
         return players.get(activePlayerIndex);
     }
 
+
+
     public Square getSquare(int row, int column) {
         return boardManager.getSquare(row, column);
+    }
+
+    public String getContentSquare(int row, int column)
+    {
+        return boardManager.getContentSquare(row, column);
     }
 
     public void playTile(Square square) {
