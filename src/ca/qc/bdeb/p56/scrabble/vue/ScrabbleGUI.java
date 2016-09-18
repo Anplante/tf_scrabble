@@ -22,6 +22,7 @@ public class ScrabbleGUI extends JFrame {
     JPanel gridPanel;
     GameManager gameManager;
     Game gameModel;
+    private JButton btnFinish;
     BoardManager boardManager;
 
     private JPanel panelInformation;
@@ -50,7 +51,20 @@ public class ScrabbleGUI extends JFrame {
         createPanelLetterRack();
         createPanelBoard();
         createPanelInformation();
+        createButton();
 
+    }
+
+    private void createButton() {
+        btnFinish = new JButton();
+        int witdh = (int) (getWidth() - getWidth()* RATIO_PANEL_INFORMATION);
+        int x = witdh;
+        btnFinish.setSize(100,30);
+        btnFinish.setName("finish");
+        btnFinish.setLocation(x,770 );
+        btnFinish.setText("Finir tour");
+        btnFinish.setVisible(true);
+        add(btnFinish);
     }
 
     private void createPanelInformation() {

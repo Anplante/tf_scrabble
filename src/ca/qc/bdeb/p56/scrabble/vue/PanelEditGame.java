@@ -106,7 +106,7 @@ public class PanelEditGame extends  JFrame {
         {
             public void actionPerformed(ActionEvent e)
             {
-                System.out.println("test");
+                System.exit(0);
             }
         });
         panelMenu.add(btnConfirm);
