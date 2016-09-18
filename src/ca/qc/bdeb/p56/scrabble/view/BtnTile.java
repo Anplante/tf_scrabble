@@ -1,4 +1,4 @@
-package ca.qc.bdeb.p56.scrabble.vue;
+package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.Letter;
@@ -11,32 +11,30 @@ import java.awt.event.MouseEvent;
 /**
  * Created by TheFrenchOne on 9/12/2016.
  */
-public class LabelTile extends JLabel {
+public class BtnTile extends JButton {
 
     private Game gameModel;
 
     private Letter letter;
 
 
-    public LabelTile(Game gameModel, Letter letter, Rectangle bounds)
-    {
-        super(""+ letter.getLetter(), SwingConstants.CENTER);
+    public BtnTile(Game gameModel, Letter letter, Rectangle bounds) {
+
+        super("" + letter.getLetter());
         this.gameModel = gameModel;
         this.letter = letter;
-
-        //setSize(50, 50);
         setBounds(bounds);
-        //label.setBackground(Color.YELLOW);
-        setOpaque(true);
 
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        setBorder(BorderFactory.createEtchedBorder());
 
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
+
                 gameModel.selectLetter(letter);
-                setText("");  // solution temporaire pour le sprint de mardi, utiliser obersaveteur.
+                gameModel.goToNextState();
+
+                // TODO Louis: avertir l'observateur du lettre qu'elle a été sélectionné si on veut éventuellement que ca fasse quelque chose
             }
         });
     }

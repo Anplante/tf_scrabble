@@ -1,6 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
-import ca.qc.bdeb.p56.scrabble.Shared.IDState;
+import ca.qc.bdeb.p56.scrabble.shared.IDState;
 
 /**
  * Created by TheFrenchOne on 9/12/2016.
@@ -37,8 +37,8 @@ public abstract class State {
         return game;
     }
 
-    protected abstract void selectTile(Letter letter);
-    protected abstract void playTile(Square square);
+    protected abstract void selectMode(Object itemSelected);
+   // protected abstract void playTile(Square square);
     protected abstract State getNextState();
     protected abstract boolean readyForNextState();
 

@@ -30,7 +30,7 @@ public class GameManager {
     }
 
 
-    public Game createNewGame()
+    public Game createNewGame(List<Player> players)
     {
         try{
             File fXmlFile = new File(GAME_FILE);
@@ -40,7 +40,7 @@ public class GameManager {
             Element rootElement = doc.getDocumentElement();
             rootElement.normalize();
             initAlphabetBag(rootElement);
-            game = new Game(rootElement, alphabetBag);
+            game = new Game(rootElement, alphabetBag, players);
         }
         catch (Exception e)
         {

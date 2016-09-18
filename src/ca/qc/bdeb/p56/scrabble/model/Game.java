@@ -20,7 +20,7 @@ public class Game {
 
 
 
-    public Game(Element rootElement, List<Letter> alphabetBag)
+    public Game(Element rootElement, List<Letter> alphabetBag, List<Player> players)
     {
 
         boardManager = createBoard(rootElement);
@@ -28,15 +28,11 @@ public class Game {
 
 
         // tests
-        players = new ArrayList<Player>();
-        //players.add(new Player(this));
-        //players.add(new Player(this));
+        this.players = players;
+
     }
 
-    public String getContentSquare(int row, int column)
-    {
-        return boardManager.getContentSquare(row, column);
-    }
+
 
     private BoardManager createBoard(Element rootElement)
     {
@@ -61,21 +57,20 @@ public class Game {
 
     public void goToNextState()
     {
-        getActivePlayerIndex().nextState();
+        if(isReadyForNextPhase()){
+            getActivePlayer().nextState();
 
-        while(!getActivePlayerIndex().isActivated())
-        {
-            activateNextPlayer();
+            while(!getActivePlayer().isActivated())
+            {
+                activateNextPlayer();
+            }
         }
     }
 
-    public void addPlayer(Player player) {
-        players.add(player);
-    }
 
     private void activateNextPlayer() {
         activePlayerIndex = (activePlayerIndex + 1) % players.size();
-        getActivePlayerIndex().nextState();
+        getActivePlayer().nextState();
     }
 
     private void initPlayerRack() {
@@ -83,7 +78,7 @@ public class Game {
             for (int i = 0; i < 7; i++) {
                 for (int j = 0; j < players.size(); j++) {
                     Letter letter = alphabetBag.get(randomGenerator.nextInt(alphabetBag.size()));
-                players.get(j % 2).addLetter(letter);
+                players.get(j).addLetter(letter);
                     alphabetBag.remove(letter);
             }
         }
@@ -99,23 +94,34 @@ public class Game {
         return players.size();
     }
 
-    public Player getActivePlayerIndex() {
+    public Player getActivePlayer() {
         return players.get(activePlayerIndex);
     }
+
+
 
     public Square getSquare(int row, int column) {
         return boardManager.getSquare(row, column);
     }
 
+    public String getContentSquare(int row, int column)
+    {
+        return boardManager.getContentSquare(row, column);
+    }
+
     public void playTile(Square square) {
-       getActivePlayerIndex().playTile(square);
+       getActivePlayer().playTile(square);
     }
 
     public void selectLetter(Letter letter) {
-        getActivePlayerIndex().selectLetter(letter);
+        getActivePlayer().selectLetter(letter);
     }
 
     public List<Player> getPlayers() {
         return players;
+    }
+
+    public boolean isReadyForNextPhase() {
+        return getActivePlayer().getState().readyForNextState();
     }
 }

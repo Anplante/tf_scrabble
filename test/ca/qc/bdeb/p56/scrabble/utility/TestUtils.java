@@ -1,4 +1,4 @@
-package ca.qc.bdeb.p56.scrabble.model;
+package ca.qc.bdeb.p56.scrabble.utility;
 
 import javax.swing.*;
 import java.awt.*;

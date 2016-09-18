@@ -1,4 +1,4 @@
-package ca.qc.bdeb.p56.scrabble.vue;
+package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.Letter;
@@ -6,8 +6,6 @@ import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.*;
 
@@ -46,9 +44,9 @@ public class PanelLetterRackZone extends JPanel implements Observateur{
     @Override
     public void changementEtat() {
 
-        if(player != game.getActivePlayerIndex())
+        if(player != game.getActivePlayer())
         {
-            setPlayer(game.getActivePlayerIndex());
+            setPlayer(game.getActivePlayer());
         }
 
         for (Component comp : getComponents()) {
@@ -62,7 +60,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur{
 
         for(Letter letter : letters)
         {
-            LabelTile tile = new LabelTile(game, letter, new Rectangle(x, y, 50, 50) );
+            BtnTile tile = new BtnTile(game, letter, new Rectangle(x, y, 50, 50) );
             add(tile);
             x += 60;
        }

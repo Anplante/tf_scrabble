@@ -1,4 +1,4 @@
-package ca.qc.bdeb.p56.scrabble.Shared;
+package ca.qc.bdeb.p56.scrabble.shared;
 
 /**
  * Created by TheFrenchOne on 9/12/2016.
@@ -8,7 +8,8 @@ public enum IDState {
     DRAW("Draw"),
     WAIT("Wait"),
     SELECT("Select"),
-    EXCHANGE("Exchange");
+    EXCHANGE("Exchange"),
+    PLAY_TILE("Play tile");
 
     private String name;
 
