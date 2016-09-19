@@ -5,6 +5,8 @@ import ca.qc.bdeb.p56.scrabble.model.Letter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -27,10 +29,9 @@ public class BtnTile extends JButton {
 
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent mouseEvent) {
 
+        addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 gameModel.selectLetter(letter);
                 gameModel.goToNextState();
 

@@ -13,17 +13,22 @@ public class StatePending extends State {
 
     public StatePending(Player player)
     {
-        super(player, IDState.WAIT);
+        super(player, IDState.PENDING);
     }
 
     @Override
     protected void selectMode(Object modeSelected) {
     }
 
-    /*@Override
-    protected void playTile(Square square) {
+    @Override
+    protected void execute(){
+        getPlayer().setActive(true);
+    }
 
-    }*/
+    protected void initialize()
+    {
+        getPlayer().setActive(false);
+    }
 
     @Override
     protected State getNextState() {
@@ -38,8 +43,5 @@ public class StatePending extends State {
         return true;
     }
 
-    @Override
-    protected void execute() {
-        getPlayer().setActive(true);
-    }
+
 }

@@ -42,5 +42,10 @@ public abstract class State {
     protected abstract State getNextState();
     protected abstract boolean readyForNextState();
 
+    public final String getName()
+    {
+        return idState.getName();
+    }
+
 
 }

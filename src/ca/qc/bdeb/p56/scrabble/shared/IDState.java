@@ -6,7 +6,7 @@ package ca.qc.bdeb.p56.scrabble.shared;
 public enum IDState {
 
     DRAW("Draw"),
-    WAIT("Wait"),
+    PENDING("Wait"),
     SELECT("Select"),
     EXCHANGE("Exchange"),
     PLAY_TILE("Play tile");

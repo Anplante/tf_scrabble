@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9e93a873-ab64-4362-b5fe-5856ecefeca3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/BtnSquareTest.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/LabelPlayerLetter.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/LabelSquare.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnSquare.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/LabelTile.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnTile.java" />
+    <list default="true" id="9e93a873-ab64-4362-b5fe-5856ecefeca3" name="Default" comment="Changer les labels en button.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/ai/AiPlayer.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/ai/AiPlayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/BoardManager.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/BoardManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Player.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/State.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/State.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StatePending.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StatePending.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StateSelect.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StateSelect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/shared/IDState.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/shared/IDState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnSquare.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnSquare.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnTile.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnTile.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/model/GameTest.java" afterPath="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/model/GameTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/BtnSquareTest.java" afterPath="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/BtnSquareTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUITest.java" afterPath="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUITest.java" />
     </list>
     <ignored path="tf_scrabble.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,9 +39,37 @@
     <SUITE FILE_PATH="coverage/tf_scrabble$GameTest_testSelectTile.coverage" NAME="GameTest.testSelectTile Coverage Results" MODIFIED="1474215853265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>ca.qc.bdeb.p56.scrabble.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/tf_scrabble$BtnSquareTest_testSelectSquareInPlayTileState.coverage" NAME="BtnSquareTest.testSelectSquareInPlayTileState Coverage Results" MODIFIED="1474237943760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>ca.qc.bdeb.p56.scrabble.view.*</FILTER>
+    </SUITE>
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="MainMenuGUITest.java" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/MainMenuGUITest.java">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="744">
+                    <caret line="65" column="34" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
+                    <folding>
+                      <element signature="e#1835#1836#0" expanded="true" />
+                      <element signature="e#1893#1894#0" expanded="true" />
+                      <element signature="e#1972#1973#0" expanded="true" />
+                      <element signature="e#2030#2031#0" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -42,11 +77,103 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="161">
+              <caret line="46" column="21" selection-start-line="46" selection-start-column="21" selection-end-line="46" selection-end-column="21" />
+              <folding>
+                <element signature="e#2275#2276#0" expanded="true" />
+                <element signature="e#2328#2329#0" expanded="true" />
+                <element signature="e#2728#2729#0" expanded="true" />
+                <element signature="e#2780#2781#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+              <folding>
+                <element signature="e#958#959#0" expanded="true" />
+                <element signature="e#990#991#0" expanded="true" />
+                <element signature="e#1623#1624#0" expanded="true" />
+                <element signature="e#1650#1651#0" expanded="true" />
+                <element signature="e#1889#1890#0" expanded="true" />
+                <element signature="e#1934#1935#0" expanded="true" />
+                <element signature="e#2351#2352#0" expanded="true" />
+                <element signature="e#2380#2381#0" expanded="true" />
+                <element signature="e#2632#2633#0" expanded="true" />
+                <element signature="e#2678#2679#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ScrabbleGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="586">
-              <caret line="130" column="14" selection-start-line="130" selection-start-column="14" selection-end-line="130" selection-end-column="14" />
+            <state relative-caret-position="272">
+              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PanelLetterRackZone.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="416">
+              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="State.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/State.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+              <folding>
+                <element signature="e#586#587#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StatePlayTile.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StatePlayTile.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Square.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Square.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="504">
+              <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+              <folding>
+                <element signature="e#1427#1428#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainMenuGUI.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="141" column="26" selection-start-line="141" selection-start-column="26" selection-end-line="141" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -57,89 +184,19 @@
       <file leaf-file-name="BtnTile.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnTile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+            <state relative-caret-position="561">
+              <caret line="41" column="1" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BtnSquare.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BtnSquare.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnSquare.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
+            <state relative-caret-position="493">
+              <caret line="38" column="30" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BtnSquareTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/BtnSquareTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#592#600#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/utility/TestUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainMenuGUI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-73">
-              <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/model/GameTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="30" selection-end-column="47" />
-              <folding>
-                <element signature="e#572#580#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainMenuGUITest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/MainMenuGUITest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="27" column="11" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Square.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Square.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
-              <folding>
-                <element signature="e#1353#1354#0" expanded="true" />
-                <element signature="e#1383#1384#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -173,7 +230,6 @@
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Letter.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Phases/PhaseSelect.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Phases/Phase.java" />
-        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/BoardManager.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Phase.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/PhaseSelect.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Square.java" />
@@ -189,26 +245,30 @@
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/vue/PanelPlayerInfo.java" />
         <option value="$PROJECT_DIR$/src/resources/scrabbleParameters.xml" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/Shared/IDState.java" />
-        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/State.java" />
-        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StatePending.java" />
-        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Player.java" />
-        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StateSelect.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StatePlayTile.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/vue/PanelEditGame.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/vue/LabelSquare.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/vue/LabelTile.java" />
         <option value="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/utility/TestUtils.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/GameManager.java" />
-        <option value="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/model/GameTest.java" />
-        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/LabelSquare.java" />
-        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java" />
-        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java" />
         <option value="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/LabelSquareTest.java" />
-        <option value="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/BtnSquareTest.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/LabelTile.java" />
+        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/shared/IDState.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnTile.java" />
+        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/BoardManager.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnSquare.java" />
+        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java" />
+        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/State.java" />
+        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StatePending.java" />
+        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StateSelect.java" />
+        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" />
+        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Player.java" />
+        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/ai/AiPlayer.java" />
+        <option value="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/BtnSquareTest.java" />
+        <option value="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/model/GameTest.java" />
+        <option value="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUITest.java" />
+        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java" />
       </list>
     </option>
   </component>
@@ -258,10 +318,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="tf_scrabble" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -328,6 +384,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tf_scrabble" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tf_scrabble" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scrabble" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -367,7 +445,120 @@
       <recent name="ca.qc.bdeb.p56.scrabble.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUITest.java</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
+  </component>
+  <component name="RunManager" selected="JUnit.All in tf_scrabble">
     <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -383,6 +574,32 @@
       <envs />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="BtnSquareTest.testSelectSquareInPlayTileState" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="ca.qc.bdeb.p56.scrabble.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="tf_scrabble" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="ca.qc.bdeb.p56.scrabble.view" />
+      <option name="MAIN_CLASS_NAME" value="ca.qc.bdeb.p56.scrabble.view.BtnSquareTest" />
+      <option name="METHOD_NAME" value="testSelectSquareInPlayTileState" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
       <method />
     </configuration>
     <configuration default="false" name="All in tf_scrabble" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -406,15 +623,20 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="All in tf_scrabble (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    <configuration default="false" name="ScrabbleGUITest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="ca.qc.bdeb.p56.scrabble.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <module name="tf_scrabble" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" />
+      <option name="PACKAGE_NAME" value="ca.qc.bdeb.p56.scrabble.view" />
+      <option name="MAIN_CLASS_NAME" value="ca.qc.bdeb.p56.scrabble.view.ScrabbleGUITest" />
       <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" />
@@ -427,46 +649,20 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="GameTest.testSelectTile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="ScrabbleGUITest.testChangePlayer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="ca.qc.bdeb.p56.scrabble.*" />
+          <option name="PATTERN" value="ca.qc.bdeb.p56.scrabble.view.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <module name="tf_scrabble" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="ca.qc.bdeb.p56.scrabble.model" />
-      <option name="MAIN_CLASS_NAME" value="ca.qc.bdeb.p56.scrabble.model.GameTest" />
-      <option name="METHOD_NAME" value="testSelectTile" />
+      <option name="PACKAGE_NAME" value="ca.qc.bdeb.p56.scrabble.view" />
+      <option name="MAIN_CLASS_NAME" value="ca.qc.bdeb.p56.scrabble.view.ScrabbleGUITest" />
+      <option name="METHOD_NAME" value="testChangePlayer" />
       <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="GameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="ca.qc.bdeb.p56.scrabble.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="tf_scrabble" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="ca.qc.bdeb.p56.scrabble.model" />
-      <option name="MAIN_CLASS_NAME" value="ca.qc.bdeb.p56.scrabble.model.GameTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" />
@@ -703,18 +899,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.All in tf_scrabble" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.All in tf_scrabble (1)" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.GameTest.testSelectTile" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.GameTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.BtnSquareTest.testSelectSquareInPlayTileState" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.All in tf_scrabble" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.ScrabbleGUITest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.ScrabbleGUITest.testChangePlayer" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.GameTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.All in tf_scrabble" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.GameTest.testSelectTile" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.All in tf_scrabble (1)" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.All in tf_scrabble" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.ScrabbleGUITest.testChangePlayer" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.ScrabbleGUITest" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.BtnSquareTest.testSelectSquareInPlayTileState" />
       </list>
     </recent_temporary>
   </component>
@@ -791,39 +987,46 @@
       <option name="project" value="LOCAL" />
       <updated>1474216015508</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Changer les labels en button.">
+      <created>1474223990114</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1474223990114</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_in_tf_scrabble - 2016.09.18 at 12h 24m 55s.xml">
+    <history-entry file="All_in_tf_scrabble - 2016.09.18 at 21h 08m 26s.xml">
       <configuration name="All in tf_scrabble" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_tf_scrabble - 2016.09.18 at 12h 59m 57s.xml">
-      <configuration name="All in tf_scrabble" configurationId="JUnit" />
+    <history-entry file="ScrabbleGUITest - 2016.09.18 at 19h 44m 36s.xml">
+      <configuration name="ScrabbleGUITest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameTest - 2016.09.18 at 12h 03m 37s.xml">
-      <configuration name="GameTest" configurationId="JUnit" />
+    <history-entry file="ScrabbleGUITest - 2016.09.18 at 19h 44m 42s.xml">
+      <configuration name="ScrabbleGUITest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameTest - 2016.09.18 at 12h 05m 07s.xml">
-      <configuration name="GameTest" configurationId="JUnit" />
+    <history-entry file="ScrabbleGUITest - 2016.09.18 at 20h 02m 22s.xml">
+      <configuration name="ScrabbleGUITest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameTest - 2016.09.18 at 12h 19m 51s.xml">
-      <configuration name="GameTest" configurationId="JUnit" />
+    <history-entry file="ScrabbleGUITest - 2016.09.18 at 20h 07m 20s.xml">
+      <configuration name="ScrabbleGUITest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameTest - 2016.09.18 at 12h 21m 24s.xml">
-      <configuration name="GameTest" configurationId="JUnit" />
+    <history-entry file="ScrabbleGUITest_testChangePlayer - 2016.09.18 at 20h 09m 56s.xml">
+      <configuration name="ScrabbleGUITest.testChangePlayer" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameTest - 2016.09.18 at 13h 02m 33s.xml">
-      <configuration name="GameTest" configurationId="JUnit" />
+    <history-entry file="ScrabbleGUITest_testChangePlayer - 2016.09.18 at 20h 14m 08s.xml">
+      <configuration name="ScrabbleGUITest.testChangePlayer" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameTest - 2016.09.18 at 13h 02m 34s.xml">
-      <configuration name="GameTest" configurationId="JUnit" />
+    <history-entry file="ScrabbleGUITest_testChangePlayer - 2016.09.18 at 20h 14m 11s.xml">
+      <configuration name="ScrabbleGUITest.testChangePlayer" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameTest_testSelectTile - 2016.09.18 at 12h 24m 06s.xml">
-      <configuration name="GameTest.testSelectTile" configurationId="JUnit" />
+    <history-entry file="ScrabbleGUITest_testChangePlayer - 2016.09.18 at 20h 16m 36s.xml">
+      <configuration name="ScrabbleGUITest.testChangePlayer" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameTest_testSelectTile - 2016.09.18 at 12h 24m 14s.xml">
-      <configuration name="GameTest.testSelectTile" configurationId="JUnit" />
+    <history-entry file="ScrabbleGUITest_testChangePlayer - 2016.09.18 at 20h 17m 18s.xml">
+      <configuration name="ScrabbleGUITest.testChangePlayer" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
@@ -831,27 +1034,27 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32875264" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25833333" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25833333" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3276414" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3266385" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3991462" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29386893" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -861,6 +1064,35 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39852008" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32875264" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25833333" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3266385" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -900,81 +1132,38 @@
     <MESSAGE value="Modifier les classes qui gèrent les états du jeu + ajout d'un panel pour afficher le nom et le score du joueur." />
     <MESSAGE value="Ajout d'une classe pour gérer lorsque l'utilisateur place une lettre sur le board. Auparavant, la sélection d'une lettre et son placement étaient effectués dans le même état. De plus, une lettre ne peut qu'être placé qu'une seule fois à présent." />
     <MESSAGE value="Il faut à présent envoyer la liste des joueurs qui vont participper à la partie au lieu d'avoir une méthode qui permettait d'ajouter au fur et à mesure." />
-    <option name="LAST_COMMIT_MESSAGE" value="Il faut à présent envoyer la liste des joueurs qui vont participper à la partie au lieu d'avoir une méthode qui permettait d'ajouter au fur et à mesure." />
+    <MESSAGE value="Changer les labels en button." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changer les labels en button." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="9" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StatePlayTile.java</url>
+          <line>28</line>
+          <properties />
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java</url>
+          <line>80</line>
+          <properties />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="22" />
     </breakpoint-manager>
-    <watches-manager />
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="gameModel.boardManager.premiums" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/GameManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#2240#2241#0" expanded="true" />
-            <element signature="e#2298#2299#0" expanded="true" />
-            <element signature="e#2361#2362#0" expanded="true" />
-            <element signature="e#2426#2427#0" expanded="true" />
-            <element signature="e#2469#2470#0" expanded="true" />
-            <element signature="e#2518#2519#0" expanded="true" />
-            <element signature="e#2565#2566#0" expanded="true" />
-            <element signature="e#2619#2620#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1818#1819#0" expanded="true" />
-            <element signature="e#1865#1866#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Premium.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="59" column="73" selection-start-line="59" selection-start-column="73" selection-end-line="59" selection-end-column="73" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Square.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="901">
@@ -1010,14 +1199,14 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2240#2241#0" expanded="true" />
-            <element signature="e#2298#2299#0" expanded="true" />
-            <element signature="e#2361#2362#0" expanded="true" />
-            <element signature="e#2426#2427#0" expanded="true" />
-            <element signature="e#2469#2470#0" expanded="true" />
-            <element signature="e#2518#2519#0" expanded="true" />
-            <element signature="e#2565#2566#0" expanded="true" />
-            <element signature="e#2619#2620#0" expanded="true" />
+            <element signature="e#2381#2382#0" expanded="true" />
+            <element signature="e#2439#2440#0" expanded="true" />
+            <element signature="e#2496#2497#0" expanded="true" />
+            <element signature="e#2561#2562#0" expanded="true" />
+            <element signature="e#2728#2729#0" expanded="true" />
+            <element signature="e#2780#2781#0" expanded="true" />
+            <element signature="e#2827#2828#0" expanded="true" />
+            <element signature="e#2879#2880#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1027,9 +1216,7 @@
         <state relative-caret-position="85">
           <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1818#1819#0" expanded="true" />
-            <element signature="e#1865#1866#0" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1093,14 +1280,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Letter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1117,54 +1296,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/shared/IDState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StatePlayTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
-          <folding>
-            <element signature="e#1025#1026#0" expanded="false" />
-            <element signature="e#1062#1063#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StateSelect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StatePending.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding>
-            <element signature="e#253#254#0" expanded="false" />
-            <element signature="e#296#297#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/ai/AiPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://D:/Program Files/Java/jdk1.8.0_60/jre/lib/rt.jar!/java/util/Random.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
@@ -1173,30 +1304,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/State.java">
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnPlayerLetter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="39" column="28" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="82" column="25" selection-start-line="82" selection-start-column="25" selection-end-line="82" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1818#1819#0" expanded="true" />
-            <element signature="e#1865#1866#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="48" column="15" selection-start-line="48" selection-start-column="15" selection-end-line="48" selection-end-column="15" />
+        <state relative-caret-position="119">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1209,36 +1320,167 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/GameManager.java">
+    <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/utility/TestUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="39" column="38" selection-start-line="39" selection-start-column="38" selection-end-line="39" selection-end-column="38" />
+        <state relative-caret-position="425">
+          <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/shared/IDState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_60/jre/lib/rt.jar!/java/lang/Object.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_60/jre/lib/rt.jar!/java/awt/geom/Dimension2D.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_60/jre/lib/rt.jar!/java/awt/Dimension.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_60/jre/lib/rt.jar!/java/awt/Component.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="905" column="0" selection-start-line="905" selection-start-column="0" selection-end-line="905" selection-end-column="0" />
+          <folding>
+            <element signature="e#28837#28838#0" expanded="true" />
+            <element signature="e#28907#28908#0" expanded="true" />
+            <element signature="e#28968#28969#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_60/jre/lib/rt.jar!/javax/swing/AbstractButton.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="174" column="0" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
+          <folding>
+            <element signature="e#6703#6704#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/BoardManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="556">
-          <caret line="69" column="28" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
+        <state relative-caret-position="238">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java">
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Board.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="106" column="20" selection-start-line="106" selection-start-column="20" selection-end-line="106" selection-end-column="20" />
+        <state relative-caret-position="88">
+          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/junit-4.12.jar!/org/junit/Assert.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/MainMenuGUITest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="744">
+          <caret line="65" column="34" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
           <folding>
-            <element signature="e#2240#2241#0" expanded="true" />
-            <element signature="e#2298#2299#0" expanded="true" />
-            <element signature="e#2361#2362#0" expanded="true" />
-            <element signature="e#2426#2427#0" expanded="true" />
-            <element signature="e#2469#2470#0" expanded="true" />
-            <element signature="e#2518#2519#0" expanded="true" />
-            <element signature="e#2565#2566#0" expanded="true" />
-            <element signature="e#2619#2620#0" expanded="true" />
+            <element signature="e#1835#1836#0" expanded="true" />
+            <element signature="e#1893#1894#0" expanded="true" />
+            <element signature="e#1972#1973#0" expanded="true" />
+            <element signature="e#2030#2031#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/GameManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StateSelect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StatePending.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding>
+            <element signature="e#500#501#0" expanded="true" />
+            <element signature="e#544#545#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/ai/AiPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+          <folding>
+            <element signature="e#254#255#0" expanded="true" />
+            <element signature="e#281#282#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/BtnSquareTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="30" column="31" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#668#676#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/model/GameTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="30" column="31" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUITest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="36" column="22" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1250,106 +1492,107 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/utility/TestUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-73">
-          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Square.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
-          <folding>
-            <element signature="e#1353#1354#0" expanded="true" />
-            <element signature="e#1383#1384#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Program Files/Java/jdk1.8.0_60/jre/lib/rt.jar!/javax/swing/AbstractButton.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="172" column="16" selection-start-line="172" selection-start-column="16" selection-end-line="172" selection-end-column="16" />
-          <folding>
-            <element signature="e#6703#6704#0" expanded="true" />
-            <element signature="e#6735#6736#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/model/GameTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="30" selection-end-column="47" />
-          <folding>
-            <element signature="e#572#580#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/MainMenuGUITest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="27" column="11" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="130" column="14" selection-start-line="130" selection-start-column="14" selection-end-line="130" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnPlayerLetter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/BtnSquareTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#592#600#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnTile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+        <state relative-caret-position="561">
+          <caret line="41" column="1" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnSquare.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
+        <state relative-caret-position="493">
+          <caret line="38" column="30" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Square.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding>
+            <element signature="e#1427#1428#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/State.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding>
+            <element signature="e#586#587#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StatePlayTile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding>
+            <element signature="e#958#959#0" expanded="true" />
+            <element signature="e#990#991#0" expanded="true" />
+            <element signature="e#1623#1624#0" expanded="true" />
+            <element signature="e#1650#1651#0" expanded="true" />
+            <element signature="e#1889#1890#0" expanded="true" />
+            <element signature="e#1934#1935#0" expanded="true" />
+            <element signature="e#2351#2352#0" expanded="true" />
+            <element signature="e#2380#2381#0" expanded="true" />
+            <element signature="e#2632#2633#0" expanded="true" />
+            <element signature="e#2678#2679#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="46" column="21" selection-start-line="46" selection-start-column="21" selection-end-line="46" selection-end-column="21" />
+          <folding>
+            <element signature="e#2275#2276#0" expanded="true" />
+            <element signature="e#2328#2329#0" expanded="true" />
+            <element signature="e#2728#2729#0" expanded="true" />
+            <element signature="e#2780#2781#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="141" column="26" selection-start-line="141" selection-start-column="26" selection-end-line="141" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

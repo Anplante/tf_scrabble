@@ -31,12 +31,13 @@ public class ScrabbleGUITest {
     public void setUp()  throws Exception {
         gameManager = new GameManager();
         List lstPlayer = new ArrayList<Player>();
+
+        lstPlayer.add(new Player("Antoine"));
+        lstPlayer.add(new Player("Louis"));
+        lstPlayer.add(new Player("Julien"));
         game = gameManager.createNewGame(lstPlayer);
-        game.saveHumanPlayers("Antoine");
-        game.saveHumanPlayers("Louis");
-        game.saveHumanPlayers("Julien");
+
         scrabbleGame = new ScrabbleGUI(game, new Rectangle(screenSize));
-        game.startGame();
         btnFinish = (JButton) TestUtils.getChildNamed(scrabbleGame, "finish");
     }
 

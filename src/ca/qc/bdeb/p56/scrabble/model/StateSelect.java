@@ -27,14 +27,17 @@ public class StateSelect extends State {
     @Override
     protected State getNextState() {
 
-        State newState = null;
+        State newState;
 
         if(modeSelected.getClass() == Letter.class)
         {
             newState = new StatePlayTile(getPlayer(), (Letter)modeSelected);
         }
-        else
+        else if(modeSelected.getClass() == IDState.class)
         {
+            newState = new StatePending(getPlayer());
+        }
+        else{
             newState = this;
         }
         return newState;

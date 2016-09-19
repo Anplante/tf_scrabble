@@ -70,8 +70,7 @@ public class ScrabbleGUI extends JFrame {
         {
             public void actionPerformed(ActionEvent e)
             {
-                // FIXME: le state est tout le temps null
-                gameModel.activateNextPlayer();
+              gameModel.passTurn();
             }
         });
         add(btnFinish);

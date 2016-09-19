@@ -24,7 +24,7 @@ public class Player implements Observable {
 
    // private final List<Letter> lettersOnHand;
 
-    public Player(Game game, String name)
+    public Player(String name)
     {
         this.name  = name;
         this.game = game;
@@ -34,6 +34,10 @@ public class Player implements Observable {
         observateurs = new LinkedList<>();
     }
 
+    public void setGame(Game game)
+    {
+        this.game = game;
+    }
     public void addLetter(Letter letter)
     {
         letters.add(letter);
@@ -78,14 +82,20 @@ public class Player implements Observable {
     }
 
 
-    public void playTile(Square square) {
+  /*  public void playTile(Square square) {
 
         currentState.selectMode(square);
     }
+    */
 
-    public void selectLetter(Letter letter) {
-        currentState.selectMode(letter);
+    public void selectMode(Object mode)
+    {
+        currentState.selectMode(mode);
     }
+
+ /*  public void selectLetter(Letter letter) {
+        currentState.selectMode(letter);
+    }*/
 
     public State getState() {
         return currentState;

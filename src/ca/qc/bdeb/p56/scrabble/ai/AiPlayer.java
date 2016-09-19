@@ -10,6 +10,6 @@ public class AiPlayer extends Player{
 
 
     public AiPlayer(Game game, String name) {
-        super(game, name);
+        super(name);
     }
 }

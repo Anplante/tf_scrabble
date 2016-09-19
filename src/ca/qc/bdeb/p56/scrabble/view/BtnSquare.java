@@ -6,6 +6,8 @@ import ca.qc.bdeb.p56.scrabble.model.Square;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -22,7 +24,7 @@ public class BtnSquare extends JButton {
 
     public BtnSquare(Game gameModel, int posRow, int posColumn) {
 
-        super("" + String.valueOf(gameModel.getContentSquare(posRow, posColumn)));
+        super(gameModel.getPremiumSquare(posRow, posColumn));
         this.gameModel = gameModel;
         this.posRow = posRow;
         this.posColumn = posColumn;
@@ -32,15 +34,13 @@ public class BtnSquare extends JButton {
         setBorder(BorderFactory.createEtchedBorder());
 
 
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent mouseEvent) {
-
+        addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 gameModel.playTile(gameModel.getSquare(posRow, posColumn));
                 setText("" + String.valueOf(gameModel.getContentSquare(posRow, posColumn)));
                 gameModel.goToNextState();
-
             }
         });
+
     }
 }

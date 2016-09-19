@@ -21,6 +21,7 @@ public class BoardManager {
 
     private Map<String, Premium> premiums;
     private static Map<String, Premium.Type> premiumTypeMap;
+    private Board board;
 
     static {
         premiumTypeMap = new TreeMap<String, Premium.Type>();
@@ -28,8 +29,6 @@ public class BoardManager {
         premiumTypeMap.put("wordscore", Premium.Type.WORD_SCORE);
     }
 
-
-    private Board board;
 
 
     public BoardManager()
@@ -67,9 +66,9 @@ public class BoardManager {
     }
 
 
-    public String getContentSquare(int row, int column) {
+    public char getContentSquare(int row, int column) {
 
-        String value = "";
+        char value = '\0';
 
         Square square = board.getSquare(row, column);
 
@@ -77,16 +76,21 @@ public class BoardManager {
 
         if(content != Character.MIN_VALUE)
         {
-            value = ""+content;
+            value = content;
         }
-        else {
-            Premium premiumContent = square.getPremium();
-            if (premiumContent != null) {
+        return value;
+    }
 
-                for (Map.Entry<String, Premium> premium : premiums.entrySet()) {
-                    if (premiumContent.equals(premium.getValue())) {
-                        value = premium.getKey();
-                    }
+    public String getPremiumSquare(int row, int column) {
+
+        String value = "";
+        Square square = board.getSquare(row, column);
+        Premium premiumContent = square.getPremium();
+
+        if (premiumContent != null) {
+            for (Map.Entry<String, Premium> premium : premiums.entrySet()) {
+                if (premiumContent.equals(premium.getValue())) {
+                    value = premium.getKey();
                 }
             }
         }
@@ -116,4 +120,6 @@ public class BoardManager {
     public Square getSquare(int row, int column) {
         return board.getSquare(row, column);
     }
+
+
 }

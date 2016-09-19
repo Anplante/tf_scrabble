@@ -25,7 +25,7 @@ public class MainMenuGUI extends JFrame {
     private JLabel lblNombreAI;
     private String[] nombreDeAi = {"1", "2", "3"};
     private JComboBox cmbNombreAi = new JComboBox();
-    private GameManager gameManager = new GameManager();
+    private GameManager gameManager;
 
     private Player player;
     private List<Player> players;
@@ -119,23 +119,27 @@ public class MainMenuGUI extends JFrame {
     }
 
     private void setPlayer() {
-        List lstPlayer = new ArrayList<Player>();
-        game = gameManager.createNewGame(lstPlayer);
-        game.saveHumanPlayers(txtNom.getText());
+
+        players = new ArrayList<Player>();
+        player = new Player(txtNom.getText());
+        players.add(player);
+
         int limit = (int) cmbNombreAi.getSelectedIndex();
         ++limit;
         for (int i = 0; i < limit; i++) {
-            game.saveHumanPlayers("AI");
+            players.add(new AiPlayer(game, "AI"));
         }
     }
 
     private void initializeGame() {
 
+        gameManager = new GameManager();
+        game = gameManager.createNewGame(players);
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         ScrabbleGUI gameGUI = new ScrabbleGUI(game, new Rectangle(screenSize));
         gameGUI.setVisible(true);
         setVisible(false);
-        game.startGame();
         gameGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }

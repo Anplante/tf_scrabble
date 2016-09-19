@@ -28,7 +28,7 @@ public class GameTest {
         gameManager = new GameManager();
 
         List<Player> players = new ArrayList<Player>();
-        players.add(new Player(game, "Louis"));
+        players.add(new Player("Louis"));
         game = gameManager.createNewGame(players);
         game.startGame();
     }
