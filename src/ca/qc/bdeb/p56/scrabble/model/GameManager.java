@@ -24,53 +24,27 @@ public class GameManager {
 
     private List<Letter> alphabetBag;
 
-    public GameManager()
-    {
+    public GameManager() {
         game = null;
     }
 
 
-    public Game createNewGame(List<Player> players)
-    {
-        try{
-            File fXmlFile = new File(GAME_FILE);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(fXmlFile);
-            Element rootElement = doc.getDocumentElement();
-            rootElement.normalize();
-            initAlphabetBag(rootElement);
-            game = new Game(rootElement, alphabetBag, players);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+    public Game createNewGame(List<Player> players) {
+        game = new Game(GAME_FILE, players);
         return game;
     }
 
-    private void initAlphabetBag(Element rootElement)
+
+    public void saveGame(File file)
     {
-        alphabetBag = new ArrayList<Letter>();
 
-        Element alphabetsElement = (Element) rootElement.getElementsByTagName("frenchAlphabet").item(0);
-
-        NodeList alphabetsNodes = alphabetsElement.getElementsByTagName("letter");
-
-        for(int i = 0; i < alphabetsNodes.getLength(); i++)
-        {
-            Element activeElement = (Element) alphabetsNodes.item(i);
-
-            char caracter = activeElement.getAttribute("text").charAt(0);
-            int value = Integer.parseInt(activeElement.getAttribute("value"));
-            Letter letter = new Letter(caracter, value);
-
-            int amount = Integer.parseInt(activeElement.getAttribute("amount"));
-
-            for(int j = 0; j < amount; j++)
-            {
-                alphabetBag.add(letter);   // c'est la meme reference pour chaque lettre
-            }
-        }
     }
+
+    public Game loadGame(File file)
+    {
+        Game game = null;
+
+        return game;
+    }
+
 }

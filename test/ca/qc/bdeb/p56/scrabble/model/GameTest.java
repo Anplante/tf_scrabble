@@ -15,7 +15,6 @@ import static org.junit.Assert.assertNotEquals;
  */
 public class GameTest {
 
-    private GameManager gameManager;
     private Game game;
 
     public GameTest()
@@ -25,7 +24,7 @@ public class GameTest {
     @Before
     public void setUp()  throws Exception {
 
-        gameManager = new GameManager();
+        GameManager gameManager = new GameManager();
 
         List<Player> players = new ArrayList<Player>();
         players.add(new Player("Louis"));

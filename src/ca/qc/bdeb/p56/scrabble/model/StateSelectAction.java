@@ -5,14 +5,14 @@ import ca.qc.bdeb.p56.scrabble.shared.IDState;
 /**
  * Created by TheFrenchOne on 9/12/2016.
  */
-public class StateSelect extends State {
+public class StateSelectAction extends State {
 
     private Letter letterSelected;
     private Object modeSelected;
 
     private boolean  readyToChange ;
 
-    protected StateSelect(Player currentPlayer) {
+    protected StateSelectAction(Player currentPlayer) {
 
 
         super(currentPlayer, IDState.SELECT);

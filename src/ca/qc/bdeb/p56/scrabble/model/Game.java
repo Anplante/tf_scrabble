@@ -1,8 +1,13 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,19 +25,69 @@ public class Game {
     private static final Random randomGenerator = new Random();
 
 
-    public Game(Element rootElement, List<Letter> alphabetBag, List<Player> players) {
+    public Game(String filePath, List<Player> players) {
 
-        boardManager = createBoard(rootElement);
-        this.alphabetBag = alphabetBag;
 
-        // tests
+        loadParameters(filePath);
+
         this.players = players;
 
         for(Player player : players)
         {
             player.setGame(this);
         }
+    }
 
+    private void loadParameters(String filePath)
+    {
+        Element rootElement = getRootElement(filePath);
+        initAlphabetBag(rootElement);
+        boardManager = createBoard(rootElement);
+    }
+
+    private Element getRootElement(String path) {
+
+        Element rootElement = null;
+
+        try{
+            File fXmlFile = new File(path);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+            rootElement = doc.getDocumentElement();
+            rootElement.normalize();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return rootElement;
+      }
+
+    private void initAlphabetBag(Element rootElement)
+    {
+        alphabetBag = new ArrayList<Letter>();
+
+        Element alphabetsElement = (Element) rootElement.getElementsByTagName("frenchAlphabet").item(0);
+
+        NodeList alphabetsNodes = alphabetsElement.getElementsByTagName("letter");
+
+        for(int i = 0; i < alphabetsNodes.getLength(); i++)
+        {
+            Element activeElement = (Element) alphabetsNodes.item(i);
+
+            char caracter = activeElement.getAttribute("text").charAt(0);
+            int value = Integer.parseInt(activeElement.getAttribute("value"));
+            Letter letter = new Letter(caracter, value);
+
+            int amount = Integer.parseInt(activeElement.getAttribute("amount"));
+
+            for(int j = 0; j < amount; j++)
+            {
+                alphabetBag.add(letter);
+            }
+        }
     }
 
 

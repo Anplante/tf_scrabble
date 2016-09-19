@@ -33,7 +33,7 @@ public class StatePending extends State {
     @Override
     protected State getNextState() {
 
-       State newState = new StateSelect(getPlayer());
+       State newState = new StateSelectAction(getPlayer());
 
         return newState;
     }
