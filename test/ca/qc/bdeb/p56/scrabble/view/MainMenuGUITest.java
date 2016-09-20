@@ -72,6 +72,7 @@ public class MainMenuGUITest {
         });
     }
 
+
     private void txtInputActionPerformed(ActionEvent evt) {
         txtInput.setText(txtInput.getText() + '?');
     }
