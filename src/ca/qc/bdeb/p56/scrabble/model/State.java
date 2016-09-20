@@ -27,6 +27,17 @@ public abstract class State {
 
     }
 
+    protected void selectTile(Tile tile){
+
+    }
+
+    protected void selectSquare(Square square)
+    {
+
+    }
+
+
+
     protected final Player getPlayer()
     {
         return player;
@@ -37,8 +48,8 @@ public abstract class State {
         return game;
     }
 
-    protected abstract void selectMode(Object itemSelected);
-   // protected abstract void playTile(Square square);
+    protected abstract void selectNextState(IDState stateSelected);
+
     protected abstract State getNextState();
     protected abstract boolean readyForNextState();
 

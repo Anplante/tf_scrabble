@@ -46,25 +46,25 @@ public class BtnSquareTest {
     @Test
     public void testSelectSquareInPlayTileState() throws AWTException {
 
-        Letter letter = new Letter('a', 2);
-        btnTile = new BtnTile(gameModel, letter, new Rectangle(0,0,10,10));
+        Tile tile = new Tile('a', 2);
+        btnTile = new BtnTile(gameModel, tile, new Rectangle(0,0,10,10));
 
         assertEquals('\0', gameModel.getContentSquare(0,0));
 
         btnTile.doClick();
         btnSquare.doClick();
-        assertEquals(letter.getLetter(), gameModel.getContentSquare(0,0));
+        assertEquals(tile.getLetter(), gameModel.getContentSquare(0,0));
 
 
     }
 
     @Test
-    public void testSelectSquareInSelectState() throws AWTException {
+    public void testSelectSquareInSelectStateAction() throws AWTException {
 
 
-        assertEquals(IDState.SELECT.getName(), gameModel.getState());
+        assertEquals(IDState.SELECT_ACTION.getName(), gameModel.getState());
         btnSquare.doClick();
-        assertEquals(IDState.SELECT.getName(), gameModel.getState());
+        assertEquals(IDState.SELECT_ACTION.getName(), gameModel.getState());
 
     }
 

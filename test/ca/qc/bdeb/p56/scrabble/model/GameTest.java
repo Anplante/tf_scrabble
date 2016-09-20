@@ -39,25 +39,25 @@ public class GameTest {
     @Test
     public void testSelectTile()
     {
-        Letter letter1 = new Letter('a', 2);
-        Letter letter2 = new Letter ('b', 3);
+        Tile tile1 = new Tile('a', 2);
+        Tile tile2 = new Tile('b', 3);
 
         Square square = new Square();
-        square.setLetter(letter2);
+        square.setLetter(tile2);
 
-        assertNotEquals(letter1, letter2);
-        assertNotEquals(letter1.getLetter(), square.getLetterOn());
+        assertNotEquals(tile1, tile2);
+        assertNotEquals(tile1.getLetter(), square.getTileOn());
 
-        game.selectLetter(letter1);
+        game.selectLetter(tile1);
         game.goToNextState();
         game.playTile(square);
 
-        assertEquals(letter1.getLetter(), square.getLetterOn());
+        assertEquals(tile1.getLetter(), square.getTileOn());
     }
 
     @Test
     public void testAlphabetBagsSize()
     {
-        assertEquals(100, game.lettersLeft() + 7 * game.getPlayersLeft());
+        assertEquals(102, game.lettersLeft() + 7 * game.getPlayersLeft());
     }
 }

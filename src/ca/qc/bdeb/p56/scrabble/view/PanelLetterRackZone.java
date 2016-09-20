@@ -1,7 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
-import ca.qc.bdeb.p56.scrabble.model.Letter;
+import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
@@ -53,9 +53,9 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         int x = ((getWidth()) / 2) - 150;
         int y = (getHeight() - 50) / 2;
 
-        List<Letter> letters = player.getLetters();
+        List<Tile> tiles = player.getTiles();
 
-        for (Letter letter : letters) {
+        for (Tile letter : tiles) {
             BtnTile tile = new BtnTile(game, letter, new Rectangle(x, y, 50, 50));
             add(tile);
             x += 60;

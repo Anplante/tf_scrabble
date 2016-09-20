@@ -8,34 +8,46 @@ import ca.qc.bdeb.p56.scrabble.shared.IDState;
 public class StatePlayTile extends State {
 
 
-    private Letter letterSelected;
+    private Tile tileSelected;
     boolean readyToChange;
+    private IDState stateSelected;
 
-    public StatePlayTile(Player currentPlayer, Letter letterSelected)
+    public StatePlayTile(Player currentPlayer, Tile tileSelected)
     {
         super(currentPlayer, IDState.PLAY_TILE);
-        this.letterSelected = letterSelected;
+        this.tileSelected = tileSelected;
         readyToChange = false;
     }
 
 
     @Override
-    protected void selectMode(Object itemSelected) {
+    protected  void selectSquare(Square squareSelected)
+    {
 
-        if(itemSelected.getClass() == Square.class)
-        {
-            Square square = (Square) itemSelected;
-
-            square.setLetter(letterSelected);
-            getPlayer().remove(letterSelected);
+            // TODO Louis : Vérifier que la case est valide
+            squareSelected.setLetter(tileSelected); // La partie devrait le faire
+            getPlayer().remove(tileSelected);  // idem
             getPlayer().aviserObservateurs();
             readyToChange = true;
-        }
+              this.stateSelected = IDState.SELECT_TILE;
+    }
+
+
+    @Override
+    protected void selectNextState(IDState stateSelected) {
+
+       this.stateSelected = stateSelected;
     }
 
 
     @Override
     protected State getNextState() {
+
+        switch(stateSelected)
+        {
+            case SELECT_ACTION:
+                break;
+        }
 
         State newState = new StateSelectAction(getPlayer());
 

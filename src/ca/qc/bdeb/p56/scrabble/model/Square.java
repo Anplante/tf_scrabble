@@ -20,14 +20,14 @@ public class Square {
 
     private int posRow;
     private int posColumn;
-    private Letter letterOn;
+    private Tile tileOn;
     private Premium premium;
 
 
 
     public Square()
     {
-        this.letterOn = null;
+        this.tileOn = null;
     }
 
 
@@ -43,20 +43,20 @@ public class Square {
     }
 
 
-    public char getLetterOn()
+    public char getTileOn()
     {
-        if(letterOn != null)
+        if(tileOn != null)
         {
-            return letterOn.getLetter();
+            return tileOn.getLetter();
         }
         else{
             return Character.MIN_VALUE;
         }
     }
 
-    public Letter getLetter()
+    public Tile getLetter()
     {
-      return letterOn;
+      return tileOn;
     }
 
 
@@ -68,7 +68,7 @@ public class Square {
         return premium;
     }
 
-    public void setLetter(Letter letter) {
-        this.letterOn = letter;
+    public void setLetter(Tile tile) {
+        this.tileOn = tile;
     }
 }

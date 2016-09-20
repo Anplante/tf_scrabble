@@ -20,7 +20,7 @@ public class Game {
     private BoardManager boardManager;
     private List<Player> players;
     private int activePlayerIndex;
-    private static List<Letter> alphabetBag;
+    private static List<Tile> alphabetBag;
 
     private static final Random randomGenerator = new Random();
 
@@ -67,7 +67,7 @@ public class Game {
 
     private void initAlphabetBag(Element rootElement)
     {
-        alphabetBag = new ArrayList<Letter>();
+        alphabetBag = new ArrayList<Tile>();
 
         Element alphabetsElement = (Element) rootElement.getElementsByTagName("frenchAlphabet").item(0);
 
@@ -79,13 +79,13 @@ public class Game {
 
             char caracter = activeElement.getAttribute("text").charAt(0);
             int value = Integer.parseInt(activeElement.getAttribute("value"));
-            Letter letter = new Letter(caracter, value);
+            Tile tile = new Tile(caracter, value);
 
             int amount = Integer.parseInt(activeElement.getAttribute("amount"));
 
             for(int j = 0; j < amount; j++)
             {
-                alphabetBag.add(letter);
+                alphabetBag.add(tile);
             }
         }
     }
@@ -122,7 +122,7 @@ public class Game {
     }
 
     public void passTurn() {
-        getActivePlayer().selectMode(IDState.PENDING);
+        getActivePlayer().selectNextState(IDState.PENDING);
         goToNextState();
     }
 
@@ -135,9 +135,9 @@ public class Game {
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < players.size(); j++) {
-                Letter letter = alphabetBag.get(randomGenerator.nextInt(alphabetBag.size()));
-                players.get(j).addLetter(letter);
-                alphabetBag.remove(letter);
+                Tile tile = alphabetBag.get(randomGenerator.nextInt(alphabetBag.size()));
+                players.get(j).addLetter(tile);
+                alphabetBag.remove(tile);
             }
         }
     }
@@ -168,11 +168,11 @@ public class Game {
     }
 
     public void playTile(Square square) {
-        getActivePlayer().selectMode(square);
+        getActivePlayer().selectSquare(square);
     }
 
-    public void selectLetter(Letter letter) {
-        getActivePlayer().selectMode(letter);
+    public void selectLetter(Tile tile) {
+        getActivePlayer().selectTile(tile);
     }
 
     public List<Player> getPlayers() {
@@ -185,5 +185,8 @@ public class Game {
 
     public String getState() {
         return getActivePlayer().getState().getName();
+    }
+
+    public void recallTiles() {
     }
 }
