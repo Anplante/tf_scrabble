@@ -43,13 +43,15 @@ public class StatePlayTile extends State {
     @Override
     protected State getNextState() {
 
+        State newState;
         switch(stateSelected)
         {
-            case SELECT_ACTION:
+            case SELECT_TILE:
+                newState = new StateSelectTile(getPlayer());
                 break;
+            default:
+               newState = new StateSelectAction(getPlayer());
         }
-
-        State newState = new StateSelectAction(getPlayer());
 
         return newState;
     }

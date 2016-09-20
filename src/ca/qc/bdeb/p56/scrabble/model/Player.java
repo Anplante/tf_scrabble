@@ -56,6 +56,7 @@ public class Player implements Observable {
 
     @Override
     public void aviserObservateurs() {
+
         for(Observateur ob : observateurs)
         {
             ob.changementEtat();
@@ -98,7 +99,7 @@ public class Player implements Observable {
         State newState =  currentState.getNextState();
         currentState = newState;
         newState.initialize();
-        // aviserobservateur
+        aviserObservateurs();
     }
 
     public boolean isActivated() {
@@ -133,6 +134,5 @@ public class Player implements Observable {
 
     public void addPoints(int points) {
         score += points;
-        aviserObservateurs();
     }
 }

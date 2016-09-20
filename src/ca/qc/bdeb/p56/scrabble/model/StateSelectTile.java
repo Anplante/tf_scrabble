@@ -15,6 +15,11 @@ public class StateSelectTile extends State{
     }
 
     @Override
+    protected void execute()
+    {
+
+    }
+    @Override
     protected void selectTile(Tile tileSelected)
     {
         this.tileSelected = tileSelected;
@@ -35,6 +40,9 @@ public class StateSelectTile extends State{
        {
            case PLAY_TILE:
                newState = new StatePlayTile(getPlayer(),tileSelected);
+               break;
+           case PENDING:
+               newState = new StatePending(getPlayer());
                break;
            default:
                 newState = new StateSelectAction(getPlayer());

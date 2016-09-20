@@ -18,7 +18,8 @@ import static com.sun.java.accessibility.util.AWTEventMonitor.addActionListener;
  */
 public class PanelLetterRackZone extends JPanel implements Observateur {
 
-    private Player player;
+    private Player currentPlayer;
+    private List<Player> players;
     private Game game;
 
     private JButton btnPlayWord;
@@ -26,7 +27,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     public PanelLetterRackZone(Rectangle boundsZoneLetterRack) {
 
         super();
-        player = null;
+        currentPlayer = null;
+        players = null;
         setBounds(boundsZoneLetterRack);
         setLayout(null);
         initializeBtnPlayWord();
@@ -34,16 +36,29 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     }
 
 
-    public void setPlayer(Player player) {
-        if (player != null) {
-            player.retirerObservateur(this);
+    public void setPlayer(List<Player> players) {
+
+        if (currentPlayer != null) {
+            for(Player player : players)
+            {
+                player.retirerObservateur(this);
+            }
+
         }
-        this.player = player;
-        this.player.ajouterObservateur(this);
+        this.players = players;
+        for(Player player : players)
+        {
+            player.ajouterObservateur(this);
+        }
     }
 
     public void setGame(Game aGame) {
+        if(game != null)
+        {
+            game.retirerObservateur(this);
+        }
         this.game = aGame;
+        this.game.ajouterObservateur(this);
     }
 
 
@@ -71,8 +86,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     @Override
     public void changementEtat() {
 
-        if (player != game.getActivePlayer()) {
-            setPlayer(game.getActivePlayer());
+        if (currentPlayer != game.getActivePlayer()) {
+            currentPlayer = game.getActivePlayer();
         }
 
         for (Component comp : getComponents()) {
@@ -80,7 +95,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
                 remove(comp);
         }
 
-        List<Tile> playerTiles = player.getTiles();
+        List<Tile> playerTiles = currentPlayer.getTiles();
 
         int x = ((getWidth()) / 2) - playerTiles.size()*50/2;
         int y = (getHeight() - 50) / 2;

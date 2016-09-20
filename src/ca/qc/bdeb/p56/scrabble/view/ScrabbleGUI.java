@@ -111,7 +111,7 @@ public class ScrabbleGUI extends JFrame {
         Rectangle boundsZoneLetterRack = new Rectangle(x, y, witdhBoard, BOARD_ZONE_HEIGHT);
         panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack);
 
-        panelLetterRack.setPlayer(gameModel.getActivePlayer());
+        panelLetterRack.setPlayer(gameModel.getPlayers());
         panelLetterRack.setGame(gameModel);
         panelLetterRack.changementEtat();
         add(panelLetterRack);
@@ -157,7 +157,6 @@ public class ScrabbleGUI extends JFrame {
 
     private void initGame()
     {
-       // gameModel = gameManager.createNewGame();
         gameModel.startGame();
     }
 
