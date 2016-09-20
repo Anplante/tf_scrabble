@@ -130,4 +130,9 @@ public class Player implements Observable {
         currentState.selectTile(tile);
 
     }
+
+    public void addPoints(int points) {
+        score += points;
+        aviserObservateurs();
+    }
 }

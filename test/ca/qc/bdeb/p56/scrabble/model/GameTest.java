@@ -46,13 +46,13 @@ public class GameTest {
         square.setLetter(tile2);
 
         assertNotEquals(tile1, tile2);
-        assertNotEquals(tile1.getLetter(), square.getTileOn());
+        assertNotEquals(tile1.getLetter(), square.getLetterOn());
 
         game.selectLetter(tile1);
         game.goToNextState();
         game.playTile(square);
 
-        assertEquals(tile1.getLetter(), square.getTileOn());
+        assertEquals(tile1.getLetter(), square.getLetterOn());
     }
 
     @Test

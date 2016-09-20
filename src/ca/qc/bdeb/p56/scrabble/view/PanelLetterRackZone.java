@@ -58,8 +58,10 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         btnPlayWord.setBounds(x,y, 50,50);
         btnPlayWord.setMargin(new Insets(0, 0, 0, 0));
-        addActionListener(new ActionListener() {
+
+        btnPlayWord.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                game.playWord();
             }
         });
 

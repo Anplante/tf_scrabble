@@ -21,6 +21,7 @@ public class Game {
     private List<Player> players;
     private int activePlayerIndex;
     private static List<Tile> alphabetBag;
+    private List<Square> tilesPlaced;
 
     private static final Random randomGenerator = new Random();
 
@@ -29,7 +30,7 @@ public class Game {
 
 
         loadParameters(filePath);
-
+        tilesPlaced = new ArrayList<>();
         this.players = players;
 
         for(Player player : players)
@@ -169,6 +170,7 @@ public class Game {
 
     public void playTile(Square square) {
         getActivePlayer().selectSquare(square);
+        tilesPlaced.add(square);
     }
 
     public void selectLetter(Tile tile) {
@@ -188,5 +190,21 @@ public class Game {
     }
 
     public void recallTiles() {
+    }
+
+    public void playWord() {
+        getActivePlayer().addPoints(calculateWordPoints(tilesPlaced));
+    }
+
+    private int calculateWordPoints(List<Square> letterChain)
+    {
+        int points = 0;
+
+        for(Square square : letterChain)
+        {
+            points += square.getTileOn().getValue();
+        }
+
+        return points;
     }
 }

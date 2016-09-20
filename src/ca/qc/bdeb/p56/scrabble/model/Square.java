@@ -43,7 +43,7 @@ public class Square {
     }
 
 
-    public char getTileOn()
+    public char getLetterOn()
     {
         if(tileOn != null)
         {
@@ -54,7 +54,7 @@ public class Square {
         }
     }
 
-    public Tile getLetter()
+    public Tile getTileOn()
     {
       return tileOn;
     }

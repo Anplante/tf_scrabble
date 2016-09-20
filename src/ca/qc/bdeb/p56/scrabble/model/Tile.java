@@ -19,4 +19,8 @@ public class Tile {
         return letter;
     }
 
+    public int getValue()
+    {
+        return value;
+    }
 }

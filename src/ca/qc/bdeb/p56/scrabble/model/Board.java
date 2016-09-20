@@ -23,7 +23,7 @@ public class Board {
 
     public char getContentSquare(int row, int column)
     {
-        return board[row][column].getTileOn();
+        return board[row][column].getLetterOn();
     }
 
     private void setNeighbours()
