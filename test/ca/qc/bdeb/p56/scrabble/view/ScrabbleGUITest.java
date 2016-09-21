@@ -57,4 +57,14 @@ public class ScrabbleGUITest {
         btnFinish.doClick();
         assertEquals(firstPlayer, game.getActivePlayer());
     }
+
+    @Test
+    public void testPlayerName() {
+
+    }
+
+    @Test
+    public void testScorePlayer() {
+        
+    }
 }
