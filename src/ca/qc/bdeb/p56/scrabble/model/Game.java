@@ -205,6 +205,12 @@ public class Game implements Observable {
         goToNextState();
     }
 
+    public void exchangeTiles(){
+        ArrayList<Tile> tilesToRemove = new ArrayList<>();
+        getActivePlayer().setState(new StateExchange(getActivePlayer()));
+
+    }
+
     private int calculateWordPoints(List<Square> letterChain)
     {
         int points = 0;
