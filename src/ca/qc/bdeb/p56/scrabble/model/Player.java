@@ -1,9 +1,9 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
+import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
-import java.security.KeyPairGeneratorSpi;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,19 +16,19 @@ public class Player implements Observable {
 
     private String name;
     private Game game;
-    private List<Letter> letters;
+    private List<Tile> tiles;
     private State currentState;
     private int score;
     private boolean active;
     private transient LinkedList<Observateur> observateurs;  //transient = not be serialized
 
-   // private final List<Letter> lettersOnHand;
+   // private final List<Tile> lettersOnHand;
 
     public Player(String name)
     {
         this.name  = name;
         this.game = game;
-        letters = new ArrayList<Letter>();
+        tiles = new ArrayList<Tile>();
         setState(new StatePending(this));
         active = false;
         observateurs = new LinkedList<>();
@@ -38,9 +38,9 @@ public class Player implements Observable {
     {
         this.game = game;
     }
-    public void addLetter(Letter letter)
+    public void addLetter(Tile tile)
     {
-        letters.add(letter);
+        tiles.add(tile);
     }
 
     @Override
@@ -56,6 +56,7 @@ public class Player implements Observable {
 
     @Override
     public void aviserObservateurs() {
+
         for(Observateur ob : observateurs)
         {
             ob.changementEtat();
@@ -67,8 +68,8 @@ public class Player implements Observable {
 
     }
 
-    public List<Letter> getLetters() {
-        return letters;
+    public List<Tile> getTiles() {
+        return tiles;
     }
 
     public Game getGame() {
@@ -80,23 +81,14 @@ public class Player implements Observable {
     {
         currentState = newState;
     }
+    
 
-
-  /*  public void playTile(Square square) {
-
-        currentState.selectMode(square);
-    }
-    */
-
-    public void selectMode(Object mode)
+    public void selectNextState(IDState state)
     {
-        currentState.selectMode(mode);
+        currentState.selectNextState(state);
     }
 
- /*  public void selectLetter(Letter letter) {
-        currentState.selectMode(letter);
-    }*/
-
+    
     public State getState() {
         return currentState;
     }
@@ -107,7 +99,7 @@ public class Player implements Observable {
         State newState =  currentState.getNextState();
         currentState = newState;
         newState.initialize();
-        // aviserobservateur
+        aviserObservateurs();
     }
 
     public boolean isActivated() {
@@ -127,7 +119,20 @@ public class Player implements Observable {
         return score;
     }
 
-    public void remove(Letter letterSelected) {
-        letters.remove(letterSelected);
+    public void remove(Tile tileSelected) {
+        tiles.remove(tileSelected);
+    }
+
+    public void selectSquare(Square square) {
+        currentState.selectSquare(square);
+    }
+
+    public void selectTile(Tile tile) {
+        currentState.selectTile(tile);
+
+    }
+
+    public void addPoints(int points) {
+        score += points;
     }
 }

@@ -8,33 +8,27 @@ import ca.qc.bdeb.p56.scrabble.shared.IDState;
 public class StatePending extends State {
 
 
-
-    private Letter letter;
-
-    public StatePending(Player player)
-    {
+    public StatePending(Player player) {
         super(player, IDState.PENDING);
     }
 
     @Override
-    protected void selectMode(Object modeSelected) {
+    protected void selectNextState(IDState idState) {
     }
 
     @Override
-    protected void execute(){
+    protected void execute() {
         getPlayer().setActive(true);
     }
 
-    protected void initialize()
-    {
+    protected void initialize() {
         getPlayer().setActive(false);
     }
 
     @Override
     protected State getNextState() {
 
-       State newState = new StateSelect(getPlayer());
-
+        State newState = new StateSelectAction(getPlayer());
         return newState;
     }
 

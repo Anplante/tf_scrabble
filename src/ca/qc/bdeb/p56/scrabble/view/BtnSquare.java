@@ -33,7 +33,6 @@ public class BtnSquare extends JButton {
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setBorder(BorderFactory.createEtchedBorder());
 
-
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 gameModel.playTile(gameModel.getSquare(posRow, posColumn));
@@ -41,6 +40,5 @@ public class BtnSquare extends JButton {
                 gameModel.goToNextState();
             }
         });
-
     }
 }

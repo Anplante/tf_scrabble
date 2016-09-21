@@ -1,14 +1,8 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
-import com.sun.javaws.jnl.XMLUtils;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
 

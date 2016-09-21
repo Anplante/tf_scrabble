@@ -1,14 +1,12 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
-import ca.qc.bdeb.p56.scrabble.model.Letter;
+import ca.qc.bdeb.p56.scrabble.model.Tile;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  * Created by TheFrenchOne on 9/12/2016.
@@ -17,14 +15,14 @@ public class BtnTile extends JButton {
 
     private Game gameModel;
 
-    private Letter letter;
+    private Tile tile;
 
 
-    public BtnTile(Game gameModel, Letter letter, Rectangle bounds) {
+    public BtnTile(Game gameModel, Tile tile, Rectangle bounds) {
 
-        super("" + letter.getLetter());
+        super("" + tile.getLetter());
         this.gameModel = gameModel;
-        this.letter = letter;
+        this.tile = tile;
         setBounds(bounds);
 
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -32,7 +30,7 @@ public class BtnTile extends JButton {
 
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                gameModel.selectLetter(letter);
+                gameModel.selectLetter(tile);
                 gameModel.goToNextState();
 
                 // TODO Louis: avertir l'observateur du lettre qu'elle a été sélectionné si on veut éventuellement que ca fasse quelque chose
