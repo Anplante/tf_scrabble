@@ -1,8 +1,10 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
+import javafx.scene.paint.*;
 
 import javax.swing.*;
+import java.awt.Paint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -81,10 +83,13 @@ public class ScrabbleGUI extends JFrame {
         int y = getHeight() - LETTER_RACK_ZONE_HEIGHT - BOARD_ZONE_HEIGHT;
         int witdh = (int) (getWidth() - getWidth()* RATIO_PANEL_INFORMATION);
         int x = witdh;
+        y *= 0.5;
 
         panelInformation = new JPanel();
+
         panelInformation.setLocation(x,0);
         panelInformation.setSize(getWidth() - witdh, y);
+        panelInformation.setLayout(new GridLayout(gameModel.getPlayers().size(), 1));
         add(panelInformation);
     }
 
@@ -146,6 +151,7 @@ public class ScrabbleGUI extends JFrame {
             }
         }
     }
+
 
     private void createGame()
     {
