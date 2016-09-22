@@ -28,6 +28,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         setLayout(new GridLayout(2,2));
         lblName = new JLabel();
         lblScore = new JLabel();
+        lblScore.setName("Score");
         add(lblName);
         add(lblScore);
     }

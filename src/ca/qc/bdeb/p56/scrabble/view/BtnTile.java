@@ -34,16 +34,16 @@ public class BtnTile extends JButton {
             public void actionPerformed(ActionEvent e) {
                 if(gameModel.getActivePlayer().getState().getName().equals(IDState.EXCHANGE.getName())){
                     StateExchange exchangeState = ((StateExchange)gameModel.getActivePlayer().getState());
-                     exchangeState.chooseTile(tile);
+                     exchangeState.chooseTile(tile); // TODO Louis : c'est le jeu qui devrait déterminer quoi faire, pas la vue.
                 }else {
 
                     gameModel.selectLetter(tile);
-                    gameModel.goToNextState();
                 }
                 // TODO Louis: avertir l'observateur du lettre qu'elle a été sélectionné si on veut éventuellement que ca fasse quelque chose
             }
         });
     }
+
     public void setTile(Tile aTile){
         this.tile = aTile;
         this.setText("" + aTile.getLetter());

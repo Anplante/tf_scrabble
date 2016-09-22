@@ -21,6 +21,7 @@ public class BtnSquareTest {
     private BtnSquare btnSquare;
     private BtnTile btnTile;
     private Game gameModel;
+    private PanelLetterRackZone zoneJoueur;
 
     @Before
     public void setUp() throws Exception {
@@ -57,6 +58,7 @@ public class BtnSquareTest {
 
 
     }
+
 
     @Test
     public void testSelectSquareInSelectStateAction() throws AWTException {

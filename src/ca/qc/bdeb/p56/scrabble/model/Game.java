@@ -150,7 +150,7 @@ public class Game implements Observable {
     }
 
 
-    public int lettersLeft() {
+    public int getlettersLeft() {
         return alphabetBag.size();
     }
 
@@ -178,10 +178,12 @@ public class Game implements Observable {
     public void playTile(Square square) {
         getActivePlayer().selectSquare(square);
         tilesPlaced.add(square);
+        goToNextState();
     }
 
     public void selectLetter(Tile tile) {
         getActivePlayer().selectTile(tile);
+        goToNextState();
     }
 
     public List<Player> getPlayers() {

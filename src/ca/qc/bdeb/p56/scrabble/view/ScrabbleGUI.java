@@ -21,7 +21,7 @@ public class ScrabbleGUI extends JFrame {
 
     PanelLetterRackZone panelLetterRack;
     Board board;
-    JPanel gridPanel;
+    JPanel pnlBoard;
     GameManager gameManager;
     Game gameModel;
     private JButton btnFinish;
@@ -42,7 +42,7 @@ public class ScrabbleGUI extends JFrame {
         addPlayersInfo();
 
 
-        //setUndecorated(true);
+        //setUndecorated(true);  // pour enlever le x
         setResizable(false);
 
 
@@ -96,6 +96,7 @@ public class ScrabbleGUI extends JFrame {
         for(Player player : players)
         {
             PanelPlayerInfo playerInfo = new PanelPlayerInfo(player);
+            playerInfo.setName("Info : " + player.getName());
             panelInformation.add(playerInfo);
         }
         panelInformation.revalidate();
@@ -114,33 +115,34 @@ public class ScrabbleGUI extends JFrame {
         panelLetterRack.setPlayer(gameModel.getPlayers());
         panelLetterRack.setGame(gameModel);
         panelLetterRack.changementEtat();
+        panelLetterRack.setName("Player letter rack");
         add(panelLetterRack);
     }
 
     private void createPanelBoard() {
 
-        gridPanel = new JPanel();
-        gridPanel.setLocation(100,0);
+        pnlBoard = new JPanel();
+        pnlBoard.setLocation(100,0);
         int widthBoard = (int) (getWidth() - getWidth() * RATIO_PANEL_INFORMATION) - 100;
         int y = getHeight() - LETTER_RACK_ZONE_HEIGHT- BOARD_ZONE_HEIGHT;
-        gridPanel.setSize(widthBoard, y);
-        add(gridPanel);
+        pnlBoard.setSize(widthBoard, y);
+        add(pnlBoard);
         initGrid();
-
+        pnlBoard.setName("Board");
     }
 
 
 
     private void initGrid() {
 
-        gridPanel.setLayout(new GridLayout(15, 15));
+        pnlBoard.setLayout(new GridLayout(15, 15));
 
         for (int row = 0; row < 15; row++) {
             for (int column = 0; column < 15; column++) {
 
-                BtnSquare label = new BtnSquare(gameModel, row, column);
-
-                gridPanel.add(label);
+                BtnSquare square = new BtnSquare(gameModel, row, column);
+                square.setName("Square " + row + ";" + column);
+                pnlBoard.add(square);
             }
         }
     }

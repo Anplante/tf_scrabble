@@ -48,7 +48,6 @@ public class StateExchangeTest {
         assertNotEquals(tile1.getLetter(), square.getLetterOn());
 
         game.selectLetter(tile1);
-        game.goToNextState();
         game.playTile(square);
 
         assertEquals(tile1.getLetter(), square.getLetterOn());
@@ -57,7 +56,7 @@ public class StateExchangeTest {
     @Test
     public void testAlphabetBagsSize()
     {
-        assertEquals(102, game.lettersLeft() + 7 * game.getPlayersLeft());
+        assertEquals(102, game.getlettersLeft() + 7 * game.getPlayersLeft());
     }
 }
 

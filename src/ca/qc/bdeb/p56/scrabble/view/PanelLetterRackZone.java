@@ -41,9 +41,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         setLayout(null);
         initializeBtnPlayWord();
         initializeOptions();
-
     }
-
 
     public void setPlayer(List<Player> players) {
 
@@ -51,7 +49,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             for (Player player : players) {
                 player.retirerObservateur(this);
             }
-
         }
         this.players = players;
         for (Player player : players) {
@@ -69,7 +66,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
     private void initializeOptions() {
 
-
         //TODO refactor and combine
 
         int x = getWidth() - 100;
@@ -78,6 +74,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         BtnSwapTiles = new JButton("Échanger");
         btnSkipTurn = new JButton("Passer le tour");
         btnHint = new JButton("Indice");
+
         BtnContextAction = new JButton();
 
         BtnContextAction.setVisible(false);
@@ -100,6 +97,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         BtnSwapTiles.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 if(currentPlayer.getState().getName()!= IDState.EXCHANGE.getName()) {
                     BtnSwapTiles.setText("Confirmer");
                     BtnContextAction.setText("Annuler");
@@ -187,13 +185,15 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         int x = 200;
         int y = (getHeight() - 50) / 2;
-
+        int i = 0;
 
         for (Tile letter : playerTiles) {
             BtnTile tile = new BtnTile(game, letter, new Rectangle(x, y, 50, 50));
+            tile.setName("Tile" +i);
             playerRack.add(tile);
             add(tile);
             x += 60;
+            i++;
         }
         repaint();
 }

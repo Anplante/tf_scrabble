@@ -39,7 +39,6 @@ public class BtnSquare extends JButton {
                 if(gameModel.getActivePlayer().getState().getName()!= IDState.EXCHANGE.getName()){
                 gameModel.playTile(gameModel.getSquare(posRow, posColumn));
                 setText("" + String.valueOf(gameModel.getContentSquare(posRow, posColumn)));
-                gameModel.goToNextState();
                 }
             }
         });
