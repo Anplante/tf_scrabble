@@ -11,6 +11,7 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
@@ -28,12 +29,14 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private JButton btnHint;
     private JButton btnPlayWord;
     private JButton BtnContextAction;
+    private ArrayList<BtnTile> playerRack;
 
     public PanelLetterRackZone(Rectangle boundsZoneLetterRack) {
 
         super();
         currentPlayer = null;
         players = null;
+        playerRack = new ArrayList<>();
         setBounds(boundsZoneLetterRack);
         setLayout(null);
         initializeBtnPlayWord();
@@ -97,19 +100,32 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         BtnSwapTiles.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(game.getActivePlayer().getState().getName()!= IDState.EXCHANGE.getName()) {
+                if(currentPlayer.getState().getName()!= IDState.EXCHANGE.getName()) {
                     BtnSwapTiles.setText("Confirmer");
                     BtnContextAction.setText("Annuler");
                     BtnContextAction.setVisible(true);
-                    game.getActivePlayer().exchangeMode(new StateExchange(game.getActivePlayer()));
-                }else{
-                    StateExchange stateX = (StateExchange) game.getActivePlayer().getState();
-                    if(stateX.getSelectedTiles().size()!=0){
+                    game.getActivePlayer().exchangeMode(new StateExchange(currentPlayer));
+                }else {
+                    StateExchange stateX = (StateExchange) currentPlayer.getState();
+                    if (stateX.getSelectedTiles().size() != 0) {
                         for (int i = 0; i < stateX.getSelectedTiles().size(); i++) {
+                            boolean found = false;
+                            for (int j = 0; j < currentPlayer.getTiles().size() && !found; j++) {
+                                if (stateX.getSelectedTiles().get(i) == currentPlayer.getTiles().get(j)) {
+                                    game.addATile(game.getActivePlayer().getTiles().get(j));
+                                    currentPlayer.getTiles().remove(j);
+                                    currentPlayer.getTiles().add(game.getATile());
+                                    found = true;
+                                }
+                            }
                         }
-                    }else{
+
+                    } else {
                         //TODO MESSSAGE ERROR CANT SWAP NOTHING
                     }
+                    paintCurrentTilesPlayer();
+                    BtnContextAction.setVisible(false);
+                    BtnSwapTiles.setText("Échanger");
                 }
             }
         });
@@ -121,7 +137,14 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             public void actionPerformed(ActionEvent e) {
             }
         });
-
+        BtnContextAction.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                currentPlayer.selectNextState(IDState.PENDING);
+                BtnContextAction.setVisible(false);
+                BtnSwapTiles.setText("Échanger");
+                currentPlayer.nextState();
+            }
+        });
     }
 
     private void exchangeTiles(){
@@ -168,8 +191,16 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         for (Tile letter : playerTiles) {
             BtnTile tile = new BtnTile(game, letter, new Rectangle(x, y, 50, 50));
+            playerRack.add(tile);
             add(tile);
             x += 60;
+        }
+        repaint();
+}
+
+    private void paintCurrentTilesPlayer(){
+        for (int i = 0; i < currentPlayer.getTiles().size(); i++) {
+            playerRack.get(i).setTile(currentPlayer.getTiles().get(i));
         }
         repaint();
     }

@@ -44,4 +44,9 @@ public class BtnTile extends JButton {
             }
         });
     }
+    public void setTile(Tile aTile){
+        this.tile = aTile;
+        this.setText("" + aTile.getLetter());
+    }
+
 }

@@ -149,6 +149,7 @@ public class Game implements Observable {
         }
     }
 
+
     public int lettersLeft() {
         return alphabetBag.size();
     }
@@ -196,6 +197,17 @@ public class Game implements Observable {
     }
 
     public void recallTiles() {
+    }
+
+    public Tile getATile(){
+        int tileId = randomGenerator.nextInt(alphabetBag.size());
+        Tile aTile = alphabetBag.get(tileId);
+        alphabetBag.remove(tileId);
+        return aTile;
+    }
+
+    public void addATile(Tile aTile){
+        alphabetBag.add(aTile);
     }
 
     public void playWord() {
