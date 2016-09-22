@@ -44,7 +44,7 @@ public class StateExchange extends State {
     protected State getNextState() {
         State newState;
 
-        newState = new StatePending(getPlayer());
+        newState = new StateSelectAction(getPlayer());
 
         return newState;
     }

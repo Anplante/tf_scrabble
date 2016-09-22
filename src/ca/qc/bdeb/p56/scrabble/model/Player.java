@@ -69,7 +69,7 @@ public class Player implements Observable {
 
     }
 
-    public void exchangeMode (State exchange){this.currentState = exchange;}
+    public void  exchangeMode (State state){this.currentState = state;}
 
     public List<Tile> getTiles() {
         return tiles;
