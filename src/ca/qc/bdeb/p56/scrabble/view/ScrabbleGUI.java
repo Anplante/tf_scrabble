@@ -4,6 +4,7 @@ import ca.qc.bdeb.p56.scrabble.model.*;
 import javafx.scene.paint.*;
 
 import javax.swing.*;
+import java.awt.Color;
 import java.awt.Paint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,8 +53,9 @@ public class ScrabbleGUI extends JFrame {
     }
 
     private void initializeComponents() {
-        createPanelLetterRack();
+
         createPanelBoard();
+        createPanelLetterRack();
         createPanelInformation();
         createButton();
 
@@ -112,16 +114,19 @@ public class ScrabbleGUI extends JFrame {
 
     private void createPanelLetterRack() {
 
-        int x = 0;
+        int x = pnlBoard.getX();
         int y = getHeight() - LETTER_RACK_ZONE_HEIGHT*2;
-        int witdhBoard = (int) (getWidth() - getWidth() * RATIO_PANEL_INFORMATION);
+        int witdhBoard = pnlBoard.getWidth();
+
         Rectangle boundsZoneLetterRack = new Rectangle(x, y, witdhBoard, BOARD_ZONE_HEIGHT);
         panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack);
 
         panelLetterRack.setPlayer(gameModel.getPlayers());
         panelLetterRack.setGame(gameModel);
-        panelLetterRack.changementEtat();
+
         panelLetterRack.setName("Player letter rack");
+        panelLetterRack.setBackground(Color.CYAN);
+        panelLetterRack.changementEtat();
         add(panelLetterRack);
     }
 

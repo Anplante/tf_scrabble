@@ -30,15 +30,24 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private JButton btnPlayWord;
     private JButton BtnContextAction;
     private ArrayList<BtnTile> playerRack;
+    private JPanel panelLettersRack;
+
 
     public PanelLetterRackZone(Rectangle boundsZoneLetterRack) {
 
-        super();
+        super(new FlowLayout());
         currentPlayer = null;
         players = null;
         playerRack = new ArrayList<>();
         setBounds(boundsZoneLetterRack);
-        setLayout(null);
+
+
+
+        panelLettersRack = new JPanel(new FlowLayout());
+        int x = getWidth()/2 - 150;
+        int y = (getHeight() - 50) / 2;
+        panelLettersRack.setBounds(x, y, 350, 50);
+        add(panelLettersRack);
         initializeBtnPlayWord();
         initializeOptions();
     }
@@ -78,22 +87,25 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         BtnContextAction = new JButton();
 
         BtnContextAction.setVisible(false);
-        BtnContextAction.setBounds(x-420, y+5, 75, 40);
-        BtnContextAction.setMargin(new Insets(0, 0, 0, 0));
 
-        BtnSwapTiles.setBounds(x-530, y, 100, 50);
+
+       // BtnContextAction.setBounds(x-420, y+5, 75, 40);
+       // BtnContextAction.setSize(75, 40);
+       // BtnContextAction.setMargin(new Insets(0, 0, 0, 0));
+        BtnSwapTiles.setSize(100, 50);
+      //  BtnSwapTiles.setBounds(x-530, y, 100, 50);
         BtnSwapTiles.setMargin(new Insets(0, 0, 0, 0));
 
-        btnSkipTurn.setBounds(x-640, y, 100, 50);
-        btnSkipTurn.setMargin(new Insets(0, 0, 0, 0));
+       // btnSkipTurn.setBounds(x-640, y, 100, 50);
+        //btnSkipTurn.setMargin(new Insets(0, 0, 0, 0));
 
-        btnHint.setBounds(x-750, y, 100, 50);
-        btnHint.setMargin(new Insets(0, 0, 0, 0));
+       // btnHint.setBounds(x-750, y, 100, 50);
+        //btnHint.setMargin(new Insets(0, 0, 0, 0));
 
-        add(btnHint);
-        add(btnSkipTurn);
+       // add(btnHint);
+       // add(btnSkipTurn);
         add(BtnSwapTiles);
-        add(BtnContextAction);
+     //   add(BtnContextAction);
 
         BtnSwapTiles.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -157,9 +169,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             currentPlayer = game.getActivePlayer();
         }
 
-        for (Component comp : getComponents()) {
-            if (comp.getClass().equals(BtnTile.class))
-                remove(comp);
+        for (Component comp : panelLettersRack.getComponents()) {
+                panelLettersRack.remove(comp);
         }
 
         List<Tile> playerTiles = currentPlayer.getTiles();
@@ -169,21 +180,14 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         int i = 0;
 
         for (Tile letter : playerTiles) {
-            BtnTile tile = new BtnTile(game, letter, new Rectangle(x, y, 50, 50));
+            BtnTile tile = new BtnTile(game, letter, new Dimension(50,50));
             tile.setName("Tile" +i);
-            playerRack.add(tile);
-            add(tile);
+            panelLettersRack.add(tile);
             x += 60;
             i++;
         }
-        repaint();
-}
-
-    private void paintCurrentTilesPlayer(){
-        for (int i = 0; i < currentPlayer.getTiles().size(); i++) {
-            playerRack.get(i).setTile(currentPlayer.getTiles().get(i));
-        }
-        repaint();
+        panelLettersRack.revalidate();
+        //repaint();
     }
 
     @Override

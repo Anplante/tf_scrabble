@@ -50,13 +50,13 @@ public class StateExchangeTest {
         panelTested = new PanelLetterRackZone(new Rectangle(1000,1000));
         listTLetters = new ArrayList<>();
 
-        listTLetters.add(new BtnTile(game,new Tile('-',3),new Rectangle(50,50)));
-        listTLetters.add(new BtnTile(game,new Tile('-',3),new Rectangle(50,50)));
-        listTLetters.add(new BtnTile(game,new Tile('-',3),new Rectangle(50,50)));
-        listTLetters.add(new BtnTile(game,new Tile('-',3),new Rectangle(50,50)));
-        listTLetters.add(new BtnTile(game,new Tile('-',3),new Rectangle(50,50)));
-        listTLetters.add(new BtnTile(game,new Tile('-',3),new Rectangle(50,50)));
-        listTLetters.add(new BtnTile(game,new Tile('-',3),new Rectangle(50,50)));
+        listTLetters.add(new BtnTile(game,new Tile('-',3),new Dimension(50,50)));
+        listTLetters.add(new BtnTile(game,new Tile('-',3),new Dimension(50,50)));
+        listTLetters.add(new BtnTile(game,new Tile('-',3),new Dimension(50,50)));
+        listTLetters.add(new BtnTile(game,new Tile('-',3),new Dimension(50,50)));
+        listTLetters.add(new BtnTile(game,new Tile('-',3),new Dimension(50,50)));
+        listTLetters.add(new BtnTile(game,new Tile('-',3),new Dimension(50,50)));
+        listTLetters.add(new BtnTile(game,new Tile('-',3),new Dimension(50,50)));
 
         }
 
@@ -73,7 +73,7 @@ public class StateExchangeTest {
         listTLetters.get(7).doClick();
         btnEchanger.doClick();
 
-        BtnTile notExcepted = new BtnTile(game,new Tile('-',3),new Rectangle(50,50));
+        BtnTile notExcepted = new BtnTile(game,new Tile('-',3),new Dimension(50,50));
 
         assertNotEquals(notExcepted,listTLetters.get(5));
         assertNotEquals(notExcepted,listTLetters.get(6));

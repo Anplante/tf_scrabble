@@ -1,9 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
-import ca.qc.bdeb.p56.scrabble.model.StateExchange;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
-import ca.qc.bdeb.p56.scrabble.shared.IDState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,12 +18,12 @@ public class BtnTile extends JButton {
     private Tile tile;
 
 
-    public BtnTile(Game gameModel, Tile tile, Rectangle bounds) {
+    public BtnTile(Game gameModel, Tile tile, Dimension dimension) {
 
         super("" + tile.getLetter());
         this.gameModel = gameModel;
         this.tile = tile;
-        setBounds(bounds);
+        setSize(dimension);
 
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
@@ -43,5 +41,4 @@ public class BtnTile extends JButton {
         this.tile = aTile;
         this.setText("" + aTile.getLetter());
     }
-
 }
