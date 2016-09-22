@@ -1,7 +1,9 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
+import ca.qc.bdeb.p56.scrabble.model.StateExchange;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
+import ca.qc.bdeb.p56.scrabble.shared.IDState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,9 +32,14 @@ public class BtnTile extends JButton {
 
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                gameModel.selectLetter(tile);
-                gameModel.goToNextState();
+                if(gameModel.getActivePlayer().getState().getName().equals(IDState.EXCHANGE.getName())){
+                    StateExchange exchangeState = ((StateExchange)gameModel.getActivePlayer().getState());
+                     exchangeState.chooseTile(tile);
+                }else {
 
+                    gameModel.selectLetter(tile);
+                    gameModel.goToNextState();
+                }
                 // TODO Louis: avertir l'observateur du lettre qu'elle a été sélectionné si on veut éventuellement que ca fasse quelque chose
             }
         });

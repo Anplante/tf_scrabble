@@ -2,6 +2,7 @@ package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.Square;
+import ca.qc.bdeb.p56.scrabble.shared.IDState;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -35,9 +36,11 @@ public class BtnSquare extends JButton {
 
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if(gameModel.getActivePlayer().getState().getName()!= IDState.EXCHANGE.getName()){
                 gameModel.playTile(gameModel.getSquare(posRow, posColumn));
                 setText("" + String.valueOf(gameModel.getContentSquare(posRow, posColumn)));
                 gameModel.goToNextState();
+                }
             }
         });
     }

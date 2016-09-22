@@ -49,6 +49,7 @@ public class Player implements Observable {
             observateurs.add(ob);
     }
 
+
     @Override
     public void retirerObservateur(Observateur ob) {
         observateurs.remove(ob);
@@ -67,6 +68,8 @@ public class Player implements Observable {
     public void aviserObservateurs(Enum<?> e, Object o) {
 
     }
+
+    public void exchangeMode (State exchange){this.currentState = exchange;}
 
     public List<Tile> getTiles() {
         return tiles;

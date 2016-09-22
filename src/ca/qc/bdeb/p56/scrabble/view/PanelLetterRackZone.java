@@ -1,9 +1,12 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
+import ca.qc.bdeb.p56.scrabble.model.StateExchange;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.model.Player;
+import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -64,7 +67,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private void initializeOptions() {
 
 
-        //Refactor Combine
+        //TODO refactor and combine
 
         int x = getWidth() - 100;
         int y = (getHeight() - 50) / 2;
@@ -94,9 +97,20 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         BtnSwapTiles.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                BtnSwapTiles.setText("Confirmer");
-                BtnContextAction.setText("Annuler");
-                BtnContextAction.setVisible(true);
+                if(game.getActivePlayer().getState().getName()!= IDState.EXCHANGE.getName()) {
+                    BtnSwapTiles.setText("Confirmer");
+                    BtnContextAction.setText("Annuler");
+                    BtnContextAction.setVisible(true);
+                    game.getActivePlayer().exchangeMode(new StateExchange(game.getActivePlayer()));
+                }else{
+                    StateExchange stateX = (StateExchange) game.getActivePlayer().getState();
+                    if(stateX.getSelectedTiles().size()!=0){
+                        for (int i = 0; i < stateX.getSelectedTiles().size(); i++) {
+                        }
+                    }else{
+                        //TODO MESSSAGE ERROR CANT SWAP NOTHING
+                    }
+                }
             }
         });
         btnSkipTurn.addActionListener(new ActionListener() {
