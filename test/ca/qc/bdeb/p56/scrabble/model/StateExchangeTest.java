@@ -7,6 +7,7 @@ import ca.qc.bdeb.p56.scrabble.view.ScrabbleGUI;
 import javafx.scene.layout.Pane;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.swing.*;
@@ -63,6 +64,7 @@ public class StateExchangeTest {
     public void tearDown() throws Exception {
     }
 
+    @Ignore
     @Test
     public void testExchangeOnlyClick()
     {

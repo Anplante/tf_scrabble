@@ -11,46 +11,52 @@ public class StateExchange extends State {
 
     private ArrayList<Tile> selectedTiles;
     private IDState stateSelected;
+    boolean readyForNextPhase;
 
     public StateExchange(Player player) {
         super(player, IDState.EXCHANGE);
         selectedTiles = new ArrayList<>();
         stateSelected = IDState.EXCHANGE;
+        readyForNextPhase = false;
     }
 
     @Override
     protected void selectNextState(IDState stateSelected) {
         this.stateSelected = stateSelected;
+        readyForNextPhase = true;
     }
 
-    public void chooseTile(Tile aTile) {
-        boolean found = false;
-        for (int i = 0; i < selectedTiles.size() && !found; i++) {
-            if (aTile == selectedTiles.get(i)) {
-                selectedTiles.remove(i);
-                found = true;
-            }
+    @Override
+    protected void selectTile(Tile tile)
+    {
+        if(!selectedTiles.contains(tile))
+        {
+            selectedTiles.add(tile);
         }
-        if (!found) {
-            selectedTiles.add(aTile);
-        }
-    }
-
-    public ArrayList<Tile> getSelectedTiles() {
-        return selectedTiles;
     }
 
     @Override
     protected State getNextState() {
-        State newState;
 
-        newState = new StateSelectAction(getPlayer());
+        State newState = null;
+
+        switch (stateSelected)
+        {
+            case PENDING:
+                getGame().exchangeLetters(selectedTiles);
+                newState = new StatePending(getPlayer());
+                break;
+
+        }
 
         return newState;
     }
 
     @Override
     protected boolean readyForNextState() {
-        return false;
+        return readyForNextPhase;
     }
+
+
+
 }

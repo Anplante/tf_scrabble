@@ -99,32 +99,15 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             public void actionPerformed(ActionEvent e) {
 
                 if(currentPlayer.getState().getName()!= IDState.EXCHANGE.getName()) {
+                    game.activateExchangeOption();                                 //// il aurait moyen de regrouper et laisser l'etat verifier puis juste avertir l'observateur
                     BtnSwapTiles.setText("Confirmer");
                     BtnContextAction.setText("Annuler");
                     BtnContextAction.setVisible(true);
-                    game.getActivePlayer().exchangeMode(new StateExchange(currentPlayer));
                 }else {
-                    StateExchange stateX = (StateExchange) currentPlayer.getState();
-                    if (stateX.getSelectedTiles().size() != 0) {
-                        for (int i = 0; i < stateX.getSelectedTiles().size(); i++) {
-                            boolean found = false;
-                            for (int j = 0; j < currentPlayer.getTiles().size() && !found; j++) {
-                                if (stateX.getSelectedTiles().get(i) == currentPlayer.getTiles().get(j)) {
-                                    game.addATile(game.getActivePlayer().getTiles().get(j));
-                                    currentPlayer.getTiles().remove(j);
-                                    currentPlayer.getTiles().add(game.getATile());
-                                    found = true;
-                                }
-                            }
-                        }
-
-                    } else {
-                        //TODO MESSSAGE ERROR CANT SWAP NOTHING
-                    }
-                    currentPlayer.selectNextState(IDState.PENDING);
+                    game.exchangeLetters();
+                    changementEtat();
                     BtnContextAction.setVisible(false);
                     BtnSwapTiles.setText("Échanger");
-                    currentPlayer.nextState();
                 }
             }
         });
@@ -146,9 +129,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         });
     }
 
-    private void exchangeTiles(){
-
-    }
 
     private void initializeBtnPlayWord() {
         // TODO Louis : Mettre un label en dessous du boutton ou trouver un moyen pour que le text s'ajuste à la taille du bouton

@@ -69,8 +69,6 @@ public class Player implements Observable {
 
     }
 
-    public void  exchangeMode (State state){this.currentState = state;}
-
     public List<Tile> getTiles() {
         return tiles;
     }
@@ -137,5 +135,9 @@ public class Player implements Observable {
 
     public void addPoints(int points) {
         score += points;
+    }
+
+    public boolean canDraw() {
+        return tiles.size() < 7;
     }
 }
