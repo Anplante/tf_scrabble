@@ -123,9 +123,10 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
                     } else {
                         //TODO MESSSAGE ERROR CANT SWAP NOTHING
                     }
-                    paintCurrentTilesPlayer();
+                    currentPlayer.selectNextState(IDState.PENDING);
                     BtnContextAction.setVisible(false);
                     BtnSwapTiles.setText("Échanger");
+                    currentPlayer.nextState();
                 }
             }
         });
