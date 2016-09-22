@@ -87,8 +87,9 @@ public class ScrabbleGUI extends JFrame {
 
         panelInformation = new JPanel();
 
-        panelInformation.setLocation(x,0);
-        panelInformation.setSize(getWidth() - witdh, y);
+        // TODO Antoine : change les positions pour qu'il soit relatif à la grandeur de l'écran
+        panelInformation.setLocation(x + 10,4);
+        panelInformation.setSize((getWidth() - witdh) - 20, y);
         panelInformation.setLayout(new GridLayout(gameModel.getPlayers().size(), 1));
         add(panelInformation);
     }

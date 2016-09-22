@@ -57,7 +57,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawRect(0,0, this.getWidth()- 10,this.getHeight());
+        g.drawRect(0,0, this.getWidth()- 10,this.getHeight() - 1);
         g.dispose();
     }
 }
