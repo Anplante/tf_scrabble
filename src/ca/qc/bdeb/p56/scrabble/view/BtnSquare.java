@@ -3,6 +3,7 @@ package ca.qc.bdeb.p56.scrabble.view;
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.Square;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
+import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -15,12 +16,13 @@ import java.awt.event.MouseEvent;
 /**
  * Created by TheFrenchOne on 9/11/2016.
  */
-public class BtnSquare extends JButton {
+public class BtnSquare extends JButton implements Observateur {
 
 
     private Game gameModel;
     private int posRow;
     private int posColumn;
+    private Square square;
 
 
     public BtnSquare(Game gameModel, int posRow, int posColumn) {
@@ -36,11 +38,22 @@ public class BtnSquare extends JButton {
 
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(gameModel.getActivePlayer().getState().getName()!= IDState.EXCHANGE.getName()){
-                gameModel.playTile(gameModel.getSquare(posRow, posColumn));
-                setText("" + String.valueOf(gameModel.getContentSquare(posRow, posColumn)));
-                }
+               if(square == null)
+               {
+                   square = gameModel.getSquare(posRow, posColumn);
+                   square.ajouterObservateur(BtnSquare.this);
+               }
+                gameModel.playTile(square);
             }
         });
+    }
+
+    @Override
+    public void changementEtat() {
+        setText("" + String.valueOf(gameModel.getContentSquare(posRow, posColumn)));
+    }
+
+    @Override
+    public void changementEtat(Enum<?> e, Object o) {
     }
 }

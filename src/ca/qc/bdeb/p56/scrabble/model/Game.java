@@ -23,6 +23,7 @@ public class Game implements Observable {
     private List<Player> players;
     private int activePlayerIndex;
     private static List<Tile> alphabetBag;
+
     private List<Square> tilesPlaced;
     private transient LinkedList<Observateur> observateurs;
 
@@ -175,8 +176,7 @@ public class Game implements Observable {
 
     public void selectLetter(Tile tile) {
         getActivePlayer().selectTile(tile);
-        if(isReadyForNextPhase())
-        {
+        if (isReadyForNextPhase()) {
             goToNextState();
         }
     }
@@ -193,14 +193,12 @@ public class Game implements Observable {
         return getActivePlayer().getState().getName();
     }
 
-    public void recallTiles() {
-    }
 
     public void drawTile() {
 
         while (getActivePlayer().canDraw() && !alphabetBag.isEmpty()) {
 
-            Tile tile = alphabetBag.get(alphabetBag.size()-1);
+            Tile tile = alphabetBag.get(alphabetBag.size() - 1);
             getActivePlayer().addLetter(tile);
             alphabetBag.remove(tile);
         }
@@ -216,6 +214,19 @@ public class Game implements Observable {
             goToNextState();
         }
 
+    }
+
+    public void recallTiles() {
+
+        for (Square tileLocation : tilesPlaced) {
+            getActivePlayer().addLetter(tileLocation.getTileOn());
+            tileLocation.setLetter(null);
+        }
+        tilesPlaced.clear();
+        getActivePlayer().selectNextState(IDState.SELECT_ACTION);
+        if (isReadyForNextPhase()) {
+            goToNextState();
+        }
     }
 
     private int calculateWordPoints(List<Square> letterChain) {

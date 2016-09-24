@@ -49,16 +49,6 @@ public class ScrabbleGUITest {
     }
 
 
-    @Test
-    public void testChangePlayer() {
-        btnFinish = (JButton) TestUtils.getChildNamed(scrabbleGame, "finish");
-        Player firstPlayer = game.getActivePlayer();
-        btnFinish.doClick();
-        assertNotEquals(firstPlayer, game.getActivePlayer());
-        btnFinish.doClick();
-        btnFinish.doClick();
-        assertEquals(firstPlayer, game.getActivePlayer());
-    }
 
     @Test
     public void testPlayWord()

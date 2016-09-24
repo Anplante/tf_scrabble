@@ -1,12 +1,10 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
-import ca.qc.bdeb.p56.scrabble.model.StateExchange;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,17 +18,21 @@ import javax.swing.*;
  */
 public class PanelLetterRackZone extends JPanel implements Observateur {
 
+
+
     private Player currentPlayer;
     private List<Player> players;
     private Game game;
 
-    private JButton BtnSwapTiles;
+    private JButton btnSwapTiles;
     private JButton btnSkipTurn;
     private JButton btnHint;
     private JButton btnPlayWord;
+    private JButton btnRecall;
     private JButton BtnContextAction;
     private ArrayList<BtnTile> playerRack;
     private JPanel panelLettersRack;
+
 
 
     public PanelLetterRackZone(Rectangle boundsZoneLetterRack) {
@@ -50,6 +52,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         add(panelLettersRack);
         initializeBtnPlayWord();
         initializeOptions();
+        initializeRecallOption();
     }
 
     public void setPlayer(List<Player> players) {
@@ -80,7 +83,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         int x = getWidth() - 100;
         int y = (getHeight() - 50) / 2;
 
-        BtnSwapTiles = new JButton("Échanger");
+        btnSwapTiles = new JButton("Échanger");
         btnSkipTurn = new JButton("Passer le tour");
         btnHint = new JButton("Indice");
 
@@ -92,39 +95,46 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
        // BtnContextAction.setBounds(x-420, y+5, 75, 40);
        // BtnContextAction.setSize(75, 40);
        // BtnContextAction.setMargin(new Insets(0, 0, 0, 0));
-        BtnSwapTiles.setSize(100, 50);
-      //  BtnSwapTiles.setBounds(x-530, y, 100, 50);
-        BtnSwapTiles.setMargin(new Insets(0, 0, 0, 0));
+        btnSwapTiles.setSize(100, 50);
+      //  btnSwapTiles.setBounds(x-530, y, 100, 50);
+        btnSwapTiles.setMargin(new Insets(0, 0, 0, 0));
 
+        btnSkipTurn.setSize(100, 50);
        // btnSkipTurn.setBounds(x-640, y, 100, 50);
-        //btnSkipTurn.setMargin(new Insets(0, 0, 0, 0));
+        btnSkipTurn.setMargin(new Insets(0, 0, 0, 0));
+        btnSkipTurn.setName("Pass turn");
+
+
 
        // btnHint.setBounds(x-750, y, 100, 50);
         //btnHint.setMargin(new Insets(0, 0, 0, 0));
 
        // add(btnHint);
-       // add(btnSkipTurn);
-        add(BtnSwapTiles);
+        add(btnSkipTurn);
+        add(btnSwapTiles);
+
      //   add(BtnContextAction);
 
-        BtnSwapTiles.addActionListener(new ActionListener() {
+        btnSwapTiles.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
                 if(currentPlayer.getState().getName()!= IDState.EXCHANGE.getName()) {
                     game.activateExchangeOption();                                 //// il aurait moyen de regrouper et laisser l'etat verifier puis juste avertir l'observateur
-                    BtnSwapTiles.setText("Confirmer");
+                    btnSwapTiles.setText("Confirmer");
                     BtnContextAction.setText("Annuler");
                     BtnContextAction.setVisible(true);
                 }else {
                     game.exchangeLetters();
                     changementEtat();
                     BtnContextAction.setVisible(false);
-                    BtnSwapTiles.setText("Échanger");
+                    btnSwapTiles.setText("Échanger");
                 }
             }
         });
+
         btnSkipTurn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                game.passTurn();
             }
         });
         btnHint.addActionListener(new ActionListener() {
@@ -135,12 +145,27 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             public void actionPerformed(ActionEvent e) {
                 currentPlayer.selectNextState(IDState.PENDING);
                 BtnContextAction.setVisible(false);
-                BtnSwapTiles.setText("Échanger");
+                btnSwapTiles.setText("Échanger");
                 currentPlayer.nextState();
             }
         });
     }
 
+
+    private void initializeRecallOption()
+    {
+        btnRecall = new JButton("Recall");
+        btnRecall.setSize(100, 50);
+        btnRecall.setName("Recall");
+        add(btnRecall);
+
+        btnRecall.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                game.recallTiles();
+            }
+        });
+    }
 
     private void initializeBtnPlayWord() {
         // TODO Louis : Mettre un label en dessous du boutton ou trouver un moyen pour que le text s'ajuste à la taille du bouton
