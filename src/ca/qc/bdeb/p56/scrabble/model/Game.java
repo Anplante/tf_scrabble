@@ -66,6 +66,7 @@ public class Game implements Observable {
     }
 
     private void initAlphabetBag(Element rootElement) {
+
         alphabetBag = new ArrayList<Tile>();
 
         Element alphabetsElement = (Element) rootElement.getElementsByTagName("frenchAlphabet").item(0);
@@ -85,6 +86,7 @@ public class Game implements Observable {
                 alphabetBag.add(tile);
             }
         }
+        Collections.shuffle(alphabetBag);
     }
 
 
@@ -195,8 +197,10 @@ public class Game implements Observable {
     }
 
     public void drawTile() {
-        while (getActivePlayer().canDraw()) {
-            Tile tile = alphabetBag.get(randomGenerator.nextInt(alphabetBag.size()));
+
+        while (getActivePlayer().canDraw() && !alphabetBag.isEmpty()) {
+
+            Tile tile = alphabetBag.get(alphabetBag.size()-1);
             getActivePlayer().addLetter(tile);
             alphabetBag.remove(tile);
         }
@@ -266,6 +270,7 @@ public class Game implements Observable {
                 alphabetBag.add(tile);
                 getActivePlayer().remove(tile);
             }
+            Collections.shuffle(alphabetBag);
             drawTile();
         } else {
             //TODO MESSSAGE ERROR CANT SWAP NOTHING
