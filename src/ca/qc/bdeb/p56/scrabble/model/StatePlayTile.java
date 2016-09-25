@@ -27,7 +27,7 @@ public class StatePlayTile extends State {
             // TODO Louis : Vérifier que la case est valide
             squareSelected.setLetter(tileSelected); // La partie devrait le faire
             getPlayer().remove(tileSelected);  // idem
-            getPlayer().aviserObservateurs();
+            getPlayer().aviserObservateurs();  // surement inutile
             readyToChange = true;
               this.stateSelected = IDState.SELECT_TILE;
     }

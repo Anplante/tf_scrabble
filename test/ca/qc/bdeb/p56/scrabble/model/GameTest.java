@@ -29,7 +29,7 @@ public class GameTest {
         List<Player> players = new ArrayList<Player>();
         players.add(new Player("Louis"));
         game = gameManager.createNewGame(players);
-        game.startGame();
+
     }
 
     @After
@@ -39,17 +39,17 @@ public class GameTest {
     @Test
     public void testSelectTile()
     {
+        game.startGame();
+
         Tile tile1 = new Tile('a', 2);
         Tile tile2 = new Tile('b', 3);
 
         Square square = new Square();
         square.setLetter(tile2);
 
-        assertNotEquals(tile1, tile2);
         assertNotEquals(tile1.getLetter(), square.getLetterOn());
 
         game.selectLetter(tile1);
-        game.goToNextState();
         game.playTile(square);
 
         assertEquals(tile1.getLetter(), square.getLetterOn());
@@ -58,6 +58,28 @@ public class GameTest {
     @Test
     public void testAlphabetBagsSize()
     {
-        assertEquals(102, game.lettersLeft() + 7 * game.getPlayersLeft());
+        int sizeAlphabet = game.getlettersLeft();
+        game.startGame();
+        assertEquals(sizeAlphabet, game.getlettersLeft() + 7 * game.getPlayersLeft());
+    }
+
+    @Test
+    public void testCalculateWordPoints()
+    {
+        game.startGame();
+
+        Square square1 = new Square();
+        Square square2 = new Square();
+        Tile tile1 = new Tile('a', 2);
+        Tile tile2 = new Tile('b', 3);
+
+        game.selectLetter(tile1);
+        game.playTile(square1);
+        game.selectLetter(tile2);
+        game.playTile(square2);
+        Player currentPlayer = game.getActivePlayer();
+        game.playWord();
+        assertEquals(tile1.getValue() + tile2.getValue(),currentPlayer.getScore() );
+
     }
 }

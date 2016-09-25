@@ -18,23 +18,27 @@ public class BtnTile extends JButton {
     private Tile tile;
 
 
-    public BtnTile(Game gameModel, Tile tile, Rectangle bounds) {
+    public BtnTile(Game gameModel, Tile tile, Dimension dimension) {
 
         super("" + tile.getLetter());
         this.gameModel = gameModel;
         this.tile = tile;
-        setBounds(bounds);
+        setSize(dimension);
 
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                gameModel.selectLetter(tile);
-                gameModel.goToNextState();
+                    gameModel.selectLetter(tile);
 
                 // TODO Louis: avertir l'observateur du lettre qu'elle a été sélectionné si on veut éventuellement que ca fasse quelque chose
             }
         });
+    }
+
+    public void setTile(Tile aTile){
+        this.tile = aTile;
+        this.setText("" + aTile.getLetter());
     }
 }

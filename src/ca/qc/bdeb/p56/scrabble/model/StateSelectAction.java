@@ -47,6 +47,9 @@ public class StateSelectAction extends State {
             case PENDING:
                 newState = new StatePending(getPlayer());
                 break;
+            case EXCHANGE:
+                newState = new StateExchange(getPlayer());
+                break;
             default:
                 newState = this;
         }

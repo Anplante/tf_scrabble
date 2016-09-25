@@ -34,7 +34,7 @@ public class StateSelectTile extends State{
     @Override
     protected State getNextState() {
 
-        State newState;
+        State newState = null;
 
         switch (stateSelected)
        {
@@ -44,11 +44,10 @@ public class StateSelectTile extends State{
            case PENDING:
                newState = new StatePending(getPlayer());
                break;
-           default:
-                newState = new StateSelectAction(getPlayer());
+           case SELECT_ACTION:
+               newState = new StateSelectAction(getPlayer());
                break;
        }
-        // TODO Louis : Ajouter les vérifications lorsque le joueur veut annuler son coup
        return newState;
     }
 

@@ -11,10 +11,7 @@ import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by TheFrenchOne on 9/10/2016.
@@ -26,6 +23,7 @@ public class Game implements Observable {
     private List<Player> players;
     private int activePlayerIndex;
     private static List<Tile> alphabetBag;
+
     private List<Square> tilesPlaced;
     private transient LinkedList<Observateur> observateurs;
 
@@ -39,14 +37,12 @@ public class Game implements Observable {
         tilesPlaced = new ArrayList<>();
         this.players = players;
 
-        for(Player player : players)
-        {
+        for (Player player : players) {
             player.setGame(this);
         }
     }
 
-    private void loadParameters(String filePath)
-    {
+    private void loadParameters(String filePath) {
         Element rootElement = getRootElement(filePath);
         initAlphabetBag(rootElement);
         boardManager = createBoard(rootElement);
@@ -56,32 +52,29 @@ public class Game implements Observable {
 
         Element rootElement = null;
 
-        try{
+        try {
             File fXmlFile = new File(path);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(fXmlFile);
             rootElement = doc.getDocumentElement();
             rootElement.normalize();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return rootElement;
-      }
+    }
 
-    private void initAlphabetBag(Element rootElement)
-    {
+    private void initAlphabetBag(Element rootElement) {
+
         alphabetBag = new ArrayList<Tile>();
 
         Element alphabetsElement = (Element) rootElement.getElementsByTagName("frenchAlphabet").item(0);
 
         NodeList alphabetsNodes = alphabetsElement.getElementsByTagName("letter");
 
-        for(int i = 0; i < alphabetsNodes.getLength(); i++)
-        {
+        for (int i = 0; i < alphabetsNodes.getLength(); i++) {
             Element activeElement = (Element) alphabetsNodes.item(i);
 
             char caracter = activeElement.getAttribute("text").charAt(0);
@@ -90,11 +83,11 @@ public class Game implements Observable {
 
             int amount = Integer.parseInt(activeElement.getAttribute("amount"));
 
-            for(int j = 0; j < amount; j++)
-            {
+            for (int j = 0; j < amount; j++) {
                 alphabetBag.add(tile);
             }
         }
+        Collections.shuffle(alphabetBag);
     }
 
 
@@ -149,7 +142,8 @@ public class Game implements Observable {
         }
     }
 
-    public int lettersLeft() {
+
+    public int getlettersLeft() {
         return alphabetBag.size();
     }
 
@@ -177,10 +171,14 @@ public class Game implements Observable {
     public void playTile(Square square) {
         getActivePlayer().selectSquare(square);
         tilesPlaced.add(square);
+        goToNextState();
     }
 
     public void selectLetter(Tile tile) {
         getActivePlayer().selectTile(tile);
+        if (isReadyForNextPhase()) {
+            goToNextState();
+        }
     }
 
     public List<Player> getPlayers() {
@@ -195,22 +193,46 @@ public class Game implements Observable {
         return getActivePlayer().getState().getName();
     }
 
-    public void recallTiles() {
+
+    public void drawTile() {
+
+        while (getActivePlayer().canDraw() && !alphabetBag.isEmpty()) {
+
+            Tile tile = alphabetBag.get(alphabetBag.size() - 1);
+            getActivePlayer().addLetter(tile);
+            alphabetBag.remove(tile);
+        }
     }
+
 
     public void playWord() {
-        getActivePlayer().addPoints(calculateWordPoints(tilesPlaced));
+
+        getActivePlayer().addPoints(calculateWordPoints(tilesPlaced)); // TODO Louis : Vérifier que le mot peut être placé
         tilesPlaced.clear();
         getActivePlayer().selectNextState(IDState.PENDING);
-        goToNextState();
+        if (isReadyForNextPhase()) {
+            goToNextState();
+        }
+
     }
 
-    private int calculateWordPoints(List<Square> letterChain)
-    {
+    public void recallTiles() {
+
+        for (Square tileLocation : tilesPlaced) {
+            getActivePlayer().addLetter(tileLocation.getTileOn());
+            tileLocation.setLetter(null);
+        }
+        tilesPlaced.clear();
+        getActivePlayer().selectNextState(IDState.SELECT_ACTION);
+        if (isReadyForNextPhase()) {
+            goToNextState();
+        }
+    }
+
+    private int calculateWordPoints(List<Square> letterChain) {
         int points = 0;
 
-        for(Square square : letterChain)
-        {
+        for (Square square : letterChain) {
             points += square.getTileOn().getValue();
         }
 
@@ -230,8 +252,7 @@ public class Game implements Observable {
 
     @Override
     public void aviserObservateurs() {
-        for(Observateur ob : observateurs)
-        {
+        for (Observateur ob : observateurs) {
             ob.changementEtat();
         }
     }
@@ -241,5 +262,29 @@ public class Game implements Observable {
 
     }
 
+    public void activateExchangeOption() {
+        getActivePlayer().selectNextState(IDState.EXCHANGE);
+        goToNextState();
+    }
 
+
+    public void exchangeLetters() {
+        getActivePlayer().selectNextState(IDState.PENDING);  // TODO Louis : Bloquer end turn
+        goToNextState();
+    }
+
+    public void exchangeLetters(ArrayList<Tile> selectedTiles) {
+
+        if (selectedTiles.size() != 0) {
+
+            for (Tile tile : selectedTiles) {
+                alphabetBag.add(tile);
+                getActivePlayer().remove(tile);
+            }
+            Collections.shuffle(alphabetBag);
+            drawTile();
+        } else {
+            //TODO MESSSAGE ERROR CANT SWAP NOTHING
+        }
+    }
 }

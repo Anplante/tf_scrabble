@@ -49,6 +49,7 @@ public class Player implements Observable {
             observateurs.add(ob);
     }
 
+
     @Override
     public void retirerObservateur(Observateur ob) {
         observateurs.remove(ob);
@@ -134,5 +135,9 @@ public class Player implements Observable {
 
     public void addPoints(int points) {
         score += points;
+    }
+
+    public boolean canDraw() {
+        return tiles.size() < 7;
     }
 }

@@ -1,11 +1,15 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
 
+import ca.qc.bdeb.p56.scrabble.utility.Observable;
+import ca.qc.bdeb.p56.scrabble.utility.Observateur;
+
+import java.util.LinkedList;
 
 /**
  * Created by TheFrenchOne on 9/7/2016.
  */
-public class Square {
+public class Square implements Observable{
 
     public static final char TWO_LETTER_BONUS = 49;
     public static final char THREE_LETTER_BONUS = 50;
@@ -22,12 +26,14 @@ public class Square {
     private int posColumn;
     private Tile tileOn;
     private Premium premium;
+    private transient LinkedList<Observateur> observateurs;
 
 
 
     public Square()
     {
         this.tileOn = null;
+        observateurs = new LinkedList<>();
     }
 
 
@@ -70,5 +76,28 @@ public class Square {
 
     public void setLetter(Tile tile) {
         this.tileOn = tile;
+        aviserObservateurs();
+    }
+
+    @Override
+    public void ajouterObservateur(Observateur o) {
+        observateurs.add(o);
+    }
+
+    @Override
+    public void retirerObservateur(Observateur o) {
+            observateurs.remove(o);
+    }
+
+    @Override
+    public void aviserObservateurs() {
+        for (Observateur ob : observateurs) {
+            ob.changementEtat();
+        }
+    }
+
+    @Override
+    public void aviserObservateurs(Enum<?> e, Object o) {
+
     }
 }

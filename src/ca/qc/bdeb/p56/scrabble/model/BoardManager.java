@@ -23,8 +23,6 @@ public class BoardManager {
         premiumTypeMap.put("wordscore", Premium.Type.WORD_SCORE);
     }
 
-
-
     public BoardManager()
     {
         board = null;
@@ -114,6 +112,4 @@ public class BoardManager {
     public Square getSquare(int row, int column) {
         return board.getSquare(row, column);
     }
-
-
 }
