@@ -127,7 +127,7 @@ public class MainMenuGUI extends JFrame {
         int limit = (int) cmbNombreAi.getSelectedIndex();
         ++limit;
         for (int i = 0; i < limit; i++) {
-            players.add(new AiPlayer(game, "AI"));
+            players.add(new AiPlayer(game));
         }
     }
 
