@@ -16,6 +16,7 @@ public class BtnTile extends JButton {
 
     private  Color BASIC_COLOR = Color.lightGray;
     private  Color REMOVE_COLOR = Color.red;
+    private  Color SELECTED_COLOR = Color.green;
 
     private Game gameModel;
 
@@ -36,9 +37,9 @@ public class BtnTile extends JButton {
             public void actionPerformed(ActionEvent e) {
                 if(gameModel.getActivePlayer().getState().getName() == IDState.EXCHANGE.getName()){
                     if(getBackground() == BASIC_COLOR) {
-                        setBackground(Color.RED);
+                        setExchangeColor();
                     }else{
-                        setBackground(BASIC_COLOR);
+                        setBasicColor();
                     }
 
                 }else {
@@ -48,6 +49,18 @@ public class BtnTile extends JButton {
                 // TODO Louis: avertir l'observateur du lettre qu'elle a été sélectionné si on veut éventuellement que ca fasse quelque chose
             }
         });
+    }
+
+    public void setSelectedColor(){
+        setBackground(SELECTED_COLOR);
+    }
+
+    public void setExchangeColor(){
+        setBackground(REMOVE_COLOR);
+    }
+
+    public void setBasicColor(){
+        setBackground(BASIC_COLOR);
     }
 
     public Tile getTile(){
