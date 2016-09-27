@@ -127,8 +127,15 @@ public class Game implements Observable {
     }
 
     private void activateNextPlayer() {
+        players.get(activePlayerIndex).setActive(false);
         activePlayerIndex = (activePlayerIndex + 1) % players.size();
+        players.get(activePlayerIndex).setActive(true);
         getActivePlayer().nextState();
+
+        for (Observateur ob : observateurs) {
+            ob.changementEtat();
+        }
+
     }
 
     private void initPlayerRack() {

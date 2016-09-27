@@ -4,6 +4,7 @@ import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class Player implements Observable {
     private State currentState;
     private int score;
     private boolean active;
+    private Color playerColor;
     private transient LinkedList<Observateur> observateurs;  //transient = not be serialized
 
    // private final List<Tile> lettersOnHand;
@@ -29,6 +31,8 @@ public class Player implements Observable {
         this.name  = name;
         this.game = game;
         tiles = new ArrayList<Tile>();
+        // TODO : recevoir une couleur
+        playerColor = new Color(0,0,182,155); // light blue
         setState(new StatePending(this));
         active = false;
         observateurs = new LinkedList<>();
@@ -140,4 +144,6 @@ public class Player implements Observable {
     public boolean canDraw() {
         return tiles.size() < 7;
     }
+
+    public Color getColor() { return this.playerColor; }
 }
