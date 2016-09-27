@@ -19,6 +19,7 @@ import java.util.*;
 public class Game implements Observable {
 
 
+    public final int MAX_TILE_IN_HAND = 7;
     private BoardManager boardManager;
     private List<Player> players;
     private int activePlayerIndex;
@@ -79,12 +80,10 @@ public class Game implements Observable {
 
             char caracter = activeElement.getAttribute("text").charAt(0);
             int value = Integer.parseInt(activeElement.getAttribute("value"));
-            Tile tile = new Tile(caracter, value);
-
             int amount = Integer.parseInt(activeElement.getAttribute("amount"));
 
             for (int j = 0; j < amount; j++) {
-                alphabetBag.add(tile);
+                alphabetBag.add(new Tile(caracter, value));
             }
         }
         Collections.shuffle(alphabetBag);
@@ -96,6 +95,11 @@ public class Game implements Observable {
         newBoardManager.createBoard(rootElement);
 
         return newBoardManager;
+    }
+
+    public Board getBoard()
+    {
+        return boardManager.getBoard();
     }
 
 
@@ -133,7 +137,7 @@ public class Game implements Observable {
 
     private void initPlayerRack() {
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < MAX_TILE_IN_HAND; i++) {
             for (int j = 0; j < players.size(); j++) {
                 Tile tile = alphabetBag.get(randomGenerator.nextInt(alphabetBag.size()));
                 players.get(j).addLetter(tile);
@@ -213,7 +217,6 @@ public class Game implements Observable {
         if (isReadyForNextPhase()) {
             goToNextState();
         }
-
     }
 
     public void recallTiles() {
