@@ -31,7 +31,6 @@ public class BtnTile extends JButton {
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                     gameModel.selectLetter(tile);
-
                 // TODO Louis: avertir l'observateur du lettre qu'elle a été sélectionné si on veut éventuellement que ca fasse quelque chose
             }
         });
