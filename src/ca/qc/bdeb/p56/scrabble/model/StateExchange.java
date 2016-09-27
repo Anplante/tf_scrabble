@@ -9,13 +9,11 @@ import java.util.ArrayList;
  */
 public class StateExchange extends State {
 
-    private ArrayList<Tile> selectedTiles;
     private IDState stateSelected;
     boolean readyForNextPhase;
 
     public StateExchange(Player player) {
         super(player, IDState.EXCHANGE);
-        selectedTiles = new ArrayList<>();
         stateSelected = IDState.EXCHANGE;
         readyForNextPhase = false;
     }
@@ -29,10 +27,6 @@ public class StateExchange extends State {
     @Override
     protected void selectTile(Tile tile)
     {
-        if(!selectedTiles.contains(tile))
-        {
-            selectedTiles.add(tile);
-        }
     }
 
     @Override
@@ -42,8 +36,10 @@ public class StateExchange extends State {
 
         switch (stateSelected)
         {
+            case SELECT_ACTION:
+                newState = new StateSelectAction(getPlayer());
+                break;
             case PENDING:
-                getGame().exchangeLetters(selectedTiles);
                 newState = new StatePending(getPlayer());
                 break;
 

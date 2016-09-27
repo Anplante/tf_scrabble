@@ -48,6 +48,7 @@ public class StatePlayTile extends State {
         {
             case SELECT_TILE:
                 newState = new StateSelectTile(getPlayer());
+
                 break;
             default:
                newState = new StateSelectAction(getPlayer());

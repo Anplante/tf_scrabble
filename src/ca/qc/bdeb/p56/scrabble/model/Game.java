@@ -3,6 +3,7 @@ package ca.qc.bdeb.p56.scrabble.model;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
+import ca.qc.bdeb.p56.scrabble.view.BtnTile;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -10,8 +11,10 @@ import org.w3c.dom.NodeList;
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.awt.*;
 import java.io.File;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by TheFrenchOne on 9/10/2016.
@@ -79,12 +82,12 @@ public class Game implements Observable {
 
             char caracter = activeElement.getAttribute("text").charAt(0);
             int value = Integer.parseInt(activeElement.getAttribute("value"));
-            Tile tile = new Tile(caracter, value);
+
 
             int amount = Integer.parseInt(activeElement.getAttribute("amount"));
 
             for (int j = 0; j < amount; j++) {
-                alphabetBag.add(tile);
+                alphabetBag.add(new Tile(caracter, value));
             }
         }
         Collections.shuffle(alphabetBag);
@@ -262,29 +265,40 @@ public class Game implements Observable {
 
     }
 
-    public void activateExchangeOption() {
-        getActivePlayer().selectNextState(IDState.EXCHANGE);
-        goToNextState();
-    }
 
 
-    public void exchangeLetters() {
-        getActivePlayer().selectNextState(IDState.PENDING);  // TODO Louis : Bloquer end turn
-        goToNextState();
-    }
+    public void exchangeLetters( ArrayList<BtnTile> btns) {
 
-    public void exchangeLetters(ArrayList<Tile> selectedTiles) {
+        boolean exchangeDo = false;
 
-        if (selectedTiles.size() != 0) {
-
-            for (Tile tile : selectedTiles) {
-                alphabetBag.add(tile);
-                getActivePlayer().remove(tile);
+        for (int i = 0; i < btns.size(); i++) {
+            if (btns.get(i).getBackground() == Color.red && alphabetBag.size() > 6){
+                exchangeDo = true;
+                Tile aTile = btns.get(i).getTile();
+                alphabetBag.add(aTile);
+                getActivePlayer().remove(aTile);
+                btns.get(i).setBackground(Color.lightGray);
+                Collections.shuffle(alphabetBag);
+                drawTile();
             }
-            Collections.shuffle(alphabetBag);
-            drawTile();
-        } else {
-            //TODO MESSSAGE ERROR CANT SWAP NOTHING
+        }
+
+        if(exchangeDo){
+            passTurn();
+        }else {
+            if(alphabetBag.size()<7){
+                JOptionPane.showMessageDialog(new Frame(),
+                "Pas assez de lettres dans le sac",
+                    "Action invalide",
+                    JOptionPane.ERROR_MESSAGE);
+                getActivePlayer().selectNextState(IDState.SELECT_ACTION);
+                getActivePlayer().nextState();
+            } else{
+                JOptionPane.showMessageDialog(new Frame(),
+                        "Aucune tuile n'a été sélectionné à supprimer",
+                        "Action invalide",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }

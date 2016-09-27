@@ -23,14 +23,14 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private Player currentPlayer;
     private List<Player> players;
     private Game game;
+    private ArrayList<BtnTile> listBtnTiles;
 
     private JButton btnSwapTiles;
     private JButton btnSkipTurn;
     private JButton btnHint;
     private JButton btnPlayWord;
     private JButton btnRecall;
-    private JButton BtnContextAction;
-    private ArrayList<BtnTile> playerRack;
+    private JButton btnCancelExchange;
     private JPanel panelLettersRack;
 
 
@@ -40,7 +40,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         super(new FlowLayout());
         currentPlayer = null;
         players = null;
-        playerRack = new ArrayList<>();
+        listBtnTiles = new ArrayList<>();
         setBounds(boundsZoneLetterRack);
 
 
@@ -76,6 +76,10 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         this.game.ajouterObservateur(this);
     }
 
+    public  ArrayList<BtnTile> getListBtnTiles(){
+        return listBtnTiles;
+    }
+
     private void initializeOptions() {
 
         //TODO refactor and combine
@@ -87,47 +91,44 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         btnSkipTurn = new JButton("Passer le tour");
         btnHint = new JButton("Indice");
 
-        BtnContextAction = new JButton();
+        btnCancelExchange = new JButton("Annuler");
+        btnCancelExchange.setVisible(false);
 
-        BtnContextAction.setVisible(false);
 
-
-       // BtnContextAction.setBounds(x-420, y+5, 75, 40);
-       // BtnContextAction.setSize(75, 40);
-       // BtnContextAction.setMargin(new Insets(0, 0, 0, 0));
         btnSwapTiles.setSize(100, 50);
-      //  btnSwapTiles.setBounds(x-530, y, 100, 50);
         btnSwapTiles.setMargin(new Insets(0, 0, 0, 0));
 
+        btnCancelExchange.setSize(100,50);
+        btnCancelExchange.setMargin(new Insets(0,0,0,0));
+
         btnSkipTurn.setSize(100, 50);
-       // btnSkipTurn.setBounds(x-640, y, 100, 50);
         btnSkipTurn.setMargin(new Insets(0, 0, 0, 0));
         btnSkipTurn.setName("Pass turn");
 
 
 
-       // btnHint.setBounds(x-750, y, 100, 50);
-        //btnHint.setMargin(new Insets(0, 0, 0, 0));
 
-       // add(btnHint);
         add(btnSkipTurn);
         add(btnSwapTiles);
+        add(btnCancelExchange);
 
-     //   add(BtnContextAction);
 
         btnSwapTiles.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
                 if(currentPlayer.getState().getName()!= IDState.EXCHANGE.getName()) {
-                    game.activateExchangeOption();                                 //// il aurait moyen de regrouper et laisser l'etat verifier puis juste avertir l'observateur
+                    btnRecall.doClick();
+                    currentPlayer.selectNextState(IDState.EXCHANGE);                                 //// il aurait moyen de regrouper et laisser l'etat verifier puis juste avertir l'observateur
+                    currentPlayer.nextState();
+
                     btnSwapTiles.setText("Confirmer");
-                    BtnContextAction.setText("Annuler");
-                    BtnContextAction.setVisible(true);
+                    disableAllOtherBtnExchange(false);
                 }else {
-                    game.exchangeLetters();
+                    disableAllOtherBtnExchange(true);
+                    game.exchangeLetters(getListBtnTiles());
                     changementEtat();
-                    BtnContextAction.setVisible(false);
                     btnSwapTiles.setText("Échanger");
+
                 }
             }
         });
@@ -141,16 +142,24 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             public void actionPerformed(ActionEvent e) {
             }
         });
-        BtnContextAction.addActionListener(new ActionListener() {
+        btnCancelExchange.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                currentPlayer.selectNextState(IDState.PENDING);
-                BtnContextAction.setVisible(false);
+                currentPlayer.selectNextState(IDState.SELECT_ACTION);
                 btnSwapTiles.setText("Échanger");
                 currentPlayer.nextState();
+                disableAllOtherBtnExchange(true);
             }
         });
     }
 
+    private void disableAllOtherBtnExchange(boolean enabler){
+        btnHint.setEnabled(enabler);
+        btnPlayWord.setEnabled(enabler);
+        btnSkipTurn.setEnabled(enabler);
+        btnRecall.setEnabled(enabler);
+        btnCancelExchange.setVisible(!enabler);
+
+    }
 
     private void initializeRecallOption()
     {
@@ -208,6 +217,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             BtnTile tile = new BtnTile(game, letter, new Dimension(50,50));
             tile.setName("Tile" +i);
             panelLettersRack.add(tile);
+            listBtnTiles.add(tile);
             x += 60;
             i++;
         }
