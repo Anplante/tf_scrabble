@@ -9,7 +9,7 @@ import java.util.List;
 public interface ListOfName {
 
     // FIXME: Est-ce nécessaire d'apeller cette méthode liste de nom?
-    public static final List<String> AIName = new ArrayList<String>() {{
+    public final List<String> AIName = new ArrayList<String>() {{
         add("BobbyJohnBoratos");
         add("DiscordBot");
         add("Iamnotabot");

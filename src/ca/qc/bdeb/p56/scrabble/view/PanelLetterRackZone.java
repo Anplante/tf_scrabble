@@ -22,6 +22,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private Player currentPlayer;
     private List<Player> players;
     private Game game;
+    private ArrayList<BtnTile> listBtnTiles;
 
     private final double RATIO_LETTERS_ZONE = .1;
     private final int TILE_SIZE;
@@ -29,19 +30,17 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private JButton btnPassTurn;
     private JButton btnPlayWord;
     private JButton btnRecall;
+    private JButton btnCancelExchange;
     private JPanel panelLettersRack;
-
-
-
-   // private final int LETTERS_ZONE_HEIGHT;
-  //  private final int LETTERS_ZONE_WIDTH;
 
 
     public PanelLetterRackZone(Rectangle boundsZoneLetterRack) {
 
+        super(new FlowLayout());
         currentPlayer = null;
         players = null;
         setBounds(boundsZoneLetterRack);
+        listBtnTiles = new ArrayList<BtnTile>();
         panelLettersRack = new JPanel();
 
         setLayout(null);
@@ -60,6 +59,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         panelLettersRack.setBounds(x, y, width,TILE_SIZE-10);
         add(panelLettersRack);
         initializeOptions();
+
     }
 
     public void setPlayer(List<Player> players) {
@@ -81,6 +81,10 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         }
         this.game = aGame;
         this.game.ajouterObservateur(this);
+    }
+
+    public  ArrayList<BtnTile> getListBtnTiles(){
+        return listBtnTiles;
     }
 
     private void initializeOptions() {
@@ -107,25 +111,57 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private void initExchangeOption() {
 
         btnSwapTiles = new JButton("Échanger");
-        btnSwapTiles.setSize(100, 50);
+
+        btnCancelExchange = new JButton("Annuler");
+        btnCancelExchange.setVisible(false);
+
+
         btnSwapTiles.setName("Exchange");
+
+        btnCancelExchange.setName("Cancel_Exchange");
+
+
+
         add(btnSwapTiles);
+        add(btnCancelExchange);
+
 
         btnSwapTiles.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                if (currentPlayer.getState().getName() != IDState.EXCHANGE.getName()) {
-                    game.activateExchangeOption();                                 //// il aurait moyen de regrouper et laisser l'etat verifier puis juste avertir l'observateur
+                if(currentPlayer.getState().getName()!= IDState.EXCHANGE.getName()) {
+                    btnRecall.doClick();
+                    currentPlayer.selectNextState(IDState.EXCHANGE);                                 //// il aurait moyen de regrouper et laisser l'etat verifier puis juste avertir l'observateur
+                    currentPlayer.nextState();
                     btnSwapTiles.setText("Confirmer");
-                } else {
-                    game.exchangeLetters();
+                    disableAllOtherBtnExchange(false);
+                }else {
+                    disableAllOtherBtnExchange(true);
+                    game.exchangeLetters(getListBtnTiles());
                     changementEtat();
                     btnSwapTiles.setText("Échanger");
+
                 }
+            }
+        });
+
+        btnCancelExchange.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                currentPlayer.selectNextState(IDState.SELECT_ACTION);
+                btnSwapTiles.setText("Échanger");
+                currentPlayer.nextState();
+                disableAllOtherBtnExchange(true);
             }
         });
     }
 
+    private void disableAllOtherBtnExchange(boolean enabler){
+        btnPlayWord.setEnabled(enabler);
+        btnRecall.setEnabled(enabler);
+        btnPassTurn.setEnabled(enabler);
+        btnCancelExchange.setVisible(!enabler);
+
+    }
     private void initRecallOption() {
 
         btnRecall = new JButton("Recall");
@@ -170,10 +206,12 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         List<Tile> playerTiles = currentPlayer.getTiles();
 
         int i = 0;
+
         for (Tile letter : playerTiles) {
-            BtnTile tile = new BtnTile(game, letter, new Dimension(TILE_SIZE, TILE_SIZE));
+            BtnTile tile = new BtnTile(game, letter, new Dimension(50, 50));
             tile.setName("Tile" + i);
             panelLettersRack.add(tile);
+            listBtnTiles.add(tile);
             i++;
         }
         panelLettersRack.revalidate();

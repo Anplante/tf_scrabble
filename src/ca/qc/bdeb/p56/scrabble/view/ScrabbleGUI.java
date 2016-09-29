@@ -25,6 +25,7 @@ public class ScrabbleGUI extends JFrame {
     private final int LETTER_RACK_ZONE_HEIGHT;
     private final  int MARGIN = 5;
 
+    private JLabel lblNumberLetter;
     PanelLetterRackZone panelLetterRack;
     Board board;
     JPanel pnlBoard;
@@ -59,7 +60,22 @@ public class ScrabbleGUI extends JFrame {
         createPanelBoard();
         createPanelLetterRack();
         createPanelInformation();
+        createLabelNumberLetters();
 
+    }
+
+    private void createLabelNumberLetters() {
+        int y = getHeight() - BOARD_ZONE_HEIGHT;
+        y = panelInformation.getHeight();
+        int witdh = (int) (getWidth() - getWidth()* RATIO_PANEL_INFORMATION);
+        int x = witdh;
+       // y *= 0.5;
+        lblNumberLetter =  new JLabel();
+        lblNumberLetter.setLocation(1, y);
+        lblNumberLetter.setSize(lblNumberLetter.getPreferredSize());
+        lblNumberLetter.setText(Integer.toString(gameModel.getlettersLeft()));
+        lblNumberLetter.setVisible(true);
+        add(lblNumberLetter);
     }
 
     private void createPanelInformation() {

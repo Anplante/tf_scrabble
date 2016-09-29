@@ -43,15 +43,17 @@ public class AiplayerTest {
         Game oneGame;
         oneGame = gameManager.createNewGame(players);
         AiPlayer aiPlayer = new AiPlayer(oneGame);
-        aiPlayer.AIName.clear();
-        aiPlayer.AIName.add("Antoine");
+        aiPlayer.tmpList.clear();
+        aiPlayer.tmpList.add("Antoine");
         players.add(new AiPlayer(oneGame));
         assertEquals("Antoine", players.get(1).getName());
-        aiPlayer.AIName.add("Bot");
+        aiPlayer.tmpList.add("Bot");
         players.add(new AiPlayer(oneGame));
         assertEquals("Bot", players.get(2).getName());
-
-
-
+        aiPlayer.tmpList = ListOfName.AIName;
+        aiPlayer.tmpList.add("Antoine");
+        aiPlayer.tmpList.add("Louis");
+        aiPlayer.tmpList.add("Wow");
+        aiPlayer.tmpList.add("AntoinePlante");
     }
 }
