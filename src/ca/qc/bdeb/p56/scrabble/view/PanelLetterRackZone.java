@@ -19,20 +19,17 @@ import javax.swing.*;
 public class PanelLetterRackZone extends JPanel implements Observateur {
 
 
-
     private Player currentPlayer;
     private List<Player> players;
     private Game game;
     private ArrayList<BtnTile> listBtnTiles;
 
     private JButton btnSwapTiles;
-    private JButton btnSkipTurn;
-    private JButton btnHint;
+    private JButton btnPassTurn;
     private JButton btnPlayWord;
     private JButton btnRecall;
     private JButton btnCancelExchange;
     private JPanel panelLettersRack;
-
 
 
     public PanelLetterRackZone(Rectangle boundsZoneLetterRack) {
@@ -40,19 +37,15 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         super(new FlowLayout());
         currentPlayer = null;
         players = null;
-        listBtnTiles = new ArrayList<>();
         setBounds(boundsZoneLetterRack);
 
-
-
         panelLettersRack = new JPanel(new FlowLayout());
-        int x = getWidth()/2 - 150;
+        int x = getWidth() / 2 - 150;
         int y = (getHeight() - 50) / 2;
         panelLettersRack.setBounds(x, y, 350, 50);
         add(panelLettersRack);
-        initializeBtnPlayWord();
         initializeOptions();
-        initializeRecallOption();
+
     }
 
     public void setPlayer(List<Player> players) {
@@ -82,10 +75,26 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
     private void initializeOptions() {
 
-        //TODO refactor and combine
+        initPassTurnOption();
+        initExchangeOption();
+        initRecallOption();
+        initiBtnPlayWord();
+    }
 
-        int x = getWidth() - 100;
-        int y = (getHeight() - 50) / 2;
+    private void initPassTurnOption()
+    {
+        btnPassTurn = new JButton("Passer le tour");
+        btnPassTurn.setSize(100, 50);
+        btnPassTurn.setName("Pass turn");
+        add(btnPassTurn);
+        btnPassTurn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                game.passTurn();
+            }
+        });
+    }
+
+    private void initExchangeOption() {
 
         btnSwapTiles = new JButton("Échanger");
         btnSkipTurn = new JButton("Passer le tour");
@@ -96,6 +105,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
 
         btnSwapTiles.setSize(100, 50);
+        btnSwapTiles.setName("Exchange");
         btnSwapTiles.setMargin(new Insets(0, 0, 0, 0));
 
         btnCancelExchange.setSize(100,50);
@@ -116,12 +126,16 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         btnSwapTiles.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
+                if (currentPlayer.getState().getName() != IDState.EXCHANGE.getName()) {
+                    game.activateExchangeOption();                                 //// il aurait moyen de regrouper et laisser l'etat verifier puis juste avertir l'observateur
                 if(currentPlayer.getState().getName()!= IDState.EXCHANGE.getName()) {
                     btnRecall.doClick();
                     currentPlayer.selectNextState(IDState.EXCHANGE);                                 //// il aurait moyen de regrouper et laisser l'etat verifier puis juste avertir l'observateur
                     currentPlayer.nextState();
 
                     btnSwapTiles.setText("Confirmer");
+                } else {
+                    game.exchangeLetters();
                     disableAllOtherBtnExchange(false);
                 }else {
                     disableAllOtherBtnExchange(true);
@@ -160,9 +174,9 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         btnCancelExchange.setVisible(!enabler);
 
     }
+    private void initRecallOption() {
 
-    private void initializeRecallOption()
-    {
+
         btnRecall = new JButton("Recall");
         btnRecall.setSize(100, 50);
         btnRecall.setName("Recall");
@@ -176,24 +190,19 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         });
     }
 
-    private void initializeBtnPlayWord() {
+    private void initiBtnPlayWord() {
         // TODO Louis : Mettre un label en dessous du boutton ou trouver un moyen pour que le text s'ajuste à la taille du bouton
 
         btnPlayWord = new JButton("Play");
-
-        int x = getWidth() - 100;
-        int y = (getHeight() - 50) / 2;
-
-        btnPlayWord.setBounds(x, y, 50, 50);
-        btnPlayWord.setMargin(new Insets(0, 0, 0, 0));
+        btnPlayWord.setSize(100, 50);
+        btnPlayWord.setName("Play");
+        add(btnPlayWord);
 
         btnPlayWord.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 game.playWord();
             }
         });
-
-        add(btnPlayWord);
     }
 
     @Override
@@ -204,25 +213,22 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         }
 
         for (Component comp : panelLettersRack.getComponents()) {
-                panelLettersRack.remove(comp);
+            panelLettersRack.remove(comp);
         }
 
         List<Tile> playerTiles = currentPlayer.getTiles();
 
-        int x = 200;
-        int y = (getHeight() - 50) / 2;
         int i = 0;
 
         for (Tile letter : playerTiles) {
-            BtnTile tile = new BtnTile(game, letter, new Dimension(50,50));
-            tile.setName("Tile" +i);
+            BtnTile tile = new BtnTile(game, letter, new Dimension(50, 50));
+            tile.setName("Tile" + i);
             panelLettersRack.add(tile);
             listBtnTiles.add(tile);
             x += 60;
             i++;
         }
         panelLettersRack.revalidate();
-        //repaint();
     }
 
     @Override

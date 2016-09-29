@@ -7,8 +7,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 /**
  * Created by TheFrenchOne on 9/12/2016.
@@ -37,22 +36,43 @@ public class GameTest {
     }
 
     @Test
-    public void testSelectTile()
+    public void testPlayTile()
+    {
+        game.startGame();
+        Player activePlayer = game.getActivePlayer();
+        Tile tile = activePlayer.getTiles().get(0);
+
+        Square square = game.getBoard().getSquare(0,0);
+        assertNull(square.getTileOn());
+
+        game.selectLetter(tile);
+        game.playTile(square);
+
+        assertEquals(tile.getLetter(), square.getLetterOn());
+    }
+
+    @Test
+    public void testRecallTiles()
     {
         game.startGame();
 
-        Tile tile1 = new Tile('a', 2);
-        Tile tile2 = new Tile('b', 3);
+        Player activePlayer = game.getActivePlayer();
+        Tile tile = activePlayer.getTiles().get(0);
 
-        Square square = new Square();
-        square.setLetter(tile2);
+        Square square = game.getBoard().getSquare(0,0);
+        assertNull(square.getTileOn());
 
-        assertNotEquals(tile1.getLetter(), square.getLetterOn());
-
-        game.selectLetter(tile1);
+        game.selectLetter(tile);
         game.playTile(square);
 
-        assertEquals(tile1.getLetter(), square.getLetterOn());
+        assertEquals(tile.getLetter(), square.getLetterOn());
+
+        assertFalse(activePlayer.getTiles().contains(tile));
+
+        game.recallTiles();
+
+        assertTrue(activePlayer.getTiles().contains(tile));
+        assertNull(square.getTileOn());
     }
 
     @Test
