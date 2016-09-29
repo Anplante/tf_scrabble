@@ -16,9 +16,12 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
     private JLabel lblName;
     private JLabel lblTitre;
     private JLabel lblScore;
+    private Color playerColor;
+    private boolean isActif;
 
     public PanelPlayerInfo(Player player){
 
+        isActif = false;
         playerModel = player;
         player.ajouterObservateur(this);
         initComponents();
@@ -49,6 +52,8 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
 
         lblName.setText(playerModel.getName());
         lblScore.setText(Integer.toString(playerModel.getScore()));
+        this.repaint();
+        this.revalidate();
     }
 
     @Override
@@ -58,7 +63,15 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        // TODO L'observateur devrait nous dire lequel des jouers est actif et inactif
+        if (playerModel.isActivated()) {
+            g.setColor(Color.green);
+        }
+        else {
+            g.setColor(Color.darkGray);
+        }
         g.drawRect(0,0, this.getWidth()- 10,this.getHeight() - 1);
         g.dispose();
+
     }
 }
