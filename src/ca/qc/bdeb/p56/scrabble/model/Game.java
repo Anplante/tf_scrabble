@@ -45,6 +45,8 @@ public class Game implements Observable {
         }
     }
 
+    public Board getBoard(){ return boardManager.getBoard();}
+
     private void loadParameters(String filePath) {
         Element rootElement = getRootElement(filePath);
         initAlphabetBag(rootElement);

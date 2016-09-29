@@ -38,6 +38,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         currentPlayer = null;
         players = null;
         setBounds(boundsZoneLetterRack);
+        listBtnTiles = new ArrayList<BtnTile>();
 
         panelLettersRack = new JPanel(new FlowLayout());
         int x = getWidth() / 2 - 150;
@@ -97,28 +98,17 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private void initExchangeOption() {
 
         btnSwapTiles = new JButton("Échanger");
-        btnSkipTurn = new JButton("Passer le tour");
-        btnHint = new JButton("Indice");
 
         btnCancelExchange = new JButton("Annuler");
         btnCancelExchange.setVisible(false);
 
 
-        btnSwapTiles.setSize(100, 50);
         btnSwapTiles.setName("Exchange");
-        btnSwapTiles.setMargin(new Insets(0, 0, 0, 0));
 
-        btnCancelExchange.setSize(100,50);
-        btnCancelExchange.setMargin(new Insets(0,0,0,0));
-
-        btnSkipTurn.setSize(100, 50);
-        btnSkipTurn.setMargin(new Insets(0, 0, 0, 0));
-        btnSkipTurn.setName("Pass turn");
+        btnCancelExchange.setName("Cancel_Exchange");
 
 
 
-
-        add(btnSkipTurn);
         add(btnSwapTiles);
         add(btnCancelExchange);
 
@@ -126,16 +116,11 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         btnSwapTiles.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                if (currentPlayer.getState().getName() != IDState.EXCHANGE.getName()) {
-                    game.activateExchangeOption();                                 //// il aurait moyen de regrouper et laisser l'etat verifier puis juste avertir l'observateur
                 if(currentPlayer.getState().getName()!= IDState.EXCHANGE.getName()) {
                     btnRecall.doClick();
                     currentPlayer.selectNextState(IDState.EXCHANGE);                                 //// il aurait moyen de regrouper et laisser l'etat verifier puis juste avertir l'observateur
                     currentPlayer.nextState();
-
                     btnSwapTiles.setText("Confirmer");
-                } else {
-                    game.exchangeLetters();
                     disableAllOtherBtnExchange(false);
                 }else {
                     disableAllOtherBtnExchange(true);
@@ -147,15 +132,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             }
         });
 
-        btnSkipTurn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                game.passTurn();
-            }
-        });
-        btnHint.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
         btnCancelExchange.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 currentPlayer.selectNextState(IDState.SELECT_ACTION);
@@ -167,9 +143,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     }
 
     private void disableAllOtherBtnExchange(boolean enabler){
-        btnHint.setEnabled(enabler);
         btnPlayWord.setEnabled(enabler);
-        btnSkipTurn.setEnabled(enabler);
         btnRecall.setEnabled(enabler);
         btnCancelExchange.setVisible(!enabler);
 
@@ -225,7 +199,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             tile.setName("Tile" + i);
             panelLettersRack.add(tile);
             listBtnTiles.add(tile);
-            x += 60;
             i++;
         }
         panelLettersRack.revalidate();
