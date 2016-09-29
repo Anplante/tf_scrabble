@@ -44,10 +44,6 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         lblScore.setBounds(50, 50, 25, 25);
     }
 
-    public JLabel getLblName() {
-        return lblName;
-    }
-
     @Override
     public void changementEtat() {
 
