@@ -50,5 +50,8 @@ public class AiplayerTest {
         aiPlayer.AIName.add("Bot");
         players.add(new AiPlayer(oneGame));
         assertEquals("Bot", players.get(2).getName());
+
+
+
     }
 }

@@ -18,10 +18,12 @@ import java.awt.*;
 public class ScrabbleGUI extends JFrame {
 
     private final double RATIO_BOARD_ZONE = 0.1;
-    private final double RATIO_PANEL_INFORMATION = 0.10;
-    private final double RATIO_LETTER_RACK_ZONE = 0.1;
+
+    private final double RATIO_PANEL_INFORMATION = 0.1;
+    private final double RATIO_LETTER_RACK_ZONE = 0.15;
     private final int BOARD_ZONE_HEIGHT;
     private final int LETTER_RACK_ZONE_HEIGHT;
+    private final  int MARGIN = 5;
 
     PanelLetterRackZone panelLetterRack;
     Board board;
@@ -63,16 +65,17 @@ public class ScrabbleGUI extends JFrame {
     private void createPanelInformation() {
 
         int y = getHeight() - LETTER_RACK_ZONE_HEIGHT - BOARD_ZONE_HEIGHT;
-        int witdh = (int) (getWidth() - getWidth()* RATIO_PANEL_INFORMATION);
-        int x = witdh;
+        int witdh = ((getWidth() - getHeight()+ LETTER_RACK_ZONE_HEIGHT)/2) - MARGIN  ;
+        int x = getWidth() - witdh;
         y *= 0.5;
 
         panelInformation = new JPanel();
 
         // TODO Antoine : change les positions pour qu'il soit relatif à la grandeur de l'écran // @Louis : ils sont déjà relatif à la taille de l'écran.
-        panelInformation.setLocation(x + 10,4);
-        panelInformation.setSize((getWidth() - witdh) - 20, y);
-        panelInformation.setLayout(new GridLayout(gameModel.getPlayers().size(), 1));
+        panelInformation.setLocation(x, MARGIN);
+        panelInformation.setSize(witdh, y);
+        panelInformation.setLayout(new GridLayout(gameModel.getPlayers().size(), 1, MARGIN, MARGIN));
+        panelInformation.setBackground(Color.YELLOW);
         add(panelInformation);
     }
 
@@ -93,10 +96,10 @@ public class ScrabbleGUI extends JFrame {
     private void createPanelLetterRack() {
 
         int x = pnlBoard.getX();
-        int y = getHeight() - LETTER_RACK_ZONE_HEIGHT*2;
+        int y = getHeight() - LETTER_RACK_ZONE_HEIGHT;
         int witdhBoard = pnlBoard.getWidth();
 
-        Rectangle boundsZoneLetterRack = new Rectangle(x, y, witdhBoard, BOARD_ZONE_HEIGHT);
+        Rectangle boundsZoneLetterRack = new Rectangle(x, y, witdhBoard, LETTER_RACK_ZONE_HEIGHT);
         panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack);
 
         panelLetterRack.setPlayer(gameModel.getPlayers());
@@ -112,15 +115,10 @@ public class ScrabbleGUI extends JFrame {
 
         pnlBoard = new JPanel();
 
-
-        int x = (int) (getWidth()* RATIO_PANEL_INFORMATION);
-
-        pnlBoard.setLocation(x, 0 );
-
-        int widthBoard = (int) (getWidth() - getWidth() * RATIO_PANEL_INFORMATION*2);
-        int heightBoard = getHeight() - LETTER_RACK_ZONE_HEIGHT - BOARD_ZONE_HEIGHT;
-
-        pnlBoard.setSize(widthBoard, heightBoard);
+        int heightBoard = getHeight() - LETTER_RACK_ZONE_HEIGHT - MARGIN;
+        int x = (getWidth() - heightBoard) /2;
+        pnlBoard.setLocation(x, MARGIN );
+        pnlBoard.setSize(heightBoard, heightBoard);
         add(pnlBoard);
         initGrid();
         pnlBoard.setName("Board");

@@ -23,6 +23,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private List<Player> players;
     private Game game;
 
+    private final double RATIO_LETTERS_ZONE = .1;
+    private final int TILE_SIZE;
     private JButton btnSwapTiles;
     private JButton btnPassTurn;
     private JButton btnPlayWord;
@@ -30,20 +32,34 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private JPanel panelLettersRack;
 
 
+
+   // private final int LETTERS_ZONE_HEIGHT;
+  //  private final int LETTERS_ZONE_WIDTH;
+
+
     public PanelLetterRackZone(Rectangle boundsZoneLetterRack) {
 
-        super(new FlowLayout());
         currentPlayer = null;
         players = null;
         setBounds(boundsZoneLetterRack);
+        panelLettersRack = new JPanel();
 
-        panelLettersRack = new JPanel(new FlowLayout());
-        int x = getWidth() / 2 - 150;
-        int y = (getHeight() - 50) / 2;
-        panelLettersRack.setBounds(x, y, 350, 50);
+        setLayout(null);
+        TILE_SIZE = (int) (getHeight() - getHeight()*RATIO_LETTERS_ZONE*2);
+        initPanelLettersRack();
+    }
+
+    private void initPanelLettersRack()
+    {
+
+
+        int x = getWidth() / 4;
+        int y = getHeight() / 8;
+
+        int width = TILE_SIZE * 7;
+        panelLettersRack.setBounds(x, y, width,TILE_SIZE-10);
         add(panelLettersRack);
         initializeOptions();
-
     }
 
     public void setPlayer(List<Player> players) {
@@ -154,9 +170,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         List<Tile> playerTiles = currentPlayer.getTiles();
 
         int i = 0;
-
         for (Tile letter : playerTiles) {
-            BtnTile tile = new BtnTile(game, letter, new Dimension(50, 50));
+            BtnTile tile = new BtnTile(game, letter, new Dimension(TILE_SIZE, TILE_SIZE));
             tile.setName("Tile" + i);
             panelLettersRack.add(tile);
             i++;

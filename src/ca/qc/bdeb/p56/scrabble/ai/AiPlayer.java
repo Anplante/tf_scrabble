@@ -20,7 +20,7 @@ public class AiPlayer extends Player implements ListOfName{
     private static String chooseName() {
         List<String> tmpList = AIName;
         Random rand = new Random();
-        int  nom = rand.nextInt(tmpList.size());
+        int  nom = rand.nextInt(AIName.size());
         String Ainame = tmpList.get(nom);
         AIName.remove(nom);
         return Ainame;
