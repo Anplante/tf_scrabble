@@ -4,6 +4,7 @@ import ca.qc.bdeb.p56.scrabble.model.*;
 import javafx.scene.paint.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.Color;
 import java.awt.Paint;
 import java.awt.event.ActionEvent;
@@ -16,9 +17,9 @@ import java.awt.*;
  */
 public class ScrabbleGUI extends JFrame {
 
-    private final double RATIO_BOARD_ZONE = 0.12;
-    private final double RATIO_PANEL_INFORMATION = 0.20;
-    private final double RATIO_LETTER_RACK_ZONE = 0.12;
+    private final double RATIO_BOARD_ZONE = 0.1;
+    private final double RATIO_PANEL_INFORMATION = 0.10;
+    private final double RATIO_LETTER_RACK_ZONE = 0.1;
     private final int BOARD_ZONE_HEIGHT;
     private final int LETTER_RACK_ZONE_HEIGHT;
 
@@ -68,7 +69,7 @@ public class ScrabbleGUI extends JFrame {
 
         panelInformation = new JPanel();
 
-        // TODO Antoine : change les positions pour qu'il soit relatif à la grandeur de l'écran
+        // TODO Antoine : change les positions pour qu'il soit relatif à la grandeur de l'écran // @Louis : ils sont déjà relatif à la taille de l'écran.
         panelInformation.setLocation(x + 10,4);
         panelInformation.setSize((getWidth() - witdh) - 20, y);
         panelInformation.setLayout(new GridLayout(gameModel.getPlayers().size(), 1));
@@ -77,7 +78,6 @@ public class ScrabbleGUI extends JFrame {
 
     private void addPlayersInfo()
     {
-
         List<Player> players = gameModel.getPlayers();
 
         for(Player player : players)
@@ -87,7 +87,6 @@ public class ScrabbleGUI extends JFrame {
             panelInformation.add(playerInfo);
         }
         panelInformation.revalidate();
-
     }
 
 
@@ -112,20 +111,25 @@ public class ScrabbleGUI extends JFrame {
     private void createPanelBoard() {
 
         pnlBoard = new JPanel();
-        pnlBoard.setLocation(100,0);
-        int widthBoard = (int) (getWidth() - getWidth() * RATIO_PANEL_INFORMATION) - 100;
-        int y = getHeight() - LETTER_RACK_ZONE_HEIGHT- BOARD_ZONE_HEIGHT;
-        pnlBoard.setSize(widthBoard, y);
+
+
+        int x = (int) (getWidth()* RATIO_PANEL_INFORMATION);
+
+        pnlBoard.setLocation(x, 0 );
+
+        int widthBoard = (int) (getWidth() - getWidth() * RATIO_PANEL_INFORMATION*2);
+        int heightBoard = getHeight() - LETTER_RACK_ZONE_HEIGHT - BOARD_ZONE_HEIGHT;
+
+        pnlBoard.setSize(widthBoard, heightBoard);
         add(pnlBoard);
         initGrid();
         pnlBoard.setName("Board");
+        pnlBoard.setBackground(Color.RED);
     }
-
-
 
     private void initGrid() {
 
-        pnlBoard.setLayout(new GridLayout(15, 15));
+        pnlBoard.setLayout(new GridLayout(15, 15, 2, 2));
 
         for (int row = 0; row < 15; row++) {
             for (int column = 0; column < 15; column++) {
@@ -137,7 +141,6 @@ public class ScrabbleGUI extends JFrame {
         }
     }
 
-
     private void createGame()
     {
         initGame();
@@ -145,13 +148,10 @@ public class ScrabbleGUI extends JFrame {
         // initilaiser player rack
         // initiate scoreboard
         // etc
-
     }
 
     private void initGame()
     {
         gameModel.startGame();
     }
-
-
 }

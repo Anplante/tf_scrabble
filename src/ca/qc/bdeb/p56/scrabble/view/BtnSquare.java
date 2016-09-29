@@ -31,7 +31,6 @@ public class BtnSquare extends JButton implements Observateur {
         this.gameModel = gameModel;
         this.posRow = posRow;
         this.posColumn = posColumn;
-        setSize(50, 50);
 
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setBorder(BorderFactory.createEtchedBorder());
