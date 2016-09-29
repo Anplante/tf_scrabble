@@ -145,11 +145,11 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private void disableAllOtherBtnExchange(boolean enabler){
         btnPlayWord.setEnabled(enabler);
         btnRecall.setEnabled(enabler);
+        btnPassTurn.setEnabled(enabler);
         btnCancelExchange.setVisible(!enabler);
 
     }
     private void initRecallOption() {
-
 
         btnRecall = new JButton("Recall");
         btnRecall.setSize(100, 50);

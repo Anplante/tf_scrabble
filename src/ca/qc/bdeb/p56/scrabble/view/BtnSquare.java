@@ -42,7 +42,9 @@ public class BtnSquare extends JButton implements Observateur {
                    square = gameModel.getSquare(posRow, posColumn);
                    square.ajouterObservateur(BtnSquare.this);
                }
-                gameModel.playTile(square);
+               if(gameModel.getActivePlayer().getState().getName() != IDState.EXCHANGE.getName()) {
+                   gameModel.playTile(square);
+               }
             }
         });
     }
