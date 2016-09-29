@@ -23,6 +23,7 @@ public class ScrabbleGUI extends JFrame {
     private final int BOARD_ZONE_HEIGHT;
     private final int LETTER_RACK_ZONE_HEIGHT;
 
+    private JLabel lblNumberLetter;
     PanelLetterRackZone panelLetterRack;
     Board board;
     JPanel pnlBoard;
@@ -57,7 +58,22 @@ public class ScrabbleGUI extends JFrame {
         createPanelBoard();
         createPanelLetterRack();
         createPanelInformation();
+        createLabelNumberLetters();
 
+    }
+
+    private void createLabelNumberLetters() {
+        int y = getHeight() - BOARD_ZONE_HEIGHT;
+        y = panelInformation.getHeight();
+        int witdh = (int) (getWidth() - getWidth()* RATIO_PANEL_INFORMATION);
+        int x = witdh;
+       // y *= 0.5;
+        lblNumberLetter =  new JLabel();
+        lblNumberLetter.setLocation(1, y);
+        lblNumberLetter.setSize(lblNumberLetter.getPreferredSize());
+        lblNumberLetter.setText(Integer.toString(gameModel.getlettersLeft()));
+        lblNumberLetter.setVisible(true);
+        add(lblNumberLetter);
     }
 
     private void createPanelInformation() {
@@ -69,7 +85,6 @@ public class ScrabbleGUI extends JFrame {
 
         panelInformation = new JPanel();
 
-        // TODO Antoine : change les positions pour qu'il soit relatif à la grandeur de l'écran // @Louis : ils sont déjà relatif à la taille de l'écran.
         panelInformation.setLocation(x + 10,4);
         panelInformation.setSize((getWidth() - witdh) - 20, y);
         panelInformation.setLayout(new GridLayout(gameModel.getPlayers().size(), 1));
