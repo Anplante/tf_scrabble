@@ -12,6 +12,7 @@ import java.awt.*;
 public class PanelPlayerInfo extends JPanel implements Observateur{
 
     private Player playerModel;
+
     private JLabel lblName;
     private JLabel lblTitre;
     private JLabel lblScore;
@@ -41,6 +42,10 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
                 100, 25);
         lblScore.setFont(font);
         lblScore.setBounds(50, 50, 25, 25);
+    }
+
+    public JLabel getLblName() {
+        return lblName;
     }
 
     @Override
