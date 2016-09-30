@@ -22,7 +22,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private Player currentPlayer;
     private List<Player> players;
     private Game game;
-    private ArrayList<BtnTile> listBtnTiles;
+    private List<BtnTile> listBtnTiles;
 
     private final double RATIO_LETTERS_ZONE = .1;
     private final int TILE_SIZE;
@@ -40,11 +40,11 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         currentPlayer = null;
         players = null;
         setBounds(boundsZoneLetterRack);
-        listBtnTiles = new ArrayList<BtnTile>();
-        panelLettersRack = new JPanel();
+        listBtnTiles = new ArrayList<>();
+        panelLettersRack = new JPanel(new FlowLayout());
 
-        setLayout(null);
-        TILE_SIZE = (int) (getHeight() - getHeight()*RATIO_LETTERS_ZONE*2);
+       // setLayout(null);
+        TILE_SIZE = getWidth()/12;
         initPanelLettersRack();
     }
 
@@ -56,7 +56,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         int y = getHeight() / 8;
 
         int width = TILE_SIZE * 7;
-        panelLettersRack.setBounds(x, y, width,TILE_SIZE-10);
+        panelLettersRack.setBounds(x, y, width,TILE_SIZE);
         add(panelLettersRack);
         initializeOptions();
 
@@ -83,7 +83,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         this.game.ajouterObservateur(this);
     }
 
-    public  ArrayList<BtnTile> getListBtnTiles(){
+    public  List<BtnTile> getListBtnTiles(){
         return listBtnTiles;
     }
 
@@ -207,14 +207,18 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         int i = 0;
 
+        Dimension dimension = new Dimension(TILE_SIZE, TILE_SIZE);
         for (Tile letter : playerTiles) {
-            BtnTile tile = new BtnTile(game, letter, new Dimension(50, 50));
+            BtnTile tile = new BtnTile(game, letter, dimension );
+            tile.setMinimumSize(dimension);
+            tile.setMaximumSize(dimension);
             tile.setName("Tile" + i);
             panelLettersRack.add(tile);
             listBtnTiles.add(tile);
             i++;
         }
-        panelLettersRack.revalidate();
+      //  panelLettersRack.revalidate();
+        panelLettersRack.repaint();
     }
 
     @Override

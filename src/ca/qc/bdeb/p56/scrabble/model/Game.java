@@ -268,8 +268,8 @@ public class Game implements Observable {
     }
 
 
-
-    public void exchangeLetters( ArrayList<BtnTile> btns) {
+        // FIXME Louis : woah c'est quoi ca!? pas de liste de bouttons
+    public void exchangeLetters( List<BtnTile> btns) {
 
         boolean exchangeDo = false;
 

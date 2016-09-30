@@ -30,7 +30,7 @@ public class StateExchangeTest {
     private GameManager gameManager;
     private JButton btnEchanger;
     private JButton btnCancel;
-    private ArrayList<BtnTile> listTLetters;
+    private List<BtnTile> listTLetters;
     private ScrabbleGUI scrabbleGame;
 
 

@@ -69,7 +69,6 @@ public class ScrabbleGUI extends JFrame {
         y = panelInformation.getHeight();
         int witdh = (int) (getWidth() - getWidth()* RATIO_PANEL_INFORMATION);
         int x = witdh;
-       // y *= 0.5;
         lblNumberLetter =  new JLabel();
         lblNumberLetter.setLocation(1, y);
         lblNumberLetter.setSize(lblNumberLetter.getPreferredSize());
@@ -87,7 +86,6 @@ public class ScrabbleGUI extends JFrame {
 
         panelInformation = new JPanel();
 
-        // TODO Antoine : change les positions pour qu'il soit relatif à la grandeur de l'écran // @Louis : ils sont déjà relatif à la taille de l'écran.
         panelInformation.setLocation(x, MARGIN);
         panelInformation.setSize(witdh, y);
         panelInformation.setLayout(new GridLayout(gameModel.getPlayers().size(), 1, MARGIN, MARGIN));
