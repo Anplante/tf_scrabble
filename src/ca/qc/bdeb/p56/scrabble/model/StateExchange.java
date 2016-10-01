@@ -43,17 +43,21 @@ public class StateExchange extends State {
     @Override
     protected void execute()
     {
-        if(tilesSelected!= null)
+        if(stateSelected != IDState.SELECT_ACTION)
         {
-            getGame().exchangeLetters(tilesSelected);
+            if(tilesSelected!= null )
+            {
+                getGame().exchangeLetters(tilesSelected);
+            }
+            else {
+                // solution temporaire
+                JOptionPane.showMessageDialog(new Frame(),
+                        "Aucune tuile n'a été sélectionné à supprimer",
+                        "Action invalide",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
-       else{
-            // solution temporaire
-             JOptionPane.showMessageDialog(new Frame(),
-                    "Aucune tuile n'a été sélectionné à supprimer",
-                    "Action invalide",
-                    JOptionPane.ERROR_MESSAGE);
-        }
+
     }
 
     @Override

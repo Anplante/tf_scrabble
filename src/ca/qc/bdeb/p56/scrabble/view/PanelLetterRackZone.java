@@ -9,7 +9,6 @@ import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
@@ -55,6 +54,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         int width = TILE_SIZE * 7;
         panelLettersRack.setBounds(x, y, width,TILE_SIZE);
+        panelLettersRack.setName("Letter rack");
         add(panelLettersRack);
         initializeOptions();
 
