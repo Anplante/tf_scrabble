@@ -40,6 +40,7 @@ public class StateExchangeTest {
 
     @Before
     public void setUp()  throws Exception {
+
         gameManager = new GameManager();
 
         List lstPlayer = new ArrayList<Player>();
@@ -54,7 +55,7 @@ public class StateExchangeTest {
         btnEchanger = (JButton) TestUtils.getChildNamed(panelTested, "Exchange");
         btnCancel = (JButton) TestUtils.getChildNamed(panelTested, "Cancel_Exchange");
 
-        listTLetters = panelTested.getListBtnTiles();
+        listTLetters = null;
 
         for (int i = 0; i < listTLetters.size() ; i++) {
             listTLetters.get(i).setTile(new Tile('-',0));

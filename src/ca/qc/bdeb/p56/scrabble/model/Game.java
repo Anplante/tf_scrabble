@@ -268,39 +268,16 @@ public class Game implements Observable {
     }
 
 
-        // FIXME Louis : woah c'est quoi ca!? pas de liste de bouttons
-    public void exchangeLetters( List<BtnTile> btns) {
+    public void exchangeLetters( List<Tile> tilesSelected) {
 
-        boolean exchangeDo = false;
 
-        for (int i = 0; i < btns.size(); i++) {
-            if (btns.get(i).getBackground() == Color.red && alphabetBag.size() > 6){
-                exchangeDo = true;
-                Tile aTile = btns.get(i).getTile();
-                alphabetBag.add(aTile);
-                getActivePlayer().remove(aTile);
-                btns.get(i).setBackground(Color.lightGray);
-                Collections.shuffle(alphabetBag);
-                drawTile();
-            }
+        for(Tile tileToExchange : tilesSelected)
+        {
+            alphabetBag.add(tileToExchange);
+            getActivePlayer().remove(tileToExchange);
         }
 
-        if(exchangeDo){
-            passTurn();
-        }else {
-            if(alphabetBag.size()<7){
-                JOptionPane.showMessageDialog(new Frame(),
-                "Pas assez de lettres dans le sac",
-                    "Action invalide",
-                    JOptionPane.ERROR_MESSAGE);
-                getActivePlayer().selectNextState(IDState.SELECT_ACTION);
-                getActivePlayer().nextState();
-            } else{
-                JOptionPane.showMessageDialog(new Frame(),
-                        "Aucune tuile n'a été sélectionné à supprimer",
-                        "Action invalide",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        }
+        Collections.shuffle(alphabetBag);
+        drawTile();
     }
 }

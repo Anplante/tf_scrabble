@@ -5,7 +5,7 @@ import ca.qc.bdeb.p56.scrabble.shared.IDState;
 /**
  * Created by TheFrenchOne on 9/19/2016.
  */
-public class StateSelectTile extends State{
+public class StateSelectTile extends State {
 
     private Tile tileSelected;
     private IDState stateSelected;
@@ -15,13 +15,17 @@ public class StateSelectTile extends State{
     }
 
     @Override
-    protected void execute()
-    {
+    protected void execute() {
 
+        if (stateSelected.equals(IDState.EXCHANGE))
+
+        {
+            getGame().recallTiles();
+        }
     }
+
     @Override
-    protected void selectTile(Tile tileSelected)
-    {
+    protected void selectTile(Tile tileSelected) {
         this.tileSelected = tileSelected;
         stateSelected = IDState.PLAY_TILE;
     }
@@ -36,19 +40,20 @@ public class StateSelectTile extends State{
 
         State newState = null;
 
-        switch (stateSelected)
-       {
-           case PLAY_TILE:
-               newState = new StatePlayTile(getPlayer(),tileSelected);
-               break;
-           case PENDING:
-               newState = new StatePending(getPlayer());
-               break;
-           case SELECT_ACTION:
-               newState = new StateSelectAction(getPlayer());
-               break;
-       }
-       return newState;
+        switch (stateSelected) {
+            case PLAY_TILE:
+                newState = new StatePlayTile(getPlayer(), tileSelected);
+                break;
+            case PENDING:
+                newState = new StatePending(getPlayer());
+                break;
+            case SELECT_ACTION:
+                newState = new StateSelectAction(getPlayer());
+                break;
+            case EXCHANGE:
+                newState = new StateExchange(getPlayer());
+        }
+        return newState;
     }
 
     @Override

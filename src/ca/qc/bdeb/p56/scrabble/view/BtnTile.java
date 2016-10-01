@@ -35,6 +35,8 @@ public class BtnTile extends JButton {
 
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
+                gameModel.selectLetter(tile);
                 if(gameModel.getActivePlayer().getState().getName() == IDState.EXCHANGE.getName()){
                     if(getBackground() == BASIC_COLOR) {
                         setExchangeColor();
@@ -43,7 +45,7 @@ public class BtnTile extends JButton {
                     }
 
                 }else {
-                    gameModel.selectLetter(tile);
+
                     setBackground(SELECTED_COLOR);
                 }
 

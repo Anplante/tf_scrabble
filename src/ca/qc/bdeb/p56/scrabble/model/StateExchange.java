@@ -2,7 +2,11 @@ package ca.qc.bdeb.p56.scrabble.model;
 
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Julien Brosseau on 9/21/2016.
@@ -11,6 +15,8 @@ public class StateExchange extends State {
 
     private IDState stateSelected;
     boolean readyForNextPhase;
+
+    private List<Tile> tilesSelected;
 
     public StateExchange(Player player) {
         super(player, IDState.EXCHANGE);
@@ -27,6 +33,27 @@ public class StateExchange extends State {
     @Override
     protected void selectTile(Tile tile)
     {
+        if(tilesSelected == null)
+        {
+            tilesSelected = new ArrayList<>();
+        }
+        tilesSelected.add(tile);
+    }
+
+    @Override
+    protected void execute()
+    {
+        if(tilesSelected!= null)
+        {
+            getGame().exchangeLetters(tilesSelected);
+        }
+       else{
+            // solution temporaire
+             JOptionPane.showMessageDialog(new Frame(),
+                    "Aucune tuile n'a été sélectionné à supprimer",
+                    "Action invalide",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     @Override
@@ -39,12 +66,10 @@ public class StateExchange extends State {
             case SELECT_ACTION:
                 newState = new StateSelectAction(getPlayer());
                 break;
-            case PENDING:
+            case EXCHANGE:
                 newState = new StatePending(getPlayer());
                 break;
-
         }
-
         return newState;
     }
 

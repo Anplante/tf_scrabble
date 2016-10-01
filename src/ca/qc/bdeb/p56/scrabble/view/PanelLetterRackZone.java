@@ -22,7 +22,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private Player currentPlayer;
     private List<Player> players;
     private Game game;
-    private List<BtnTile> listBtnTiles;
 
     private final double RATIO_LETTERS_ZONE = .1;
     private final int TILE_SIZE;
@@ -40,7 +39,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         currentPlayer = null;
         players = null;
         setBounds(boundsZoneLetterRack);
-        listBtnTiles = new ArrayList<>();
         panelLettersRack = new JPanel(new FlowLayout());
 
        // setLayout(null);
@@ -81,10 +79,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         }
         this.game = aGame;
         this.game.ajouterObservateur(this);
-    }
-
-    public  List<BtnTile> getListBtnTiles(){
-        return listBtnTiles;
     }
 
     private void initializeOptions() {
@@ -129,19 +123,20 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         btnSwapTiles.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
+
+                currentPlayer.selectNextState(IDState.EXCHANGE);
+
+
+
                 if(currentPlayer.getState().getName()!= IDState.EXCHANGE.getName()) {
-                    btnRecall.doClick();
-                    currentPlayer.selectNextState(IDState.EXCHANGE);                                 //// il aurait moyen de regrouper et laisser l'etat verifier puis juste avertir l'observateur
-                    currentPlayer.nextState();
                     btnSwapTiles.setText("Confirmer");
                     disableAllOtherBtnExchange(false);
                 }else {
                     disableAllOtherBtnExchange(true);
-                    game.exchangeLetters(getListBtnTiles());
-                    changementEtat();
+                    //changementEtat();
                     btnSwapTiles.setText("Échanger");
-
                 }
+                game.goToNextState();
             }
         });
 
@@ -210,11 +205,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         Dimension dimension = new Dimension(TILE_SIZE, TILE_SIZE);
         for (Tile letter : playerTiles) {
             BtnTile tile = new BtnTile(game, letter, dimension );
-            tile.setMinimumSize(dimension);
-            tile.setMaximumSize(dimension);
             tile.setName("Tile" + i);
             panelLettersRack.add(tile);
-            listBtnTiles.add(tile);
             i++;
         }
       //  panelLettersRack.revalidate();
