@@ -102,4 +102,10 @@ public class GameTest {
         assertEquals(tile1.getValue() + tile2.getValue(),currentPlayer.getScore() );
 
     }
+
+    @Test
+    public void testPlayFirstWordNotCenter()
+    {
+
+    }
 }

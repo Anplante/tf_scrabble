@@ -203,6 +203,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         int i = 0;
 
         Dimension dimension = new Dimension(TILE_SIZE, TILE_SIZE);
+
         for (Tile letter : playerTiles) {
             BtnTile tile = new BtnTile(game, letter, dimension );
             tile.setName("Tile" + i);

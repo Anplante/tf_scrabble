@@ -47,6 +47,31 @@ public class Game implements Observable {
 
     public Board getBoard(){ return boardManager.getBoard();}
 
+    public int getlettersLeft() {
+        return alphabetBag.size();
+    }
+
+    public int getPlayersLeft() {
+        return players.size();
+    }
+
+    public Player getActivePlayer() {
+        return players.get(activePlayerIndex);
+    }
+
+    public Square getSquare(int row, int column) {
+        return boardManager.getSquare(row, column);
+    }
+
+    public char getContentSquare(int row, int column) {
+        return boardManager.getContentSquare(row, column);
+    }
+
+    public String getPremiumSquare(int row, int column) {
+        return boardManager.getPremiumSquare(row, column);
+    }
+
+
     private void loadParameters(String filePath) {
         Element rootElement = getRootElement(filePath);
         initAlphabetBag(rootElement);
@@ -148,35 +173,8 @@ public class Game implements Observable {
     }
 
 
-    public int getlettersLeft() {
-        return alphabetBag.size();
-    }
-
-    public int getPlayersLeft() {
-        return players.size();
-    }
-
-    public Player getActivePlayer() {
-        return players.get(activePlayerIndex);
-    }
-
-
-    public Square getSquare(int row, int column) {
-        return boardManager.getSquare(row, column);
-    }
-
-    public char getContentSquare(int row, int column) {
-        return boardManager.getContentSquare(row, column);
-    }
-
-    public String getPremiumSquare(int row, int column) {
-        return boardManager.getPremiumSquare(row, column);
-    }
-
     public void playTile(Square square) {
         getActivePlayer().selectSquare(square);
-        tilesPlaced.add(square);
-        goToNextState();
     }
 
     public void selectLetter(Tile tile) {
@@ -212,26 +210,33 @@ public class Game implements Observable {
 
     public void playWord() {
 
-        getActivePlayer().addPoints(calculateWordPoints(tilesPlaced)); // TODO Louis : Vérifier que le mot peut être placé
-        tilesPlaced.clear();
         getActivePlayer().selectNextState(IDState.PENDING);
         if (isReadyForNextPhase()) {
             goToNextState();
         }
+    }
+
+    public void playWord(List<Square> tilesPlaced)
+    {
+        getActivePlayer().addPoints(calculateWordPoints(tilesPlaced)); // TODO Louis : Vérifier que le mot peut être placé
 
     }
 
-    public void recallTiles() {
+    public void recallTiles()
+    {
+        getActivePlayer().selectNextState(IDState.EXCHANGE);
+        if (isReadyForNextPhase()) {
+            goToNextState();
+        }
+    }
+
+    public void recallTiles(List<Square> tilesPlaced) {
 
         for (Square tileLocation : tilesPlaced) {
             getActivePlayer().addLetter(tileLocation.getTileOn());
             tileLocation.setLetter(null);
         }
-        tilesPlaced.clear();
-        getActivePlayer().selectNextState(IDState.SELECT_ACTION);
-        if (isReadyForNextPhase()) {
-            goToNextState();
-        }
+
     }
 
     private int calculateWordPoints(List<Square> letterChain) {

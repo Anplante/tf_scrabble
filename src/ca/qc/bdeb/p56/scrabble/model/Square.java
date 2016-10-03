@@ -45,7 +45,6 @@ public class Square implements Observable{
         this.adjacentDown = adjacentDown;
         this.adjacentLeft = adjacentLeft;
         this.adjacentRight = adjacentRight;
-
     }
 
 
@@ -79,6 +78,11 @@ public class Square implements Observable{
         aviserObservateurs();
     }
 
+
+    public boolean isNeighbours(Square square)
+    {
+        return square.equals(adjacentDown) || square.equals(adjacentLeft) || square.equals(adjacentRight) || square.equals(adjacentUp);
+    }
     @Override
     public void ajouterObservateur(Observateur o) {
         observateurs.add(o);

@@ -17,6 +17,7 @@ public class StatePendingTest {
     private Game game;
     private Player player;
 
+
     @Before
     public void setUp() throws Exception {
 
@@ -51,16 +52,17 @@ public class StatePendingTest {
     @Test
     public void testDrawToFullHand()
     {
-        int bagSizeBefore = game.getlettersLeft();
-        List<Tile> playerLetters = player.getTiles();
-
-        playerLetters.clear();
-
-        assertEquals(0, playerLetters.size());
-
+        while(!player.getTiles().isEmpty())
+        {
+            game.selectLetter(player.getTiles().get(0));
+            game.playTile(game.getSquare(0,0));
+        }
+        assertEquals(0,  player.getTiles().size());
+        game.playWord();
+        game.passTurn();
         game.drawTile();
 
-        assertEquals(7,  player.getTiles().size());
+        assertEquals(7, player.getTiles().size());
     }
 
     @Test
@@ -69,9 +71,15 @@ public class StatePendingTest {
         List<Tile> playerLetters = player.getTiles();
         while(game.getlettersLeft() > 0)
         {
-            playerLetters.clear();
-            playerLetters = player.getTiles();
-            game.drawTile();
+            while(!player.getTiles().isEmpty())
+            {
+                game.selectLetter(player.getTiles().get(0));
+                game.playTile(game.getSquare(0,0));
+            }
+            assertEquals(0,  player.getTiles().size());
+            game.playWord();
+            game.passTurn();
+            game.drawTile(); // TODO LOUIS : le jeu devrait automatiquement draw après un changement de tour.
         }
         int lettersCount = player.getTiles().size();
         game.drawTile();
