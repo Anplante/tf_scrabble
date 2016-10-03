@@ -959,7 +959,14 @@
       <option name="project" value="LOCAL" />
       <updated>1475288281630</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Changer un peu comment échanger les lettres fonctionnaient pour bien séparer la vue du modèle. La vue n'a plus besoin de vérifier l'état pour envoyer le bon action, c'est la partie et les états qui font la vérification. J'ai laissé les conditions cependant pour que les boutions s'activent ou désactivent correctement, mais c'est à changer en utilisants les observateurs.">
+      <created>1475466250425</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1475466250425</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TestHistory">
