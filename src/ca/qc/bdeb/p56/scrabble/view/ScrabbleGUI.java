@@ -8,13 +8,15 @@ import java.awt.Color;
 import java.awt.Paint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 import java.awt.*;
 
 /**
  * Created by Louis Luu Lim on 9/7/2016.
  */
-public class ScrabbleGUI extends JFrame {
+public class ScrabbleGUI extends JFrame implements KeyListener {
 
     private final double RATIO_BOARD_ZONE = 0.12;
     private final double RATIO_PANEL_INFORMATION = 0.20;
@@ -46,8 +48,8 @@ public class ScrabbleGUI extends JFrame {
 
         //setUndecorated(true);  // pour enlever le x
         setResizable(false);
-
-
+        addKeyListener(this);
+        setFocusable(true);
 
     }
 
@@ -154,4 +156,19 @@ public class ScrabbleGUI extends JFrame {
     }
 
 
+    @Override
+    public void keyTyped(KeyEvent keyEvent) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {
+        if(keyEvent.getKeyCode() == KeyEvent.VK_ESCAPE)
+        {
+        }
+    }
 }
