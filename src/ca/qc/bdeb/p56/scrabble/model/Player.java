@@ -38,14 +38,48 @@ public class Player implements Observable {
         observateurs = new LinkedList<>();
     }
 
+    public List<Tile> getTiles() {
+
+        List<Tile> playertiles = new LinkedList<>();
+
+        for(Tile tile : tiles)
+        {
+            playertiles.add(tile);
+        }
+        return playertiles;
+    }
+
+    public int getLettersCount()
+    {
+        return tiles.size();
+    }
+    public Game getGame() {
+        return game;
+    }
+
+
+    protected void setState(State newState)
+    {
+        currentState = newState;
+    }
+
+
     public void setGame(Game game)
     {
         this.game = game;
     }
+
+
+
     public void addLetter(Tile tile)
     {
         tiles.add(tile);
     }
+
+
+
+
+
 
     @Override
     public void ajouterObservateur(Observateur ob) {
@@ -73,20 +107,9 @@ public class Player implements Observable {
 
     }
 
-    public List<Tile> getTiles() {
-        return tiles;
-    }
-
-    public Game getGame() {
-        return game;
-    }
 
 
-    protected void setState(State newState)
-    {
-        currentState = newState;
-    }
-    
+
 
     public void selectNextState(IDState state)
     {

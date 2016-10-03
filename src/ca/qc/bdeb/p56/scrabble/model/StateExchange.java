@@ -2,20 +2,24 @@ package ca.qc.bdeb.p56.scrabble.model;
 
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Julien Brosseau on 9/21/2016.
  */
 public class StateExchange extends State {
 
-    private ArrayList<Tile> selectedTiles;
     private IDState stateSelected;
     boolean readyForNextPhase;
 
+    private List<Tile> tilesSelected;
+
     public StateExchange(Player player) {
         super(player, IDState.EXCHANGE);
-        selectedTiles = new ArrayList<>();
         stateSelected = IDState.EXCHANGE;
         readyForNextPhase = false;
     }
@@ -29,10 +33,31 @@ public class StateExchange extends State {
     @Override
     protected void selectTile(Tile tile)
     {
-        if(!selectedTiles.contains(tile))
+        if(tilesSelected == null)
         {
-            selectedTiles.add(tile);
+            tilesSelected = new ArrayList<>();
         }
+        tilesSelected.add(tile);
+    }
+
+    @Override
+    protected void execute()
+    {
+        if(stateSelected != IDState.SELECT_ACTION)
+        {
+            if(tilesSelected!= null )
+            {
+                getGame().exchangeLetters(tilesSelected);
+            }
+            else {
+                // solution temporaire
+                JOptionPane.showMessageDialog(new Frame(),
+                        "Aucune tuile n'a été sélectionné à supprimer",
+                        "Action invalide",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
     }
 
     @Override
@@ -42,13 +67,13 @@ public class StateExchange extends State {
 
         switch (stateSelected)
         {
-            case PENDING:
-                getGame().exchangeLetters(selectedTiles);
+            case SELECT_ACTION:
+                newState = new StateSelectAction(getPlayer());
+                break;
+            case EXCHANGE:
                 newState = new StatePending(getPlayer());
                 break;
-
         }
-
         return newState;
     }
 

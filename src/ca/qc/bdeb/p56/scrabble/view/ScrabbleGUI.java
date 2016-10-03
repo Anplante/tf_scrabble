@@ -4,26 +4,28 @@ import ca.qc.bdeb.p56.scrabble.model.*;
 import javafx.scene.paint.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.Color;
 import java.awt.Paint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.List;
 import java.awt.*;
 
 /**
  * Created by Louis Luu Lim on 9/7/2016.
  */
-public class ScrabbleGUI extends JFrame implements KeyListener {
+public class ScrabbleGUI extends JFrame {
 
-    private final double RATIO_BOARD_ZONE = 0.12;
-    private final double RATIO_PANEL_INFORMATION = 0.20;
-    private final double RATIO_LETTER_RACK_ZONE = 0.12;
+    private final double RATIO_BOARD_ZONE = 0.1;
+
+    private final double RATIO_PANEL_INFORMATION = 0.1;
+    private final double RATIO_LETTER_RACK_ZONE = 0.15;
     private final int BOARD_ZONE_HEIGHT;
     private final int LETTER_RACK_ZONE_HEIGHT;
+    private final  int MARGIN = 5;
 
+    private JLabel lblNumberLetter;
     PanelLetterRackZone panelLetterRack;
     Board board;
     JPanel pnlBoard;
@@ -48,8 +50,8 @@ public class ScrabbleGUI extends JFrame implements KeyListener {
 
         //setUndecorated(true);  // pour enlever le x
         setResizable(false);
-        addKeyListener(this);
-        setFocusable(true);
+
+
 
     }
 
@@ -58,28 +60,41 @@ public class ScrabbleGUI extends JFrame implements KeyListener {
         createPanelBoard();
         createPanelLetterRack();
         createPanelInformation();
+        createLabelNumberLetters();
 
+    }
+
+    private void createLabelNumberLetters() {
+        int y = getHeight() - BOARD_ZONE_HEIGHT;
+        y = panelInformation.getHeight();
+        int witdh = (int) (getWidth() - getWidth()* RATIO_PANEL_INFORMATION);
+        int x = witdh;
+        lblNumberLetter =  new JLabel();
+        lblNumberLetter.setLocation(1, y);
+        lblNumberLetter.setSize(lblNumberLetter.getPreferredSize());
+        lblNumberLetter.setText(Integer.toString(gameModel.getlettersLeft()));
+        lblNumberLetter.setVisible(true);
+        add(lblNumberLetter);
     }
 
     private void createPanelInformation() {
 
         int y = getHeight() - LETTER_RACK_ZONE_HEIGHT - BOARD_ZONE_HEIGHT;
-        int witdh = (int) (getWidth() - getWidth()* RATIO_PANEL_INFORMATION);
-        int x = witdh;
+        int witdh = ((getWidth() - getHeight()+ LETTER_RACK_ZONE_HEIGHT)/2) - MARGIN  ;
+        int x = getWidth() - witdh;
         y *= 0.5;
 
         panelInformation = new JPanel();
 
-        // TODO Antoine : change les positions pour qu'il soit relatif à la grandeur de l'écran
-        panelInformation.setLocation(x + 10,4);
-        panelInformation.setSize((getWidth() - witdh) - 20, y);
-        panelInformation.setLayout(new GridLayout(gameModel.getPlayers().size(), 1));
+        panelInformation.setLocation(x, MARGIN);
+        panelInformation.setSize(witdh, y);
+        panelInformation.setLayout(new GridLayout(gameModel.getPlayers().size(), 1, MARGIN, MARGIN));
+        panelInformation.setBackground(Color.YELLOW);
         add(panelInformation);
     }
 
     private void addPlayersInfo()
     {
-
         List<Player> players = gameModel.getPlayers();
 
         for(Player player : players)
@@ -89,17 +104,16 @@ public class ScrabbleGUI extends JFrame implements KeyListener {
             panelInformation.add(playerInfo);
         }
         panelInformation.revalidate();
-
     }
 
 
     private void createPanelLetterRack() {
 
         int x = pnlBoard.getX();
-        int y = getHeight() - LETTER_RACK_ZONE_HEIGHT*2;
+        int y = getHeight() - LETTER_RACK_ZONE_HEIGHT;
         int witdhBoard = pnlBoard.getWidth();
 
-        Rectangle boundsZoneLetterRack = new Rectangle(x, y, witdhBoard, BOARD_ZONE_HEIGHT);
+        Rectangle boundsZoneLetterRack = new Rectangle(x, y, witdhBoard, LETTER_RACK_ZONE_HEIGHT);
         panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack);
 
         panelLetterRack.setPlayer(gameModel.getPlayers());
@@ -114,20 +128,20 @@ public class ScrabbleGUI extends JFrame implements KeyListener {
     private void createPanelBoard() {
 
         pnlBoard = new JPanel();
-        pnlBoard.setLocation(100,0);
-        int widthBoard = (int) (getWidth() - getWidth() * RATIO_PANEL_INFORMATION) - 100;
-        int y = getHeight() - LETTER_RACK_ZONE_HEIGHT- BOARD_ZONE_HEIGHT;
-        pnlBoard.setSize(widthBoard, y);
+
+        int heightBoard = getHeight() - LETTER_RACK_ZONE_HEIGHT - MARGIN;
+        int x = (getWidth() - heightBoard) /2;
+        pnlBoard.setLocation(x, MARGIN );
+        pnlBoard.setSize(heightBoard, heightBoard);
         add(pnlBoard);
         initGrid();
         pnlBoard.setName("Board");
+        pnlBoard.setBackground(Color.RED);
     }
-
-
 
     private void initGrid() {
 
-        pnlBoard.setLayout(new GridLayout(15, 15));
+        pnlBoard.setLayout(new GridLayout(15, 15, 2, 2));
 
         for (int row = 0; row < 15; row++) {
             for (int column = 0; column < 15; column++) {
@@ -139,7 +153,6 @@ public class ScrabbleGUI extends JFrame implements KeyListener {
         }
     }
 
-
     private void createGame()
     {
         initGame();
@@ -147,28 +160,10 @@ public class ScrabbleGUI extends JFrame implements KeyListener {
         // initilaiser player rack
         // initiate scoreboard
         // etc
-
     }
 
     private void initGame()
     {
         gameModel.startGame();
-    }
-
-
-    @Override
-    public void keyTyped(KeyEvent keyEvent) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent keyEvent) {
-    }
-
-    @Override
-    public void keyReleased(KeyEvent keyEvent) {
-        if(keyEvent.getKeyCode() == KeyEvent.VK_ESCAPE)
-        {
-        }
     }
 }

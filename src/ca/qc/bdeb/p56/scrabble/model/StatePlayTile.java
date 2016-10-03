@@ -48,6 +48,11 @@ public class StatePlayTile extends State {
         {
             case SELECT_TILE:
                 newState = new StateSelectTile(getPlayer());
+
+                break;
+            case EXCHANGE:
+                getGame().recallTiles();
+                newState = new StateExchange(getPlayer());
                 break;
             default:
                newState = new StateSelectAction(getPlayer());

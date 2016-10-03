@@ -31,7 +31,6 @@ public class BtnSquare extends JButton implements Observateur {
         this.gameModel = gameModel;
         this.posRow = posRow;
         this.posColumn = posColumn;
-        setSize(50, 50);
 
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setBorder(BorderFactory.createEtchedBorder());
@@ -43,7 +42,9 @@ public class BtnSquare extends JButton implements Observateur {
                    square = gameModel.getSquare(posRow, posColumn);
                    square.ajouterObservateur(BtnSquare.this);
                }
-                gameModel.playTile(square);
+               if(gameModel.getActivePlayer().getState().getName() != IDState.EXCHANGE.getName()) {
+                   gameModel.playTile(square);
+               }
             }
         });
     }

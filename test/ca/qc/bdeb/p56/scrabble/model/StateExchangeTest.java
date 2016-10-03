@@ -4,10 +4,8 @@ import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
 import ca.qc.bdeb.p56.scrabble.view.BtnTile;
 import ca.qc.bdeb.p56.scrabble.view.PanelLetterRackZone;
 import ca.qc.bdeb.p56.scrabble.view.ScrabbleGUI;
-import javafx.scene.layout.Pane;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.swing.*;
@@ -23,78 +21,159 @@ import static org.junit.Assert.assertNotEquals;
  */
 public class StateExchangeTest {
 
-
-    private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private PanelLetterRackZone panelTested;
     private Game game;
-    private GameManager gameManager;
     private JButton btnEchanger;
     private JButton btnCancel;
-    private ArrayList<BtnTile> listTLetters;
+    private List<BtnTile> btnTiles;
+    private ScrabbleGUI scrabbleGame;
+    private JPanel letterRack;
 
 
-    public StateExchangeTest()
-    {
+    private Player currentPlayer;
+
+    public StateExchangeTest() {
     }
 
     @Before
-    public void setUp()  throws Exception {
-        gameManager = new GameManager();
-        List lstPlayer = new ArrayList<Player>();
+    public void setUp() throws Exception {
 
+        GameManager gameManager = new GameManager();
+
+        List lstPlayer = new ArrayList<Player>();
         lstPlayer.add(new Player("Antoine"));
         lstPlayer.add(new Player("Louis"));
         lstPlayer.add(new Player("Julien"));
+
         game = gameManager.createNewGame(lstPlayer);
 
-        panelTested = new PanelLetterRackZone(new Rectangle(1000,1000));
-        listTLetters = new ArrayList<>();
+        scrabbleGame = new ScrabbleGUI(game, new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
 
-        listTLetters.add(new BtnTile(game,new Tile('-',3),new Dimension(50,50)));
-        listTLetters.add(new BtnTile(game,new Tile('-',3),new Dimension(50,50)));
-        listTLetters.add(new BtnTile(game,new Tile('-',3),new Dimension(50,50)));
-        listTLetters.add(new BtnTile(game,new Tile('-',3),new Dimension(50,50)));
-        listTLetters.add(new BtnTile(game,new Tile('-',3),new Dimension(50,50)));
-        listTLetters.add(new BtnTile(game,new Tile('-',3),new Dimension(50,50)));
-        listTLetters.add(new BtnTile(game,new Tile('-',3),new Dimension(50,50)));
+        panelTested = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, "Player letter rack");
+        btnEchanger = (JButton) TestUtils.getChildNamed(panelTested, "Exchange");
+        btnCancel = (JButton) TestUtils.getChildNamed(panelTested, "Cancel_Exchange");
+        letterRack = (JPanel) TestUtils.getChildNamed(panelTested, "Letter rack");
+        currentPlayer = game.getActivePlayer();
 
+        btnTiles = new ArrayList<>();
+
+        for (int i = 0; i < currentPlayer.getLettersCount(); i++) {
+            btnTiles.add((BtnTile) TestUtils.getChildNamed(letterRack, "Tile" + i));
         }
+    }
 
     @After
     public void tearDown() throws Exception {
     }
 
-    @Ignore
     @Test
-    public void testExchangeOnlyClick()
-    {
-        listTLetters.get(5).doClick();
-        listTLetters.get(6).doClick();
-        listTLetters.get(7).doClick();
+    public void testEchangeChangePlayer() {
+        assertEquals(currentPlayer, game.getActivePlayer());
+        btnEchanger.doClick();
+        btnTiles.get(4).doClick();
+        btnEchanger.doClick();
+        assertNotEquals(currentPlayer, game.getActivePlayer());
+    }
+
+
+    @Test
+    public void testExchangeOnlyClickOrdered() {
+
+        List<Tile> playerTileBeforeExchange = currentPlayer.getTiles();
         btnEchanger.doClick();
 
-        BtnTile notExcepted = new BtnTile(game,new Tile('-',3),new Dimension(50,50));
 
-        assertNotEquals(notExcepted,listTLetters.get(5));
-        assertNotEquals(notExcepted,listTLetters.get(6));
-        assertNotEquals(notExcepted,listTLetters.get(7));
+        for (BtnTile tileToSelect : btnTiles) {
+            tileToSelect.doClick();
+        }
+
+        btnEchanger.doClick();
+
+
+        assertNotEquals(playerTileBeforeExchange, currentPlayer.getTiles());
+
     }
+
+        @Test
+        public void testCancel() {
+
+            List<Tile> playerTileBeforeExchange = currentPlayer.getTiles();
+
+            btnEchanger.doClick();
+            btnTiles.get(4).doClick();
+            btnTiles.get(5).doClick();
+            btnTiles.get(6).doClick();
+            btnCancel.doClick();
+
+            assertEquals(playerTileBeforeExchange, currentPlayer.getTiles());
+        }
+
+/*
 
     @Test
-    public void testExchangeAddRemoveTiles(){
+    public void testExchangeAddRemoveTiles() {
+        btnEchanger.doClick();
+        playerTiles.get(2).doClick();
+        playerTiles.get(3).doClick();
+        playerTiles.get(5).doClick();
+        playerTiles.get(3).doClick();
+        btnEchanger.doClick();
 
+        Tile notExcepted = new Tile('-', 0);
+        Tile expected = new Tile('-', 0);
+
+        assertEquals(expected.getLetter(), playerTiles.get(0).getTile().getLetter());
+        assertEquals(expected.getLetter(), playerTiles.get(1).getTile().getLetter());
+        assertEquals(expected.getLetter(), playerTiles.get(2).getTile().getLetter());
+        assertEquals(expected.getLetter(), playerTiles.get(3).getTile().getLetter());
+        assertEquals(expected.getLetter(), playerTiles.get(4).getTile().getLetter());
+        assertNotEquals(notExcepted, playerTiles.get(5).getTile().getLetter());
+        assertNotEquals(notExcepted, playerTiles.get(6).getTile().getLetter());
     }
+
 
     @Test
-    public void testNoTile(){
+    public void testFromPlayTile() {
+        playerTiles.get(0).doClick();
+        btnEchanger.doClick();
+        playerTiles.get(4).doClick();
+        playerTiles.get(5).doClick();
+        playerTiles.get(6).doClick();
+        btnEchanger.doClick();
 
+        Tile notExcepted = new Tile('-', 0);
+        Tile expected = new Tile('-', 0);
+
+        assertEquals(expected.getLetter(), playerTiles.get(0).getTile().getLetter());
+        assertEquals(expected.getLetter(), playerTiles.get(1).getTile().getLetter());
+        assertEquals(expected.getLetter(), playerTiles.get(2).getTile().getLetter());
+        assertEquals(expected.getLetter(), playerTiles.get(3).getTile().getLetter());
+        assertEquals(expected.getLetter(), playerTiles.get(4).getTile().getLetter());
+        assertNotEquals(notExcepted, playerTiles.get(5).getTile().getLetter());
+        assertNotEquals(notExcepted, playerTiles.get(6).getTile().getLetter());
     }
+
 
     @Test
-    public  void testCancel(){
+    public void testNoTile() {
+        btnEchanger.doClick();
+        playerTiles.get(4).doClick();
+        playerTiles.get(5).doClick();
+        playerTiles.get(6).doClick();
+        btnEchanger.doClick();
+
+        Tile expected = new Tile('-', 0);
+
+        assertEquals(expected.getLetter(), playerTiles.get(0).getTile().getLetter());
+        assertEquals(expected.getLetter(), playerTiles.get(1).getTile().getLetter());
+        assertEquals(expected.getLetter(), playerTiles.get(2).getTile().getLetter());
+        assertEquals(expected.getLetter(), playerTiles.get(3).getTile().getLetter());
+        assertEquals(expected.getLetter(), playerTiles.get(4).getTile().getLetter());
+        assertEquals(expected.getLetter(), playerTiles.get(5).getTile().getLetter());
+        assertEquals(expected.getLetter(), playerTiles.get(6).getTile().getLetter());
 
     }
-
+*/
 
 }
 

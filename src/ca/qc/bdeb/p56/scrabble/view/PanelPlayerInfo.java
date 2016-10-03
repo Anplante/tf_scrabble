@@ -12,6 +12,7 @@ import java.awt.*;
 public class PanelPlayerInfo extends JPanel implements Observateur{
 
     private Player playerModel;
+
     private JLabel lblName;
     private JLabel lblTitre;
     private JLabel lblScore;

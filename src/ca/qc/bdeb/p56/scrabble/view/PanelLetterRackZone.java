@@ -9,7 +9,6 @@ import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
@@ -23,10 +22,13 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private List<Player> players;
     private Game game;
 
+    private final double RATIO_LETTERS_ZONE = .1;
+    private final int TILE_SIZE;
     private JButton btnSwapTiles;
     private JButton btnPassTurn;
     private JButton btnPlayWord;
     private JButton btnRecall;
+    private JButton btnCancelExchange;
     private JPanel panelLettersRack;
 
 
@@ -36,11 +38,23 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         currentPlayer = null;
         players = null;
         setBounds(boundsZoneLetterRack);
-
         panelLettersRack = new JPanel(new FlowLayout());
-        int x = getWidth() / 2 - 150;
-        int y = (getHeight() - 50) / 2;
-        panelLettersRack.setBounds(x, y, 350, 50);
+
+       // setLayout(null);
+        TILE_SIZE = getWidth()/12;
+        initPanelLettersRack();
+    }
+
+    private void initPanelLettersRack()
+    {
+
+
+        int x = getWidth() / 4;
+        int y = getHeight() / 8;
+
+        int width = TILE_SIZE * 7;
+        panelLettersRack.setBounds(x, y, width,TILE_SIZE);
+        panelLettersRack.setName("Letter rack");
         add(panelLettersRack);
         initializeOptions();
 
@@ -91,25 +105,58 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private void initExchangeOption() {
 
         btnSwapTiles = new JButton("Échanger");
-        btnSwapTiles.setSize(100, 50);
+
+        btnCancelExchange = new JButton("Annuler");
+        btnCancelExchange.setVisible(false);
+
+
         btnSwapTiles.setName("Exchange");
+
+        btnCancelExchange.setName("Cancel_Exchange");
+
+
+
         add(btnSwapTiles);
+        add(btnCancelExchange);
+
 
         btnSwapTiles.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                if (currentPlayer.getState().getName() != IDState.EXCHANGE.getName()) {
-                    game.activateExchangeOption();                                 //// il aurait moyen de regrouper et laisser l'etat verifier puis juste avertir l'observateur
+
+                currentPlayer.selectNextState(IDState.EXCHANGE);
+
+
+
+                if(currentPlayer.getState().getName()!= IDState.EXCHANGE.getName()) {
                     btnSwapTiles.setText("Confirmer");
-                } else {
-                    game.exchangeLetters();
-                    changementEtat();
+                    disableAllOtherBtnExchange(false);
+                }else {
+                    disableAllOtherBtnExchange(true);
+                    //changementEtat();
                     btnSwapTiles.setText("Échanger");
                 }
+                game.goToNextState();
+            }
+        });
+
+        btnCancelExchange.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                currentPlayer.selectNextState(IDState.SELECT_ACTION);
+                btnSwapTiles.setText("Échanger");
+                currentPlayer.nextState();
+                disableAllOtherBtnExchange(true);
             }
         });
     }
 
+    private void disableAllOtherBtnExchange(boolean enabler){
+        btnPlayWord.setEnabled(enabler);
+        btnRecall.setEnabled(enabler);
+        btnPassTurn.setEnabled(enabler);
+        btnCancelExchange.setVisible(!enabler);
+
+    }
     private void initRecallOption() {
 
         btnRecall = new JButton("Recall");
@@ -155,13 +202,15 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         int i = 0;
 
+        Dimension dimension = new Dimension(TILE_SIZE, TILE_SIZE);
         for (Tile letter : playerTiles) {
-            BtnTile tile = new BtnTile(game, letter, new Dimension(50, 50));
+            BtnTile tile = new BtnTile(game, letter, dimension );
             tile.setName("Tile" + i);
             panelLettersRack.add(tile);
             i++;
         }
-        panelLettersRack.revalidate();
+      //  panelLettersRack.revalidate();
+        panelLettersRack.repaint();
     }
 
     @Override

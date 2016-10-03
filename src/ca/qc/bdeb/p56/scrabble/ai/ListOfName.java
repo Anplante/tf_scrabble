@@ -8,7 +8,8 @@ import java.util.List;
  */
 public interface ListOfName {
 
-    public static List<String> AIName = new ArrayList<String>() {{
+    // FIXME: Est-ce nécessaire d'apeller cette méthode liste de nom?
+    public final List<String> AIName = new ArrayList<String>() {{
         add("BobbyJohnBoratos");
         add("DiscordBot");
         add("Iamnotabot");

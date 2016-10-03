@@ -12,17 +12,17 @@ import java.util.Random;
  */
 public class AiPlayer extends Player implements ListOfName{
 
+    public static List<String> tmpList = AIName;
 
     public AiPlayer(Game game) {
         super(chooseName());
     }
 
     private static String chooseName() {
-        List<String> tmpList = AIName;
         Random rand = new Random();
-        int  nom = rand.nextInt(tmpList.size());
+        int  nom = rand.nextInt(AIName.size());
         String Ainame = tmpList.get(nom);
-        AIName.remove(nom);
+        tmpList.remove(nom);
         return Ainame;
     }
 }
