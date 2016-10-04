@@ -22,6 +22,7 @@ public class Square implements Observable{
     private Square adjacentLeft;
     private Square adjacentRight;
 
+
     private int posRow;
     private int posColumn;
     private Tile tileOn;
@@ -66,14 +67,23 @@ public class Square implements Observable{
       return tileOn;
     }
 
+    public int getPosRow() {
+        return posRow;
+    }
 
-    public void setPremium(Premium premium) {
-        this.premium = premium;
+    public int getPosColumn() {
+        return posColumn;
     }
 
     public Premium getPremium() {
         return premium;
     }
+
+    public void setPremium(Premium premium) {
+        this.premium = premium;
+    }
+
+
 
     public void setLetter(Tile tile) {
         this.tileOn = tile;
@@ -95,6 +105,7 @@ public class Square implements Observable{
     {
         return tileOn != null;
     }
+
     @Override
     public void ajouterObservateur(Observateur o) {
         observateurs.add(o);

@@ -165,6 +165,7 @@ public class Game implements Observable {
     public void passTurn() {
         getActivePlayer().selectNextState(IDState.PENDING);
         goToNextState();
+        // TODO Louis : bloquer quand le joueur place un mot ou annuler les autres actions
     }
 
     private void activateNextPlayer() {

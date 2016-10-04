@@ -111,7 +111,7 @@ public class GameTest {
 
         game.selectLetter(tileTested);
         game.playTile(game.getSquare(0,0));
-
+        game.recallTiles();
         assertTrue(activePlayer.getTiles().contains(tileTested));
     }
 }
