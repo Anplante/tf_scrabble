@@ -25,12 +25,22 @@ public class StatePlayTile extends State {
 
     @Override
     protected void selectSquare(Square squareSelected) {
+
         if (tilesPlaced == null) {
             tilesPlaced = new ArrayList<>();
         }
+
+        if(getGame().getMovesHistory().isEmpty())
+        {
+            if(!squareSelected.isCenter() && tilesPlaced.isEmpty())
+            {
+                return;
+            }
+        }
+
         tilesPlaced.add(squareSelected);
         // TODO Louis : Vérifier que la case est valide
-        squareSelected.setLetter(tileSelected); // La partie devrait le faire
+        squareSelected.setLetter(tileSelected); // La partie devrait le faire??
         getPlayer().remove(tileSelected);  // idem
         getPlayer().aviserObservateurs();
     }

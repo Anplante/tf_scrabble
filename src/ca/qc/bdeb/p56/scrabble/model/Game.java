@@ -22,22 +22,23 @@ import java.util.List;
 public class Game implements Observable {
 
 
+    private transient LinkedList<Observateur> observateurs;
+    private static final Random randomGenerator = new Random();
+
     private BoardManager boardManager;
     private List<Player> players;
     private int activePlayerIndex;
     private static List<Tile> alphabetBag;
 
-    private List<Square> tilesPlaced;
-    private transient LinkedList<Observateur> observateurs;
+    private List<Move> movesHistory;
 
-    private static final Random randomGenerator = new Random();
 
 
     public Game(String filePath, List<Player> players) {
 
         observateurs = new LinkedList<>();
+        movesHistory = new ArrayList<>();
         loadParameters(filePath);
-        tilesPlaced = new ArrayList<>();
         this.players = players;
 
         for (Player player : players) {
@@ -71,6 +72,16 @@ public class Game implements Observable {
         return boardManager.getPremiumSquare(row, column);
     }
 
+
+    public List<Move> getMovesHistory()
+    {
+        List<Move> moves = new ArrayList<>();
+        for(Move move : movesHistory)
+        {
+            moves.add(move);
+        }
+        return moves;
+    }
 
     private void loadParameters(String filePath) {
         Element rootElement = getRootElement(filePath);
@@ -146,8 +157,9 @@ public class Game implements Observable {
         getActivePlayer().nextState();
 
         if (!getActivePlayer().isActivated()) {
-
+            drawTile();
             activateNextPlayer();
+
         }
     }
 
@@ -218,7 +230,14 @@ public class Game implements Observable {
 
     public void playWord(List<Square> tilesPlaced)
     {
-        getActivePlayer().addPoints(calculateWordPoints(tilesPlaced)); // TODO Louis : Vérifier que le mot peut être placé
+        StringBuilder word = new StringBuilder( tilesPlaced.size());
+
+        for(Square square : tilesPlaced)
+        {
+            word.append(square.getLetterOn());
+        }
+        movesHistory.add(new Move(getActivePlayer(), word.toString()));
+        getActivePlayer().addPoints(calculateWordPoints(tilesPlaced));
 
     }
 
@@ -283,6 +302,5 @@ public class Game implements Observable {
         }
 
         Collections.shuffle(alphabetBag);
-        drawTile();
     }
 }

@@ -55,12 +55,11 @@ public class StatePendingTest {
         while(!player.getTiles().isEmpty())
         {
             game.selectLetter(player.getTiles().get(0));
-            game.playTile(game.getSquare(0,0));
+            game.playTile(game.getSquare(7,7));
         }
         assertEquals(0,  player.getTiles().size());
         game.playWord();
         game.passTurn();
-        game.drawTile();
 
         assertEquals(7, player.getTiles().size());
     }
@@ -74,12 +73,11 @@ public class StatePendingTest {
             while(!player.getTiles().isEmpty())
             {
                 game.selectLetter(player.getTiles().get(0));
-                game.playTile(game.getSquare(0,0));
+                game.playTile(game.getSquare(7,7));
             }
             assertEquals(0,  player.getTiles().size());
             game.playWord();
             game.passTurn();
-            game.drawTile(); // TODO LOUIS : le jeu devrait automatiquement draw après un changement de tour.
         }
         int lettersCount = player.getTiles().size();
         game.drawTile();

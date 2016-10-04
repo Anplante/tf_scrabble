@@ -32,7 +32,7 @@ public class BtnSquareTest {
         players.add(new Player("Louis"));
         gameModel = gameManager.createNewGame(players);
 
-        btnSquare = new BtnSquare(gameModel, 0, 0);
+        btnSquare = new BtnSquare(gameModel, 7, 7);
         gameModel.startGame();
 
     }
@@ -50,11 +50,11 @@ public class BtnSquareTest {
         Tile tile = new Tile('a', 2);
         btnTile = new BtnTile(gameModel, tile, new Dimension(50,50));
 
-        assertEquals('\0', gameModel.getContentSquare(0,0));
+        assertEquals('\0', gameModel.getContentSquare(7,7));
 
         btnTile.doClick();
         btnSquare.doClick();
-        assertEquals(tile.getLetter(), gameModel.getContentSquare(0,0));
+        assertEquals(tile.getLetter(), gameModel.getContentSquare(7,7));
 
 
     }

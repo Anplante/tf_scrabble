@@ -30,8 +30,10 @@ public class Square implements Observable{
 
 
 
-    public Square()
+    public Square(int posRow, int posColumn)
     {
+        this.posRow = posRow;
+        this.posColumn = posColumn;
         this.tileOn = null;
         observateurs = new LinkedList<>();
     }
@@ -83,6 +85,12 @@ public class Square implements Observable{
     {
         return square.equals(adjacentDown) || square.equals(adjacentLeft) || square.equals(adjacentRight) || square.equals(adjacentUp);
     }
+
+    public boolean isCenter()
+    {
+        return posColumn == 7 && posRow == 7;
+    }
+
     @Override
     public void ajouterObservateur(Observateur o) {
         observateurs.add(o);

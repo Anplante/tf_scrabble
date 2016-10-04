@@ -15,7 +15,7 @@ public class Board {
     private void initBoard() {
         for (int row = 0; row < board.length ;row++) {
             for (int column = 0; column <board.length; column++) {
-                board[row][column] = new Square();
+                board[row][column] = new Square(row, column);
             }
         }
         setNeighbours();
