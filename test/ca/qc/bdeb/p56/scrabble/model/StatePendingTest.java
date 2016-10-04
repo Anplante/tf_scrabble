@@ -52,10 +52,14 @@ public class StatePendingTest {
     @Test
     public void testDrawToFullHand()
     {
+        int row = 7;
+        int column = 7;
+
         while(!player.getTiles().isEmpty())
         {
             game.selectLetter(player.getTiles().get(0));
-            game.playTile(game.getSquare(7,7));
+            game.playTile(game.getSquare(row,column));
+            row++;
         }
         assertEquals(0,  player.getTiles().size());
         game.playWord();
@@ -68,13 +72,27 @@ public class StatePendingTest {
     public void testDrawWhenBagIsEmpty()
     {
         List<Tile> playerLetters = player.getTiles();
+        int row = 7;
+        int column = 7;
         while(game.getlettersLeft() > 0)
         {
             while(!player.getTiles().isEmpty())
             {
                 game.selectLetter(player.getTiles().get(0));
-                game.playTile(game.getSquare(7,7));
+                game.playTile(game.getSquare(row,column));
+                row ++;
+
+                if(row >= 15)
+                {
+                    row = 0;
+                    column++;
+                    if(column >=15)
+                    {
+                        column = 0;
+                    }
+                }
             }
+
             assertEquals(0,  player.getTiles().size());
             game.playWord();
             game.passTurn();

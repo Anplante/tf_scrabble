@@ -21,8 +21,9 @@ public class Board {
         setNeighbours();
     }
 
-    public char getContentSquare(int row, int column)
+    public String getContentSquare(int row, int column)
     {
+
         return board[row][column].getLetterOn();
     }
 

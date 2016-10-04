@@ -64,7 +64,7 @@ public class Game implements Observable {
         return boardManager.getSquare(row, column);
     }
 
-    public char getContentSquare(int row, int column) {
+    public String getContentSquare(int row, int column) {
         return boardManager.getContentSquare(row, column);
     }
 
@@ -118,9 +118,8 @@ public class Game implements Observable {
         for (int i = 0; i < alphabetsNodes.getLength(); i++) {
             Element activeElement = (Element) alphabetsNodes.item(i);
 
-            char caracter = activeElement.getAttribute("text").charAt(0);
+            String caracter = activeElement.getAttribute("text");
             int value = Integer.parseInt(activeElement.getAttribute("value"));
-
 
             int amount = Integer.parseInt(activeElement.getAttribute("amount"));
 
@@ -243,7 +242,7 @@ public class Game implements Observable {
 
     public void recallTiles()
     {
-        getActivePlayer().selectNextState(IDState.EXCHANGE);
+        getActivePlayer().selectNextState(IDState.SELECT_ACTION);
         if (isReadyForNextPhase()) {
             goToNextState();
         }

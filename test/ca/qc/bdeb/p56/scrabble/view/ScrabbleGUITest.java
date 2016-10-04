@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 
 /**
@@ -62,7 +63,7 @@ public class ScrabbleGUITest {
         PanelPlayerInfo infoJoueur = (PanelPlayerInfo) TestUtils.getChildNamed(scrabbleGame, "Info : " + player.getName());
         JLabel score = (JLabel) TestUtils.getChildNamed(infoJoueur, "Score");
 
-        assertEquals('\0', game.getContentSquare(7,7));
+        assertFalse((game.getSquare(7,7).containLetter()));
         assertEquals(0, Integer.parseInt(score.getText()));
 
         tileJoueur.doClick();

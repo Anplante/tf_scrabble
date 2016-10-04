@@ -5,16 +5,16 @@ package ca.qc.bdeb.p56.scrabble.model;
  */
 public class Tile {
 
-    private char letter;
+    private String letter;
     private int value;
 
-    public Tile(char letter, int value)
+    public Tile(String letter, int value)
     {
         this.letter = letter;
         this.value = value;
     }
 
-    public char getLetter()
+    public String getLetter()
     {
         return letter;
     }

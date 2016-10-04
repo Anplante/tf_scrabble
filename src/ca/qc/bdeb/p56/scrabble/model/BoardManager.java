@@ -36,7 +36,6 @@ public class BoardManager {
 
         board = new Board(BOARD_SIZE);
 
-
         Element premiumsElement = (Element) rootElement.getElementsByTagName("premiums").item(0);
         initPremiums(premiumsElement);
 
@@ -58,19 +57,18 @@ public class BoardManager {
     }
 
 
-    public char getContentSquare(int row, int column) {
-
-        char value = '\0';
+    public String getContentSquare(int row, int column) {
 
         Square square = board.getSquare(row, column);
 
-        char content = square.getLetterOn();
+        String content = square.getLetterOn();
 
-        if(content != Character.MIN_VALUE)
+        if(content.isEmpty())
         {
-            value = content;
+            content+= getPremiumSquare(row, column);
         }
-        return value;
+
+        return content;
     }
 
     public String getPremiumSquare(int row, int column) {

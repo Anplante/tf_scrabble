@@ -50,14 +50,14 @@ public class Square implements Observable{
     }
 
 
-    public char getLetterOn()
+    public String getLetterOn()
     {
         if(tileOn != null)
         {
             return tileOn.getLetter();
         }
         else{
-            return Character.MIN_VALUE;
+            return "";
         }
     }
 
@@ -91,6 +91,10 @@ public class Square implements Observable{
         return posColumn == 7 && posRow == 7;
     }
 
+    public boolean containLetter()
+    {
+        return tileOn != null;
+    }
     @Override
     public void ajouterObservateur(Observateur o) {
         observateurs.add(o);

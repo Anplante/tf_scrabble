@@ -37,12 +37,14 @@ public class StatePlayTile extends State {
                 return;
             }
         }
-
-        tilesPlaced.add(squareSelected);
-        // TODO Louis : Vérifier que la case est valide
-        squareSelected.setLetter(tileSelected); // La partie devrait le faire??
-        getPlayer().remove(tileSelected);  // idem
-        getPlayer().aviserObservateurs();
+        if(!squareSelected.containLetter())
+        {
+            tilesPlaced.add(squareSelected);
+            // TODO Louis : Vérifier que la case est valide
+            squareSelected.setLetter(tileSelected); // La partie devrait le faire??
+            getPlayer().remove(tileSelected);  // idem
+            getPlayer().aviserObservateurs();
+        }
     }
 
     @Override

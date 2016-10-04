@@ -47,6 +47,7 @@ public class BtnTile extends JButton {
                 }else {
                     setBackground(SELECTED_COLOR);
                 }
+
                 // TODO Louis: avertir l'observateur du lettre qu'elle a été sélectionné si on veut éventuellement que ca fasse quelque chose
             }
         });
