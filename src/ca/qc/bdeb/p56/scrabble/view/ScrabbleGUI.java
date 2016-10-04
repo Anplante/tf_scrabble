@@ -51,8 +51,8 @@ public class ScrabbleGUI extends JFrame {
         //setUndecorated(true);  // pour enlever le x
         setResizable(false);
 
-
-
+       // MnuOptions options = new MnuOptions(getWidth()/2,getHeight()/2);
+        //options.setVisible(true);
     }
 
     private void initializeComponents() {
