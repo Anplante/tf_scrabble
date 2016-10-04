@@ -16,6 +16,7 @@ public class StatePlayTile extends State {
     boolean readyToChange;
     private IDState stateSelected;
     private List<Square> tilesPlaced;
+    private List<Tile> originalTilesOder;
 
     public StatePlayTile(Player currentPlayer, Tile tileSelected) {
         super(currentPlayer, IDState.PLAY_TILE);
@@ -34,13 +35,15 @@ public class StatePlayTile extends State {
 
         if(isValidMove())
         {
+            if(originalTilesOder == null)
+            {
+                originalTilesOder = getPlayer().getTiles();
+            }
             tilesPlaced.add(squareSelected);
             squareSelected.setLetter(tileSelected); // La partie devrait le faire??
             getPlayer().remove(tileSelected);  // idem
             getPlayer().aviserObservateurs();
         }
-
-
     }
 
     private boolean isValidMove()
@@ -117,10 +120,12 @@ public class StatePlayTile extends State {
                 break;
             case EXCHANGE:
                 getGame().recallTiles(tilesPlaced);
+                getGame().replacePlayerTilesInOrder(originalTilesOder);
                 newState = new StateExchange(getPlayer());
                 break;
             case SELECT_ACTION:
                 getGame().recallTiles(tilesPlaced);
+                getGame().replacePlayerTilesInOrder(originalTilesOder);
                 newState = new StateSelectAction(getPlayer());
                 break;
         }

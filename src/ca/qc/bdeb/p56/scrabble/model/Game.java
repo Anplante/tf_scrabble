@@ -303,4 +303,21 @@ public class Game implements Observable {
 
         Collections.shuffle(alphabetBag);
     }
+
+    public void replacePlayerTilesInOrder(List<Tile> originalOrder){
+
+        List<Tile> currentOrder = getActivePlayer().getTiles();
+
+      if( currentOrder.containsAll(originalOrder)){
+
+          for(Tile tile : originalOrder)
+          {
+              getActivePlayer().remove(tile);
+          }
+          for(Tile tile : originalOrder)
+          {
+              getActivePlayer().addLetter(tile);
+          }
+      }
+    }
 }

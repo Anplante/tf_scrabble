@@ -17,8 +17,6 @@ public class GameTest {
 
     private Game game;
 
-    public GameTest() {
-    }
 
     @Before
     public void setUp() throws Exception {
@@ -51,28 +49,7 @@ public class GameTest {
         assertEquals(tile.getLetter(), square.getLetterOn());
     }
 
-    @Test
-    public void testRecallTiles() {
-        game.startGame();
 
-        Player activePlayer = game.getActivePlayer();
-        Tile tile = activePlayer.getTiles().get(0);
-
-        Square square = game.getBoard().getSquare(7, 7);
-        assertNull(square.getTileOn());
-
-        game.selectLetter(tile);
-        game.playTile(square);
-
-        assertEquals(tile.getLetter(), square.getLetterOn());
-
-        assertFalse(activePlayer.getTiles().contains(tile));
-
-        game.recallTiles();
-
-        assertTrue(activePlayer.getTiles().contains(tile));
-        assertNull(square.getTileOn());
-    }
 
     @Test
     public void testAlphabetBagsSize() {
@@ -100,18 +77,6 @@ public class GameTest {
         assertEquals(tile1.getValue() + tile2.getValue(), activePlayer.getScore());
     }
 
-    @Test
-    public void testPlayFirstWordNotCenter() {
 
-        game.startGame();
 
-        Player activePlayer = game.getActivePlayer();
-
-        Tile tileTested = activePlayer.getTiles().get(0);
-
-        game.selectLetter(tileTested);
-        game.playTile(game.getSquare(0,0));
-        game.recallTiles();
-        assertTrue(activePlayer.getTiles().contains(tileTested));
-    }
 }

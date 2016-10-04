@@ -76,7 +76,9 @@ public class Player implements Observable {
         tiles.add(tile);
     }
 
-
+    public void remove(Tile tileSelected) {
+        tiles.remove(tileSelected);
+    }
 
 
 
@@ -147,9 +149,7 @@ public class Player implements Observable {
         return score;
     }
 
-    public void remove(Tile tileSelected) {
-        tiles.remove(tileSelected);
-    }
+
 
     public void selectSquare(Square square) {
         currentState.selectSquare(square);

@@ -50,7 +50,6 @@ public class ScrabbleGUITest {
     }
 
 
-
     @Test
     public void testPlayWord()
     {
@@ -75,5 +74,4 @@ public class ScrabbleGUITest {
 
         assertEquals(tile.getValue(), Integer.parseInt(score.getText()));
     }
-
 }
