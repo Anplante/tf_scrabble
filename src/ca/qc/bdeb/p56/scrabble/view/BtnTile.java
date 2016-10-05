@@ -24,8 +24,10 @@ public class BtnTile extends JButton {
 
 
     public BtnTile(Game gameModel, Tile tile, Dimension dimension) {
-
-        super("" + tile.getLetter());
+        super(tile.getLetter() + " (" + tile.getValue() + ")");
+        if (tile.getLetter().equals(" ")) {
+            this.setText("     ");
+        }
         this.gameModel = gameModel;
         this.tile = tile;
         setSize(dimension);
