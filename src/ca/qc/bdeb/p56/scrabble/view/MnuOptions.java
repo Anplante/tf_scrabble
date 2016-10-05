@@ -8,14 +8,16 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.Observer;
 
 /**
  * Created by 1468636 on 2016-10-04.
  */
-public class MnuOptions extends JPanel implements Observateur {
+public class MnuOptions extends JPanel implements KeyListener {
 
     private JButton returnGame;
     private JButton abandon;
@@ -38,11 +40,15 @@ public class MnuOptions extends JPanel implements Observateur {
         returnGame.setBounds((getWidth()-200)/2,(getHeight()/2)-75,200,50);
         abandon.setBounds((getWidth()-200)/2,(getHeight()/2),200,50);
         quitter.setBounds((getWidth()-200)/2,(getHeight()/2)+75,200,50);
+        abandon.setFocusable(false);
+        quitter.setFocusable(false);
 
         add(title);
         add(returnGame);
         add(abandon);
         add(quitter);
+        addKeyListener(this);
+        setFocusable(true);
 
         returnGame.addActionListener(new ActionListener() {
             @Override
@@ -55,13 +61,24 @@ public class MnuOptions extends JPanel implements Observateur {
         abandon.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                int i = JOptionPane.showConfirmDialog(new Frame(), "Voulez-vous vraiment continuer?",
+                        "Abandon de partie",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE );
+                if(i == 0){
+                    JOptionPane.showMessageDialog(null,"Vous avez perdu.",
+                            "Fin de partie", JOptionPane.INFORMATION_MESSAGE);
+                    game.setIsOver(true);
+                    game.aviserObservateurs();
+                }
             }
         });
         quitter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                int i = JOptionPane.showConfirmDialog(new Frame(), "Voulez-vous vraiment continuer?",
+                        "Fermeture de l'application",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE );
+                if(i == 0) {
+                    System.exit(0);
+                }
             }
         });
 
@@ -70,12 +87,19 @@ public class MnuOptions extends JPanel implements Observateur {
     }
 
     @Override
-    public void changementEtat() {
+    public void keyTyped(KeyEvent keyEvent) {
 
     }
 
     @Override
-    public void changementEtat(Enum<?> e, Object o) {
+    public void keyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.setVisible(false);
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {
 
     }
 }

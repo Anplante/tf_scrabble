@@ -136,7 +136,7 @@ public class MainMenuGUI extends JFrame implements Observateur {
 
         gameManager = new GameManager();
         game = gameManager.createNewGame(players);
-
+        game.ajouterObservateur(this);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         ScrabbleGUI gameGUI = new ScrabbleGUI(game, new Rectangle(screenSize));
         gameGUI.setVisible(true);
@@ -187,6 +187,9 @@ public class MainMenuGUI extends JFrame implements Observateur {
 
     @Override
     public void changementEtat() {
+        if(game.getIsOver()){
+            setVisible(true);
+        }
     }
 
     @Override

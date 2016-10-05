@@ -35,6 +35,13 @@ public class Game implements Observable {
     private List<Move> movesHistory;
 
 
+    public void setIsOver(boolean bool){
+        isOver = bool;
+    }
+
+    public boolean getIsOver(){
+        return isOver;
+    }
 
     public Game(String filePath, List<Player> players) {
         isInMenu = false;

@@ -225,6 +225,9 @@ public class ScrabbleGUI extends JFrame implements KeyListener, Observateur {
             panelInformation.setVisible(true);
             options.setVisible(false);
         }
+        if(gameModel.getIsOver()){
+            dispose();
+        }
     }
 
     @Override
