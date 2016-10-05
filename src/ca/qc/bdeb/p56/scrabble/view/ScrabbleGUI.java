@@ -164,7 +164,7 @@ public class ScrabbleGUI extends JFrame implements KeyListener, Observateur {
         int y = getHeight() - LETTER_RACK_ZONE_HEIGHT;
         int witdhBoard = pnlBoard.getWidth();
 
-        Rectangle boundsZoneLetterRack = new Rectangle(x, y, witdhBoard, LETTER_RACK_ZONE_HEIGHT);
+        Rectangle boundsZoneLetterRack = new Rectangle(x - 25, y, witdhBoard + 50, LETTER_RACK_ZONE_HEIGHT);
         panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack);
 
         panelLetterRack.setPlayer(gameModel.getPlayers());

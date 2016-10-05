@@ -1,6 +1,8 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
+import ca.qc.bdeb.p56.scrabble.ai.AiPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Game;
+import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
@@ -9,6 +11,8 @@ import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
@@ -20,6 +24,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
     private Player currentPlayer;
     private List<Player> players;
+    private List<Player> resetPlayers;
     private Game game;
 
     private final double RATIO_LETTERS_ZONE = .1;
@@ -28,6 +33,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private JButton btnPassTurn;
     private JButton btnPlayWord;
     private JButton btnRecall;
+    private JButton btnForfeit;
     private JButton btnCancelExchange;
     private JPanel panelLettersRack;
 
@@ -87,6 +93,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         initExchangeOption();
         initRecallOption();
         initiBtnPlayWord();
+        initForfeitOption();
     }
 
     private void initPassTurnOption()
@@ -187,6 +194,45 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         });
     }
 
+    private void initForfeitOption() {
+        btnForfeit = new JButton("Abandonner");
+        btnForfeit.setSize(100, 50);
+        btnForfeit.setName("forfeit");
+        add(btnForfeit);
+        btnForfeit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int dialogButton = JOptionPane.YES_NO_OPTION;
+                int result = JOptionPane.showConfirmDialog((Component) null, "Voulez recommencez la partie?","Abandonner", JOptionPane.YES_NO_CANCEL_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    resetPlayer();
+                    reinitializeGame();
+                }
+            }
+        });
+    }
+
+    private void resetPlayer() {
+        resetPlayers = new ArrayList<>();
+        resetPlayers.add(new Player(currentPlayer.getName()));
+
+        for (int i = 0; i < players.size() - 1 ; i++) {
+            resetPlayers.add(new AiPlayer());
+        }
+    }
+    private void reinitializeGame() {
+
+        GameManager gameManager = new GameManager();
+        game = gameManager.createNewGame(resetPlayers);
+        game.ajouterObservateur(this);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        ScrabbleGUI gameGUI = new ScrabbleGUI(game, new Rectangle(screenSize));
+        gameGUI.setVisible(true);
+        setVisible(false);
+        gameGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        SwingUtilities.windowForComponent(this).dispose();
+
+    }
+
     @Override
     public void changementEtat() {
 
@@ -203,6 +249,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         int i = 0;
 
         Dimension dimension = new Dimension(TILE_SIZE, TILE_SIZE);
+        int we = getWidth() / 12;
 
         for (Tile letter : playerTiles) {
             BtnTile tile = new BtnTile(game, letter, dimension );

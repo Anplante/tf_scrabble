@@ -128,7 +128,7 @@ public class MainMenuGUI extends JFrame implements Observateur {
         int limit = (int) cmbNombreAi.getSelectedIndex();
         ++limit;
         for (int i = 0; i < limit; i++) {
-            players.add(new AiPlayer(game));
+            players.add(new AiPlayer());
         }
     }
 
