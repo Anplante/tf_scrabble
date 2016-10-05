@@ -65,16 +65,19 @@ public class ScrabbleGUI extends JFrame {
     }
 
     private void createLabelNumberLetters() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
         int y = getHeight() - BOARD_ZONE_HEIGHT;
         y = panelInformation.getHeight();
         int witdh = (int) (getWidth() - getWidth()* RATIO_PANEL_INFORMATION);
         int x = witdh;
+        panel.setBounds(x,y,50,50);
         lblNumberLetter =  new JLabel();
-        lblNumberLetter.setLocation(1, y);
         lblNumberLetter.setSize(lblNumberLetter.getPreferredSize());
         lblNumberLetter.setText(Integer.toString(gameModel.getlettersLeft()));
         lblNumberLetter.setVisible(true);
-        add(lblNumberLetter);
+        panel.add(lblNumberLetter);
+        add(panel);
     }
 
     private void createPanelInformation() {
