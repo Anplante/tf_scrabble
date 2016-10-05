@@ -93,7 +93,9 @@ public class ScrabbleGUI extends JFrame implements KeyListener, Observateur {
     private void createBackground() {
         background = new JLabel();
         background.setSize(getWidth(), getHeight());
-        background.setIcon(new ImageIcon(new ImageIcon(".\\resources\\background.jpg").getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
+        // L'ancien background etait beaucoup trop aggresif sur les yeux, un background simple est preferable
+        background.setIcon(new ImageIcon(new ImageIcon(this.getClass().getResource("/Image/scrabble.jpg")).getImage()
+                .getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
         add(background);
 
     }

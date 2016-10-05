@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e93a873-ab64-4362-b5fe-5856ecefeca3" name="Default" comment="Le joueur doit placer une lettre sur le meme axe que les autres autres lettres jouees sur le meme tour.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Image/scrabble.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MnuOptions.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MnuOptions.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnTile.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnTile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/background.jpg" afterPath="$PROJECT_DIR$/resources/Image/background.jpg" />
     </list>
     <ignored path="tf_scrabble.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,24 +24,24 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/tf_scrabble$GameTest.coverage" NAME="GameTest Coverage Results" MODIFIED="1474215683587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>ca.qc.bdeb.p56.scrabble.model.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/tf_scrabble$All_in_tf_scrabble.coverage" NAME="All in tf_scrabble Coverage Results" MODIFIED="1475512823633" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/tf_scrabble$ca_qc_bdeb_p56_scrabble_in_tf_scrabble.coverage" NAME="ca.qc.bdeb.p56.scrabble in tf_scrabble Coverage Results" MODIFIED="1475150138778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>ca.qc.bdeb.p56.scrabble.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/tf_scrabble$Main.coverage" NAME="Main Coverage Results" MODIFIED="1474511721392" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/tf_scrabble$StateExchangeTest_testExchangeOnlyClick.coverage" NAME="StateExchangeTest.testExchangeOnlyClick Coverage Results" MODIFIED="1474513712087" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>ca.qc.bdeb.p56.scrabble.model.*</FILTER>
-    </SUITE>
+    <SUITE FILE_PATH="coverage/tf_scrabble$All_in_tf_scrabble.coverage" NAME="All in tf_scrabble Coverage Results" MODIFIED="1475512823633" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/tf_scrabble$GameTest_testSelectTile.coverage" NAME="GameTest.testSelectTile Coverage Results" MODIFIED="1474215853265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>ca.qc.bdeb.p56.scrabble.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/tf_scrabble$All_in_tf_scrabble__1_.coverage" NAME="All in tf_scrabble (1) Coverage Results" MODIFIED="1473888592508" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/tf_scrabble$BtnSquareTest_testSelectSquareInPlayTileState.coverage" NAME="BtnSquareTest.testSelectSquareInPlayTileState Coverage Results" MODIFIED="1474237943760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>ca.qc.bdeb.p56.scrabble.view.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/tf_scrabble$GameTest.coverage" NAME="GameTest Coverage Results" MODIFIED="1474215683587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>ca.qc.bdeb.p56.scrabble.model.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/tf_scrabble$StateExchangeTest_testExchangeOnlyClick.coverage" NAME="StateExchangeTest.testExchangeOnlyClick Coverage Results" MODIFIED="1474513712087" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>ca.qc.bdeb.p56.scrabble.model.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/tf_scrabble$All_in_tf_scrabble__1_.coverage" NAME="All in tf_scrabble (1) Coverage Results" MODIFIED="1473888592508" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="CoverageViewManager">
     <option name="myAutoScrollToSource" value="true" />
@@ -55,30 +56,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Square.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Square.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1088">
-              <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-              <folding>
-                <element signature="e#1610#1611#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StatePlayTileTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/model/StatePlayTileTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="PanelPlayerInfo.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelPlayerInfo.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -92,21 +69,20 @@
       <file leaf-file-name="PanelLetterRackZone.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2924">
-              <caret line="185" column="0" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
+            <state relative-caret-position="399">
+              <caret line="208" column="38" selection-start-line="208" selection-start-column="31" selection-end-line="208" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5027#5163#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScrabbleGUI.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ScrabbleGUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="438">
-              <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
+            <state relative-caret-position="464">
+              <caret line="96" column="102" selection-start-line="96" selection-start-column="102" selection-end-line="96" selection-end-column="102" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -117,7 +93,7 @@
       <file leaf-file-name="MnuOptions.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MnuOptions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
+            <state relative-caret-position="986">
               <caret line="63" column="66" selection-start-line="63" selection-start-column="66" selection-end-line="63" selection-end-column="66" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -126,7 +102,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainMenuGUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainMenuGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="234">
@@ -136,22 +112,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StatePlayTile.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StatePlayTile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2023">
-              <caret line="121" column="26" selection-start-line="121" selection-start-column="26" selection-end-line="121" selection-end-column="26" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Board.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
+            <state relative-caret-position="515">
               <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding>
                 <element signature="e#1426#1427#0" expanded="true" />
@@ -163,14 +127,36 @@
       <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="332" column="11" selection-start-line="332" selection-start-column="11" selection-end-line="332" selection-end-column="11" />
-              <folding>
-                <element signature="e#1025#1026#0" expanded="true" />
-                <element signature="e#1054#1055#0" expanded="true" />
-                <element signature="e#1087#1088#0" expanded="true" />
-                <element signature="e#1116#1117#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="191">
+              <caret line="270" column="0" selection-start-line="270" selection-start-column="0" selection-end-line="270" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="background.jpg" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/Image/background.jpg">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BtnTile.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnTile.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="30" column="34" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BtnSquareTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/BtnSquareTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="51" column="62" selection-start-line="51" selection-start-column="62" selection-end-line="51" selection-end-column="62" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -226,9 +212,7 @@
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnSquare.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StateSelectTile.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StateExchange.java" />
-        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnTile.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StateSelectAction.java" />
-        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java" />
         <option value="$PROJECT_DIR$/test/resources/testScrabbleParameters.xml" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/StatePending.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Move.java" />
@@ -245,8 +229,10 @@
         <option value="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUITest.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MnuOptions.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" />
-        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java" />
+        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java" />
+        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnTile.java" />
+        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java" />
       </list>
     </option>
   </component>
@@ -270,7 +256,7 @@
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
-    <option name="height" value="1066" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -297,8 +283,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -551,7 +535,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -565,6 +551,9 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="ca.qc.bdeb.p56.scrabble.model" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="ca.qc.bdeb.p56.scrabble.model" />
       <recent name="ca.qc.bdeb.p56.scrabble.view" />
@@ -576,13 +565,6 @@
       <recent name="ca.qc.bdeb.p56.scrabble.utility" />
       <recent name="ca.qc.bdeb.p56.scrabble.view" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\ProjetBdeb\tf_scrabble\tf_scrabble\resources\Image" />
-      <recent name="C:\Users\0993083\IdeaProjects\tf_scrabble" />
-      <recent name="C:\Users\TheFrenchOne\Desktop\School\Session 5\Génie II\Projet\tf_scrabble" />
-      <recent name="C:\Users\TheFrenchOne\Desktop\School\Session 5\Génie II\Projet\tf_scrabble\src\resources" />
-      <recent name="C:\Users\TheFrenchOne\Desktop\School\Session 5\Génie II\Projet\tf_scrabble\src\ca\qc\bdeb\p56\scrabble\resources" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\ProjetBdeb\tf_scrabble\tf_scrabble\resources" />
       <recent name="C:\Users\TheFrenchOne\Desktop\School\Session 5\Génie II\Projet\tf_scrabble\test\resources" />
@@ -591,8 +573,12 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="ca.qc.bdeb.p56.scrabble.vue" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="ca.qc.bdeb.p56.scrabble.model" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\ProjetBdeb\tf_scrabble\tf_scrabble\resources\Image" />
+      <recent name="C:\Users\0993083\IdeaProjects\tf_scrabble" />
+      <recent name="C:\Users\TheFrenchOne\Desktop\School\Session 5\Génie II\Projet\tf_scrabble" />
+      <recent name="C:\Users\TheFrenchOne\Desktop\School\Session 5\Génie II\Projet\tf_scrabble\src\resources" />
+      <recent name="C:\Users\TheFrenchOne\Desktop\School\Session 5\Génie II\Projet\tf_scrabble\src\ca\qc\bdeb\p56\scrabble\resources" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
@@ -777,6 +763,136 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Cold Fusion runner description" factoryName="Cold Fusion" custom_browser="" web_path="">
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
+      <option name="BCName" value="" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="moduleName" value="" />
+      <option name="trusted" value="true" />
+      <method />
+    </configuration>
     <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -791,6 +907,14 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="passParentEnv" value="true" />
+      <setting name="launchBrowser" value="true" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <method />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
@@ -856,6 +980,9 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" />
@@ -878,6 +1005,12 @@
       <option name="passParentEnvs" value="true" />
       <option name="workingDirectory" />
       <option name="isAlternativeJrePathEnabled" value="false" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
       <envs />
       <method />
     </configuration>
@@ -937,6 +1070,22 @@
       <listeners />
       <method />
     </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
+      <method />
+    </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.StatePlayTileTest" />
@@ -974,6 +1123,7 @@
       <workItem from="1475185691634" duration="67000" />
       <workItem from="1475236659478" duration="30000" />
       <workItem from="1475686251524" duration="2658000" />
+      <workItem from="1475692567011" duration="1042000" />
     </task>
     <task id="LOCAL-00001" summary="Test">
       <created>1473636002777</created>
@@ -1150,7 +1300,14 @@
       <option name="project" value="LOCAL" />
       <updated>1475686774182</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="resolution de conflit">
+      <created>1475692637364</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1475692637364</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1186,10 +1343,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11051000" />
+    <option name="totallyTimeSpent" value="12093000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1199,12 +1356,14 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3647059" sideWeight="0.41336116" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36334404" sideWeight="0.5866388" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3625793" sideWeight="0.5866388" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32769555" sideWeight="0.49791232" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23560767" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23541667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34355178" sideWeight="0.4874739" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1216,10 +1375,8 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15445027" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34355178" sideWeight="0.4874739" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1282,7 +1439,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Test" />
     <MESSAGE value="Je sais pas trop ce que j'ai fais, mais j'ai planté le bout que Julien a fait. J'ai essayé de reprendre sa partie que j'ai pu." />
     <MESSAGE value="Les lettres du joueurs sont centrés en dessous du board." />
     <MESSAGE value="Début de l'implémentation des tests." />
@@ -1305,9 +1461,10 @@
     <MESSAGE value="Modifier les tests lorsque le joueur échange des lettres." />
     <MESSAGE value="Enlever la classe de l'état selectTile pour que l'état playTile et exchangeTile fassent eux-même leurs vérifications" />
     <MESSAGE value="Le premier joueur qui joue un mot doit le relier au centre." />
-    <MESSAGE value="Le joueur doit placer une lettre sur le meme axe que les autres autres lettres jouees sur le meme tour." />
     <MESSAGE value="Un chiffre est maintenant afficher pour montre le nombre de letter dans le sac" />
-    <option name="LAST_COMMIT_MESSAGE" value="Un chiffre est maintenant afficher pour montre le nombre de letter dans le sac" />
+    <MESSAGE value="Le joueur doit placer une lettre sur le meme axe que les autres autres lettres jouees sur le meme tour." />
+    <MESSAGE value="resolution de conflit" />
+    <option name="LAST_COMMIT_MESSAGE" value="resolution de conflit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1318,8 +1475,14 @@
           <properties />
           <option name="timeStamp" value="66" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java</url>
+          <line>205</line>
+          <properties />
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="88" />
+      <option name="time" value="90" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
@@ -1332,7 +1495,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelActions.java" />
     <entry file="jar://$USER_HOME$/JavaDev/jdk1.8.0_60/jre/lib/rt.jar!/javax/swing/plaf/basic/BasicButtonListener.class" />
     <entry file="jar://$USER_HOME$/JavaDev/jdk1.8.0_60/jre/lib/rt.jar!/javax/swing/AbstractButton.class" />
     <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Premium.java">
@@ -1357,7 +1519,6 @@
           <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5027#5163#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1368,7 +1529,6 @@
           <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5027#5163#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1486,22 +1646,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/BtnSquareTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="36" column="30" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/BoardManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1611">
@@ -1603,16 +1747,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding>
-            <element signature="e#1426#1427#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/model/StatePlayTileTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
@@ -1631,43 +1765,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2924">
-          <caret line="185" column="0" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5027#5163#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="332" column="11" selection-start-line="332" selection-start-column="11" selection-end-line="332" selection-end-column="11" />
-          <folding>
-            <element signature="e#1025#1026#0" expanded="true" />
-            <element signature="e#1054#1055#0" expanded="true" />
-            <element signature="e#1087#1088#0" expanded="true" />
-            <element signature="e#1116#1117#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MnuOptions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
+        <state relative-caret-position="986">
           <caret line="63" column="66" selection-start-line="63" selection-start-column="66" selection-end-line="63" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1680,6 +1780,65 @@
         <state relative-caret-position="234">
           <caret line="134" column="35" selection-start-line="134" selection-start-column="35" selection-end-line="134" selection-end-column="35" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding>
+            <element signature="e#1426#1427#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="270" column="0" selection-start-line="270" selection-start-column="0" selection-end-line="270" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/Image/background.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/view/BtnSquareTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="51" column="62" selection-start-line="51" selection-start-column="62" selection-end-line="51" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="208" column="38" selection-start-line="208" selection-start-column="31" selection-end-line="208" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/BtnTile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="30" column="34" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="96" column="102" selection-start-line="96" selection-start-column="102" selection-end-line="96" selection-end-column="102" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
