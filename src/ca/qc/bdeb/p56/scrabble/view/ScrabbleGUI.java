@@ -3,12 +3,15 @@ package ca.qc.bdeb.p56.scrabble.view;
 import ca.qc.bdeb.p56.scrabble.model.*;
 import javafx.scene.paint.*;
 
+import javax.imageio.ImageIO;
+import java.awt.Image;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.Color;
 import java.awt.Paint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 import java.awt.*;
 
@@ -26,6 +29,7 @@ public class ScrabbleGUI extends JFrame {
     private final  int MARGIN = 5;
 
     private JLabel lblNumberLetter;
+    private Image bagImg;
     PanelLetterRackZone panelLetterRack;
     Board board;
     JPanel pnlBoard;
@@ -43,9 +47,14 @@ public class ScrabbleGUI extends JFrame {
         BOARD_ZONE_HEIGHT = (int) (bounds.height * RATIO_BOARD_ZONE) > 100 ? (int) (bounds.height*RATIO_BOARD_ZONE) :  100;
         LETTER_RACK_ZONE_HEIGHT = (int) (bounds.height * RATIO_LETTER_RACK_ZONE) > 100 ? (int) (bounds.height*RATIO_LETTER_RACK_ZONE) : 100;
         setLayout(null);
+        try {
+            bagImg = ImageIO.read(this.getClass().getResource("/Image/bag_scrabble.png"));
+        } catch (IOException ex) {
+        }
         createGame();
         initializeComponents();
         addPlayersInfo();
+
 
 
         //setUndecorated(true);  // pour enlever le x
@@ -65,19 +74,31 @@ public class ScrabbleGUI extends JFrame {
     }
 
     private void createLabelNumberLetters() {
+        ImageIcon imageBag = null;
+        Image image = null;
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
         int y = getHeight() - BOARD_ZONE_HEIGHT;
         y = panelInformation.getHeight();
         int witdh = (int) (getWidth() - getWidth()* RATIO_PANEL_INFORMATION);
         int x = witdh;
-        panel.setBounds(x,y,50,50);
-        lblNumberLetter =  new JLabel();
+        panel.setBounds(x + 50,y + 20,60,60);
+
+        lblNumberLetter =  new JLabel(new ImageIcon(bagImg.getScaledInstance(60,60, Image.SCALE_DEFAULT)));
         lblNumberLetter.setSize(lblNumberLetter.getPreferredSize());
         lblNumberLetter.setText(Integer.toString(gameModel.getlettersLeft()));
+        lblNumberLetter.setForeground(Color.white);
+        lblNumberLetter.setHorizontalTextPosition(JLabel.CENTER);
         lblNumberLetter.setVisible(true);
+       // lblNumberLetter.setIcon(imageBag);
         panel.add(lblNumberLetter);
         add(panel);
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        //g.drawImage(bagImg,0,0,50,50);
     }
 
     private void createPanelInformation() {
