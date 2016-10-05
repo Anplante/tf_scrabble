@@ -10,6 +10,7 @@ import java.awt.*;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 
 /**
@@ -32,7 +33,7 @@ public class BtnSquareTest {
         players.add(new Player("Louis"));
         gameModel = gameManager.createNewGame(players);
 
-        btnSquare = new BtnSquare(gameModel, 0, 0);
+        btnSquare = new BtnSquare(gameModel, 7, 7);
         gameModel.startGame();
 
     }
@@ -47,14 +48,13 @@ public class BtnSquareTest {
     @Test
     public void testSelectSquareInPlayTileState() throws AWTException {
 
-        Tile tile = new Tile('a', 2);
+        Tile tile = new Tile("a", 2);
         btnTile = new BtnTile(gameModel, tile, new Dimension(50,50));
 
-        assertEquals('\0', gameModel.getContentSquare(0,0));
-
+        assertFalse(gameModel.getSquare(7,7).containLetter());
         btnTile.doClick();
         btnSquare.doClick();
-        assertEquals(tile.getLetter(), gameModel.getContentSquare(0,0));
+        assertEquals(tile.getLetter(), gameModel.getContentSquare(7,7));
 
 
     }

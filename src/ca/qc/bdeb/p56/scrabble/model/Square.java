@@ -22,6 +22,7 @@ public class Square implements Observable{
     private Square adjacentLeft;
     private Square adjacentRight;
 
+
     private int posRow;
     private int posColumn;
     private Tile tileOn;
@@ -30,8 +31,10 @@ public class Square implements Observable{
 
 
 
-    public Square()
+    public Square(int posRow, int posColumn)
     {
+        this.posRow = posRow;
+        this.posColumn = posColumn;
         this.tileOn = null;
         observateurs = new LinkedList<>();
     }
@@ -45,18 +48,17 @@ public class Square implements Observable{
         this.adjacentDown = adjacentDown;
         this.adjacentLeft = adjacentLeft;
         this.adjacentRight = adjacentRight;
-
     }
 
 
-    public char getLetterOn()
+    public String getLetterOn()
     {
         if(tileOn != null)
         {
             return tileOn.getLetter();
         }
         else{
-            return Character.MIN_VALUE;
+            return "";
         }
     }
 
@@ -65,18 +67,43 @@ public class Square implements Observable{
       return tileOn;
     }
 
+    public int getPosRow() {
+        return posRow;
+    }
 
-    public void setPremium(Premium premium) {
-        this.premium = premium;
+    public int getPosColumn() {
+        return posColumn;
     }
 
     public Premium getPremium() {
         return premium;
     }
 
+    public void setPremium(Premium premium) {
+        this.premium = premium;
+    }
+
+
+
     public void setLetter(Tile tile) {
         this.tileOn = tile;
         aviserObservateurs();
+    }
+
+
+    public boolean isNeighbours(Square square)
+    {
+        return square.equals(adjacentDown) || square.equals(adjacentLeft) || square.equals(adjacentRight) || square.equals(adjacentUp);
+    }
+
+    public boolean isCenter()
+    {
+        return posColumn == 7 && posRow == 7;
+    }
+
+    public boolean containLetter()
+    {
+        return tileOn != null;
     }
 
     @Override

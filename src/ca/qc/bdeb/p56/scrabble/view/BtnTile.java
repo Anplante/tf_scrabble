@@ -45,7 +45,6 @@ public class BtnTile extends JButton {
                     }
 
                 }else {
-
                     setBackground(SELECTED_COLOR);
                 }
 

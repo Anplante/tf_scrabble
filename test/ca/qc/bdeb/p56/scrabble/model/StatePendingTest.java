@@ -17,6 +17,7 @@ public class StatePendingTest {
     private Game game;
     private Player player;
 
+
     @Before
     public void setUp() throws Exception {
 
@@ -51,27 +52,45 @@ public class StatePendingTest {
     @Test
     public void testDrawToFullHand()
     {
-        int bagSizeBefore = game.getlettersLeft();
-        List<Tile> playerLetters = player.getTiles();
+        int row = 7;
+        int column = 7;
 
-        playerLetters.clear();
+        while(!player.getTiles().isEmpty())
+        {
+            game.selectLetter(player.getTiles().get(0));
+            game.playTile(game.getSquare(row,column));
+            row++;
+        }
+        assertEquals(0,  player.getTiles().size());
+        game.playWord();
+        game.passTurn();
 
-        assertEquals(0, playerLetters.size());
-
-        game.drawTile();
-
-        assertEquals(7,  player.getTiles().size());
+        assertEquals(7, player.getTiles().size());
     }
 
     @Test
     public void testDrawWhenBagIsEmpty()
     {
-        List<Tile> playerLetters = player.getTiles();
+        int row = 7;
+        int column = 7;
         while(game.getlettersLeft() > 0)
         {
-            playerLetters.clear();
-            playerLetters = player.getTiles();
-            game.drawTile();
+            while(!player.getTiles().isEmpty())
+            {
+                game.selectLetter(player.getTiles().get(0));
+                game.playTile(game.getSquare(row,column));
+                row ++;
+            }
+
+            row = 0;
+            column++;
+            if(column >=15)
+            {
+                column = 0;
+            }
+            assertEquals(0,  player.getTiles().size());
+            game.playWord();
+            game.passTurn();
         }
         int lettersCount = player.getTiles().size();
         game.drawTile();

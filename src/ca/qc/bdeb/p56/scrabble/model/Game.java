@@ -22,22 +22,23 @@ import java.util.List;
 public class Game implements Observable {
 
 
+    private transient LinkedList<Observateur> observateurs;
+    private static final Random randomGenerator = new Random();
+
     private BoardManager boardManager;
     private List<Player> players;
     private int activePlayerIndex;
     private static List<Tile> alphabetBag;
 
-    private List<Square> tilesPlaced;
-    private transient LinkedList<Observateur> observateurs;
+    private List<Move> movesHistory;
 
-    private static final Random randomGenerator = new Random();
 
 
     public Game(String filePath, List<Player> players) {
 
         observateurs = new LinkedList<>();
+        movesHistory = new ArrayList<>();
         loadParameters(filePath);
-        tilesPlaced = new ArrayList<>();
         this.players = players;
 
         for (Player player : players) {
@@ -46,6 +47,41 @@ public class Game implements Observable {
     }
 
     public Board getBoard(){ return boardManager.getBoard();}
+
+    public int getlettersLeft() {
+        return alphabetBag.size();
+    }
+
+    public int getPlayersLeft() {
+        return players.size();
+    }
+
+    public Player getActivePlayer() {
+        return players.get(activePlayerIndex);
+    }
+
+    public Square getSquare(int row, int column) {
+        return boardManager.getSquare(row, column);
+    }
+
+    public String getContentSquare(int row, int column) {
+        return boardManager.getContentSquare(row, column);
+    }
+
+    public String getPremiumSquare(int row, int column) {
+        return boardManager.getPremiumSquare(row, column);
+    }
+
+
+    public List<Move> getMovesHistory()
+    {
+        List<Move> moves = new ArrayList<>();
+        for(Move move : movesHistory)
+        {
+            moves.add(move);
+        }
+        return moves;
+    }
 
     private void loadParameters(String filePath) {
         Element rootElement = getRootElement(filePath);
@@ -82,9 +118,8 @@ public class Game implements Observable {
         for (int i = 0; i < alphabetsNodes.getLength(); i++) {
             Element activeElement = (Element) alphabetsNodes.item(i);
 
-            char caracter = activeElement.getAttribute("text").charAt(0);
+            String caracter = activeElement.getAttribute("text");
             int value = Integer.parseInt(activeElement.getAttribute("value"));
-
 
             int amount = Integer.parseInt(activeElement.getAttribute("amount"));
 
@@ -121,14 +156,16 @@ public class Game implements Observable {
         getActivePlayer().nextState();
 
         if (!getActivePlayer().isActivated()) {
-
+            drawTile();
             activateNextPlayer();
+
         }
     }
 
     public void passTurn() {
         getActivePlayer().selectNextState(IDState.PENDING);
         goToNextState();
+        // TODO Louis : bloquer quand le joueur place un mot ou annuler les autres actions
     }
 
     private void activateNextPlayer() {
@@ -148,35 +185,8 @@ public class Game implements Observable {
     }
 
 
-    public int getlettersLeft() {
-        return alphabetBag.size();
-    }
-
-    public int getPlayersLeft() {
-        return players.size();
-    }
-
-    public Player getActivePlayer() {
-        return players.get(activePlayerIndex);
-    }
-
-
-    public Square getSquare(int row, int column) {
-        return boardManager.getSquare(row, column);
-    }
-
-    public char getContentSquare(int row, int column) {
-        return boardManager.getContentSquare(row, column);
-    }
-
-    public String getPremiumSquare(int row, int column) {
-        return boardManager.getPremiumSquare(row, column);
-    }
-
     public void playTile(Square square) {
         getActivePlayer().selectSquare(square);
-        tilesPlaced.add(square);
-        goToNextState();
     }
 
     public void selectLetter(Tile tile) {
@@ -212,26 +222,40 @@ public class Game implements Observable {
 
     public void playWord() {
 
-        getActivePlayer().addPoints(calculateWordPoints(tilesPlaced)); // TODO Louis : Vérifier que le mot peut être placé
-        tilesPlaced.clear();
         getActivePlayer().selectNextState(IDState.PENDING);
         if (isReadyForNextPhase()) {
             goToNextState();
         }
+    }
+
+    public void playWord(List<Square> tilesPlaced)
+    {
+        StringBuilder word = new StringBuilder( tilesPlaced.size());
+
+        for(Square square : tilesPlaced)
+        {
+            word.append(square.getLetterOn());
+        }
+        movesHistory.add(new Move(getActivePlayer(), word.toString()));
+        getActivePlayer().addPoints(calculateWordPoints(tilesPlaced));
 
     }
 
-    public void recallTiles() {
+    public void recallTiles()
+    {
+        getActivePlayer().selectNextState(IDState.SELECT_ACTION);
+        if (isReadyForNextPhase()) {
+            goToNextState();
+        }
+    }
+
+    public void recallTiles(List<Square> tilesPlaced) {
 
         for (Square tileLocation : tilesPlaced) {
             getActivePlayer().addLetter(tileLocation.getTileOn());
             tileLocation.setLetter(null);
         }
-        tilesPlaced.clear();
-        getActivePlayer().selectNextState(IDState.SELECT_ACTION);
-        if (isReadyForNextPhase()) {
-            goToNextState();
-        }
+
     }
 
     private int calculateWordPoints(List<Square> letterChain) {
@@ -278,6 +302,22 @@ public class Game implements Observable {
         }
 
         Collections.shuffle(alphabetBag);
-        drawTile();
+    }
+
+    public void replacePlayerTilesInOrder(List<Tile> originalOrder){
+
+        List<Tile> currentOrder = getActivePlayer().getTiles();
+
+      if( currentOrder.containsAll(originalOrder)){
+
+          for(Tile tile : originalOrder)
+          {
+              getActivePlayer().remove(tile);
+          }
+          for(Tile tile : originalOrder)
+          {
+              getActivePlayer().addLetter(tile);
+          }
+      }
     }
 }
