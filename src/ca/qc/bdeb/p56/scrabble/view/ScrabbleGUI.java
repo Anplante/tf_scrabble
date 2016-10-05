@@ -141,7 +141,7 @@ public class ScrabbleGUI extends JFrame implements KeyListener, Observateur {
         panelInformation.setLocation(x, MARGIN);
         panelInformation.setSize(witdh, y);
         panelInformation.setLayout(new GridLayout(gameModel.getPlayers().size(), 1, MARGIN, MARGIN));
-        panelInformation.setBackground(Color.YELLOW);
+        panelInformation.setOpaque(false);
         add(panelInformation);
     }
 
