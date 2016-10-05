@@ -8,7 +8,6 @@ public enum IDState {
     DRAW("Draw"),
     PENDING("Wait"),
     SELECT_ACTION("Select action"),
-    SELECT_TILE("Select tile"),
     EXCHANGE("Exchange"),
     PLAY_TILE("Play tile");
 

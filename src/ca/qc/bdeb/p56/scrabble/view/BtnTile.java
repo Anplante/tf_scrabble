@@ -14,9 +14,9 @@ import java.awt.event.ActionListener;
  */
 public class BtnTile extends JButton {
 
-    private  Color BASIC_COLOR = Color.lightGray;
-    private  Color REMOVE_COLOR = Color.red;
-    private  Color SELECTED_COLOR = Color.green;
+    private Color BASIC_COLOR = Color.lightGray;
+    private Color REMOVE_COLOR = Color.red;
+    private Color SELECTED_COLOR = Color.green;
 
     private Game gameModel;
 
@@ -35,16 +35,18 @@ public class BtnTile extends JButton {
 
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
                 gameModel.selectLetter(tile);
-                if(gameModel.getActivePlayer().getState().getName() == IDState.EXCHANGE.getName()){
-                    if(getBackground() == BASIC_COLOR) {
+                if (gameModel.getActivePlayer().getState().getName() == IDState.EXCHANGE.getName()) {
+                    if (getBackground() == BASIC_COLOR) {
                         setExchangeColor();
-                    }else{
+                    } else {
                         setBasicColor();
                     }
 
-                }else {
+                } else if (gameModel.getActivePlayer().getState().getName() == IDState.PLAY_TILE.getName()
+                        && gameModel.getActivePlayer().getHasTile()) {
+
+                } else {
                     setBackground(SELECTED_COLOR);
                 }
 
@@ -53,23 +55,23 @@ public class BtnTile extends JButton {
         });
     }
 
-    public void setSelectedColor(){
+    public void setSelectedColor() {
         setBackground(SELECTED_COLOR);
     }
 
-    public void setExchangeColor(){
+    public void setExchangeColor() {
         setBackground(REMOVE_COLOR);
     }
 
-    public void setBasicColor(){
+    public void setBasicColor() {
         setBackground(BASIC_COLOR);
     }
 
-    public Tile getTile(){
+    public Tile getTile() {
         return tile;
     }
 
-    public void setTile(Tile aTile){
+    public void setTile(Tile aTile) {
         this.tile = aTile;
         this.setText("" + aTile.getLetter());
     }

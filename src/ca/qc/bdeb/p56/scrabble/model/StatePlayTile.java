@@ -42,6 +42,7 @@ public class StatePlayTile extends State {
             tilesPlaced.add(squareSelected);
             squareSelected.setLetter(tileSelected); // La partie devrait le faire??
             getPlayer().remove(tileSelected);  // idem
+            getPlayer().setHasTile(false);
             getPlayer().aviserObservateurs();
         }
     }

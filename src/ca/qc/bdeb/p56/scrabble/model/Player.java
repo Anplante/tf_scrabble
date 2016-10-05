@@ -23,6 +23,7 @@ public class Player implements Observable {
     private boolean active;
     private Color playerColor;
     private transient LinkedList<Observateur> observateurs;  //transient = not be serialized
+    private boolean hasTile;
 
    // private final List<Tile> lettersOnHand;
 
@@ -36,6 +37,15 @@ public class Player implements Observable {
         setState(new StatePending(this));
         active = false;
         observateurs = new LinkedList<>();
+        hasTile = false;
+    }
+
+    public boolean getHasTile(){
+        return hasTile;
+    }
+
+    public void setHasTile(boolean bool){
+        hasTile = bool;
     }
 
     public List<Tile> getTiles() {

@@ -29,13 +29,15 @@ public class Game implements Observable {
     private List<Player> players;
     private int activePlayerIndex;
     private static List<Tile> alphabetBag;
+    private boolean isInMenu;
+    private boolean isOver;
 
     private List<Move> movesHistory;
 
 
 
     public Game(String filePath, List<Player> players) {
-
+        isInMenu = false;
         observateurs = new LinkedList<>();
         movesHistory = new ArrayList<>();
         loadParameters(filePath);
@@ -44,6 +46,14 @@ public class Game implements Observable {
         for (Player player : players) {
             player.setGame(this);
         }
+    }
+
+    public boolean getIsInMenu(){
+        return isInMenu;
+    }
+
+    public void  setIsInMenu(Boolean bool){
+        isInMenu = bool;
     }
 
     public Board getBoard(){ return boardManager.getBoard();}

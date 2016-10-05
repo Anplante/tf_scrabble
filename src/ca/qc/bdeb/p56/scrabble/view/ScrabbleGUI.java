@@ -1,21 +1,27 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
+import ca.qc.bdeb.p56.scrabble.utility.Observateur;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.Color;
 import java.awt.Paint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.util.List;
 import java.awt.*;
 
 /**
  * Created by Louis Luu Lim on 9/7/2016.
  */
-public class ScrabbleGUI extends JFrame {
+public class ScrabbleGUI extends JFrame implements KeyListener, Observateur {
 
     private final double RATIO_BOARD_ZONE = 0.1;
 
@@ -23,7 +29,7 @@ public class ScrabbleGUI extends JFrame {
     private final double RATIO_LETTER_RACK_ZONE = 0.15;
     private final int BOARD_ZONE_HEIGHT;
     private final int LETTER_RACK_ZONE_HEIGHT;
-    private final  int MARGIN = 5;
+    private final int MARGIN = 5;
 
     private JLabel lblNumberLetter;
     PanelLetterRackZone panelLetterRack;
@@ -32,17 +38,20 @@ public class ScrabbleGUI extends JFrame {
     GameManager gameManager;
     Game gameModel;
     BoardManager boardManager;
+    JPanel options;
+    JLabel background;
 
     private JPanel panelInformation;
 
 
-    public ScrabbleGUI(Game game, Rectangle bounds)
-    {
+    public ScrabbleGUI(Game game, Rectangle bounds) {
+
         this.gameModel = game;
         setBounds(bounds);
-        BOARD_ZONE_HEIGHT = (int) (bounds.height * RATIO_BOARD_ZONE) > 100 ? (int) (bounds.height*RATIO_BOARD_ZONE) :  100;
-        LETTER_RACK_ZONE_HEIGHT = (int) (bounds.height * RATIO_LETTER_RACK_ZONE) > 100 ? (int) (bounds.height*RATIO_LETTER_RACK_ZONE) : 100;
+        BOARD_ZONE_HEIGHT = (int) (bounds.height * RATIO_BOARD_ZONE) > 100 ? (int) (bounds.height * RATIO_BOARD_ZONE) : 100;
+        LETTER_RACK_ZONE_HEIGHT = (int) (bounds.height * RATIO_LETTER_RACK_ZONE) > 100 ? (int) (bounds.height * RATIO_LETTER_RACK_ZONE) : 100;
         setLayout(null);
+
         createGame();
         initializeComponents();
         addPlayersInfo();
@@ -50,9 +59,10 @@ public class ScrabbleGUI extends JFrame {
 
         //setUndecorated(true);  // pour enlever le x
         setResizable(false);
+        setFocusable(true);
+        addKeyListener(this);
+        gameModel.ajouterObservateur(this);
 
-       // MnuOptions options = new MnuOptions(getWidth()/2,getHeight()/2);
-        //options.setVisible(true);
     }
 
     private void initializeComponents() {
@@ -61,15 +71,30 @@ public class ScrabbleGUI extends JFrame {
         createPanelLetterRack();
         createPanelInformation();
         createLabelNumberLetters();
+        createOptionsPanel();
+        createBackground();
+    }
+
+    private void createOptionsPanel() {
+        options = new MnuOptions(getWidth() / 2, getHeight() / 2, gameModel);
+        options.setVisible(false);
+        add(options);
+    }
+
+    private void createBackground() {
+        background = new JLabel();
+        background.setSize(getWidth(), getHeight());
+        background.setIcon(new ImageIcon(new ImageIcon(".\\resources\\background.jpg").getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
+        add(background);
 
     }
 
     private void createLabelNumberLetters() {
         int y = getHeight() - BOARD_ZONE_HEIGHT;
         y = panelInformation.getHeight();
-        int witdh = (int) (getWidth() - getWidth()* RATIO_PANEL_INFORMATION);
+        int witdh = (int) (getWidth() - getWidth() * RATIO_PANEL_INFORMATION);
         int x = witdh;
-        lblNumberLetter =  new JLabel();
+        lblNumberLetter = new JLabel();
         lblNumberLetter.setLocation(1, y);
         lblNumberLetter.setSize(lblNumberLetter.getPreferredSize());
         lblNumberLetter.setText(Integer.toString(gameModel.getlettersLeft()));
@@ -80,7 +105,7 @@ public class ScrabbleGUI extends JFrame {
     private void createPanelInformation() {
 
         int y = getHeight() - LETTER_RACK_ZONE_HEIGHT - BOARD_ZONE_HEIGHT;
-        int witdh = ((getWidth() - getHeight()+ LETTER_RACK_ZONE_HEIGHT)/2) - MARGIN  ;
+        int witdh = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN;
         int x = getWidth() - witdh;
         y *= 0.5;
 
@@ -93,12 +118,10 @@ public class ScrabbleGUI extends JFrame {
         add(panelInformation);
     }
 
-    private void addPlayersInfo()
-    {
+    private void addPlayersInfo() {
         List<Player> players = gameModel.getPlayers();
 
-        for(Player player : players)
-        {
+        for (Player player : players) {
             PanelPlayerInfo playerInfo = new PanelPlayerInfo(player);
             playerInfo.setName("Info : " + player.getName());
             panelInformation.add(playerInfo);
@@ -130,8 +153,8 @@ public class ScrabbleGUI extends JFrame {
         pnlBoard = new JPanel();
 
         int heightBoard = getHeight() - LETTER_RACK_ZONE_HEIGHT - MARGIN;
-        int x = (getWidth() - heightBoard) /2;
-        pnlBoard.setLocation(x, MARGIN );
+        int x = (getWidth() - heightBoard) / 2;
+        pnlBoard.setLocation(x, MARGIN);
         pnlBoard.setSize(heightBoard, heightBoard);
         add(pnlBoard);
         initGrid();
@@ -153,8 +176,7 @@ public class ScrabbleGUI extends JFrame {
         }
     }
 
-    private void createGame()
-    {
+    private void createGame() {
         initGame();
 
         // initilaiser player rack
@@ -162,8 +184,51 @@ public class ScrabbleGUI extends JFrame {
         // etc
     }
 
-    private void initGame()
-    {
+    private void initGame() {
         gameModel.startGame();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent keyEvent) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            if (!gameModel.getIsInMenu()) {
+                pnlBoard.setVisible(false);
+                panelLetterRack.setVisible(false);
+                panelInformation.setVisible(false);
+                options.setVisible(true);
+                gameModel.setIsInMenu(true);
+            }else {
+                pnlBoard.setVisible(true);
+                panelLetterRack.setVisible(true);
+                panelInformation.setVisible(true);
+                options.setVisible(false);
+                gameModel.setIsInMenu(false);
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {
+
+    }
+
+    @Override
+    public void changementEtat() {
+        if (!gameModel.getIsInMenu()) {
+            pnlBoard.setVisible(true);
+            panelLetterRack.setVisible(true);
+            panelInformation.setVisible(true);
+            options.setVisible(false);
+        }
+    }
+
+    @Override
+    public void changementEtat(Enum<?> e, Object o) {
+
     }
 }

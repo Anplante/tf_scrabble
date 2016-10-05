@@ -4,6 +4,7 @@ import ca.qc.bdeb.p56.scrabble.ai.AiPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.Player;
+import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +16,7 @@ import java.util.List;
 /**
  * Created by Antoine on 9/12/2016.
  */
-public class MainMenuGUI extends JFrame {
+public class MainMenuGUI extends JFrame implements Observateur {
 
     private JPanel panelMenu;
     private JTextField txtNom;
@@ -182,5 +183,14 @@ public class MainMenuGUI extends JFrame {
 
     public int getLenghtPlayers() {
         return game.getPlayers().size();
+    }
+
+    @Override
+    public void changementEtat() {
+    }
+
+    @Override
+    public void changementEtat(Enum<?> e, Object o) {
+
     }
 }
