@@ -6,6 +6,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.*;
 
 import javax.imageio.ImageIO;
+import java.awt.Image;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.Color;
@@ -15,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.List;
 import java.awt.*;
 
@@ -29,9 +31,10 @@ public class ScrabbleGUI extends JFrame implements KeyListener, Observateur {
     private final double RATIO_LETTER_RACK_ZONE = 0.15;
     private final int BOARD_ZONE_HEIGHT;
     private final int LETTER_RACK_ZONE_HEIGHT;
-    private final int MARGIN = 5;
+    private final  int MARGIN = 5;
 
     private JLabel lblNumberLetter;
+    private Image bagImg;
     PanelLetterRackZone panelLetterRack;
     Board board;
     JPanel pnlBoard;
@@ -44,17 +47,21 @@ public class ScrabbleGUI extends JFrame implements KeyListener, Observateur {
     private JPanel panelInformation;
 
 
-    public ScrabbleGUI(Game game, Rectangle bounds) {
-
+    public ScrabbleGUI(Game game, Rectangle bounds)
+    {
         this.gameModel = game;
         setBounds(bounds);
-        BOARD_ZONE_HEIGHT = (int) (bounds.height * RATIO_BOARD_ZONE) > 100 ? (int) (bounds.height * RATIO_BOARD_ZONE) : 100;
-        LETTER_RACK_ZONE_HEIGHT = (int) (bounds.height * RATIO_LETTER_RACK_ZONE) > 100 ? (int) (bounds.height * RATIO_LETTER_RACK_ZONE) : 100;
+        BOARD_ZONE_HEIGHT = (int) (bounds.height * RATIO_BOARD_ZONE) > 100 ? (int) (bounds.height*RATIO_BOARD_ZONE) :  100;
+        LETTER_RACK_ZONE_HEIGHT = (int) (bounds.height * RATIO_LETTER_RACK_ZONE) > 100 ? (int) (bounds.height*RATIO_LETTER_RACK_ZONE) : 100;
         setLayout(null);
-
+        try {
+            bagImg = ImageIO.read(this.getClass().getResource("/Image/bag_scrabble.png"));
+        } catch (IOException ex) {
+        }
         createGame();
         initializeComponents();
         addPlayersInfo();
+
 
 
         //setUndecorated(true);  // pour enlever le x
@@ -63,6 +70,8 @@ public class ScrabbleGUI extends JFrame implements KeyListener, Observateur {
         addKeyListener(this);
         gameModel.ajouterObservateur(this);
 
+       // MnuOptions options = new MnuOptions(getWidth()/2,getHeight()/2);
+        //options.setVisible(true);
     }
 
     private void initializeComponents() {
@@ -90,16 +99,32 @@ public class ScrabbleGUI extends JFrame implements KeyListener, Observateur {
     }
 
     private void createLabelNumberLetters() {
+        ImageIcon imageBag = null;
+        Image image = null;
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
         int y = getHeight() - BOARD_ZONE_HEIGHT;
         y = panelInformation.getHeight();
-        int witdh = (int) (getWidth() - getWidth() * RATIO_PANEL_INFORMATION);
+        int witdh = (int) (getWidth() - getWidth()* RATIO_PANEL_INFORMATION);
         int x = witdh;
-        lblNumberLetter = new JLabel();
-        lblNumberLetter.setLocation(1, y);
+        panel.setBounds(x + 50,y + 20,60,60);
+
+        lblNumberLetter =  new JLabel(new ImageIcon(bagImg.getScaledInstance(60,60, Image.SCALE_DEFAULT)));
         lblNumberLetter.setSize(lblNumberLetter.getPreferredSize());
         lblNumberLetter.setText(Integer.toString(gameModel.getlettersLeft()));
+        lblNumberLetter.setForeground(Color.white);
+        lblNumberLetter.setHorizontalTextPosition(JLabel.CENTER);
+      //  lblNumberLetter.setVerticalTextPosition(JLabel.BOTTOM);
         lblNumberLetter.setVisible(true);
-        add(lblNumberLetter);
+       // lblNumberLetter.setIcon(imageBag);
+        panel.add(lblNumberLetter);
+        add(panel);
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        //g.drawImage(bagImg,0,0,50,50);
     }
 
     private void createPanelInformation() {
@@ -118,7 +143,8 @@ public class ScrabbleGUI extends JFrame implements KeyListener, Observateur {
         add(panelInformation);
     }
 
-    private void addPlayersInfo() {
+    private void addPlayersInfo()
+    {
         List<Player> players = gameModel.getPlayers();
 
         for (Player player : players) {
@@ -176,7 +202,8 @@ public class ScrabbleGUI extends JFrame implements KeyListener, Observateur {
         }
     }
 
-    private void createGame() {
+    private void createGame()
+    {
         initGame();
 
         // initilaiser player rack
@@ -184,7 +211,8 @@ public class ScrabbleGUI extends JFrame implements KeyListener, Observateur {
         // etc
     }
 
-    private void initGame() {
+    private void initGame()
+    {
         gameModel.startGame();
     }
 
