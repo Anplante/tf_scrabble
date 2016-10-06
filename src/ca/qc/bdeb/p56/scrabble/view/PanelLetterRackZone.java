@@ -2,6 +2,7 @@ package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.ai.AiPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Game;
+import ca.qc.bdeb.p56.scrabble.model.StateSwapTile;
 import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.model.Player;
@@ -234,31 +235,61 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
     }*/
 
+    private void swapTiles(){
+        StateSwapTile swap = (StateSwapTile) game.getActivePlayer().getState();
+        for (Component comp : panelLettersRack.getComponents()) {
+            BtnTile btn = (BtnTile)comp;
+            if(btn.getTile() == swap.getTileSelected()){
+                swap.setFirst(btn);
+            }
+            if(btn.getTile() == swap.getSwapTile()){
+                swap.setSecond(btn);
+            }
+        }
+        swap.swap();
+        game.getActivePlayer().setHasTile(false);
+        game.getActivePlayer().clearTiles();
+        for (Component comp : panelLettersRack.getComponents()) {
+            BtnTile btn = (BtnTile)comp;
+            game.getActivePlayer().addLetter(btn.getTile());
+        }
+        game.getActivePlayer().selectNextState(IDState.SELECT_ACTION);
+        game.getActivePlayer().nextState();
+        panelLettersRack.repaint();
+    }
+
     @Override
     public void changementEtat() {
 
-        if (currentPlayer != game.getActivePlayer()) {
-            currentPlayer = game.getActivePlayer();
-        }
+        if(game.getActivePlayer().getState().getName()==IDState.SWAP_TILE.getName()
+               ){
+            swapTiles();
+            } else {
 
-        for (Component comp : panelLettersRack.getComponents()) {
-            panelLettersRack.remove(comp);
-        }
+            if (currentPlayer != game.getActivePlayer()) {
+                currentPlayer = game.getActivePlayer();
+            }
 
-        List<Tile> playerTiles = currentPlayer.getTiles();
+            for (Component comp : panelLettersRack.getComponents()) {
+                panelLettersRack.remove(comp);
+            }
 
-        int i = 0;
+            List<Tile> playerTiles = currentPlayer.getTiles();
 
-        Dimension dimension = new Dimension(TILE_SIZE, TILE_SIZE);
+            int i = 0;
+
+            Dimension dimension = new Dimension(TILE_SIZE, TILE_SIZE);
 
         for (Tile letter : playerTiles) {
             BtnTile btnTile = new BtnTile(game, letter, dimension );
+            btnTile.setFocusable(false);
             letter.ajouterObservateur(btnTile);
             btnTile.setName("Tile" + i);
             panelLettersRack.add(btnTile);
             i++;
         }
-        panelLettersRack.repaint();
+            panelLettersRack.repaint();
+        }
     }
 
     @Override

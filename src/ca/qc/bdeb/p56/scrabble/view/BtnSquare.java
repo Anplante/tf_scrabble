@@ -39,6 +39,7 @@ public class BtnSquare extends JButton implements Observateur {
         setForeground(Color.WHITE);
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setBorder(BorderFactory.createEtchedBorder());
+        setFocusable(false);
         changementEtat();
 
         addActionListener(new ActionListener() {

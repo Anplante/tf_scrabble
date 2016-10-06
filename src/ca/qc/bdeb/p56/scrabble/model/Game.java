@@ -29,8 +29,8 @@ public class Game implements Observable {
     private List<Player> players;
     private int activePlayerIndex;
     private static List<Tile> alphabetBag;
-    private List<Move> movesHistory;
 
+    private List<Move> movesHistory;
 
 
     public Game(String filePath, List<Player> players) {
@@ -253,16 +253,12 @@ public class Game implements Observable {
 
     public void recallTiles(List<Square> tilesPlaced) {
 
-        if(tilesPlaced != null)
-        {
+        if(tilesPlaced != null) {
             for (Square tileLocation : tilesPlaced) {
                 getActivePlayer().addLetter(tileLocation.getTileOn());
                 tileLocation.setLetter(null);
             }
-
-
         }
-
     }
 
     private int calculateWordPoints(List<Square> letterChain) {

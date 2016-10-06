@@ -1,6 +1,8 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
+import ca.qc.bdeb.p56.scrabble.model.StatePlayTile;
+import ca.qc.bdeb.p56.scrabble.model.StateSwapTile;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
@@ -34,6 +36,7 @@ public class BtnTile extends JButton implements Observateur {
         setSize(dimension);
         changementEtat();
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        setFocusable(false);
 
 
         addActionListener(new ActionListener() {
@@ -42,6 +45,7 @@ public class BtnTile extends JButton implements Observateur {
             }
         });
     }
+
 
     public Tile getTile() {
         return tile;

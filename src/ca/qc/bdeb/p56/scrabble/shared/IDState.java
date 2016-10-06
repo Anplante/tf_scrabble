@@ -9,7 +9,8 @@ public enum IDState {
     PENDING("Wait"),
     SELECT_ACTION("Select action"),
     EXCHANGE("Exchange"),
-    PLAY_TILE("Play tile");
+    PLAY_TILE("Play tile"),
+    SWAP_TILE("Swap tile");
 
     private String name;
 
