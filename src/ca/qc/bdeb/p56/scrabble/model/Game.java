@@ -218,6 +218,7 @@ public class Game implements Observable {
             getActivePlayer().addLetter(tile);
             alphabetBag.remove(tile);
         }
+        aviserObservateurs();
     }
 
 

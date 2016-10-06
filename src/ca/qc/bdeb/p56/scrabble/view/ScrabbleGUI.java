@@ -40,6 +40,7 @@ public class ScrabbleGUI extends JFrame implements KeyListener {
     Game gameModel;
     MnuOptions options;
     private MainMenuGUI menu;
+    private PanelBag bagOfLetter;
 
     JLabel background;
 
@@ -111,26 +112,15 @@ public class ScrabbleGUI extends JFrame implements KeyListener {
     }
 
     private void createLabelNumberLetters() {
-        ImageIcon imageBag = null;
-        Image image = null;
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        //int y = getHeight() - BOARD_ZONE_HEIGHT;
+
+        bagOfLetter = new PanelBag(gameModel);
+        bagOfLetter.setLayout(new BorderLayout());
         int y = panelInformation.getHeight();
         int witdh = (int) (getWidth() - getWidth() * RATIO_PANEL_INFORMATION);
         int x = witdh;
-        panel.setBounds(x + 50, y + 20, 60, 60);
-
-        lblNumberLetter = new JLabel(new ImageIcon(bagImg.getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-        lblNumberLetter.setSize(lblNumberLetter.getPreferredSize());
-        lblNumberLetter.setText(Integer.toString(gameModel.getlettersLeft()));
-        lblNumberLetter.setForeground(Color.white);
-        lblNumberLetter.setHorizontalTextPosition(JLabel.CENTER);
-        //  lblNumberLetter.setVerticalTextPosition(JLabel.BOTTOM);
-        lblNumberLetter.setVisible(true);
-        // lblNumberLetter.setIcon(imageBag);
-        panel.add(lblNumberLetter);
-        add(panel);
+        bagOfLetter.setBounds(x + 50, y + 20, 60, 60);
+        add(bagOfLetter);
+        gameModel.ajouterObservateur(bagOfLetter);
     }
 
     @Override

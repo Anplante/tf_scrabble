@@ -55,6 +55,7 @@ public class BtnTile extends JButton implements Observateur {
     @Override
     public void changementEtat() {
 
+
         if(tile.isSelected())
         {
             if (gameModel.getActivePlayer().getState().getName() == IDState.EXCHANGE.getName()) {
