@@ -38,7 +38,7 @@ public class StatePlayTile extends State {
             tilesPlaced = new ArrayList<>();
         }
 
-        if(isValidMove())
+        if(isValidMove()&&getPlayer().getHasTile())
         {
             if(originalTilesOder == null)
             {
