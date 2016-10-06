@@ -78,6 +78,7 @@ public class ScrabbleGUI extends JFrame implements KeyListener, Observateur {
     private void createOptionsPanel() {
         options = new MnuOptions(getWidth() / 2, getHeight() / 2, gameModel);
         options.setVisible(false);
+        options.        setName("Options");
         add(options);
     }
 
