@@ -59,6 +59,10 @@ public class Player implements Observable {
         return playertiles;
     }
 
+    public void clearTiles(){
+        tiles.clear();
+    }
+
     public int getLettersCount()
     {
         return tiles.size();
@@ -134,7 +138,6 @@ public class Player implements Observable {
     }
 
     public void nextState() {
-
         currentState.execute();
         State newState =  currentState.getNextState();
         currentState = newState;

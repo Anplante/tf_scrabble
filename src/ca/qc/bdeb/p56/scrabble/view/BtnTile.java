@@ -1,6 +1,8 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
+import ca.qc.bdeb.p56.scrabble.model.StatePlayTile;
+import ca.qc.bdeb.p56.scrabble.model.StateSwapTile;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 
@@ -23,36 +25,59 @@ public class BtnTile extends JButton {
     private Tile tile;
 
 
-    public BtnTile(Game gameModel, Tile tile, Dimension dimension) {
+    public BtnTile(Game gameModel, Tile tile, Dimension dimension,boolean selected) {
 
         super("" + tile.getLetter());
         this.gameModel = gameModel;
         this.tile = tile;
         setSize(dimension);
-        setBackground(BASIC_COLOR);
+        if(selected){
+            setSelectedColor();
+        }else {
+            setBasicColor();
+        }
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        setFocusable(false);
+        this.tile.setSelected(selected);
 
 
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                gameModel.selectLetter(tile);
                 if (gameModel.getActivePlayer().getState().getName() == IDState.EXCHANGE.getName()) {
                     if (getBackground() == BASIC_COLOR) {
                         setExchangeColor();
                     } else {
                         setBasicColor();
                     }
+                } else if ((gameModel.getActivePlayer().getState().getName() == IDState.PLAY_TILE.getName())
+                        && gameModel.getActivePlayer().getHasTile() == true) {
+                    StatePlayTile state = (StatePlayTile)gameModel.getActivePlayer().getState();
+                    state.setBackupTile(getTile());
 
-                } else if (gameModel.getActivePlayer().getState().getName() == IDState.PLAY_TILE.getName()
-                        && gameModel.getActivePlayer().getHasTile()) {
-
+                    gameModel.getActivePlayer().selectNextState(IDState.SWAP_TILE);
+                    gameModel.getActivePlayer().nextState();
                 } else {
-                    setBackground(SELECTED_COLOR);
+                    if(tile.getSelected()) {
+                        tile.setSelected(false);
+                        setBasicColor();
+                    }else {
+                        gameModel.getActivePlayer().setHasTile(true);
+                        tile.setSelected(true);
+                        setSelectedColor();
+                        gameModel.selectLetter(tile);
+                    }
                 }
-
                 // TODO Louis: avertir l'observateur du lettre qu'elle a été sélectionné si on veut éventuellement que ca fasse quelque chose
             }
         });
+    }
+
+    public Color getBASIC_COLOR(){
+        return BASIC_COLOR;
+    }
+
+    public Color getSELECTED_COLOR(){
+        return SELECTED_COLOR;
     }
 
     public void setSelectedColor() {

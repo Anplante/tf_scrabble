@@ -1,6 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
+import ca.qc.bdeb.p56.scrabble.model.StateSwapTile;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
@@ -187,31 +188,62 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         });
     }
 
+    private void swapTiles(){
+        StateSwapTile swap = (StateSwapTile) game.getActivePlayer().getState();
+        for (Component comp : panelLettersRack.getComponents()) {
+            BtnTile btn = (BtnTile)comp;
+            if(btn.getTile() == swap.getTileSelected()){
+                swap.setFirst(btn);
+            }
+            if(btn.getTile() == swap.getSwapTile()){
+                swap.setSecond(btn);
+            }
+        }
+        swap.swap();
+        game.getActivePlayer().setHasTile(false);
+        game.getActivePlayer().clearTiles();
+        for (Component comp : panelLettersRack.getComponents()) {
+            BtnTile btn = (BtnTile)comp;
+            btn.getTile().setSelected(false);
+            game.getActivePlayer().addLetter(btn.getTile());
+        }
+        game.getActivePlayer().selectNextState(IDState.SELECT_ACTION);
+        game.getActivePlayer().nextState();
+        panelLettersRack.repaint();
+    }
+
     @Override
     public void changementEtat() {
 
-        if (currentPlayer != game.getActivePlayer()) {
-            currentPlayer = game.getActivePlayer();
+        if(game.getActivePlayer().getState().getName()==IDState.SWAP_TILE.getName()
+               && game.getActivePlayer().getHasTile() ){
+            swapTiles();
+            } else {
+
+            if (currentPlayer != game.getActivePlayer()) {
+                currentPlayer = game.getActivePlayer();
+            }
+
+            for (Component comp : panelLettersRack.getComponents()) {
+                panelLettersRack.remove(comp);
+            }
+
+            List<Tile> playerTiles = currentPlayer.getTiles();
+
+            int i = 0;
+
+            Dimension dimension = new Dimension(TILE_SIZE, TILE_SIZE);
+
+            for (Tile letter : playerTiles) {
+                BtnTile tile = new BtnTile(game, letter, dimension,letter.getSelected());
+                tile.setFocusable(false);
+                tile.setName("Tile" + i);
+                panelLettersRack.add(tile);
+                i++;
+            }
+            //  panelLettersRack.revalidate();
+            panelLettersRack.repaint();
         }
-
-        for (Component comp : panelLettersRack.getComponents()) {
-            panelLettersRack.remove(comp);
-        }
-
-        List<Tile> playerTiles = currentPlayer.getTiles();
-
-        int i = 0;
-
-        Dimension dimension = new Dimension(TILE_SIZE, TILE_SIZE);
-
-        for (Tile letter : playerTiles) {
-            BtnTile tile = new BtnTile(game, letter, dimension );
-            tile.setName("Tile" + i);
-            panelLettersRack.add(tile);
-            i++;
-        }
-      //  panelLettersRack.revalidate();
-        panelLettersRack.repaint();
     }
 
     @Override

@@ -17,12 +17,17 @@ public class StatePlayTile extends State {
     private IDState stateSelected;
     private List<Square> tilesPlaced;
     private List<Tile> originalTilesOder;
+    private Tile backupTile;
 
     public StatePlayTile(Player currentPlayer, Tile tileSelected) {
         super(currentPlayer, IDState.PLAY_TILE);
         this.tileSelected = tileSelected;
 
         readyToChange = false;
+    }
+
+    public void setBackupTile(Tile tile){
+        backupTile = tile;
     }
 
     @Override
@@ -113,6 +118,7 @@ public class StatePlayTile extends State {
     protected State getNextState() {
 
         State newState = null;
+
         switch (stateSelected) {
             case PENDING:
                 getGame().playWord(tilesPlaced);
@@ -129,6 +135,10 @@ public class StatePlayTile extends State {
                 getGame().replacePlayerTilesInOrder(originalTilesOder);
                 newState = new StateSelectAction(getPlayer());
                 break;
+            case SWAP_TILE:
+                newState = new StateSwapTile(getPlayer(),tileSelected,backupTile);
+                break;
+
         }
         return newState;
     }

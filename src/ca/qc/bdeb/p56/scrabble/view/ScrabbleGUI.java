@@ -170,6 +170,7 @@ public class ScrabbleGUI extends JFrame implements KeyListener, Observateur {
             for (int column = 0; column < 15; column++) {
 
                 BtnSquare square = new BtnSquare(gameModel, row, column);
+                square.setFocusable(false);
                 square.setName("Square " + row + ";" + column);
                 pnlBoard.add(square);
             }

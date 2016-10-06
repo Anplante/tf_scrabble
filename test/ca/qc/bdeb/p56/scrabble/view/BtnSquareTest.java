@@ -48,8 +48,8 @@ public class BtnSquareTest {
     @Test
     public void testSelectSquareInPlayTileState() throws AWTException {
 
-        Tile tile = new Tile("a", 2);
-        btnTile = new BtnTile(gameModel, tile, new Dimension(50,50));
+        Tile tile = new Tile("a", 2,false);
+        btnTile = new BtnTile(gameModel, tile, new Dimension(50,50),false);
 
         assertFalse(gameModel.getSquare(7,7).containLetter());
         btnTile.doClick();

@@ -45,6 +45,7 @@ public class Game implements Observable {
 
     public Game(String filePath, List<Player> players) {
         isInMenu = false;
+        isOver = false;
         observateurs = new LinkedList<>();
         movesHistory = new ArrayList<>();
         loadParameters(filePath);
@@ -54,6 +55,7 @@ public class Game implements Observable {
             player.setGame(this);
         }
     }
+
 
     public boolean getIsInMenu(){
         return isInMenu;
@@ -141,7 +143,7 @@ public class Game implements Observable {
             int amount = Integer.parseInt(activeElement.getAttribute("amount"));
 
             for (int j = 0; j < amount; j++) {
-                alphabetBag.add(new Tile(caracter, value));
+                alphabetBag.add(new Tile(caracter, value,false));
             }
         }
         Collections.shuffle(alphabetBag);
@@ -211,6 +213,9 @@ public class Game implements Observable {
         if (isReadyForNextPhase()) {
             goToNextState();
         }
+    }
+
+    public void swapTiles(){
     }
 
     public List<Player> getPlayers() {
