@@ -51,6 +51,7 @@ public class ScrabbleGUI extends JFrame implements KeyListener {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Rectangle bounds = new Rectangle(screenSize);
         setBounds(bounds);
+
         BOARD_ZONE_HEIGHT = (int) (bounds.height * RATIO_BOARD_ZONE) > 100 ? (int) (bounds.height * RATIO_BOARD_ZONE) : 100;
         LETTER_RACK_ZONE_HEIGHT = (int) (bounds.height * RATIO_LETTER_RACK_ZONE) > 100 ? (int) (bounds.height * RATIO_LETTER_RACK_ZONE) : 100;
         setLayout(null);
@@ -58,11 +59,12 @@ public class ScrabbleGUI extends JFrame implements KeyListener {
         try {
             bagImg = ImageIO.read(this.getClass().getResource("/Image/bag_scrabble.png"));
         } catch (IOException ex) {
+            // FIXME ANTOINE : ???
         }
         setResizable(false);
         setFocusable(true);
         addKeyListener(this);
-
+        setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menu = new MainMenuGUI(this);
         menu.setName("Menu");
@@ -70,22 +72,18 @@ public class ScrabbleGUI extends JFrame implements KeyListener {
 
 
     public void createScrabbleGame(Game game) {
+
         if (gameModel != null) {
             remove(panelInformation);
             remove(panelLetterRack);
-            remove(pnlBoard); // il faudra p-e remove le background et le sac de lettres
+            remove(pnlBoard);
         }
+
         this.gameModel = game;
         createGame();
         initializeComponents();
         addPlayersInfo();
-
         setVisible(true);
-        repaint();
-        //setUndecorated(true);
-
-        // MnuOptions options = new MnuOptions(getWidth()/2,getHeight()/2);
-        //options.setVisible(true);
     }
 
     private void initializeComponents() {
@@ -97,7 +95,6 @@ public class ScrabbleGUI extends JFrame implements KeyListener {
         createLabelNumberLetters();
 
     }
-
 
     private void createBackground() {
 

@@ -48,7 +48,8 @@ public class MnuOptionsTest {
         lstPlayer.add(new Player("Julien"));
 
         game = gameManager.createNewGame(lstPlayer);
-        scrabbleGame = new ScrabbleGUI(game, new Rectangle(screenSize));
+        scrabbleGame = new ScrabbleGUI();
+        scrabbleGame.createScrabbleGame(game);
 
         options = (MnuOptions) TestUtils.getChildNamed(scrabbleGame, "Options");
         abandon = (JButton) TestUtils.getChildNamed(options, "Abandon");

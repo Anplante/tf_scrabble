@@ -26,9 +26,6 @@ public class StatePlayTile extends State {
         readyToChange = false;
     }
 
-    public void setBackupTile(Tile tile){
-        backupTile = tile;
-    }
 
     @Override
     protected void selectSquare(Square squareSelected) {
@@ -39,16 +36,19 @@ public class StatePlayTile extends State {
         }
 
 
-        if (isValidMove()&&getPlayer().getHasTile()) {
+        if (isValidMove()) {
             if (originalTilesOder == null) {
                 originalTilesOder = getPlayer().getTiles();
             }
+
             tilesPlaced.add(squareSelected);
             squareSelected.setLetter(tileSelected); // La partie devrait le faire??
             tileSelected.selectTile(false);
             getPlayer().remove(tileSelected);  // idem
             getPlayer().setHasTile(false);
             getPlayer().aviserObservateurs();
+            tileSelected.selectTile(false);
+            tileSelected = null;
         }
     }
 
@@ -92,9 +92,15 @@ public class StatePlayTile extends State {
     @Override
     protected void selectTile(Tile tileSelected) {
 
-        this.tileSelected.selectTile(false);
-        tileSelected.selectTile(true);
-        this.tileSelected = tileSelected;
+        if (this.tileSelected == null) {
+            tileSelected.selectTile(true);
+            this.tileSelected = tileSelected;
+        } else {
+            selectNextState(IDState.SWAP_TILE);
+            this.tileSelected.selectTile(false);  // p-e pas necessaire
+            backupTile = tileSelected;
+            readyToChange = true;
+        }
     }
 
     @Override
@@ -107,6 +113,8 @@ public class StatePlayTile extends State {
             }
         }
         this.stateSelected = stateSelected;
+        if (tileSelected != null)
+            tileSelected.selectTile(false);
         readyToChange = true;
     }
 
@@ -123,21 +131,19 @@ public class StatePlayTile extends State {
 
                 break;
             case EXCHANGE:
-                tileSelected.selectTile(false);
+
                 getGame().recallTiles(tilesPlaced);
                 getGame().replacePlayerTilesInOrder(originalTilesOder);
                 newState = new StateExchange(getPlayer());
                 break;
             case SELECT_ACTION:
-                tileSelected.selectTile(false);
                 getGame().recallTiles(tilesPlaced);
                 getGame().replacePlayerTilesInOrder(originalTilesOder);
                 newState = new StateSelectAction(getPlayer());
                 break;
             case SWAP_TILE:
-                newState = new StateSwapTile(getPlayer(),tileSelected,backupTile);
+                newState = new StateSwapTile(getPlayer(), backupTile, tileSelected);
                 break;
-
         }
         return newState;
     }

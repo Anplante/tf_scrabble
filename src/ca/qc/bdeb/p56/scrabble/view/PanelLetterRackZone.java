@@ -251,7 +251,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         game.getActivePlayer().clearTiles();
         for (Component comp : panelLettersRack.getComponents()) {
             BtnTile btn = (BtnTile)comp;
-            btn.getTile().setSelected(false);
             game.getActivePlayer().addLetter(btn.getTile());
         }
         game.getActivePlayer().selectNextState(IDState.SELECT_ACTION);
@@ -263,7 +262,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     public void changementEtat() {
 
         if(game.getActivePlayer().getState().getName()==IDState.SWAP_TILE.getName()
-               && game.getActivePlayer().getHasTile() ){
+               ){
             swapTiles();
             } else {
 
@@ -283,7 +282,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         for (Tile letter : playerTiles) {
             BtnTile btnTile = new BtnTile(game, letter, dimension );
-            tile.setFocusable(false);
+            btnTile.setFocusable(false);
             letter.ajouterObservateur(btnTile);
             btnTile.setName("Tile" + i);
             panelLettersRack.add(btnTile);

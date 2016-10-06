@@ -40,6 +40,8 @@ public class MnuOptions extends JDialog implements KeyListener {
 
         setLayout(null);
 
+        setUndecorated(true);
+
         title.setBounds((getWidth()-200)/2,(getHeight()/2)-140,200,50);
         returnGame.setBounds((getWidth()-200)/2,(getHeight()/2)-75,200,50);
         abandon.setBounds((getWidth()-200)/2,(getHeight()/2),200,50);

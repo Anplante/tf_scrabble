@@ -49,11 +49,12 @@ public class StateSwaptTileTest {
 
         game = gameManager.createNewGame(lstPlayer);
 
-        scrabbleGame = new ScrabbleGUI(game, new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+        scrabbleGame = new ScrabbleGUI();
+        scrabbleGame.createScrabbleGame(game);
 
         panelTested = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, "Player letter rack");
-        btnEchanger = (JButton) TestUtils.getChildNamed(panelTested, "Exchange");
-        btnCancel = (JButton) TestUtils.getChildNamed(panelTested, "Cancel_Exchange");
+       // btnEchanger = (JButton) TestUtils.getChildNamed(panelTested, "Exchange");
+       // btnCancel = (JButton) TestUtils.getChildNamed(panelTested, "Cancel_Exchange");
         letterRack = (JPanel) TestUtils.getChildNamed(panelTested, "Letter rack");
         currentPlayer = game.getActivePlayer();
 
@@ -69,15 +70,17 @@ public class StateSwaptTileTest {
     }
 
     @Test
-    public void exchangeSwapTest() {
+    public void exchangeOnlySwapStateTest() {
 
         List<Tile> playerTileBeforeExchange = currentPlayer.getTiles();
 
-        btnTiles.get(2).doClick();
-        btnTiles.get(5).doClick();
+        JButton firstButton = (JButton) TestUtils.getChildNamed(letterRack, "Tile" + 1); //btnTiles.get(2).doClick();
+        firstButton.doClick();
+        JButton secondButton = (JButton) TestUtils.getChildNamed(letterRack, "Tile" + 2); //btnTiles.get(2).doClick();
+        secondButton.doClick();
 
-        assertEquals(playerTileBeforeExchange.get(5), currentPlayer.getTiles().get(2));
-        assertEquals(playerTileBeforeExchange.get(2), currentPlayer.getTiles().get(5));
+        assertEquals(playerTileBeforeExchange.get(1), currentPlayer.getTiles().get(2));
+        assertEquals(playerTileBeforeExchange.get(2), currentPlayer.getTiles().get(1));
 
     }
 

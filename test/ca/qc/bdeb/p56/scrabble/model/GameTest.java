@@ -73,10 +73,6 @@ public class GameTest {
         game.selectLetter(tile2);
         game.playTile(square2);
         game.playWord();
-
         assertEquals(tile1.getValue() + tile2.getValue(), activePlayer.getScore());
     }
-
-
-
 }
