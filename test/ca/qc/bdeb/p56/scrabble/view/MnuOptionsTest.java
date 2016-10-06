@@ -17,6 +17,7 @@ import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * Created by Julien Brosseau on 10/5/2016.
@@ -26,8 +27,11 @@ public class MnuOptionsTest {
     private ScrabbleGUI scrabbleGame;
     private Game game;
     private GameManager gameManager;
-    private JButton btnFinish;
-    private Player player;
+    private JButton abandon;
+    private JButton retourner;
+    private MnuOptions options;
+
+
 
 
     PanelLetterRackZone zoneJoueur;
@@ -46,6 +50,9 @@ public class MnuOptionsTest {
         game = gameManager.createNewGame(lstPlayer);
         scrabbleGame = new ScrabbleGUI(game, new Rectangle(screenSize));
 
+        options = (MnuOptions) TestUtils.getChildNamed(scrabbleGame, "Options");
+        abandon = (JButton) TestUtils.getChildNamed(options, "Abandon");
+        retourner = (JButton) TestUtils.getChildNamed(options, "Return");
     }
 
     @After
@@ -56,12 +63,43 @@ public class MnuOptionsTest {
     @Test
     public void openMnuTest() throws AWTException {
         Robot robot = new Robot();
-
-        // Simulate a mouse click
+        scrabbleGame.requestFocus();
         robot.keyPress(KeyEvent.VK_ESCAPE);
-        robot.keyRelease(KeyEvent.VK_ESCAPE);
+        assertEquals(true,options.isVisible());
 
 
     }
+
+    @Test
+    public void returnMenuBtnTest() throws AWTException {
+        Robot robot = new Robot();
+        scrabbleGame.requestFocus();
+        robot.keyPress(KeyEvent.VK_ESCAPE);
+        assertEquals(true,options.isVisible());
+        retourner.doClick();
+        assertNotEquals(true,options.isVisible());
+    }
+
+    @Test
+    public void abandonMenuBtnTest() throws AWTException {
+        Robot robot = new Robot();
+        scrabbleGame.requestFocus();
+        robot.keyPress(KeyEvent.VK_ESCAPE);
+        assertEquals(true,options.isVisible());
+        retourner.doClick();
+        assertNotEquals(true,options.isVisible());
+    }
+
+    @Test
+    public void closeMnuTest() throws AWTException {
+        Robot robot = new Robot();
+        scrabbleGame.requestFocus();
+        robot.keyPress(KeyEvent.VK_ESCAPE);
+        assertEquals(true,options.isVisible());
+        robot.keyPress(KeyEvent.VK_ESCAPE);
+        assertNotEquals(true,options.isVisible());
+
+    }
 }
+
 

@@ -30,7 +30,9 @@ public class MnuOptions extends JPanel implements KeyListener {
         gameModel = game;
 
         returnGame = new JButton("Retourner au jeu");
+        returnGame.setName("Return");
         abandon = new JButton("Abandonner");
+        abandon.setName("Abandon");
         title = new JLabel("       Menu");
         quitter = new JButton("Quitter");
         title.setFont(new Font(title.getName(), Font.BOLD, 30));
