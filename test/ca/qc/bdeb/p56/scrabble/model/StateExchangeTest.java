@@ -46,8 +46,8 @@ public class StateExchangeTest {
         lstPlayer.add(new Player("Julien"));
 
         game = gameManager.createNewGame(lstPlayer);
-
-        scrabbleGame = new ScrabbleGUI(game, new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+        scrabbleGame = new ScrabbleGUI();
+        scrabbleGame.createScrabbleGame(game);
 
         panelTested = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, "Player letter rack");
         btnEchanger = (JButton) TestUtils.getChildNamed(panelTested, "Exchange");

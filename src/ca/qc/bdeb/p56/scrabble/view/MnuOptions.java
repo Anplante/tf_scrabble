@@ -17,32 +17,34 @@ import java.util.Observer;
 /**
  * Created by 1468636 on 2016-10-04.
  */
-public class MnuOptions extends JPanel implements KeyListener {
+public class MnuOptions extends JDialog implements KeyListener {
 
     private JButton returnGame;
     private JButton abandon;
     private JLabel title;
     private JButton quitter;
-    private Game gameModel;
+    private ScrabbleGUI parent;
 
-    public MnuOptions(int x, int y, Game game) {
-        setBounds(x-200, y-150,400 , 300);
-        gameModel = game;
+    public MnuOptions(ScrabbleGUI parent) {
 
+        setBounds(parent.getWidth()/2-200, parent.getHeight()/2-150,400 , 300);
+
+        this.parent = parent;
         returnGame = new JButton("Retourner au jeu");
         abandon = new JButton("Abandonner");
-        title = new JLabel("       Menu");
+        title = new JLabel("       Menu");   //????
         quitter = new JButton("Quitter");
         title.setFont(new Font(title.getName(), Font.BOLD, 30));
 
         setLayout(null);
+
         title.setBounds((getWidth()-200)/2,(getHeight()/2)-140,200,50);
         returnGame.setBounds((getWidth()-200)/2,(getHeight()/2)-75,200,50);
         abandon.setBounds((getWidth()-200)/2,(getHeight()/2),200,50);
         quitter.setBounds((getWidth()-200)/2,(getHeight()/2)+75,200,50);
         abandon.setFocusable(false);
         quitter.setFocusable(false);
-
+        setModal(true);
         add(title);
         add(returnGame);
         add(abandon);
@@ -50,11 +52,11 @@ public class MnuOptions extends JPanel implements KeyListener {
         addKeyListener(this);
         setFocusable(true);
 
+
         returnGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                gameModel.setIsInMenu(false);
-                gameModel.aviserObservateurs();
+                dispose();
             }
         });
 
@@ -66,11 +68,12 @@ public class MnuOptions extends JPanel implements KeyListener {
                 if(i == 0){
                     JOptionPane.showMessageDialog(null,"Vous avez perdu.",
                             "Fin de partie", JOptionPane.INFORMATION_MESSAGE);
-                    game.setIsOver(true);
-                    game.aviserObservateurs();
+                    parent.returnToMenu();
+                    dispose();
                 }
             }
         });
+
         quitter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -94,7 +97,7 @@ public class MnuOptions extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent keyEvent) {
         if (keyEvent.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            this.setVisible(false);
+            dispose();
         }
     }
 

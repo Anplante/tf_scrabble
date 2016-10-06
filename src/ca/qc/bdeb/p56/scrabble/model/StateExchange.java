@@ -38,6 +38,7 @@ public class StateExchange extends State {
             tilesSelected = new ArrayList<>();
         }
         tilesSelected.add(tile);
+        tile.selectTile(true);
     }
 
     @Override
@@ -68,6 +69,10 @@ public class StateExchange extends State {
         switch (stateSelected)
         {
             case SELECT_ACTION:
+                for(Tile tile : tilesSelected)
+                {
+                    tile.selectTile(false);
+                }
                 newState = new StateSelectAction(getPlayer());
                 break;
             case EXCHANGE:

@@ -27,7 +27,10 @@ public class MainMenuGUITest {
 
     @Before
     public void setUp()  throws Exception {
-        frame = new MainMenuGUI();
+
+        ScrabbleGUI scrabbleGUI = new ScrabbleGUI();
+        // TODO LOUIS : comment accéder au dialog sans passer par le getter
+        frame = scrabbleGUI.getMenu();
         txtInput = (JTextField) TestUtils.getChildNamed(frame, "textBox");
         btnAccept = (JButton) TestUtils.getChildNamed(frame, "Confirm");
         cmbNombreAi = (JComboBox) TestUtils.getChildNamed(frame, "choix");

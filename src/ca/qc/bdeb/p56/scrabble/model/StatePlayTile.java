@@ -33,27 +33,24 @@ public class StatePlayTile extends State {
             tilesPlaced = new ArrayList<>();
         }
 
-        if(isValidMove())
-        {
-            if(originalTilesOder == null)
-            {
+        if (isValidMove()) {
+            if (originalTilesOder == null) {
                 originalTilesOder = getPlayer().getTiles();
             }
             tilesPlaced.add(squareSelected);
             squareSelected.setLetter(tileSelected); // La partie devrait le faire??
+            tileSelected.selectTile(false);
             getPlayer().remove(tileSelected);  // idem
             getPlayer().setHasTile(false);
             getPlayer().aviserObservateurs();
         }
     }
 
-    private boolean isValidMove()
-    {
+    private boolean isValidMove() {
         boolean validMove = false;
 
-        if(!squareSelected.containLetter() && letterOnSameAxe())
-        {
-                validMove = true;
+        if (!squareSelected.containLetter() && letterOnSameAxe()) {
+            validMove = true;
         }
 
         // autres vérifications à venir
@@ -61,26 +58,22 @@ public class StatePlayTile extends State {
         return validMove;
     }
 
-    private boolean letterOnSameAxe()
-    {
+    private boolean letterOnSameAxe() {
         boolean validMove = true;
 
-        if(!tilesPlaced.isEmpty()){
+        if (!tilesPlaced.isEmpty()) {
 
-            for(Square tilePosition : tilesPlaced)
-            {
-                if(tilePosition.getPosRow() != squareSelected.getPosRow() ){
+            for (Square tilePosition : tilesPlaced) {
+                if (tilePosition.getPosRow() != squareSelected.getPosRow()) {
                     validMove = false;
                     break;
                 }
             }
 
-            if(!validMove)
-            {
+            if (!validMove) {
                 validMove = true;
-                for(Square tilePosition : tilesPlaced)
-                {
-                    if(tilePosition.getPosColumn() != squareSelected.getPosColumn() ){
+                for (Square tilePosition : tilesPlaced) {
+                    if (tilePosition.getPosColumn() != squareSelected.getPosColumn()) {
                         validMove = false;
                         break;
                     }
@@ -92,16 +85,19 @@ public class StatePlayTile extends State {
 
     @Override
     protected void selectTile(Tile tileSelected) {
+
+        this.tileSelected.selectTile(false);
+        tileSelected.selectTile(true);
         this.tileSelected = tileSelected;
     }
 
     @Override
     protected void selectNextState(IDState stateSelected) {
 
-        if(stateSelected == IDState.PENDING) // il y a un probleme lorsque le joueur decide de passer un tour alors qu'il est en train de placer des lettres, a voir la solution a utiliser
+        if (stateSelected == IDState.PENDING) // il y a un probleme lorsque le joueur decide de passer un tour alors qu'il est en train de placer des lettres, a voir la solution a utiliser
         {
-            if(!verifyValidWord()){
-               return;
+            if (!verifyValidWord()) {
+                return;
             }
         }
         this.stateSelected = stateSelected;
@@ -120,11 +116,13 @@ public class StatePlayTile extends State {
 
                 break;
             case EXCHANGE:
+                tileSelected.selectTile(false);
                 getGame().recallTiles(tilesPlaced);
                 getGame().replacePlayerTilesInOrder(originalTilesOder);
                 newState = new StateExchange(getPlayer());
                 break;
             case SELECT_ACTION:
+                tileSelected.selectTile(false);
                 getGame().recallTiles(tilesPlaced);
                 getGame().replacePlayerTilesInOrder(originalTilesOder);
                 newState = new StateSelectAction(getPlayer());
@@ -133,12 +131,10 @@ public class StatePlayTile extends State {
         return newState;
     }
 
-    private boolean verifyValidWord()
-    {
+    private boolean verifyValidWord() {
         boolean validMove = true;
 
-        if(getGame().getMovesHistory().isEmpty())
-        {
+        if (getGame().getMovesHistory().isEmpty()) {
             validMove = verifyFirstWordAtCenter();
         }
 
@@ -149,19 +145,16 @@ public class StatePlayTile extends State {
     }
 
 
-    private boolean verifyFirstWordAtCenter()
-    {
+    private boolean verifyFirstWordAtCenter() {
         boolean validMove = false;
 
-        for(Square square: tilesPlaced)
-        {
-            if(square.isCenter())
-            {
+        for (Square square : tilesPlaced) {
+            if (square.isCenter()) {
                 validMove = true;
                 break;
             }
         }
-       return validMove;
+        return validMove;
     }
 
     @Override

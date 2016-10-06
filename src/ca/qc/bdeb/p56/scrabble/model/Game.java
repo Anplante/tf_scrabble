@@ -29,22 +29,12 @@ public class Game implements Observable {
     private List<Player> players;
     private int activePlayerIndex;
     private static List<Tile> alphabetBag;
-    private boolean isInMenu;
-    private boolean isOver;
-
     private List<Move> movesHistory;
 
 
-    public void setIsOver(boolean bool){
-        isOver = bool;
-    }
-
-    public boolean getIsOver(){
-        return isOver;
-    }
 
     public Game(String filePath, List<Player> players) {
-        isInMenu = false;
+
         observateurs = new LinkedList<>();
         movesHistory = new ArrayList<>();
         loadParameters(filePath);
@@ -55,13 +45,7 @@ public class Game implements Observable {
         }
     }
 
-    public boolean getIsInMenu(){
-        return isInMenu;
-    }
 
-    public void  setIsInMenu(Boolean bool){
-        isInMenu = bool;
-    }
 
     public Board getBoard(){ return boardManager.getBoard();}
 
@@ -268,9 +252,14 @@ public class Game implements Observable {
 
     public void recallTiles(List<Square> tilesPlaced) {
 
-        for (Square tileLocation : tilesPlaced) {
-            getActivePlayer().addLetter(tileLocation.getTileOn());
-            tileLocation.setLetter(null);
+        if(tilesPlaced != null)
+        {
+            for (Square tileLocation : tilesPlaced) {
+                getActivePlayer().addLetter(tileLocation.getTileOn());
+                tileLocation.setLetter(null);
+            }
+
+
         }
 
     }
@@ -323,18 +312,23 @@ public class Game implements Observable {
 
     public void replacePlayerTilesInOrder(List<Tile> originalOrder){
 
-        List<Tile> currentOrder = getActivePlayer().getTiles();
 
-      if( currentOrder.containsAll(originalOrder)){
+        if(originalOrder != null)
+        {
+            List<Tile> currentOrder = getActivePlayer().getTiles();
 
-          for(Tile tile : originalOrder)
-          {
-              getActivePlayer().remove(tile);
-          }
-          for(Tile tile : originalOrder)
-          {
-              getActivePlayer().addLetter(tile);
-          }
-      }
+            if( currentOrder.containsAll(originalOrder)){
+
+                for(Tile tile : originalOrder)
+                {
+                    getActivePlayer().remove(tile);
+                }
+                for(Tile tile : originalOrder)
+                {
+                    getActivePlayer().addLetter(tile);
+                }
+            }
+        }
+
     }
 }

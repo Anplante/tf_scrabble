@@ -93,7 +93,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         initExchangeOption();
         initRecallOption();
         initiBtnPlayWord();
-        initForfeitOption();
+       // initForfeitOption();
     }
 
     private void initPassTurnOption()
@@ -194,7 +194,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         });
     }
 
-    private void initForfeitOption() {
+ /*   private void initForfeitOption() {
         btnForfeit = new JButton("Abandonner");
         btnForfeit.setSize(100, 50);
         btnForfeit.setName("forfeit");
@@ -209,7 +209,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
                 }
             }
         });
-    }
+    }*/
 
     private void resetPlayer() {
         resetPlayers = new ArrayList<>();
@@ -219,7 +219,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             resetPlayers.add(new AiPlayer());
         }
     }
-    private void reinitializeGame() {
+
+/*    private void reinitializeGame() {
 
         GameManager gameManager = new GameManager();
         game = gameManager.createNewGame(resetPlayers);
@@ -231,7 +232,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         gameGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         SwingUtilities.windowForComponent(this).dispose();
 
-    }
+    }*/
 
     @Override
     public void changementEtat() {
@@ -249,15 +250,14 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         int i = 0;
 
         Dimension dimension = new Dimension(TILE_SIZE, TILE_SIZE);
-        int we = getWidth() / 12;
 
         for (Tile letter : playerTiles) {
-            BtnTile tile = new BtnTile(game, letter, dimension );
-            tile.setName("Tile" + i);
-            panelLettersRack.add(tile);
+            BtnTile btnTile = new BtnTile(game, letter, dimension );
+            letter.ajouterObservateur(btnTile);
+            btnTile.setName("Tile" + i);
+            panelLettersRack.add(btnTile);
             i++;
         }
-      //  panelLettersRack.revalidate();
         panelLettersRack.repaint();
     }
 
