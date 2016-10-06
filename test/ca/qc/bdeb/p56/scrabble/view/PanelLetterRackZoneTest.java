@@ -45,10 +45,9 @@ public class PanelLetterRackZoneTest {
         lstPlayer.add(new Player("Antoine"));
         lstPlayer.add(new Player("Louis"));
         lstPlayer.add(new Player("Julien"));
-
+        scrabbleGame = new ScrabbleGUI();
         game = gameManager.createNewGame(lstPlayer);
-        scrabbleGame = new ScrabbleGUI(game, new Rectangle(screenSize));
-
+        scrabbleGame.createScrabbleGame(game);
     }
 
     @After

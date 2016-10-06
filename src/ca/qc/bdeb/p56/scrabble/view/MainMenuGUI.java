@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Antoine on 9/12/2016.
  */
-public class MainMenuGUI extends JFrame implements Observateur {
+public class MainMenuGUI extends JDialog {
 
     private JPanel panelMenu;
     private JTextField txtNom;
@@ -31,20 +31,20 @@ public class MainMenuGUI extends JFrame implements Observateur {
     private Player player;
     private List<Player> players;
     private Game game;
+    ScrabbleGUI parent;
 
-    public MainMenuGUI() {
+    public MainMenuGUI(ScrabbleGUI parent) {
 
         super();
 
+        this.parent = parent;
         setLayout(null);
         players = new ArrayList<>();
-
 
         JFrame fenetre = new JFrame();
         this.setTitle("Menu");
         fenetre.pack();
         Insets insets = fenetre.getInsets();
-        fenetre = null;
         setSize(new Dimension(insets.left + insets.right + 400,
                 insets.top + insets.bottom + 400));
 
@@ -54,12 +54,8 @@ public class MainMenuGUI extends JFrame implements Observateur {
         int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
         this.setLocation(x, y);
-
-
         setVisible(true);
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
 
     }
 
@@ -128,7 +124,7 @@ public class MainMenuGUI extends JFrame implements Observateur {
         int limit = (int) cmbNombreAi.getSelectedIndex();
         ++limit;
         for (int i = 0; i < limit; i++) {
-            players.add(new AiPlayer(game));
+            players.add(new AiPlayer());
         }
     }
 
@@ -136,13 +132,8 @@ public class MainMenuGUI extends JFrame implements Observateur {
 
         gameManager = new GameManager();
         game = gameManager.createNewGame(players);
-        game.ajouterObservateur(this);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        ScrabbleGUI gameGUI = new ScrabbleGUI(game, new Rectangle(screenSize));
-        gameGUI.setVisible(true);
+        parent.createScrabbleGame(game);
         setVisible(false);
-        gameGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
     private void ajouterLesLabels() {
@@ -185,15 +176,4 @@ public class MainMenuGUI extends JFrame implements Observateur {
         return game.getPlayers().size();
     }
 
-    @Override
-    public void changementEtat() {
-        if(game.getIsOver()){
-            setVisible(true);
-        }
-    }
-
-    @Override
-    public void changementEtat(Enum<?> e, Object o) {
-
-    }
 }

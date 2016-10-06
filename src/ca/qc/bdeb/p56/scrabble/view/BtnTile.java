@@ -5,6 +5,7 @@ import ca.qc.bdeb.p56.scrabble.model.StatePlayTile;
 import ca.qc.bdeb.p56.scrabble.model.StateSwapTile;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
+import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +15,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by TheFrenchOne on 9/12/2016.
  */
-public class BtnTile extends JButton {
+public class BtnTile extends JButton implements Observateur {
 
     private Color BASIC_COLOR = Color.lightGray;
     private Color REMOVE_COLOR = Color.red;
@@ -25,24 +26,22 @@ public class BtnTile extends JButton {
     private Tile tile;
 
 
-    public BtnTile(Game gameModel, Tile tile, Dimension dimension,boolean selected) {
-
-        super("" + tile.getLetter());
+    public BtnTile(Game gameModel, Tile tile, Dimension dimension) {
+        super(tile.getLetter() + " (" + tile.getValue() + ")");
+        if (tile.getLetter().equals(" ")) {
+            this.setText("     ");
+        }
         this.gameModel = gameModel;
         this.tile = tile;
         setSize(dimension);
-        if(selected){
-            setSelectedColor();
-        }else {
-            setBasicColor();
-        }
+        changementEtat();
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setFocusable(false);
-        this.tile.setSelected(selected);
 
 
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+               // gameModel.selectLetter(tile);
                 if (gameModel.getActivePlayer().getState().getName() == IDState.EXCHANGE.getName()) {
                     if (getBackground() == BASIC_COLOR) {
                         setExchangeColor();
@@ -72,25 +71,6 @@ public class BtnTile extends JButton {
         });
     }
 
-    public Color getBASIC_COLOR(){
-        return BASIC_COLOR;
-    }
-
-    public Color getSELECTED_COLOR(){
-        return SELECTED_COLOR;
-    }
-
-    public void setSelectedColor() {
-        setBackground(SELECTED_COLOR);
-    }
-
-    public void setExchangeColor() {
-        setBackground(REMOVE_COLOR);
-    }
-
-    public void setBasicColor() {
-        setBackground(BASIC_COLOR);
-    }
 
     public Tile getTile() {
         return tile;
@@ -99,5 +79,27 @@ public class BtnTile extends JButton {
     public void setTile(Tile aTile) {
         this.tile = aTile;
         this.setText("" + aTile.getLetter());
+    }
+
+    @Override
+    public void changementEtat() {
+
+        if(tile.isSelected())
+        {
+            if (gameModel.getActivePlayer().getState().getName() == IDState.EXCHANGE.getName()) {
+                setBackground(REMOVE_COLOR);
+            }
+            else {
+                setBackground(SELECTED_COLOR);
+            }
+        }
+        else{
+            setBackground(BASIC_COLOR);
+        }
+    }
+
+    @Override
+    public void changementEtat(Enum<?> e, Object o) {
+
     }
 }

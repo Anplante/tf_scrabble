@@ -1,27 +1,26 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
+import ca.qc.bdeb.p56.scrabble.utility.Observable;
+import ca.qc.bdeb.p56.scrabble.utility.Observateur;
+
+import java.util.LinkedList;
+
 /**
  * Created by TheFrenchOne on 9/11/2016.
  */
-public class Tile {
+public class Tile implements Observable {
 
     private String letter;
     private int value;
-    private boolean selected;
+    private boolean isSelected;
+    private transient LinkedList<Observateur> observateurs;
 
-    public Tile(String letter, int value, Boolean isSelect)
+    public Tile(String letter, int value)
     {
         this.letter = letter;
         this.value = value;
-        selected = isSelect;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
-
-    public boolean getSelected(){
-        return selected;
+        isSelected = false;
+        observateurs = new LinkedList<>();
     }
 
     public String getLetter()
@@ -32,5 +31,39 @@ public class Tile {
     public int getValue()
     {
         return value;
+    }
+
+    public boolean isSelected()
+    {
+        return isSelected;
+    }
+
+    public void selectTile(boolean newState)  // un nom plus significatif
+    {
+        isSelected = newState;
+        aviserObservateurs();
+    }
+
+    @Override
+    public void ajouterObservateur(Observateur o) {
+            observateurs.clear();
+            observateurs.add(o);
+    }
+
+    @Override
+    public void retirerObservateur(Observateur o) {
+          observateurs.remove(o);
+    }
+
+    @Override
+    public void aviserObservateurs() {
+        for (Observateur ob : observateurs) {
+            ob.changementEtat();
+        }
+    }
+
+    @Override
+    public void aviserObservateurs(Enum<?> e, Object o) {
+
     }
 }

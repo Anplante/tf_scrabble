@@ -25,6 +25,7 @@ public class StateSelectAction extends State {
     protected  void selectTile(Tile tileSelected)
     {
         this.tileSelected = tileSelected;
+        tileSelected.selectTile(true);
         stateSelected = IDState.PLAY_TILE;
     }
 

@@ -41,7 +41,8 @@ public class ScrabbleGUITest {
         lstPlayer.add(new Player("Julien"));
 
         game = gameManager.createNewGame(lstPlayer);
-        scrabbleGame = new ScrabbleGUI(game, new Rectangle(screenSize));
+        scrabbleGame = new ScrabbleGUI();
+        scrabbleGame.createScrabbleGame(game);
 
     }
 

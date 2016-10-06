@@ -14,7 +14,7 @@ public class AiPlayer extends Player implements ListOfName{
 
     public static List<String> tmpList = AIName;
 
-    public AiPlayer(Game game) {
+    public AiPlayer() {
         super(chooseName());
     }
 
