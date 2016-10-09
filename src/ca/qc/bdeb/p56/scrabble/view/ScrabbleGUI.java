@@ -23,7 +23,7 @@ import java.awt.*;
 /**
  * Created by Louis Luu Lim on 9/7/2016.
  */
-public class ScrabbleGUI extends JFrame implements KeyListener {
+public class ScrabbleGUI extends JFrame {
 
     private final double RATIO_BOARD_ZONE = 0.1;
 
@@ -62,15 +62,27 @@ public class ScrabbleGUI extends JFrame implements KeyListener {
         } catch (IOException ex) {
             // FIXME ANTOINE : ???
         }
+
         setResizable(false);
         setFocusable(true);
-        addKeyListener(this);
         setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menu = new MainMenuGUI(this);
         menu.setName("Menu");
+        addKeyBindings();
     }
 
+    private final AbstractAction actionEscape = new AbstractAction("Escape") {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            if (options == null)// il faudra p-e l'enlever, car on veut que ca soit focus tant que ce n'est pas termine
+            {
+                options = new MnuOptions(ScrabbleGUI.this);
+            }
+            options.setVisible(true);
+        }
+    };
 
     public void createScrabbleGame(Game game) {
 
@@ -213,35 +225,18 @@ public class ScrabbleGUI extends JFrame implements KeyListener {
         gameModel.startGame();
     }
 
-    @Override
-    public void keyTyped(KeyEvent keyEvent) {
 
-    }
 
-    @Override
-    public void keyPressed(KeyEvent keyEvent) {
+    private void addKeyBindings()
+    {
 
-        if (keyEvent.getKeyCode() == KeyEvent.VK_ESCAPE) {
-
-            if (options == null)// il faudra p-e l'enlever, car on veut que ca soit focus tant que ce n'est pas termine
-            {
-                options = new MnuOptions(this);
-            }
-            options.setVisible(true);
-        }
+        JRootPane contentPane = (JRootPane) getRootPane();
+        contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Escape");
+        contentPane.getActionMap().put("Escape", actionEscape);
     }
 
 
-    private void createOptionsPanel() {
 
-        options.setVisible(false);
-        add(options);
-    }
-
-    @Override
-    public void keyReleased(KeyEvent keyEvent) {
-
-    }
 
     public MainMenuGUI getMenu() {
         return menu;

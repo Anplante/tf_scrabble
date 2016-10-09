@@ -134,6 +134,7 @@ public class MainMenuGUI extends JDialog {
         game = gameManager.createNewGame(players);
         parent.createScrabbleGame(game);
         setVisible(false);
+        //dispose();
     }
 
     private void ajouterLesLabels() {
