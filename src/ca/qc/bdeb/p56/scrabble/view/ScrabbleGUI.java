@@ -28,7 +28,7 @@ public class ScrabbleGUI extends JFrame {
     private final double RATIO_BOARD_ZONE = 0.1;
 
     private final double RATIO_PANEL_INFORMATION = 0.1;
-    private final double RATIO_LETTER_RACK_ZONE = 0.15;
+    private final double RATIO_LETTER_RACK_ZONE = 0.1;
     private final int BOARD_ZONE_HEIGHT;
     private final int LETTER_RACK_ZONE_HEIGHT;
     private final int MARGIN = 5;
@@ -171,7 +171,7 @@ public class ScrabbleGUI extends JFrame {
         int y = getHeight() - LETTER_RACK_ZONE_HEIGHT;
         int witdhBoard = pnlBoard.getWidth();
 
-        Rectangle boundsZoneLetterRack = new Rectangle(x - 25, y, witdhBoard + 50, LETTER_RACK_ZONE_HEIGHT);
+        Rectangle boundsZoneLetterRack = new Rectangle(x, y + MARGIN, witdhBoard, LETTER_RACK_ZONE_HEIGHT/2);
         panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack);
 
         panelLetterRack.setPlayer(gameModel.getPlayers());

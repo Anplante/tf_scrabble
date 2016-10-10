@@ -2,6 +2,7 @@ package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.ai.AiPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Game;
+import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
@@ -38,26 +39,29 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
     public PanelLetterRackZone(Rectangle boundsZoneLetterRack) {
 
-        super(new FlowLayout());
+        super();
+        //setLayout(new FlowLayout());
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        //setLayout(new GridLayout(1,10,2,0));
         currentPlayer = null;
         players = null;
         setBounds(boundsZoneLetterRack);
-        panelLettersRack = new JPanel(new FlowLayout());
+        panelLettersRack = new JPanel();
+        // panelLettersRack.setLayout(new BoxLayout(panelLettersRack, BoxLayout.X_AXIS));
 
-       // setLayout(null);
-        TILE_SIZE = getWidth()/12;
+
+        TILE_SIZE = getWidth() / 12;
         initPanelLettersRack();
     }
 
-    private void initPanelLettersRack()
-    {
+    private void initPanelLettersRack() {
 
 
         int x = getWidth() / 4;
         int y = getHeight() / 8;
 
         int width = TILE_SIZE * 7;
-        panelLettersRack.setBounds(x, y, width,TILE_SIZE);
+        panelLettersRack.setBounds(x, y, width, TILE_SIZE);
         panelLettersRack.setName("Letter rack");
         add(panelLettersRack);
         initializeOptions();
@@ -91,13 +95,12 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         initExchangeOption();
         initRecallOption();
         initiBtnPlayWord();
-       // initForfeitOption();
+        initForfeitOption();
     }
 
-    private void initPassTurnOption()
-    {
+    private void initPassTurnOption() {
         btnPassTurn = new JButton("Passer le tour");
-        btnPassTurn.setSize(100, 50);
+        btnPassTurn.setSize(150, 100);
         btnPassTurn.setName("Pass turn");
         add(btnPassTurn);
         btnPassTurn.addActionListener(new ActionListener() {
@@ -120,9 +123,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         btnCancelExchange.setName("Cancel_Exchange");
 
 
-
         add(btnSwapTiles);
-        add(btnCancelExchange);
+
 
 
         btnSwapTiles.addActionListener(new ActionListener() {
@@ -132,11 +134,10 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
                 currentPlayer.selectNextState(IDState.EXCHANGE);
 
 
-
-                if(currentPlayer.getState().getName()!= IDState.EXCHANGE.getName()) {
+                if (currentPlayer.getState().getName() != IDState.EXCHANGE.getName()) {
                     btnSwapTiles.setText("Confirmer");
                     disableAllOtherBtnExchange(false);
-                }else {
+                } else {
                     disableAllOtherBtnExchange(true);
                     //changementEtat();
                     btnSwapTiles.setText("Échanger");
@@ -155,13 +156,14 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         });
     }
 
-    private void disableAllOtherBtnExchange(boolean enabler){
+    private void disableAllOtherBtnExchange(boolean enabler) {
         btnPlayWord.setEnabled(enabler);
         btnRecall.setEnabled(enabler);
         btnPassTurn.setEnabled(enabler);
         btnCancelExchange.setVisible(!enabler);
 
     }
+
     private void initRecallOption() {
 
         btnRecall = new JButton("Recall");
@@ -192,7 +194,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         });
     }
 
- /*   private void initForfeitOption() {
+    private void initForfeitOption() {
         btnForfeit = new JButton("Abandonner");
         btnForfeit.setSize(100, 50);
         btnForfeit.setName("forfeit");
@@ -200,66 +202,88 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         btnForfeit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int dialogButton = JOptionPane.YES_NO_OPTION;
-                int result = JOptionPane.showConfirmDialog((Component) null, "Voulez recommencez la partie?","Abandonner", JOptionPane.YES_NO_CANCEL_OPTION);
+                int result = JOptionPane.showConfirmDialog((Component) null, "Voulez recommencez la partie?", "Abandonner", JOptionPane.YES_NO_CANCEL_OPTION);
                 if (result == JOptionPane.YES_OPTION) {
                     resetPlayer();
                     reinitializeGame();
                 }
             }
         });
-    }*/
+    }
+
 
     private void resetPlayer() {
         resetPlayers = new ArrayList<>();
         resetPlayers.add(new Player(currentPlayer.getName()));
 
-        for (int i = 0; i < players.size() - 1 ; i++) {
+        for (int i = 0; i < players.size() - 1; i++) {
             resetPlayers.add(new AiPlayer());
         }
     }
 
-/*    private void reinitializeGame() {
+
+    private void reinitializeGame() {
 
         GameManager gameManager = new GameManager();
         game = gameManager.createNewGame(resetPlayers);
         game.ajouterObservateur(this);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        ScrabbleGUI gameGUI = new ScrabbleGUI(game, new Rectangle(screenSize));
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  // TODO Louis : à revoir, car je ne crois pas que le component devrait directement recréer son parent.
+        ScrabbleGUI gameGUI = new ScrabbleGUI();
+
+      /*  gameGUI.createScrabbleGame(game);
         gameGUI.setVisible(true);
         setVisible(false);
         gameGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        SwingUtilities.windowForComponent(this).dispose();
-
-    }*/
+        SwingUtilities.windowForComponent(this).dispose();*/
+    }
 
     @Override
     public void changementEtat() {
 
+        if (currentPlayer != game.getActivePlayer()) {
+            currentPlayer = game.getActivePlayer();
+        }
 
-            if (currentPlayer != game.getActivePlayer()) {
-                currentPlayer = game.getActivePlayer();
-            }
+        for (Component comp : getComponents()) {
+            remove(comp);
+        }
 
-            for (Component comp : panelLettersRack.getComponents()) {
-                panelLettersRack.remove(comp);
-            }
+        add(btnForfeit);
+        add(btnSwapTiles);
+        add(panelLettersRack);
 
-            List<Tile> playerTiles = currentPlayer.getTiles();
+        if (currentPlayer.getState().getName() == IDState.PLAY_TILE.getName()) {
 
-            int i = 0;
+            add(btnRecall);
+            add(btnPlayWord);
 
-            Dimension dimension = new Dimension(TILE_SIZE, TILE_SIZE);
+        }
+        else{
+            add(btnPassTurn);
+            add(btnCancelExchange);
+        }
+
+
+        for (Component comp : panelLettersRack.getComponents()) {
+            panelLettersRack.remove(comp);
+        }
+
+        List<Tile> playerTiles = currentPlayer.getTiles();
+
+        int i = 0;
+
+        Dimension dimension = new Dimension(TILE_SIZE, TILE_SIZE);
 
         for (Tile letter : playerTiles) {
-            BtnTile btnTile = new BtnTile(game, letter, dimension );
+            BtnTile btnTile = new BtnTile(game, letter, dimension);
             btnTile.setFocusable(false);
             letter.ajouterObservateur(btnTile);
             btnTile.setName("Tile" + i);
             panelLettersRack.add(btnTile);
             i++;
         }
-            panelLettersRack.repaint();
-        }
+        panelLettersRack.repaint();
+    }
 
     @Override
     public void changementEtat(Enum<?> e, Object o) {
