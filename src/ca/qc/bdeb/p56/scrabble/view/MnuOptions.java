@@ -17,7 +17,7 @@ import java.util.Observer;
 /**
  * Created by 1468636 on 2016-10-04.
  */
-public class MnuOptions extends JDialog implements KeyListener {
+public class MnuOptions extends JDialog{
 
     private JButton returnGame;
     private JButton abandon;
@@ -53,8 +53,9 @@ public class MnuOptions extends JDialog implements KeyListener {
         add(returnGame);
         add(abandon);
         add(quitter);
-        addKeyListener(this);
+        addKeybindings();
         setFocusable(true);
+
 
 
         returnGame.addActionListener(new ActionListener() {
@@ -93,20 +94,18 @@ public class MnuOptions extends JDialog implements KeyListener {
     /* important Statement */
     }
 
-    @Override
-    public void keyTyped(KeyEvent keyEvent) {
+    private void addKeybindings() {
 
+        JRootPane contentPane = (JRootPane) getRootPane();
+        contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Escape");
+        contentPane.getActionMap().put("Escape", actionEscape);
     }
 
-    @Override
-    public void keyPressed(KeyEvent keyEvent) {
-        if (keyEvent.getKeyCode() == KeyEvent.VK_ESCAPE) {
+    private final AbstractAction actionEscape = new AbstractAction("Escape") {
+        @Override
+        public void actionPerformed(ActionEvent e) {
             dispose();
         }
-    }
+    };
 
-    @Override
-    public void keyReleased(KeyEvent keyEvent) {
-
-    }
 }

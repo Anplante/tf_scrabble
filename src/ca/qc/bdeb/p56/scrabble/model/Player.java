@@ -6,6 +6,7 @@ import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -182,4 +183,10 @@ public class Player implements Observable {
     }
 
     public Color getColor() { return this.playerColor; }
+
+    public void swapTile(Tile backupTile, Tile tileSelected) {
+
+        Collections.swap(tiles, tiles.indexOf(backupTile), tiles.indexOf(tileSelected));
+        aviserObservateurs();
+    }
 }

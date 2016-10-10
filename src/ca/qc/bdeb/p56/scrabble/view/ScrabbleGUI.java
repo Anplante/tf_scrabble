@@ -76,10 +76,9 @@ public class ScrabbleGUI extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            if (options == null)// il faudra p-e l'enlever, car on veut que ca soit focus tant que ce n'est pas termine
-            {
-                options = new MnuOptions(ScrabbleGUI.this);
-            }
+
+            options = new MnuOptions(ScrabbleGUI.this);
+            options.setName("Options");
             options.setVisible(true);
         }
     };

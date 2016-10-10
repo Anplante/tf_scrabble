@@ -2,8 +2,6 @@ package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.ai.AiPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Game;
-import ca.qc.bdeb.p56.scrabble.model.StateSwapTile;
-import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
@@ -12,7 +10,6 @@ import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -235,36 +232,9 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
     }*/
 
-    private void swapTiles(){
-        StateSwapTile swap = (StateSwapTile) game.getActivePlayer().getState();
-        for (Component comp : panelLettersRack.getComponents()) {
-            BtnTile btn = (BtnTile)comp;
-            if(btn.getTile() == swap.getTileSelected()){
-                swap.setFirst(btn);
-            }
-            if(btn.getTile() == swap.getSwapTile()){
-                swap.setSecond(btn);
-            }
-        }
-        swap.swap();
-        game.getActivePlayer().setHasTile(false);
-        game.getActivePlayer().clearTiles();
-        for (Component comp : panelLettersRack.getComponents()) {
-            BtnTile btn = (BtnTile)comp;
-            game.getActivePlayer().addLetter(btn.getTile());
-        }
-        game.getActivePlayer().selectNextState(IDState.SELECT_ACTION);
-        game.getActivePlayer().nextState();
-        panelLettersRack.repaint();
-    }
-
     @Override
     public void changementEtat() {
 
-        if(game.getActivePlayer().getState().getName()==IDState.SWAP_TILE.getName()
-               ){
-            swapTiles();
-            } else {
 
             if (currentPlayer != game.getActivePlayer()) {
                 currentPlayer = game.getActivePlayer();
@@ -290,7 +260,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         }
             panelLettersRack.repaint();
         }
-    }
 
     @Override
     public void changementEtat(Enum<?> e, Object o) {

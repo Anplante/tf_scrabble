@@ -17,12 +17,11 @@ public class StatePlayTile extends State {
     private IDState stateSelected;
     private List<Square> tilesPlaced;
     private List<Tile> originalTilesOder;
-    private Tile backupTile;
 
     public StatePlayTile(Player currentPlayer, Tile tileSelected) {
         super(currentPlayer, IDState.PLAY_TILE);
         this.tileSelected = tileSelected;
-
+        tilesPlaced = new ArrayList<>();
         readyToChange = false;
     }
 
@@ -31,12 +30,9 @@ public class StatePlayTile extends State {
     protected void selectSquare(Square squareSelected) {
 
         this.squareSelected = squareSelected;
-        if (tilesPlaced == null) {
-            tilesPlaced = new ArrayList<>();
-        }
-
 
         if (isValidMove()) {
+
             if (originalTilesOder == null) {
                 originalTilesOder = getPlayer().getTiles();
             }
@@ -45,10 +41,30 @@ public class StatePlayTile extends State {
             squareSelected.setLetter(tileSelected); // La partie devrait le faire??
             tileSelected.selectTile(false);
             getPlayer().remove(tileSelected);  // idem
-            getPlayer().setHasTile(false);
             getPlayer().aviserObservateurs();
             tileSelected.selectTile(false);
             tileSelected = null;
+        }
+    }
+
+
+    @Override
+    protected void selectTile(Tile tileSelected) {
+
+        if (this.tileSelected == null) {
+            tileSelected.selectTile(true);
+            this.tileSelected = tileSelected;
+        } else {
+
+            this.tileSelected.selectTile(false);  // p-e pas necessaire
+            getPlayer().swapTile(tileSelected, this.tileSelected);
+
+            if(tilesPlaced.isEmpty())
+            {
+                selectNextState(IDState.SELECT_ACTION);
+                readyToChange = true;
+            }
+
         }
     }
 
@@ -89,19 +105,6 @@ public class StatePlayTile extends State {
         return validMove;
     }
 
-    @Override
-    protected void selectTile(Tile tileSelected) {
-
-        if (this.tileSelected == null) {
-            tileSelected.selectTile(true);
-            this.tileSelected = tileSelected;
-        } else {
-            selectNextState(IDState.SWAP_TILE);
-            this.tileSelected.selectTile(false);  // p-e pas necessaire
-            backupTile = tileSelected;
-            readyToChange = true;
-        }
-    }
 
     @Override
     protected void selectNextState(IDState stateSelected) {
@@ -118,7 +121,6 @@ public class StatePlayTile extends State {
         readyToChange = true;
     }
 
-
     @Override
     protected State getNextState() {
 
@@ -131,7 +133,6 @@ public class StatePlayTile extends State {
 
                 break;
             case EXCHANGE:
-
                 getGame().recallTiles(tilesPlaced);
                 getGame().replacePlayerTilesInOrder(originalTilesOder);
                 newState = new StateExchange(getPlayer());
@@ -140,9 +141,6 @@ public class StatePlayTile extends State {
                 getGame().recallTiles(tilesPlaced);
                 getGame().replacePlayerTilesInOrder(originalTilesOder);
                 newState = new StateSelectAction(getPlayer());
-                break;
-            case SWAP_TILE:
-                newState = new StateSwapTile(getPlayer(), backupTile, tileSelected);
                 break;
         }
         return newState;
@@ -178,4 +176,5 @@ public class StatePlayTile extends State {
     protected boolean readyForNextState() {
         return readyToChange;
     }
+
 }

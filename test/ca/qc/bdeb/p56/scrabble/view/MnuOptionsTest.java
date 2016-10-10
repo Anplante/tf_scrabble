@@ -8,12 +8,14 @@ import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import sun.applet.Main;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.*;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -32,8 +34,6 @@ public class MnuOptionsTest {
     private MnuOptions options;
 
 
-
-
     PanelLetterRackZone zoneJoueur;
 
 
@@ -42,18 +42,20 @@ public class MnuOptionsTest {
 
         gameManager = new GameManager();
 
-        java.util.List lstPlayer = new ArrayList<Player>();
+/*        List<Player> lstPlayer = new ArrayList<>();
         lstPlayer.add(new Player("Antoine"));
         lstPlayer.add(new Player("Louis"));
-        lstPlayer.add(new Player("Julien"));
+        lstPlayer.add(new Player("Julien"));*/
 
-        game = gameManager.createNewGame(lstPlayer);
+        //game = gameManager.createNewGame(lstPlayer);
+
         scrabbleGame = new ScrabbleGUI();
-        scrabbleGame.createScrabbleGame(game);
 
-        options = (MnuOptions) TestUtils.getChildNamed(scrabbleGame, "Options");
-        abandon = (JButton) TestUtils.getChildNamed(options, "Abandon");
-        retourner = (JButton) TestUtils.getChildNamed(options, "Return");
+        MainMenuGUI frame = scrabbleGame.getMenu();
+        JButton btnAccept = (JButton) TestUtils.getChildNamed(frame, "Confirm");
+        btnAccept.doClick();
+        // scrabbleGame.createScrabbleGame(game);
+
     }
 
     @After
@@ -63,12 +65,15 @@ public class MnuOptionsTest {
 
     @Test
     public void openMnuTest() throws AWTException {
+
         Robot robot = new Robot();
-        scrabbleGame.requestFocus();
+        scrabbleGame.setVisible(true);
+        boolean success = scrabbleGame.hasFocus();
         robot.keyPress(KeyEvent.VK_ESCAPE);
-        assertEquals(true,options.isVisible());
+        robot.keyRelease(KeyEvent.VK_ESCAPE);
 
-
+        options = (MnuOptions) TestUtils.getChildNamed(scrabbleGame, "Options");
+        assertEquals(true, options.isVisible());
     }
 
     @Test
@@ -76,9 +81,9 @@ public class MnuOptionsTest {
         Robot robot = new Robot();
         scrabbleGame.requestFocus();
         robot.keyPress(KeyEvent.VK_ESCAPE);
-        assertEquals(true,options.isVisible());
+        assertEquals(true, options.isVisible());
         retourner.doClick();
-        assertNotEquals(true,options.isVisible());
+        assertNotEquals(true, options.isVisible());
     }
 
     @Test
@@ -86,9 +91,9 @@ public class MnuOptionsTest {
         Robot robot = new Robot();
         scrabbleGame.requestFocus();
         robot.keyPress(KeyEvent.VK_ESCAPE);
-        assertEquals(true,options.isVisible());
+        assertEquals(true, options.isVisible());
         retourner.doClick();
-        assertNotEquals(true,options.isVisible());
+        assertNotEquals(true, options.isVisible());
     }
 
     @Test
@@ -96,9 +101,9 @@ public class MnuOptionsTest {
         Robot robot = new Robot();
         scrabbleGame.requestFocus();
         robot.keyPress(KeyEvent.VK_ESCAPE);
-        assertEquals(true,options.isVisible());
+        assertEquals(true, options.isVisible());
         robot.keyPress(KeyEvent.VK_ESCAPE);
-        assertNotEquals(true,options.isVisible());
+        assertNotEquals(true, options.isVisible());
 
     }
 }
