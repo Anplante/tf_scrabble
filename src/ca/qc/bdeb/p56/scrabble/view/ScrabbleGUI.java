@@ -24,6 +24,7 @@ public class ScrabbleGUI extends JFrame {
     private final int LETTER_RACK_ZONE_HEIGHT;
     private final int MARGIN = 5;
 
+    private String backgroundPath;
     private JLabel lblNumberLetter;
     private Image bagImg;
     PanelLetterRackZone panelLetterRack;
@@ -51,7 +52,8 @@ public class ScrabbleGUI extends JFrame {
         try {
             bagImg = ImageIO.read(this.getClass().getResource("/Image/bag_scrabble.png"));
         } catch (IOException ex) {
-            // FIXME ANTOINE : ???
+            // FIXME
+            ex.printStackTrace();
         }
 
         setResizable(false);
@@ -104,8 +106,8 @@ public class ScrabbleGUI extends JFrame {
         background = new JLabel();
         background.setSize(getWidth(), getHeight());
         // L'ancien background etait beaucoup trop aggresif sur les yeux, un background simple est preferable
-        background.setIcon(new ImageIcon(new ImageIcon(this.getClass().getResource("/background/scrabble.jpg")).getImage()
-                .getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
+        background.setIcon(new ImageIcon(new ImageIcon(this.getClass().getResource("/background/" +
+                backgroundPath)).getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
         setContentPane(background);
 
     }
@@ -225,7 +227,9 @@ public class ScrabbleGUI extends JFrame {
         contentPane.getActionMap().put("Escape", actionEscape);
     }
 
-
+    public void changeBackground(String filePath) {
+        this.backgroundPath =  filePath;
+    }
 
 
     public MainMenuGUI getMenu() {

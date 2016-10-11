@@ -149,6 +149,7 @@ public class MainMenuGUI extends JDialog {
 
         gameManager = new GameManager();
         game = gameManager.createNewGame(players);
+        parent.changeBackground(cmbBackgroundScrabble.getSelectedItem().toString());
         parent.createScrabbleGame(game);
         setVisible(false);
         //dispose();
@@ -206,7 +207,7 @@ public class MainMenuGUI extends JDialog {
         }
         File[] files =  null;
         for (File file : lesFichiers.listFiles()) {
-            cmbBackgroundScrabble.addItem(removeExtension(file.getName()));
+            cmbBackgroundScrabble.addItem(file.getName());
         }
     }
 
