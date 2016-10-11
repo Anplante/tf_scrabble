@@ -5,11 +5,15 @@ import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
+import sun.misc.Launcher;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +31,8 @@ public class MainMenuGUI extends JDialog {
     private String[] nombreDeAi = {"1", "2", "3"};
     private JComboBox cmbNombreAi = new JComboBox();
     private GameManager gameManager;
+    private JComboBox<String> cmbBackgroundScrabble;
+    private JLabel lblBackground;
 
     private Player player;
     private List<Player> players;
@@ -66,12 +72,12 @@ public class MainMenuGUI extends JDialog {
         ajouterTextBox();
         ajouterLesLabels();
         ajouterBoutons();
-        ajouterComboBox();
+        addComboBox();
 
         add(panelMenu);
     }
 
-    private void ajouterComboBox() {
+    private void addComboBox() {
         cmbNombreAi = new JComboBox();
         cmbNombreAi.setName("choix");
         for (int i = 0; i < nombreDeAi.length; i++) {
@@ -80,7 +86,18 @@ public class MainMenuGUI extends JDialog {
         cmbNombreAi.setVisible(true);
         cmbNombreAi.setLocation(180, 120);
         cmbNombreAi.setSize(100, 25);
+
+        cmbBackgroundScrabble = new JComboBox<>();
+
+        cmbBackgroundScrabble.setName("background");
+        addImageFile();
+        cmbBackgroundScrabble.setVisible(true);
+        cmbBackgroundScrabble.setLocation(180, 220);
+        cmbBackgroundScrabble.setSize(200,25);
+
+
         panelMenu.add(cmbNombreAi);
+        panelMenu.add(cmbBackgroundScrabble);
     }
 
     private void ajouterBoutons() {
@@ -149,8 +166,17 @@ public class MainMenuGUI extends JDialog {
         lblNombreAI.setLocation(25, 125);
         lblNombreAI.setSize(lblNombreAI.getPreferredSize());
         lblNombreAI.setVisible(true);
+
+        lblBackground = new JLabel();
+        lblBackground.setText("Background : ");
+        lblBackground.setLocation(25, 225);
+        lblBackground.setSize(lblBackground.getPreferredSize());
+        lblBackground.setVisible(true);
+
+
         panelMenu.add(lblNom);
         panelMenu.add(lblNombreAI);
+        panelMenu.add(lblBackground);
     }
 
     private void ajouterTextBox() {
@@ -167,6 +193,42 @@ public class MainMenuGUI extends JDialog {
             }
         });
         panelMenu.add(txtNom);
+    }
+
+    private void addImageFile() {
+        File lesFichiers = null;
+
+        URL url = Launcher.class.getResource("/background/");
+        try {
+            lesFichiers = new File(url.toURI());
+        } catch (URISyntaxException ex) {
+            ex.printStackTrace();
+        }
+        File[] files =  null;
+        for (File file : lesFichiers.listFiles()) {
+            cmbBackgroundScrabble.addItem(removeExtension(file.getName()));
+        }
+    }
+
+    public static String removeExtension(String filenameWithExtension) {
+
+        String separator = System.getProperty("file.separator");
+        String filename;
+
+        // Remove the path up to the filename.
+        int lastSeparatorIndex = filenameWithExtension.lastIndexOf(separator);
+        if (lastSeparatorIndex == -1) {
+            filename = filenameWithExtension;
+        } else {
+            filename = filenameWithExtension.substring(lastSeparatorIndex + 1);
+        }
+
+        // Remove the extension.
+        int extensionIndex = filename.lastIndexOf(".");
+        if (extensionIndex == -1)
+            return filename;
+
+        return filename.substring(0, extensionIndex);
     }
 
     public Player getPlayer() {
