@@ -5,6 +5,7 @@ import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
+import javafx.stage.FileChooser;
 import sun.misc.Launcher;
 
 import javax.swing.*;
@@ -33,6 +34,8 @@ public class MainMenuGUI extends JDialog {
     private GameManager gameManager;
     private JComboBox<String> cmbBackgroundScrabble;
     private JLabel lblBackground;
+    private JFileChooser fileImage;
+    private JButton btnOpenDialog;
 
     private Player player;
     private List<Player> players;
@@ -93,7 +96,7 @@ public class MainMenuGUI extends JDialog {
         addImageFile();
         cmbBackgroundScrabble.setVisible(true);
         cmbBackgroundScrabble.setLocation(180, 220);
-        cmbBackgroundScrabble.setSize(200,25);
+        cmbBackgroundScrabble.setSize(180,25);
 
 
         panelMenu.add(cmbNombreAi);
@@ -113,6 +116,14 @@ public class MainMenuGUI extends JDialog {
         btnConfirm.setLocation(50, 325);
         btnConfirm.setName("Confirm");
         btnCancel.setName("Cancel");
+        btnOpenDialog = new JButton("...");
+        btnOpenDialog.setVisible(true);
+        btnOpenDialog.setSize(25,25);
+        btnOpenDialog.setLocation(365,220);
+
+        fileImage = new JFileChooser();
+
+
         btnConfirm.addActionListener( new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -128,6 +139,13 @@ public class MainMenuGUI extends JDialog {
                 System.exit(0);
             }
         });
+        btnOpenDialog.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int returnVal = fileImage.showOpenDialog(panelMenu);
+            }
+        });
+        panelMenu.add(btnOpenDialog);
         panelMenu.add(btnConfirm);
         panelMenu.add(btnCancel);
     }
