@@ -41,7 +41,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         super();
         //setLayout(new FlowLayout());
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+       // setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setLayout(new GridBagLayout());
         //setLayout(new GridLayout(1,10,2,0));
         currentPlayer = null;
         players = null;
@@ -57,13 +58,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private void initPanelLettersRack() {
 
 
-        int x = getWidth() / 4;
-        int y = getHeight() / 8;
 
-        int width = TILE_SIZE * 7;
-        panelLettersRack.setBounds(x, y, width, TILE_SIZE);
-        panelLettersRack.setName("Letter rack");
-        add(panelLettersRack);
         initializeOptions();
 
     }
@@ -91,11 +86,20 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
     private void initializeOptions() {
 
-        initPassTurnOption();
+        initForfeitOption();
         initExchangeOption();
+
+        int x = getWidth() / 4;
+        int y = getHeight() / 8;
+
+        int width = TILE_SIZE * 7;
+        panelLettersRack.setBounds(x, y, width, TILE_SIZE);
+        panelLettersRack.setName("Letter rack");
+        add(panelLettersRack);
+
         initRecallOption();
         initiBtnPlayWord();
-        initForfeitOption();
+        initPassTurnOption();
     }
 
     private void initPassTurnOption() {
@@ -103,6 +107,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         btnPassTurn.setSize(150, 100);
         btnPassTurn.setName("Pass turn");
         add(btnPassTurn);
+        btnPassTurn.setVisible(false);
         btnPassTurn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 game.passTurn();
@@ -124,7 +129,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
 
         add(btnSwapTiles);
-
 
 
         btnSwapTiles.addActionListener(new ActionListener() {
@@ -169,8 +173,9 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         btnRecall = new JButton("Recall");
         btnRecall.setSize(100, 50);
         btnRecall.setName("Recall");
-        add(btnRecall);
 
+        add(btnRecall);
+        btnRecall.setVisible(false);
         btnRecall.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -185,8 +190,9 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         btnPlayWord = new JButton("Play");
         btnPlayWord.setSize(100, 50);
         btnPlayWord.setName("Play");
-        add(btnPlayWord);
 
+        add(btnPlayWord);
+        btnPlayWord.setVisible(false);
         btnPlayWord.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 game.playWord();
@@ -201,7 +207,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         add(btnForfeit);
         btnForfeit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int dialogButton = JOptionPane.YES_NO_OPTION;
                 int result = JOptionPane.showConfirmDialog((Component) null, "Voulez recommencez la partie?", "Abandonner", JOptionPane.YES_NO_CANCEL_OPTION);
                 if (result == JOptionPane.YES_OPTION) {
                     resetPlayer();
@@ -213,6 +218,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
 
     private void resetPlayer() {
+
         resetPlayers = new ArrayList<>();
         resetPlayers.add(new Player(currentPlayer.getName()));
 
@@ -244,23 +250,23 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             currentPlayer = game.getActivePlayer();
         }
 
-        for (Component comp : getComponents()) {
-            remove(comp);
-        }
-
-        add(btnForfeit);
-        add(btnSwapTiles);
-        add(panelLettersRack);
-
         if (currentPlayer.getState().getName() == IDState.PLAY_TILE.getName()) {
 
-            add(btnRecall);
-            add(btnPlayWord);
+            btnPassTurn.setVisible(false);
+            btnCancelExchange.setVisible(false);
+            btnRecall.setVisible(true);
+            btnPlayWord.setVisible(true);
+          //  add(btnRecall);
+           // add(btnPlayWord);
 
         }
         else{
-            add(btnPassTurn);
-            add(btnCancelExchange);
+            btnRecall.setVisible(false);
+            btnPlayWord.setVisible(false);
+            btnPassTurn.setVisible(true);
+            btnCancelExchange.setVisible(true);
+          //  add(btnPassTurn);
+            //add(btnCancelExchange);
         }
 
 

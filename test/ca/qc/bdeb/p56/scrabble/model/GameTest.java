@@ -75,4 +75,12 @@ public class GameTest {
         game.playWord();
         assertEquals(tile1.getValue() + tile2.getValue(), activePlayer.getScore());
     }
+
+
+    @Test
+    public void testMotValide(){
+
+        String wordTested = "bonjour";
+        assertTrue(game.isValidWord(wordTested));
+    }
 }

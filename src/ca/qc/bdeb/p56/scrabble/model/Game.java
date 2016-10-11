@@ -328,4 +328,12 @@ public class Game implements Observable {
         }
 
     }
+
+    public boolean isValidWord(String wordTested) {
+
+        boolean isValid = true;
+
+
+        return isValid;
+    }
 }

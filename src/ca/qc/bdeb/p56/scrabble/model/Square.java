@@ -11,12 +11,6 @@ import java.util.LinkedList;
  */
 public class Square implements Observable{
 
-    public static final char TWO_LETTER_BONUS = 49;
-    public static final char THREE_LETTER_BONUS = 50;
-    public static final char TWO_WORD_BONUS = 51;
-    public static final char THREE_WORD_BONUS = 52;
-    public static final char CENTER_SQUARE = 53;
-
     private Square adjacentUp;
     private Square adjacentDown;
     private Square adjacentLeft;
@@ -30,7 +24,6 @@ public class Square implements Observable{
     private transient LinkedList<Observateur> observateurs;
 
 
-
     public Square(int posRow, int posColumn)
     {
         this.posRow = posRow;
@@ -40,8 +33,6 @@ public class Square implements Observable{
     }
 
 
-
-
     public void setNeighbours(Square adjacentUp, Square adjacentDown, Square adjacentLeft, Square adjacentRight) {
 
         this.adjacentUp = adjacentUp;
@@ -49,7 +40,6 @@ public class Square implements Observable{
         this.adjacentLeft = adjacentLeft;
         this.adjacentRight = adjacentRight;
     }
-
 
     public String getLetterOn()
     {
@@ -61,6 +51,7 @@ public class Square implements Observable{
             return "";
         }
     }
+
 
     public Tile getTileOn()
     {
@@ -84,9 +75,10 @@ public class Square implements Observable{
     }
 
 
-
     public void setLetter(Tile tile) {
+
         this.tileOn = tile;
+
         aviserObservateurs();
     }
 
