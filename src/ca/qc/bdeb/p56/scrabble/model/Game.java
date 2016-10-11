@@ -3,15 +3,12 @@ package ca.qc.bdeb.p56.scrabble.model;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
-import ca.qc.bdeb.p56.scrabble.view.BtnTile;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.awt.*;
 import java.io.File;
 import java.util.*;
 import java.util.List;
@@ -46,8 +43,9 @@ public class Game implements Observable {
     }
 
 
-
-    public Board getBoard(){ return boardManager.getBoard();}
+    public Board getBoard() {
+        return boardManager.getBoard();
+    }
 
     public int getlettersLeft() {
         return alphabetBag.size();
@@ -74,11 +72,9 @@ public class Game implements Observable {
     }
 
 
-    public List<Move> getMovesHistory()
-    {
+    public List<Move> getMovesHistory() {
         List<Move> moves = new ArrayList<>();
-        for(Move move : movesHistory)
-        {
+        for (Move move : movesHistory) {
             moves.add(move);
         }
         return moves;
@@ -230,21 +226,61 @@ public class Game implements Observable {
         }
     }
 
-    public void playWord(List<Square> tilesPlaced)
-    {
-        StringBuilder word = new StringBuilder( tilesPlaced.size());
+    public boolean playWord(List<Square> tilesPlaced) {
+        StringBuilder word = new StringBuilder();
 
-        for(Square square : tilesPlaced)
-        {
+        //char direction = findColumnOrRow(tilesPlaced);
+
+        //boolean isAWord = findIsAWord(direction,tilesPlaced);
+
+        for (Square square : tilesPlaced) {
             word.append(square.getLetterOn());
         }
         movesHistory.add(new Move(getActivePlayer(), word.toString()));
         getActivePlayer().addPoints(calculateWordPoints(tilesPlaced));
-
+        return true;
     }
 
-    public void recallTiles()
-    {
+    private char findColumnOrRow(List<Square> letters) {
+        char direction = 'C';
+        int column = letters.get(0).getPosColumn();
+        if (letters.size() > 1) {
+            if (letters.get(1).getPosColumn() != column) {
+                direction = 'R';
+            }
+        }
+        return direction;
+    }
+
+    private int findColumnOrRowValue(List<Square> letters) {
+        int column = letters.get(0).getPosColumn();
+        if (letters.size() > 1) {
+            if (letters.get(1).getPosColumn() != column) {
+                column = letters.get(1).getPosRow();
+            }
+        }
+        return column;
+    }
+
+    private boolean findIsAWord(char direction, List<Square> letters) {
+        boolean isAWord = true;
+        boolean isConnectedToBoard = false;
+        int rowOrColumn = findColumnOrRowValue(letters);
+/*        if(direction == 'C'){
+            for(int i = 0;i<letters.size();i++)
+                Square lower = letters.get(i).getAdjacentDown();
+
+                if(!isConnectedToBoard){
+                    isConnectedToBoard = letters.contains(lower);
+                }
+            }
+        }else{
+
+        }*/
+        return false;
+    }
+
+    public void recallTiles() {
         getActivePlayer().selectNextState(IDState.SELECT_ACTION);
         if (isReadyForNextPhase()) {
             goToNextState();
@@ -253,7 +289,7 @@ public class Game implements Observable {
 
     public void recallTiles(List<Square> tilesPlaced) {
 
-        if(tilesPlaced != null) {
+        if (tilesPlaced != null) {
             for (Square tileLocation : tilesPlaced) {
                 getActivePlayer().addLetter(tileLocation.getTileOn());
                 tileLocation.setLetter(null);
@@ -267,7 +303,6 @@ public class Game implements Observable {
         for (Square square : letterChain) {
             points += square.getTileOn().getValue();
         }
-
         return points;
     }
 
@@ -295,11 +330,10 @@ public class Game implements Observable {
     }
 
 
-    public void exchangeLetters( List<Tile> tilesSelected) {
+    public void exchangeLetters(List<Tile> tilesSelected) {
 
 
-        for(Tile tileToExchange : tilesSelected)
-        {
+        for (Tile tileToExchange : tilesSelected) {
             alphabetBag.add(tileToExchange);
             getActivePlayer().remove(tileToExchange);
         }
@@ -307,21 +341,18 @@ public class Game implements Observable {
         Collections.shuffle(alphabetBag);
     }
 
-    public void replacePlayerTilesInOrder(List<Tile> originalOrder){
+    public void replacePlayerTilesInOrder(List<Tile> originalOrder) {
 
 
-        if(originalOrder != null)
-        {
+        if (originalOrder != null) {
             List<Tile> currentOrder = getActivePlayer().getTiles();
 
-            if( currentOrder.containsAll(originalOrder)){
+            if (currentOrder.containsAll(originalOrder)) {
 
-                for(Tile tile : originalOrder)
-                {
+                for (Tile tile : originalOrder) {
                     getActivePlayer().remove(tile);
                 }
-                for(Tile tile : originalOrder)
-                {
+                for (Tile tile : originalOrder) {
                     getActivePlayer().addLetter(tile);
                 }
             }
