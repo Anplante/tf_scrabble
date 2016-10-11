@@ -24,16 +24,22 @@ public class MainMenuGUITest {
     private JTextField txtInput;
     private Player player;
     private JComboBox cmbNombreAi;
+    private JComboBox cmbBackgroundImage;
+    private ScrabbleGUI scrabbleGUI;
 
     @Before
     public void setUp()  throws Exception {
 
-        ScrabbleGUI scrabbleGUI = new ScrabbleGUI();
+        scrabbleGUI = new ScrabbleGUI();
+        scrabbleGUI.setBackgroundPath("simplistic.png");
         // TODO LOUIS : comment accéder au dialog sans passer par le getter
         frame = scrabbleGUI.getMenu();
         txtInput = (JTextField) TestUtils.getChildNamed(frame, "textBox");
         btnAccept = (JButton) TestUtils.getChildNamed(frame, "Confirm");
         cmbNombreAi = (JComboBox) TestUtils.getChildNamed(frame, "choix");
+        cmbBackgroundImage = (JComboBox) TestUtils.getChildNamed(frame, "background");
+
+        cmbBackgroundImage.setSelectedIndex(0);
     }
 
     @After
@@ -63,6 +69,15 @@ public class MainMenuGUITest {
         txtInput.postActionEvent();
 
         assertEquals("Testing", txtInput.getText());
+    }
+
+    @Test
+    public void testBackground() {
+        // boardScrabble - attention si onajoute une image, ce test risque de ne pas fonctionner
+        cmbBackgroundImage.setSelectedIndex(1);
+        btnAccept.doClick();
+        assertEquals("boardScrabble.jpeg", scrabbleGUI.getBackgroundPath());
+
     }
 
     private void setupTxtInput() {

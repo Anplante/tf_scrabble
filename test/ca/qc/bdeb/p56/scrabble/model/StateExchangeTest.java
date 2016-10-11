@@ -47,6 +47,7 @@ public class StateExchangeTest {
 
         game = gameManager.createNewGame(lstPlayer);
         scrabbleGame = new ScrabbleGUI();
+        scrabbleGame.setBackgroundPath("simplistic.png");
         scrabbleGame.createScrabbleGame(game);
 
         panelTested = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, "Player letter rack");

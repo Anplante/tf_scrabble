@@ -35,6 +35,7 @@ public class ScrabbleGUITest {
 
         gameManager = new GameManager();
 
+
         List lstPlayer = new ArrayList<Player>();
         lstPlayer.add(new Player("Antoine"));
         lstPlayer.add(new Player("Louis"));
@@ -42,6 +43,7 @@ public class ScrabbleGUITest {
 
         game = gameManager.createNewGame(lstPlayer);
         scrabbleGame = new ScrabbleGUI();
+        scrabbleGame.setBackgroundPath("simplistic.png");
         scrabbleGame.createScrabbleGame(game);
 
     }

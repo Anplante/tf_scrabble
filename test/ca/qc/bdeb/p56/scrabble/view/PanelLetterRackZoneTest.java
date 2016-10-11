@@ -46,6 +46,7 @@ public class PanelLetterRackZoneTest {
         lstPlayer.add(new Player("Louis"));
         lstPlayer.add(new Player("Julien"));
         scrabbleGame = new ScrabbleGUI();
+        scrabbleGame.setBackgroundPath("simplistic.png");
         game = gameManager.createNewGame(lstPlayer);
         scrabbleGame.createScrabbleGame(game);
     }

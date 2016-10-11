@@ -227,6 +227,14 @@ public class ScrabbleGUI extends JFrame {
         contentPane.getActionMap().put("Escape", actionEscape);
     }
 
+    public String getBackgroundPath() {
+        return backgroundPath;
+    }
+
+    public void setBackgroundPath(String path) {
+        this.backgroundPath = path;
+    }
+
     public void changeBackground(String filePath) {
         this.backgroundPath =  filePath;
     }
