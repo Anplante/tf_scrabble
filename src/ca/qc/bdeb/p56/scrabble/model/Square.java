@@ -33,6 +33,14 @@ public class Square implements Observable{
     }
 
 
+    public Square getAdjacentDown(){
+        return adjacentDown;
+    }
+
+    public Square getAdjacentRight(){
+        return adjacentRight;
+    }
+
     public void setNeighbours(Square adjacentUp, Square adjacentDown, Square adjacentLeft, Square adjacentRight) {
 
         this.adjacentUp = adjacentUp;
@@ -78,7 +86,6 @@ public class Square implements Observable{
     public void setLetter(Tile tile) {
 
         this.tileOn = tile;
-
         aviserObservateurs();
     }
 

@@ -5,6 +5,7 @@ import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
+import javafx.stage.FileChooser;
 import sun.misc.Launcher;
 
 import javax.swing.*;
@@ -14,6 +15,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +36,8 @@ public class MainMenuGUI extends JDialog {
     private GameManager gameManager;
     private JComboBox<String> cmbBackgroundScrabble;
     private JLabel lblBackground;
+    private JFileChooser fileImage;
+    private JButton btnOpenDialog;
 
     private Player player;
     private List<Player> players;
@@ -69,6 +74,7 @@ public class MainMenuGUI extends JDialog {
     private void initializeComponents() {
         panelMenu = new JPanel();
         panelMenu.setLayout(null);
+        addFileChooser();
         ajouterTextBox();
         ajouterLesLabels();
         ajouterBoutons();
@@ -93,7 +99,7 @@ public class MainMenuGUI extends JDialog {
         addImageFile();
         cmbBackgroundScrabble.setVisible(true);
         cmbBackgroundScrabble.setLocation(180, 220);
-        cmbBackgroundScrabble.setSize(200,25);
+        cmbBackgroundScrabble.setSize(180,25);
 
 
         panelMenu.add(cmbNombreAi);
@@ -103,16 +109,22 @@ public class MainMenuGUI extends JDialog {
     private void ajouterBoutons() {
         btnCancel = new JButton();
         btnConfirm = new JButton();
+        btnOpenDialog = new JButton("...");
         btnCancel.setVisible(true);
+        btnOpenDialog.setVisible(true);
         btnConfirm.setVisible(true);
         btnCancel.setSize(100, 50);
+        btnOpenDialog.setSize(25,25);
         btnConfirm.setSize(100, 50);
         btnCancel.setText("Annuler");
         btnConfirm.setText("Confirmer");
         btnCancel.setLocation(250, 325);
+        btnOpenDialog.setLocation(365,220);
         btnConfirm.setLocation(50, 325);
         btnConfirm.setName("Confirm");
         btnCancel.setName("Cancel");
+
+
         btnConfirm.addActionListener( new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -128,8 +140,19 @@ public class MainMenuGUI extends JDialog {
                 System.exit(0);
             }
         });
+        btnOpenDialog.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int returnValue = fileImage.showOpenDialog(panelMenu);
+                receiveBackground(returnValue);
+            }});
+        panelMenu.add(btnOpenDialog);
         panelMenu.add(btnConfirm);
         panelMenu.add(btnCancel);
+    }
+
+    private void addFileChooser() {
+        fileImage = new JFileChooser();
     }
 
     private void setPlayer() {
@@ -208,6 +231,23 @@ public class MainMenuGUI extends JDialog {
         File[] files =  null;
         for (File file : lesFichiers.listFiles()) {
             cmbBackgroundScrabble.addItem(file.getName());
+        }
+    }
+
+    private void receiveBackground(int returnValue) {
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File fichier = fileImage.getSelectedFile();
+            // TODO: filter
+            if (!fichier.getName().endsWith(".jpg") || !fichier.getName().endsWith(".png")
+                    || !fichier.getName().endsWith(".jpeg")) {
+                fichier = new File(fichier.getAbsolutePath());
+                Path path = Paths.get(fichier.getAbsolutePath());
+                cmbBackgroundScrabble.addItem(path.getFileName().toString());
+            }
+            else {
+                JOptionPane.showMessageDialog(panelMenu, "Problème de chargement de fichier", "Erreur",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
