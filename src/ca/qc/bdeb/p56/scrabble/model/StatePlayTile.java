@@ -59,8 +59,7 @@ public class StatePlayTile extends State {
             this.tileSelected.selectTile(false);  // p-e pas necessaire
             getPlayer().swapTile(tileSelected, this.tileSelected);
 
-            if(tilesPlaced.isEmpty())
-            {
+            if (tilesPlaced.isEmpty()) {
                 selectNextState(IDState.SELECT_ACTION);
                 readyToChange = true;
             }
@@ -128,8 +127,13 @@ public class StatePlayTile extends State {
 
         switch (stateSelected) {
             case PENDING:
-                getGame().playWord(tilesPlaced);
-                newState = new StatePending(getPlayer());
+                boolean isAWord = getGame().playWord(tilesPlaced);
+                if (isAWord) {
+                    newState = new StatePending(getPlayer());
+                } else {
+                    getGame().recallTiles();
+                    newState = new StateSelectAction(getPlayer());
+                }
 
                 break;
             case EXCHANGE:
