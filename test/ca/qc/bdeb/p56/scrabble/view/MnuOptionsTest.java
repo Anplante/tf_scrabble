@@ -50,6 +50,7 @@ public class MnuOptionsTest {
         //game = gameManager.createNewGame(lstPlayer);
 
         scrabbleGame = new ScrabbleGUI();
+        scrabbleGame.setBackgroundPath("simplistic.png");
 
         MainMenuGUI frame = scrabbleGame.getMenu();
         JButton btnAccept = (JButton) TestUtils.getChildNamed(frame, "Confirm");

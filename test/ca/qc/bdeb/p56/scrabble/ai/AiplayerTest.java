@@ -55,5 +55,13 @@ public class AiplayerTest {
         aiPlayer.tmpList.add("Louis");
         aiPlayer.tmpList.add("Wow");
         aiPlayer.tmpList.add("AntoinePlante");
+        aiPlayer.tmpList.add("Wow");
+        aiPlayer.tmpList.add("AntoinePlante");
+        aiPlayer.tmpList.add("Wow");
+        aiPlayer.tmpList.add("AntoinePlante");
+        aiPlayer.tmpList.add("Wow");
+        aiPlayer.tmpList.add("AntoinePlante");
+        aiPlayer.tmpList.add("Wow");
+        aiPlayer.tmpList.add("AntoinePlante");
     }
 }
