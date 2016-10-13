@@ -99,4 +99,31 @@ public class GameTest {
         assertFalse(game.isValidWord(wordtested));
     }
 
+    @Test
+    public void testPlayWord()
+    {
+
+        Square square1 = game.getSquare(0,0);
+        square1.setLetter(new Tile("l",2));
+        Square square2 =game.getSquare(1,0);
+        square2.setLetter(new Tile("a",2));
+
+        List<Square> test = new ArrayList<>();
+        test.add(square1);
+        test.add(square2);
+
+        assertTrue(game.playWord(test));
+    }
+
+    @Test
+    public void testPlayAfterWord()
+    {
+
+        Square square1 = game.getSquare(0,0);
+        square1.setLetter(new Tile("l",2));
+        Square square2 =game.getSquare(1,0);
+        square2.setLetter(new Tile("a",2));
+
+
+    }
 }

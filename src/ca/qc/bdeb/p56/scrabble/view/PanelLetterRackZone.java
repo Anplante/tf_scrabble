@@ -122,21 +122,13 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         btnCancelExchange = new JButton("Annuler");
         btnCancelExchange.setVisible(false);
 
-
         btnSwapTiles.setName("Exchange");
-
-        btnCancelExchange.setName("Cancel_Exchange");
-
+        btnCancelExchange.setName("Cancel Exchange");
 
         add(btnSwapTiles);
-
-
+        add(btnCancelExchange);
         btnSwapTiles.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-
-                currentPlayer.selectNextState(IDState.EXCHANGE);
-
 
                 if (currentPlayer.getState().getName() != IDState.EXCHANGE.getName()) {
                     btnSwapTiles.setText("Confirmer");
@@ -146,15 +138,15 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
                     //changementEtat();
                     btnSwapTiles.setText("Échanger");
                 }
-                game.goToNextState();
+                game.exchangeLetter();
             }
         });
 
         btnCancelExchange.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                currentPlayer.selectNextState(IDState.SELECT_ACTION);
+
+                game.cancelExchange();
                 btnSwapTiles.setText("Échanger");
-                currentPlayer.nextState();
                 disableAllOtherBtnExchange(true);
             }
         });
@@ -253,7 +245,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         if (currentPlayer.getState().getName() == IDState.PLAY_TILE.getName()) {
 
             btnPassTurn.setVisible(false);
-            btnCancelExchange.setVisible(false);
             btnRecall.setVisible(true);
             btnPlayWord.setVisible(true);
           //  add(btnRecall);
@@ -264,7 +255,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             btnRecall.setVisible(false);
             btnPlayWord.setVisible(false);
             btnPassTurn.setVisible(true);
-            btnCancelExchange.setVisible(true);
           //  add(btnPassTurn);
             //add(btnCancelExchange);
         }

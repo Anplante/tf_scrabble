@@ -58,7 +58,6 @@ public class StateExchange extends State {
                         JOptionPane.ERROR_MESSAGE);
             }
         }
-
     }
 
     @Override
