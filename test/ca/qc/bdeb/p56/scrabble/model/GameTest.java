@@ -122,8 +122,19 @@ public class GameTest {
         Square square1 = game.getSquare(0,0);
         square1.setLetter(new Tile("l",2));
         Square square2 =game.getSquare(1,0);
-        square2.setLetter(new Tile("a",2));
+        square2.setLetter(new Tile("e",2));
 
+        List<Square> test = new ArrayList<>();
+        test.add(square1);
+        test.add(square2);
+        assertTrue(game.playWord(test));
+
+
+        Square square3d = game.getSquare(2,0);
+        square3d.setLetter(new Tile("s",2));
+        test.clear();
+        test.add(square3d);
+        assertTrue(game.playWord(test));
 
     }
 }

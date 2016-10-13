@@ -1,6 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
+import ca.qc.bdeb.p56.scrabble.utility.Direction;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 import org.w3c.dom.Document;
@@ -238,12 +239,13 @@ public class Game implements Observable {
 
     public boolean playWord(List<Square> tilesPlaced) {
 
-        char direction = findColumnOrRow(tilesPlaced);
+        Direction direction = findColumnOrRow(tilesPlaced);
         boolean isAWord = false;
-        List letters = findIsAWord(direction, tilesPlaced);
+        int rowOrColumn = findColumnOrRowValue(tilesPlaced);
+        List<Square> letters =  orderByDirection(tilesPlaced, direction, rowOrColumn);
 
         if (!letters.isEmpty()) {
-            String word = createWord(tilesPlaced).toLowerCase();
+            String word = createWord(letters).toLowerCase();
 
             if (dictionary.checkWordExist(word)) {
                 movesHistory.add(new Move(getActivePlayer(), word.toString()));
@@ -254,6 +256,37 @@ public class Game implements Observable {
         return isAWord;
     }
 
+    private List<Square> orderByDirection(List<Square> letters, Direction direction, int rowOrColumn) {
+
+        List<Square> newLetters = new ArrayList<>();
+        Square square;
+        int i = 0;
+        boolean foundWordUtilisingAllLetters = false;
+
+        while( !foundWordUtilisingAllLetters && i < boardManager.BOARD_SIZE)
+        {
+            if (direction.equals(Direction.COLUMN)) {
+                square = boardManager.getSquare(i, rowOrColumn);
+            } else {
+                square = boardManager.getSquare(rowOrColumn, i);
+            }
+            if (square.getTileOn() != null) {
+                newLetters.add(square);
+            } else {
+                boolean allLettersUtilised = true;
+                int j = 0;
+                while(allLettersUtilised && j < letters.size() )
+                    if (!newLetters.contains(letters.get(j))) {
+                        newLetters.clear();
+                        allLettersUtilised = false;
+                    }
+                foundWordUtilisingAllLetters = true;
+            }
+        }
+        return newLetters;
+    }
+
+
     private String createWord(List<Square> letters) {
         StringBuilder word = new StringBuilder();
         for (Square square : letters) {
@@ -262,12 +295,14 @@ public class Game implements Observable {
         return word.toString();
     }
 
-    private char findColumnOrRow(List<Square> letters) {
-        char direction = 'C';
+    private Direction findColumnOrRow(List<Square> letters) {
+
+        Direction direction = Direction.COLUMN;
+
         int column = letters.get(0).getPosColumn();
         if (letters.size() > 1) {
             if (letters.get(1).getPosColumn() != column) {
-                direction = 'R';
+                direction = Direction.ROWN;
             }
         }
         return direction;
@@ -283,79 +318,6 @@ public class Game implements Observable {
         return column;
     }
 
-    private List<Square> findIsAWord(char direction, List<Square> letters) {
-
-        boolean isAWord = true;
-        boolean isConnectedToBoard = false;
-        int rowOrColumn = findColumnOrRowValue(letters);
-        letters = orderByDirection(letters, direction, rowOrColumn);
-    /*    Square nextInWord = null;
-
-
-        if (direction == 'C') {
-            for (int i = 0; i < letters.size() && isAWord; i++) {
-                nextInWord = letters.get(i).getAdjacentDown();
-                if (nextInWord == null || !nextInWord.getLetterOn().equals("")) {
-                    isConnectedToBoard = letters.contains(nextInWord);
-                    if (!isConnectedToBoard && isAWord) {
-                        isConnectedToBoard = true;
-                        letters.add(nextInWord);
-                        i--;
-                    }
-                } else {
-                    isAWord = false;
-                }
-            }
-        } else {
-            for (int i = 0; i < letters.size() && isAWord; i++) {
-                nextInWord = letters.get(i).getAdjacentRight();
-                if (nextInWord == null || !nextInWord.getTileOn().getLetter().equals("")) {
-                    isConnectedToBoard = letters.contains(nextInWord);
-                    if (!isConnectedToBoard && isAWord) {
-                        isConnectedToBoard = true;
-                        letters.add(nextInWord);
-                        i--;
-                    }
-                } else {
-                    isAWord = false;
-                }
-            }
-        }
-        if (!isConnectedToBoard || !isAWord ) {
-            letters = null;
-        }else{
-            letters = orderByDirection(letters,direction,rowOrColumn);
-        }*/
-        return letters;
-    }
-
-    private List<Square> orderByDirection(List<Square> letters, char direction, int rowOrColumn) {
-
-        List<Square> newLetters = new ArrayList<>();
-
-        if (direction == 'C') {
-
-            Square square;
-
-            for (int i = 0; i < 15; i++) {
-                square = boardManager.getSquare(i, rowOrColumn);
-
-                if (square.getTileOn() != null) {
-                    newLetters.add(square);
-                } else {
-                    for (Square tilePlaced : letters) {
-                        if (!newLetters.contains(tilePlaced)) {
-                            newLetters.clear();
-                            break;
-                        }
-
-                    }
-                }
-            }
-        } else {
-        }
-        return newLetters;
-    }
 
     public void recallTiles() {
         getActivePlayer().selectNextState(IDState.SELECT_ACTION);
