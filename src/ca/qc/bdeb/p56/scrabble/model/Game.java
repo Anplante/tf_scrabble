@@ -28,6 +28,7 @@ public class Game implements Observable {
     private static List<Tile> alphabetBag;
 
     private List<Move> movesHistory;
+    private Dictionary dictionary;
 
 
     public Game(String filePath, List<Player> players) {
@@ -84,6 +85,15 @@ public class Game implements Observable {
         Element rootElement = getRootElement(filePath);
         initAlphabetBag(rootElement);
         boardManager = createBoard(rootElement);
+        initDictionnary();
+    }
+
+    private void initDictionnary() {
+
+        File dictFile = new File("resources/dictionary/fr_dictionary.txt");
+
+        dictionary = Dictionary.getINSTANCE();
+        dictionary.loadDictinnary(dictFile);
     }
 
     private Element getRootElement(String path) {
@@ -362,9 +372,6 @@ public class Game implements Observable {
 
     public boolean isValidWord(String wordTested) {
 
-        boolean isValid = true;
-
-
-        return isValid;
+        return dictionary.checkWordExist(wordTested);
     }
 }

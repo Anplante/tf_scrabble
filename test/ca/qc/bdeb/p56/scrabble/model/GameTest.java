@@ -3,6 +3,7 @@ package ca.qc.bdeb.p56.scrabble.model;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -78,9 +79,24 @@ public class GameTest {
 
 
     @Test
-    public void testMotValide(){
+    public void testValidWordFr(){
 
         String wordTested = "bonjour";
         assertTrue(game.isValidWord(wordTested));
     }
+
+    @Test
+    public void testInvalidWord(){
+
+        String wordTested = "ssdfaf";
+        assertFalse(game.isValidWord(wordTested));
+    }
+
+    @Ignore
+    @Test
+    public void testValidWordEn(){
+        String wordtested = "hello";
+        assertFalse(game.isValidWord(wordtested));
+    }
+
 }
