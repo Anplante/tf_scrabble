@@ -189,4 +189,13 @@ public class Player implements Observable {
         Collections.swap(tiles, tiles.indexOf(backupTile), tiles.indexOf(tileSelected));
         aviserObservateurs();
     }
+
+    /**
+     * Pour l'utilisation des tests
+     */
+    public void emptyHand()
+    {
+        tiles.clear();
+    }
+
 }

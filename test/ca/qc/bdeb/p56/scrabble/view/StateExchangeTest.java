@@ -56,7 +56,7 @@ public class StateExchangeTest {
 
         panelTested = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, "Player letter rack");
         btnEchanger = (JButton) TestUtils.getChildNamed(panelTested, "Exchange");
-        btnCancel = (JButton) TestUtils.getChildNamed(panelTested, "Cancel exchange");
+        btnCancel = (JButton) TestUtils.getChildNamed(panelTested, "Cancel Exchange");
         letterRack = (JPanel) TestUtils.getChildNamed(panelTested, "Letter rack");
         currentPlayer = game.getActivePlayer();
 

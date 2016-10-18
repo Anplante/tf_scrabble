@@ -4,6 +4,7 @@ import ca.qc.bdeb.p56.scrabble.model.*;
 import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.swing.*;
@@ -53,6 +54,7 @@ public class ScrabbleGUITest {
     }
 
 
+    @Ignore
     @Test
     public void testPlayWord()
     {

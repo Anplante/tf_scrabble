@@ -217,6 +217,15 @@ public class Game implements Observable {
     }
 
 
+    /**
+     * Pour l'utilisation des tests
+     */
+    public void emptyBag()
+    {
+        alphabetBag.clear();
+    }
+
+
     public void drawTile() {
 
         while (getActivePlayer().canDraw() && !alphabetBag.isEmpty()) {
@@ -242,7 +251,7 @@ public class Game implements Observable {
         Direction direction = findColumnOrRow(tilesPlaced);
         boolean isAWord = false;
         int rowOrColumn = findColumnOrRowValue(tilesPlaced);
-        List<Square> letters =  orderByDirection(tilesPlaced, direction, rowOrColumn);
+        List<Square> letters = orderByDirection(tilesPlaced, direction, rowOrColumn);
 
         if (!letters.isEmpty()) {
             String word = createWord(letters).toLowerCase();
@@ -256,32 +265,35 @@ public class Game implements Observable {
         return isAWord;
     }
 
-    private List<Square> orderByDirection(List<Square> letters, Direction direction, int rowOrColumn) {
+    private List<Square> orderByDirection(List<Square> lettersPlayed, Direction direction, int rowOrColumn) {
 
         List<Square> newLetters = new ArrayList<>();
         Square square;
-        int i = 0;
+        int indexBoard = 0;
         boolean foundWordUtilisingAllLetters = false;
 
-        while( !foundWordUtilisingAllLetters && i < boardManager.BOARD_SIZE)
-        {
+        while (!foundWordUtilisingAllLetters && indexBoard < boardManager.BOARD_SIZE) {
             if (direction.equals(Direction.COLUMN)) {
-                square = boardManager.getSquare(i, rowOrColumn);
+                square = boardManager.getSquare(indexBoard, rowOrColumn);
             } else {
-                square = boardManager.getSquare(rowOrColumn, i);
+                square = boardManager.getSquare(rowOrColumn, indexBoard);
             }
             if (square.getTileOn() != null) {
                 newLetters.add(square);
             } else {
                 boolean allLettersUtilised = true;
-                int j = 0;
-                while(allLettersUtilised && j < letters.size() )
-                    if (!newLetters.contains(letters.get(j))) {
+                int indexLetterPlayed = 0;
+                while (allLettersUtilised && indexLetterPlayed < lettersPlayed.size()) {
+                    if (!newLetters.contains(lettersPlayed.get(indexLetterPlayed))) {
                         newLetters.clear();
                         allLettersUtilised = false;
                     }
-                foundWordUtilisingAllLetters = true;
+                    indexLetterPlayed++;
+                }
+                if (allLettersUtilised)
+                    foundWordUtilisingAllLetters = true;
             }
+            indexBoard++;
         }
         return newLetters;
     }
