@@ -50,8 +50,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         panelLettersRack = new JPanel();
         // panelLettersRack.setLayout(new BoxLayout(panelLettersRack, BoxLayout.X_AXIS));
 
-
-        TILE_SIZE = getWidth() / 12;
+        //22
+        TILE_SIZE = getWidth() / 22;
         initPanelLettersRack();
     }
 
@@ -272,6 +272,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         for (Tile letter : playerTiles) {
             BtnTile btnTile = new BtnTile(game, letter, dimension);
+            //btnTile.setSize(50,50);
             btnTile.setFocusable(false);
             letter.ajouterObservateur(btnTile);
             btnTile.setName("Tile" + i);
