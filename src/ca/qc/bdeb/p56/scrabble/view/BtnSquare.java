@@ -6,12 +6,9 @@ import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import javax.swing.*;
-import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  * Created by TheFrenchOne on 9/11/2016.
@@ -49,13 +46,12 @@ public class BtnSquare extends JButton implements Observateur {
                 }
                     gameModel.playTile(square);
                 if(square.getTileOn() != null &&gameModel.getActivePlayer().getState().getName().equals(IDState.PLAY_TILE.getName())){
-                    ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource("./lettres/"+square.getLetterOn().toUpperCase()+".png"));
+                    ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource("./letters/englishDictionaryValue/" +square.getLetterOn().toUpperCase()+".png"));
                     Image img = fillingIcon.getImage() ;
                     Image newimg = img.getScaledInstance( getWidth(), getHeight(),  java.awt.Image.SCALE_SMOOTH ) ;
                     ImageIcon icon = new ImageIcon( newimg );
                     setIcon(icon);
                 }
-
             }
         });
     }
@@ -84,6 +80,7 @@ public class BtnSquare extends JButton implements Observateur {
         if(square != null && square.getTileOn() == null){
             setIcon(null);
         }
+        repaint();
     }
 
     @Override

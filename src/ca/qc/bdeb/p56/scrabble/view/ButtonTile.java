@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
  */
 public class ButtonTile extends JButton implements Observateur {
 
+    private final String PATH_RES_LETTERS_VALUE = "./letters/englishDictionaryValue/";
     private Color BASIC_COLOR = Color.lightGray;
     private Color REMOVE_COLOR = Color.red;
     private Color SELECTED_COLOR = Color.green;
@@ -24,28 +25,24 @@ public class ButtonTile extends JButton implements Observateur {
     private Tile tile;
 
 
-    public BtnTile(Game gameModel, Tile tile, Dimension dimension) {
-        /*super(tile.getLetter() + " (" + tile.getValue() + ")");*/
-        /*if (tile.getLetter().equals(" ")) {
-    public ButtonTile(Game gameModel, Tile tile) {
-        super(tile.getLetter() + " (" + tile.getValue() + ")");
-        if (tile.getLetter().equals(" ")) {
-            this.setText("     ");
-        }*/
+    public ButtonTile(Game gameModel, Tile tile, Dimension dimension) {
+        super();
         this.gameModel = gameModel;
         this.tile = tile;
+        setSize(dimension);
         changementEtat();
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        setFocusable(false);
-        if(tile !=null) {
-            String ressource = "./lettres/" + tile.getLetter().toUpperCase().trim() + ".png";
+
+
+        if (tile != null) {
+            String ressource = PATH_RES_LETTERS_VALUE + tile.getLetter().toUpperCase().trim() + ".png";
             ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(ressource));
             Image img = fillingIcon.getImage();
             Image newimg = img.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH);
             ImageIcon icon = new ImageIcon(newimg);
             setIcon(icon);
-        }
 
+        }
 
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -61,31 +58,25 @@ public class ButtonTile extends JButton implements Observateur {
 
     public void setTile(Tile aTile) {
         this.tile = aTile;
-        //this.setText("" + aTile.getLetter());
-        if(tile !=null) {
-            ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource("./lettres/" + tile.getLetter().toUpperCase() + ".png"));
+        if (tile != null) {
+            ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(PATH_RES_LETTERS_VALUE + tile.getLetter().toUpperCase() + ".png"));
             Image img = fillingIcon.getImage();
             Image newimg = img.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH);
             ImageIcon icon = new ImageIcon(newimg);
             setIcon(icon);
-
         }
-
     }
 
     @Override
     public void changementEtat() {
 
-        if(tile.isSelected())
-        {
+        if (tile.isSelected()) {
             if (gameModel.getActivePlayer().getState().getName() == IDState.EXCHANGE.getName()) {
                 setBackground(REMOVE_COLOR);
-            }
-            else {
+            } else {
                 setBackground(SELECTED_COLOR);
             }
-        }
-        else{
+        } else {
             setBackground(BASIC_COLOR);
         }
     }

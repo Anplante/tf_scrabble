@@ -51,6 +51,7 @@ public class ScrabbleGUI extends JFrame {
         menu = new MainMenuGUI(this);
         menu.setName("Menu");
         addKeyBindings();
+
     }
 
     private final AbstractAction actionEscape = new AbstractAction("Escape") {
@@ -143,6 +144,7 @@ public class ScrabbleGUI extends JFrame {
         panelLetterRack.setName("Player letter rack");
         panelLetterRack.setOpaque(false);
         panelLetterRack.changementEtat();
+
         add(panelLetterRack);
     }
 

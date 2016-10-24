@@ -52,9 +52,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         LETTERS_RACK_WIDTH =  (int) (getWidth() * RATIO_TILES_RACK);
         OPTIONS_WIDTH = ((getWidth() - LETTERS_RACK_WIDTH) / 4)  -  ScrabbleGUI.MARGIN;
-        //22
-        TILE_SIZE = getWidth() / 22;
-        initPanelLettersRack();
     }
 
 
@@ -276,7 +273,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         }
 
         if (currentPlayer.getState().getName() == IDState.PLAY_TILE.getName()) {
-
             btnPassTurn.setVisible(false);
             btnRecall.setVisible(true);
             btnPlayWord.setVisible(true);
@@ -295,18 +291,21 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         int width = LETTERS_RACK_WIDTH/MAX_TILES_IN_HAND ;
         int x = (MAX_TILES_IN_HAND - playerTiles.size()) * width  / 2;
 
+       Dimension dimension = new Dimension(width ,width);
 
         for (Tile letter : playerTiles) {
-            ButtonTile btnTile = new ButtonTile(game, letter);
-            btnTile.setFocusable(false);
+
+            ButtonTile btnTile = new ButtonTile(game, letter, dimension);
+            btnTile.setLocation(x, POS_Y);
             letter.ajouterObservateur(btnTile);
             btnTile.setName("Tile" + i);
-            btnTile.setBounds(x, POS_Y, width ,width );
             panelLettersRack.add(btnTile);
             i++;
             x += width ;
         }
+
         panelLettersRack.repaint();
+
     }
 
     @Override

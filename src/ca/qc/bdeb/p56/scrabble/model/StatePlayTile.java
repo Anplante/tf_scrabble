@@ -108,7 +108,7 @@ public class StatePlayTile extends State {
     @Override
     protected void selectNextState(IDState stateSelected) {
 
-        if (stateSelected == IDState.PENDING) // il y a un probleme lorsque le joueur decide de passer un tour alors qu'il est en train de placer des lettres, a voir la solution a utiliser
+        if (stateSelected == IDState.PENDING) // il y a un probleme lorsque le joueur decide de passer un tour alors qu'il est en train de placer des letters, a voir la solution a utiliser
         {
             if (!verifyValidWord()) {
                 return;
