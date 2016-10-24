@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by TheFrenchOne on 9/12/2016.
  */
-public class BtnTile extends JButton implements Observateur {
+public class ButtonTile extends JButton implements Observateur {
 
     private Color BASIC_COLOR = Color.lightGray;
     private Color REMOVE_COLOR = Color.red;
@@ -24,14 +24,13 @@ public class BtnTile extends JButton implements Observateur {
     private Tile tile;
 
 
-    public BtnTile(Game gameModel, Tile tile, Dimension dimension) {
+    public ButtonTile(Game gameModel, Tile tile) {
         super(tile.getLetter() + " (" + tile.getValue() + ")");
         if (tile.getLetter().equals(" ")) {
             this.setText("     ");
         }
         this.gameModel = gameModel;
         this.tile = tile;
-        setSize(dimension);
         changementEtat();
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setFocusable(false);
@@ -56,7 +55,6 @@ public class BtnTile extends JButton implements Observateur {
 
     @Override
     public void changementEtat() {
-
 
         if(tile.isSelected())
         {

@@ -20,7 +20,7 @@ public class BtnSquareTest {
 
 
     private BtnSquare btnSquare;
-    private BtnTile btnTile;
+    private ButtonTile btnTile;
     private Game gameModel;
     private PanelLetterRackZone zoneJoueur;
 
@@ -41,21 +41,18 @@ public class BtnSquareTest {
     @After
     public void tearDown() throws Exception {
 
-
     }
-
 
     @Test
     public void testSelectSquareInPlayTileState() throws AWTException {
 
         Tile tile = new Tile("a", 2);
-        btnTile = new BtnTile(gameModel, tile, new Dimension(50,50));
+        btnTile = new ButtonTile(gameModel, tile);
 
         assertFalse(gameModel.getSquare(7,7).containLetter());
         btnTile.doClick();
         btnSquare.doClick();
         assertEquals(tile.getLetter(), gameModel.getContentSquare(7,7));
-
 
     }
 
@@ -63,11 +60,8 @@ public class BtnSquareTest {
     @Test
     public void testSelectSquareInSelectStateAction() throws AWTException {
 
-
         assertEquals(IDState.SELECT_ACTION.getName(), gameModel.getState());
         btnSquare.doClick();
         assertEquals(IDState.SELECT_ACTION.getName(), gameModel.getState());
-
     }
-
 }

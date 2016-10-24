@@ -2,7 +2,7 @@ package ca.qc.bdeb.p56.scrabble.model;
 
 import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
 import ca.qc.bdeb.p56.scrabble.view.BtnSquare;
-import ca.qc.bdeb.p56.scrabble.view.BtnTile;
+import ca.qc.bdeb.p56.scrabble.view.ButtonTile;
 import ca.qc.bdeb.p56.scrabble.view.PanelLetterRackZone;
 import ca.qc.bdeb.p56.scrabble.view.ScrabbleGUI;
 import org.junit.After;
@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class StateSwaptTileTest {
     private Game game;
     private JButton btnEchanger;
     private JButton btnCancel;
-    private List<BtnTile> btnTiles;
+    private List<ButtonTile> btnTiles;
     private ScrabbleGUI scrabbleGame;
     private JPanel letterRack;
 
@@ -62,7 +61,7 @@ public class StateSwaptTileTest {
         btnTiles = new ArrayList<>();
 
         for (int i = 0; i < currentPlayer.getLettersCount(); i++) {
-            btnTiles.add((BtnTile) TestUtils.getChildNamed(letterRack, "Tile" + i));
+            btnTiles.add((ButtonTile) TestUtils.getChildNamed(letterRack, "Tile" + i));
         }
     }
 

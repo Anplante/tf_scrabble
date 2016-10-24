@@ -72,6 +72,5 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         }
         g.drawRect(0,0, this.getWidth()- 10,this.getHeight() - 1);
         g.dispose();
-
     }
 }

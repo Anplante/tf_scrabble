@@ -5,7 +5,7 @@ package ca.qc.bdeb.p56.scrabble.model;
  */
 public class Board {
 
-    Square[][] board;
+    private Square[][] board;
 
     public Board(int size) {
         board = new Square[size][size];
@@ -13,18 +13,13 @@ public class Board {
     }
 
     private void initBoard() {
+
         for (int row = 0; row < board.length ;row++) {
             for (int column = 0; column <board.length; column++) {
                 board[row][column] = new Square(row, column);
             }
         }
         setNeighbours();
-    }
-
-    public String getContentSquare(int row, int column)
-    {
-
-        return board[row][column].getLetterOn();
     }
 
     private void setNeighbours()
@@ -48,4 +43,5 @@ public class Board {
     public Square getSquare(int row, int column) {
         return board[row][column];
     }
+
 }

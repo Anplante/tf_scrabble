@@ -11,37 +11,49 @@ import java.io.IOException;
 /**
  * Created by 0993083 on 2016-10-06.
  */
-public class PanelBag extends JPanel implements Observateur {
+public class ButtonExchange extends JButton implements Observateur {
 
     private Image bagImg;
     private JLabel lblNumberLetter;
     private Game theGame;
 
 
-    public PanelBag(Game game) {
+    public ButtonExchange(String name, Game game, Rectangle bounds) {
+
+        super(name);
+        setBounds(bounds);
         this.theGame = game;
+
         try {
             bagImg = ImageIO.read(this.getClass().getResource("/Image/bag_scrabble.png"));
         } catch (IOException ex) {
+            // FIXME Antoine
+            ex.printStackTrace();
         }
         initComponents();
     }
 
 
     public void initComponents() {
-        lblNumberLetter = new JLabel(new ImageIcon(bagImg.getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+
+        setIcon(new ImageIcon(bagImg.getScaledInstance(getWidth()/2, getHeight()/2, Image.SCALE_SMOOTH)));
+
+       lblNumberLetter = new JLabel();
+        //setLayout(null);
         lblNumberLetter.setSize(lblNumberLetter.getPreferredSize());
+       // lblNumberLetter.setLocation(getWidth(), getHeight());
         lblNumberLetter.setText(Integer.toString(theGame.getlettersLeft()));
-        lblNumberLetter.setForeground(Color.white);
-        lblNumberLetter.setHorizontalTextPosition(JLabel.CENTER);
+        lblNumberLetter.setForeground(Color.RED);
+        //lblNumberLetter.setHorizontalTextPosition(JLabel.CENTER);
         //  lblNumberLetter.setVerticalTextPosition(JLabel.BOTTOM);
-        lblNumberLetter.setVisible(true);
+        //lblNumberLetter.setVisible(true);
         // lblNumberLetter.setIcon(imageBag);
-        this.add(lblNumberLetter);
+        add(lblNumberLetter);
     }
 
     @Override
     public void changementEtat() {
+
         lblNumberLetter.setText(Integer.toString(theGame.getlettersLeft()));
     }
 

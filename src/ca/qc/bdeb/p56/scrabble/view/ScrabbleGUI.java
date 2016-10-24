@@ -2,12 +2,10 @@ package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
 
-import javax.imageio.ImageIO;
 import java.awt.Image;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.util.List;
 import java.awt.*;
 
@@ -18,21 +16,18 @@ public class ScrabbleGUI extends JFrame {
 
     private final double RATIO_BOARD_ZONE = 0.1;
 
-    private final double RATIO_PANEL_INFORMATION = 0.1;
-    private final double RATIO_LETTER_RACK_ZONE = 0.1;
-    private final int BOARD_ZONE_HEIGHT;
+
+    private final  double RATIO_LETTER_RACK_ZONE = 0.1;
+
     private final int LETTER_RACK_ZONE_HEIGHT;
-    private final int MARGIN = 5;
+    public final static int MARGIN = 5;
 
     private String backgroundPath;
-    private JLabel lblNumberLetter;
-    private Image bagImg;
     PanelLetterRackZone panelLetterRack;
     JPanel pnlBoard;
     Game gameModel;
     MnuOptions options;
     private MainMenuGUI menu;
-    private PanelBag bagOfLetter;
 
     JLabel background;
 
@@ -45,16 +40,9 @@ public class ScrabbleGUI extends JFrame {
         Rectangle bounds = new Rectangle(screenSize);
         setBounds(bounds);
 
-        BOARD_ZONE_HEIGHT = (int) (bounds.height * RATIO_BOARD_ZONE) > 100 ? (int) (bounds.height * RATIO_BOARD_ZONE) : 100;
-        LETTER_RACK_ZONE_HEIGHT = (int) (bounds.height * RATIO_LETTER_RACK_ZONE) > 100 ? (int) (bounds.height * RATIO_LETTER_RACK_ZONE) : 100;
+        LETTER_RACK_ZONE_HEIGHT = (int) (bounds.height * RATIO_LETTER_RACK_ZONE);
         setLayout(null);
 
-        try {
-            bagImg = ImageIO.read(this.getClass().getResource("/Image/bag_scrabble.png"));
-        } catch (IOException ex) {
-            // FIXME
-            ex.printStackTrace();
-        }
 
         setResizable(false);
         setFocusable(true);
@@ -97,50 +85,33 @@ public class ScrabbleGUI extends JFrame {
         createPanelBoard();
         createPanelLetterRack();
         createPanelInformation();
-        createLabelNumberLetters();
-
     }
 
     private void createBackground() {
 
         background = new JLabel();
         background.setSize(getWidth(), getHeight());
-        // L'ancien background etait beaucoup trop aggresif sur les yeux, un background simple est preferable
         background.setIcon(new ImageIcon(new ImageIcon(this.getClass().getResource("/background/" +
                 backgroundPath)).getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
         setContentPane(background);
-
     }
 
-    private void createLabelNumberLetters() {
-
-        bagOfLetter = new PanelBag(gameModel);
-        bagOfLetter.setLayout(new BorderLayout());
-        int y = panelInformation.getHeight();
-        int witdh = (int) (getWidth() - getWidth() * RATIO_PANEL_INFORMATION);
-        int x = witdh;
-        bagOfLetter.setBounds(x + 50, y + 20, 60, 60);
-        add(bagOfLetter);
-        gameModel.ajouterObservateur(bagOfLetter);
-    }
-
+    // Louis : ça sert tu à quelque chose?
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        //g.drawImage(bagImg,0,0,50,50);
     }
 
     private void createPanelInformation() {
 
-        int y = getHeight() - LETTER_RACK_ZONE_HEIGHT - BOARD_ZONE_HEIGHT;
-        int witdh = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN;
-        int x = getWidth() - witdh;
+        int y = getHeight() - LETTER_RACK_ZONE_HEIGHT;
+        int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN;
+        int x = getWidth() - width;
         y *= 0.5;
 
         panelInformation = new JPanel();
-
         panelInformation.setLocation(x, MARGIN);
-        panelInformation.setSize(witdh, y);
+        panelInformation.setSize(width, y);
         panelInformation.setLayout(new GridLayout(gameModel.getPlayers().size(), 1, MARGIN, MARGIN));
         panelInformation.setOpaque(false);
         add(panelInformation);
@@ -154,7 +125,6 @@ public class ScrabbleGUI extends JFrame {
             playerInfo.setName("Info : " + player.getName());
             panelInformation.add(playerInfo);
         }
-        //panelInformation.repaint();
     }
 
 
@@ -164,7 +134,7 @@ public class ScrabbleGUI extends JFrame {
         int y = getHeight() - LETTER_RACK_ZONE_HEIGHT;
         int witdhBoard = pnlBoard.getWidth();
 
-        Rectangle boundsZoneLetterRack = new Rectangle(x, y + MARGIN, witdhBoard, LETTER_RACK_ZONE_HEIGHT/2);
+        Rectangle boundsZoneLetterRack = new Rectangle(x, y + MARGIN, witdhBoard, LETTER_RACK_ZONE_HEIGHT - MARGIN * 2);
         panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack);
 
         panelLetterRack.setPlayer(gameModel.getPlayers());
@@ -201,8 +171,6 @@ public class ScrabbleGUI extends JFrame {
                 pnlBoard.add(square);
             }
         }
-
-
     }
 
     private void createGame() {
@@ -218,11 +186,9 @@ public class ScrabbleGUI extends JFrame {
     }
 
 
+    private void addKeyBindings() {
 
-    private void addKeyBindings()
-    {
-
-        JRootPane contentPane = (JRootPane) getRootPane();
+        JRootPane contentPane = getRootPane();
         contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Escape");
         contentPane.getActionMap().put("Escape", actionEscape);
     }
@@ -236,7 +202,7 @@ public class ScrabbleGUI extends JFrame {
     }
 
     public void changeBackground(String filePath) {
-        this.backgroundPath =  filePath;
+        this.backgroundPath = filePath;
     }
 
 

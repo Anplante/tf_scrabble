@@ -5,15 +5,11 @@ import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
-import ca.qc.bdeb.p56.scrabble.view.BtnTile;
-import ca.qc.bdeb.p56.scrabble.view.PanelLetterRackZone;
-import ca.qc.bdeb.p56.scrabble.view.ScrabbleGUI;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +25,7 @@ public class StateExchangeTest {
     private Game game;
     private JButton btnEchanger;
     private JButton btnCancel;
-    private List<BtnTile> btnTiles;
+    private List<ButtonTile> btnTiles;
     private ScrabbleGUI scrabbleGame;
     private JPanel letterRack;
 
@@ -63,7 +59,7 @@ public class StateExchangeTest {
         btnTiles = new ArrayList<>();
 
         for (int i = 0; i < currentPlayer.getLettersCount(); i++) {
-            btnTiles.add((BtnTile) TestUtils.getChildNamed(letterRack, "Tile" + i));
+            btnTiles.add((ButtonTile) TestUtils.getChildNamed(letterRack, "Tile" + i));
         }
     }
 
@@ -88,7 +84,7 @@ public class StateExchangeTest {
         btnEchanger.doClick();
 
 
-        for (BtnTile tileToSelect : btnTiles) {
+        for (ButtonTile tileToSelect : btnTiles) {
             tileToSelect.doClick();
         }
 

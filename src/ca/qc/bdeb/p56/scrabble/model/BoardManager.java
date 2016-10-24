@@ -12,16 +12,17 @@ import java.util.TreeMap;
 public class BoardManager {
 
     public static final int BOARD_SIZE = 15;
-
-    private Map<String, Premium> premiums;
     private static Map<String, Premium.Type> premiumTypeMap;
-    private Board board;
 
     static {
         premiumTypeMap = new TreeMap<String, Premium.Type>();
         premiumTypeMap.put("letterscore", Premium.Type.LETTER_SCORE);
         premiumTypeMap.put("wordscore", Premium.Type.WORD_SCORE);
     }
+
+    private Map<String, Premium> premiums;
+    private Board board;
+
 
     public BoardManager()
     {
@@ -89,7 +90,7 @@ public class BoardManager {
 
     private void initPremiums(Element premiumElement)
     {
-        premiums = new TreeMap<String, Premium>();
+        premiums = new TreeMap<>();
 
         NodeList premiumNodes = premiumElement.getElementsByTagName("premium");
 

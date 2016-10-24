@@ -21,14 +21,19 @@ import javax.swing.*;
 public class PanelLetterRackZone extends JPanel implements Observateur {
 
 
+    private int MAX_TILES_IN_HAND = 7;
+    private double RATIO_TILES_RACK = .5;
+    private int POS_Y = 0;
     private Player currentPlayer;
     private List<Player> players;
     private List<Player> resetPlayers;
     private Game game;
 
     private final double RATIO_LETTERS_ZONE = .1;
-    private final int TILE_SIZE;
-    private JButton btnSwapTiles;
+
+    private final int LETTERS_RACK_WIDTH;
+    private final int OPTIONS_WIDTH;
+    private ButtonExchange btnSwapTiles;
     private JButton btnPassTurn;
     private JButton btnPlayWord;
     private JButton btnRecall;
@@ -40,28 +45,15 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     public PanelLetterRackZone(Rectangle boundsZoneLetterRack) {
 
         super();
-        //setLayout(new FlowLayout());
-       // setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        setLayout(new GridBagLayout());
-        //setLayout(new GridLayout(1,10,2,0));
+        setLayout(null);
         currentPlayer = null;
         players = null;
         setBounds(boundsZoneLetterRack);
-        panelLettersRack = new JPanel();
-        // panelLettersRack.setLayout(new BoxLayout(panelLettersRack, BoxLayout.X_AXIS));
 
-
-        TILE_SIZE = getWidth() / 12;
-        initPanelLettersRack();
+        LETTERS_RACK_WIDTH =  (int) (getWidth() * RATIO_TILES_RACK);
+        OPTIONS_WIDTH = ((getWidth() - LETTERS_RACK_WIDTH) / 4)  -  ScrabbleGUI.MARGIN;
     }
 
-    private void initPanelLettersRack() {
-
-
-
-        initializeOptions();
-
-    }
 
     public void setPlayer(List<Player> players) {
 
@@ -73,41 +65,61 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         this.players = players;
         for (Player player : players) {
             player.ajouterObservateur(this);
+
         }
     }
 
     public void setGame(Game aGame) {
         if (game != null) {
             game.retirerObservateur(this);
+            game.retirerObservateur(btnSwapTiles);
         }
-        this.game = aGame;
-        this.game.ajouterObservateur(this);
+        game = aGame;
+
+
+        initPanelLettersRack();
+        initializeOptions();
+        game.ajouterObservateur(this);
+        game.ajouterObservateur(btnSwapTiles);
+    }
+
+    private void initPanelLettersRack() {
+
+        int x = getWidth() / 2 - LETTERS_RACK_WIDTH / 2;
+        panelLettersRack = new JPanel();
+        panelLettersRack.setLayout(null);
+        panelLettersRack.setLocation(x, POS_Y);
+        panelLettersRack.setSize(LETTERS_RACK_WIDTH, getHeight());
+        panelLettersRack.setName("Letter rack");
+        add(panelLettersRack);
     }
 
     private void initializeOptions() {
 
         initForfeitOption();
         initExchangeOption();
-
-        int x = getWidth() / 4;
-        int y = getHeight() / 8;
-
-        int width = TILE_SIZE * 7;
-        panelLettersRack.setBounds(x, y, width, TILE_SIZE);
-        panelLettersRack.setName("Letter rack");
-        add(panelLettersRack);
-
         initRecallOption();
         initiBtnPlayWord();
         initPassTurnOption();
     }
 
     private void initPassTurnOption() {
+
+
+        int x = getWidth() - OPTIONS_WIDTH;
+
         btnPassTurn = new JButton("Passer le tour");
-        btnPassTurn.setSize(150, 100);
         btnPassTurn.setName("Pass turn");
+        btnPassTurn.setSize( OPTIONS_WIDTH , getHeight());
+        btnPassTurn.setLocation(x, POS_Y);
+
+        btnPassTurn.setVerticalTextPosition(SwingConstants.BOTTOM);
+        btnPassTurn.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        btnPassTurn.setVisible(false);  // Pas certain que c'est necessaire
         add(btnPassTurn);
-        btnPassTurn.setVisible(false);
+
+
         btnPassTurn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 game.passTurn();
@@ -115,18 +127,68 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         });
     }
 
+    private void initiBtnPlayWord() {
+
+        int x = getWidth() - OPTIONS_WIDTH;
+
+        btnPlayWord = new JButton("Play");
+        btnPlayWord.setName("Play");
+        btnPlayWord.setSize( OPTIONS_WIDTH, getHeight());
+        btnPlayWord.setLocation(x, POS_Y);
+
+        add(btnPlayWord);
+        btnPlayWord.setVisible(false);
+        btnPlayWord.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                game.playWord();
+            }
+        });
+    }
+
+    private void initRecallOption() {
+
+        int x = getWidth() -  OPTIONS_WIDTH * 2 - ScrabbleGUI.MARGIN;
+
+        btnRecall = new JButton("Recall");
+        btnRecall.setName("Recall");
+        btnRecall.setSize( OPTIONS_WIDTH, getHeight());
+        btnRecall.setLocation(x , POS_Y);
+
+        add(btnRecall);
+
+        btnRecall.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                game.recallTiles();
+            }
+        });
+    }
+
+
     private void initExchangeOption() {
 
-        btnSwapTiles = new JButton("Échanger");
+
+        int x =  OPTIONS_WIDTH + ScrabbleGUI.MARGIN ;
+
+        Rectangle bounds = new Rectangle(x , POS_Y,  OPTIONS_WIDTH, getHeight());
+
+        btnSwapTiles = new ButtonExchange("Échanger", game ,  bounds );
+        btnSwapTiles.setName("Exchange");
+
+
+        btnSwapTiles.setVerticalTextPosition(SwingConstants.BOTTOM);
+        btnSwapTiles.setHorizontalTextPosition(SwingConstants.CENTER);
+
 
         btnCancelExchange = new JButton("Annuler");
         btnCancelExchange.setVisible(false);
-
-        btnSwapTiles.setName("Exchange");
         btnCancelExchange.setName("Cancel Exchange");
+        btnCancelExchange.setLocation(x -  ScrabbleGUI.MARGIN, POS_Y);
+        btnCancelExchange.setSize( OPTIONS_WIDTH, getHeight());
 
         add(btnSwapTiles);
         add(btnCancelExchange);
+
         btnSwapTiles.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -135,7 +197,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
                     disableAllOtherBtnExchange(false);
                 } else {
                     disableAllOtherBtnExchange(true);
-                    //changementEtat();
                     btnSwapTiles.setText("Échanger");
                 }
                 game.exchangeLetter();
@@ -157,45 +218,16 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         btnRecall.setEnabled(enabler);
         btnPassTurn.setEnabled(enabler);
         btnCancelExchange.setVisible(!enabler);
-
-    }
-
-    private void initRecallOption() {
-
-        btnRecall = new JButton("Recall");
-        btnRecall.setSize(100, 50);
-        btnRecall.setName("Recall");
-
-        add(btnRecall);
-        btnRecall.setVisible(false);
-        btnRecall.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                game.recallTiles();
-            }
-        });
-    }
-
-    private void initiBtnPlayWord() {
-        // TODO Louis : Mettre un label en dessous du boutton ou trouver un moyen pour que le text s'ajuste à la taille du bouton
-
-        btnPlayWord = new JButton("Play");
-        btnPlayWord.setSize(100, 50);
-        btnPlayWord.setName("Play");
-
-        add(btnPlayWord);
-        btnPlayWord.setVisible(false);
-        btnPlayWord.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                game.playWord();
-            }
-        });
     }
 
     private void initForfeitOption() {
+
         btnForfeit = new JButton("Abandonner");
-        btnForfeit.setSize(100, 50);
         btnForfeit.setName("forfeit");
+
+        btnForfeit.setSize( OPTIONS_WIDTH, getHeight());
+        btnForfeit.setLocation(POS_Y, POS_Y);
+
         add(btnForfeit);
         btnForfeit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -208,7 +240,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         });
     }
 
-
     private void resetPlayer() {
 
         resetPlayers = new ArrayList<>();
@@ -218,7 +249,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             resetPlayers.add(new AiPlayer());
         }
     }
-
 
     private void reinitializeGame() {
 
@@ -247,36 +277,31 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             btnPassTurn.setVisible(false);
             btnRecall.setVisible(true);
             btnPlayWord.setVisible(true);
-          //  add(btnRecall);
-           // add(btnPlayWord);
-
-        }
-        else{
+        } else {
             btnRecall.setVisible(false);
             btnPlayWord.setVisible(false);
             btnPassTurn.setVisible(true);
-          //  add(btnPassTurn);
-            //add(btnCancelExchange);
         }
-
 
         for (Component comp : panelLettersRack.getComponents()) {
             panelLettersRack.remove(comp);
         }
 
         List<Tile> playerTiles = currentPlayer.getTiles();
-
         int i = 0;
+        int width = LETTERS_RACK_WIDTH/MAX_TILES_IN_HAND ;
+        int x = (MAX_TILES_IN_HAND - playerTiles.size()) * width  / 2;
 
-        Dimension dimension = new Dimension(TILE_SIZE, TILE_SIZE);
 
         for (Tile letter : playerTiles) {
-            BtnTile btnTile = new BtnTile(game, letter, dimension);
+            ButtonTile btnTile = new ButtonTile(game, letter);
             btnTile.setFocusable(false);
             letter.ajouterObservateur(btnTile);
             btnTile.setName("Tile" + i);
+            btnTile.setBounds(x, POS_Y, width ,width );
             panelLettersRack.add(btnTile);
             i++;
+            x += width ;
         }
         panelLettersRack.repaint();
     }

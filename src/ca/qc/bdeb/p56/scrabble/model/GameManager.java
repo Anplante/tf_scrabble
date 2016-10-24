@@ -26,6 +26,7 @@ public class GameManager {
     }
 
 
+    // TODO Louis : Éventuellement?
     public void saveGame(File file)
     {
 
