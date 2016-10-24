@@ -30,7 +30,6 @@ public class BtnSquare extends JButton implements Observateur {
     private final static Color COLOR_DW = new Color(238, 49, 50);
 
     public BtnSquare(Game gameModel, int posRow, int posColumn) {
-
         super(gameModel.getPremiumSquare(posRow, posColumn));
         this.gameModel = gameModel;
         this.posRow = posRow;
@@ -48,7 +47,15 @@ public class BtnSquare extends JButton implements Observateur {
                     square = gameModel.getSquare(posRow, posColumn);
                     square.ajouterObservateur(BtnSquare.this);
                 }
-                gameModel.playTile(square);
+                    gameModel.playTile(square);
+                if(square.getTileOn() != null &&gameModel.getActivePlayer().getState().getName().equals(IDState.PLAY_TILE.getName())){
+                    ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource("./lettres/"+square.getLetterOn().toUpperCase()+".png"));
+                    Image img = fillingIcon.getImage() ;
+                    Image newimg = img.getScaledInstance( getWidth(), getHeight(),  java.awt.Image.SCALE_SMOOTH ) ;
+                    ImageIcon icon = new ImageIcon( newimg );
+                    setIcon(icon);
+                }
+
             }
         });
     }
@@ -64,6 +71,7 @@ public class BtnSquare extends JButton implements Observateur {
             setBackground(Color.LIGHT_GRAY);
         } else if (content.length() == 1) {
             setBackground(Color.black);
+            setText(null);
         } else if (content.equals("TW")) {
             setBackground(COLOR_TW);
         } else if (content.equals("DW")) {
@@ -73,11 +81,13 @@ public class BtnSquare extends JButton implements Observateur {
         } else {
             setBackground(COLOR_TL);
         }
+        if(square != null && square.getTileOn() == null){
+            setIcon(null);
+        }
     }
 
     @Override
     public void changementEtat(Enum<?> property, Object o) {
-
 
     }
 }

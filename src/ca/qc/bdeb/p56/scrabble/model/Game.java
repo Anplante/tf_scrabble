@@ -345,6 +345,7 @@ public class Game implements Observable {
                 getActivePlayer().addLetter(tileLocation.getTileOn());
                 tileLocation.setLetter(null);
             }
+            getActivePlayer().aviserObservateurs();
         }
     }
 

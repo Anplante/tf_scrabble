@@ -52,6 +52,9 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         LETTERS_RACK_WIDTH =  (int) (getWidth() * RATIO_TILES_RACK);
         OPTIONS_WIDTH = ((getWidth() - LETTERS_RACK_WIDTH) / 4)  -  ScrabbleGUI.MARGIN;
+        //22
+        TILE_SIZE = getWidth() / 22;
+        initPanelLettersRack();
     }
 
 
