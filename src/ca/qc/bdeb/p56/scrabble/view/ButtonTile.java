@@ -71,8 +71,7 @@ public class ButtonTile extends JButton implements Observateur {
 
     @Override
     public void changementEtat() {
-
-        if (tile.isSelected()) {
+        if (tile != null && tile.isSelected()) {
             if (gameModel.getActivePlayer().getState().getName() == IDState.EXCHANGE.getName()) {
                 setBackground(REMOVE_COLOR);
             } else {

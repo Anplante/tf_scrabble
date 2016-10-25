@@ -251,8 +251,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         GameManager gameManager = new GameManager();
         game = gameManager.createNewGame(resetPlayers);
         game.ajouterObservateur(this);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  // TODO Louis : à revoir, car je ne crois pas que le component devrait directement recréer son parent.
-        ScrabbleGUI gameGUI = new ScrabbleGUI();
+        //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  // TODO Louis : à revoir, car je ne crois pas que le component devrait directement recréer son parent.
+        //ScrabbleGUI gameGUI = new ScrabbleGUI();
 
       /*  gameGUI.createScrabbleGame(game);
         gameGUI.setVisible(true);

@@ -65,7 +65,7 @@ public class ButtonExchange extends JButton implements Observateur {
     @Override
     public void changementEtat() {
 
-        lblNumberLetter.setText(Integer.toString(theGame.getlettersLeft()));
+        lblNumberLetter.setText(stringCreator());
     }
 
     @Override
