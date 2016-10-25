@@ -23,6 +23,8 @@ public class BtnSquareTest {
     private ButtonTile btnTile;
     private Game gameModel;
     private PanelLetterRackZone zoneJoueur;
+    private static final int WIDTH = 50;
+    private static final int HEIGHT = 50;
 
     @Before
     public void setUp() throws Exception {
@@ -34,6 +36,7 @@ public class BtnSquareTest {
         gameModel = gameManager.createNewGame(players);
 
         btnSquare = new BtnSquare(gameModel, 7, 7);
+        btnSquare.setSize(WIDTH,HEIGHT);
         gameModel.startGame();
 
     }

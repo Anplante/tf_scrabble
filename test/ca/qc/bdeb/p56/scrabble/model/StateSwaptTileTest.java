@@ -29,6 +29,8 @@ public class StateSwaptTileTest {
     private List<ButtonTile> btnTiles;
     private ScrabbleGUI scrabbleGame;
     private JPanel letterRack;
+    private static final int WIDTH = 50;
+    private static final int HEIGHT = 50;
 
 
     private Player currentPlayer;
@@ -89,6 +91,7 @@ public class StateSwaptTileTest {
     public void swapToPlaceTestt() {
 
         BtnSquare btnSquare = new BtnSquare(game,5,5);
+        btnSquare.setSize(WIDTH, HEIGHT);
 
         btnTiles.get(2).doClick();
         btnSquare.doClick();

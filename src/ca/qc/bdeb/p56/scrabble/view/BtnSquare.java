@@ -48,8 +48,8 @@ public class BtnSquare extends JButton implements Observateur {
                 if(square.getTileOn() != null &&gameModel.getActivePlayer().getState().getName().equals(IDState.PLAY_TILE.getName())){
                     ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource("./letters/englishDictionaryValue/" +square.getLetterOn().toUpperCase()+".png"));
                     Image img = fillingIcon.getImage() ;
-                    Image newimg = img.getScaledInstance( getWidth(), getHeight(),  java.awt.Image.SCALE_SMOOTH ) ;
-                    ImageIcon icon = new ImageIcon( newimg );
+                    Image newImage = img.getScaledInstance( getWidth(), getHeight(),  java.awt.Image.SCALE_SMOOTH ) ;
+                    ImageIcon icon = new ImageIcon( newImage );
                     setIcon(icon);
                 }
             }
