@@ -10,7 +10,7 @@ public class GameManager {
 
     private Game game;
 
-    private final String GAME_FILE = "resources/scrabbleParameters.xml";
+    private final String GAME_FILE = "resources/files/scrabbleParameters.xml";
 
 
     private List<Tile> alphabetBag;

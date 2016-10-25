@@ -3,6 +3,8 @@ package ca.qc.bdeb.p56.scrabble.model;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by 0993083 on 2016-10-11.
@@ -29,19 +31,19 @@ public  class Dictionary {
     {
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
+            BufferedReader reader = new BufferedReader(new FileReader(file));
             String word;
             int wordCode = 0;
-            while((word = br.readLine()) != null)
+            while((word = reader.readLine()) != null)
             {
                 dict.put(wordCode, word);
                 wordCode++;
             }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(file.toString()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(file.toString()).log(Level.SEVERE, null, ex);
         }
 
 

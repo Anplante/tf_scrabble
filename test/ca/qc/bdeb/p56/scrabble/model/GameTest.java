@@ -189,7 +189,7 @@ public class GameTest {
 
     @Test
     public void testValidWordEn(){
-        String wordtested = "hello";
+        String wordtested = "wrong";
         assertFalse(game.isValidWord(wordtested));
     }
 

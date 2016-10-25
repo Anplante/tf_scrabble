@@ -2,11 +2,15 @@ package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
+import sun.misc.Launcher;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by 0993083 on 2016-10-06.
@@ -16,6 +20,7 @@ public class ButtonExchange extends JButton implements Observateur {
     private Image bagImg;
     private JLabel lblNumberLetter;
     private Game theGame;
+    private static final URL PATH_TO_FILE = Launcher.class.getResource("/Image/bag_scrabble.png");
 
 
     public ButtonExchange(String name, Game game, Rectangle bounds) {
@@ -25,10 +30,9 @@ public class ButtonExchange extends JButton implements Observateur {
         this.theGame = game;
 
         try {
-            bagImg = ImageIO.read(this.getClass().getResource("/Image/bag_scrabble.png"));
+            bagImg = ImageIO.read(PATH_TO_FILE);
         } catch (IOException ex) {
-            // FIXME Antoine
-            ex.printStackTrace();
+            Logger.getLogger(PATH_TO_FILE.toString()).log(Level.SEVERE, null, ex);
         }
         initComponents();
     }

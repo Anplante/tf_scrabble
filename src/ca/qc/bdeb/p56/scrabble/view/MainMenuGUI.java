@@ -4,8 +4,6 @@ import ca.qc.bdeb.p56.scrabble.ai.AiPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.Player;
-import ca.qc.bdeb.p56.scrabble.utility.Observateur;
-import javafx.stage.FileChooser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -57,7 +55,7 @@ public class MainMenuGUI extends JDialog {
     private Game game;
     ScrabbleGUI parent;
 
-    public static final URL PATH_TO_FILE = Launcher.class.getResource("/fichiers/ListOfName.xml");
+    public static final URL PATH_TO_FILE = Launcher.class.getResource("/files/ListOfName.xml");
 
     public MainMenuGUI(ScrabbleGUI parent) {
 
@@ -243,7 +241,7 @@ public class MainMenuGUI extends JDialog {
         try {
             lesFichiers = new File(url.toURI());
         } catch (URISyntaxException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(url.toString()).log(Level.SEVERE, null, ex);
         }
         File[] files =  null;
         for (File file : lesFichiers.listFiles()) {

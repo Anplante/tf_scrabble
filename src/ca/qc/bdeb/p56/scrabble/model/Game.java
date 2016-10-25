@@ -7,12 +7,17 @@ import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by TheFrenchOne on 9/10/2016.
@@ -100,16 +105,19 @@ public class Game implements Observable {
     private Element getRootElement(String path) {
 
         Element rootElement = null;
-
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         try {
-            File fXmlFile = new File(path);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            File xmlFile = new File(path);
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(fXmlFile);
+            Document doc = dBuilder.parse(xmlFile);
             rootElement = doc.getDocumentElement();
             rootElement.normalize();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(dbFactory.toString()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(path.toString()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(path.toString()).log(Level.SEVERE, null, ex);
         }
 
         return rootElement;
