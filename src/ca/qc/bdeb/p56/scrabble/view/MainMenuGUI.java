@@ -232,6 +232,7 @@ public class MainMenuGUI extends JDialog {
         for (File file : lesFichiers.listFiles()) {
             cmbBackgroundScrabble.addItem(file.getName());
         }
+        cmbBackgroundScrabble.setSelectedIndex(2);
     }
 
     private void receiveBackground(int returnValue) {
