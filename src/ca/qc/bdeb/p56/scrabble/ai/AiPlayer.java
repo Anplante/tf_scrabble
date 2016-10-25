@@ -23,54 +23,17 @@ import java.util.logging.Logger;
 /**
  * Created by Antoine on 9/17/2016.
  */
-public class AiPlayer extends Player implements ListOfName{
+public class AiPlayer extends Player {
 
-    public static List<String> tmpList = AIName;
-
-    public static final URL PATH_TO_FILE = Launcher.class.getResource("/fichiers/ListOfName.xml");
-
-    public AiPlayer() {
-        super(chooseName());
-        ArrayList<String> test = readXMLFiles();
+    public AiPlayer(ArrayList<String> listName) {
+        super(chooseName(listName));
     }
 
-    private static String chooseName() {
+    private static String chooseName(ArrayList<String> listName) {
         Random rand = new Random();
-        int nom = rand.nextInt(AIName.size());
-        String Ainame = tmpList.get(nom);
-        tmpList.remove(nom);
+        int nom = rand.nextInt(listName.size());
+        String Ainame = listName.get(nom);
+        listName.remove(nom);
         return Ainame;
-    }
-
-    private ArrayList<String> readXMLFiles() {
-        ArrayList<String> listOfName = new ArrayList<>();
-        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-        try {
-            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-            Document documentOfName = docBuilder.parse(new File(PATH_TO_FILE.toURI()));
-            documentOfName.getDocumentElement().normalize();
-            NodeList nodeOfName = documentOfName.getElementsByTagName("item");
-
-            for (int i = 0; i < nodeOfName.getLength(); i++) {
-                Node itemName = nodeOfName.item(i);
-                System.out.println("\nCurrent Element :" + itemName.getNodeName());
-                if (itemName.getNodeType() == Node.ELEMENT_NODE) {
-                    Element aiName = (Element) itemName;
-                    listOfName.add(aiName.getElementsByTagName("name").item(0).getTextContent());
-                }
-            }
-            // TODO : donner du feedback à l'utilisateur
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(docBuilderFactory.toString()).log(Level.SEVERE, null, ex);
-        } catch (SAXParseException ex) {
-            Logger.getLogger(PATH_TO_FILE.toString()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(PATH_TO_FILE.toString()).log(Level.SEVERE, null, ex);
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(PATH_TO_FILE.toString()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(docBuilderFactory.toString()).log(Level.SEVERE, null, ex);
-        }
-        return listOfName;
     }
 }

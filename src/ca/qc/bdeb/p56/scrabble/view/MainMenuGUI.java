@@ -6,19 +6,31 @@ import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 import javafx.stage.FileChooser;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 import sun.misc.Launcher;
 
 import javax.swing.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by Antoine on 9/12/2016.
@@ -38,11 +50,14 @@ public class MainMenuGUI extends JDialog {
     private JLabel lblBackground;
     private JFileChooser fileImage;
     private JButton btnOpenDialog;
+    private ArrayList<String> listName;
 
     private Player player;
     private List<Player> players;
     private Game game;
     ScrabbleGUI parent;
+
+    public static final URL PATH_TO_FILE = Launcher.class.getResource("/fichiers/ListOfName.xml");
 
     public MainMenuGUI(ScrabbleGUI parent) {
 
@@ -67,6 +82,8 @@ public class MainMenuGUI extends JDialog {
         this.setLocation(x, y);
         setVisible(true);
         setResizable(false);
+
+        listName = readXMLFiles();
 
     }
 
@@ -164,7 +181,7 @@ public class MainMenuGUI extends JDialog {
         int limit = (int) cmbNombreAi.getSelectedIndex();
         ++limit;
         for (int i = 0; i < limit; i++) {
-            players.add(new AiPlayer());
+            players.add(new AiPlayer(listName));
         }
     }
 
@@ -279,6 +296,37 @@ public class MainMenuGUI extends JDialog {
 
     public int getLenghtPlayers() {
         return game.getPlayers().size();
+    }
+
+    public ArrayList<String> readXMLFiles() {
+        ArrayList<String> listOfName = new ArrayList<>();
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        try {
+            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+            Document documentOfName = docBuilder.parse(new File(PATH_TO_FILE.toURI()));
+            documentOfName.getDocumentElement().normalize();
+            NodeList nodeOfName = documentOfName.getElementsByTagName("item");
+
+            for (int i = 0; i < nodeOfName.getLength(); i++) {
+                Node itemName = nodeOfName.item(i);
+                if (itemName.getNodeType() == Node.ELEMENT_NODE) {
+                    Element aiName = (Element) itemName;
+                    listOfName.add(aiName.getElementsByTagName("name").item(0).getTextContent());
+                }
+            }
+            // TODO : donner du feedback à l'utilisateur
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(docBuilderFactory.toString()).log(Level.SEVERE, null, ex);
+        } catch (SAXParseException ex) {
+            Logger.getLogger(PATH_TO_FILE.toString()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(PATH_TO_FILE.toString()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(PATH_TO_FILE.toString()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(docBuilderFactory.toString()).log(Level.SEVERE, null, ex);
+        }
+        return listOfName;
     }
 
 }
