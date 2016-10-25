@@ -1,10 +1,26 @@
 <string-array name="List of name">
-    <item>BobbyJohnBoratos</item>
-    <item>AI</item>
-    <item>AwesomeBot</item>
-    <item>Marshmallow</item>
-    <item>Mumble</item>
-    <item>Discord</item>
-    <item>Nouglat</item>
-    <item>ScrabbleBot</item>
+    <item>
+        <name>BobbyJohnBoratos</name>
+    </item>
+    <item>
+        <name>AI</name>
+    </item>
+    <item>
+        <name>AwesomeBot</name>
+    </item>
+    <item>
+        <name>Marshmallow</name>
+    </item>
+    <item>
+        <name>Mumble</name>
+    </item>
+    <item>
+        <name>Discord</name>
+    </item>
+    <item>
+        <name>Nouglat</name>
+    </item>
+    <item>
+        <name>ScrabbleBot</name>
+    </item>
 </string-array>

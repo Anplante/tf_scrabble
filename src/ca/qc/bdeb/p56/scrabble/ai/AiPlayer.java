@@ -59,31 +59,33 @@ public class AiPlayer extends Player implements ListOfName{
 
             for (int i = 0; i < listOfName.getLength(); i++) {
 
-
                 Node firstItem = listOfName.item(i);
-                if (listOfName != null && listOfName.getLength() > 0) {
-                    NodeList subList = listOfName.item(0).getChildNodes();
+                if (firstItem.getNodeType() == Node.ELEMENT_NODE) {
 
-                    if (subList != null && subList.getLength() > 0) {
-                        String as =  subList.item(0).getNodeValue();
-                    }
+                    Element eElement = (Element) firstItem;
+                    String yrdy = eElement.getElementsByTagName("name").item(0).getTextContent();
+                    System.out.println("First Name : " + eElement.getElementsByTagName("firstname").item(0).getTextContent());
+                    System.out.println("Last Name : " + eElement.getElementsByTagName("lastname").item(0).getTextContent());
+                    System.out.println("Nick Name : " + eElement.getElementsByTagName("nickname").item(0).getTextContent());
+                    System.out.println("Salary : " + eElement.getElementsByTagName("salary").item(0).getTextContent());
+
                 }
 
 
             }
         } catch (SAXParseException err) {
-            System.out.println("Parsing error" + ", line " + err.getLineNumber() + ", uri " + err.getSystemId());
-            System.out.println(" " + err.getMessage());
+        System.out.println("Parsing error" + ", line " + err.getLineNumber() + ", uri " + err.getSystemId());
+        System.out.println(" " + err.getMessage());
 
-        } catch (SAXException e) {
-            Exception x = e.getException();
-            ((x == null) ? e : x).printStackTrace();
-        } catch (IOException e) {
+    } catch (SAXException e) {
+        Exception x = e.getException();
+        ((x == null) ? e : x).printStackTrace();
+    } catch (IOException e) {
 
-        } catch (ParserConfigurationException e) {
+    } catch (ParserConfigurationException e) {
 
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+    } catch (URISyntaxException e) {
+        e.printStackTrace();
     }
+}
 }
