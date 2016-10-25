@@ -68,11 +68,14 @@ public class StateExchange extends State {
         switch (stateSelected)
         {
             case SELECT_ACTION:
-                for(Tile tile : tilesSelected)
-                {
-                    tile.selectTile(false);
+                if(tilesSelected != null) {
+                    for (Tile tile : tilesSelected) {
+                        tile.selectTile(false);
+                    }
+                    newState = new StateSelectAction(getPlayer());
+                } else{
+                    newState = new StateSelectAction(getPlayer());
                 }
-                newState = new StateSelectAction(getPlayer());
                 break;
             case EXCHANGE:
                 newState = new StatePending(getPlayer());

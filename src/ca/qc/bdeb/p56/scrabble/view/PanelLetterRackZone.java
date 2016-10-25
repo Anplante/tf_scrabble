@@ -100,7 +100,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private void initPassTurnOption() {
 
         int x = getWidth() - OPTIONS_WIDTH;
-        btnPassTurn = new JButton("Passer le tour");
+        btnPassTurn = new JButton("Passer \nle tour");
 
         btnPassTurn.setName("Pass turn");
         btnPassTurn.setSize( OPTIONS_WIDTH , getHeight());
