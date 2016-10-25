@@ -51,7 +51,6 @@ public class GameTest {
     }
 
 
-
     @Test
     public void testAlphabetBagsSize() {
         int sizeAlphabet = game.getlettersLeft();
@@ -60,8 +59,32 @@ public class GameTest {
     }
 
     @Test
-    public void testCalculateWordPoints() {
+    public void testCalculateWordPointsWithoutPremium() {
 
+        game.startGame();
+        Player activePlayer = game.getActivePlayer();
+
+        Tile tile1 = new Tile("l",2);
+        Tile tile2 = new Tile("a",2);
+
+        Square square1 = game.getSquare(1,0);
+        square1.setLetter(tile1);
+        Square square2 =game.getSquare(2,0);
+        square2.setLetter(tile2);
+
+        List<Square> lettersPlayed = new ArrayList<>();
+
+        lettersPlayed.add(square1);
+        lettersPlayed.add(square2);
+
+        game.playWord(lettersPlayed);
+
+        assertEquals(tile1.getValue() + tile2.getValue(), activePlayer.getScore());
+    }
+
+    @Test
+    public void testCalculateWordPointsWithTripleWordPremium()
+    {
         game.startGame();
         Player activePlayer = game.getActivePlayer();
 
@@ -80,9 +103,50 @@ public class GameTest {
 
         game.playWord(lettersPlayed);
 
-        assertEquals(tile1.getValue() + tile2.getValue(), activePlayer.getScore());
+        assertEquals((tile1.getValue() + tile2.getValue())*3, activePlayer.getScore());
     }
 
+    @Test
+    public void testCalculateWordPointsWithDifferentPremium()
+    {
+        game.startGame();
+
+        List<Tile> tilesPlayed = new ArrayList<>();
+        List<Square> lettersPlayed = new ArrayList<>();
+
+        for(int i = 0; i < 4; i++)
+        {
+            tilesPlayed.add(new Tile("l", 2));
+            Square square = game.getSquare(i,0);
+            square.setLetter(tilesPlayed.get(i));
+            lettersPlayed.add(square);
+        }
+
+        int values = game.calculateWordPoints(lettersPlayed);
+
+        assertEquals(30,  values );
+    }
+
+    @Test
+    public void testCalculateWordPointsWithTwoLetterPremium()
+    {
+        game.startGame();
+
+        List<Tile> tilesPlayed = new ArrayList<>();
+        List<Square> lettersPlayed = new ArrayList<>();
+
+        for(int i = 0; i < 4; i++)
+        {
+            tilesPlayed.add(new Tile("l", 2));
+            Square square = game.getSquare(8, i + 6);
+            square.setLetter(tilesPlayed.get(i));
+            lettersPlayed.add(square);
+        }
+
+        int values = game.calculateWordPoints(lettersPlayed);
+
+        assertEquals(12,  values );
+    }
 
     @Test
     public void testValidWordFr(){

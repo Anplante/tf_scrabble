@@ -20,19 +20,16 @@ import javax.swing.*;
  */
 public class PanelLetterRackZone extends JPanel implements Observateur {
 
+    private final int MAX_TILES_IN_HAND = 7;
+    private final double RATIO_TILES_RACK = .5;
+    private final int POS_Y = 0;
+    private final int LETTERS_RACK_WIDTH;
+    private final int OPTIONS_WIDTH;
 
-    private int MAX_TILES_IN_HAND = 7;
-    private double RATIO_TILES_RACK = .5;
-    private int POS_Y = 0;
     private Player currentPlayer;
     private List<Player> players;
     private List<Player> resetPlayers;
     private Game game;
-
-    private final double RATIO_LETTERS_ZONE = .1;
-
-    private final int LETTERS_RACK_WIDTH;
-    private final int OPTIONS_WIDTH;
     private ButtonExchange btnSwapTiles;
     private JButton btnPassTurn;
     private JButton btnPlayWord;
@@ -45,15 +42,12 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     public PanelLetterRackZone(Rectangle boundsZoneLetterRack) {
 
         super();
-        setLayout(null);
-        currentPlayer = null;
-        players = null;
-        setBounds(boundsZoneLetterRack);
 
+        setLayout(null);
+        setBounds(boundsZoneLetterRack);
         LETTERS_RACK_WIDTH =  (int) (getWidth() * RATIO_TILES_RACK);
         OPTIONS_WIDTH = ((getWidth() - LETTERS_RACK_WIDTH) / 4)  -  ScrabbleGUI.MARGIN;
     }
-
 
     public void setPlayer(List<Player> players) {
 

@@ -5,7 +5,7 @@ package ca.qc.bdeb.p56.scrabble.model;
  */
 public class Premium {
 
-    public static enum Type
+    public enum Type
     {
         LETTER_SCORE,
         WORD_SCORE

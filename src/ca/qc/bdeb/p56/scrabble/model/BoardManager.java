@@ -15,7 +15,7 @@ public class BoardManager {
     private static Map<String, Premium.Type> premiumTypeMap;
 
     static {
-        premiumTypeMap = new TreeMap<String, Premium.Type>();
+        premiumTypeMap = new TreeMap<>();
         premiumTypeMap.put("letterscore", Premium.Type.LETTER_SCORE);
         premiumTypeMap.put("wordscore", Premium.Type.WORD_SCORE);
     }

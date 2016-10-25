@@ -220,8 +220,7 @@ public class Game implements Observable {
     /**
      * Pour l'utilisation des tests
      */
-    public void emptyBag()
-    {
+    public void emptyBag() {
         alphabetBag.clear();
     }
 
@@ -349,12 +348,32 @@ public class Game implements Observable {
         }
     }
 
-    private int calculateWordPoints(List<Square> letterChain) {
+    public int calculateWordPoints(List<Square> letterChain) {
+
         int points = 0;
+        int wordMultiplier = 1;
 
         for (Square square : letterChain) {
-            points += square.getTileOn().getValue();
+
+            int letterMultiplier = 1;
+
+            Premium premium = square.getPremium();
+
+            if (premium != null) {
+                switch (premium.getType()) {
+                    case LETTER_SCORE:
+                        letterMultiplier = premium.getMultiplier();
+                        break;
+                    case WORD_SCORE:
+                        wordMultiplier *= premium.getMultiplier();
+                        break;
+                }
+            }
+
+            points += letterMultiplier * square.getTileOn().getValue();
         }
+        points *= wordMultiplier;
+
         return points;
     }
 
@@ -412,7 +431,6 @@ public class Game implements Observable {
                 }
             }
         }
-
     }
 
     public boolean isValidWord(String wordTested) {
