@@ -7,9 +7,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9e93a873-ab64-4362-b5fe-5856ecefeca3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ButtonExchange.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ButtonExchange.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ButtonTile.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ButtonTile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java" />
     </list>
     <ignored path="tf_scrabble.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,8 +67,8 @@
       <file leaf-file-name="fr_dictionary.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/dictionary/fr_dictionary.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="43">
-              <caret line="220890" column="8" selection-start-line="220890" selection-start-column="8" selection-end-line="220890" selection-end-column="8" />
+            <state relative-caret-position="111">
+              <caret line="220894" column="4" selection-start-line="220894" selection-start-column="4" selection-end-line="220894" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -1178,7 +1175,7 @@
       <workItem from="1476381878919" duration="5670000" />
       <workItem from="1476387605303" duration="5390000" />
       <workItem from="1477397760052" duration="1004000" />
-      <workItem from="1477398798923" duration="7003000" />
+      <workItem from="1477398798923" duration="7073000" />
     </task>
     <task id="LOCAL-00001" summary="Test">
       <created>1473636002777</created>
@@ -1418,7 +1415,14 @@
       <option name="project" value="LOCAL" />
       <updated>1477403681229</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="FIXED Swap after Play">
+      <created>1477405826603</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1477405826603</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1454,7 +1458,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40001000" />
+    <option name="totallyTimeSpent" value="40071000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -1973,8 +1977,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/dictionary/fr_dictionary.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
-          <caret line="220890" column="8" selection-start-line="220890" selection-start-column="8" selection-end-line="220890" selection-end-column="8" />
+        <state relative-caret-position="111">
+          <caret line="220894" column="4" selection-start-line="220894" selection-start-column="4" selection-end-line="220894" selection-end-column="4" />
           <folding />
         </state>
       </provider>
