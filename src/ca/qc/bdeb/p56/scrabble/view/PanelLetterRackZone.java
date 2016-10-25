@@ -11,6 +11,7 @@ import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -242,7 +243,9 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         resetPlayers.add(new Player(currentPlayer.getName()));
 
         for (int i = 0; i < players.size() - 1; i++) {
-            resetPlayers.add(new AiPlayer());
+            ArrayList<String> nomAi = new ArrayList<>();
+            nomAi.add(players.get(i).getName());
+            resetPlayers.add(new AiPlayer(nomAi));
         }
     }
 

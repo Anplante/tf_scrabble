@@ -1,7 +1,5 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
-import ca.qc.bdeb.p56.scrabble.shared.IDState;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,11 +32,6 @@ public class StateExchangeTest {
         game.exchangeLetter();
 
     }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-
 
     @Test
     public void testExchangeLetterChangePlayer()
