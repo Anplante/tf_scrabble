@@ -241,7 +241,9 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         resetPlayers.add(new Player(currentPlayer.getName()));
 
         for (int i = 0; i < players.size() - 1; i++) {
-            resetPlayers.add(new AiPlayer(new ArrayList<String>()));
+            ArrayList<String> nomAi = new ArrayList<>();
+            nomAi.add(players.get(i).getName());
+            resetPlayers.add(new AiPlayer(nomAi));
         }
     }
 
