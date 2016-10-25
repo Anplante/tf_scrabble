@@ -1,6 +1,5 @@
 package ca.qc.bdeb.p56.scrabble.ai;
 
-import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -17,10 +16,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by Antoine on 9/17/2016.
@@ -29,63 +27,50 @@ public class AiPlayer extends Player implements ListOfName{
 
     public static List<String> tmpList = AIName;
 
+    public static final URL PATH_TO_FILE = Launcher.class.getResource("/fichiers/ListOfName.xml");
+
     public AiPlayer() {
         super(chooseName());
+        ArrayList<String> test = readXMLFiles();
     }
 
     private static String chooseName() {
         Random rand = new Random();
-        int  nom = rand.nextInt(AIName.size());
+        int nom = rand.nextInt(AIName.size());
         String Ainame = tmpList.get(nom);
         tmpList.remove(nom);
         return Ainame;
     }
 
-    private void readXMLFiles() {
+    private ArrayList<String> readXMLFiles() {
+        ArrayList<String> listOfName = new ArrayList<>();
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         try {
-
-            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-            URL url = Launcher.class.getResource("/fichiers/ListOfName.xml");
-            Document documentOfName = docBuilder.parse(new File(url.toURI()));
-            // normalize text representation
+            Document documentOfName = docBuilder.parse(new File(PATH_TO_FILE.toURI()));
             documentOfName.getDocumentElement().normalize();
-            String test  = "Root element of the doc is " + documentOfName.getDocumentElement().getNodeName();
+            NodeList nodeOfName = documentOfName.getElementsByTagName("item");
 
-
-            NodeList listOfName = documentOfName.getElementsByTagName("item");
-            int totalName = listOfName.getLength();
-            System.out.println("Total no of people : " + listOfName);
-
-            for (int i = 0; i < listOfName.getLength(); i++) {
-
-                Node firstItem = listOfName.item(i);
-                if (firstItem.getNodeType() == Node.ELEMENT_NODE) {
-
-                    Element eElement = (Element) firstItem;
-                    String yrdy = eElement.getElementsByTagName("name").item(0).getTextContent();
-                    System.out.println("First Name : " + eElement.getElementsByTagName("firstname").item(0).getTextContent());
-                    System.out.println("Last Name : " + eElement.getElementsByTagName("lastname").item(0).getTextContent());
-                    System.out.println("Nick Name : " + eElement.getElementsByTagName("nickname").item(0).getTextContent());
-                    System.out.println("Salary : " + eElement.getElementsByTagName("salary").item(0).getTextContent());
-
+            for (int i = 0; i < nodeOfName.getLength(); i++) {
+                Node itemName = nodeOfName.item(i);
+                System.out.println("\nCurrent Element :" + itemName.getNodeName());
+                if (itemName.getNodeType() == Node.ELEMENT_NODE) {
+                    Element aiName = (Element) itemName;
+                    listOfName.add(aiName.getElementsByTagName("name").item(0).getTextContent());
                 }
-
-
             }
-        } catch (SAXParseException err) {
-        System.out.println("Parsing error" + ", line " + err.getLineNumber() + ", uri " + err.getSystemId());
-        System.out.println(" " + err.getMessage());
-
-    } catch (SAXException e) {
-        Exception x = e.getException();
-        ((x == null) ? e : x).printStackTrace();
-    } catch (IOException e) {
-
-    } catch (ParserConfigurationException e) {
-
-    } catch (URISyntaxException e) {
-        e.printStackTrace();
+            // TODO : donner du feedback à l'utilisateur
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(docBuilderFactory.toString()).log(Level.SEVERE, null, ex);
+        } catch (SAXParseException ex) {
+            Logger.getLogger(PATH_TO_FILE.toString()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(PATH_TO_FILE.toString()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(PATH_TO_FILE.toString()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(docBuilderFactory.toString()).log(Level.SEVERE, null, ex);
+        }
+        return listOfName;
     }
-}
 }
