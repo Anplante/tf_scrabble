@@ -26,7 +26,7 @@ public class ScrabbleGUI extends JFrame {
     PanelLetterRackZone panelLetterRack;
     JPanel pnlBoard;
     Game gameModel;
-    MnuOptions options;
+    DialogOptionsMenu options;
     private MainMenuGUI menu;
 
     JLabel background;
@@ -58,8 +58,7 @@ public class ScrabbleGUI extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-
-            options = new MnuOptions(ScrabbleGUI.this);
+            options = new DialogOptionsMenu(ScrabbleGUI.this);
             options.setName("Options");
             options.setVisible(true);
         }
@@ -140,7 +139,6 @@ public class ScrabbleGUI extends JFrame {
 
         panelLetterRack.setPlayer(gameModel.getPlayers());
         panelLetterRack.setGame(gameModel);
-
         panelLetterRack.setName("Player letter rack");
         panelLetterRack.setOpaque(false);
         panelLetterRack.changementEtat();

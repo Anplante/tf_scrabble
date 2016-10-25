@@ -368,8 +368,8 @@ public class Game implements Observable {
                         wordMultiplier *= premium.getMultiplier();
                         break;
                 }
+                square.setPremium(null);
             }
-
             points += letterMultiplier * square.getTileOn().getValue();
         }
         points *= wordMultiplier;
