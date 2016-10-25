@@ -42,14 +42,24 @@ public class ButtonExchange extends JButton implements Observateur {
         //setLayout(null);
         lblNumberLetter.setSize(lblNumberLetter.getPreferredSize());
 
-        lblNumberLetter.setText(Integer.toString(theGame.getlettersLeft()));
-        lblNumberLetter.setForeground(Color.RED);
+        lblNumberLetter.setForeground(Color.WHITE);
         //lblNumberLetter.setHorizontalTextPosition(JLabel.CENTER);
         //  lblNumberLetter.setVerticalTextPosition(JLabel.BOTTOM);
         //lblNumberLetter.setVisible(true);
         // lblNumberLetter.setIcon(imageBag);
         lblNumberLetter.setLocation(getWidth()/2, getHeight()/2);
+        lblNumberLetter.setText(stringCreator());
         add(lblNumberLetter);
+    }
+
+
+    private String stringCreator(){
+        StringBuffer text = new StringBuffer();
+        for (int i = 0; i <getWidth()/2/5-1 ; i++) {
+            text.append(" ");
+        }
+        text.append(theGame.getlettersLeft());
+        return text.toString();
     }
 
     @Override

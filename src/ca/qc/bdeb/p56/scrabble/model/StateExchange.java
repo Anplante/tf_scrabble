@@ -37,8 +37,14 @@ public class StateExchange extends State {
         {
             tilesSelected = new ArrayList<>();
         }
-        tilesSelected.add(tile);
-        tile.selectTile(true);
+        if(tile.isSelected()){
+            tile.setSelected(false);
+            tilesSelected.remove(tile);
+            getGame().aviserObservateurs();
+        }else {
+            tilesSelected.add(tile);
+            tile.selectTile(true);
+        }
     }
 
     @Override

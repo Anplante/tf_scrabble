@@ -34,6 +34,7 @@ public class ButtonTile extends JButton implements Observateur {
         setSize(dimension);
         changementEtat();
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        setBorder(BorderFactory.createEtchedBorder());
 
         if (tile != null) {
             String ressource = PATH_RES_LETTERS_VALUE + tile.getLetter().toUpperCase().trim() + ".png";

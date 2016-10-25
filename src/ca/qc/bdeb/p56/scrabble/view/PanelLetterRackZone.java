@@ -85,7 +85,9 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         panelLettersRack.setLocation(x, POS_Y);
         panelLettersRack.setSize(LETTERS_RACK_WIDTH, getHeight());
         panelLettersRack.setName("Letter rack");
+        panelLettersRack.setOpaque(false);
         add(panelLettersRack);
+
     }
 
     private void initializeOptions() {

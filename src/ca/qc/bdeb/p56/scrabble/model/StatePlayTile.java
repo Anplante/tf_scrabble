@@ -58,7 +58,7 @@ public class StatePlayTile extends State {
 
             this.tileSelected.selectTile(false);  // p-e pas necessaire
             getPlayer().swapTile(tileSelected, this.tileSelected);
-
+            this.tileSelected = null;
             if (tilesPlaced.isEmpty()) {
                 selectNextState(IDState.SELECT_ACTION);
                 readyToChange = true;
