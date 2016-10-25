@@ -99,18 +99,16 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
     private void initPassTurnOption() {
 
-
         int x = getWidth() - OPTIONS_WIDTH;
-
         btnPassTurn = new JButton("Passer le tour");
+
         btnPassTurn.setName("Pass turn");
         btnPassTurn.setSize( OPTIONS_WIDTH , getHeight());
         btnPassTurn.setLocation(x, POS_Y);
-
         btnPassTurn.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnPassTurn.setHorizontalTextPosition(SwingConstants.CENTER);
-
         btnPassTurn.setVisible(false);  // Pas certain que c'est necessaire
+
         add(btnPassTurn);
 
 
@@ -163,21 +161,18 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
 
         int x =  OPTIONS_WIDTH + ScrabbleGUI.MARGIN ;
-
         Rectangle bounds = new Rectangle(x , POS_Y,  OPTIONS_WIDTH, getHeight());
 
         btnSwapTiles = new ButtonExchange("Échanger", game ,  bounds );
         btnSwapTiles.setName("Exchange");
-
-
         btnSwapTiles.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnSwapTiles.setHorizontalTextPosition(SwingConstants.CENTER);
 
-
+        x = getWidth() -  OPTIONS_WIDTH * 2 - ScrabbleGUI.MARGIN;
         btnCancelExchange = new JButton("Annuler");
         btnCancelExchange.setVisible(false);
         btnCancelExchange.setName("Cancel Exchange");
-        btnCancelExchange.setLocation(x -  ScrabbleGUI.MARGIN, POS_Y);
+        btnCancelExchange.setLocation(x, POS_Y);
         btnCancelExchange.setSize( OPTIONS_WIDTH, getHeight());
 
         add(btnSwapTiles);
@@ -225,7 +220,12 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         add(btnForfeit);
         btnForfeit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int result = JOptionPane.showConfirmDialog((Component) null, "Voulez recommencez la partie?", "Abandonner", JOptionPane.YES_NO_CANCEL_OPTION);
+
+                int result = JOptionPane.showConfirmDialog((Component) null,
+                        "Voulez recommencez la partie?",
+                        "Abandonner",
+                        JOptionPane.YES_NO_CANCEL_OPTION);
+
                 if (result == JOptionPane.YES_OPTION) {
                     resetPlayer();
                     reinitializeGame();

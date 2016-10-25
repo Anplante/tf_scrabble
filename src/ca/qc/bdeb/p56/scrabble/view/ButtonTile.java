@@ -26,13 +26,14 @@ public class ButtonTile extends JButton implements Observateur {
 
 
     public ButtonTile(Game gameModel, Tile tile, Dimension dimension) {
+
         super();
+
         this.gameModel = gameModel;
         this.tile = tile;
         setSize(dimension);
         changementEtat();
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
 
         if (tile != null) {
             String ressource = PATH_RES_LETTERS_VALUE + tile.getLetter().toUpperCase().trim() + ".png";
