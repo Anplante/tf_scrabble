@@ -4,7 +4,9 @@ package ca.qc.bdeb.p56.scrabble.model;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by TheFrenchOne on 9/7/2016.
@@ -16,7 +18,7 @@ public class Square implements Observable{
     private Square adjacentLeft;
     private Square adjacentRight;
 
-
+private List<Square> neighbours;
     private int posRow;
     private int posColumn;
     private Tile tileOn;
@@ -29,6 +31,7 @@ public class Square implements Observable{
         this.posRow = posRow;
         this.posColumn = posColumn;
         this.tileOn = null;
+        neighbours = new ArrayList<>();
         observateurs = new LinkedList<>();
     }
 
@@ -47,6 +50,20 @@ public class Square implements Observable{
         this.adjacentDown = adjacentDown;
         this.adjacentLeft = adjacentLeft;
         this.adjacentRight = adjacentRight;
+
+        neighbours.add(adjacentUp);
+        neighbours.add(adjacentDown);
+        neighbours.add(adjacentLeft);
+        neighbours.add(adjacentRight);
+    }
+
+    public List<Square> getNeighbours()
+    {
+        ArrayList<Square> neighbours = new ArrayList<>();
+
+        neighbours.addAll(this.neighbours);
+
+        return neighbours;
     }
 
     public String getLetterOn()

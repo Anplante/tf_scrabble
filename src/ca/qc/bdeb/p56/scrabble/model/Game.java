@@ -1,7 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
-import ca.qc.bdeb.p56.scrabble.utility.Direction;
+import ca.qc.bdeb.p56.scrabble.shared.Direction;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 import org.w3c.dom.Document;
@@ -456,4 +456,23 @@ public class Game implements Observable {
         getActivePlayer().selectNextState(IDState.SELECT_ACTION);
         goToNextState();
     }
+
+
+    private void findWord()
+    {
+        List<Square> squaresAvailable = boardManager.getSquarePositionAvailableToPlay();
+
+
+
+        while(!squaresAvailable.isEmpty())
+        {
+
+        }
+
+    }
+
+
+
+
+
 }

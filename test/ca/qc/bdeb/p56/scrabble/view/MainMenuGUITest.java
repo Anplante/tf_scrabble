@@ -45,7 +45,7 @@ public class MainMenuGUITest {
     @After
     public void tearDown() throws Exception {
 
-
+        scrabbleGUI.dispose();
     }
 
     @Test
