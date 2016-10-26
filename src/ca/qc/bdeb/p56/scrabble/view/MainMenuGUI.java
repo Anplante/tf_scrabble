@@ -27,6 +27,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -82,9 +84,6 @@ public class MainMenuGUI extends JDialog {
         setResizable(false);
 
         listName = readXMLFiles();
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
 
@@ -124,6 +123,7 @@ public class MainMenuGUI extends JDialog {
     }
 
     private void ajouterBoutons() {
+
         btnCancel = new JButton();
         btnConfirm = new JButton();
         btnOpenDialog = new JButton("...");
@@ -196,6 +196,7 @@ public class MainMenuGUI extends JDialog {
     }
 
     private void ajouterLesLabels() {
+
         lblNom = new JLabel();
         lblNom.setText("Nom du Joueur : ");
         lblNom.setLocation(25, 25);

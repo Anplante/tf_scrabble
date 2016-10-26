@@ -23,31 +23,21 @@ public class Player implements Observable {
     private int score;
     private boolean active;
     private Color playerColor;
-    private transient LinkedList<Observateur> observateurs;  //transient = not be serialized
-    private boolean hasTile;
-
-   // private final List<Tile> lettersOnHand;
+    private transient LinkedList<Observateur> observateurs;
 
     public Player(String name)
     {
         this.name  = name;
-        this.game = game;
-        tiles = new ArrayList<Tile>();
+
+        tiles = new ArrayList<>();
+        score = 0;
         // TODO : recevoir une couleur
-        playerColor = new Color(0,0,182,155); // light blue
+        playerColor = new Color(0,0,182,155);
         setState(new StatePending(this));
         active = false;
         observateurs = new LinkedList<>();
-        hasTile = false;
     }
 
-    public boolean getHasTile(){
-        return hasTile;
-    }
-
-    public void setHasTile(boolean bool){
-        hasTile = bool;
-    }
 
     public List<Tile> getTiles() {
 
@@ -60,6 +50,9 @@ public class Player implements Observable {
         return playertiles;
     }
 
+    /**
+     * À utiliser dans les jeux de tests.
+     */
     public void clearTiles(){
         tiles.clear();
     }
