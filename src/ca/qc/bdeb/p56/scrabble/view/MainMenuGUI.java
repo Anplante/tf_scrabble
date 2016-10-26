@@ -27,24 +27,27 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Menu de démarrage de notre scrabble, on demande d'entrer un nom utilisateur , en y incluant le nombre d'adversaire.
+ * Il peut aussi changer son arrière-plan de scrabble s'il veut.
+ *
  * Created by Antoine on 9/12/2016.
  */
 public class MainMenuGUI extends JDialog {
 
+    private final String MENU = "Menu" ;
+
     private JPanel panelMenu;
-    private JTextField txtNom;
+    private JTextField txtName;
     private JButton btnConfirm;
-    private JLabel lblNom;
+    private JLabel lblName;
     private JButton btnCancel;
-    private JLabel lblNombreAI;
+    private JLabel lblNumberOfAi;
     private String[] nombreDeAi = {"1", "2", "3"};
-    private JComboBox cmbNombreAi = new JComboBox();
+    private JComboBox cmbNumberOfAi = new JComboBox();
     private GameManager gameManager;
     private JComboBox<String> cmbBackgroundScrabble;
     private JLabel lblBackground;
@@ -60,30 +63,32 @@ public class MainMenuGUI extends JDialog {
     public static final URL PATH_TO_FILE = Launcher.class.getResource("/files/ListOfName.xml");
 
     public MainMenuGUI(ScrabbleGUI parent) {
-
         super();
-
         this.parent = parent;
+        initializeFrame();
+        initializeComponents();
+        initializeSize();
+
+    }
+
+    private void initializeFrame() {
         setLayout(null);
-        players = new ArrayList<>();
-        gameManager = new GameManager();
         JFrame fenetre = new JFrame();
-        this.setTitle("Menu");
+        this.setTitle(MENU);
         fenetre.pack();
         Insets insets = fenetre.getInsets();
         setSize(new Dimension(insets.left + insets.right + 400,
                 insets.top + insets.bottom + 400));
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
 
-        initializeComponents();
-
+    private void initializeSize() {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
         this.setLocation(x, y);
         setVisible(true);
         setResizable(false);
-
-        listName = readXMLFiles();
     }
 
 
@@ -91,23 +96,22 @@ public class MainMenuGUI extends JDialog {
         panelMenu = new JPanel();
         panelMenu.setLayout(null);
         addFileChooser();
-        ajouterTextBox();
-        ajouterLesLabels();
-        ajouterBoutons();
+        addTextBox();
+        addLabels();
+        addButtons();
         addComboBox();
-
         add(panelMenu);
     }
 
     private void addComboBox() {
-        cmbNombreAi = new JComboBox();
-        cmbNombreAi.setName("choix");
+        cmbNumberOfAi = new JComboBox();
+        cmbNumberOfAi.setName("choix");
         for (int i = 0; i < nombreDeAi.length; i++) {
-            cmbNombreAi.addItem(nombreDeAi[i]);
+            cmbNumberOfAi.addItem(nombreDeAi[i]);
         }
-        cmbNombreAi.setVisible(true);
-        cmbNombreAi.setLocation(180, 120);
-        cmbNombreAi.setSize(100, 25);
+        cmbNumberOfAi.setVisible(true);
+        cmbNumberOfAi.setLocation(180, 120);
+        cmbNumberOfAi.setSize(100, 25);
 
         cmbBackgroundScrabble = new JComboBox<>();
 
@@ -118,12 +122,11 @@ public class MainMenuGUI extends JDialog {
         cmbBackgroundScrabble.setSize(180,25);
 
 
-        panelMenu.add(cmbNombreAi);
+        panelMenu.add(cmbNumberOfAi);
         panelMenu.add(cmbBackgroundScrabble);
     }
 
-    private void ajouterBoutons() {
-
+    private void addButtons() {
         btnCancel = new JButton();
         btnConfirm = new JButton();
         btnOpenDialog = new JButton("...");
@@ -175,10 +178,11 @@ public class MainMenuGUI extends JDialog {
     private void setPlayer() {
 
         players = new ArrayList<Player>();
-        player = new Player(txtNom.getText());
+        listName = readXMLFiles();
+        player = new Player(txtName.getText());
         players.add(player);
 
-        int limit = (int) cmbNombreAi.getSelectedIndex();
+        int limit = (int) cmbNumberOfAi.getSelectedIndex();
         ++limit;
         for (int i = 0; i < limit; i++) {
             players.add(new AiPlayer(listName));
@@ -186,8 +190,7 @@ public class MainMenuGUI extends JDialog {
     }
 
     private void initializeGame() {
-
-
+        gameManager = new GameManager();
         game = gameManager.createNewGame(players);
         parent.changeBackground(cmbBackgroundScrabble.getSelectedItem().toString());
         parent.createScrabbleGame(game);
@@ -195,19 +198,18 @@ public class MainMenuGUI extends JDialog {
         //dispose();
     }
 
-    private void ajouterLesLabels() {
+    private void addLabels() {
+        lblName = new JLabel();
+        lblName.setText("Nom du Joueur : ");
+        lblName.setLocation(25, 25);
+        lblName.setSize(lblName.getPreferredSize());
+        lblName.setVisible(true);
 
-        lblNom = new JLabel();
-        lblNom.setText("Nom du Joueur : ");
-        lblNom.setLocation(25, 25);
-        lblNom.setSize(lblNom.getPreferredSize());
-        lblNom.setVisible(true);
-
-        lblNombreAI = new JLabel();
-        lblNombreAI.setText("Nombre d'ordinateurs :");
-        lblNombreAI.setLocation(25, 125);
-        lblNombreAI.setSize(lblNombreAI.getPreferredSize());
-        lblNombreAI.setVisible(true);
+        lblNumberOfAi = new JLabel();
+        lblNumberOfAi.setText("Nombre d'ordinateurs :");
+        lblNumberOfAi.setLocation(25, 125);
+        lblNumberOfAi.setSize(lblNumberOfAi.getPreferredSize());
+        lblNumberOfAi.setVisible(true);
 
         lblBackground = new JLabel();
         lblBackground.setText("Background : ");
@@ -216,38 +218,38 @@ public class MainMenuGUI extends JDialog {
         lblBackground.setVisible(true);
 
 
-        panelMenu.add(lblNom);
-        panelMenu.add(lblNombreAI);
+        panelMenu.add(lblName);
+        panelMenu.add(lblNumberOfAi);
         panelMenu.add(lblBackground);
     }
 
-    private void ajouterTextBox() {
+    private void addTextBox() {
         panelMenu.setLocation(0, 0);
         panelMenu.setSize(new Dimension(400, 400));
-        txtNom = new JTextField("", 30);
-        txtNom.setName("textBox");
-        txtNom.setBounds(150, 20, 180, 30);
+        txtName = new JTextField("", 30);
+        txtName.setName("textBox");
+        txtName.setBounds(150, 20, 180, 30);
 
-        txtNom.addActionListener(new ActionListener() {
+        txtName.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String input = txtNom.getText();
-                txtNom.setText(input);
+                String input = txtName.getText();
+                txtName.setText(input);
             }
         });
-        panelMenu.add(txtNom);
+        panelMenu.add(txtName);
     }
 
     private void addImageFile() {
-        File lesFichiers = null;
+        File theFiles = null;
 
         URL url = Launcher.class.getResource("/background/");
         try {
-            lesFichiers = new File(url.toURI());
+            theFiles = new File(url.toURI());
         } catch (URISyntaxException ex) {
             Logger.getLogger(url.toString()).log(Level.SEVERE, null, ex);
         }
         File[] files =  null;
-        for (File file : lesFichiers.listFiles()) {
+        for (File file : theFiles.listFiles()) {
             cmbBackgroundScrabble.addItem(file.getName());
         }
         cmbBackgroundScrabble.setSelectedIndex(2);

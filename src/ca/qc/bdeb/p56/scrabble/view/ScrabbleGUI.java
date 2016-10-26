@@ -96,12 +96,6 @@ public class ScrabbleGUI extends JFrame {
         setContentPane(background);
     }
 
-    // Louis : ça sert tu à quelque chose?
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-    }
-
     private void createPanelInformation() {
 
         int y = getHeight() - LETTER_RACK_ZONE_HEIGHT;
