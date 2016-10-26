@@ -114,7 +114,7 @@ private List<Square> neighbours;
 
     public boolean isCenter()
     {
-        return posColumn == 7 && posRow == 7;
+        return posColumn == BoardManager.BOARD_CENTER && posRow == BoardManager.BOARD_CENTER;
     }
 
     public boolean containLetter()

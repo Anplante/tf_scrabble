@@ -307,6 +307,7 @@ public class Game implements Observable {
 
 
     private String createWord(List<Square> letters) {
+
         StringBuilder word = new StringBuilder();
         for (Square square : letters) {
             word.append(square.getTileOn().getLetter());
@@ -470,9 +471,4 @@ public class Game implements Observable {
         }
 
     }
-
-
-
-
-
 }

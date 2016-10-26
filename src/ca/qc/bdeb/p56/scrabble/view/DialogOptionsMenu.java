@@ -101,7 +101,7 @@ public class DialogOptionsMenu extends JDialog {
 
     private void addKeybindings() {
 
-        JRootPane contentPane = (JRootPane) getRootPane();
+        JRootPane contentPane = getRootPane();
         contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Escape");
         contentPane.getActionMap().put("Escape", actionEscape);
     }

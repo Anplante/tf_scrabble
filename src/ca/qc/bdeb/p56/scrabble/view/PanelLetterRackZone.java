@@ -230,38 +230,16 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
                         JOptionPane.YES_NO_CANCEL_OPTION);
 
                 if (result == JOptionPane.YES_OPTION) {
-                    resetPlayer();
                     reinitializeGame();
                 }
             }
         });
     }
 
-    private void resetPlayer() {
-
-        resetPlayers = new ArrayList<>();
-        resetPlayers.add(new Player(currentPlayer.getName()));
-
-        for (int i = 0; i < players.size() - 1; i++) {
-            ArrayList<String> nomAi = new ArrayList<>();
-            nomAi.add(players.get(i).getName());
-            resetPlayers.add(new AiPlayer(nomAi));
-        }
-    }
-
     private void reinitializeGame() {
 
-        GameManager gameManager = new GameManager();
-        game = gameManager.createNewGame(resetPlayers);
-        game.ajouterObservateur(this);
-        //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  // TODO Louis : à revoir, car je ne crois pas que le component devrait directement recréer son parent.
-        //ScrabbleGUI gameGUI = new ScrabbleGUI();
-
-      /*  gameGUI.createScrabbleGame(game);
-        gameGUI.setVisible(true);
-        setVisible(false);
-        gameGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        SwingUtilities.windowForComponent(this).dispose();*/
+        ScrabbleGUI parent = (ScrabbleGUI) SwingUtilities.getWindowAncestor(this);
+        parent.returnToMenu();
     }
 
     @Override

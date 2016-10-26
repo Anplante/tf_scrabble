@@ -64,7 +64,7 @@ public class MainMenuGUI extends JDialog {
         this.parent = parent;
         setLayout(null);
         players = new ArrayList<>();
-
+        gameManager = new GameManager();
         JFrame fenetre = new JFrame();
         this.setTitle("Menu");
         fenetre.pack();
@@ -82,6 +82,8 @@ public class MainMenuGUI extends JDialog {
         setResizable(false);
 
         listName = readXMLFiles();
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
 
@@ -185,7 +187,7 @@ public class MainMenuGUI extends JDialog {
 
     private void initializeGame() {
 
-        gameManager = new GameManager();
+
         game = gameManager.createNewGame(players);
         parent.changeBackground(cmbBackgroundScrabble.getSelectedItem().toString());
         parent.createScrabbleGame(game);
