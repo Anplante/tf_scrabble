@@ -1,7 +1,9 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
 /**
- * Created by TheFrenchOne on 9/7/2016.
+ * Classe qui contient les informations sur le plateau de jeu.
+ *
+ * Created by Louis Luu Lim on 9/7/2016.
  */
 public class Board {
 

@@ -9,7 +9,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by TheFrenchOne on 9/7/2016.
+ * Classe qui permet de contenir les informations sur une tuile du plateau de jeu.
+ *
+ * Created by Louis Luu Lim on 9/7/2016.
  */
 public class Square implements Observable{
 
@@ -103,7 +105,6 @@ private List<Square> neighbours;
         this.tileOn = tile;
         aviserObservateurs();
     }
-
 
     public boolean isNeighbours(Square square)
     {

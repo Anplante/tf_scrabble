@@ -41,7 +41,7 @@ public class Tile implements Observable {
         return isSelected;
     }
 
-    public void selectTile(boolean newState)  // un nom plus significatif
+    public void selectTile(boolean newState)
     {
         isSelected = newState;
         aviserObservateurs();
@@ -67,6 +67,6 @@ public class Tile implements Observable {
 
     @Override
     public void aviserObservateurs(Enum<?> e, Object o) {
-
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

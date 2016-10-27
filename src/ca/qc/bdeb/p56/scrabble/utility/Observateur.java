@@ -5,7 +5,6 @@ package ca.qc.bdeb.p56.scrabble.utility;
  */
 public interface Observateur {
 
-    public void changementEtat();
-
-    public void changementEtat(Enum<?> e, Object o);
+    void changementEtat();
+     void changementEtat(Enum<?> e, Object o);
 }

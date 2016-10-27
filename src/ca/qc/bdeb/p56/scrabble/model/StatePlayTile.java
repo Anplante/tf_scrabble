@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by TheFrenchOne on 9/17/2016.
+ * Classe qui représente la phase de placer des lettres sur le plateau de jeu. Le joueur peut sélectionner des lettres
+ * et les placer. Il peut également choisir d'échanger ses lettres, d'annuler son jeu et reprendre ses lettres ou de
+ * passer au prochain tour.
+ *
+ * Created by Louis Luu Lim on 9/17/2016.
  */
 public class StatePlayTile extends State {
-
 
     private Tile tileSelected;
     private Square squareSelected;
@@ -19,6 +22,7 @@ public class StatePlayTile extends State {
     private List<Tile> originalTilesOder;
 
     public StatePlayTile(Player currentPlayer, Tile tileSelected) {
+
         super(currentPlayer, IDState.PLAY_TILE);
         this.tileSelected = tileSelected;
         tilesPlaced = new ArrayList<>();
@@ -36,15 +40,19 @@ public class StatePlayTile extends State {
             if (originalTilesOder == null) {
                 originalTilesOder = getPlayer().getTiles();
             }
-
-            tilesPlaced.add(squareSelected);
-            squareSelected.setLetter(tileSelected); // La partie devrait le faire??
-            tileSelected.selectTile(false);
-            getPlayer().remove(tileSelected);  // idem
-            getPlayer().aviserObservateurs();
-            tileSelected.selectTile(false);
-            tileSelected = null;
+          placeTileOnSquare();
         }
+    }
+
+    private void placeTileOnSquare()
+    {
+        tilesPlaced.add(squareSelected);
+        squareSelected.setLetter(tileSelected);
+        tileSelected.selectTile(false);
+        getPlayer().remove(tileSelected);
+        getPlayer().aviserObservateurs();
+        tileSelected.selectTile(false);
+        tileSelected = null;
     }
 
 
@@ -52,13 +60,15 @@ public class StatePlayTile extends State {
     protected void selectTile(Tile tileSelected) {
 
         if (this.tileSelected == null) {
+
             tileSelected.selectTile(true);
             this.tileSelected = tileSelected;
         } else {
 
-            this.tileSelected.selectTile(false);  // p-e pas necessaire
+            this.tileSelected.selectTile(false);
             getPlayer().swapTile(tileSelected, this.tileSelected);
             this.tileSelected = null;
+
             if (tilesPlaced.isEmpty()) {
                 selectNextState(IDState.SELECT_ACTION);
                 readyToChange = true;
@@ -68,18 +78,18 @@ public class StatePlayTile extends State {
     }
 
     private boolean isValidMove() {
+
         boolean validMove = false;
 
         if (!squareSelected.containLetter() && letterOnSameAxe()) {
             validMove = true;
         }
 
-        // autres vérifications à venir
-
         return validMove;
     }
 
     private boolean letterOnSameAxe() {
+
         boolean validMove = true;
 
         if (!tilesPlaced.isEmpty()) {
@@ -108,15 +118,17 @@ public class StatePlayTile extends State {
     @Override
     protected void selectNextState(IDState stateSelected) {
 
-        if (stateSelected == IDState.PENDING) // il y a un probleme lorsque le joueur decide de passer un tour alors qu'il est en train de placer des letters, a voir la solution a utiliser
+        if (stateSelected == IDState.PENDING)
         {
             if (!verifyValidWord()) {
                 return;
             }
         }
         this.stateSelected = stateSelected;
+
         if (tileSelected != null)
             tileSelected.selectTile(false);
+
         readyToChange = true;
     }
 
@@ -134,7 +146,6 @@ public class StatePlayTile extends State {
                     getGame().recallTiles();
                     newState = new StateSelectAction(getPlayer());
                 }
-
                 break;
             case EXCHANGE:
                 getGame().recallTiles(tilesPlaced);
@@ -151,20 +162,19 @@ public class StatePlayTile extends State {
     }
 
     private boolean verifyValidWord() {
+
         boolean validMove = true;
 
         if (getGame().getMovesHistory().isEmpty()) {
             validMove = verifyFirstWordAtCenter();
         }
 
-
-        // TODO Louis: ajouter les autres vérifications
-
         return validMove;
     }
 
 
     private boolean verifyFirstWordAtCenter() {
+
         boolean validMove = false;
 
         for (Square square : tilesPlaced) {
