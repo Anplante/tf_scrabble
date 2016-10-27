@@ -23,9 +23,6 @@ public class Tile implements Observable {
         observateurs = new LinkedList<>();
     }
 
-    public void setSelected(Boolean selection){
-        isSelected = selection;
-    }
     public String getLetter()
     {
         return letter;

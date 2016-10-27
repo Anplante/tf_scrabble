@@ -46,6 +46,7 @@ public class DialogOptionsMenu extends JDialog implements ConstanteTestName, Con
     private void initOptQuitGame() {
 
         btnQuitGame = new JButton(OPT_QUITTER_TITLE);
+        btnQuitGame.setName(EXIT_NAME);
         add(btnQuitGame);
 
         btnQuitGame.addActionListener(actionEvent -> {
@@ -76,10 +77,10 @@ public class DialogOptionsMenu extends JDialog implements ConstanteTestName, Con
     }
 
     private void initOptReturnGame() {
+
         btnReturnGame = new JButton(TITLE_RETURN_GAME);
         btnReturnGame.setName(RETURN_NAME);
         add(btnReturnGame);
-
         btnReturnGame.addActionListener(actionEvent -> dispose());
     }
 

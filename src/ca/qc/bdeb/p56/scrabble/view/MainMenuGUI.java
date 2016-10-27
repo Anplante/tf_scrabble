@@ -105,6 +105,7 @@ public class MainMenuGUI extends JDialog implements ConstanteTestName, Constante
     }
 
     private void addComboBox() {
+
         cmbNumberOfAi = new JComboBox();
         cmbNumberOfAi.setName(QTE_AI_NAME);
         for (int i = 0; i < nombreDeAi.length; i++) {
@@ -128,6 +129,7 @@ public class MainMenuGUI extends JDialog implements ConstanteTestName, Constante
     }
 
     private void addButtons() {
+
         btnCancel = new JButton();
         btnConfirm = new JButton();
         btnOpenDialog = new JButton("...");
@@ -278,9 +280,6 @@ public class MainMenuGUI extends JDialog implements ConstanteTestName, Constante
         return filename.substring(0, extensionIndex);
     }*/
 
-    public Player getPlayer() {
-        return player;
-    }
 
     public int getLenghtPlayers() {
         return game.getPlayers().size();

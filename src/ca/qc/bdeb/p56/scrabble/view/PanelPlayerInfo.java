@@ -68,11 +68,13 @@ public class PanelPlayerInfo extends JPanel implements Observateur, ConstanteTes
         // TODO Antoine : L'observateur devrait nous dire lequel des jouers est actif et inactif
         if (playerModel.isActivated()) {
             g.setColor(Color.green);
+            setBackground(new Color(176,224,230));
         }
         else {
             g.setColor(Color.darkGray);
+            setBackground(null);
         }
-        g.drawRect(0,0, this.getWidth()- 10,this.getHeight() - 1);
+        //g.drawRect(0,0, this.getWidth()- 10,this.getHeight() - 1);
         g.dispose();
     }
 }

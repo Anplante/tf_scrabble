@@ -32,6 +32,7 @@ public class GameTest {
 
     @After
     public void tearDown() throws Exception {
+        game = null;
     }
 
     @Test
@@ -64,12 +65,12 @@ public class GameTest {
         game.startGame();
         Player activePlayer = game.getActivePlayer();
 
-        Tile tile1 = new Tile("l",2);
-        Tile tile2 = new Tile("a",2);
+        Tile tile1 = new Tile("l", 2);
+        Tile tile2 = new Tile("a", 2);
 
-        Square noPremiumSquare1 = game.getSquare(1,0);
+        Square noPremiumSquare1 = game.getSquare(1, 0);
         noPremiumSquare1.setLetter(tile1);
-        Square noPremimumSquare2 =game.getSquare(2,0);
+        Square noPremimumSquare2 = game.getSquare(2, 0);
         noPremimumSquare2.setLetter(tile2);
 
         List<Square> lettersPlayed = new ArrayList<>();
@@ -83,17 +84,16 @@ public class GameTest {
     }
 
     @Test
-    public void testCalculateWordPointsWithTripleWordPremium()
-    {
+    public void testCalculateWordPointsWithTripleWordPremium() {
         game.startGame();
         Player activePlayer = game.getActivePlayer();
 
-        Tile tile1 = new Tile("l",2);
-        Tile tile2 = new Tile("a",2);
+        Tile tile1 = new Tile("l", 2);
+        Tile tile2 = new Tile("a", 2);
 
-        Square tripleWordSquare = game.getSquare(0,0);
+        Square tripleWordSquare = game.getSquare(0, 0);
         tripleWordSquare.setLetter(tile1);
-        Square noPremiumSquare =game.getSquare(1,0);
+        Square noPremiumSquare = game.getSquare(1, 0);
         noPremiumSquare.setLetter(tile2);
 
         List<Square> lettersPlayed = new ArrayList<>();
@@ -103,40 +103,36 @@ public class GameTest {
 
         game.playWord(lettersPlayed);
 
-        assertEquals((tile1.getValue() + tile2.getValue())*3, activePlayer.getScore());
+        assertEquals((tile1.getValue() + tile2.getValue()) * 3, activePlayer.getScore());
     }
 
     @Test
-    public void testCalculateWordPointsWithDifferentPremium()
-    {
+    public void testCalculateWordPointsWithDifferentPremium() {
         game.startGame();
 
         List<Tile> tilesPlayed = new ArrayList<>();
         List<Square> lettersPlayed = new ArrayList<>();
 
-        for(int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
             tilesPlayed.add(new Tile("l", 2));
-            Square square = game.getSquare(i,0);
+            Square square = game.getSquare(i, 0);
             square.setLetter(tilesPlayed.get(i));
             lettersPlayed.add(square);
         }
 
         int values = game.calculateWordPoints(lettersPlayed);
 
-        assertEquals(30,  values );
+        assertEquals(30, values);
     }
 
     @Test
-    public void testCalculateWordPointsWithTwoLetterPremium()
-    {
+    public void testCalculateWordPointsWithTwoLetterPremium() {
         game.startGame();
 
         List<Tile> tilesPlayed = new ArrayList<>();
         List<Square> lettersPlayed = new ArrayList<>();
 
-        for(int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
             tilesPlayed.add(new Tile("l", 2));
             Square square = game.getSquare(8, i + 6);
             square.setLetter(tilesPlayed.get(i));
@@ -145,17 +141,16 @@ public class GameTest {
 
         int values = game.calculateWordPoints(lettersPlayed);
 
-        assertEquals(12,  values );
+        assertEquals(12, values);
     }
 
     @Test
-    public void testUsePremiumTwice()
-    {
+    public void testUsePremiumTwice() {
         game.startGame();
 
-        Tile tileTested = new Tile("l",2);
+        Tile tileTested = new Tile("l", 2);
 
-        Square tripleWordPremiumSquare = game.getSquare(0,0);
+        Square tripleWordPremiumSquare = game.getSquare(0, 0);
         tripleWordPremiumSquare.setLetter(tileTested);
 
         List<Square> lettersPlayed = new ArrayList<>();
@@ -164,7 +159,7 @@ public class GameTest {
 
         int values = game.calculateWordPoints(lettersPlayed);
 
-        assertEquals(6,  values );
+        assertEquals(6, values);
 
         values = game.calculateWordPoints(lettersPlayed);
 
@@ -173,14 +168,14 @@ public class GameTest {
     }
 
     @Test
-    public void testValidWordFr(){
+    public void testValidWordFr() {
 
         String validWord = "bonjour";
         assertTrue(game.isValidWord(validWord));
     }
 
     @Test
-    public void testInvalidWord(){
+    public void testInvalidWord() {
 
         String notAWord = "ssdfaf";
         assertFalse(game.isValidWord(notAWord));
@@ -188,19 +183,18 @@ public class GameTest {
 
 
     @Test
-    public void testValidWordEn(){
+    public void testValidWordEn() {
         String wordtested = "wrong";
         assertFalse(game.isValidWord(wordtested));
     }
 
     @Test
-    public void testPlayWord()
-    {
+    public void testPlayWord() {
 
-        Square tripleWordSquare = game.getSquare(0,0);
-        tripleWordSquare.setLetter(new Tile("l",2));
-        Square normalSquare =game.getSquare(1,0);
-        normalSquare.setLetter(new Tile("a",2));
+        Square tripleWordSquare = game.getSquare(0, 0);
+        tripleWordSquare.setLetter(new Tile("l", 2));
+        Square normalSquare = game.getSquare(1, 0);
+        normalSquare.setLetter(new Tile("a", 2));
 
         List<Square> test = new ArrayList<>();
         test.add(tripleWordSquare);
@@ -210,13 +204,12 @@ public class GameTest {
     }
 
     @Test
-    public void testPlayAfterWord()
-    {
+    public void testPlayAfterWord() {
 
-        Square square1 = game.getSquare(0,0);
-        square1.setLetter(new Tile("l",2));
-        Square square2 =game.getSquare(1,0);
-        square2.setLetter(new Tile("e",2));
+        Square square1 = game.getSquare(0, 0);
+        square1.setLetter(new Tile("l", 2));
+        Square square2 = game.getSquare(1, 0);
+        square2.setLetter(new Tile("e", 2));
 
         List<Square> lettersPlayed = new ArrayList<>();
         lettersPlayed.add(square1);
@@ -224,8 +217,8 @@ public class GameTest {
         assertTrue(game.playWord(lettersPlayed));
 
 
-        Square square3d = game.getSquare(2,0);
-        square3d.setLetter(new Tile("s",2));
+        Square square3d = game.getSquare(2, 0);
+        square3d.setLetter(new Tile("s", 2));
         lettersPlayed.clear();
         lettersPlayed.add(square3d);
         assertTrue(game.playWord(lettersPlayed));
@@ -233,29 +226,29 @@ public class GameTest {
     }
 
     @Test
-    public void testWordWithMultipleWordCreated(){
+    public void testWordWithMultipleWordCreated() {
 
         //"LE" Center word (7;7)
-        Square square1 = game.getSquare(7,7);
-        square1.setLetter(new Tile("l",2));
-        Square square2 =game.getSquare(7,8);
-        square2.setLetter(new Tile("e",2));
+        Square square1 = game.getSquare(7, 7);
+        square1.setLetter(new Tile("l", 2));
+        Square square2 = game.getSquare(7, 8);
+        square2.setLetter(new Tile("e", 2));
 
         //"SE" On the letter E pos(7;8)
-        Square square3 = game.getSquare(6,8);
-        square1.setLetter(new Tile("s",2));
+        Square square3 = game.getSquare(6, 8);
+        square1.setLetter(new Tile("s", 2));
 
         //"LUNES" from pos(3;9) to (7;9)
-        Square square4 = game.getSquare(3,9);
-        square4.setLetter(new Tile("l",2));
-        Square square5 =game.getSquare(4,9);
-        square5.setLetter(new Tile("u",2));
-        Square square6 = game.getSquare(5,9);
-        square6.setLetter(new Tile("n",2));
-        Square square7 =game.getSquare(6,9);
-        square7.setLetter(new Tile("e",2));
-        Square square8 =game.getSquare(7,9);
-        square8.setLetter(new Tile("s",2));
+        Square square4 = game.getSquare(3, 9);
+        square4.setLetter(new Tile("l", 2));
+        Square square5 = game.getSquare(4, 9);
+        square5.setLetter(new Tile("u", 2));
+        Square square6 = game.getSquare(5, 9);
+        square6.setLetter(new Tile("n", 2));
+        Square square7 = game.getSquare(6, 9);
+        square7.setLetter(new Tile("e", 2));
+        Square square8 = game.getSquare(7, 9);
+        square8.setLetter(new Tile("s", 2));
 
         List<Square> lettersPlayed = new ArrayList<>();
         lettersPlayed.add(square1);
@@ -274,19 +267,19 @@ public class GameTest {
     }
 
     @Test
-    public void testWordsClose(){
-        Square square1 = game.getSquare(7,7);
-        square1.setLetter(new Tile("s",2));
-        Square square2 = game.getSquare(7,8);
-        square2.setLetter(new Tile("e",2));
-        Square square3 =game.getSquare(7,9);
-        square3.setLetter(new Tile("s",2));
-        Square square4 =game.getSquare(6,7);
-        square4.setLetter(new Tile("t",2));
-        Square square5 =game.getSquare(6,8);
-        square5.setLetter(new Tile("s",2));
-        Square square6 =game.getSquare(6,9);
-        square6.setLetter(new Tile("t",2));
+    public void testWordsClose() {
+        Square square1 = game.getSquare(7, 7);
+        square1.setLetter(new Tile("s", 2));
+        Square square2 = game.getSquare(7, 8);
+        square2.setLetter(new Tile("e", 2));
+        Square square3 = game.getSquare(7, 9);
+        square3.setLetter(new Tile("s", 2));
+        Square square4 = game.getSquare(6, 7);
+        square4.setLetter(new Tile("t", 2));
+        Square square5 = game.getSquare(6, 8);
+        square5.setLetter(new Tile("s", 2));
+        Square square6 = game.getSquare(6, 9);
+        square6.setLetter(new Tile("t", 2));
 
         List<Square> lettersPlayed = new ArrayList<>();
         lettersPlayed.add(square4);
@@ -296,29 +289,29 @@ public class GameTest {
     }
 
     @Test
-    public void testWordWithMultipleWordCreatedNotValid(){
+    public void testWordWithMultipleWordCreatedNotValid() {
 
         //"LE" Center word (7;7)
-        Square square1 = game.getSquare(7,7);
-        square1.setLetter(new Tile("l",2));
-        Square square2 =game.getSquare(7,8);
-        square2.setLetter(new Tile("s",2));
+        Square square1 = game.getSquare(7, 7);
+        square1.setLetter(new Tile("l", 2));
+        Square square2 = game.getSquare(7, 8);
+        square2.setLetter(new Tile("s", 2));
 
         //"SE" On the letter E pos(7;8)
-        Square square3 = game.getSquare(6,8);
-        square1.setLetter(new Tile("",2));
+        Square square3 = game.getSquare(6, 8);
+        square1.setLetter(new Tile("", 2));
 
         //"LUNES" from pos(3;9) to (7;9)
-        Square square4 = game.getSquare(3,9);
-        square4.setLetter(new Tile("l",2));
-        Square square5 =game.getSquare(4,9);
-        square5.setLetter(new Tile("u",2));
-        Square square6 = game.getSquare(5,9);
-        square6.setLetter(new Tile("n",2));
-        Square square7 =game.getSquare(6,9);
-        square7.setLetter(new Tile("e",2));
-        Square square8 =game.getSquare(7,9);
-        square8.setLetter(new Tile("s",2));
+        Square square4 = game.getSquare(3, 9);
+        square4.setLetter(new Tile("l", 2));
+        Square square5 = game.getSquare(4, 9);
+        square5.setLetter(new Tile("u", 2));
+        Square square6 = game.getSquare(5, 9);
+        square6.setLetter(new Tile("n", 2));
+        Square square7 = game.getSquare(6, 9);
+        square7.setLetter(new Tile("e", 2));
+        Square square8 = game.getSquare(7, 9);
+        square8.setLetter(new Tile("s", 2));
 
         List<Square> lettersPlayed = new ArrayList<>();
         lettersPlayed.add(square4);

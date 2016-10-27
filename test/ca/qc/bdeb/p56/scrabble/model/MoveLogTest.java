@@ -1,6 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
 import ca.qc.bdeb.p56.scrabble.shared.IDMove;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,6 +20,11 @@ public class MoveLogTest {
     public void setUp() throws Exception {
 
         player = new Player("Louis");
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        player = null;
     }
 
     @Test

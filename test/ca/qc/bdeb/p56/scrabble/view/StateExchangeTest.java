@@ -4,6 +4,7 @@ import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
+import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -19,7 +20,7 @@ import static org.junit.Assert.assertNotEquals;
 /**
  * Created by Julien Brosseau on 9/21/2016.
  */
-public class StateExchangeTest {
+public class StateExchangeTest implements ConstanteTestName {
 
     private PanelLetterRackZone panelTested;
     private Game game;
@@ -28,12 +29,7 @@ public class StateExchangeTest {
     private List<ButtonTile> btnTiles;
     private ScrabbleGUI scrabbleGame;
     private JPanel letterRack;
-
-
     private Player currentPlayer;
-
-    public StateExchangeTest() {
-    }
 
     @Before
     public void setUp() throws Exception {
@@ -50,21 +46,22 @@ public class StateExchangeTest {
         scrabbleGame.setBackgroundPath("simplistic.png");
         scrabbleGame.createScrabbleGame(game);
 
-        panelTested = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, "Player letter rack");
-        btnEchanger = (JButton) TestUtils.getChildNamed(panelTested, "Exchange");
-        btnCancel = (JButton) TestUtils.getChildNamed(panelTested, "Cancel Exchange");
-        letterRack = (JPanel) TestUtils.getChildNamed(panelTested, "Letter rack");
+        panelTested = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, LETTER_RACK_NAME);
+        btnEchanger = (JButton) TestUtils.getChildNamed(panelTested, EXCHANGE_NAME);
+        btnCancel = (JButton) TestUtils.getChildNamed(panelTested, CANCEL_EXCHANGE_NAME);
+        letterRack = (JPanel) TestUtils.getChildNamed(panelTested, LETTER_RACK_NAME);
         currentPlayer = game.getActivePlayer();
 
         btnTiles = new ArrayList<>();
 
         for (int i = 0; i < currentPlayer.getLettersCount(); i++) {
-            btnTiles.add((ButtonTile) TestUtils.getChildNamed(letterRack, "Tile" + i));
+            btnTiles.add((ButtonTile) TestUtils.getChildNamed(letterRack, TILE_NAME + i));
         }
     }
 
     @After
     public void tearDown() throws Exception {
+
     }
 
     @Test
@@ -95,18 +92,18 @@ public class StateExchangeTest {
 
     }
 
-        @Test
-        public void testCancel() {
+    @Test
+    public void testCancel() {
 
-            List<Tile> playerTileBeforeExchange = currentPlayer.getTiles();
+        List<Tile> playerTileBeforeExchange = currentPlayer.getTiles();
 
-            btnEchanger.doClick();
-            btnTiles.get(4).doClick();
-            btnTiles.get(5).doClick();
-            btnTiles.get(6).doClick();
-            btnCancel.doClick();
+        btnEchanger.doClick();
+        btnTiles.get(4).doClick();
+        btnTiles.get(5).doClick();
+        btnTiles.get(6).doClick();
+        btnCancel.doClick();
 
-            assertEquals(playerTileBeforeExchange, currentPlayer.getTiles());
-        }
+        assertEquals(playerTileBeforeExchange, currentPlayer.getTiles());
+    }
 }
 

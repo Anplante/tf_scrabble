@@ -43,6 +43,14 @@ public class Square implements Observable {
         return adjacentRight;
     }
 
+    public Square getAdjacentUp() {
+        return adjacentUp;
+    }
+
+    public Square getAdjacentLeft() {
+        return adjacentLeft;
+    }
+
     public void setNeighbours(Square adjacentUp, Square adjacentDown, Square adjacentLeft, Square adjacentRight) {
 
         this.adjacentUp = adjacentUp;
@@ -100,7 +108,7 @@ public class Square implements Observable {
     }
 
     public boolean isNeighbours(Square square) {
-        return square.equals(adjacentDown) || square.equals(adjacentLeft) || square.equals(adjacentRight) || square.equals(adjacentUp);
+        return neighbours.contains(square);
     }
 
     public boolean isCenter() {

@@ -35,34 +35,24 @@ public class ButtonTile extends JButton implements Observateur, ConstanteCompone
         changementEtat();
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setBorder(BorderFactory.createEtchedBorder());
-
-        if (tile != null) {
-            String ressource = PATH_RES_LETTERS_VALUE + tile.getLetter().toUpperCase().trim() + EXT_PNG;
-            ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(ressource));
-            Image img = fillingIcon.getImage();
-            Image newimg = img.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH);
-            ImageIcon icon = new ImageIcon(newimg);
-            setIcon(icon);
-        }
+        setImage();
 
         addActionListener(e -> gameModel.selectLetter(tile));
     }
 
-    public Tile getTile() {
-        return tile;
+
+    private void setImage(){
+
+        String ressource = PATH_RES_LETTERS_VALUE + tile.getLetter().toUpperCase().trim() + EXT_PNG;
+        ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(ressource));
+        Image img = fillingIcon.getImage();
+        Image newimg = img.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(newimg);
+        setIcon(icon);
     }
 
-    public void setTile(Tile aTile) {
-
-        this.tile = aTile;
-        if (tile != null) {
-            ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(PATH_RES_LETTERS_VALUE
-                    + tile.getLetter().toUpperCase() + EXT_PNG));
-            Image img = fillingIcon.getImage();
-            Image newimg = img.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH);
-            ImageIcon icon = new ImageIcon(newimg);
-            setIcon(icon);
-        }
+    public Tile getTile() {
+        return tile;
     }
 
     @Override

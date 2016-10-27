@@ -683,16 +683,4 @@ public class Game implements Observable {
         getActivePlayer().selectNextState(IDState.SELECT_ACTION);
         goToNextState();
     }
-
-    /**
-     * En construction : Méthode utilisée pour trouver un mot valide.
-     */
-    private void findWord() {
-
-        List<Square> squaresAvailable = boardManager.getSquarePositionAvailableToPlay();
-
-        while (!squaresAvailable.isEmpty()) {
-        }
-
-    }
 }

@@ -27,4 +27,5 @@ public interface ConstanteTestName {
     String BOARD_NAME = "Board";
     String SQUARE_NAME = "Square";
     String INFO_NAME = "Info : ";
+    String EXIT_NAME = "Exit";
 }

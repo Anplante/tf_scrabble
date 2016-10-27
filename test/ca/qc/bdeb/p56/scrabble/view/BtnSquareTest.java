@@ -14,7 +14,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 
 /**
- * Created by TheFrenchOne on 9/18/2016.
+ * Created by Louis Luu Lim on 9/18/2016.
  */
 public class BtnSquareTest {
 
@@ -43,7 +43,8 @@ public class BtnSquareTest {
 
     @After
     public void tearDown() throws Exception {
-
+        btnSquare = null;
+        gameModel = null;
     }
 
     @Test
