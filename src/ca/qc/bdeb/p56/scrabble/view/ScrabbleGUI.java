@@ -16,9 +16,9 @@ import java.awt.*;
  */
 public class ScrabbleGUI extends JFrame implements ConstanteComponentMessage, ConstanteTestName {
 
-    private final  double RATIO_LETTER_RACK_ZONE = 0.1;
-    public final static int MARGIN = 5;
-    private final int LETTER_RACK_ZONE_HEIGHT;
+    private static final  double RATIO_LETTER_RACK_ZONE = 0.1;
+    public static final int MARGIN = 5;
+    private  final int LETTER_RACK_ZONE_HEIGHT;
 
     private String backgroundPath;
     PanelLetterRackZone panelLetterRack;

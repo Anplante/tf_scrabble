@@ -148,27 +148,16 @@ public class MainMenuGUI extends JDialog implements ConstanteTestName, Constante
         btnCancel.setName(CANCEL_NAME);
 
 
-        btnConfirm.addActionListener( new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                setPlayer();
-                initializeGame();
-            }
+        btnConfirm.addActionListener(e -> {
+            setPlayer();
+            initializeGame();
         });
-        btnCancel.addActionListener( new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                System.exit(0);
-            }
+
+        btnCancel.addActionListener(e -> System.exit(0));
+        btnOpenDialog.addActionListener(e -> {
+            int returnValue = fileImage.showOpenDialog(panelMenu);
+            receiveBackground(returnValue);
         });
-        btnOpenDialog.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int returnValue = fileImage.showOpenDialog(panelMenu);
-                receiveBackground(returnValue);
-            }});
         panelMenu.add(btnOpenDialog);
         panelMenu.add(btnConfirm);
         panelMenu.add(btnCancel);
@@ -180,7 +169,7 @@ public class MainMenuGUI extends JDialog implements ConstanteTestName, Constante
 
     private void setPlayer() {
 
-        players = new ArrayList<Player>();
+        players = new ArrayList<>();
         listName = readXMLFiles();
         player = new Player(txtName.getText());
         players.add(player);
@@ -248,7 +237,7 @@ public class MainMenuGUI extends JDialog implements ConstanteTestName, Constante
         } catch (URISyntaxException ex) {
             Logger.getLogger(url.toString()).log(Level.SEVERE, null, ex);
         }
-        File[] files =  null;
+
         for (File file : theFiles.listFiles()) {
             cmbBackgroundScrabble.addItem(file.getName());
         }

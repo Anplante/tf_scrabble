@@ -16,11 +16,11 @@ import java.awt.event.ActionListener;
  */
 public class ButtonTile extends JButton implements Observateur, ConstanteComponentMessage {
 
-    private final String PATH_RES_LETTERS_VALUE = "./letters/englishDictionaryValue/";
+    private static final String PATH_RES_LETTERS_VALUE = "./letters/englishDictionaryValue/";
 
-    private final Color BASIC_COLOR = Color.lightGray;
-    private final Color REMOVE_COLOR = Color.red;
-    private final Color SELECTED_COLOR = Color.green;
+    private static final Color BASIC_COLOR = Color.lightGray;
+    private static final Color REMOVE_COLOR = Color.red;
+    private static final Color SELECTED_COLOR = Color.green;
     private Game gameModel;
     private Tile tile;
 

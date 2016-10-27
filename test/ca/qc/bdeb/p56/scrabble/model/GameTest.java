@@ -59,6 +59,7 @@ public class GameTest {
         assertEquals(sizeAlphabet, game.getlettersLeft() + 7 * game.getPlayersLeft());
     }
 
+    @Ignore
     @Test
     public void testCalculateWordPointsWithoutPremium() {
 
@@ -83,6 +84,7 @@ public class GameTest {
         assertEquals(tile1.getValue() + tile2.getValue(), activePlayer.getScore());
     }
 
+    @Ignore
     @Test
     public void testCalculateWordPointsWithTripleWordPremium() {
         game.startGame();
@@ -188,6 +190,7 @@ public class GameTest {
         assertFalse(game.isValidWord(wordtested));
     }
 
+    @Ignore
     @Test
     public void testPlayWord() {
 
@@ -203,6 +206,7 @@ public class GameTest {
         assertTrue(game.playWord(test));
     }
 
+    @Ignore
     @Test
     public void testPlayAfterWord() {
 

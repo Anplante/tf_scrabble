@@ -19,8 +19,8 @@ public class Dictionary {
     private Dictionary() {
     }
 
-
     public static Dictionary getINSTANCE() {
+
         if (INSTANCE == null) {
             INSTANCE = new Dictionary();
         }

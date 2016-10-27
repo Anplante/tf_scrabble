@@ -73,7 +73,7 @@ public class MainMenuGUITest implements ConstanteTestName {
         cmbBackgroundImage.setSelectedIndex(0);
         cmbBackgroundImage.setSelectedIndex(1);
         btnAccept.doClick();
-        assertEquals("boardScrabble.jpeg", scrabbleGUI.getBackgroundPath());
+        assertEquals("minuit.jpg", scrabbleGUI.getBackgroundPath());
 
     }
 }
