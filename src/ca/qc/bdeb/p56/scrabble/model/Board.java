@@ -6,10 +6,12 @@ package ca.qc.bdeb.p56.scrabble.model;
 public class Board {
 
     private Square[][] board;
+    private int size;
 
     public Board(int size) {
         board = new Square[size][size];
         initBoard();
+        this.size = size;
     }
 
     private void initBoard() {

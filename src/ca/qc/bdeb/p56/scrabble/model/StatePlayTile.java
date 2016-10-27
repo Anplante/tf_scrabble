@@ -31,7 +31,7 @@ public class StatePlayTile extends State {
 
         this.squareSelected = squareSelected;
 
-        if (isValidMove()) {
+        if (isValidMove() && tileSelected != null) {
 
             if (originalTilesOder == null) {
                 originalTilesOder = getPlayer().getTiles();

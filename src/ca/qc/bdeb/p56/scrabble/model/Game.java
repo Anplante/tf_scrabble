@@ -179,6 +179,13 @@ public class Game implements Observable {
     }
 
     public void passTurn() {
+        List<Tile> tiles = getActivePlayer().getTiles();
+        getActivePlayer().clearTiles();
+        List<Tile> newTiles = new ArrayList<>();
+        for (Tile tile : tiles) {
+            tile.setSelected(false);
+            getActivePlayer().addLetter(tile);
+        }
         getActivePlayer().selectNextState(IDState.PENDING);
         goToNextState();
         // TODO Louis : bloquer quand le joueur place un mot ou annuler les autres actions
@@ -261,15 +268,38 @@ public class Game implements Observable {
         List<Square> letters = orderByDirection(tilesPlaced, direction, rowOrColumn);
 
         if (!letters.isEmpty()) {
-            String word = createWord(letters).toLowerCase();
-
+            if (letters.size() == 1) {
+                direction = findCompleteWordRow(letters);
+            }
+            String word = null;
+            word = createWordVertical(letters).toLowerCase();
             if (dictionary.checkWordExist(word)) {
                 movesHistory.add(new Move(getActivePlayer(), word.toString()));
                 getActivePlayer().addPoints(calculateWordPoints(letters));
                 isAWord = true;
             }
+            word = createWordHorizontal(letters).toLowerCase();
+            if (dictionary.checkWordExist(word)) {
+                movesHistory.add(new Move(getActivePlayer(), word.toString()));
+                getActivePlayer().addPoints(calculateWordPoints(letters));
+                isAWord = true;
+            }
+
         }
         return isAWord;
+    }
+
+    private Direction findCompleteWordRow(List<Square> letters) {
+        Square square = letters.get(0);
+        Square squareLeft = boardManager.getSquare(square.getPosRow(), square.getPosColumn() + 1);
+        Square squareRight = boardManager.getSquare(square.getPosRow(), square.getPosColumn() - 1);
+        Direction direction = null;
+        if (squareLeft.getTileOn() != null || squareRight.getTileOn() != null) {
+            direction = Direction.ROWN;
+        } else {
+            direction = Direction.COLUMN;
+        }
+        return direction;
     }
 
     private List<Square> orderByDirection(List<Square> lettersPlayed, Direction direction, int rowOrColumn) {
@@ -306,12 +336,77 @@ public class Game implements Observable {
     }
 
 
-    private String createWord(List<Square> letters) {
+    private String createWordHorizontal(List<Square> letters) {
+        StringBuilder word = new StringBuilder();
+        Square square = letters.get(0);
+        int row = square.getPosRow();
+        System.out.println("BASEH:"+square.getPosRow() + ";" + square.getPosColumn());
+        ;
+
+        boolean sameWord = true;
+        ArrayList<String> wordWrongSide = new ArrayList<>();
+        for (int i = square.getPosColumn()-1; i >= 0 && sameWord; i--) {
+            Square squareAdjacentLeft = boardManager.getSquare(row, i);
+            System.out.println("LEFTH:"+squareAdjacentLeft.getPosRow() + ";" + squareAdjacentLeft.getPosColumn());
+            if (squareAdjacentLeft.getTileOn() != null) {
+                wordWrongSide.add(squareAdjacentLeft.getTileOn().getLetter());
+                System.out.println("added");
+            } else {
+                sameWord = false;
+                for (int j = wordWrongSide.size()-1; j >= 0 ; j--) {
+                    word.append(wordWrongSide.get(j));
+                }
+            }
+        }
+        sameWord = true;
+        for (int i = square.getPosColumn(); i < boardManager.BOARD_SIZE && sameWord; i++) {
+            Square squareAdjacentRight = boardManager.getSquare(row, i);
+            System.out.println("RIGHTH"+squareAdjacentRight.getPosRow() + ";" + squareAdjacentRight.getPosColumn());
+
+            if (squareAdjacentRight.getTileOn() != null) {
+                word.append(squareAdjacentRight.getTileOn().getLetter());
+            } else {
+                sameWord = false;
+            }
+        }
+        System.out.println("WordH:"+word);
+        return word.toString();
+    }
+
+    private String createWordVertical(List<Square> letters) {
 
         StringBuilder word = new StringBuilder();
-        for (Square square : letters) {
-            word.append(square.getTileOn().getLetter());
+        Square square = letters.get(0);
+        int column = square.getPosColumn();
+        System.out.println("BASEV:"+square.getPosRow() + ";" + square.getPosColumn());
+        ;
+
+        boolean sameWord = true;
+        ArrayList<String> wordWrongSide = new ArrayList<>();
+        for (int i = square.getPosRow()-1; i >= 0 && sameWord; i--) {
+            Square squareAdjacentLeft = boardManager.getSquare(i, column);
+            System.out.println("LEFTV"+squareAdjacentLeft.getPosRow() + ";" + squareAdjacentLeft.getPosColumn());
+            if (squareAdjacentLeft.getTileOn() != null) {
+                wordWrongSide.add(squareAdjacentLeft.getLetterOn());
+            } else {
+                sameWord = false;
+                for (int j = wordWrongSide.size()-1; j >= 0 ; j--) {
+                    word.append(wordWrongSide.get(j));
+                }
+            }
         }
+        sameWord = true;
+        for (int i = square.getPosRow(); i < boardManager.BOARD_SIZE && sameWord; i++) {
+            Square squareAdjacentRight = boardManager.getSquare(i, column);
+            System.out.println("RIGHTV"+squareAdjacentRight.getPosRow() + ";" + squareAdjacentRight.getPosColumn());
+
+            if (squareAdjacentRight.getTileOn() != null) {
+                word.append(squareAdjacentRight.getTileOn().getLetter());
+            } else {
+                sameWord = false;
+            }
+        }
+        System.out.println("WordV:"+word);
         return word.toString();
     }
 
@@ -459,14 +554,11 @@ public class Game implements Observable {
     }
 
 
-    private void findWord()
-    {
+    private void findWord() {
         List<Square> squaresAvailable = boardManager.getSquarePositionAvailableToPlay();
 
 
-
-        while(!squaresAvailable.isEmpty())
-        {
+        while (!squaresAvailable.isEmpty()) {
 
         }
 

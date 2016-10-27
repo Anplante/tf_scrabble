@@ -231,4 +231,37 @@ public class GameTest {
         assertTrue(game.playWord(lettersPlayed));
 
     }
+
+        /*
+        @Test
+    public void testPlayAfterWord()
+    {
+
+        Square square1 = game.getSquare(7,7);
+        square1.setLetter(new Tile("d",2));
+        Square square2 =game.getSquare(7,8);
+        square2.setLetter(new Tile("a",2));
+        Square square3 =game.getSquare(7,9);
+        square2.setLetter(new Tile("n",2));
+        Square square4 =game.getSquare(7,10);
+        square2.setLetter(new Tile("s",2));
+
+        List<Square> lettersPlayed = new ArrayList<>();
+        lettersPlayed.add(square1);
+        lettersPlayed.add(square2);
+        lettersPlayed.add(square3);
+        lettersPlayed.add(square4);
+
+
+        assertTrue(game.playWord(lettersPlayed));
+
+        Square square5 =game.getSquare(7,11);
+        square2.setLetter(new Tile("e",2));
+
+        lettersPlayed.clear();
+        lettersPlayed.add(square5);
+        assertTrue(game.playWord(lettersPlayed));
+
+    }
+     */
 }
