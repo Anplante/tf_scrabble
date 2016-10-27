@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,12 +42,16 @@ public class AiGoalTest {
     @Test
     public void testAllPossibleWord()
     {
-        ArrayList<String> realWord = new ArrayList<>();
-        ArrayList<String> aiWord =  new ArrayList<>();
-        String lettersOfAi= "lesarn";
-        realWord.add("les");
-        realWord.add("sel");
-        aiWord = aiGoal.getPossibleWord(lettersOfAi);
-        assertEquals(aiWord.get(0), realWord.get(0));
+        Dictionary dictionary = null;
+        try {
+            dictionary = new Dictionary();
+
+        }
+        catch (FileNotFoundException e) {
+
+        }
+
+        ArrayList<String> test = dictionary.getWordsEndingWith("er");
+        int i;
     }
 }
