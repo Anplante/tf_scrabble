@@ -9,13 +9,15 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Classe qui représente la phase d'échange de lettres. Le joueur peut sélectionner les lettres qu'il veut échanger ou
+ * annuler l'échange.
+ *
  * Created by Julien Brosseau on 9/21/2016.
  */
 public class StateExchange extends State {
 
     private IDState stateSelected;
-    boolean readyForNextPhase;
-
+    private boolean readyForNextPhase;
     private List<Tile> tilesSelected;
 
     public StateExchange(Player player) {
@@ -57,7 +59,7 @@ public class StateExchange extends State {
                 getGame().exchangeLetters(tilesSelected);
             }
             else {
-                // solution temporaire
+                // TODO Louis : solution temporaire pour montrer l'erreur. Il faudrait s'entendre sur comment on veut afficher des messages d'erreur
                 JOptionPane.showMessageDialog(new Frame(),
                         "Aucune tuile n'a été sélectionné à supprimer",
                         "Action invalide",
@@ -94,7 +96,4 @@ public class StateExchange extends State {
     protected boolean readyForNextState() {
         return readyForNextPhase;
     }
-
-
-
 }

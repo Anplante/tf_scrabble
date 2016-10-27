@@ -9,16 +9,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by TheFrenchOne on 9/7/2016.
+ * Classe qui permet de contenir les informations sur une tuile du plateau de jeu.
+ * <p>
+ * Created by Louis Luu Lim on 9/7/2016.
  */
-public class Square implements Observable{
+public class Square implements Observable {
 
     private Square adjacentUp;
     private Square adjacentDown;
     private Square adjacentLeft;
     private Square adjacentRight;
-
-private List<Square> neighbours;
+    private List<Square> neighbours;
     private int posRow;
     private int posColumn;
     private Tile tileOn;
@@ -26,8 +27,7 @@ private List<Square> neighbours;
     private transient LinkedList<Observateur> observateurs;
 
 
-    public Square(int posRow, int posColumn)
-    {
+    public Square(int posRow, int posColumn) {
         this.posRow = posRow;
         this.posColumn = posColumn;
         this.tileOn = null;
@@ -35,11 +35,11 @@ private List<Square> neighbours;
         observateurs = new LinkedList<>();
     }
 
-    public Square getAdjacentDown(){
+    public Square getAdjacentDown() {
         return adjacentDown;
     }
 
-    public Square getAdjacentRight(){
+    public Square getAdjacentRight() {
         return adjacentRight;
     }
 
@@ -56,8 +56,7 @@ private List<Square> neighbours;
         neighbours.add(adjacentRight);
     }
 
-    public List<Square> getNeighbours()
-    {
+    public List<Square> getNeighbours() {
         ArrayList<Square> neighbours = new ArrayList<>();
 
         neighbours.addAll(this.neighbours);
@@ -65,20 +64,16 @@ private List<Square> neighbours;
         return neighbours;
     }
 
-    public String getLetterOn()
-    {
-        if(tileOn != null)
-        {
+    public String getLetterOn() {
+        if (tileOn != null) {
             return tileOn.getLetter();
-        }
-        else{
+        } else {
             return "";
         }
     }
 
-    public Tile getTileOn()
-    {
-      return tileOn;
+    public Tile getTileOn() {
+        return tileOn;
     }
 
     public int getPosRow() {
@@ -104,19 +99,15 @@ private List<Square> neighbours;
         aviserObservateurs();
     }
 
-
-    public boolean isNeighbours(Square square)
-    {
+    public boolean isNeighbours(Square square) {
         return square.equals(adjacentDown) || square.equals(adjacentLeft) || square.equals(adjacentRight) || square.equals(adjacentUp);
     }
 
-    public boolean isCenter()
-    {
+    public boolean isCenter() {
         return posColumn == BoardManager.BOARD_CENTER && posRow == BoardManager.BOARD_CENTER;
     }
 
-    public boolean containLetter()
-    {
+    public boolean containLetter() {
         return tileOn != null;
     }
 
@@ -127,7 +118,7 @@ private List<Square> neighbours;
 
     @Override
     public void retirerObservateur(Observateur o) {
-            observateurs.remove(o);
+        observateurs.remove(o);
     }
 
     @Override

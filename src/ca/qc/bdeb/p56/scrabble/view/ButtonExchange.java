@@ -17,10 +17,12 @@ import java.util.logging.Logger;
  */
 public class ButtonExchange extends JButton implements Observateur {
 
+
+    private static final URL PATH_TO_FILE = Launcher.class.getResource("/Image/bag_scrabble.png");
+
     private Image bagImg;
     private JLabel lblNumberLetter;
     private Game theGame;
-    private static final URL PATH_TO_FILE = Launcher.class.getResource("/Image/bag_scrabble.png");
 
 
     public ButtonExchange(String name, Game game, Rectangle bounds) {
@@ -40,26 +42,20 @@ public class ButtonExchange extends JButton implements Observateur {
 
     public void initComponents() {
 
-        setIcon(new ImageIcon(bagImg.getScaledInstance(getWidth()/2, getHeight()/2, Image.SCALE_SMOOTH)));
-
-       lblNumberLetter = new JLabel();
-        //setLayout(null);
+        setIcon(new ImageIcon(bagImg.getScaledInstance(getWidth() / 2, getHeight() / 2, Image.SCALE_SMOOTH)));
+        lblNumberLetter = new JLabel();
         lblNumberLetter.setSize(lblNumberLetter.getPreferredSize());
-
         lblNumberLetter.setForeground(Color.WHITE);
-        //lblNumberLetter.setHorizontalTextPosition(JLabel.CENTER);
-        //  lblNumberLetter.setVerticalTextPosition(JLabel.BOTTOM);
-        //lblNumberLetter.setVisible(true);
-        // lblNumberLetter.setIcon(imageBag);
-        lblNumberLetter.setLocation(getWidth()/2, getHeight()/2);
         lblNumberLetter.setText(stringCreator());
         add(lblNumberLetter);
     }
 
 
-    private String stringCreator(){
+    private String stringCreator() {
+
         StringBuffer text = new StringBuffer();
-        for (int i = 0; i <getWidth()/2/5-1 ; i++) {
+
+        for (int i = 0; i < getWidth() / 2 / 5 - 1; i++) {
             text.append(" ");
         }
         text.append(theGame.getlettersLeft());
@@ -68,12 +64,11 @@ public class ButtonExchange extends JButton implements Observateur {
 
     @Override
     public void changementEtat() {
-
         lblNumberLetter.setText(stringCreator());
     }
 
     @Override
     public void changementEtat(Enum<?> e, Object o) {
-
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

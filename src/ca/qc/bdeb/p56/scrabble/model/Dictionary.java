@@ -6,7 +6,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by 0993083 on 2016-10-11.
+ * Classe qui continent et gère les mots valides pour le jeu de scrabble.
+ *
+ * Created by Louis Luu Lim on 2016-10-11.
  */
 public class Dictionary {
 
@@ -42,21 +44,22 @@ public class Dictionary {
         } catch (IOException ex) {
             Logger.getLogger(file.toString()).log(Level.SEVERE, null, ex);
         }
-
-
     }
 
     public boolean checkWordExist(String word) {
         return dict.containsValue(word);
     }
-    
+
+
+    /**
+     *
+     *  Louis : En construction
+     */
 
     private List<String> buildWords(String lettersInHand) {
 
         List<String> wordsFound = new ArrayList<>();
 
-
         return wordsFound;
     }
-
 }
