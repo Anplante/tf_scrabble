@@ -28,10 +28,7 @@ import java.util.logging.Logger;
 public class Game implements Observable {
 
     public static final int MAX_TILES_IN_HAND = 7;
-
-
     private static final String TAG_FRENCH_ALPHABET = "frenchAlphabet";
-
     private static final String DEFAULT_DICT_PATH = "resources/dictionary/fr_dictionary.txt";
     private static final String TAG_LETTER = "letter";
     private static final String TAG_TEXT = "text";
@@ -45,7 +42,6 @@ public class Game implements Observable {
     private List<Player> players;
     private int activePlayerIndex;
     private static List<Tile> alphabetBag;
-
     private List<MoveLog> movesHistory;
     private Dictionary dictionary;
 

@@ -14,13 +14,9 @@ import java.awt.*;
  */
 public class ScrabbleGUI extends JFrame {
 
-    private final double RATIO_BOARD_ZONE = 0.1;
-
-
     private final  double RATIO_LETTER_RACK_ZONE = 0.1;
-
-    private final int LETTER_RACK_ZONE_HEIGHT;
     public final static int MARGIN = 5;
+    private final int LETTER_RACK_ZONE_HEIGHT;
 
     private String backgroundPath;
     PanelLetterRackZone panelLetterRack;

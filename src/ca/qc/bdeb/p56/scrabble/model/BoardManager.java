@@ -26,13 +26,15 @@ public class BoardManager {
     private static final String TAG_COLUMN = "col";
     private static final String TAG_MULTIPLIER = "multiplier";
     private static final String TAG_TYPE = "type";
+    private static final String TAG_LETTER_SCORE = "letterscore";
+    private static final String TAG_WORD_SCORE = "wordscore";
 
     private static Map<String, Premium.Type> premiumTypeMap;
 
     static {
         premiumTypeMap = new TreeMap<>();
-        premiumTypeMap.put("letterscore", Premium.Type.LETTER_SCORE);
-        premiumTypeMap.put("wordscore", Premium.Type.WORD_SCORE);
+        premiumTypeMap.put(TAG_LETTER_SCORE, Premium.Type.LETTER_SCORE);
+        premiumTypeMap.put(TAG_WORD_SCORE, Premium.Type.WORD_SCORE);
     }
 
     private Map<String, Premium> premiums;
