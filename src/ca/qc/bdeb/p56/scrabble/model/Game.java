@@ -8,6 +8,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,10 +21,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by TheFrenchOne on 9/10/2016.
+ * Classe du jeu de scrabbleé
+ *
+ * Created by Louis Luu Lim on 9/10/2016.
  */
 public class Game implements Observable {
 
+    public static final int MAX_TILES_IN_HAND = 7;
+
+
+    private static final String TAG_FRENCH_ALPHABET = "frenchAlphabet";
+
+    private static final String DEFAULT_DICT_PATH = "resources/dictionary/fr_dictionary.txt";
+    private static final String TAG_LETTER = "letter";
+    private static final String TAG_TEXT = "text";
+    private static final String TAG_VALUE = "value";
+    private static final String TAG_AMOUNT = "amount";
 
     private transient LinkedList<Observateur> observateurs;
     private static final Random randomGenerator = new Random();
@@ -96,7 +109,7 @@ public class Game implements Observable {
 
     private void initDictionnary() {
 
-        File dictFile = new File("resources/dictionary/fr_dictionary.txt");
+        File dictFile = new File(DEFAULT_DICT_PATH);
 
         dictionary = Dictionary.getINSTANCE();
         dictionary.loadDictinnary(dictFile);
@@ -125,29 +138,31 @@ public class Game implements Observable {
 
     private void initAlphabetBag(Element rootElement) {
 
-        alphabetBag = new ArrayList<Tile>();
+        alphabetBag = new ArrayList<>();
 
-        Element alphabetsElement = (Element) rootElement.getElementsByTagName("frenchAlphabet").item(0);
+        Element alphabetsElement = (Element) rootElement.getElementsByTagName(TAG_FRENCH_ALPHABET).item(0);
 
-        NodeList alphabetsNodes = alphabetsElement.getElementsByTagName("letter");
+        NodeList alphabetsNodes = alphabetsElement.getElementsByTagName(TAG_LETTER);
 
         for (int i = 0; i < alphabetsNodes.getLength(); i++) {
             Element activeElement = (Element) alphabetsNodes.item(i);
 
-            String caracter = activeElement.getAttribute("text");
-            int value = Integer.parseInt(activeElement.getAttribute("value"));
+            String character = activeElement.getAttribute(TAG_TEXT);
+            int value = Integer.parseInt(activeElement.getAttribute(TAG_VALUE));
 
-            int amount = Integer.parseInt(activeElement.getAttribute("amount"));
+            int amount = Integer.parseInt(activeElement.getAttribute(TAG_AMOUNT));
 
             for (int j = 0; j < amount; j++) {
-                alphabetBag.add(new Tile(caracter, value));
+                alphabetBag.add(new Tile(character, value));
             }
         }
+
         Collections.shuffle(alphabetBag);
     }
 
 
     private BoardManager createBoard(Element rootElement) {
+
         BoardManager newBoardManager = new BoardManager();
         newBoardManager.createBoard(rootElement);
 
@@ -161,11 +176,11 @@ public class Game implements Observable {
         initPlayerRack();
 
         for (Player player : players) {
-            player.getState().initialize(); // rien pour le moment
+            player.getState().initialize();
         }
+
         goToNextState();
     }
-
 
     public void goToNextState() {
 
@@ -174,25 +189,27 @@ public class Game implements Observable {
         if (!getActivePlayer().isActivated()) {
             drawTile();
             activateNextPlayer();
-
         }
     }
 
     public void passTurn() {
+
         getActivePlayer().selectNextState(IDState.PENDING);
         goToNextState();
-        // TODO Louis : bloquer quand le joueur place un mot ou annuler les autres actions
     }
 
     private void activateNextPlayer() {
+
         activePlayerIndex = (activePlayerIndex + 1) % players.size();
         getActivePlayer().nextState();
     }
 
     private void initPlayerRack() {
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < MAX_TILES_IN_HAND; i++) {
+
             for (int j = 0; j < players.size(); j++) {
+
                 Tile tile = alphabetBag.get(randomGenerator.nextInt(alphabetBag.size()));
                 players.get(j).addLetter(tile);
                 alphabetBag.remove(tile);
@@ -206,6 +223,7 @@ public class Game implements Observable {
     }
 
     public void selectLetter(Tile tile) {
+
         getActivePlayer().selectTile(tile);
         if (isReadyForNextPhase()) {
             goToNextState();
@@ -223,7 +241,6 @@ public class Game implements Observable {
     public String getState() {
         return getActivePlayer().getState().getName();
     }
-
 
     /**
      * Pour l'utilisation des tests
@@ -244,7 +261,6 @@ public class Game implements Observable {
         aviserObservateurs();
     }
 
-
     public void playWord() {
 
         getActivePlayer().selectNextState(IDState.PENDING);
@@ -261,6 +277,7 @@ public class Game implements Observable {
         List<Square> letters = orderByDirection(tilesPlaced, direction, rowOrColumn);
 
         if (!letters.isEmpty()) {
+
             String word = createWord(letters).toLowerCase();
 
             if (dictionary.checkWordExist(word)) {
@@ -273,7 +290,7 @@ public class Game implements Observable {
         return isAWord;
     }
 
-    private List<Square> orderByDirection(List<Square> lettersPlayed, Direction direction, int rowOrColumn) {
+    private List<Square> orderByDirection(List<Square> lettersPlayed, Direction direction, int position) {
 
         List<Square> newLetters = new ArrayList<>();
         Square square;
@@ -281,16 +298,18 @@ public class Game implements Observable {
         boolean foundWordUtilisingAllLetters = false;
 
         while (!foundWordUtilisingAllLetters && indexBoard < boardManager.BOARD_SIZE) {
+
             if (direction.equals(Direction.COLUMN)) {
-                square = boardManager.getSquare(indexBoard, rowOrColumn);
+                square = boardManager.getSquare(indexBoard, position);
             } else {
-                square = boardManager.getSquare(rowOrColumn, indexBoard);
+                square = boardManager.getSquare(position, indexBoard);
             }
             if (square.getTileOn() != null) {
                 newLetters.add(square);
             } else {
                 boolean allLettersUtilised = true;
                 int indexLetterPlayed = 0;
+
                 while (allLettersUtilised && indexLetterPlayed < lettersPlayed.size()) {
                     if (!newLetters.contains(lettersPlayed.get(indexLetterPlayed))) {
                         newLetters.clear();
@@ -319,8 +338,8 @@ public class Game implements Observable {
     private Direction findColumnOrRow(List<Square> letters) {
 
         Direction direction = Direction.COLUMN;
-
         int column = letters.get(0).getPosColumn();
+
         if (letters.size() > 1) {
             if (letters.get(1).getPosColumn() != column) {
                 direction = Direction.ROWN;
@@ -330,7 +349,9 @@ public class Game implements Observable {
     }
 
     private int findColumnOrRowValue(List<Square> letters) {
+
         int column = letters.get(0).getPosColumn();
+
         if (letters.size() > 1) {
             if (letters.get(1).getPosColumn() != column) {
                 column = letters.get(1).getPosRow();
@@ -339,9 +360,10 @@ public class Game implements Observable {
         return column;
     }
 
-
     public void recallTiles() {
+
         getActivePlayer().selectNextState(IDState.SELECT_ACTION);
+
         if (isReadyForNextPhase()) {
             goToNextState();
         }
@@ -350,6 +372,7 @@ public class Game implements Observable {
     public void recallTiles(List<Square> tilesPlaced) {
 
         if (tilesPlaced != null) {
+
             for (Square tileLocation : tilesPlaced) {
                 getActivePlayer().addLetter(tileLocation.getTileOn());
                 tileLocation.setLetter(null);
@@ -366,7 +389,6 @@ public class Game implements Observable {
         for (Square square : letterChain) {
 
             int letterMultiplier = 1;
-
             Premium premium = square.getPremium();
 
             if (premium != null) {
@@ -407,7 +429,7 @@ public class Game implements Observable {
 
     @Override
     public void aviserObservateurs(Enum<?> e, Object o) {
-
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 
@@ -459,16 +481,14 @@ public class Game implements Observable {
         goToNextState();
     }
 
+    /**
+     * En construction : Méthode utilisée pour trouver un mot valide.
+     */
+    private void findWord() {
 
-    private void findWord()
-    {
         List<Square> squaresAvailable = boardManager.getSquarePositionAvailableToPlay();
 
-
-
-        while(!squaresAvailable.isEmpty())
-        {
-
+        while (!squaresAvailable.isEmpty()) {
         }
 
     }

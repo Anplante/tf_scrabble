@@ -9,13 +9,14 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Created by TheFrenchOne on 9/10/2016.
+ * Classe qui s'occupe de gérer le plateau de jeu.
+ *
+ * Created by Louis Luu Lim on 9/10/2016.
  */
 public class BoardManager {
 
     public static final int BOARD_SIZE = 15;
     public static final int BOARD_CENTER = 7;
-
 
     private static final String TAG_PREMIUMS = "premiums";
     private static final String TAG_BOARD = "board";
@@ -100,7 +101,7 @@ public class BoardManager {
     private void initPremiums(Element premiumElement) {
         premiums = new TreeMap<>();
 
-        NodeList premiumNodes = premiumElement.getElementsByTagName(TAG_PREMIUMS);
+        NodeList premiumNodes = premiumElement.getElementsByTagName(TAG_PREMIUM);
 
         for (int i = 0; i < premiumNodes.getLength(); i++) {
             Element activeElement = (Element) premiumNodes.item(i);

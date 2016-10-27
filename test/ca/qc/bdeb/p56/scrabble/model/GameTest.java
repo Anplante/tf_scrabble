@@ -155,12 +155,12 @@ public class GameTest {
 
         Tile tileTested = new Tile("l",2);
 
-        Square squareTested = game.getSquare(0,0);
-        squareTested.setLetter(tileTested);
+        Square tripleWordPremiumSquare = game.getSquare(0,0);
+        tripleWordPremiumSquare.setLetter(tileTested);
 
         List<Square> lettersPlayed = new ArrayList<>();
 
-        lettersPlayed.add(squareTested);
+        lettersPlayed.add(tripleWordPremiumSquare);
 
         int values = game.calculateWordPoints(lettersPlayed);
 

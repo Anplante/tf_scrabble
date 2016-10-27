@@ -3,7 +3,10 @@ package ca.qc.bdeb.p56.scrabble.model;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 
 /**
- * Created by TheFrenchOne on 9/12/2016.
+ * Classe qui représente la phase de sélection d'un coup à jouer par le joueur. Il peut choisir d'échanger, de mettre
+ * une lettre, de passer son tour ou d'abandonner.
+ *
+ * Created by Louis Luu Lim on 9/12/2016.
  */
 public class StateSelectAction extends State {
 
@@ -14,7 +17,6 @@ public class StateSelectAction extends State {
     private boolean  readyToChange ;
 
     protected StateSelectAction(Player currentPlayer) {
-
 
         super(currentPlayer, IDState.SELECT_ACTION);
         readyToChange  = false;
@@ -37,9 +39,8 @@ public class StateSelectAction extends State {
     @Override
     protected State getNextState() {
 
-        State newState;
+        State newState = null;
 
-        // TODO Louis : Faire les vérifications pour savoir si le joueur peut passer au prochain état et non simplement se laisser dire quel état aller
         switch (stateSelected)
         {
             case PLAY_TILE:
@@ -51,8 +52,6 @@ public class StateSelectAction extends State {
             case EXCHANGE:
                 newState = new StateExchange(getPlayer());
                 break;
-            default:
-                newState = this;
         }
         return newState;
     }

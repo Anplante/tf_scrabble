@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.List;
 
 /**
- * Created by TheFrenchOne on 9/10/2016.
+ * Classe qui s'occupe de gérer une partie.
+ *
+ * Created by Louis Luu Lim on 9/10/2016.
  */
 public class GameManager {
 

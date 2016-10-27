@@ -3,7 +3,9 @@ package ca.qc.bdeb.p56.scrabble.model;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 
 /**
- * Created by TheFrenchOne on 9/14/2016.
+ * Classe qui représente la phase d'attente. Le joueur attend son tour de jouer.
+ *
+ * Created by Louis Luu Lim on 9/14/2016.
  */
 public class StatePending extends State {
 

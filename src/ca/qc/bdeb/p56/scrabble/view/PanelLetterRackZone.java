@@ -287,6 +287,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
     @Override
     public void changementEtat(Enum<?> e, Object o) {
-
+       throw new UnsupportedOperationException("Not supported yet.");
     }
 }

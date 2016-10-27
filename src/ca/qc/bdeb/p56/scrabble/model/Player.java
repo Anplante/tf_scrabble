@@ -12,7 +12,9 @@ import java.util.List;
 
 
 /**
- * Created by TheFrenchOne on 9/10/2016.
+ * Classe qui contient les informations sur un joueur.
+ * <p>
+ * Created by Louis Luu Lim on 9/10/2016.
  */
 public class Player implements Observable {
 
@@ -25,62 +27,43 @@ public class Player implements Observable {
     private Color playerColor;
     private transient LinkedList<Observateur> observateurs;
 
-    public Player(String name)
-    {
-        this.name  = name;
-
+    public Player(String name) {
+        this.name = name;
         tiles = new ArrayList<>();
-        score = 0;
         // TODO : recevoir une couleur
-        playerColor = new Color(0,0,182,155);
+        playerColor = new Color(0, 0, 182, 155);
         setState(new StatePending(this));
         active = false;
         observateurs = new LinkedList<>();
     }
 
-
     public List<Tile> getTiles() {
 
-        List<Tile> playertiles = new LinkedList<>();
+        List<Tile> playerTiles = new LinkedList<>();
 
-        for(Tile tile : tiles)
-        {
-            playertiles.add(tile);
+        for (Tile tile : tiles) {
+            playerTiles.add(tile);
         }
-        return playertiles;
+        return playerTiles;
     }
 
-    /**
-     * À utiliser dans les jeux de tests.
-     */
-    public void clearTiles(){
-        tiles.clear();
-    }
-
-    public int getLettersCount()
-    {
+    public int getLettersCount() {
         return tiles.size();
     }
+
     public Game getGame() {
         return game;
     }
 
-
-    protected void setState(State newState)
-    {
+    protected void setState(State newState) {
         currentState = newState;
     }
 
-
-    public void setGame(Game game)
-    {
+    public void setGame(Game game) {
         this.game = game;
     }
 
-
-
-    public void addLetter(Tile tile)
-    {
+    public void addLetter(Tile tile) {
         tiles.add(tile);
     }
 
@@ -88,15 +71,11 @@ public class Player implements Observable {
         tiles.remove(tileSelected);
     }
 
-
-
-
     @Override
     public void ajouterObservateur(Observateur ob) {
 
-            observateurs.add(ob);
+        observateurs.add(ob);
     }
-
 
     @Override
     public void retirerObservateur(Observateur ob) {
@@ -106,8 +85,7 @@ public class Player implements Observable {
     @Override
     public void aviserObservateurs() {
 
-        for(Observateur ob : observateurs)
-        {
+        for (Observateur ob : observateurs) {
             ob.changementEtat();
         }
     }
@@ -115,25 +93,21 @@ public class Player implements Observable {
     @Override
     public void aviserObservateurs(Enum<?> e, Object o) {
 
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
-
-
-
-
-    public void selectNextState(IDState state)
-    {
+    public void selectNextState(IDState state) {
         currentState.selectNextState(state);
     }
 
-    
     public State getState() {
         return currentState;
     }
 
     public void nextState() {
+
         currentState.execute();
-        State newState =  currentState.getNextState();
+        State newState = currentState.getNextState();
         currentState = newState;
         newState.initialize();
         aviserObservateurs();
@@ -143,28 +117,25 @@ public class Player implements Observable {
         return active;
     }
 
-    public void setActive(boolean active)
-    {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
+
     public int getScore() {
         return score;
     }
-
-
 
     public void selectSquare(Square square) {
         currentState.selectSquare(square);
     }
 
     public void selectTile(Tile tile) {
-        currentState.selectTile(tile);
 
+        currentState.selectTile(tile);
     }
 
     public void addPoints(int points) {
@@ -172,10 +143,13 @@ public class Player implements Observable {
     }
 
     public boolean canDraw() {
-        return tiles.size() < 7;
+
+        return tiles.size() < Game.MAX_TILES_IN_HAND;
     }
 
-    public Color getColor() { return this.playerColor; }
+    public Color getColor() {
+        return this.playerColor;
+    }
 
     public void swapTile(Tile backupTile, Tile tileSelected) {
 
@@ -186,9 +160,7 @@ public class Player implements Observable {
     /**
      * Pour l'utilisation des tests
      */
-    public void emptyHand()
-    {
+    public void emptyHand() {
         tiles.clear();
     }
-
 }
