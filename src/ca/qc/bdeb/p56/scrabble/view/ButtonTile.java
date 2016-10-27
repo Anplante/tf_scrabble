@@ -16,12 +16,11 @@ import java.awt.event.ActionListener;
 public class ButtonTile extends JButton implements Observateur {
 
     private final String PATH_RES_LETTERS_VALUE = "./letters/englishDictionaryValue/";
-    private Color BASIC_COLOR = Color.lightGray;
-    private Color REMOVE_COLOR = Color.red;
-    private Color SELECTED_COLOR = Color.green;
 
+    private final Color BASIC_COLOR = Color.lightGray;
+    private final Color REMOVE_COLOR = Color.red;
+    private final Color SELECTED_COLOR = Color.green;
     private Game gameModel;
-
     private Tile tile;
 
 
@@ -37,13 +36,12 @@ public class ButtonTile extends JButton implements Observateur {
         setBorder(BorderFactory.createEtchedBorder());
 
         if (tile != null) {
-            String ressource = PATH_RES_LETTERS_VALUE + tile.getLetter().toUpperCase().trim() + ".png";
+            String ressource = PATH_RES_LETTERS_VALUE + tile.getLetter().toUpperCase().trim() + BtnSquare.EXT_PNG;
             ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(ressource));
             Image img = fillingIcon.getImage();
             Image newimg = img.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH);
             ImageIcon icon = new ImageIcon(newimg);
             setIcon(icon);
-
         }
 
         addActionListener(new ActionListener() {
@@ -53,15 +51,16 @@ public class ButtonTile extends JButton implements Observateur {
         });
     }
 
-
     public Tile getTile() {
         return tile;
     }
 
     public void setTile(Tile aTile) {
+
         this.tile = aTile;
         if (tile != null) {
-            ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(PATH_RES_LETTERS_VALUE + tile.getLetter().toUpperCase() + ".png"));
+            ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(PATH_RES_LETTERS_VALUE
+                    + tile.getLetter().toUpperCase() + BtnSquare.EXT_PNG));
             Image img = fillingIcon.getImage();
             Image newimg = img.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH);
             ImageIcon icon = new ImageIcon(newimg);
@@ -71,7 +70,9 @@ public class ButtonTile extends JButton implements Observateur {
 
     @Override
     public void changementEtat() {
+
         if (tile != null && tile.isSelected()) {
+
             if (gameModel.getActivePlayer().getState().getName() == IDState.EXCHANGE.getName()) {
                 setBackground(REMOVE_COLOR);
             } else {
@@ -84,6 +85,6 @@ public class ButtonTile extends JButton implements Observateur {
 
     @Override
     public void changementEtat(Enum<?> e, Object o) {
-
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
