@@ -322,6 +322,7 @@ public class Game implements Observable {
 
     private boolean verifyAllLettersHorizontally(List<Square> letters) {
         boolean allOk = true;
+        int points = 0;
         for(int v =0;v<letters.size() && allOk;v++) {
             StringBuilder word = new StringBuilder();
             Square square = letters.get(v);
@@ -351,17 +352,20 @@ public class Game implements Observable {
                 }
             }
             if(!word.toString().equals(letters.get(v).getLetterOn())){
-                allOk = dictionary.checkWordExist(word.toString().toLowerCase());
-                int wordValue = calculateWordPoints(letters);
-                getActivePlayer().addPoints(wordValue);
-                movesHistory.add(new MoveLog(getActivePlayer(), word.toString(), wordValue));
+                if(allOk = dictionary.checkWordExist(word.toString().toLowerCase())) {
+                    points += calculateWordPoints(letters);
+                }
             }
+        }
+        if(allOk){
+            getActivePlayer().addPoints(points);
         }
         return allOk;
     }
 
     private boolean verifyAllLettersVertically(List<Square> letters) {
         boolean allOk = true;
+        int points = 0;
         for(int v =0;v<letters.size() && allOk;v++) {
             StringBuilder word = new StringBuilder();
             Square square = letters.get(v);
@@ -391,11 +395,13 @@ public class Game implements Observable {
                 }
             }
             if(!word.toString().equals(letters.get(v).getLetterOn())){
-                allOk = dictionary.checkWordExist(word.toString().toLowerCase());
-                int wordValue = calculateWordPoints(letters);
-                getActivePlayer().addPoints(wordValue);
-                movesHistory.add(new MoveLog(getActivePlayer(), word.toString(), wordValue));
+                if(allOk = dictionary.checkWordExist(word.toString().toLowerCase())) {
+                    points += calculateWordPoints(letters);
+                }
             }
+        }
+        if(allOk){
+            getActivePlayer().addPoints(points);
         }
         return allOk;
     }
