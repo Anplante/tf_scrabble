@@ -1,6 +1,8 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
+import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
+import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 
 import java.awt.Image;
 import javax.swing.*;
@@ -12,7 +14,7 @@ import java.awt.*;
 /**
  * Created by Louis Luu Lim on 9/7/2016.
  */
-public class ScrabbleGUI extends JFrame {
+public class ScrabbleGUI extends JFrame implements ConstanteComponentMessage, ConstanteTestName {
 
     private final  double RATIO_LETTER_RACK_ZONE = 0.1;
     public final static int MARGIN = 5;
@@ -45,17 +47,17 @@ public class ScrabbleGUI extends JFrame {
         setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menu = new MainMenuGUI(this);
-        menu.setName("Menu");
+        menu.setName(MENU_NAME);
         addKeyBindings();
 
     }
 
-    private final AbstractAction actionEscape = new AbstractAction("Escape") {
+    private final AbstractAction actionEscape = new AbstractAction(ESCAPE_KEY) {
         @Override
         public void actionPerformed(ActionEvent e) {
 
             options = new DialogOptionsMenu(ScrabbleGUI.this);
-            options.setName("Options");
+            options.setName(OPTIONS_NAME);
             options.setVisible(true);
         }
     };
@@ -87,7 +89,7 @@ public class ScrabbleGUI extends JFrame {
 
         background = new JLabel();
         background.setSize(getWidth(), getHeight());
-        background.setIcon(new ImageIcon(new ImageIcon(this.getClass().getResource("/background/" +
+        background.setIcon(new ImageIcon(new ImageIcon(this.getClass().getResource(PATH_BACKGROUND_RES +
                 backgroundPath)).getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
         setContentPane(background);
     }
@@ -112,7 +114,7 @@ public class ScrabbleGUI extends JFrame {
 
         for (Player player : players) {
             PanelPlayerInfo playerInfo = new PanelPlayerInfo(player);
-            playerInfo.setName("Info : " + player.getName());
+            playerInfo.setName(INFO_NAME + player.getName());
             panelInformation.add(playerInfo);
         }
     }
@@ -129,7 +131,7 @@ public class ScrabbleGUI extends JFrame {
 
         panelLetterRack.setPlayer(gameModel.getPlayers());
         panelLetterRack.setGame(gameModel);
-        panelLetterRack.setName("Player letter rack");
+        panelLetterRack.setName(LETTER_RACK_NAME);
         panelLetterRack.setOpaque(false);
         panelLetterRack.changementEtat();
 
@@ -146,7 +148,7 @@ public class ScrabbleGUI extends JFrame {
         pnlBoard.setSize(heightBoard, heightBoard);
         add(pnlBoard);
         initGrid();
-        pnlBoard.setName("Board");
+        pnlBoard.setName(BOARD_NAME);
     }
 
     private void initGrid() {
@@ -157,12 +159,11 @@ public class ScrabbleGUI extends JFrame {
             for (int column = 0; column < 15; column++) {
                 BtnSquare square = new BtnSquare(gameModel, row, column);
                 square.setFocusable(false);
-                square.setName("Square " + row + ";" + column);
+                square.setName(SQUARE_NAME + row + column);
                 pnlBoard.add(square);
             }
         }
     }
-
     private void createGame() {
 
         gameModel.startGame();
@@ -172,7 +173,7 @@ public class ScrabbleGUI extends JFrame {
 
         JRootPane contentPane = getRootPane();
         contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Escape");
-        contentPane.getActionMap().put("Escape", actionEscape);
+        contentPane.getActionMap().put(ESCAPE_KEY, actionEscape);
     }
 
     public String getBackgroundPath() {

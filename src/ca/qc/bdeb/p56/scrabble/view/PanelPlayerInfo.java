@@ -1,6 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Player;
+import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import javax.swing.*;
@@ -9,23 +10,24 @@ import java.awt.*;
 /**
  * Created by TheFrenchOne on 9/14/2016.
  */
-public class PanelPlayerInfo extends JPanel implements Observateur{
+public class PanelPlayerInfo extends JPanel implements Observateur, ConstanteTestName{
+
+
+    private static final String TEXT_FONT = "Comic Sans MS Bold";
 
     private Player playerModel;
-
     private JLabel lblName;
     private JLabel lblTitre;
     private JLabel lblScore;
     private Color playerColor;
-    private boolean isActif;
 
     public PanelPlayerInfo(Player player){
 
-        isActif = false;
         playerModel = player;
         player.ajouterObservateur(this);
         initComponents();
         changementEtat();
+
     }
 
     private void initComponents() {
@@ -34,11 +36,11 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         lblName = new JLabel();
         lblTitre = new JLabel();
         lblScore = new JLabel();
-        lblScore.setName("Score");
+        lblScore.setName(SCORE_NAME);
         add(lblName);
         add(lblScore);
 
-        Font font = new Font("Comic Sans MS Bold", Font.PLAIN, 15);
+        Font font = new Font(TEXT_FONT, Font.PLAIN, 15);
 
         lblName.setFont(font);
         lblName.setBounds(11 , 11 ,
@@ -63,7 +65,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        // TODO L'observateur devrait nous dire lequel des jouers est actif et inactif
+        // TODO Antoine : L'observateur devrait nous dire lequel des jouers est actif et inactif
         if (playerModel.isActivated()) {
             g.setColor(Color.green);
         }

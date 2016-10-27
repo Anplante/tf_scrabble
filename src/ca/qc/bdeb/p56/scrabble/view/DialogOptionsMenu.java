@@ -1,5 +1,8 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
+import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
+import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,18 +15,7 @@ import java.awt.event.ActionListener;
  *
  * Created by Julien brosseau on 2016-10-04.
  */
-public class DialogOptionsMenu extends JDialog {
-
-    private static final String OPT_QUITTER_TITLE = "Quitter";
-    private static final String MESS_CONFIRM_EXIT = "Voulez-vous vraiment quitter?";
-    private static final String TITLE_MESS_EXIT = "Fermeture de l'application";
-    private static final String TITLE_SURRENDER = "Abandonner";
-    private static final String MESS_CONFIRM_ACTION = "Voulez-vous continuer?";
-    private static final String MESS_SURRENDER_GAME = "Abandon de partie";
-    private static final String MESS_DEFEAT = "Vous avez perdu";
-    private static final String MESS_END_GAME = "Fin de la partie";
-    private static final String TITLE_RETURN_GAME = "Retourner au jeu";
-    private static final String ESCAPE_KEY = "Escape";
+public class DialogOptionsMenu extends JDialog implements ConstanteTestName, ConstanteComponentMessage {
 
     private JButton btnReturnGame;
     private JButton btnAbandon;
@@ -56,14 +48,11 @@ public class DialogOptionsMenu extends JDialog {
         btnQuitGame = new JButton(OPT_QUITTER_TITLE);
         add(btnQuitGame);
 
-        btnQuitGame.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                int i = JOptionPane.showConfirmDialog(new Frame(), MESS_CONFIRM_EXIT,
-                       TITLE_MESS_EXIT, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (i == 0) {
-                    System.exit(0);
-                }
+        btnQuitGame.addActionListener(actionEvent -> {
+            int i = JOptionPane.showConfirmDialog(new Frame(), MESS_CONFIRM_EXIT,
+                   TITLE_MESS_EXIT, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (i == 0) {
+                System.exit(0);
             }
         });
     }
@@ -71,35 +60,27 @@ public class DialogOptionsMenu extends JDialog {
     private void initOptAbandon() {
 
         btnAbandon = new JButton(TITLE_SURRENDER);
-        btnAbandon.setName("Abandon");
+        btnAbandon.setName(ABANDON_NAME);
         add(btnAbandon);
 
-        btnAbandon.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                int i = JOptionPane.showConfirmDialog(new Frame(), MESS_CONFIRM_ACTION,
-                        MESS_SURRENDER_GAME, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (i == 0) {
-                    JOptionPane.showMessageDialog(null, MESS_DEFEAT,
-                           MESS_END_GAME, JOptionPane.INFORMATION_MESSAGE);
-                    parent.returnToMenu();
-                    dispose();
-                }
+        btnAbandon.addActionListener(actionEvent -> {
+            int i = JOptionPane.showConfirmDialog(new Frame(), MESS_CONFIRM_ACTION,
+                    MESS_SURRENDER_GAME, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (i == 0) {
+                JOptionPane.showMessageDialog(null, MESS_DEFEAT,
+                       MESS_END_GAME, JOptionPane.INFORMATION_MESSAGE);
+                parent.returnToMenu();
+                dispose();
             }
         });
     }
 
     private void initOptReturnGame() {
         btnReturnGame = new JButton(TITLE_RETURN_GAME);
-        btnReturnGame.setName("Return");
+        btnReturnGame.setName(RETURN_NAME);
         add(btnReturnGame);
 
-        btnReturnGame.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                dispose();
-            }
-        });
+        btnReturnGame.addActionListener(actionEvent -> dispose());
     }
 
     private void addKeybindings() {

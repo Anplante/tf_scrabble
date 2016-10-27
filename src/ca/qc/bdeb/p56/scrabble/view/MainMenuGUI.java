@@ -4,6 +4,8 @@ import ca.qc.bdeb.p56.scrabble.ai.AiPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.Player;
+import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
+import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -36,9 +38,8 @@ import java.util.logging.Logger;
  *
  * Created by Antoine on 9/12/2016.
  */
-public class MainMenuGUI extends JDialog {
+public class MainMenuGUI extends JDialog implements ConstanteTestName, ConstanteComponentMessage{
 
-    private final String MENU = "Menu" ;
 
     private JPanel panelMenu;
     private JTextField txtName;
@@ -74,7 +75,7 @@ public class MainMenuGUI extends JDialog {
     private void initializeFrame() {
         setLayout(null);
         JFrame fenetre = new JFrame();
-        this.setTitle(MENU);
+        this.setTitle(TITLE_MENU);
         fenetre.pack();
         Insets insets = fenetre.getInsets();
         setSize(new Dimension(insets.left + insets.right + 400,
@@ -105,7 +106,7 @@ public class MainMenuGUI extends JDialog {
 
     private void addComboBox() {
         cmbNumberOfAi = new JComboBox();
-        cmbNumberOfAi.setName("choix");
+        cmbNumberOfAi.setName(QTE_AI_NAME);
         for (int i = 0; i < nombreDeAi.length; i++) {
             cmbNumberOfAi.addItem(nombreDeAi[i]);
         }
@@ -115,7 +116,7 @@ public class MainMenuGUI extends JDialog {
 
         cmbBackgroundScrabble = new JComboBox<>();
 
-        cmbBackgroundScrabble.setName("background");
+        cmbBackgroundScrabble.setName(BACKGROUND_NAME);
         addImageFile();
         cmbBackgroundScrabble.setVisible(true);
         cmbBackgroundScrabble.setLocation(180, 220);
@@ -136,13 +137,13 @@ public class MainMenuGUI extends JDialog {
         btnCancel.setSize(100, 50);
         btnOpenDialog.setSize(25,25);
         btnConfirm.setSize(100, 50);
-        btnCancel.setText("Annuler");
-        btnConfirm.setText("Confirmer");
+        btnCancel.setText(MESS_CANCEL);
+        btnConfirm.setText(MESS_CONFIRM);
         btnCancel.setLocation(250, 325);
         btnOpenDialog.setLocation(365,220);
         btnConfirm.setLocation(50, 325);
-        btnConfirm.setName("Confirm");
-        btnCancel.setName("Cancel");
+        btnConfirm.setName(CONFIRM_NAME);
+        btnCancel.setName(CANCEL_NAME);
 
 
         btnConfirm.addActionListener( new ActionListener()
@@ -182,7 +183,7 @@ public class MainMenuGUI extends JDialog {
         player = new Player(txtName.getText());
         players.add(player);
 
-        int limit = (int) cmbNumberOfAi.getSelectedIndex();
+        int limit = cmbNumberOfAi.getSelectedIndex();
         ++limit;
         for (int i = 0; i < limit; i++) {
             players.add(new AiPlayer(listName));
@@ -195,24 +196,23 @@ public class MainMenuGUI extends JDialog {
         parent.changeBackground(cmbBackgroundScrabble.getSelectedItem().toString());
         parent.createScrabbleGame(game);
         setVisible(false);
-        //dispose();
     }
 
     private void addLabels() {
         lblName = new JLabel();
-        lblName.setText("Nom du Joueur : ");
+        lblName.setText(MESS_PLAYER_NAME);
         lblName.setLocation(25, 25);
         lblName.setSize(lblName.getPreferredSize());
         lblName.setVisible(true);
 
         lblNumberOfAi = new JLabel();
-        lblNumberOfAi.setText("Nombre d'ordinateurs :");
+        lblNumberOfAi.setText(MESS_NUMBER_OF_AI);
         lblNumberOfAi.setLocation(25, 125);
         lblNumberOfAi.setSize(lblNumberOfAi.getPreferredSize());
         lblNumberOfAi.setVisible(true);
 
         lblBackground = new JLabel();
-        lblBackground.setText("Background : ");
+        lblBackground.setText(MESS_BACKGROUND);
         lblBackground.setLocation(25, 225);
         lblBackground.setSize(lblBackground.getPreferredSize());
         lblBackground.setVisible(true);
@@ -227,14 +227,12 @@ public class MainMenuGUI extends JDialog {
         panelMenu.setLocation(0, 0);
         panelMenu.setSize(new Dimension(400, 400));
         txtName = new JTextField("", 30);
-        txtName.setName("textBox");
+        txtName.setName(PLAYER_NAME);
         txtName.setBounds(150, 20, 180, 30);
 
-        txtName.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String input = txtName.getText();
-                txtName.setText(input);
-            }
+        txtName.addActionListener(e -> {
+            String input = txtName.getText();
+            txtName.setText(input);
         });
         panelMenu.add(txtName);
     }
@@ -242,7 +240,7 @@ public class MainMenuGUI extends JDialog {
     private void addImageFile() {
         File theFiles = null;
 
-        URL url = Launcher.class.getResource("/background/");
+        URL url = Launcher.class.getResource(PATH_BACKGROUND_RES);
         try {
             theFiles = new File(url.toURI());
         } catch (URISyntaxException ex) {
@@ -255,26 +253,13 @@ public class MainMenuGUI extends JDialog {
         cmbBackgroundScrabble.setSelectedIndex(2);
     }
 
-    private void receiveBackground(int returnValue) {
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            File fichier = fileImage.getSelectedFile();
-            // TODO: filter
-            if (!fichier.getName().endsWith(".jpg") || !fichier.getName().endsWith(".png")
-                    || !fichier.getName().endsWith(".jpeg")) {
-                fichier = new File(fichier.getAbsolutePath());
-                Path path = Paths.get(fichier.getAbsolutePath());
-                cmbBackgroundScrabble.addItem(path.getFileName().toString());
-            }
-            else {
-                JOptionPane.showMessageDialog(panelMenu, "Problème de chargement de fichier", "Erreur",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
+    /**
+     * Antoine : Future implémentation?
+     * @return
+     */
+   /* public static String removeExtension(String filenameWithExtension) {
 
-    public static String removeExtension(String filenameWithExtension) {
-
-        String separator = System.getProperty("file.separator");
+        String separator = System.getProperty(FILE_SEPARATOR);
         String filename;
 
         // Remove the path up to the filename.
@@ -291,7 +276,7 @@ public class MainMenuGUI extends JDialog {
             return filename;
 
         return filename.substring(0, extensionIndex);
-    }
+    }*/
 
     public Player getPlayer() {
         return player;
@@ -302,22 +287,23 @@ public class MainMenuGUI extends JDialog {
     }
 
     public ArrayList<String> readXMLFiles() {
+
         ArrayList<String> listOfName = new ArrayList<>();
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
             Document documentOfName = docBuilder.parse(new File(PATH_TO_FILE.toURI()));
             documentOfName.getDocumentElement().normalize();
-            NodeList nodeOfName = documentOfName.getElementsByTagName("item");
+            NodeList nodeOfName = documentOfName.getElementsByTagName(TAG_ITEM);
 
             for (int i = 0; i < nodeOfName.getLength(); i++) {
                 Node itemName = nodeOfName.item(i);
                 if (itemName.getNodeType() == Node.ELEMENT_NODE) {
                     Element aiName = (Element) itemName;
-                    listOfName.add(aiName.getElementsByTagName("name").item(0).getTextContent());
+                    listOfName.add(aiName.getElementsByTagName(TAG_NAME).item(0).getTextContent());
                 }
             }
-            // TODO : donner du feedback à l'utilisateur
+            // TODO Antoine : donner du feedback à l'utilisateur
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(docBuilderFactory.toString()).log(Level.SEVERE, null, ex);
         } catch (SAXParseException ex) {
@@ -332,4 +318,20 @@ public class MainMenuGUI extends JDialog {
         return listOfName;
     }
 
+    private void receiveBackground(int returnValue) {
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File fichier = fileImage.getSelectedFile();
+            // TODO: filter
+            if (!fichier.getName().endsWith(EXT_JPG) || !fichier.getName().endsWith(EXT_PNG)
+                    || !fichier.getName().endsWith(EXT_JPG)) {
+                fichier = new File(fichier.getAbsolutePath());
+                Path path = Paths.get(fichier.getAbsolutePath());
+                cmbBackgroundScrabble.addItem(path.getFileName().toString());
+            }
+            else {
+                JOptionPane.showMessageDialog(panelMenu, MESS_ERROR_LOADING_FILE, MESS_ERROR,
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
 }

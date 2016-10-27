@@ -3,6 +3,7 @@ package ca.qc.bdeb.p56.scrabble.view;
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.Square;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
+import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import javax.swing.*;
@@ -19,19 +20,17 @@ public class BtnSquare extends JButton implements Observateur {
     private final static Color COLOR_TW = new Color(252, 179, 87);
     private final static Color COLOR_TL = new Color(91, 187, 71);
     private final static Color COLOR_DW = new Color(238, 49, 50);
+    private static final String RES_IMAGES_ENG = "./letters/englishDictionaryValue/";
 
+    private static final String TRIPLE_WORD = "TW";
+    private static final String DOUBLE_WORD = "DW";
+    private static final String DOUBLE_LETTER = "DL";
+    private static final String TRIPLE_LETTER = "TL";
 
     private Game gameModel;
     private int posRow;
     private int posColumn;
     private Square square;
-
-    private static final String RES_IMAGES_ENG = "./letters/englishDictionaryValue/";
-    public static final String EXT_PNG = ".png";
-    private static final String TRIPLE_WORD = "TW";
-    private static final String DOUBLE_WORD = "DW";
-    private static final String DOUBLE_LETTER = "DL";
-    private static final String TRIPLE_LETTER = "TL";
 
     public BtnSquare(Game gameModel, int posRow, int posColumn) {
 
@@ -60,7 +59,7 @@ public class BtnSquare extends JButton implements Observateur {
 
                     ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(RES_IMAGES_ENG
                             + square.getLetterOn().toUpperCase()
-                            + EXT_PNG));
+                            + MainMenuGUI.EXT_PNG));
                     Image img = fillingIcon.getImage();
                     Image newImage = img.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH);
                     ImageIcon icon = new ImageIcon(newImage);

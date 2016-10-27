@@ -3,6 +3,7 @@ package ca.qc.bdeb.p56.scrabble.view;
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
+import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by TheFrenchOne on 9/12/2016.
  */
-public class ButtonTile extends JButton implements Observateur {
+public class ButtonTile extends JButton implements Observateur, ConstanteComponentMessage {
 
     private final String PATH_RES_LETTERS_VALUE = "./letters/englishDictionaryValue/";
 
@@ -36,7 +37,7 @@ public class ButtonTile extends JButton implements Observateur {
         setBorder(BorderFactory.createEtchedBorder());
 
         if (tile != null) {
-            String ressource = PATH_RES_LETTERS_VALUE + tile.getLetter().toUpperCase().trim() + BtnSquare.EXT_PNG;
+            String ressource = PATH_RES_LETTERS_VALUE + tile.getLetter().toUpperCase().trim() + EXT_PNG;
             ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(ressource));
             Image img = fillingIcon.getImage();
             Image newimg = img.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH);
@@ -44,11 +45,7 @@ public class ButtonTile extends JButton implements Observateur {
             setIcon(icon);
         }
 
-        addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                gameModel.selectLetter(tile);
-            }
-        });
+        addActionListener(e -> gameModel.selectLetter(tile));
     }
 
     public Tile getTile() {
@@ -60,7 +57,7 @@ public class ButtonTile extends JButton implements Observateur {
         this.tile = aTile;
         if (tile != null) {
             ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(PATH_RES_LETTERS_VALUE
-                    + tile.getLetter().toUpperCase() + BtnSquare.EXT_PNG));
+                    + tile.getLetter().toUpperCase() + EXT_PNG));
             Image img = fillingIcon.getImage();
             Image newimg = img.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH);
             ImageIcon icon = new ImageIcon(newimg);
