@@ -232,36 +232,85 @@ public class GameTest {
 
     }
 
-        /*
-        @Test
-    public void testPlayAfterWord()
-    {
+    @Test
+    public void testWordWithMultipleWordCreated(){
 
+        //"LE" Center word (7;7)
         Square square1 = game.getSquare(7,7);
-        square1.setLetter(new Tile("d",2));
+        square1.setLetter(new Tile("l",2));
         Square square2 =game.getSquare(7,8);
-        square2.setLetter(new Tile("a",2));
-        Square square3 =game.getSquare(7,9);
-        square2.setLetter(new Tile("n",2));
-        Square square4 =game.getSquare(7,10);
-        square2.setLetter(new Tile("s",2));
+        square2.setLetter(new Tile("e",2));
+
+        //"SE" On the letter E pos(7;8)
+        Square square3 = game.getSquare(6,8);
+        square1.setLetter(new Tile("s",2));
+
+        //"LUNES" from pos(3;9) to (7;9)
+        Square square4 = game.getSquare(3,9);
+        square4.setLetter(new Tile("l",2));
+        Square square5 =game.getSquare(4,9);
+        square5.setLetter(new Tile("u",2));
+        Square square6 = game.getSquare(5,9);
+        square6.setLetter(new Tile("n",2));
+        Square square7 =game.getSquare(6,9);
+        square7.setLetter(new Tile("e",2));
+        Square square8 =game.getSquare(7,9);
+        square8.setLetter(new Tile("s",2));
 
         List<Square> lettersPlayed = new ArrayList<>();
         lettersPlayed.add(square1);
         lettersPlayed.add(square2);
+        game.playWord(lettersPlayed);
+        lettersPlayed.clear();
         lettersPlayed.add(square3);
+        game.playWord(lettersPlayed);
+        lettersPlayed.clear();
         lettersPlayed.add(square4);
-
-
+        lettersPlayed.add(square5);
+        lettersPlayed.add(square6);
+        lettersPlayed.add(square7);
+        lettersPlayed.add(square8);
         assertTrue(game.playWord(lettersPlayed));
+    }
 
-        Square square5 =game.getSquare(7,11);
+    @Test
+    public void testWordWithMultipleWordCreatedNotValid(){
+
+        //"LE" Center word (7;7)
+        Square square1 = game.getSquare(7,7);
+        square1.setLetter(new Tile("l",2));
+        Square square2 =game.getSquare(7,8);
         square2.setLetter(new Tile("e",2));
 
-        lettersPlayed.clear();
-        lettersPlayed.add(square5);
-        assertTrue(game.playWord(lettersPlayed));
+        //"SE" On the letter E pos(7;8)
+        Square square3 = game.getSquare(6,8);
+        square1.setLetter(new Tile("",2));
 
+        //"LUNES" from pos(3;9) to (7;9)
+        Square square4 = game.getSquare(3,9);
+        square4.setLetter(new Tile("l",2));
+        Square square5 =game.getSquare(4,9);
+        square5.setLetter(new Tile("u",2));
+        Square square6 = game.getSquare(5,9);
+        square6.setLetter(new Tile("n",2));
+        Square square7 =game.getSquare(6,9);
+        square7.setLetter(new Tile("e",2));
+        Square square8 =game.getSquare(7,9);
+        square8.setLetter(new Tile("s",2));
+
+        List<Square> lettersPlayed = new ArrayList<>();
+        lettersPlayed.add(square1);
+        lettersPlayed.add(square2);
+        game.playWord(lettersPlayed);
+        lettersPlayed.clear();
+        lettersPlayed.add(square3);
+        game.playWord(lettersPlayed);
+        lettersPlayed.clear();
+        lettersPlayed.add(square4);
+        lettersPlayed.add(square5);
+        lettersPlayed.add(square6);
+        lettersPlayed.add(square7);
+        lettersPlayed.add(square8);
+        assertTrue(game.playWord(lettersPlayed));
     }
-     */
 }
