@@ -274,13 +274,35 @@ public class GameTest {
     }
 
     @Test
+    public void testWordsClose(){
+        Square square1 = game.getSquare(7,7);
+        square1.setLetter(new Tile("s",2));
+        Square square2 = game.getSquare(7,8);
+        square2.setLetter(new Tile("e",2));
+        Square square3 =game.getSquare(7,9);
+        square3.setLetter(new Tile("s",2));
+        Square square4 =game.getSquare(6,7);
+        square4.setLetter(new Tile("t",2));
+        Square square5 =game.getSquare(6,8);
+        square5.setLetter(new Tile("s",2));
+        Square square6 =game.getSquare(6,9);
+        square6.setLetter(new Tile("t",2));
+
+        List<Square> lettersPlayed = new ArrayList<>();
+        lettersPlayed.add(square4);
+        lettersPlayed.add(square5);
+        lettersPlayed.add(square6);
+        assertFalse(game.playWord(lettersPlayed));
+    }
+
+    @Test
     public void testWordWithMultipleWordCreatedNotValid(){
 
         //"LE" Center word (7;7)
         Square square1 = game.getSquare(7,7);
         square1.setLetter(new Tile("l",2));
         Square square2 =game.getSquare(7,8);
-        square2.setLetter(new Tile("e",2));
+        square2.setLetter(new Tile("s",2));
 
         //"SE" On the letter E pos(7;8)
         Square square3 = game.getSquare(6,8);
@@ -299,18 +321,11 @@ public class GameTest {
         square8.setLetter(new Tile("s",2));
 
         List<Square> lettersPlayed = new ArrayList<>();
-        lettersPlayed.add(square1);
-        lettersPlayed.add(square2);
-        game.playWord(lettersPlayed);
-        lettersPlayed.clear();
-        lettersPlayed.add(square3);
-        game.playWord(lettersPlayed);
-        lettersPlayed.clear();
         lettersPlayed.add(square4);
         lettersPlayed.add(square5);
         lettersPlayed.add(square6);
         lettersPlayed.add(square7);
         lettersPlayed.add(square8);
-        assertTrue(game.playWord(lettersPlayed));
+        assertFalse(game.playWord(lettersPlayed));
     }
 }

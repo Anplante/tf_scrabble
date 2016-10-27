@@ -327,9 +327,6 @@ public class Game implements Observable {
     private boolean verifyAllLettersHorizontally(List<Square> letters) {
         boolean allOk = true;
         for(int v =0;v<letters.size() && allOk;v++) {
-            if(v==3){
-                System.out.println("ds");
-            }
             StringBuilder word = new StringBuilder();
             Square square = letters.get(v);
             int row = square.getPosRow();
@@ -363,7 +360,6 @@ public class Game implements Observable {
                 getActivePlayer().addPoints(wordValue);
                 movesHistory.add(new MoveLog(getActivePlayer(), word.toString(), wordValue));
             }
-            System.out.println(word.toString());
         }
         return allOk;
     }
@@ -404,7 +400,6 @@ public class Game implements Observable {
                 getActivePlayer().addPoints(wordValue);
                 movesHistory.add(new MoveLog(getActivePlayer(), word.toString(), wordValue));
             }
-            System.out.println(word.toString());
         }
         return allOk;
     }
@@ -427,33 +422,7 @@ public class Game implements Observable {
         List<Square> newLetters = new ArrayList<>();
         Square square;
         int indexBoard = 0;
-        boolean foundWordUtilisingAllLetters = false;
 
-        /*while (!foundWordUtilisingAllLetters && indexBoard < boardManager.BOARD_SIZE) {
-
-            if (direction.equals(Direction.COLUMN)) {
-                square = boardManager.getSquare(indexBoard, rowOrColumn);
-            } else {
-                square = boardManager.getSquare(rowOrColumn, indexBoard);
-            }
-            if (square.getTileOn() != null) {
-                newLetters.add(square);
-            } else {
-                boolean allLettersUtilised = true;
-                int indexLetterPlayed = 0;
-
-                while (allLettersUtilised && indexLetterPlayed < lettersPlayed.size()) {
-                    if (!newLetters.contains(lettersPlayed.get(indexLetterPlayed))) {
-                        newLetters.clear();
-                        allLettersUtilised = false;
-                    }
-                    indexLetterPlayed++;
-                }
-                if (allLettersUtilised)
-                    foundWordUtilisingAllLetters = true;
-            }
-            indexBoard++;
-        }*/
         while (indexBoard < boardManager.BOARD_SIZE) {
 
             if (direction.equals(Direction.COLUMN)) {
@@ -475,13 +444,11 @@ public class Game implements Observable {
         List<Square> allLetters = new ArrayList<>();
         Square square = letters.get(0);
         int column = square.getPosColumn();
-        //System.out.println("BASEV:"+square.getPosRow() + ";" + square.getPosColumn());
 
         boolean sameWord = true;
         ArrayList<Square> wordWrongSide = new ArrayList<>();
         for (int i = square.getPosRow()-1; i >= 0 && sameWord; i--) {
             Square squareAdjacentLeft = boardManager.getSquare(i, column);
-            //System.out.println("LEFTV"+squareAdjacentLeft.getPosRow() + ";" + squareAdjacentLeft.getPosColumn());
             if (squareAdjacentLeft.getTileOn() != null) {
                 int culumnCurrentSquare = squareAdjacentLeft.getPosColumn();
                 int rowCurrentSquare = squareAdjacentLeft.getPosRow();
@@ -502,8 +469,6 @@ public class Game implements Observable {
         sameWord = true;
         for (int i = square.getPosRow(); i < boardManager.BOARD_SIZE && sameWord; i++) {
             Square squareAdjacentRight = boardManager.getSquare(i, column);
-            //System.out.println("RIGHTV"+squareAdjacentRight.getPosRow() + ";" + squareAdjacentRight.getPosColumn());
-
             if (squareAdjacentRight.getTileOn() != null) {
                 int culumnCurrentSquare = squareAdjacentRight.getPosColumn();
                 int rowCurrentSquare = squareAdjacentRight.getPosRow();
@@ -521,7 +486,6 @@ public class Game implements Observable {
         if(!isConnected){
             allLetters = null;
         }
-        //System.out.println("WordV:"+word);
         return allLetters;
     }
 
@@ -530,14 +494,10 @@ public class Game implements Observable {
         List<Square> allLetters = new ArrayList<>();
         Square square = letters.get(0);
         int row = square.getPosRow();
-        //System.out.println("BASEH:"+square.getPosRow() + ";" + square.getPosColumn());
-
-
         boolean sameWord = true;
         ArrayList<Square> wordWrongSide = new ArrayList<>();
         for (int i = square.getPosColumn()-1; i >= 0 && sameWord; i--) {
             Square squareAdjacentLeft = boardManager.getSquare(row, i);
-            //System.out.println("LEFTH:"+squareAdjacentLeft.getPosRow() + ";" + squareAdjacentLeft.getPosColumn());
             if (squareAdjacentLeft.getTileOn() != null) {
                 int culumnCurrentSquare = squareAdjacentLeft.getPosColumn();
                 int rowCurrentSquare = squareAdjacentLeft.getPosRow();
@@ -548,7 +508,6 @@ public class Game implements Observable {
                     isConnected = true;
                 }
                 wordWrongSide.add(squareAdjacentLeft);
-                //System.out.println("added");
             } else {
                 sameWord = false;
                 for (int j = wordWrongSide.size()-1; j >= 0 ; j--) {
@@ -559,7 +518,6 @@ public class Game implements Observable {
         sameWord = true;
         for (int i = square.getPosColumn(); i < boardManager.BOARD_SIZE && sameWord; i++) {
             Square squareAdjacentRight = boardManager.getSquare(row, i);
-            //System.out.println("RIGHTH"+squareAdjacentRight.getPosRow() + ";" + squareAdjacentRight.getPosColumn());
 
             if (squareAdjacentRight.getTileOn() != null) {
                 int culumnCurrentSquare = squareAdjacentRight.getPosColumn();
@@ -578,7 +536,6 @@ public class Game implements Observable {
         if(!isConnected){
             allLetters = null;
         }
-        //System.out.println("WordH:"+word);
         return allLetters;
     }
 
