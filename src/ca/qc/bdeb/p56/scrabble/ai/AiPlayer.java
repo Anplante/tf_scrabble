@@ -25,8 +25,11 @@ import java.util.logging.Logger;
  */
 public class AiPlayer extends Player {
 
+    private AiGoal aiGoal;
+
     public AiPlayer(ArrayList<String> listName) {
         super(chooseName(listName));
+        aiGoal = new AiGoal(getGame());
     }
 
     private static String chooseName(ArrayList<String> listName) {
@@ -36,4 +39,6 @@ public class AiPlayer extends Player {
         listName.remove(nom);
         return Ainame;
     }
+
+
 }
