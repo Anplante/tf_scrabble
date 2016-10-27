@@ -33,7 +33,7 @@ public class Game implements Observable {
     private int activePlayerIndex;
     private static List<Tile> alphabetBag;
 
-    private List<Move> movesHistory;
+    private List<MoveLog> movesHistory;
     private Dictionary dictionary;
 
 
@@ -79,12 +79,12 @@ public class Game implements Observable {
     }
 
 
-    public List<Move> getMovesHistory() {
-        List<Move> moves = new ArrayList<>();
-        for (Move move : movesHistory) {
-            moves.add(move);
+    public List<MoveLog> getMovesHistory() {
+        List<MoveLog> moveLogs = new ArrayList<>();
+        for (MoveLog moveLog : movesHistory) {
+            moveLogs.add(moveLog);
         }
-        return moves;
+        return moveLogs;
     }
 
     private void loadParameters(String filePath) {
@@ -280,8 +280,9 @@ public class Game implements Observable {
             }
             word = createWordHorizontal(letters).toLowerCase();
             if (dictionary.checkWordExist(word)) {
-                movesHistory.add(new Move(getActivePlayer(), word.toString()));
-                getActivePlayer().addPoints(calculateWordPoints(letters));
+                int wordValue = calculateWordPoints(letters);
+                getActivePlayer().addPoints(wordValue);
+                movesHistory.add(new MoveLog(getActivePlayer(), word.toString(), wordValue));
                 isAWord = true;
             }
 

@@ -168,17 +168,9 @@ public class ScrabbleGUI extends JFrame {
     }
 
     private void createGame() {
-        initGame();
 
-        // initilaiser player rack
-        // initiate scoreboard
-        // etc
-    }
-
-    private void initGame() {
         gameModel.startGame();
     }
-
 
     private void addKeyBindings() {
 

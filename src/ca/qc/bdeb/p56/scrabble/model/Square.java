@@ -35,7 +35,6 @@ private List<Square> neighbours;
         observateurs = new LinkedList<>();
     }
 
-
     public Square getAdjacentDown(){
         return adjacentDown;
     }
@@ -76,7 +75,6 @@ private List<Square> neighbours;
             return "";
         }
     }
-
 
     public Tile getTileOn()
     {

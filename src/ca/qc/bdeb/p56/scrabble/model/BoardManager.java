@@ -16,6 +16,16 @@ public class BoardManager {
     public static final int BOARD_SIZE = 15;
     public static final int BOARD_CENTER = 7;
 
+
+    private static final String TAG_PREMIUMS = "premiums";
+    private static final String TAG_BOARD = "board";
+    private static final String TAG_PREMIUM = "premium";
+    private static final String TAG_NAME = "name";
+    private static final String TAG_ROW = "row";
+    private static final String TAG_COLUMN = "col";
+    private static final String TAG_MULTIPLIER = "multiplier";
+    private static final String TAG_TYPE = "type";
+
     private static Map<String, Premium.Type> premiumTypeMap;
 
     static {
@@ -26,7 +36,6 @@ public class BoardManager {
 
     private Map<String, Premium> premiums;
     private Board board;
-
 
     public BoardManager() {
         board = null;
@@ -40,20 +49,19 @@ public class BoardManager {
 
         board = new Board(BOARD_SIZE);
 
-        Element premiumsElement = (Element) rootElement.getElementsByTagName("premiums").item(0);
+        Element premiumsElement = (Element) rootElement.getElementsByTagName(TAG_PREMIUMS).item(0);
         initPremiums(premiumsElement);
 
-        Element boardElement = (Element) rootElement.getElementsByTagName("board").item(0);
+        Element boardElement = (Element) rootElement.getElementsByTagName(TAG_BOARD).item(0);
 
-        NodeList premiumsNodes = boardElement.getElementsByTagName("premium");
+        NodeList premiumsNodes = boardElement.getElementsByTagName(TAG_PREMIUM);
 
         for (int i = 0; i < premiumsNodes.getLength(); i++) {
             Element activeElement = (Element) premiumsNodes.item(i);
 
-            String identifier = activeElement.getAttribute("name");
-            int row = Integer.parseInt(activeElement.getAttribute("row"));
-            int column = Integer.parseInt(activeElement.getAttribute("col"));
-
+            String identifier = activeElement.getAttribute(TAG_NAME);
+            int row = Integer.parseInt(activeElement.getAttribute(TAG_ROW));
+            int column = Integer.parseInt(activeElement.getAttribute(TAG_COLUMN));
             Premium premium = premiums.get(identifier);
             board.getSquare(row, column).setPremium(premium);
         }
@@ -92,14 +100,14 @@ public class BoardManager {
     private void initPremiums(Element premiumElement) {
         premiums = new TreeMap<>();
 
-        NodeList premiumNodes = premiumElement.getElementsByTagName("premium");
+        NodeList premiumNodes = premiumElement.getElementsByTagName(TAG_PREMIUMS);
 
         for (int i = 0; i < premiumNodes.getLength(); i++) {
             Element activeElement = (Element) premiumNodes.item(i);
 
-            String identifier = activeElement.getAttribute("name");
-            String type = activeElement.getAttribute("type");
-            int multiplier = Integer.parseInt(activeElement.getAttribute("multiplier"));
+            String identifier = activeElement.getAttribute(TAG_NAME);
+            String type = activeElement.getAttribute(TAG_TYPE);
+            int multiplier = Integer.parseInt(activeElement.getAttribute(TAG_MULTIPLIER));
 
             Premium.Type premiumType = premiumTypeMap.get(type);
             Premium premium = new Premium(premiumType, multiplier);
@@ -113,17 +121,13 @@ public class BoardManager {
 
     public List<Square> getSquarePositionAvailableToPlay() {
 
-
         List<Square> squaresAvailable = new ArrayList<>();
-
         Square centerSquare = board.getSquare(BOARD_CENTER, BOARD_CENTER);
-
 
         if (centerSquare.getLetterOn() != null) {
 
             List<Square> candidats = new ArrayList<>();
             candidats.add(centerSquare);
-
 
             while (!candidats.isEmpty()) {
 
@@ -144,7 +148,6 @@ public class BoardManager {
                 if (available && !squaresAvailable.contains(candidatAnalysed)) {
                     squaresAvailable.add(candidatAnalysed);
                 }
-
                 candidats.remove(candidatAnalysed);
             }
         } else {
@@ -152,6 +155,7 @@ public class BoardManager {
         }
         return squaresAvailable;
     }
+
 
 /*
     public List<Square> getSquarePositionAvailableToPlay() {

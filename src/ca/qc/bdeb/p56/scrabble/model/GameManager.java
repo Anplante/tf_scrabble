@@ -10,33 +10,14 @@ public class GameManager {
 
     private Game game;
 
-    private final String GAME_FILE = "resources/files/scrabbleParameters.xml";
-
-
-    private List<Tile> alphabetBag;
+    private final String DEFAULT_GAME_PARAMS = "resources/files/scrabbleParameters.xml";
 
     public GameManager() {
         game = null;
     }
 
-
     public Game createNewGame(List<Player> players) {
-        game = new Game(GAME_FILE, players);
+        game = new Game(DEFAULT_GAME_PARAMS, players);
         return game;
     }
-
-
-    // TODO Louis : Éventuellement?
-    public void saveGame(File file)
-    {
-
-    }
-
-    public Game loadGame(File file)
-    {
-        Game game = null;
-
-        return game;
-    }
-
 }
