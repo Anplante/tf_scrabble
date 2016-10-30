@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 /**
  * Created by TheFrenchOne on 9/11/2016.
@@ -20,7 +21,6 @@ public class BtnSquare extends JButton implements Observateur {
     private final static Color COLOR_TW = new Color(252, 179, 87);
     private final static Color COLOR_TL = new Color(91, 187, 71);
     private final static Color COLOR_DW = new Color(238, 49, 50);
-    private static final String RES_IMAGES_ENG = "./letters/englishDictionaryValue/";
 
     private static final String TRIPLE_WORD = "TW";
     private static final String DOUBLE_WORD = "DW";
@@ -31,6 +31,7 @@ public class BtnSquare extends JButton implements Observateur {
     private int posRow;
     private int posColumn;
     private Square square;
+    private HashMap<String, ImageIcon> icons;
 
     public BtnSquare(Game gameModel, int posRow, int posColumn) {
 
@@ -38,33 +39,28 @@ public class BtnSquare extends JButton implements Observateur {
         this.gameModel = gameModel;
         this.posRow = posRow;
         this.posColumn = posColumn;
-
         setForeground(Color.WHITE);
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setBorder(BorderFactory.createEtchedBorder());
         setFocusable(false);
         changementEtat();
 
-        addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        addActionListener(e -> {
 
-                if (square == null) {
-                    square = gameModel.getSquare(posRow, posColumn);
-                    square.ajouterObservateur(BtnSquare.this);
-                }
-                gameModel.playTile(square);
+            if (square == null) {
+                square = gameModel.getSquare(posRow, posColumn);
+                square.ajouterObservateur(BtnSquare.this);
+            }
+            gameModel.playTile(square);
 
-                if (square.getTileOn() != null
-                        && gameModel.getActivePlayer().getState().getName().equals(IDState.PLAY_TILE.getName())) {
+            if (square.getTileOn() != null
+                    && gameModel.getActivePlayer().getState().getName().equals(IDState.PLAY_TILE.getName())) {
 
-                    ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(RES_IMAGES_ENG
-                            + square.getLetterOn().toUpperCase()
-                            + MainMenuGUI.EXT_PNG));
-                    Image img = fillingIcon.getImage();
-                    Image newImage = img.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH);
-                    ImageIcon icon = new ImageIcon(newImage);
-                    setIcon(icon);
-                }
+                ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(ConstanteComponentMessage.RES_IMAGES_ENG +square.getLetterOn().toUpperCase()+ ConstanteComponentMessage.EXT_PNG));
+                Image img = fillingIcon.getImage() ;
+                Image newImage = img.getScaledInstance( getWidth(), getHeight(),  java.awt.Image.SCALE_SMOOTH ) ;
+                ImageIcon icon = new ImageIcon( newImage );
+                setIcon(icon);
             }
         });
     }
@@ -98,5 +94,10 @@ public class BtnSquare extends JButton implements Observateur {
     @Override
     public void changementEtat(Enum<?> property, Object o) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void initIcons(HashMap<String, ImageIcon> iconsTile) {
+
+        this.icons = iconsTile;
     }
 }

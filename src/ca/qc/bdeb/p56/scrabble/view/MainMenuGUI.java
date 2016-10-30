@@ -19,8 +19,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -35,25 +33,24 @@ import java.util.logging.Logger;
 /**
  * Menu de démarrage de notre scrabble, on demande d'entrer un nom utilisateur , en y incluant le nombre d'adversaire.
  * Il peut aussi changer son arrière-plan de scrabble s'il veut.
- *
+ * <p>
  * Created by Antoine on 9/12/2016.
  */
-public class MainMenuGUI extends JDialog implements ConstanteTestName, ConstanteComponentMessage{
+public class MainMenuGUI extends JDialog {
 
-
+    private static final String[] nombreDeAi = {"1", "2", "3"};
     private JPanel panelMenu;
     private JTextField txtName;
-    private JButton btnConfirm;
+    private JButton btnCreateGame;
     private JLabel lblName;
-    private JButton btnCancel;
+    private JButton btnExit;
     private JLabel lblNumberOfAi;
-    private String[] nombreDeAi = {"1", "2", "3"};
     private JComboBox cmbNumberOfAi = new JComboBox();
     private GameManager gameManager;
     private JComboBox<String> cmbBackgroundScrabble;
     private JLabel lblBackground;
     private JFileChooser fileImage;
-    private JButton btnOpenDialog;
+    private JButton btnChooseBackgroundImg;
     private ArrayList<String> listName;
 
     private Player player;
@@ -75,12 +72,12 @@ public class MainMenuGUI extends JDialog implements ConstanteTestName, Constante
     private void initializeFrame() {
         setLayout(null);
         JFrame fenetre = new JFrame();
-        this.setTitle(TITLE_MENU);
+        this.setTitle(ConstanteComponentMessage.TITLE_MENU);
         fenetre.pack();
         Insets insets = fenetre.getInsets();
         setSize(new Dimension(insets.left + insets.right + 400,
                 insets.top + insets.bottom + 400));
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        // TODO Louis : Faire en sorte que lorsqu'on ferme le dialogue que le programme se termine.
     }
 
     private void initializeSize() {
@@ -99,7 +96,7 @@ public class MainMenuGUI extends JDialog implements ConstanteTestName, Constante
         addFileChooser();
         addTextBox();
         addLabels();
-        addButtons();
+        initMenuOptions();
         addComboBox();
         add(panelMenu);
     }
@@ -107,7 +104,7 @@ public class MainMenuGUI extends JDialog implements ConstanteTestName, Constante
     private void addComboBox() {
 
         cmbNumberOfAi = new JComboBox();
-        cmbNumberOfAi.setName(QTE_AI_NAME);
+        cmbNumberOfAi.setName(ConstanteTestName.QTE_AI_NAME);
         for (int i = 0; i < nombreDeAi.length; i++) {
             cmbNumberOfAi.addItem(nombreDeAi[i]);
         }
@@ -117,50 +114,60 @@ public class MainMenuGUI extends JDialog implements ConstanteTestName, Constante
 
         cmbBackgroundScrabble = new JComboBox<>();
 
-        cmbBackgroundScrabble.setName(BACKGROUND_NAME);
+        cmbBackgroundScrabble.setName(ConstanteTestName.BACKGROUND_NAME);
         addImageFile();
         cmbBackgroundScrabble.setVisible(true);
         cmbBackgroundScrabble.setLocation(180, 220);
-        cmbBackgroundScrabble.setSize(180,25);
+        cmbBackgroundScrabble.setSize(180, 25);
 
 
         panelMenu.add(cmbNumberOfAi);
         panelMenu.add(cmbBackgroundScrabble);
     }
 
-    private void addButtons() {
+    private void initMenuOptions() {
 
-        btnCancel = new JButton();
-        btnConfirm = new JButton();
-        btnOpenDialog = new JButton("...");
-        btnCancel.setVisible(true);
-        btnOpenDialog.setVisible(true);
-        btnConfirm.setVisible(true);
-        btnCancel.setSize(100, 50);
-        btnOpenDialog.setSize(25,25);
-        btnConfirm.setSize(100, 50);
-        btnCancel.setText(MESS_CANCEL);
-        btnConfirm.setText(MESS_CONFIRM);
-        btnCancel.setLocation(250, 325);
-        btnOpenDialog.setLocation(365,220);
-        btnConfirm.setLocation(50, 325);
-        btnConfirm.setName(CONFIRM_NAME);
-        btnCancel.setName(CANCEL_NAME);
+        initBtnChooseBackgroundImg();
+        initBtnExit();
+        initBtnCreateGame();
+    }
 
+    private void initBtnChooseBackgroundImg()
+    {
+        btnChooseBackgroundImg = new JButton(ConstanteComponentMessage.ELLIPSIS);
+        btnChooseBackgroundImg.setSize(25, 25);
+        btnChooseBackgroundImg.setLocation(365, 220);
+        panelMenu.add(btnChooseBackgroundImg);
+        btnChooseBackgroundImg.addActionListener(e -> {
+            int returnValue = fileImage.showOpenDialog(panelMenu);
+            receiveBackground(returnValue);
+        });
+    }
+    private void initBtnExit()
+    {
+        btnExit = new JButton();
+        btnExit.setSize(100, 50);
+        btnExit.setLocation(250, 325);
+        btnExit.setText(ConstanteComponentMessage.MESS_CANCEL);
+        btnExit.setName(ConstanteTestName.CANCEL_NAME);
+        panelMenu.add(btnExit);
+        btnExit.addActionListener(e -> System.exit(0));
+    }
 
-        btnConfirm.addActionListener(e -> {
+    private void initBtnCreateGame()
+    {
+        btnCreateGame = new JButton();
+        btnCreateGame.setSize(100, 50);
+        btnCreateGame.setText(ConstanteComponentMessage.MESS_CONFIRM);
+        btnCreateGame.setLocation(50, 325);
+        btnCreateGame.setName(ConstanteTestName.CONFIRM_NAME);
+        panelMenu.add(btnCreateGame);
+
+        btnCreateGame.addActionListener(e -> {
             setPlayer();
             initializeGame();
         });
 
-        btnCancel.addActionListener(e -> System.exit(0));
-        btnOpenDialog.addActionListener(e -> {
-            int returnValue = fileImage.showOpenDialog(panelMenu);
-            receiveBackground(returnValue);
-        });
-        panelMenu.add(btnOpenDialog);
-        panelMenu.add(btnConfirm);
-        panelMenu.add(btnCancel);
     }
 
     private void addFileChooser() {
@@ -191,19 +198,19 @@ public class MainMenuGUI extends JDialog implements ConstanteTestName, Constante
 
     private void addLabels() {
         lblName = new JLabel();
-        lblName.setText(MESS_PLAYER_NAME);
+        lblName.setText(ConstanteComponentMessage.MESS_PLAYER_NAME);
         lblName.setLocation(25, 25);
         lblName.setSize(lblName.getPreferredSize());
         lblName.setVisible(true);
 
         lblNumberOfAi = new JLabel();
-        lblNumberOfAi.setText(MESS_NUMBER_OF_AI);
+        lblNumberOfAi.setText(ConstanteComponentMessage.MESS_NUMBER_OF_AI);
         lblNumberOfAi.setLocation(25, 125);
         lblNumberOfAi.setSize(lblNumberOfAi.getPreferredSize());
         lblNumberOfAi.setVisible(true);
 
         lblBackground = new JLabel();
-        lblBackground.setText(MESS_BACKGROUND);
+        lblBackground.setText(ConstanteComponentMessage.MESS_BACKGROUND);
         lblBackground.setLocation(25, 225);
         lblBackground.setSize(lblBackground.getPreferredSize());
         lblBackground.setVisible(true);
@@ -218,7 +225,7 @@ public class MainMenuGUI extends JDialog implements ConstanteTestName, Constante
         panelMenu.setLocation(0, 0);
         panelMenu.setSize(new Dimension(400, 400));
         txtName = new JTextField("", 30);
-        txtName.setName(PLAYER_NAME);
+        txtName.setName(ConstanteTestName.PLAYER_NAME);
         txtName.setBounds(150, 20, 180, 30);
 
         txtName.addActionListener(e -> {
@@ -231,7 +238,7 @@ public class MainMenuGUI extends JDialog implements ConstanteTestName, Constante
     private void addImageFile() {
         File theFiles = null;
 
-        URL url = Launcher.class.getResource(PATH_BACKGROUND_RES);
+        URL url = Launcher.class.getResource(ConstanteComponentMessage.PATH_BACKGROUND_RES);
         try {
             theFiles = new File(url.toURI());
         } catch (URISyntaxException ex) {
@@ -246,6 +253,7 @@ public class MainMenuGUI extends JDialog implements ConstanteTestName, Constante
 
     /**
      * Antoine : Future implémentation?
+     *
      * @return
      */
    /* public static String removeExtension(String filenameWithExtension) {
@@ -268,8 +276,6 @@ public class MainMenuGUI extends JDialog implements ConstanteTestName, Constante
 
         return filename.substring(0, extensionIndex);
     }*/
-
-
     public int getLenghtPlayers() {
         return game.getPlayers().size();
     }
@@ -282,13 +288,13 @@ public class MainMenuGUI extends JDialog implements ConstanteTestName, Constante
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
             Document documentOfName = docBuilder.parse(new File(PATH_TO_FILE.toURI()));
             documentOfName.getDocumentElement().normalize();
-            NodeList nodeOfName = documentOfName.getElementsByTagName(TAG_ITEM);
+            NodeList nodeOfName = documentOfName.getElementsByTagName(ConstanteComponentMessage.TAG_ITEM);
 
             for (int i = 0; i < nodeOfName.getLength(); i++) {
                 Node itemName = nodeOfName.item(i);
                 if (itemName.getNodeType() == Node.ELEMENT_NODE) {
                     Element aiName = (Element) itemName;
-                    listOfName.add(aiName.getElementsByTagName(TAG_NAME).item(0).getTextContent());
+                    listOfName.add(aiName.getElementsByTagName(ConstanteComponentMessage.TAG_NAME).item(0).getTextContent());
                 }
             }
             // TODO Antoine : donner du feedback à l'utilisateur
@@ -310,14 +316,13 @@ public class MainMenuGUI extends JDialog implements ConstanteTestName, Constante
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File fichier = fileImage.getSelectedFile();
             // TODO: filter
-            if (!fichier.getName().endsWith(EXT_JPG) || !fichier.getName().endsWith(EXT_PNG)
-                    || !fichier.getName().endsWith(EXT_JPG)) {
+            if (!fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG) || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_PNG)
+                    || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG)) {
                 fichier = new File(fichier.getAbsolutePath());
                 Path path = Paths.get(fichier.getAbsolutePath());
                 cmbBackgroundScrabble.addItem(path.getFileName().toString());
-            }
-            else {
-                JOptionPane.showMessageDialog(panelMenu, MESS_ERROR_LOADING_FILE, MESS_ERROR,
+            } else {
+                JOptionPane.showMessageDialog(panelMenu, ConstanteComponentMessage.MESS_ERROR_LOADING_FILE, ConstanteComponentMessage.MESS_ERROR,
                         JOptionPane.ERROR_MESSAGE);
             }
         }

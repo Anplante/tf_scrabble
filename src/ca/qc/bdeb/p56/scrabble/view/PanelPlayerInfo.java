@@ -10,7 +10,7 @@ import java.awt.*;
 /**
  * Created by TheFrenchOne on 9/14/2016.
  */
-public class PanelPlayerInfo extends JPanel implements Observateur, ConstanteTestName{
+public class PanelPlayerInfo extends JPanel implements Observateur{
 
 
     private static final String TEXT_FONT = "Comic Sans MS Bold";
@@ -36,7 +36,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur, ConstanteTes
         lblName = new JLabel();
         lblTitre = new JLabel();
         lblScore = new JLabel();
-        lblScore.setName(SCORE_NAME);
+        lblScore.setName(ConstanteTestName.SCORE_NAME);
         add(lblName);
         add(lblScore);
 

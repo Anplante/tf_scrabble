@@ -10,13 +10,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Created by TheFrenchOne on 9/12/2016.
  */
-public class ButtonTile extends JButton implements Observateur, ConstanteComponentMessage {
+public class ButtonTile extends JButton implements Observateur{
 
-    private static final String PATH_RES_LETTERS_VALUE = "./letters/englishDictionaryValue/";
+
 
     private static final Color BASIC_COLOR = Color.lightGray;
     private static final Color REMOVE_COLOR = Color.red;
@@ -25,7 +27,7 @@ public class ButtonTile extends JButton implements Observateur, ConstanteCompone
     private Tile tile;
 
 
-    public ButtonTile(Game gameModel, Tile tile, Dimension dimension) {
+    public ButtonTile(Game gameModel, Tile tile, Dimension dimension, ImageIcon icon) {
 
         super();
 
@@ -35,20 +37,23 @@ public class ButtonTile extends JButton implements Observateur, ConstanteCompone
         changementEtat();
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setBorder(BorderFactory.createEtchedBorder());
-        setImage();
+        setIcon(icon);
 
         addActionListener(e -> gameModel.selectLetter(tile));
-    }
 
 
-    private void setImage(){
+        setTransferHandler(new TransferHandler("Text"));
 
-        String ressource = PATH_RES_LETTERS_VALUE + tile.getLetter().toUpperCase().trim() + EXT_PNG;
-        ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(ressource));
-        Image img = fillingIcon.getImage();
-        Image newimg = img.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH);
-        ImageIcon icon = new ImageIcon(newimg);
-        setIcon(icon);
+        addMouseListener(new MouseAdapter() {
+
+            public void mousePressed(MouseEvent e){
+
+                JComponent lab = (JComponent)e.getSource();
+                TransferHandler handle = lab.getTransferHandler();
+                handle.exportAsDrag(lab, e, TransferHandler.MOVE);
+            }
+        });
+
     }
 
     public Tile getTile() {

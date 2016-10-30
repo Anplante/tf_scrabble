@@ -2,10 +2,12 @@ package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
+import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
@@ -22,7 +24,6 @@ public class BtnSquareTest {
     private BtnSquare btnSquare;
     private ButtonTile btnTile;
     private Game gameModel;
-    private PanelLetterRackZone zoneJoueur;
     private static final int WIDTH = 50;
     private static final int HEIGHT = 50;
 
@@ -30,15 +31,12 @@ public class BtnSquareTest {
     public void setUp() throws Exception {
 
         GameManager gameManager = new GameManager();
-
         java.util.List<Player> players = new ArrayList<Player>();
         players.add(new Player("Louis"));
         gameModel = gameManager.createNewGame(players);
-
         btnSquare = new BtnSquare(gameModel, 7, 7);
         btnSquare.setSize(WIDTH,HEIGHT);
         gameModel.startGame();
-
     }
 
     @After
@@ -51,7 +49,7 @@ public class BtnSquareTest {
     public void testSelectSquareInPlayTileState() throws AWTException {
 
         Tile tile = new Tile("a", 2);
-        btnTile = new ButtonTile(gameModel, tile, new Dimension(50,50));
+        btnTile = new ButtonTile(gameModel, tile, new Dimension(50,50), new ImageIcon());
 
         assertFalse(gameModel.getSquare(7,7).containLetter());
         btnTile.doClick();

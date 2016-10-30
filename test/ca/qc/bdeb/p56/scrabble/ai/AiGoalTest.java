@@ -42,11 +42,11 @@ public class AiGoalTest {
     public void testAllPossibleWord()
     {
         ArrayList<String> realWord = new ArrayList<>();
-        ArrayList<String> aiWord =  new ArrayList<>();
+
         String lettersOfAi= "lesarn";
         realWord.add("les");
         realWord.add("sel");
-        aiWord = aiGoal.getPossibleWord(lettersOfAi);
+        ArrayList<String>  aiWord = aiGoal.getPossibleWord(lettersOfAi);
         assertEquals(aiWord.get(0), realWord.get(0));
     }
 }

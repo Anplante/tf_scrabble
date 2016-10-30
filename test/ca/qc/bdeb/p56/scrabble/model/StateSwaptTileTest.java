@@ -21,12 +21,10 @@ import static org.junit.Assert.assertNotEquals;
  * Created by Julien Brosseau on 10/6/2016.
  */
 
-public class StateSwaptTileTest implements ConstanteTestName {
+public class StateSwaptTileTest{
 
     private PanelLetterRackZone panelTested;
     private Game game;
-    private JButton btnEchanger;
-    private JButton btnCancel;
     private List<ButtonTile> btnTiles;
     private ScrabbleGUI scrabbleGame;
     private JPanel letterRack;
@@ -55,16 +53,14 @@ public class StateSwaptTileTest implements ConstanteTestName {
         scrabbleGame.setBackgroundPath("simplistic.png");
         scrabbleGame.createScrabbleGame(game);
 
-        panelTested = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, LETTER_RACK_NAME);
-       // btnEchanger = (JButton) TestUtils.getChildNamed(panelTested, "Exchange");
-       // btnCancel = (JButton) TestUtils.getChildNamed(panelTested, "Cancel_Exchange");
-        letterRack = (JPanel) TestUtils.getChildNamed(panelTested, LETTER_RACK_NAME);
+        panelTested = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.LETTER_RACK_NAME);
+        letterRack = (JPanel) TestUtils.getChildNamed(panelTested, ConstanteTestName.LETTER_RACK_NAME);
         currentPlayer = game.getActivePlayer();
 
         btnTiles = new ArrayList<>();
 
         for (int i = 0; i < currentPlayer.getLettersCount(); i++) {
-            btnTiles.add((ButtonTile) TestUtils.getChildNamed(letterRack, TILE_NAME + i));
+            btnTiles.add((ButtonTile) TestUtils.getChildNamed(letterRack, ConstanteTestName.TILE_NAME + i));
         }
     }
 
@@ -77,9 +73,9 @@ public class StateSwaptTileTest implements ConstanteTestName {
 
         List<Tile> playerTileBeforeExchange = currentPlayer.getTiles();
 
-        JButton firstButton = (JButton) TestUtils.getChildNamed(letterRack, TILE_NAME + 1); //btnTiles.get(2).doClick();
+        JButton firstButton = (JButton) TestUtils.getChildNamed(letterRack, ConstanteTestName.TILE_NAME + 1); //btnTiles.get(2).doClick();
         firstButton.doClick();
-        JButton secondButton = (JButton) TestUtils.getChildNamed(letterRack,TILE_NAME + 2); //btnTiles.get(2).doClick();
+        JButton secondButton = (JButton) TestUtils.getChildNamed(letterRack, ConstanteTestName.TILE_NAME + 2); //btnTiles.get(2).doClick();
         secondButton.doClick();
 
         assertEquals(playerTileBeforeExchange.get(1), currentPlayer.getTiles().get(2));

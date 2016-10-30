@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
  *
  * Created by Julien brosseau on 2016-10-04.
  */
-public class DialogOptionsMenu extends JDialog implements ConstanteTestName, ConstanteComponentMessage {
+public class DialogOptionsMenu extends JDialog {
 
     private JButton btnReturnGame;
     private JButton btnAbandon;
@@ -45,13 +45,13 @@ public class DialogOptionsMenu extends JDialog implements ConstanteTestName, Con
 
     private void initOptQuitGame() {
 
-        btnQuitGame = new JButton(OPT_QUITTER_TITLE);
-        btnQuitGame.setName(EXIT_NAME);
+        btnQuitGame = new JButton( ConstanteComponentMessage.OPT_QUITTER_TITLE);
+        btnQuitGame.setName(ConstanteTestName.EXIT_NAME);
         add(btnQuitGame);
 
         btnQuitGame.addActionListener(actionEvent -> {
-            int i = JOptionPane.showConfirmDialog(new Frame(), MESS_CONFIRM_EXIT,
-                   TITLE_MESS_EXIT, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            int i = JOptionPane.showConfirmDialog(new Frame(),  ConstanteComponentMessage.MESS_CONFIRM_EXIT,
+                    ConstanteComponentMessage.TITLE_MESS_EXIT, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (i == 0) {
                 System.exit(0);
             }
@@ -60,16 +60,16 @@ public class DialogOptionsMenu extends JDialog implements ConstanteTestName, Con
 
     private void initOptAbandon() {
 
-        btnAbandon = new JButton(TITLE_SURRENDER);
-        btnAbandon.setName(ABANDON_NAME);
+        btnAbandon = new JButton( ConstanteComponentMessage.TITLE_SURRENDER);
+        btnAbandon.setName(ConstanteTestName.ABANDON_NAME);
         add(btnAbandon);
 
         btnAbandon.addActionListener(actionEvent -> {
-            int i = JOptionPane.showConfirmDialog(new Frame(), MESS_CONFIRM_ACTION,
-                    MESS_SURRENDER_GAME, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            int i = JOptionPane.showConfirmDialog(new Frame(),  ConstanteComponentMessage.MESS_CONFIRM_ACTION,
+                    ConstanteComponentMessage.MESS_SURRENDER_GAME, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (i == 0) {
-                JOptionPane.showMessageDialog(null, MESS_DEFEAT,
-                       MESS_END_GAME, JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null,  ConstanteComponentMessage.MESS_DEFEAT,
+                        ConstanteComponentMessage.MESS_END_GAME, JOptionPane.INFORMATION_MESSAGE);
                 parent.returnToMenu();
                 dispose();
             }
@@ -78,8 +78,8 @@ public class DialogOptionsMenu extends JDialog implements ConstanteTestName, Con
 
     private void initOptReturnGame() {
 
-        btnReturnGame = new JButton(TITLE_RETURN_GAME);
-        btnReturnGame.setName(RETURN_NAME);
+        btnReturnGame = new JButton( ConstanteComponentMessage.TITLE_RETURN_GAME);
+        btnReturnGame.setName(ConstanteTestName.RETURN_NAME);
         add(btnReturnGame);
         btnReturnGame.addActionListener(actionEvent -> dispose());
     }
@@ -87,11 +87,11 @@ public class DialogOptionsMenu extends JDialog implements ConstanteTestName, Con
     private void addKeybindings() {
 
         JRootPane contentPane = getRootPane();
-        contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),ESCAPE_KEY );
-        contentPane.getActionMap().put(ESCAPE_KEY , actionEscape);
+        contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),  ConstanteComponentMessage.ESCAPE_KEY );
+        contentPane.getActionMap().put( ConstanteComponentMessage.ESCAPE_KEY , actionEscape);
     }
 
-    private final AbstractAction actionEscape = new AbstractAction(ESCAPE_KEY ) {
+    private final AbstractAction actionEscape = new AbstractAction( ConstanteComponentMessage.ESCAPE_KEY ) {
         @Override
         public void actionPerformed(ActionEvent e) {
             dispose();

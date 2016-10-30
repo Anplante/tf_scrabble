@@ -8,26 +8,27 @@ import java.awt.Image;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
 import java.util.List;
 import java.awt.*;
 
 /**
  * Created by Louis Luu Lim on 9/7/2016.
  */
-public class ScrabbleGUI extends JFrame implements ConstanteComponentMessage, ConstanteTestName {
+public class ScrabbleGUI extends JFrame {
 
-    private static final  double RATIO_LETTER_RACK_ZONE = 0.1;
+    private static final double RATIO_LETTER_RACK_ZONE = 0.1;
     public static final int MARGIN = 5;
-    private  final int LETTER_RACK_ZONE_HEIGHT;
 
+    private final int LETTER_RACK_ZONE_HEIGHT;
     private String backgroundPath;
-    PanelLetterRackZone panelLetterRack;
-    JPanel pnlBoard;
-    Game gameModel;
-    DialogOptionsMenu options;
+    private PanelLetterRackZone panelLetterRack;
+    private JPanel pnlBoard;
+    private Game gameModel;
+    private DialogOptionsMenu options;
     private MainMenuGUI menu;
 
-    JLabel background;
+    private JLabel background;
 
     private JPanel panelInformation;
 
@@ -41,23 +42,24 @@ public class ScrabbleGUI extends JFrame implements ConstanteComponentMessage, Co
         LETTER_RACK_ZONE_HEIGHT = (int) (bounds.height * RATIO_LETTER_RACK_ZONE);
         setLayout(null);
 
-
         setResizable(false);
         setFocusable(true);
         setUndecorated(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        menu = new MainMenuGUI(this);
-        menu.setName(MENU_NAME);
+
         addKeyBindings();
 
+
+        menu = new MainMenuGUI(this);
+        menu.setName(ConstanteTestName.MENU_NAME);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    private final AbstractAction actionEscape = new AbstractAction(ESCAPE_KEY) {
+    private final AbstractAction actionEscape = new AbstractAction(ConstanteComponentMessage.ESCAPE_KEY) {
         @Override
         public void actionPerformed(ActionEvent e) {
 
             options = new DialogOptionsMenu(ScrabbleGUI.this);
-            options.setName(OPTIONS_NAME);
+            options.setName(ConstanteTestName.OPTIONS_NAME);
             options.setVisible(true);
         }
     };
@@ -89,7 +91,7 @@ public class ScrabbleGUI extends JFrame implements ConstanteComponentMessage, Co
 
         background = new JLabel();
         background.setSize(getWidth(), getHeight());
-        background.setIcon(new ImageIcon(new ImageIcon(this.getClass().getResource(PATH_BACKGROUND_RES +
+        background.setIcon(new ImageIcon(new ImageIcon(this.getClass().getResource( ConstanteComponentMessage.PATH_BACKGROUND_RES +
                 backgroundPath)).getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
         setContentPane(background);
     }
@@ -114,7 +116,7 @@ public class ScrabbleGUI extends JFrame implements ConstanteComponentMessage, Co
 
         for (Player player : players) {
             PanelPlayerInfo playerInfo = new PanelPlayerInfo(player);
-            playerInfo.setName(INFO_NAME + player.getName());
+            playerInfo.setName(ConstanteTestName.INFO_NAME + player.getName());
             panelInformation.add(playerInfo);
         }
     }
@@ -127,11 +129,11 @@ public class ScrabbleGUI extends JFrame implements ConstanteComponentMessage, Co
         int witdhBoard = pnlBoard.getWidth();
 
         Rectangle boundsZoneLetterRack = new Rectangle(x, y + MARGIN, witdhBoard, LETTER_RACK_ZONE_HEIGHT - MARGIN * 2);
-        panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack);
+        panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack, this);
 
         panelLetterRack.setPlayer(gameModel.getPlayers());
         panelLetterRack.setGame(gameModel);
-        panelLetterRack.setName(LETTER_RACK_NAME);
+        panelLetterRack.setName(ConstanteTestName.LETTER_RACK_NAME);
         panelLetterRack.setOpaque(false);
         panelLetterRack.changementEtat();
 
@@ -148,7 +150,7 @@ public class ScrabbleGUI extends JFrame implements ConstanteComponentMessage, Co
         pnlBoard.setSize(heightBoard, heightBoard);
         add(pnlBoard);
         initGrid();
-        pnlBoard.setName(BOARD_NAME);
+        pnlBoard.setName(ConstanteTestName.BOARD_NAME);
     }
 
     private void initGrid() {
@@ -159,11 +161,12 @@ public class ScrabbleGUI extends JFrame implements ConstanteComponentMessage, Co
             for (int column = 0; column < 15; column++) {
                 BtnSquare square = new BtnSquare(gameModel, row, column);
                 square.setFocusable(false);
-                square.setName(SQUARE_NAME + row + column);
+                square.setName(ConstanteTestName.SQUARE_NAME + row + column);
                 pnlBoard.add(square);
             }
         }
     }
+
     private void createGame() {
 
         gameModel.startGame();
@@ -172,9 +175,10 @@ public class ScrabbleGUI extends JFrame implements ConstanteComponentMessage, Co
     private void addKeyBindings() {
 
         JRootPane contentPane = getRootPane();
-        contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Escape");
-        contentPane.getActionMap().put(ESCAPE_KEY, actionEscape);
+        contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), ConstanteComponentMessage.ESCAPE_KEY);
+        contentPane.getActionMap().put( ConstanteComponentMessage.ESCAPE_KEY, actionEscape);
     }
+
 
     public String getBackgroundPath() {
         return backgroundPath;

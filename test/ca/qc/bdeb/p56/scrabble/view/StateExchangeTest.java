@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNotEquals;
 /**
  * Created by Julien Brosseau on 9/21/2016.
  */
-public class StateExchangeTest implements ConstanteTestName {
+public class StateExchangeTest{
 
     private PanelLetterRackZone panelTested;
     private Game game;
@@ -46,16 +46,16 @@ public class StateExchangeTest implements ConstanteTestName {
         scrabbleGame.setBackgroundPath("simplistic.png");
         scrabbleGame.createScrabbleGame(game);
 
-        panelTested = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, LETTER_RACK_NAME);
-        btnEchanger = (JButton) TestUtils.getChildNamed(panelTested, EXCHANGE_NAME);
-        btnCancel = (JButton) TestUtils.getChildNamed(panelTested, CANCEL_EXCHANGE_NAME);
-        letterRack = (JPanel) TestUtils.getChildNamed(panelTested, LETTER_RACK_NAME);
+        panelTested = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.LETTER_RACK_NAME);
+        btnEchanger = (JButton) TestUtils.getChildNamed(panelTested, ConstanteTestName.EXCHANGE_NAME);
+        btnCancel = (JButton) TestUtils.getChildNamed(panelTested, ConstanteTestName.CANCEL_EXCHANGE_NAME);
+        letterRack = (JPanel) TestUtils.getChildNamed(panelTested, ConstanteTestName.LETTER_RACK_NAME);
         currentPlayer = game.getActivePlayer();
 
         btnTiles = new ArrayList<>();
 
         for (int i = 0; i < currentPlayer.getLettersCount(); i++) {
-            btnTiles.add((ButtonTile) TestUtils.getChildNamed(letterRack, TILE_NAME + i));
+            btnTiles.add((ButtonTile) TestUtils.getChildNamed(letterRack, ConstanteTestName.TILE_NAME + i));
         }
     }
 

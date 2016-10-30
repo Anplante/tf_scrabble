@@ -1,34 +1,35 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
-import ca.qc.bdeb.p56.scrabble.ai.AiPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Game;
-import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
+import ca.qc.bdeb.p56.scrabble.utility.DragListener;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.*;
 
 /**
  * Created by TheFrenchOne on 9/11/2016.
  */
-public class PanelLetterRackZone extends JPanel implements Observateur, ConstanteTestName, ConstanteComponentMessage {
+public class PanelLetterRackZone extends JPanel implements Observateur {
 
 
+    private static final char START_ALPHABET = 'A';
+    private static final char END_ALPHABET = 'Z';
     private final int MAX_TILES_IN_HAND = 7;
     private final double RATIO_TILES_RACK = .5;
     private final int POS_Y = 0;
     private final int LETTERS_RACK_WIDTH;
     private final int OPTIONS_WIDTH;
+    private final Dimension TILE_DIMENSION;
 
     private Player currentPlayer;
     private Game game;
@@ -39,16 +40,22 @@ public class PanelLetterRackZone extends JPanel implements Observateur, Constant
     private JButton btnForfeit;
     private JButton btnCancelExchange;
     private JPanel panelLettersRack;
+    private ScrabbleGUI parent;
+    private HashMap<String, ImageIcon> iconsTile;
 
-
-    public PanelLetterRackZone(Rectangle boundsZoneLetterRack) {
+    public PanelLetterRackZone(Rectangle boundsZoneLetterRack, ScrabbleGUI parent) {
 
         super();
 
+        this.parent = parent;
         setLayout(null);
         setBounds(boundsZoneLetterRack);
         LETTERS_RACK_WIDTH = (int) (getWidth() * RATIO_TILES_RACK);
         OPTIONS_WIDTH = ((getWidth() - LETTERS_RACK_WIDTH) / 4) - ScrabbleGUI.MARGIN;
+        int width = LETTERS_RACK_WIDTH / MAX_TILES_IN_HAND;
+        TILE_DIMENSION = new Dimension(width, width);
+        initIconsTile();
+
     }
 
     public void setPlayer(List<Player> players) {
@@ -86,7 +93,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, Constant
         panelLettersRack.setLayout(null);
         panelLettersRack.setLocation(x, POS_Y);
         panelLettersRack.setSize(LETTERS_RACK_WIDTH, getHeight());
-        panelLettersRack.setName(LETTER_RACK_NAME);
+        panelLettersRack.setName(ConstanteTestName.LETTER_RACK_NAME);
         panelLettersRack.setOpaque(false);
         add(panelLettersRack);
 
@@ -104,9 +111,9 @@ public class PanelLetterRackZone extends JPanel implements Observateur, Constant
     private void initPassTurnOption() {
 
         int x = getWidth() - OPTIONS_WIDTH;
-        btnPassTurn = new JButton(MESS_PASS_TURN);
+        btnPassTurn = new JButton(ConstanteComponentMessage.MESS_PASS_TURN);
 
-        btnPassTurn.setName(PASS_TURN_NAME);
+        btnPassTurn.setName(ConstanteTestName.PASS_TURN_NAME);
         btnPassTurn.setSize(OPTIONS_WIDTH, getHeight());
         btnPassTurn.setLocation(x, POS_Y);
         btnPassTurn.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -122,8 +129,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur, Constant
 
         int x = getWidth() - OPTIONS_WIDTH;
 
-        btnPlayWord = new JButton(MESS_PLAY);
-        btnPlayWord.setName(PLAY_NAME);
+        btnPlayWord = new JButton(ConstanteComponentMessage.MESS_PLAY);
+        btnPlayWord.setName(ConstanteTestName.PLAY_NAME);
         btnPlayWord.setSize(OPTIONS_WIDTH, getHeight());
         btnPlayWord.setLocation(x, POS_Y);
 
@@ -133,13 +140,12 @@ public class PanelLetterRackZone extends JPanel implements Observateur, Constant
     }
 
 
-
     private void initRecallOption() {
 
         int x = getWidth() - OPTIONS_WIDTH * 2 - ScrabbleGUI.MARGIN;
 
-        btnRecall = new JButton(MESS_RECALL);
-        btnRecall.setName(RECALL_NAME);
+        btnRecall = new JButton(ConstanteComponentMessage.MESS_RECALL);
+        btnRecall.setName(ConstanteTestName.RECALL_NAME);
         btnRecall.setSize(OPTIONS_WIDTH, getHeight());
         btnRecall.setLocation(x, POS_Y);
         add(btnRecall);
@@ -153,15 +159,15 @@ public class PanelLetterRackZone extends JPanel implements Observateur, Constant
         int x = OPTIONS_WIDTH + ScrabbleGUI.MARGIN;
         Rectangle bounds = new Rectangle(x, POS_Y, OPTIONS_WIDTH, getHeight());
 
-        btnSwapTiles = new ButtonExchange(MESS_EXCHANGE, game, bounds);
-        btnSwapTiles.setName(EXCHANGE_NAME);
+        btnSwapTiles = new ButtonExchange(ConstanteComponentMessage.MESS_EXCHANGE, game, bounds);
+        btnSwapTiles.setName(ConstanteTestName.EXCHANGE_NAME);
         btnSwapTiles.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnSwapTiles.setHorizontalTextPosition(SwingConstants.CENTER);
 
         x = getWidth() - OPTIONS_WIDTH * 2 - ScrabbleGUI.MARGIN;
-        btnCancelExchange = new JButton(MESS_CANCEL);
+        btnCancelExchange = new JButton( ConstanteComponentMessage.MESS_CANCEL);
         btnCancelExchange.setVisible(false);
-        btnCancelExchange.setName(CANCEL_EXCHANGE_NAME);
+        btnCancelExchange.setName(ConstanteTestName.CANCEL_EXCHANGE_NAME);
         btnCancelExchange.setLocation(x, POS_Y);
         btnCancelExchange.setSize(OPTIONS_WIDTH, getHeight());
 
@@ -171,11 +177,11 @@ public class PanelLetterRackZone extends JPanel implements Observateur, Constant
         btnSwapTiles.addActionListener(e -> {
 
             if (currentPlayer.getState().getName() != IDState.EXCHANGE.getName()) {
-                btnSwapTiles.setText(MESS_CONFIRM);
+                btnSwapTiles.setText( ConstanteComponentMessage.MESS_CONFIRM);
                 disableAllOtherBtnExchange(false);
             } else {
                 disableAllOtherBtnExchange(true);
-                btnSwapTiles.setText(MESS_EXCHANGE);
+                btnSwapTiles.setText( ConstanteComponentMessage.MESS_EXCHANGE);
             }
             game.exchangeLetter();
         });
@@ -184,7 +190,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, Constant
             public void actionPerformed(ActionEvent e) {
 
                 game.cancelExchange();
-                btnSwapTiles.setText(MESS_EXCHANGE);
+                btnSwapTiles.setText( ConstanteComponentMessage.MESS_EXCHANGE);
                 disableAllOtherBtnExchange(true);
             }
         });
@@ -199,31 +205,28 @@ public class PanelLetterRackZone extends JPanel implements Observateur, Constant
 
     private void initForfeitOption() {
 
-        btnForfeit = new JButton(TITLE_SURRENDER);
-        btnForfeit.setName(FORFEIT_NAME);
+        btnForfeit = new JButton( ConstanteComponentMessage.TITLE_SURRENDER);
+        btnForfeit.setName(ConstanteTestName.FORFEIT_NAME);
 
         btnForfeit.setSize(OPTIONS_WIDTH, getHeight());
         btnForfeit.setLocation(POS_Y, POS_Y);
 
         add(btnForfeit);
-        btnForfeit.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        btnForfeit.addActionListener(e -> {
 
-                int result = JOptionPane.showConfirmDialog((Component) null,
-                        MESS_RESTART_GAME,
-                        TITLE_SURRENDER,
-                        JOptionPane.YES_NO_CANCEL_OPTION);
+            int result = JOptionPane.showConfirmDialog(null,
+                    ConstanteComponentMessage.MESS_RESTART_GAME,
+                    ConstanteComponentMessage.TITLE_SURRENDER,
+                    JOptionPane.YES_NO_CANCEL_OPTION);
 
-                if (result == JOptionPane.YES_OPTION) {
-                    reinitializeGame();
-                }
+            if (result == JOptionPane.YES_OPTION) {
+                reinitializeGame();
             }
         });
     }
 
     private void reinitializeGame() {
 
-        ScrabbleGUI parent = (ScrabbleGUI) SwingUtilities.getWindowAncestor(this);
         parent.returnToMenu();
     }
 
@@ -250,23 +253,40 @@ public class PanelLetterRackZone extends JPanel implements Observateur, Constant
 
         List<Tile> playerTiles = currentPlayer.getTiles();
         int i = 0;
-        int width = LETTERS_RACK_WIDTH / MAX_TILES_IN_HAND;
-        int x = (MAX_TILES_IN_HAND - playerTiles.size()) * width / 2;
 
-        Dimension dimension = new Dimension(width, width);
+        int x =  (int)((MAX_TILES_IN_HAND - playerTiles.size()) * TILE_DIMENSION.getWidth() / 2);
+
+       // DragListener drag = new DragListener();   // Todo Louis : permettre le drag & drop
 
         for (Tile letter : playerTiles) {
 
-            ButtonTile btnTile = new ButtonTile(game, letter, dimension);
+            ButtonTile btnTile = new ButtonTile(game, letter, TILE_DIMENSION, iconsTile.get(letter.getLetter()));
             btnTile.setLocation(x, POS_Y);
             letter.ajouterObservateur(btnTile);
-            btnTile.setName(TILE_NAME + i);
+            btnTile.setName(ConstanteTestName.TILE_NAME + i);
+            //btnTile.addMouseListener(drag);
+            //btnTile.addMouseMotionListener(drag);
             panelLettersRack.add(btnTile);
             i++;
-            x += width;
+            x += TILE_DIMENSION.getWidth() ;
         }
 
         panelLettersRack.repaint();
+    }
+
+    private void initIconsTile()
+    {
+        iconsTile = new HashMap<>();
+
+      for(char start = START_ALPHABET; start < END_ALPHABET; start++)
+        {
+            String ressource = ConstanteComponentMessage.RES_IMAGES_ENG + start +  ConstanteComponentMessage.EXT_PNG;
+            ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(ressource));
+            Image img = fillingIcon.getImage();
+            Image newimg = img.getScaledInstance((int)TILE_DIMENSION.getWidth(), (int)TILE_DIMENSION.getHeight(), java.awt.Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(newimg);
+            iconsTile.put(Character.toString(start), icon);
+        }
     }
 
     @Override

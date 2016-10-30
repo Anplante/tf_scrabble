@@ -7,8 +7,4 @@ public enum Direction {
 
     COLUMN,
     ROWN,
-    WEST,
-    EAST,
-    NORTH,
-    SOUTH
 }

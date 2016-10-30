@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Louis Luu Lim on 9/21/2016.
  */
-public class PanelLetterRackZoneTest implements ConstanteTestName {
+public class PanelLetterRackZoneTest {
 
     private ScrabbleGUI scrabbleGame;
     private Game game;
@@ -48,7 +48,7 @@ public class PanelLetterRackZoneTest implements ConstanteTestName {
     @Test
     public void testChangePlayer() {
 
-        JButton btnFinish = (JButton) TestUtils.getChildNamed(scrabbleGame, PASS_TURN_NAME);
+        JButton btnFinish = (JButton) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.PASS_TURN_NAME);
         Player firstPlayer = game.getActivePlayer();
         btnFinish.doClick();
         assertNotEquals(firstPlayer, game.getActivePlayer());

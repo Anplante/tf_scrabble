@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNotEquals;
 /**
  * Created by Antoine Plante on 9/18/2016.
  */
-public class ScrabbleGUITest implements ConstanteTestName{
+public class ScrabbleGUITest {
 
     private ScrabbleGUI scrabbleGame;
     private Game game;
@@ -61,14 +61,14 @@ public class ScrabbleGUITest implements ConstanteTestName{
         String centerSquarePos = "77";
         String playerFirstTilePos = "0";
 
-        zoneJoueur = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, LETTER_RACK_NAME);
-        JPanel board = (JPanel) TestUtils.getChildNamed(scrabbleGame, BOARD_NAME);
-        BtnSquare square = (BtnSquare) TestUtils.getChildNamed(board, SQUARE_NAME + centerSquarePos);
-        ButtonTile tileJoueur = (ButtonTile) TestUtils.getChildNamed(zoneJoueur, TILE_NAME + playerFirstTilePos);
+        zoneJoueur = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.LETTER_RACK_NAME);
+        JPanel board = (JPanel) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.BOARD_NAME);
+        BtnSquare square = (BtnSquare) TestUtils.getChildNamed(board, ConstanteTestName.SQUARE_NAME + centerSquarePos);
+        ButtonTile tileJoueur = (ButtonTile) TestUtils.getChildNamed(zoneJoueur, ConstanteTestName.TILE_NAME + playerFirstTilePos);
         player = game.getActivePlayer();
         Tile tile = player.getTiles().get(0);
-        PanelPlayerInfo infoJoueur = (PanelPlayerInfo) TestUtils.getChildNamed(scrabbleGame, INFO_NAME + player.getName());
-        JLabel score = (JLabel) TestUtils.getChildNamed(infoJoueur, SCORE_NAME);
+        PanelPlayerInfo infoJoueur = (PanelPlayerInfo) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.INFO_NAME + player.getName());
+        JLabel score = (JLabel) TestUtils.getChildNamed(infoJoueur, ConstanteTestName.SCORE_NAME);
 
         assertFalse((game.getSquare(7,7).containLetter()));
         assertEquals(0, Integer.parseInt(score.getText()));

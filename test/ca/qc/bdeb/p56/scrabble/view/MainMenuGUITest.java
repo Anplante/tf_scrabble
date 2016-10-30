@@ -18,7 +18,7 @@ import static org.junit.Assert.assertNotEquals;
 /**
  * Created by Antoine Plante on 2016-09-15.
  */
-public class MainMenuGUITest implements ConstanteTestName {
+public class MainMenuGUITest {
 
     private MainMenuGUI frame;
     private JButton btnAccept;
@@ -34,10 +34,10 @@ public class MainMenuGUITest implements ConstanteTestName {
         scrabbleGUI = new ScrabbleGUI();
         scrabbleGUI.setBackgroundPath("simplistic.png");
         frame = scrabbleGUI.getMenu();
-        txtInput = (JTextField) TestUtils.getChildNamed(frame, PLAYER_NAME);
-        btnAccept = (JButton) TestUtils.getChildNamed(frame, CONFIRM_NAME);
-        cmbNombreAi = (JComboBox) TestUtils.getChildNamed(frame, QTE_AI_NAME);
-        cmbBackgroundImage = (JComboBox) TestUtils.getChildNamed(frame, BACKGROUND_NAME);
+        txtInput = (JTextField) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME);
+        btnAccept = (JButton) TestUtils.getChildNamed(frame, ConstanteTestName.CONFIRM_NAME);
+        cmbNombreAi = (JComboBox) TestUtils.getChildNamed(frame, ConstanteTestName.QTE_AI_NAME);
+        cmbBackgroundImage = (JComboBox) TestUtils.getChildNamed(frame, ConstanteTestName.BACKGROUND_NAME);
 
         cmbBackgroundImage.setSelectedIndex(0);
     }
