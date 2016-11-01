@@ -39,16 +39,34 @@ public class AiGoal {
 
             int resultLength = results.size();
 
-            for(int j = 0; j < resultLength; j++)
-            {
-                String wordFormed = allLetters.charAt(i) + results.get(j);
-                results.add(wordFormed);
+            for (int j = 0; j < resultLength; j++) {
+                String wordFormed = results.get(j) + allLetters.charAt(i);
 
-                if (game.isValidWord( wordFormed) && !allPossibleCombination.contains(wordFormed)) {
+                if (!results.contains(wordFormed))
+                    results.add(wordFormed);
+
+                if (game.isValidWord(wordFormed) && !allPossibleCombination.contains(wordFormed)) {
                     allPossibleCombination.add(wordFormed);
                 }
             }
-            results.add(Character.toString(allLetters.charAt(i)));
+            if (!results.contains(Character.toString(allLetters.charAt(i))))
+                results.add(Character.toString(allLetters.charAt(i)));
+        }
+
+        allLetters = new StringBuilder(allLetters).reverse().toString();
+        
+        for (int i = 0; i < allLetters.length(); i++) {
+
+            int resultLength = results.size();
+
+            for (int j = 0; j < resultLength; j++) {
+                String wordFormed = results.get(j) + allLetters.charAt(i);
+                if (!results.contains(wordFormed))
+                    results.add(wordFormed);
+                if (game.isValidWord(wordFormed) && !allPossibleCombination.contains(wordFormed)) {
+                    allPossibleCombination.add(wordFormed);
+                }
+            }
         }
     }
 }

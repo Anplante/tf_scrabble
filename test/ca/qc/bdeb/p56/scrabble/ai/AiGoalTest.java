@@ -9,9 +9,11 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Antoine on 10/26/2016.
@@ -41,12 +43,16 @@ public class AiGoalTest {
     @Test
     public void testAllPossibleWord()
     {
-        ArrayList<String> realWord = new ArrayList<>();
+        List<String> results = new ArrayList<>(Arrays.asList("banane", "banne", "nana", "ben", "bea", "ban", "ane", "ana", "ne", "na", "en", "an"));
 
-        String lettersOfAi= "lesarn";
-        realWord.add("les");
-        realWord.add("sel");
-        ArrayList<String>  aiWord = aiGoal.getPossibleWord(lettersOfAi);
-        assertEquals(aiWord.get(0), realWord.get(0));
+        String lettersOfAi= "banane";
+
+        ArrayList<String>  wordsFound = aiGoal.getPossibleWord(lettersOfAi);
+
+
+        for(String word : results)
+        {
+            assertTrue(wordsFound.contains(word));
+        }
     }
 }
