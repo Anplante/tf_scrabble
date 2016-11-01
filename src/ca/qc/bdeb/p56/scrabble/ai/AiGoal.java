@@ -54,7 +54,7 @@ public class AiGoal {
         }
 
         allLetters = new StringBuilder(allLetters).reverse().toString();
-        
+
         for (int i = 0; i < allLetters.length(); i++) {
 
             int resultLength = results.size();
