@@ -182,7 +182,7 @@ public class Game implements Observable {
 
         getActivePlayer().nextState();
 
-        if (!getActivePlayer().isActivated()) {
+        if (!getActivePlayer().isActivated() ) {
             drawTile();
             activateNextPlayer();
 

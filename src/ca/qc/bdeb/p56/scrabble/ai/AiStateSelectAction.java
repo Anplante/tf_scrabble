@@ -3,6 +3,7 @@ package ca.qc.bdeb.p56.scrabble.ai;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.model.StateSelectAction;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
+import ca.qc.bdeb.p56.scrabble.shared.IDState;
 
 import java.util.List;
 

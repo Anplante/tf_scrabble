@@ -12,7 +12,7 @@ public class StateSelectAction extends State {
 
     private Tile tileSelected;
     private Object modeSelected;
-    private IDState stateSelected;
+    protected IDState stateSelected;
 
     private boolean  readyToChange ;
 

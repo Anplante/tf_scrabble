@@ -32,9 +32,9 @@ public abstract class Player implements Observable {
         tiles = new ArrayList<>();
         // TODO : recevoir une couleur
         playerColor = new Color(0, 0, 182, 155);
-        setState(new StatePending(this));
         active = false;
         observateurs = new LinkedList<>();
+        setState(new StatePending(this));
     }
 
     public List<Tile> getTiles() {
