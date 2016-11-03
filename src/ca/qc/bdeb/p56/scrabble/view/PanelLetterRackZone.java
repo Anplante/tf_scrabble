@@ -4,14 +4,12 @@ import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
-import ca.qc.bdeb.p56.scrabble.utility.DragListener;
-import ca.qc.bdeb.p56.scrabble.utility.Observateur;
+import ca.qc.bdeb.p56.scrabble.utility.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.*;
@@ -165,7 +163,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         btnSwapTiles.setHorizontalTextPosition(SwingConstants.CENTER);
 
         x = getWidth() - OPTIONS_WIDTH * 2 - ScrabbleGUI.MARGIN;
-        btnCancelExchange = new JButton( ConstanteComponentMessage.MESS_CANCEL);
+        btnCancelExchange = new JButton(ConstanteComponentMessage.MESS_CANCEL);
         btnCancelExchange.setVisible(false);
         btnCancelExchange.setName(ConstanteTestName.CANCEL_EXCHANGE_NAME);
         btnCancelExchange.setLocation(x, POS_Y);
@@ -177,11 +175,11 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         btnSwapTiles.addActionListener(e -> {
 
             if (currentPlayer.getState().getName() != IDState.EXCHANGE.getName()) {
-                btnSwapTiles.setText( ConstanteComponentMessage.MESS_CONFIRM);
+                btnSwapTiles.setText(ConstanteComponentMessage.MESS_CONFIRM);
                 disableAllOtherBtnExchange(false);
             } else {
                 disableAllOtherBtnExchange(true);
-                btnSwapTiles.setText( ConstanteComponentMessage.MESS_EXCHANGE);
+                btnSwapTiles.setText(ConstanteComponentMessage.MESS_EXCHANGE);
             }
             game.exchangeLetter();
         });
@@ -190,7 +188,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             public void actionPerformed(ActionEvent e) {
 
                 game.cancelExchange();
-                btnSwapTiles.setText( ConstanteComponentMessage.MESS_EXCHANGE);
+                btnSwapTiles.setText(ConstanteComponentMessage.MESS_EXCHANGE);
                 disableAllOtherBtnExchange(true);
             }
         });
@@ -205,7 +203,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
     private void initForfeitOption() {
 
-        btnForfeit = new JButton( ConstanteComponentMessage.TITLE_SURRENDER);
+        btnForfeit = new JButton(ConstanteComponentMessage.TITLE_SURRENDER);
         btnForfeit.setName(ConstanteTestName.FORFEIT_NAME);
 
         btnForfeit.setSize(OPTIONS_WIDTH, getHeight());
@@ -254,9 +252,9 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         List<Tile> playerTiles = currentPlayer.getTiles();
         int i = 0;
 
-        int x =  (int)((MAX_TILES_IN_HAND - playerTiles.size()) * TILE_DIMENSION.getWidth() / 2);
+        int x = (int) ((MAX_TILES_IN_HAND - playerTiles.size()) * TILE_DIMENSION.getWidth() / 2);
 
-       // DragListener drag = new DragListener();   // Todo Louis : permettre le drag & drop
+        // DragListener drag = new DragListener();   // Todo Louis : permettre le drag & drop
 
         for (Tile letter : playerTiles) {
 
@@ -268,23 +266,21 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             //btnTile.addMouseMotionListener(drag);
             panelLettersRack.add(btnTile);
             i++;
-            x += TILE_DIMENSION.getWidth() ;
+            x += TILE_DIMENSION.getWidth();
         }
 
         panelLettersRack.repaint();
     }
 
-    private void initIconsTile()
-    {
+    private void initIconsTile() {
+
         iconsTile = new HashMap<>();
 
-      for(char start = START_ALPHABET; start < END_ALPHABET; start++)
-        {
-            String ressource = ConstanteComponentMessage.RES_IMAGES_FR + start +  ConstanteComponentMessage.EXT_PNG;
-            ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(ressource));
-            Image img = fillingIcon.getImage();
-            Image newimg = img.getScaledInstance((int)TILE_DIMENSION.getWidth(), (int)TILE_DIMENSION.getHeight(), java.awt.Image.SCALE_SMOOTH);
-            ImageIcon icon = new ImageIcon(newimg);
+        for (char start = START_ALPHABET; start < END_ALPHABET; start++) {
+            String ressource = ConstanteComponentMessage.RES_IMAGES_FR + start + ConstanteComponentMessage.EXT_PNG;
+            int size = (int) TILE_DIMENSION.getWidth();
+            URL res = getClass().getClassLoader().getResource(ressource);
+            ImageIcon icon = ImagesManager.getIcon(res, size, size);
             iconsTile.put(Character.toString(start), icon);
         }
     }

@@ -18,8 +18,6 @@ import java.awt.event.MouseEvent;
  */
 public class ButtonTile extends JButton implements Observateur{
 
-
-
     private static final Color BASIC_COLOR = Color.lightGray;
     private static final Color REMOVE_COLOR = Color.red;
     private static final Color SELECTED_COLOR = Color.green;
