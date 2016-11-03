@@ -31,7 +31,7 @@ public class BtnSquareTest {
 
         GameManager gameManager = new GameManager();
         java.util.List<Player> players = new ArrayList<Player>();
-        players.add(new Player("Louis"));
+        players.add(new HumanPlayer("Louis"));
         gameModel = gameManager.createNewGame(players);
         btnSquare = new BtnSquare(gameModel, 7, 7, 50);
         btnSquare.setSize(WIDTH,HEIGHT);

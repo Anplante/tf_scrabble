@@ -1,9 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
-import ca.qc.bdeb.p56.scrabble.model.Game;
-import ca.qc.bdeb.p56.scrabble.model.GameManager;
-import ca.qc.bdeb.p56.scrabble.model.Player;
-import ca.qc.bdeb.p56.scrabble.model.Tile;
+import ca.qc.bdeb.p56.scrabble.model.*;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
 import org.junit.After;
@@ -37,9 +34,9 @@ public class StateExchangeTest{
         GameManager gameManager = new GameManager();
 
         List lstPlayer = new ArrayList<Player>();
-        lstPlayer.add(new Player("Antoine"));
-        lstPlayer.add(new Player("Louis"));
-        lstPlayer.add(new Player("Julien"));
+        lstPlayer.add(new HumanPlayer("Antoine"));
+        lstPlayer.add(new HumanPlayer("Louis"));
+        lstPlayer.add(new HumanPlayer("Julien"));
 
         game = gameManager.createNewGame(lstPlayer);
         scrabbleGame = new ScrabbleGUI();

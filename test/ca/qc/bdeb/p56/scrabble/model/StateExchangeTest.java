@@ -24,8 +24,8 @@ public class StateExchangeTest {
         GameManager gameManager = new GameManager();
 
         List<Player> players = new ArrayList<Player>();
-        players.add(new Player("Louis"));
-        players.add(new Player("Antoine"));
+        players.add(new HumanPlayer("Louis"));
+        players.add(new HumanPlayer("Antoine"));
         game = gameManager.createNewGame(players);
         game.startGame();
         currentPlayer = game.getActivePlayer();

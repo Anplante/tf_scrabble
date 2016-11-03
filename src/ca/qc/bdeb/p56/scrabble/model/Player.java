@@ -16,7 +16,7 @@ import java.util.List;
  * <p>
  * Created by Louis Luu Lim on 9/10/2016.
  */
-public class Player implements Observable {
+public abstract class Player implements Observable {
 
     private String name;
     private Game game;

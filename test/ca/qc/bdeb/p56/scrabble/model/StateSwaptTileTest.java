@@ -43,9 +43,9 @@ public class StateSwaptTileTest{
         GameManager gameManager = new GameManager();
 
         List lstPlayer = new ArrayList<Player>();
-        lstPlayer.add(new Player("Antoine"));
-        lstPlayer.add(new Player("Louis"));
-        lstPlayer.add(new Player("Julien"));
+        lstPlayer.add(new HumanPlayer("Antoine"));
+        lstPlayer.add(new HumanPlayer("Louis"));
+        lstPlayer.add(new HumanPlayer("Julien"));
 
         game = gameManager.createNewGame(lstPlayer);
 

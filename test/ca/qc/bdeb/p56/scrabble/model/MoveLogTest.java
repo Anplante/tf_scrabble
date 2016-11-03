@@ -19,7 +19,7 @@ public class MoveLogTest {
     @Before
     public void setUp() throws Exception {
 
-        player = new Player("Louis");
+        player = new HumanPlayer("Louis");
     }
 
     @After

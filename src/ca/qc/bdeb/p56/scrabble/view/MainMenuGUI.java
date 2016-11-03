@@ -3,6 +3,7 @@ package ca.qc.bdeb.p56.scrabble.view;
 import ca.qc.bdeb.p56.scrabble.ai.AiPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.GameManager;
+import ca.qc.bdeb.p56.scrabble.model.HumanPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
@@ -55,7 +56,7 @@ public class MainMenuGUI extends JDialog {
     private JButton btnChooseBackgroundImg;
     private ArrayList<String> listName;
 
-    private Player player;
+    private HumanPlayer player;
     private List<Player> players;
     private Game game;
     ScrabbleGUI parent;
@@ -189,7 +190,7 @@ public class MainMenuGUI extends JDialog {
 
         players = new ArrayList<>();
         listName = readXMLFiles();
-        player = new Player(txtName.getText());
+        player = new HumanPlayer(txtName.getText());
         players.add(player);
 
         int limit = cmbNumberOfAi.getSelectedIndex();

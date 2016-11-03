@@ -2,6 +2,7 @@ package ca.qc.bdeb.p56.scrabble.ai;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.GameManager;
+import ca.qc.bdeb.p56.scrabble.model.HumanPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import org.junit.After;
 import org.junit.Before;
@@ -29,7 +30,7 @@ public class AiGoalTest {
         GameManager gameManager = new GameManager();
         listName.add("Julien");
         List<Player> players = new ArrayList<Player>();
-        players.add(new Player("Louis"));
+        players.add(new HumanPlayer("Louis"));
         game = gameManager.createNewGame(players);
         aiGoal = new AiGoal(game);
 

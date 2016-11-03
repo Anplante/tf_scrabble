@@ -2,6 +2,7 @@ package ca.qc.bdeb.p56.scrabble.ai;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.GameManager;
+import ca.qc.bdeb.p56.scrabble.model.HumanPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.view.MainMenuGUI;
 import ca.qc.bdeb.p56.scrabble.view.ScrabbleGUI;
@@ -28,7 +29,7 @@ public class AiplayerTest {
         GameManager gameManager = new GameManager();
         listName.add("Julien");
         List<Player> players = new ArrayList<Player>();
-        players.add(new Player("Louis"));
+        players.add(new HumanPlayer("Louis"));
         game = gameManager.createNewGame(players);
 
     }
@@ -42,7 +43,7 @@ public class AiplayerTest {
     {
         GameManager gameManager = new GameManager();
         List<Player> players = new ArrayList<Player>();
-        players.add(new Player("Louis"));
+        players.add(new HumanPlayer("Louis"));
         Game oneGame;
         oneGame = gameManager.createNewGame(players);
         AiPlayer aiPlayer = new AiPlayer(listName);

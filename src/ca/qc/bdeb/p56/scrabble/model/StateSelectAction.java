@@ -8,7 +8,7 @@ import ca.qc.bdeb.p56.scrabble.shared.IDState;
  *
  * Created by Louis Luu Lim on 9/12/2016.
  */
-public abstract class StateSelectAction extends State {
+public class StateSelectAction extends State {
 
     private Tile tileSelected;
     private Object modeSelected;

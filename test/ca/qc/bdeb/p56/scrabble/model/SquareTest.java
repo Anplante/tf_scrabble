@@ -23,7 +23,7 @@ public class SquareTest {
         GameManager gameManager = new GameManager();
 
         List<Player> players = new ArrayList<Player>();
-        players.add(new Player("Louis"));
+        players.add(new HumanPlayer("Louis"));
         game = gameManager.createNewGame(players);
 
     }
