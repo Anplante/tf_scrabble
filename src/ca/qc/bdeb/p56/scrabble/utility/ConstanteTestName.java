@@ -10,6 +10,7 @@ public class ConstanteTestName {
     public static final String ABANDON_NAME = "Abandon";
     public static final String QTE_AI_NAME = "Number of Ai";
     public static final String BACKGROUND_NAME = "background";
+    public static final String THEME_NAME = "theme";
     public static final String CANCEL_NAME = "Cancel";
     public static final String CONFIRM_NAME = "Confirm";
     public static final String PLAYER_NAME = "Player";

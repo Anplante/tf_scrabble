@@ -45,6 +45,8 @@ public class MainMenuGUI extends JDialog {
     private JPanel panelMenu;
     private JTextField txtName;
     private JButton btnCreateGame;
+    private JLabel lblTheme;
+    private JComboBox cmbTheme;
     private JLabel lblName;
     private JButton btnExit;
     private JLabel lblNumberOfAi;
@@ -85,8 +87,8 @@ public class MainMenuGUI extends JDialog {
         this.setTitle(ConstanteComponentMessage.TITLE_MENU);
 
         Insets insets = fenetre.getInsets();
-        setSize(new Dimension(insets.left + insets.right + 400,
-                insets.top + insets.bottom + 400));
+        setSize(new Dimension(insets.left + insets.right + 450,
+                insets.top + insets.bottom + 450));
 
         fenetre.pack();
         // TODO Louis : Faire en sorte que lorsqu'on ferme le dialogue que le programme se termine.
@@ -132,9 +134,18 @@ public class MainMenuGUI extends JDialog {
         cmbBackgroundScrabble.setLocation(180, 220);
         cmbBackgroundScrabble.setSize(180, 25);
 
+        cmbTheme =  new JComboBox();
+        cmbTheme.setName(ConstanteTestName.THEME_NAME);
+        cmbTheme.addItem(ConstanteComponentMessage.MESS_THEME_CLASSIQUE);
+        cmbTheme.addItem(ConstanteComponentMessage.MESS_THEME_NOBLE);
+        cmbTheme.setVisible(true);
+        cmbTheme.setLocation(180, 270);
+        cmbTheme.setSize(100,25);
+
 
         panelMenu.add(cmbNumberOfAi);
         panelMenu.add(cmbBackgroundScrabble);
+        panelMenu.add(cmbTheme);
     }
 
     private void initMenuOptions() {
@@ -227,10 +238,16 @@ public class MainMenuGUI extends JDialog {
         lblBackground.setSize(lblBackground.getPreferredSize());
         lblBackground.setVisible(true);
 
+        lblTheme = new JLabel();
+        lblTheme.setText(ConstanteComponentMessage.MESS_THEME);
+        lblTheme.setLocation(25, 275);
+        lblTheme.setSize(lblBackground.getPreferredSize());
+        lblTheme.setVisible(true);
 
         panelMenu.add(lblName);
         panelMenu.add(lblNumberOfAi);
         panelMenu.add(lblBackground);
+        panelMenu.add(lblTheme);
     }
 
     private void addTextBox() {
