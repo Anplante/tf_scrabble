@@ -283,6 +283,7 @@ public class Game implements Observable {
                 word = createWord(letters);
                 isAWord = verifyAllLetters(letters, direction);
                 if (dictionary.checkWordExist(word) && isAWord) {
+                    System.out.println("point donné MainWord");
                     int wordValue = calculateWordPoints(letters);
                     getActivePlayer().addPoints(wordValue);
                     movesHistory.add(new MoveLog(getActivePlayer(), word.toString(), wordValue));
@@ -308,9 +309,7 @@ public class Game implements Observable {
         boolean allOk = true;
         int points = 0;
         for (int v = 0; v < letters.size() && allOk; v++) {
-            if(v == 3){
-                System.out.println();
-            }
+
             StringBuilder word = new StringBuilder();
             Square square = letters.get(v);
             int rowOrColumn;
@@ -324,6 +323,7 @@ public class Game implements Observable {
             }
             boolean isAWord = true;
             ArrayList<String> wordWrongSide = new ArrayList<>();
+            
             for (int i = reverse - 1; i >= 0 && isAWord; i--) {
                 Square squareAdjacent;
                 if (direction.equals(Direction.COLUMN)) {
@@ -356,8 +356,11 @@ public class Game implements Observable {
                 }
             }
             if (!word.toString().equals(letters.get(v).getLetterOn())) {
-                if (allOk = dictionary.checkWordExist(word.toString().toLowerCase())) {
+                if (dictionary.checkWordExist(word.toString().toLowerCase())) {
+                    System.out.println("point donné Verifier");
                     points += calculateWordPoints(letters);
+                }else{
+                    allOk = false;
                 }
             }
         }
@@ -527,9 +530,9 @@ public class Game implements Observable {
 
         int points = 0;
         int wordMultiplier = 1;
-
+        String mot = "";
         for (Square square : letterChain) {
-
+            mot += square.getLetterOn();
             int letterMultiplier = 1;
 
             Premium premium = square.getPremium();
@@ -548,6 +551,8 @@ public class Game implements Observable {
             points += letterMultiplier * square.getTileOn().getValue();
         }
         points *= wordMultiplier;
+
+        System.out.println("Pts:"+points+" Mot:"+mot);
 
         return points;
     }
