@@ -19,6 +19,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -67,16 +69,25 @@ public class MainMenuGUI extends JDialog {
         initializeComponents();
         initializeSize();
 
+        addWindowListener(new WindowAdapter() {
+            @Override public void windowClosed(WindowEvent e) {
+                System.exit(0);
+            }
+        });
+
+
     }
 
     private void initializeFrame() {
         setLayout(null);
         JFrame fenetre = new JFrame();
         this.setTitle(ConstanteComponentMessage.TITLE_MENU);
-        fenetre.pack();
+
         Insets insets = fenetre.getInsets();
         setSize(new Dimension(insets.left + insets.right + 400,
                 insets.top + insets.bottom + 400));
+
+        fenetre.pack();
         // TODO Louis : Faire en sorte que lorsqu'on ferme le dialogue que le programme se termine.
     }
 
@@ -276,6 +287,7 @@ public class MainMenuGUI extends JDialog {
 
         return filename.substring(0, extensionIndex);
     }*/
+
     public int getLenghtPlayers() {
         return game.getPlayers().size();
     }

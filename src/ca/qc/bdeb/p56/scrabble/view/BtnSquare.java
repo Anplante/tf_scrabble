@@ -22,6 +22,7 @@ public class BtnSquare extends JButton implements Observateur {
     private final static Color COLOR_TW = new Color(252, 179, 87);
     private final static Color COLOR_TL = new Color(91, 187, 71);
     private final static Color COLOR_DW = new Color(238, 49, 50);
+    private final static Color COLOR_CENTER = new Color(255,192,203);
 
     private static final String PATH_IMG_CENTER_STAR = "./images/star.png";
     private static final String TRIPLE_WORD = "TW";
@@ -33,8 +34,8 @@ public class BtnSquare extends JButton implements Observateur {
     private Game gameModel;
     private int posRow;
     private int posColumn;
-    private Square square;
     private int size;
+    private Square square;
     private HashMap<String, ImageIcon> icons;
 
     public BtnSquare(Game gameModel, int posRow, int posColumn, int size) {
@@ -44,18 +45,15 @@ public class BtnSquare extends JButton implements Observateur {
         this.posRow = posRow;
         this.posColumn = posColumn;
         this.size = size;
-        setForeground(Color.WHITE);
+        this.square = gameModel.getSquare(posRow, posColumn);
+        square.ajouterObservateur(BtnSquare.this);
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setBorder(BorderFactory.createEtchedBorder());
         setFocusable(false);
         changementEtat();
-
+        setPremiumColor();
         addActionListener(e -> {
 
-            if (square == null) {
-                square = gameModel.getSquare(posRow, posColumn);
-                square.ajouterObservateur(BtnSquare.this);
-            }
             gameModel.playTile(square);
 
             if (square.getTileOn() != null
@@ -94,13 +92,37 @@ public class BtnSquare extends JButton implements Observateur {
                 break;
             case CENTER:
                 setText("");
-                setIcon(ImagesManager.getIcon(getClass().getClassLoader().getResource("./images/star.png"), size, size));
+                setIcon(ImagesManager.getIcon(getClass().getClassLoader().getResource(PATH_IMG_CENTER_STAR), size, size));
             default:
                 setBackground(Color.lightGray);
                 break;
         }
-
         repaint();
+    }
+
+    private void setPremiumColor() {
+
+        if (square.getPremium() != null) {
+            String content = gameModel.getContentSquare(posRow, posColumn);
+
+            switch (content) {
+                case TRIPLE_LETTER:
+                    setBackground(COLOR_TW);
+                    break;
+                case DOUBLE_WORD:
+                    setBackground(COLOR_DW);
+                    break;
+                case DOUBLE_LETTER:
+                    setBackground(COLOR_DL);
+                    break;
+                case TRIPLE_WORD:
+                    setBackground(COLOR_TL);
+                    break;
+                case CENTER:
+                    setBackground(COLOR_CENTER);
+                default:
+            }
+        }
     }
 
     @Override
