@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 
 /**
  * Classe du jeu de scrabbleé
- *
+ * <p>
  * Created by Louis Luu Lim on 9/10/2016.
  */
 public class Game implements Observable {
@@ -278,33 +278,17 @@ public class Game implements Observable {
                 direction = findCompleteWordRow(letters);
             }
             String word = null;
-            if(direction.equals(Direction.COLUMN)) {
-                letters = createWordListVertical(letters,direction);
-                if(letters!= null) {
-                    word = createWord(letters);
-                    isAWord = verifyAllLetters(letters,direction);
-                    if (dictionary.checkWordExist(word) && isAWord) {
-                        int wordValue = calculateWordPoints(letters);
-                        getActivePlayer().addPoints(wordValue);
-                        movesHistory.add(new MoveLog(getActivePlayer(), word.toString(), wordValue));
-                        isAWord = true;
-                    } else{
-                        isAWord = false;
-                    }
-                }
-            }else {
-                letters = createWordListVertical(letters,direction);
-                if(letters!= null) {
-                    word = createWord(letters);
-                    isAWord = verifyAllLetters(letters,direction);
-                    if (dictionary.checkWordExist(word) && isAWord) {
-                        int wordValue = calculateWordPoints(letters);
-                        getActivePlayer().addPoints(wordValue);
-                        movesHistory.add(new MoveLog(getActivePlayer(), word.toString(), wordValue));
-                        isAWord = true;
-                    } else{
-                        isAWord = false;
-                    }
+            letters = createWordListVertical(letters, direction);
+            if (letters != null) {
+                word = createWord(letters);
+                isAWord = verifyAllLetters(letters, direction);
+                if (dictionary.checkWordExist(word) && isAWord) {
+                    int wordValue = calculateWordPoints(letters);
+                    getActivePlayer().addPoints(wordValue);
+                    movesHistory.add(new MoveLog(getActivePlayer(), word.toString(), wordValue));
+                    isAWord = true;
+                } else {
+                    isAWord = false;
                 }
             }
 
@@ -312,9 +296,9 @@ public class Game implements Observable {
         return isAWord;
     }
 
-    private String createWord (List<Square> letters){
+    private String createWord(List<Square> letters) {
         StringBuilder word = new StringBuilder();
-        for (Square letter :letters){
+        for (Square letter : letters) {
             word.append(letter.getLetterOn());
         }
         return word.toString().toLowerCase();
@@ -323,41 +307,41 @@ public class Game implements Observable {
     private boolean verifyAllLetters(List<Square> letters, Direction direction) {
         boolean allOk = true;
         int points = 0;
-        for(int v =0;v<letters.size() && allOk;v++) {
+        for (int v = 0; v < letters.size() && allOk; v++) {
             StringBuilder word = new StringBuilder();
             Square square = letters.get(v);
             int rowOrColumn;
-            if(direction.equals(Direction.COLUMN)) {
+            if (direction.equals(Direction.COLUMN)) {
                 rowOrColumn = square.getPosRow();
-            } else{
+            } else {
                 rowOrColumn = square.getPosColumn();
             }
             boolean isAWord = true;
             ArrayList<String> wordWrongSide = new ArrayList<>();
-            for (int i = square.getPosColumn()-1; i >= 0 && isAWord; i--) {
+            for (int i = square.getPosColumn() - 1; i >= 0 && isAWord; i--) {
                 Square squareAdjacent;
-                if(direction.equals(Direction.COLUMN)) {
+                if (direction.equals(Direction.COLUMN)) {
                     squareAdjacent = boardManager.getSquare(rowOrColumn, i);
-                } else{
-                    squareAdjacent = boardManager.getSquare(i,rowOrColumn);
+                } else {
+                    squareAdjacent = boardManager.getSquare(i, rowOrColumn);
                 }
                 if (squareAdjacent.getTileOn() != null) {
                     wordWrongSide.add(squareAdjacent.getLetterOn());
                 } else {
                     isAWord = false;
-                    for (int j = wordWrongSide.size()-1; j >= 0 ; j--) {
+                    for (int j = wordWrongSide.size() - 1; j >= 0; j--) {
                         word.append(wordWrongSide.get(j));
                     }
                 }
             }
             word.append(square.getLetterOn());
             isAWord = true;
-            for (int i = square.getPosColumn()+1; i < boardManager.BOARD_SIZE && isAWord; i++) {
+            for (int i = square.getPosColumn() + 1; i < boardManager.BOARD_SIZE && isAWord; i++) {
                 Square squareAdjacent;
-                if(direction.equals(Direction.COLUMN)) {
+                if (direction.equals(Direction.COLUMN)) {
                     squareAdjacent = boardManager.getSquare(rowOrColumn, i);
-                } else{
-                    squareAdjacent = boardManager.getSquare(i,rowOrColumn);
+                } else {
+                    squareAdjacent = boardManager.getSquare(i, rowOrColumn);
                 }
                 if (squareAdjacent.getTileOn() != null) {
                     word.append(squareAdjacent.getTileOn().getLetter());
@@ -365,13 +349,13 @@ public class Game implements Observable {
                     isAWord = false;
                 }
             }
-            if(!word.toString().equals(letters.get(v).getLetterOn())){
-                if(allOk = dictionary.checkWordExist(word.toString().toLowerCase())) {
+            if (!word.toString().equals(letters.get(v).getLetterOn())) {
+                if (allOk = dictionary.checkWordExist(word.toString().toLowerCase())) {
                     points += calculateWordPoints(letters);
                 }
             }
         }
-        if(allOk){
+        if (allOk) {
             getActivePlayer().addPoints(points);
         }
         return allOk;
@@ -379,10 +363,16 @@ public class Game implements Observable {
 
     private Direction findCompleteWordRow(List<Square> letters) {
         Square square = letters.get(0);
-        Square squareLeft = boardManager.getSquare(square.getPosRow(), square.getPosColumn() + 1);
-        Square squareRight = boardManager.getSquare(square.getPosRow(), square.getPosColumn() - 1);
+        Square squareLeft = null;
+        Square squareRight = null;
+        if (square.getPosColumn() + 1 < 15) {
+            squareLeft = boardManager.getSquare(square.getPosRow(), square.getPosColumn() + 1);
+        }
+        if (square.getPosColumn() - 1 >= 0) {
+            squareRight = boardManager.getSquare(square.getPosRow(), square.getPosColumn() - 1);
+        }
         Direction direction = null;
-        if (squareLeft.getTileOn() != null || squareRight.getTileOn() != null) {
+        if ((squareLeft != null && squareLeft.getTileOn() != null) || (squareRight != null && squareRight.getTileOn() != null)) {
             direction = Direction.ROWN;
         } else {
             direction = Direction.COLUMN;
@@ -412,85 +402,78 @@ public class Game implements Observable {
     }
 
 
-    private List<Square> createWordListVertical(List<Square> letters,Direction direction) {
+    private List<Square> createWordListVertical(List<Square> letters, Direction direction) {
         boolean isConnected = false;
         List<Square> allLetters = new ArrayList<>();
         Square square = letters.get(0);
         int rowOrColumn;
         int reverseRowOrColumn;
-        if(direction.equals(Direction.COLUMN)) {
+        if (direction.equals(Direction.COLUMN)) {
             rowOrColumn = square.getPosColumn();
             reverseRowOrColumn = square.getPosRow();
-        } else{
+        } else {
             rowOrColumn = square.getPosRow();
             reverseRowOrColumn = square.getPosColumn();
         }
         boolean sameWord = true;
         ArrayList<Square> wordWrongSide = new ArrayList<>();
-        for (int i = reverseRowOrColumn-1; i >= 0 && sameWord; i--) {
+        for (int i = reverseRowOrColumn - 1; i >= 0 && sameWord; i--) {
             Square squareAdjacent;
-            if(direction.equals(Direction.COLUMN)) {
-                squareAdjacent = boardManager.getSquare(i,rowOrColumn);
-            } else{
+            if (direction.equals(Direction.COLUMN)) {
+                squareAdjacent = boardManager.getSquare(i, rowOrColumn);
+            } else {
                 squareAdjacent = boardManager.getSquare(rowOrColumn, i);
             }
             if (squareAdjacent.getTileOn() != null) {
-                int culumnCurrentSquare = squareAdjacent.getPosColumn();
-                int rowCurrentSquare = squareAdjacent.getPosRow();
-                if(!letters.contains(squareAdjacent)
-                        ||boardManager.getSquare(rowCurrentSquare,culumnCurrentSquare+1).getTileOn()!=null
-                        ||boardManager.getSquare(rowCurrentSquare,culumnCurrentSquare-1).getTileOn()!=null
-                        || movesHistory.size()==0){
-                    isConnected = true;
-                }
-                if(!letters.contains(squareAdjacent)
-                        ||boardManager.getSquare(rowCurrentSquare+1,culumnCurrentSquare).getTileOn()!=null
-                        ||boardManager.getSquare(rowCurrentSquare-1,culumnCurrentSquare).getTileOn()!=null
-                        || movesHistory.size()==0){
-                    isConnected = true;
-                }
+                isConnected = verifyIsAConnected(letters, squareAdjacent);
                 wordWrongSide.add(squareAdjacent);
             } else {
                 sameWord = false;
-                for (int j = wordWrongSide.size()-1; j >= 0 ; j--) {
-                    allLetters.add(wordWrongSide.get(j));
-                }
             }
+        }
+        for (int j = wordWrongSide.size() - 1; j >= 0; j--) {
+            allLetters.add(wordWrongSide.get(j));
         }
         sameWord = true;
         for (int i = reverseRowOrColumn; i < boardManager.BOARD_SIZE && sameWord; i++) {
             Square squareAdjacent;
-            if(direction.equals(Direction.COLUMN)) {
-                squareAdjacent = boardManager.getSquare(i,rowOrColumn);
+            if (direction.equals(Direction.COLUMN)) {
+                squareAdjacent = boardManager.getSquare(i, rowOrColumn);
 
-            } else{
+            } else {
                 squareAdjacent = boardManager.getSquare(rowOrColumn, i);
 
             }
             if (squareAdjacent.getTileOn() != null) {
-                int culumnCurrentSquare = squareAdjacent.getPosColumn();
-                int rowCurrentSquare = squareAdjacent.getPosRow();
-                if(!letters.contains(squareAdjacent)
-                        ||boardManager.getSquare(rowCurrentSquare,culumnCurrentSquare+1).getTileOn()!=null
-                        ||boardManager.getSquare(rowCurrentSquare,culumnCurrentSquare-1).getTileOn()!=null
-                        || movesHistory.size()==0){
-                    isConnected = true;
-                }
-                if(!letters.contains(squareAdjacent)
-                        ||boardManager.getSquare(rowCurrentSquare+1,culumnCurrentSquare).getTileOn()!=null
-                        ||boardManager.getSquare(rowCurrentSquare-1,culumnCurrentSquare).getTileOn()!=null
-                        || movesHistory.size()==0){
-                    isConnected = true;
+                if (!isConnected) {
+                    isConnected = verifyIsAConnected(letters, squareAdjacent);
                 }
                 allLetters.add(squareAdjacent);
             } else {
                 sameWord = false;
             }
         }
-        if(!isConnected){
+        if (!isConnected) {
             allLetters = null;
         }
         return allLetters;
+    }
+
+    private boolean verifyIsAConnected(List<Square> letters, Square adjacent) {
+        boolean isConnected = false;
+        int culumnCurrentSquare = adjacent.getPosColumn();
+        int rowCurrentSquare = adjacent.getPosRow();
+        if (!letters.contains(adjacent)
+                && ((boardManager.getSquare(rowCurrentSquare, culumnCurrentSquare + 1) != null
+                && (culumnCurrentSquare + 1 < 15 && boardManager.getSquare(rowCurrentSquare, culumnCurrentSquare + 1).getTileOn() != null
+                || culumnCurrentSquare - 1 >= 0 && boardManager.getSquare(rowCurrentSquare, culumnCurrentSquare - 1).getTileOn() != null))
+                || (boardManager.getSquare(rowCurrentSquare + 1, culumnCurrentSquare) != null
+                && (culumnCurrentSquare + 1 < 15 && boardManager.getSquare(rowCurrentSquare + 1, culumnCurrentSquare).getTileOn() != null
+                || culumnCurrentSquare - 1 >= 0 && boardManager.getSquare(rowCurrentSquare - 1, culumnCurrentSquare).getTileOn() != null)))
+                || movesHistory.size() == 0) {
+            isConnected = true;
+        }
+        return isConnected;
     }
 
     private Direction findColumnOrRow(List<Square> letters) {

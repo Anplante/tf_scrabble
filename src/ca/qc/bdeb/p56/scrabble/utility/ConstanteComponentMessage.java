@@ -38,6 +38,8 @@ public class ConstanteComponentMessage {
     public static final String MESS_RESTART_GAME  = "Voulez-vous recommencer la partie?";
     public static final String ELLIPSIS = "...";
     public static final String RES_IMAGES_ENG = "./letters/englishDictionaryValue/";
+    public static final String RES_IMAGES_FR = "./letters/frenchDictionaryValue/";
+
 
 
 }

@@ -280,7 +280,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
       for(char start = START_ALPHABET; start < END_ALPHABET; start++)
         {
-            String ressource = ConstanteComponentMessage.RES_IMAGES_ENG + start +  ConstanteComponentMessage.EXT_PNG;
+            String ressource = ConstanteComponentMessage.RES_IMAGES_FR + start +  ConstanteComponentMessage.EXT_PNG;
             ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(ressource));
             Image img = fillingIcon.getImage();
             Image newimg = img.getScaledInstance((int)TILE_DIMENSION.getWidth(), (int)TILE_DIMENSION.getHeight(), java.awt.Image.SCALE_SMOOTH);

@@ -56,7 +56,7 @@ public class BtnSquare extends JButton implements Observateur {
             if (square.getTileOn() != null
                     && gameModel.getActivePlayer().getState().getName().equals(IDState.PLAY_TILE.getName())) {
 
-                ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(ConstanteComponentMessage.RES_IMAGES_ENG +square.getLetterOn().toUpperCase()+ ConstanteComponentMessage.EXT_PNG));
+                ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(ConstanteComponentMessage.RES_IMAGES_FR +square.getLetterOn().toUpperCase()+ ConstanteComponentMessage.EXT_PNG));
                 Image img = fillingIcon.getImage() ;
                 Image newImage = img.getScaledInstance( getWidth(), getHeight(),  java.awt.Image.SCALE_SMOOTH ) ;
                 ImageIcon icon = new ImageIcon( newImage );
@@ -72,7 +72,7 @@ public class BtnSquare extends JButton implements Observateur {
         setText(content);
 
         if (content.isEmpty()) {
-            setBackground(Color.LIGHT_GRAY);
+            setBackground(Color.lightGray);
         } else if (content.length() == 1) {
             setBackground(Color.black);
             setText(null);
