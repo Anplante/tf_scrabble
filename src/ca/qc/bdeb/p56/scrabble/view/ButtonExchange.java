@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class ButtonExchange extends JButton implements Observateur {
 
 
-    private static final URL PATH_TO_FILE = Launcher.class.getResource("/Image/bag_scrabble.png");
+    private static final URL PATH_TO_FILE = Launcher.class.getResource("/images/bag_scrabble.png");
 
     private Image bagImg;
     private JLabel lblNumberLetter;

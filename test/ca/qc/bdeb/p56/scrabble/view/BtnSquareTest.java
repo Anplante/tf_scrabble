@@ -2,7 +2,6 @@ package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +33,7 @@ public class BtnSquareTest {
         java.util.List<Player> players = new ArrayList<Player>();
         players.add(new Player("Louis"));
         gameModel = gameManager.createNewGame(players);
-        btnSquare = new BtnSquare(gameModel, 7, 7);
+        btnSquare = new BtnSquare(gameModel, 7, 7, 50);
         btnSquare.setSize(WIDTH,HEIGHT);
         gameModel.startGame();
     }

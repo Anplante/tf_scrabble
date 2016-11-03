@@ -168,6 +168,29 @@ public class GameTest {
     }
 
     @Test
+    public void testDoublePointsWordAtCenter() {
+
+        game.startGame();
+
+        Tile tileTested1 = new Tile("l", 2);
+        Tile tileTested2 = new Tile("l", 3);
+        Square centerSquare = game.getSquare(7, 7);
+        Square adjacentToCenterSquare = game.getSquare(7,8);
+        centerSquare.setLetter(tileTested1);
+        adjacentToCenterSquare.setLetter(tileTested2);
+
+        List<Square> lettersPlayed = new ArrayList<>();
+
+        lettersPlayed.add(centerSquare);
+        lettersPlayed.add(adjacentToCenterSquare);
+
+        int values = game.calculateWordPoints(lettersPlayed);
+
+        assertEquals(10, values);
+    }
+
+
+    @Test
     public void testValidWordFr() {
 
         String validWord = "bonjour";

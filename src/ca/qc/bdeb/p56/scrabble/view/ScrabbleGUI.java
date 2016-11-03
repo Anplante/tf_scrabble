@@ -3,6 +3,7 @@ package ca.qc.bdeb.p56.scrabble.view;
 import ca.qc.bdeb.p56.scrabble.model.*;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
+import ca.qc.bdeb.p56.scrabble.utility.ImagesManager;
 
 import java.awt.Image;
 import javax.swing.*;
@@ -155,12 +156,11 @@ public class ScrabbleGUI extends JFrame {
 
     private void initGrid() {
 
-        pnlBoard.setLayout(new GridLayout(15, 15, 2, 2));
-
-        for (int row = 0; row < 15; row++) {
-            for (int column = 0; column < 15; column++) {
-                BtnSquare square = new BtnSquare(gameModel, row, column);
-                square.setFocusable(false);
+        pnlBoard.setLayout(new GridLayout(BoardManager.BOARD_SIZE, BoardManager.BOARD_SIZE, 2, 2));
+        int size = pnlBoard.getWidth()/BoardManager.BOARD_SIZE;
+        for (int row = 0; row < BoardManager.BOARD_SIZE; row++) {
+            for (int column = 0; column < BoardManager.BOARD_SIZE; column++) {
+                BtnSquare square = new BtnSquare(gameModel, row, column, size);
                 square.setName(ConstanteTestName.SQUARE_NAME + row + column);
                 pnlBoard.add(square);
             }

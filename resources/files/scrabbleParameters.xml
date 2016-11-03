@@ -36,8 +36,11 @@
             <premium name="DW" type="wordscore" multiplier="2" />
             <premium name="TL" type="letterscore" multiplier="3" />
             <premium name="DL" type="letterscore" multiplier="2" />
+            <premium name="CENTER" type="wordscore" multiplier="2" />
         </premiums>
         <board>
+            <premium row="7" col="7" name="CENTER"/>
+
             <premium row="0" col="0" name="TW" />
             <premium row="0" col="7" name="TW" />
             <premium row="0" col="14" name="TW" />

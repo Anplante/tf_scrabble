@@ -87,7 +87,7 @@ public class StateSwaptTileTest{
     @Test
     public void swapToPlaceTestt() {
 
-        BtnSquare btnSquare = new BtnSquare(game,5,5);
+        BtnSquare btnSquare = new BtnSquare(game,5,5, 50);
         btnSquare.setSize(WIDTH, HEIGHT);
 
         btnTiles.get(2).doClick();
