@@ -38,7 +38,7 @@ public class Board {
                 Square adjacenLeft = (column <= 0) ? null : board[row][column - 1];
                 Square adjacentRight = (column >= board.length- 1) ? null : board[row][column + 1];
 
-                currentSquare.setNeighbours( adjacenLeft, adjacentRight, adjacentUp, adjacentDown);
+                currentSquare.setNeighbours(adjacentUp,adjacentDown, adjacenLeft, adjacentRight);
 
             }
         }

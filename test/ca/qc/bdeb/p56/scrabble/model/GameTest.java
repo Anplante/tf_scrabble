@@ -245,7 +245,6 @@ public class GameTest {
         lettersPlayed.clear();
         lettersPlayed.add(square3d);
         assertTrue(game.playWord(lettersPlayed));
-
     }
 
     @Test
@@ -257,7 +256,13 @@ public class GameTest {
         Square square2 = game.getSquare(7, 8);
         square2.setLetter(new Tile("e", 2));
         Square square3 = game.getSquare(7, 9);
-        square1.setLetter(new Tile("s", 2));
+        square3.setLetter(new Tile("s", 2));
+
+        List<Square> lettersPlayed = new ArrayList<>();
+        lettersPlayed.add(square1);
+        lettersPlayed.add(square2);
+        lettersPlayed.add(square3);
+        assertTrue(game.playWord(lettersPlayed));
 
         //"LUNES" from pos(3;9) to (7;9)
         Square square4 = game.getSquare(6, 4);
@@ -271,11 +276,6 @@ public class GameTest {
         Square square8 = game.getSquare(6, 8);
         square8.setLetter(new Tile("s", 2));
 
-        List<Square> lettersPlayed = new ArrayList<>();
-        lettersPlayed.add(square1);
-        lettersPlayed.add(square2);
-        lettersPlayed.add(square3);
-        assertTrue(game.playWord(lettersPlayed));
         lettersPlayed.clear();
         lettersPlayed.add(square4);
         lettersPlayed.add(square5);
@@ -283,6 +283,7 @@ public class GameTest {
         lettersPlayed.add(square7);
         lettersPlayed.add(square8);
         assertTrue(game.playWord(lettersPlayed));
+        System.out.println(game.getActivePlayer().getScore());
     }
 
     @Test
