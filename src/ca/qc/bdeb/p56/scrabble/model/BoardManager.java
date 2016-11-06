@@ -196,6 +196,6 @@ public class BoardManager {
             }
             candidats.remove(candidatAnalysing);
         }
-        return squaresAvailable;
+        return squaresAvailable; // test
     }
 }
