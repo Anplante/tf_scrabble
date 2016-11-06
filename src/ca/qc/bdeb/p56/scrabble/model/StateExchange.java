@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Classe qui représente la phase d'échange de lettres. Le joueur peut sélectionner les lettres qu'il veut échanger ou
  * annuler l'échange.
- *
+ * <p>
  * Created by Julien Brosseau on 9/21/2016.
  */
 public class StateExchange extends State {
@@ -33,37 +33,39 @@ public class StateExchange extends State {
     }
 
     @Override
-    protected void selectTile(Tile tile)
-    {
-        if(tilesSelected == null)
-        {
+    protected void selectTile(Tile tile) {
+        if (tilesSelected == null) {
             tilesSelected = new ArrayList<>();
         }
-        if(tile.isSelected()){
-            tile.selectTile(false);
+        if (tile.isSelected()) {
+            tile.selectTile();
             tilesSelected.remove(tile);
             getGame().aviserObservateurs();
-        }else {
+        } else {
             tilesSelected.add(tile);
-            tile.selectTile(true);
+            tile.selectTile();
         }
     }
 
     @Override
-    protected void execute()
-    {
-        if(stateSelected != IDState.SELECT_ACTION)
-        {
-            if(tilesSelected!= null )
-            {
-                getGame().exchangeLetters(tilesSelected);
-            }
-            else {
-                // TODO Louis : solution temporaire pour montrer l'erreur. Il faudrait s'entendre sur comment on veut afficher des messages d'erreur
-                JOptionPane.showMessageDialog(new Frame(),
-                        "Aucune tuile n'a été sélectionné à supprimer",
-                        "Action invalide",
-                        JOptionPane.ERROR_MESSAGE);
+    protected void execute() {
+
+        switch (stateSelected) {
+            case EXCHANGE:
+                if (tilesSelected != null) {
+                    getGame().exchangeLetters(tilesSelected);
+                } else {
+                    // TODO Louis : solution temporaire pour montrer l'erreur. Il faudrait s'entendre sur comment on veut afficher des messages d'erreur
+                    JOptionPane.showMessageDialog(new Frame(),
+                            "Aucune tuile n'a été sélectionné à supprimer",
+                            "Action invalide",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+                break;
+        }
+        if (tilesSelected != null) {
+            for (Tile tile : tilesSelected) {
+                tile.selectTile();
             }
         }
     }
@@ -73,17 +75,9 @@ public class StateExchange extends State {
 
         State newState = null;
 
-        switch (stateSelected)
-        {
+        switch (stateSelected) {
             case SELECT_ACTION:
-                if(tilesSelected != null) {
-                    for (Tile tile : tilesSelected) {
-                        tile.selectTile(false);
-                    }
-                    newState = new StateSelectAction(getPlayer());
-                } else{
-                    newState = new StateSelectAction(getPlayer());
-                }
+                newState = new StateSelectAction(getPlayer());
                 break;
             case EXCHANGE:
                 newState = new StatePending(getPlayer());

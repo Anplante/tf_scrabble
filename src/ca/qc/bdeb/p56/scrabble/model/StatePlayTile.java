@@ -48,10 +48,10 @@ public class StatePlayTile extends State {
     {
         tilesPlaced.add(squareSelected);
         squareSelected.setLetter(tileSelected);
-        tileSelected.selectTile(false);
+        tileSelected.selectTile();
         getPlayer().remove(tileSelected);
         getPlayer().aviserObservateurs();
-        tileSelected.selectTile(false);
+        tileSelected.selectTile();
         tileSelected = null;
     }
 
@@ -61,11 +61,11 @@ public class StatePlayTile extends State {
 
         if (this.tileSelected == null) {
 
-            tileSelected.selectTile(true);
+            tileSelected.selectTile();
             this.tileSelected = tileSelected;
         } else {
 
-            this.tileSelected.selectTile(false);
+            this.tileSelected.selectTile();
             getPlayer().swapTile(tileSelected, this.tileSelected);
             this.tileSelected = null;
 
@@ -127,7 +127,7 @@ public class StatePlayTile extends State {
         this.stateSelected = stateSelected;
 
         if (tileSelected != null)
-            tileSelected.selectTile(false);
+            tileSelected.selectTile();
 
         readyToChange = true;
     }

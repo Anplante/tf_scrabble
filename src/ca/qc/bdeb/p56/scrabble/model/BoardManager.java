@@ -122,7 +122,7 @@ public class BoardManager {
         return board.getSquare(row, column);
     }
 
-    public List<Square> getSquarePositionAvailableToPlay() {
+/*    public List<Square> getSquarePositionAvailableToPlay() {
 
         List<Square> squaresAvailable = new ArrayList<>();
         Square centerSquare = board.getSquare(BOARD_CENTER, BOARD_CENTER);
@@ -157,10 +157,9 @@ public class BoardManager {
             squaresAvailable.add(centerSquare);
         }
         return squaresAvailable;
-    }
+    }*/
 
 
-/*
     public List<Square> getSquarePositionAvailableToPlay() {
         List<Square> squaresAvailable = new ArrayList<>();
 
@@ -168,30 +167,35 @@ public class BoardManager {
         Square centerSquare = board.getSquare(BOARD_CENTER, BOARD_CENTER);
 
         List<Square> candidats = new ArrayList<>();
+        List<Square> candidatsAnalysed = new ArrayList<>();
         candidats.add(centerSquare);
-
-
 
 
         while (!candidats.isEmpty()) {
 
+            Square candidatAnalysing = candidats.get(0);
 
-            Square candidatAnalysed = candidats.get(0);
-
-            if (candidatAnalysed.getLetterOn() == null) {
-
-                if(!squaresAvailable.contains(candidatAnalysed))
+            if(!candidatsAnalysed.contains(candidatAnalysing))
+            {
+                if( candidatAnalysing != null)
                 {
-                    squaresAvailable.add(candidatAnalysed);
+                    if (candidatAnalysing.getTileOn() == null) {
+
+                        if(!squaresAvailable.contains(candidatAnalysing))
+                        {
+                            squaresAvailable.add(candidatAnalysing);
+                        }
+                    } else {
+
+                        List<Square> neighbours = candidatAnalysing.getNeighbours();
+
+                        candidats.addAll(neighbours);
+                    }
                 }
-            } else {
-
-                List<Square> neighbours = candidatAnalysed.getNeighbours();
-
-                candidats.addAll(neighbours);
+                candidatsAnalysed.add(candidatAnalysing);
             }
-            candidats.remove(candidatAnalysed);
+            candidats.remove(candidatAnalysing);
         }
         return squaresAvailable;
-    }*/
+    }
 }

@@ -38,9 +38,9 @@ public class Tile implements Observable {
         return isSelected;
     }
 
-    public void selectTile(boolean newState)
+    public void selectTile()
     {
-        isSelected = newState;
+        isSelected = !isSelected;
         aviserObservateurs();
     }
 

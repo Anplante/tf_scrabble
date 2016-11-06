@@ -258,7 +258,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         for (Tile letter : playerTiles) {
 
-            ButtonTile btnTile = new ButtonTile(game, letter, TILE_DIMENSION, iconsTile.get(letter.getLetter()));
+            ButtonTile btnTile = new ButtonTile(game, letter, iconsTile.get(letter.getLetter()));
+            btnTile.setSize(TILE_DIMENSION);
             btnTile.setLocation(x, POS_Y);
             letter.ajouterObservateur(btnTile);
             btnTile.setName(ConstanteTestName.TILE_NAME + i);

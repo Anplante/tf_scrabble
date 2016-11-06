@@ -25,13 +25,12 @@ public class ButtonTile extends JButton implements Observateur{
     private Tile tile;
 
 
-    public ButtonTile(Game gameModel, Tile tile, Dimension dimension, ImageIcon icon) {
+    public ButtonTile(Game gameModel, Tile tile, ImageIcon icon) {
 
         super();
 
         this.gameModel = gameModel;
         this.tile = tile;
-        setSize(dimension);
         changementEtat();
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setBorder(BorderFactory.createEtchedBorder());
@@ -61,8 +60,7 @@ public class ButtonTile extends JButton implements Observateur{
     @Override
     public void changementEtat() {
 
-        if (tile != null && tile.isSelected()) {
-
+        if (tile.isSelected()) {
             if (gameModel.getActivePlayer().getState().getName() == IDState.EXCHANGE.getName()) {
                 setBackground(REMOVE_COLOR);
             } else {

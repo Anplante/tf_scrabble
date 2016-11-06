@@ -8,12 +8,10 @@ package ca.qc.bdeb.p56.scrabble.model;
 public class Board {
 
     private Square[][] board;
-    private int size;
 
     public Board(int size) {
         board = new Square[size][size];
         initBoard();
-        this.size = size;
     }
 
     private void initBoard() {
@@ -37,9 +35,7 @@ public class Board {
                 Square adjacentDown = (row >=board.length - 1) ? null : board[row + 1][column];
                 Square adjacenLeft = (column <= 0) ? null : board[row][column - 1];
                 Square adjacentRight = (column >= board.length- 1) ? null : board[row][column + 1];
-
                 currentSquare.setNeighbours(adjacentUp,adjacentDown, adjacenLeft, adjacentRight);
-
             }
         }
     }
@@ -47,5 +43,4 @@ public class Board {
     public Square getSquare(int row, int column) {
         return board[row][column];
     }
-
 }

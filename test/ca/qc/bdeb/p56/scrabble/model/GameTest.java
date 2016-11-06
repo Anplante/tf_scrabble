@@ -341,4 +341,10 @@ public class GameTest {
         lettersPlayed.add(square8);
         assertFalse(game.playWord(lettersPlayed));
     }
+
+    @Test
+    public void testPlayFirstWordAtCenter()
+    {
+
+    }
 }

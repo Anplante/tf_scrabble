@@ -37,7 +37,9 @@ public class Game implements Observable {
     private transient LinkedList<Observateur> observateurs;
     private static final Random randomGenerator = new Random();
 
+
     private BoardManager boardManager;
+
     private List<Player> players;
     private int activePlayerIndex;
     private static List<Tile> alphabetBag;
@@ -86,6 +88,9 @@ public class Game implements Observable {
         return boardManager.getPremiumSquare(row, column);
     }
 
+    public BoardManager getBoardManager() {
+        return boardManager;
+    }
 
     public List<MoveLog> getMovesHistory() {
         List<MoveLog> moveLogs = new ArrayList<>();
@@ -301,15 +306,13 @@ public class Game implements Observable {
 
         Direction direction = findColumnOrRow(tilesPlaced);
         boolean isAWord = false;
-        int rowOrColumn = findColumnOrRowValue(tilesPlaced);  // Louis : on peut skip cette verification je crois car on sait deja c'est colonne ou range, alors on n'a qu'a cherche dans les tiles joues
-        List<Square> letters = formWordWithTilesPlayed(tilesPlaced, direction, rowOrColumn);
+        List<Square> letters = formWordWithTilesPlayed(tilesPlaced, direction);
 
         if (!letters.isEmpty() && letters.size() > 1) {
 
             String word = createWord(letters);
-            // isAWord = verifyAllLetters(letters, direction);
             if (dictionary.checkWordExist(word)) {
-                if (checkForComboWord(tilesPlaced, letters, direction)) {
+                if (checkForComboWord(tilesPlaced, direction)) {
                     System.out.println("point donné MainWord");
                     int wordValue = calculateWordPoints(letters);
                     getActivePlayer().addPoints(wordValue);
@@ -475,7 +478,7 @@ public class Game implements Observable {
     }
 
 
-    private boolean checkForComboWord(List<Square> tilesPlaced, List<Square> letters, Direction direction) {
+    private boolean checkForComboWord(List<Square> tilesPlaced, Direction direction) {
 
         boolean allCombinaisonAreValid = true;
         int indexTilesPlaced = 0;
@@ -582,7 +585,7 @@ public class Game implements Observable {
         return newLetters;
     }
 
-    private List<Square> formWordWithTilesPlayed(List<Square> lettersPlayed, Direction direction, int rowOrColumn) {
+    private List<Square> formWordWithTilesPlayed(List<Square> lettersPlayed, Direction direction) {
 
         List<Square> sequenceFound = new ArrayList<>();
         boolean foundSequenceTilesWithAllLetters = false;
@@ -765,5 +768,18 @@ public class Game implements Observable {
 
         getActivePlayer().selectNextState(IDState.SELECT_ACTION);
         goToNextState();
+    }
+
+
+    public void PlaceAWord()
+    {
+        List<Square> squaresPlayable = boardManager.getSquarePositionAvailableToPlay();
+        boolean wordFound = false;
+
+        while(!squaresPlayable.isEmpty() && !wordFound)
+        {
+            
+        }
+
     }
 }
