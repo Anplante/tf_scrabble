@@ -121,6 +121,8 @@ public abstract class Player implements Observable {
         this.active = active;
     }
 
+    public abstract boolean isHumanPlayer();
+
     public String getName() {
         return name;
     }

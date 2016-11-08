@@ -41,4 +41,8 @@ public class AiPlayer extends Player {
     }
 
 
+    @Override
+    public boolean isHumanPlayer() {
+        return false;
+    }
 }
