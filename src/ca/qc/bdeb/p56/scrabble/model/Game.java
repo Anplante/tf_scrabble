@@ -192,7 +192,6 @@ public class Game implements Observable {
         if (!getActivePlayer().isActivated()) {
             drawTile();
             activateNextPlayer();
-
         }
     }
 
@@ -205,7 +204,7 @@ public class Game implements Observable {
     private void activateNextPlayer() {
 
         activePlayerIndex = (activePlayerIndex + 1) % players.size();
-        getActivePlayer().nextState();
+        getActivePlayer().changePlayer();
     }
 
     private void initPlayerRack() {
@@ -336,6 +335,7 @@ public class Game implements Observable {
         return word.toString().toLowerCase();
     }
 
+    // TODO Antoine : refactoring a faire ici
     private boolean verifyAllLetters(List<Square> letters, Direction direction) {
         boolean allOk = true;
         int points = 0;
@@ -420,6 +420,7 @@ public class Game implements Observable {
         return direction;
     }
 
+    // TODO Antoine : refactoring a faire ici
     private List<Square> createWordList(List<Square> letters, Direction direction) {
         boolean isConnected = false;
         List<Square> allLetters = new ArrayList<>();
@@ -480,6 +481,7 @@ public class Game implements Observable {
     }
 
 
+    // TODO Antoine : refactoring a faire ici
     private boolean checkForComboWord(List<Square> tilesPlaced, Direction direction) {
 
         boolean allCombinaisonAreValid = true;

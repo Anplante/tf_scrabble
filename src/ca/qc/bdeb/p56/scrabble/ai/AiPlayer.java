@@ -1,6 +1,8 @@
 package ca.qc.bdeb.p56.scrabble.ai;
 
 import ca.qc.bdeb.p56.scrabble.model.Player;
+import ca.qc.bdeb.p56.scrabble.model.State;
+import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -30,6 +32,7 @@ public class AiPlayer extends Player {
     public AiPlayer(ArrayList<String> listName) {
         super(chooseName(listName));
         aiGoal = new AiGoal(getGame());
+        setState(new AiStateSelectAction(this));
     }
 
     private static String chooseName(ArrayList<String> listName) {
@@ -38,6 +41,12 @@ public class AiPlayer extends Player {
         String Ainame = listName.get(nom);
         listName.remove(nom);
         return Ainame;
+    }
+
+    @Override
+    public void changePlayer() {
+        nextState();
+        getGame().goToNextState();
     }
 
 

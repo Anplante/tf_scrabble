@@ -37,6 +37,10 @@ public class StateSelectAction extends State {
     }
 
     @Override
+    protected void execute() {
+    }
+
+    @Override
     protected State getNextState() {
 
         State newState = null;

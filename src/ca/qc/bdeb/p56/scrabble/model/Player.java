@@ -34,7 +34,6 @@ public abstract class Player implements Observable {
         playerColor = new Color(0, 0, 182, 155);
         active = false;
         observateurs = new LinkedList<>();
-        setState(new StatePending(this));
     }
 
     public List<Tile> getTiles() {
@@ -105,12 +104,15 @@ public abstract class Player implements Observable {
     }
 
     public void nextState() {
-
         currentState.execute();
         State newState = currentState.getNextState();
         currentState = newState;
         newState.initialize();
         aviserObservateurs();
+    }
+
+    public void changePlayer() {
+        nextState();
     }
 
     public boolean isActivated() {
