@@ -157,6 +157,8 @@ public abstract class Player implements Observable {
         aviserObservateurs();
     }
 
+
+
     /**
      * Pour l'utilisation des tests
      */

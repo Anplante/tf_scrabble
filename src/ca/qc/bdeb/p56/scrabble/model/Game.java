@@ -1,5 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
+import ca.qc.bdeb.p56.scrabble.ai.AiGoal;
+import ca.qc.bdeb.p56.scrabble.ai.AiPlayer;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.shared.Direction;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
@@ -771,15 +773,67 @@ public class Game implements Observable {
     }
 
 
-    public void PlaceAWord()
-    {
+    public void PlaceAWord() {
         List<Square> squaresPlayable = boardManager.getSquarePositionAvailableToPlay();
         boolean wordFound = false;
+        AiGoal ai = new AiGoal(this);
+        String letters = getPlayerLettersInStringFormat(getActivePlayer());
+        List<String> wordsPlayable = ai.getPossibleWord(letters);
+        int indexCandidatsSquare = 0;
+        int indexWord = 0;
+        while (indexCandidatsSquare < squaresPlayable.size() && !wordFound) {
+            boolean wordPlayable = false;
+            int index = 0;
+            List<Square> cases = new ArrayList<>();
+            Square start = squaresPlayable.get(indexCandidatsSquare);
+            Square currentSquare = start;
 
-        while(!squaresPlayable.isEmpty() && !wordFound)
-        {
-            
+            while (indexWord < wordsPlayable.size() && !wordPlayable) {
+
+
+                if (start.getPosColumn() + wordsPlayable.get(indexWord).length() < boardManager.BOARD_SIZE) {
+                    boolean mayBePlayable = true;
+                    while (index < letters.length() && mayBePlayable) {
+
+                        if (currentSquare != null) {
+                            if (currentSquare.getTileOn() == null) {
+                                cases.add(currentSquare);
+                                currentSquare = currentSquare.getAdjacentRight();
+                                index++;
+                            } else {
+                                start = start.getAdjacentLeft();
+                                cases.clear();
+                                currentSquare = start;
+                                index = 0;
+                                mayBePlayable = false;
+                            }
+                        } else {
+                            break;
+                        }
+                    }
+                } else {
+                    indexWord++;
+                }
+            }
+
+            indexCandidatsSquare++;
+
         }
 
+    }
+
+
+
+
+    private String getPlayerLettersInStringFormat(Player player) {
+        StringBuilder letters = new StringBuilder();
+
+        List<Tile> playerTiles = player.getTiles();
+
+        for (Tile tile : playerTiles) {
+            letters.append(tile.getLetter());
+        }
+
+        return letters.toString();
     }
 }
