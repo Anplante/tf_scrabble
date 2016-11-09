@@ -161,6 +161,7 @@ public class BoardManager {
 
 
     public List<Square> getSquarePositionAvailableToPlay() {
+
         List<Square> squaresAvailable = new ArrayList<>();
 
 
@@ -179,7 +180,7 @@ public class BoardManager {
             {
                 if( candidatAnalysing != null)
                 {
-                    if (candidatAnalysing.getTileOn() == null) {
+                    if (candidatAnalysing.isEmpty()) {
 
                         if(!squaresAvailable.contains(candidatAnalysing))
                         {
@@ -196,6 +197,8 @@ public class BoardManager {
             }
             candidats.remove(candidatAnalysing);
         }
-        return squaresAvailable; // test
+        return squaresAvailable;
     }
+
+
 }

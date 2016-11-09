@@ -774,8 +774,27 @@ public class Game implements Observable {
         goToNextState();
     }
 
+    private void playFirstWord(Player player) {
+        AiGoal ai = new AiGoal(this);
+        String letters = getPlayerLettersInStringFormat(player);
+        List<String> wordsPlayable = ai.getPossibleWord(letters);
+        String wordToPlay = wordsPlayable.get(0);   // TODO Louis : jouer le mot le plus long?
 
-    public void PlaceAWord() {
+        Square start = boardManager.getSquare(boardManager.BOARD_CENTER, boardManager.BOARD_CENTER - wordToPlay.length());
+
+        char[] wordLetters = wordToPlay.toCharArray();
+
+        for (int i = 0; i < wordLetters.length; i++) {
+            Tile playerTile = player.getTile(String.valueOf(wordLetters[i]));
+            start.setLetter(playerTile);
+            player.remove(playerTile);
+        }
+    }
+
+
+
+
+  /*  public void PlaceAWord() {
         List<Square> squaresPlayable = boardManager.getSquarePositionAvailableToPlay();
         boolean wordFound = false;
         AiGoal ai = new AiGoal(this);
@@ -822,9 +841,71 @@ public class Game implements Observable {
 
         }
 
+    }*/
+
+
+    public void placeAWord() {
+
+        List<Square> squaresPlayable = boardManager.getSquarePositionAvailableToPlay();
+        boolean wordFound = false;
+        AiGoal ai = new AiGoal(this);
+        String validWord;
+        int indexCandidatsSquare = 0;
+
+        while (indexCandidatsSquare < squaresPlayable.size() && !wordFound) {
+            String letters = getPlayerLettersInStringFormat(getActivePlayer());
+            Square start = squaresPlayable.get(indexCandidatsSquare);
+            Square currentSquare = start;
+            List<String> wordsPlayable = ai.getPossibleWord(letters);
+            List<String> tempsWords;
+            while (!currentSquare.getAdjacentRight().isEmpty()) {
+                currentSquare = currentSquare.getAdjacentRight();
+                letters += currentSquare.getLetterOn();
+            }
+
+            tempsWords = ai.getPossibleWord(letters);
+            wordsPlayable = removeDuplicateWord(wordsPlayable, tempsWords);
+
+            while (!wordsPlayable.isEmpty() && !wordFound) {
+                String currentWord = wordsPlayable.get(0);
+                int indexLetter = 0;
+                boolean playable = true;
+                while (indexLetter < currentWord.length() && playable) {
+                    if (!currentSquare.isEmpty()) {
+                        if (!currentSquare.getLetterOn().equals(String.valueOf(currentWord.charAt(indexLetter)))) {
+                            playable = false;
+                            indexLetter = 0;
+                        }
+                    }
+                    indexLetter++;
+                }
+                if (playable) {
+                    wordFound = true;
+                    validWord = currentWord;
+                    int index = 0;
+
+                    while (index < validWord.length()) {
+                        if (start.isEmpty()) {
+                            start.setLetter(getActivePlayer().getTile(String.valueOf(validWord.charAt(index))));
+                        }
+                    }
+                } else {
+                    wordsPlayable.remove(currentWord);
+                }
+            }
+        }
+
+
     }
 
-
+    private List<String> removeDuplicateWord(List<String> original, List<String> newWords) {
+        for (String word : original) {
+            if (newWords.contains(word)) {
+                newWords.remove(word);
+            }
+        }
+        return newWords;
+    }
 
 
     private String getPlayerLettersInStringFormat(Player player) {

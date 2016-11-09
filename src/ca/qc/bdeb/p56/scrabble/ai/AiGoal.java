@@ -32,7 +32,7 @@ public class AiGoal {
     }
 
     private void combinations(String allLetters) {
-
+        long startTime = System.currentTimeMillis();
         List<String> results = new ArrayList<>();
 
         for (int i = 0; i < allLetters.length(); i++) {
@@ -67,6 +67,10 @@ public class AiGoal {
                     allPossibleCombination.add(wordFormed);
                 }
             }
+
         }
+        long stopTime = System.currentTimeMillis();
+        long elapsedTime = stopTime - startTime;
+        System.out.println(elapsedTime);
     }
 }

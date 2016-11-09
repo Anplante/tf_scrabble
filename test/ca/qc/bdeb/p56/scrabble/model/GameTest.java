@@ -1,5 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
+import ca.qc.bdeb.p56.scrabble.ai.AiGoal;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import org.junit.After;
 import org.junit.Before;
@@ -342,9 +343,12 @@ public class GameTest {
         assertFalse(game.playWord(lettersPlayed));
     }
 
+    @Ignore
     @Test
     public void testPlayFirstWordAtCenter()
     {
+            game.startGame();
+            game.placeAWord();
 
     }
 }

@@ -169,4 +169,20 @@ public abstract class Player implements Observable {
     public void emptyHand() {
         tiles.clear();
     }
+
+    public Tile getTile(String letterWanted) {
+
+        int index = 0;
+        boolean tileFound = false;
+        Tile tileWanted = null;
+
+        while(!tileFound && index < tiles.size())
+        {
+            if(tileFound = tiles.get(index).getLetter().equals(letterWanted))
+            {
+                tileWanted = tiles.get(index);
+            }
+        }
+        return tileWanted;
+    }
 }

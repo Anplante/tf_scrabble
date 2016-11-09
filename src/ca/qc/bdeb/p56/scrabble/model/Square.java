@@ -140,4 +140,8 @@ public class Square implements Observable {
     public void aviserObservateurs(Enum<?> e, Object o) {
 
     }
+
+    public boolean isEmpty() {
+        return tileOn == null;
+    }
 }
