@@ -44,12 +44,10 @@ public class AiGoalTest {
     @Test
     public void testAllPossibleWord()
     {
-        List<String> results = new ArrayList<>(Arrays.asList("banane", "banne", "nana", "ben", "bea", "ban", "ane", "ana", "ne", "na", "en", "an"));
+        List<String> results = new ArrayList<>(Arrays.asList("banna","banane", "banne", "nana", "ben", "bea", "ban", "ane", "ana", "ne", "na", "en", "an"));
 
-        String lettersOfAi= "banane";
-
-        ArrayList<String>  wordsFound = aiGoal.getPossibleWord(lettersOfAi);
-
+        String lettersOfAi= "nnbaae";
+        List<String>  wordsFound = aiGoal.getPossibleWord(lettersOfAi);
 
         for(String word : results)
         {

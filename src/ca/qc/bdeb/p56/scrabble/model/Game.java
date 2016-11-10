@@ -858,13 +858,18 @@ public class Game implements Observable {
             Square currentSquare = start;
             List<String> wordsPlayable = ai.getPossibleWord(letters);
             List<String> tempsWords;
+            String suppLetters = "";
             while (!currentSquare.getAdjacentRight().isEmpty()) {
                 currentSquare = currentSquare.getAdjacentRight();
-                letters += currentSquare.getLetterOn();
+                suppLetters += currentSquare.getLetterOn();
             }
 
-            tempsWords = ai.getPossibleWord(letters);
-            wordsPlayable = removeDuplicateWord(wordsPlayable, tempsWords);
+            if(!suppLetters.isEmpty())
+            {
+                tempsWords = ai.getPossibleWord(letters);
+                wordsPlayable = removeDuplicateWord(wordsPlayable, tempsWords);
+            }
+
 
             while (!wordsPlayable.isEmpty() && !wordFound) {
                 String currentWord = wordsPlayable.get(0);
