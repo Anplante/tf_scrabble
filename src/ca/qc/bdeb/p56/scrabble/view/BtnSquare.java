@@ -1,6 +1,5 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
-import ca.qc.bdeb.p56.scrabble.model.BoardManager;
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.Square;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
@@ -37,12 +36,12 @@ public class BtnSquare extends JButton implements Observateur {
     private int size;
     private Square square;
     private HashMap<String, ImageIcon> icons;
-    private String ImgPath;
+    private String imgPath;
 
     public BtnSquare(Game gameModel, int posRow, int posColumn, int size, String pathImg) {
 
         super(gameModel.getPremiumSquare(posRow, posColumn));
-        ImgPath = pathImg;
+        imgPath = pathImg;
         this.gameModel = gameModel;
         this.posRow = posRow;
         this.posColumn = posColumn;
@@ -61,7 +60,11 @@ public class BtnSquare extends JButton implements Observateur {
             if (square.getTileOn() != null
                     && gameModel.getActivePlayer().getState().getName().equals(IDState.PLAY_TILE.getName())) {
                 setText("");
-                URL path = getClass().getClassLoader().getResource(ImgPath + square.getLetterOn().toUpperCase() + ConstanteComponentMessage.EXT_PNG);
+                String valueOnTile = square.getLetterOn();
+                if(valueOnTile.trim().equals("")){
+                    valueOnTile = "1";
+                }
+                URL path = getClass().getClassLoader().getResource(imgPath + valueOnTile + ConstanteComponentMessage.EXT_PNG);
                 setIcon(ImagesManager.getIcon(path, size, size));
             }
         });
@@ -96,7 +99,11 @@ public class BtnSquare extends JButton implements Observateur {
                 setText("");
                 setIcon(ImagesManager.getIcon(getClass().getClassLoader().getResource(PATH_IMG_CENTER_STAR), size, size));
             default:
-                setBackground(Color.lightGray);
+                if(imgPath.equals(ConstanteComponentMessage.RES_IMAGES_FR_NOBLE)) {
+                    setBackground(Color.lightGray);
+                }else {
+                    setBackground(new Color(188,183,122));
+                }
                 break;
         }
         repaint();
