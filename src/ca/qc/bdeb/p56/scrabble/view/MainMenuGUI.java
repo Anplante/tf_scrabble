@@ -41,6 +41,9 @@ import java.util.logging.Logger;
  */
 public class MainMenuGUI extends JDialog {
 
+    private static final int BASIC_THEME = 0;
+    private static final int NOBLE_THEME = 1;
+
     private static final String[] nombreDeAi = {"1", "2", "3"};
     private JPanel panelMenu;
     private JTextField txtName;
@@ -193,6 +196,22 @@ public class MainMenuGUI extends JDialog {
 
     }
 
+    private String getLetttersDirectory(){
+        String path;
+        switch (cmbTheme.getSelectedIndex()){
+            case BASIC_THEME:
+                path = ConstanteComponentMessage.RES_IMAGES_FR_BASIC;
+                break;
+            case NOBLE_THEME:
+                path = ConstanteComponentMessage.RES_IMAGES_FR_NOBLE;
+                break;
+            default:
+                path = ConstanteComponentMessage.RES_IMAGES_FR_BASIC;
+                break;
+        }
+        return path;
+    }
+
     private void addFileChooser() {
         fileImage = new JFileChooser();
     }
@@ -214,6 +233,7 @@ public class MainMenuGUI extends JDialog {
     private void initializeGame() {
         gameManager = new GameManager();
         game = gameManager.createNewGame(players);
+        parent.setImgPath(getLetttersDirectory());
         parent.changeBackground(cmbBackgroundScrabble.getSelectedItem().toString());
         parent.createScrabbleGame(game);
         setVisible(false);

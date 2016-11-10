@@ -4,6 +4,7 @@ import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.HumanPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Player;
+import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
 import org.junit.After;
@@ -37,6 +38,7 @@ public class PanelLetterRackZoneTest {
         scrabbleGame = new ScrabbleGUI();
         scrabbleGame.setBackgroundPath("simplistic.png");
         game = gameManager.createNewGame(lstPlayer);
+        scrabbleGame.setImgPath(ConstanteComponentMessage.RES_IMAGES_FR_BASIC);
         scrabbleGame.createScrabbleGame(game);
     }
 

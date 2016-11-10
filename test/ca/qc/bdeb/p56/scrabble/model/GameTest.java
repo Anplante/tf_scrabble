@@ -2,6 +2,7 @@ package ca.qc.bdeb.p56.scrabble.model;
 
 import ca.qc.bdeb.p56.scrabble.ai.AiGoal;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
+import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -228,7 +229,7 @@ public class GameTest {
     }
 
     @Test
-    public void testPlayAfterWord() {
+    public void testPlayAfterWordVertical() {
 
         Square square1 = game.getSquare(0, 0);
         square1.setLetter(new Tile("l", 2));
@@ -245,6 +246,109 @@ public class GameTest {
         square3d.setLetter(new Tile("s", 2));
         lettersPlayed.clear();
         lettersPlayed.add(square3d);
+        assertTrue(game.playWord(lettersPlayed));
+    }
+
+    @Test
+    public void testWordCrossingOtherWord() {
+
+        Square square1 = game.getSquare(7, 7);
+        square1.setLetter(new Tile("l", 2));
+        Square square2 = game.getSquare(7, 8);
+        square2.setLetter(new Tile("e", 2));
+
+        List<Square> lettersPlayed = new ArrayList<>();
+        lettersPlayed.add(square1);
+        lettersPlayed.add(square2);
+        assertTrue(game.playWord(lettersPlayed));
+
+
+        Square square3 = game.getSquare(6, 8);
+        square3.setLetter(new Tile("s", 2));
+        Square square4 = game.getSquare(8, 8);
+        square4.setLetter(new Tile("s", 2));
+        lettersPlayed.clear();
+        lettersPlayed.add(square3);
+        lettersPlayed.add(square4);
+        assertTrue(game.playWord(lettersPlayed));
+    }
+
+    @Test
+    public void testWordCreatedFromOtherWord() {
+
+        Square square1 = game.getSquare(7, 7);
+        square1.setLetter(new Tile("l", 2));
+        Square square2 = game.getSquare(7, 8);
+        square2.setLetter(new Tile("e", 2));
+
+        List<Square> lettersPlayed = new ArrayList<>();
+        lettersPlayed.add(square1);
+        lettersPlayed.add(square2);
+        assertTrue(game.playWord(lettersPlayed));
+
+
+        Square square3 = game.getSquare(7, 9);
+        square3.setLetter(new Tile("s", 2));
+        Square square5 = game.getSquare(8, 9);
+        square5.setLetter(new Tile("e", 2));
+        Square square4 = game.getSquare(9, 9);
+        square4.setLetter(new Tile("s", 2));
+        lettersPlayed.clear();
+        lettersPlayed.add(square3);
+        lettersPlayed.add(square4);
+        lettersPlayed.add(square5);
+        assertTrue(game.playWord(lettersPlayed));
+    }
+
+    @Test
+    public void testPlayAfterWordHorizontal() {
+
+        Square square1 = game.getSquare(0, 0);
+        square1.setLetter(new Tile("l", 2));
+        Square square2 = game.getSquare(0, 1);
+        square2.setLetter(new Tile("e", 2));
+
+        List<Square> lettersPlayed = new ArrayList<>();
+        lettersPlayed.add(square1);
+        lettersPlayed.add(square2);
+        assertTrue(game.playWord(lettersPlayed));
+
+
+        Square square3d = game.getSquare(0, 2);
+        square3d.setLetter(new Tile("s", 2));
+        lettersPlayed.clear();
+        lettersPlayed.add(square3d);
+        assertTrue(game.playWord(lettersPlayed));
+    }
+
+    @Test
+    public void testWordsCreatedAddinngOneLetterToTwoWords(){
+
+        Square square1 = game.getSquare(0, 0);
+        square1.setLetter(new Tile("l", 2));
+        Square square2 = game.getSquare(1, 0);
+        square2.setLetter(new Tile("e", 2));
+
+        List<Square> lettersPlayed = new ArrayList<>();
+        lettersPlayed.add(square1);
+        lettersPlayed.add(square2);
+        assertTrue(game.playWord(lettersPlayed));
+
+
+        Square square3 = game.getSquare(2, 1);
+        square3.setLetter(new Tile("e", 2));
+        Square square4 = game.getSquare(2, 2);
+        square4.setLetter(new Tile("s", 2));
+
+        lettersPlayed.clear();
+        lettersPlayed.add(square3);
+        lettersPlayed.add(square4);
+        assertTrue(game.playWord(lettersPlayed));
+        lettersPlayed.clear();
+        Square square5 = game.getSquare(2, 0);
+        square5.setLetter(new Tile("s", 2));
+        lettersPlayed.add(square5);
+
         assertTrue(game.playWord(lettersPlayed));
     }
 
@@ -285,6 +389,25 @@ public class GameTest {
         lettersPlayed.add(square8);
         assertTrue(game.playWord(lettersPlayed));
         System.out.println(game.getActivePlayer().getScore());
+    }
+
+    @Test
+    public void testCalculateNewWordCreatedFromExistingWord(){
+        Square square1 = game.getSquare(7, 7);
+        square1.setLetter(new Tile("s", 2));
+        Square square2 = game.getSquare(7, 8);
+        square2.setLetter(new Tile("e", 2));
+
+        List<Square> lettersPlayed = new ArrayList<>();
+        lettersPlayed.add(square1);
+        lettersPlayed.add(square2);
+        game.playWord(lettersPlayed);
+
+        Square square3 = game.getSquare(7, 9);
+        square3.setLetter(new Tile("s", 2));
+        lettersPlayed.clear();
+        lettersPlayed.add(square3);
+        assertTrue(game.playWord(lettersPlayed));
     }
 
     @Test

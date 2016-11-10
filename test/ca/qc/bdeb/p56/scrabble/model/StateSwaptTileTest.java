@@ -1,5 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
+import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
 import ca.qc.bdeb.p56.scrabble.view.BtnSquare;
@@ -51,6 +52,7 @@ public class StateSwaptTileTest{
 
         scrabbleGame = new ScrabbleGUI();
         scrabbleGame.setBackgroundPath("simplistic.png");
+        scrabbleGame.setImgPath(ConstanteComponentMessage.RES_IMAGES_FR_BASIC);
         scrabbleGame.createScrabbleGame(game);
 
         panelTested = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.LETTER_RACK_NAME);
@@ -87,7 +89,7 @@ public class StateSwaptTileTest{
     @Test
     public void swapToPlaceTestt() {
 
-        BtnSquare btnSquare = new BtnSquare(game,5,5, 50);
+        BtnSquare btnSquare = new BtnSquare(game,5,5, 50, ConstanteComponentMessage.RES_IMAGES_FR_BASIC);
         btnSquare.setSize(WIDTH, HEIGHT);
 
         btnTiles.get(2).doClick();

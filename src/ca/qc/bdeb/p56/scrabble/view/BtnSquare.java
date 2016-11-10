@@ -37,10 +37,12 @@ public class BtnSquare extends JButton implements Observateur {
     private int size;
     private Square square;
     private HashMap<String, ImageIcon> icons;
+    private String ImgPath;
 
-    public BtnSquare(Game gameModel, int posRow, int posColumn, int size) {
+    public BtnSquare(Game gameModel, int posRow, int posColumn, int size, String pathImg) {
 
         super(gameModel.getPremiumSquare(posRow, posColumn));
+        ImgPath = pathImg;
         this.gameModel = gameModel;
         this.posRow = posRow;
         this.posColumn = posColumn;
@@ -59,7 +61,7 @@ public class BtnSquare extends JButton implements Observateur {
             if (square.getTileOn() != null
                     && gameModel.getActivePlayer().getState().getName().equals(IDState.PLAY_TILE.getName())) {
                 setText("");
-                URL path = getClass().getClassLoader().getResource(ConstanteComponentMessage.RES_IMAGES_FR + square.getLetterOn().toUpperCase() + ConstanteComponentMessage.EXT_PNG);
+                URL path = getClass().getClassLoader().getResource(ImgPath + square.getLetterOn().toUpperCase() + ConstanteComponentMessage.EXT_PNG);
                 setIcon(ImagesManager.getIcon(path, size, size));
             }
         });

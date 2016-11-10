@@ -279,13 +279,13 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         int size = (int) TILE_DIMENSION.getWidth();
 
         for (char start = START_ALPHABET; start < END_ALPHABET; start++) {
-            String ressource = ConstanteComponentMessage.RES_IMAGES_FR + start + ConstanteComponentMessage.EXT_PNG;
+            String ressource = parent.getImgPath() + start + ConstanteComponentMessage.EXT_PNG;
             URL res = getClass().getClassLoader().getResource(ressource);
             ImageIcon icon = ImagesManager.getIcon(res, size, size);
             iconsTile.put(Character.toString(start), icon);
         }
         iconsTile.put(" ",
-                ImagesManager.getIcon(getClass().getClassLoader().getResource(ConstanteComponentMessage.RES_IMAGES_FR
+                ImagesManager.getIcon(getClass().getClassLoader().getResource(parent.getImgPath()
                         + "1" + ConstanteComponentMessage.EXT_PNG), size, size));
 
     }

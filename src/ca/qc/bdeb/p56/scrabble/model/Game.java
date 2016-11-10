@@ -49,8 +49,7 @@ public class Game implements Observable {
     private Dictionary dictionary;
 
 
-    public Game(String filePath, List<Player> players) {
-
+    public Game(String filePath, List<Player> players ){
         observateurs = new LinkedList<>();
         movesHistory = new ArrayList<>();
         loadParameters(filePath);
@@ -60,7 +59,6 @@ public class Game implements Observable {
             player.setGame(this);
         }
     }
-
 
     public Board getBoard() {
         return boardManager.getBoard();
@@ -307,9 +305,12 @@ public class Game implements Observable {
 
         Direction direction = findColumnOrRow(tilesPlaced);
         boolean isAWord = false;
+        if(tilesPlaced.size() == 1){
+            direction = findCompleteWordRow(tilesPlaced);
+        }
         List<Square> letters = formWordWithTilesPlayed(tilesPlaced, direction);
 
-        if (!letters.isEmpty() && letters.size() > 1) {
+        if (!letters.isEmpty() && letters.size() > 0) {
 
             String word = createWord(letters);
             if (dictionary.checkWordExist(word)) {
@@ -591,15 +592,16 @@ public class Game implements Observable {
 
     private List<Square> formWordWithTilesPlayed(List<Square> lettersPlayed, Direction direction) {
 
+
         List<Square> sequenceFound = new ArrayList<>();
         boolean foundSequenceTilesWithAllLetters = false;
         Square start;
 
-        if (direction.equals(Direction.COLUMN))
+        if (direction.equals(Direction.COLUMN)) {
             start = boardManager.getSquare(0, lettersPlayed.get(0).getPosColumn());
-        else
+        }else {
             start = boardManager.getSquare(lettersPlayed.get(0).getPosRow(), 0);
-
+        }
 
         while (start != null && !foundSequenceTilesWithAllLetters) {
             if (start.getTileOn() != null) {
