@@ -182,6 +182,7 @@ public abstract class Player implements Observable {
             {
                 tileWanted = tiles.get(index);
             }
+            index++;
         }
         return tileWanted;
     }

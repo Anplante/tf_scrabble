@@ -32,7 +32,7 @@ public class AiPlayer extends Player {
     public AiPlayer(ArrayList<String> listName) {
         super(chooseName(listName));
         aiGoal = new AiGoal(getGame());
-        setState(new AiStateSelectAction(this));
+        setState(new AiStatePending(this));
     }
 
     private static String chooseName(ArrayList<String> listName) {

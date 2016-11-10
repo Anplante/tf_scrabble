@@ -466,7 +466,6 @@ public class GameTest {
         assertFalse(game.playWord(lettersPlayed));
     }
 
-    @Ignore
     @Test
     public void testPlayFirstWordAtCenter()
     {

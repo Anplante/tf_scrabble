@@ -13,9 +13,6 @@ public class AiStatePending extends StatePending {
         super(player);
     }
 
-    @Override
-    protected void execute() {
-    }
 
     @Override
     protected State getNextState() {

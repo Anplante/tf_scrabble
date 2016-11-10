@@ -99,14 +99,29 @@ public class BtnSquare extends JButton implements Observateur {
                 setText("");
                 setIcon(ImagesManager.getIcon(getClass().getClassLoader().getResource(PATH_IMG_CENTER_STAR), size, size));
             default:
-                if(imgPath.equals(ConstanteComponentMessage.RES_IMAGES_FR_NOBLE)) {
-                    setBackground(Color.lightGray);
-                }else {
-                    setBackground(new Color(188,183,122));
-                }
+                setImage();
                 break;
         }
         repaint();
+    }
+
+    // temporaire - à changer TODO
+    private void setImage()
+    {
+        if (square.getTileOn() != null ) {
+            setText("");
+            String valueOnTile = square.getLetterOn();
+            if(valueOnTile.trim().equals("")){
+                valueOnTile = "1";
+            }
+            URL path = getClass().getClassLoader().getResource(imgPath + valueOnTile + ConstanteComponentMessage.EXT_PNG);
+            setIcon(ImagesManager.getIcon(path, size, size));
+        }
+        else if(imgPath.equals(ConstanteComponentMessage.RES_IMAGES_FR_NOBLE)) {
+            setBackground(Color.lightGray);
+        }else {
+            setBackground(new Color(188,183,122));
+        }
     }
 
     private void setPremiumColor() {

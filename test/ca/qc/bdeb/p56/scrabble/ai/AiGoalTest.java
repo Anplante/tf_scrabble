@@ -48,6 +48,7 @@ public class AiGoalTest {
         List<String> results = new ArrayList<>(Arrays.asList("banna","banane", "banne", "nana", "ben", "bea", "ban", "ane", "ana", "ne", "na", "en", "an"));
 
         String lettersOfAi= "nnbaae";
+
         List<String>  wordsFound = aiGoal.getPossibleWord(lettersOfAi);
 
         for(String word : results)

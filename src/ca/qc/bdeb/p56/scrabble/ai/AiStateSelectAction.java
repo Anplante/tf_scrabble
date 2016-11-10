@@ -19,6 +19,7 @@ public class AiStateSelectAction extends StateSelectAction {
 
     @Override
     protected void execute() {
+        getGame().placeAWord();
         getPlayer().setActive(false);
     }
 

@@ -37,25 +37,20 @@ public class AiGoal {
         return allPossibleCombination;
     }
 
-
     private void findAllCombinationsWords(String root, String letters) {
 
+        String wordFormed;
         for (int i = 0; i < letters.length(); i++) {
 
-            String wordFormed = root + letters.charAt(i);
+            wordFormed = root + letters.charAt(i);
 
-            if (!combinaisons.contains(wordFormed))
-                combinaisons.add(wordFormed);
-
-            if (wordFormed.length() > 1 && game.isValidWord(wordFormed) && !allPossibleCombination.contains(wordFormed)) {
+            if (wordFormed.length() > 1 && !allPossibleCombination.contains(wordFormed) && game.isValidWord(wordFormed) ) {
                 allPossibleCombination.add(wordFormed);
             }
-
+            System.out.println(wordFormed);
             StringBuilder temp = new StringBuilder(letters);
             temp.deleteCharAt(i);
-
             findAllCombinationsWords(wordFormed, temp.toString());
-
         }
     }
 }
