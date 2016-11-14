@@ -146,6 +146,10 @@ public abstract class Player implements Observable {
         score += points;
     }
 
+    public void reducePoints(int value) {
+        score -= value;
+    }
+
     public boolean canDraw() {
 
         return tiles.size() < Game.MAX_TILES_IN_HAND;
@@ -186,4 +190,6 @@ public abstract class Player implements Observable {
         }
         return tileWanted;
     }
+
+
 }

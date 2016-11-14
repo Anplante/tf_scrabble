@@ -34,7 +34,8 @@ public class Game implements Observable {
     private static final String TAG_TEXT = "text";
     private static final String TAG_VALUE = "value";
     private static final String TAG_AMOUNT = "amount";
-
+    private static final int DOUBLE_VALUE = 2;
+    private static final int MAX_CONSECUTIVE_SCORELESS_TURN = 6;
     private transient LinkedList<Observateur> observateurs;
     private static final Random randomGenerator = new Random();
 
@@ -48,7 +49,7 @@ public class Game implements Observable {
     private Dictionary dictionary;
 
 
-    public Game(String filePath, List<Player> players ){
+    public Game(String filePath, List<Player> players) {
         observateurs = new LinkedList<>();
         movesHistory = new ArrayList<>();
         loadParameters(filePath);
@@ -187,8 +188,14 @@ public class Game implements Observable {
         getActivePlayer().nextState();
 
         if (!getActivePlayer().isActivated()) {
-            drawTile();
-            activateNextPlayer();
+            if(checkForEndOfTheGame())
+            {
+                    // TODO Louis : FIN DE LA PARTIE
+            }
+            else{
+                drawTile();
+                activateNextPlayer();
+            }
         }
     }
 
@@ -274,11 +281,9 @@ public class Game implements Observable {
         Direction direction;
         boolean isAWord = false;
 
-        if(tilesPlaced.size() == 1){
+        if (tilesPlaced.size() == 1) {
             direction = findCompleteWordRow(tilesPlaced);
-        }
-        else
-        {
+        } else {
             direction = findColumnOrRow(tilesPlaced);
         }
         List<Square> letters = formWordWithTilesPlayed(tilesPlaced, direction);
@@ -398,7 +403,7 @@ public class Game implements Observable {
 
         if (direction.equals(Direction.COLUMN)) {
             start = boardManager.getSquare(0, lettersPlayed.get(0).getPosColumn());
-        }else {
+        } else {
             start = boardManager.getSquare(lettersPlayed.get(0).getPosRow(), 0);
         }
 
@@ -580,8 +585,7 @@ public class Game implements Observable {
                 suppLetters += currentSquare.getLetterOn();
             }
 
-            if(!suppLetters.isEmpty())
-            {
+            if (!suppLetters.isEmpty()) {
                 tempsWords = ai.getPossibleWord(letters);
                 wordsPlayable = removeDuplicateWord(wordsPlayable, tempsWords);
             }
@@ -642,4 +646,72 @@ public class Game implements Observable {
 
         return letters.toString();
     }
+
+    public boolean checkForEndOfTheGame() {
+
+        return checkForPlayerPlayingOut() || checkForSixConsecutiveScorelessTurn();
+    }
+
+    private boolean checkForPlayerPlayingOut() {
+
+        boolean endOfGame = false;
+
+        if (getActivePlayer().getTiles().isEmpty() && alphabetBag.isEmpty()) {
+            calculPlayOutPointsInStandartFormat();
+            endOfGame = true;
+        }
+
+        return endOfGame;
+    }
+
+    private void calculPlayOutPointsInStandartFormat() {
+        Player currentPlayer = getActivePlayer();
+
+        for (Player player : players) {
+            List<Tile> tiles = player.getTiles();
+
+            for (Tile tile : tiles) {
+                int value = tile.getValue();
+                currentPlayer.addPoints(value);
+                player.reducePoints(value);
+            }
+        }
+    }
+
+    /**
+     * TODO Louis : Si jamais on veut ajouter des modes de jeux différents
+     */
+    private void calculPlayOytPointsInTournamentFormat() {
+
+        Player currentPlayer = getActivePlayer();
+
+        for (Player player : players) {
+            List<Tile> tiles = player.getTiles();
+
+            for (Tile tile : tiles) {
+                int value = tile.getValue() * DOUBLE_VALUE;
+                currentPlayer.addPoints(value);
+            }
+        }
+    }
+
+    private boolean checkForSixConsecutiveScorelessTurn()
+    {
+        ListIterator<MoveLog> litr = movesHistory.listIterator(movesHistory.size());
+
+        int countScorelessTurn = 0;
+        int index = 0;
+
+        while(litr.hasPrevious() &&  index < MAX_CONSECUTIVE_SCORELESS_TURN)
+        {
+            if(litr.previous().getWordPoints() == 0)
+            {
+                countScorelessTurn++;
+            }
+            index++;
+        }
+
+        return countScorelessTurn == MAX_CONSECUTIVE_SCORELESS_TURN;
+    }
+
 }

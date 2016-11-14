@@ -473,4 +473,13 @@ public class GameTest {
             game.placeAWord();
 
     }
+
+
+    @Test
+    public void testEndOfTheGame()
+    {
+        game.startGame();
+
+        assertFalse(game.checkForEndOfTheGame());
+    }
 }
