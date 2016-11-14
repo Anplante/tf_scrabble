@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class MoveLogTest {
 
-
+    private final int TURN_PLAYED = 1;
     private Player player;
 
     @Before
@@ -32,7 +32,7 @@ public class MoveLogTest {
 
         String wordPlayed = "test";
         int wordValue = 10;
-        MoveLog log = new MoveLog(player, wordPlayed, wordValue);
+        MoveLog log = new MoveLog(player, TURN_PLAYED, wordPlayed, wordValue);
 
         assertEquals(IDMove.PLAYED_WORD, log.getMove());
     }
@@ -40,7 +40,7 @@ public class MoveLogTest {
     @Test
     public void testLogPlayerPassedTurn() {
 
-        MoveLog log = new MoveLog(player, IDMove.PASS);
+        MoveLog log = new MoveLog(player, TURN_PLAYED, IDMove.PASS);
 
         assertEquals(IDMove.PASS, log.getMove());
         assertEquals(0, log.getWordPoints());
@@ -48,11 +48,10 @@ public class MoveLogTest {
     }
 
     @Test
-    public void testLogPlayerEchangedLetters(){
+    public void testLogPlayerEchangedLetters() {
 
-        MoveLog log = new MoveLog(player, IDMove.EXCHANGED);
+        MoveLog log = new MoveLog(player, TURN_PLAYED, IDMove.EXCHANGED);
 
         assertEquals(IDMove.EXCHANGED, log.getMove());
     }
-
 }

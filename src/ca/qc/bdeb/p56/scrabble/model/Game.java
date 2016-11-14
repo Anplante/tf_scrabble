@@ -1,6 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
 import ca.qc.bdeb.p56.scrabble.ai.AiGoal;
+import ca.qc.bdeb.p56.scrabble.shared.IDMove;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.shared.Direction;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
@@ -47,6 +48,7 @@ public class Game implements Observable {
     private static List<Tile> alphabetBag;
     private List<MoveLog> movesHistory;
     private Dictionary dictionary;
+    private int turn;
 
 
     public Game(String filePath, List<Player> players) {
@@ -173,6 +175,7 @@ public class Game implements Observable {
     public void startGame() {
 
         activePlayerIndex = randomGenerator.nextInt(players.size());
+        turn = 1;
         initPlayerRack();
 
         for (Player player : players) {
@@ -200,6 +203,8 @@ public class Game implements Observable {
     }
 
     public void passTurn() {
+
+        movesHistory.add(new MoveLog(getActivePlayer(), turn, IDMove.PASS));
         getActivePlayer().selectNextState(IDState.PENDING);
         goToNextState();
         // TODO Louis : bloquer quand le joueur place un mot ou annuler les autres actions
@@ -293,10 +298,10 @@ public class Game implements Observable {
             String word = createWord(letters);
             if (dictionary.checkWordExist(word)) {
                 if (checkForComboWord(tilesPlaced, direction)) {
-                    System.out.println("point donné MainWord");
                     int wordValue = calculateWordPoints(letters);
                     getActivePlayer().addPoints(wordValue);
-                    movesHistory.add(new MoveLog(getActivePlayer(), word.toString(), wordValue));
+                    movesHistory.add(new MoveLog(getActivePlayer(), turn, word.toString(), wordValue));
+                    turn++;
                     isAWord = true;
                 } else {
                     isAWord = false;
@@ -530,6 +535,8 @@ public class Game implements Observable {
         }
 
         Collections.shuffle(alphabetBag);
+        movesHistory.add(new MoveLog(getActivePlayer(), turn, IDMove.EXCHANGED));
+        turn++;
     }
 
     public void replacePlayerTilesInOrder(List<Tile> originalOrder) {

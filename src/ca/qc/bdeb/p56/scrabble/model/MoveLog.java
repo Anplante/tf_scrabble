@@ -14,19 +14,22 @@ public class MoveLog {
     private IDMove IDMove;
     private int wordPoints;
     private int pointsAccumulated;
+    private int turnPlayed;
 
-    public MoveLog(Player player, String word, int point) {
+    public MoveLog(Player player, int turnPlayed, String word, int point) {
 
         this.player = player;
+        this.turnPlayed = turnPlayed;
         this.wordPlayed = word;
         this.wordPoints = point;
         this.pointsAccumulated = player.getScore();
         this.IDMove = IDMove.PLAYED_WORD;
     }
 
-    public MoveLog(Player player, IDMove IDMove)
+    public MoveLog(Player player, int turnPlayed, IDMove IDMove)
     {
         this.player = player;
+        this.turnPlayed = turnPlayed;
         this.wordPlayed = "";
         this.wordPoints = 0;
         this.pointsAccumulated = player.getScore();
@@ -51,6 +54,11 @@ public class MoveLog {
 
     public int getPointsAccumulated() {
         return pointsAccumulated;
+    }
+
+    public int getTurnPlayed()
+    {
+        return turnPlayed;
     }
 }
 

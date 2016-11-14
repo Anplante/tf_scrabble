@@ -20,8 +20,7 @@ import javax.swing.*;
 public class PanelLetterRackZone extends JPanel implements Observateur {
 
 
-    private static final char START_ALPHABET = 'A';
-    private static final char END_ALPHABET = 'Z';
+
     private final int MAX_TILES_IN_HAND = 7;
     private final double RATIO_TILES_RACK = .5;
     private final int POS_Y = 0;
@@ -278,7 +277,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         iconsTile = new HashMap<>();
         int size = (int) TILE_DIMENSION.getWidth();
 
-        for (char start = START_ALPHABET; start <= END_ALPHABET; start++) {
+        for (char start = ConstanteComponentMessage.START_ALPHABET; start <=  ConstanteComponentMessage.END_ALPHABET; start++) {
             String ressource = parent.getImgPath() + start + ConstanteComponentMessage.EXT_PNG;
             URL res = getClass().getClassLoader().getResource(ressource);
             ImageIcon icon = ImagesManager.getIcon(res, size, size);
