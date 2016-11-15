@@ -26,7 +26,7 @@ public class GameTest {
 
         GameManager gameManager = new GameManager();
 
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         players.add(new HumanPlayer("Louis"));
         game = gameManager.createNewGame(players);
 
@@ -148,25 +148,36 @@ public class GameTest {
 
     @Test
     public void testUsePremiumTwice() {
+
+        List<Square> tilesPlayed = new ArrayList<>();
+
+        Player player = game.getActivePlayer();
+
         game.startGame();
 
-        Tile tileTested = new Tile("l", 2);
-
         Square tripleWordPremiumSquare = game.getSquare(0, 0);
-        tripleWordPremiumSquare.setLetter(tileTested);
+        tripleWordPremiumSquare.setLetter(new Tile("l", 2));
+        Square adjacentRight = tripleWordPremiumSquare.getAdjacentDown();
+        adjacentRight.setLetter(new Tile("e", 2));
+        tilesPlayed.add(tripleWordPremiumSquare);
+        tilesPlayed.add(tripleWordPremiumSquare.getAdjacentDown());
 
-        List<Square> lettersPlayed = new ArrayList<>();
+        game.playWord(tilesPlayed);
 
-        lettersPlayed.add(tripleWordPremiumSquare);
+        int values = player.getScore();
+        int tripleWordScore = 12;
+        assertEquals(tripleWordScore, values);
 
-        int values = game.calculateWordPoints(lettersPlayed);
+        tilesPlayed.clear();
+        tripleWordPremiumSquare.getAdjacentRight().setLetter(new Tile("e", 2));
+        tilesPlayed.add(tripleWordPremiumSquare.getAdjacentRight());
 
-        assertEquals(6, values);
+        int resultExpected = 4 + player.getScore();
+        game.playWord(tilesPlayed);
 
-        values = game.calculateWordPoints(lettersPlayed);
+        values = player.getScore();
 
-        assertEquals(2, values);
-
+        assertEquals(resultExpected, values);
     }
 
     @Test
@@ -192,26 +203,6 @@ public class GameTest {
     }
 
 
-    @Test
-    public void testValidWordFr() {
-
-        String validWord = "bonjour";
-        assertTrue(game.isValidWord(validWord));
-    }
-
-    @Test
-    public void testInvalidWord() {
-
-        String notAWord = "ssdfaf";
-        assertFalse(game.isValidWord(notAWord));
-    }
-
-
-    @Test
-    public void testValidWordEn() {
-        String wordtested = "wrong";
-        assertFalse(game.isValidWord(wordtested));
-    }
 
     @Test
     public void testPlayWord() {
@@ -261,7 +252,6 @@ public class GameTest {
         lettersPlayed.add(square1);
         lettersPlayed.add(square2);
         assertTrue(game.playWord(lettersPlayed));
-
 
         Square square3 = game.getSquare(6, 8);
         square3.setLetter(new Tile("s", 2));
@@ -489,8 +479,7 @@ public class GameTest {
 
         game.startGame();
 
-        for(int i = 0; i < 6; i++)
-        {
+        for (int i = 0; i < 6; i++) {
             game.passTurn();
         }
         assertTrue(game.checkForEndOfTheGame());

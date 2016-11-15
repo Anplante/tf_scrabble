@@ -33,6 +33,11 @@ public class Tile implements Observable {
         return value;
     }
 
+    public boolean isBlankTile()
+    {
+        return value == 0 || letter.isEmpty();
+    }
+
     public boolean isSelected()
     {
         return isSelected;

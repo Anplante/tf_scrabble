@@ -43,11 +43,12 @@ public class MainMenuGUI extends JDialog {
 
     private static final int BASIC_THEME = 0;
     private static final int NOBLE_THEME = 1;
+    private static final int LIMIT_OF_PLAYER = 4;
 
     private static final String[] numberOfAi = {"0", "1", "2", "3"};
     private static final String[] numberOfHuman = {"2", "3", "4"};
     private JPanel panelMenu;
-    private JTextField txtName;
+    private List<JTextField> allTextField;
     private JButton btnCreateGame;
     private JLabel lblTheme;
     private JComboBox cmbTheme;
@@ -72,33 +73,33 @@ public class MainMenuGUI extends JDialog {
     public static final URL PATH_TO_FILE = Launcher.class.getResource("/files/ListOfName.xml");
 
     public MainMenuGUI(ScrabbleGUI parent) {
+
         super();
         this.parent = parent;
-        initializeFrame();
         initializeComponents();
         initializeSize();
 
+      /*  setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override public void windowClosed(WindowEvent e) {
+                System.out.println("exit");
                 System.exit(0);
             }
-        });
-
-
+        });*/
     }
 
-    private void initializeFrame() {
-        setLayout(null);
-        JFrame fenetre = new JFrame();
-        this.setTitle(ConstanteComponentMessage.TITLE_MENU);
+  /*  private void initializeDialog() {
+
+
+        setTitle(ConstanteComponentMessage.TITLE_MENU);
 
         Insets insets = fenetre.getInsets();
-        setSize(new Dimension(insets.left + insets.right + 450,
-                insets.top + insets.bottom + 450));
+        setSize(new Dimension(insets.left + insets.right + 500,
+                insets.top + insets.bottom + 550));
 
         fenetre.pack();
         // TODO Louis : Faire en sorte que lorsqu'on ferme le dialogue que le programme se termine.
-    }
+    }*/
 
     private void initializeSize() {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -111,8 +112,12 @@ public class MainMenuGUI extends JDialog {
 
 
     private void initializeComponents() {
-        panelMenu = new JPanel();
-        panelMenu.setLayout(null);
+
+        setSize(parent.getWidth() / 4, parent.getHeight() / 2);
+        setLocationRelativeTo(parent);
+        // setLayout(new BorderLayout());
+        panelMenu = new JPanel(new GridBagLayout());
+        //  panelMenu.setLayout(null);
         addFileChooser();
         addTextBox();
         addLabels();
@@ -130,7 +135,7 @@ public class MainMenuGUI extends JDialog {
         }
         // Pour l'instant, on n'affiche pas cette combo box puisqu'on n'a pas de AI
         cmbNumberOfAi.setVisible(false);
-        cmbNumberOfAi.setLocation(180, 120);
+        cmbNumberOfAi.setLocation(180, 215);
         cmbNumberOfAi.setSize(100, 25);
 
         cmbNumberOfHuman = new JComboBox<>();
@@ -139,7 +144,7 @@ public class MainMenuGUI extends JDialog {
             cmbNumberOfHuman.addItem(numberOfHuman[i]);
         }
         cmbNumberOfHuman.setVisible(true);
-        cmbNumberOfHuman.setLocation(180, 120);
+        cmbNumberOfHuman.setLocation(180, 215);
         cmbNumberOfHuman.setSize(100, 25);
 
         cmbBackgroundScrabble = new JComboBox<>();
@@ -147,7 +152,7 @@ public class MainMenuGUI extends JDialog {
         cmbBackgroundScrabble.setName(ConstanteTestName.BACKGROUND_NAME);
         addImageFile();
         cmbBackgroundScrabble.setVisible(true);
-        cmbBackgroundScrabble.setLocation(180, 220);
+        cmbBackgroundScrabble.setLocation(180, 315);
         cmbBackgroundScrabble.setSize(180, 25);
 
         cmbTheme =  new JComboBox();
@@ -155,7 +160,7 @@ public class MainMenuGUI extends JDialog {
         cmbTheme.addItem(ConstanteComponentMessage.MESS_THEME_CLASSIQUE);
         cmbTheme.addItem(ConstanteComponentMessage.MESS_THEME_NOBLE);
         cmbTheme.setVisible(true);
-        cmbTheme.setLocation(180, 270);
+        cmbTheme.setLocation(180, 365);
         cmbTheme.setSize(100,25);
 
 
@@ -168,38 +173,37 @@ public class MainMenuGUI extends JDialog {
     private void initMenuOptions() {
 
         initBtnChooseBackgroundImg();
-        initBtnExit();
         initBtnCreateGame();
+        initBtnExit();
+
     }
 
-    private void initBtnChooseBackgroundImg()
-    {
+    private void initBtnChooseBackgroundImg() {
         btnChooseBackgroundImg = new JButton(ConstanteComponentMessage.ELLIPSIS);
         btnChooseBackgroundImg.setSize(25, 25);
-        btnChooseBackgroundImg.setLocation(365, 220);
+        btnChooseBackgroundImg.setLocation(365, 315);
         panelMenu.add(btnChooseBackgroundImg);
         btnChooseBackgroundImg.addActionListener(e -> {
             int returnValue = fileImage.showOpenDialog(panelMenu);
             receiveBackground(returnValue);
         });
     }
-    private void initBtnExit()
-    {
+
+    private void initBtnExit() {
         btnExit = new JButton();
         btnExit.setSize(100, 50);
-        btnExit.setLocation(250, 325);
+        btnExit.setLocation(250, 420);
         btnExit.setText(ConstanteComponentMessage.MESS_CANCEL);
         btnExit.setName(ConstanteTestName.CANCEL_NAME);
         panelMenu.add(btnExit);
         btnExit.addActionListener(e -> System.exit(0));
     }
 
-    private void initBtnCreateGame()
-    {
+    private void initBtnCreateGame() {
         btnCreateGame = new JButton();
         btnCreateGame.setSize(100, 50);
         btnCreateGame.setText(ConstanteComponentMessage.MESS_CONFIRM);
-        btnCreateGame.setLocation(50, 325);
+        btnCreateGame.setLocation(50, 420);
         btnCreateGame.setName(ConstanteTestName.CONFIRM_NAME);
         panelMenu.add(btnCreateGame);
 
@@ -239,7 +243,7 @@ public class MainMenuGUI extends JDialog {
         numberOfHumanPlayers += 2;
 
         for (int i = 0; i < numberOfHumanPlayers; i++) {
-            players.add(new HumanPlayer(txtName.getText()));
+            players.add(new HumanPlayer(allTextField.get(i).getText()));
         }
 
         int limit = cmbNumberOfAi.getSelectedIndex();
@@ -266,26 +270,26 @@ public class MainMenuGUI extends JDialog {
 
         lblNumberOfAi = new JLabel();
         lblNumberOfAi.setText(ConstanteComponentMessage.MESS_NUMBER_OF_AI);
-        lblNumberOfAi.setLocation(25, 125);
+        lblNumberOfAi.setLocation(25, 220);
         lblNumberOfAi.setSize(lblNumberOfAi.getPreferredSize());
         // Pour l'instant, on n'affiche pas ce label puisqu'on n'a pas de AI
         lblNumberOfAi.setVisible(false);
 
         lblNumberOfHuman = new JLabel();
         lblNumberOfHuman.setText(ConstanteComponentMessage.MESS_NUMBER_OF_HUMAN);
-        lblNumberOfHuman.setLocation(25, 125);
+        lblNumberOfHuman.setLocation(25, 220);
         lblNumberOfHuman.setSize(lblNumberOfAi.getPreferredSize());
         lblNumberOfHuman.setVisible(true);
 
         lblBackground = new JLabel();
         lblBackground.setText(ConstanteComponentMessage.MESS_BACKGROUND);
-        lblBackground.setLocation(25, 225);
+        lblBackground.setLocation(25, 320);
         lblBackground.setSize(lblBackground.getPreferredSize());
         lblBackground.setVisible(true);
 
         lblTheme = new JLabel();
         lblTheme.setText(ConstanteComponentMessage.MESS_THEME);
-        lblTheme.setLocation(25, 275);
+        lblTheme.setLocation(25, 370);
         lblTheme.setSize(lblBackground.getPreferredSize());
         lblTheme.setVisible(true);
 
@@ -298,16 +302,32 @@ public class MainMenuGUI extends JDialog {
 
     private void addTextBox() {
         panelMenu.setLocation(0, 0);
-        panelMenu.setSize(new Dimension(400, 400));
-        txtName = new JTextField("", 30);
-        txtName.setName(ConstanteTestName.PLAYER_NAME);
-        txtName.setBounds(150, 20, 180, 30);
+        panelMenu.setSize(new Dimension(500, 550));
 
-        txtName.addActionListener(e -> {
-            String input = txtName.getText();
-            txtName.setText(input);
+        allTextField = new ArrayList<>();
+        allTextField.add(new JTextField("", 30));
+        allTextField.add(new JTextField("", 30));
+        allTextField.add(new JTextField("", 30));
+        allTextField.add(new JTextField("", 30));
+
+        int y = -15;
+        for (int i = 0; i < LIMIT_OF_PLAYER; i++) {
+            y += 35;
+            initializeTextField(i, y);
+        }
+    }
+
+    private void initializeTextField(int index, int y) {
+        JTextField txtOfPlayer = allTextField.get(index);
+        txtOfPlayer.setName(ConstanteTestName.PLAYER_NAME + " " + index);
+        txtOfPlayer.setBounds(150, y, 180, 30);
+        txtOfPlayer.setVisible(true);
+
+        txtOfPlayer.addActionListener(e -> {
+            String input = allTextField.get(index).getText();
+            allTextField.get(index).setText(input);
         });
-        panelMenu.add(txtName);
+        panelMenu.add(txtOfPlayer);
     }
 
     private void addImageFile() {
@@ -351,7 +371,6 @@ public class MainMenuGUI extends JDialog {
 
         return filename.substring(0, extensionIndex);
     }*/
-
     public int getLenghtPlayers() {
         return game.getPlayers().size();
     }
