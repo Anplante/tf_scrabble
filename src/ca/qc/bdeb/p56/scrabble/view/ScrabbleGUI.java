@@ -31,6 +31,7 @@ public class ScrabbleGUI extends JFrame {
     private DialogOptionsMenu options;
     private MainMenuGUI menu;
     private String imgPath;
+    private WaitingPanel pnlWaiting;
 
     private JLabel background;
 
@@ -93,11 +94,18 @@ public class ScrabbleGUI extends JFrame {
     }
 
     private void initializeComponents() {
-
         createBackground();
+        //createPanelWait();
         createPanelBoard();
         createPanelLetterRack();
         createPanelInformation();
+    }
+
+    private void createPanelWait(){
+
+        pnlWaiting = new WaitingPanel(new Dimension(getWidth(),getHeight()),this);
+        add(pnlWaiting);
+        pnlWaiting.setGame(gameModel);
     }
 
     private void createBackground() {
@@ -181,7 +189,7 @@ public class ScrabbleGUI extends JFrame {
 
     private void createGame() {
 
-        gameModel.startGame();
+          gameModel.startGame();
     }
 
     private void addKeyBindings() {

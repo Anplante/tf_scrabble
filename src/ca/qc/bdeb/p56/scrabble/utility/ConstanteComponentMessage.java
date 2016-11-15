@@ -36,6 +36,7 @@ public class ConstanteComponentMessage {
     public static final String TAG_NAME = "name";
     public static final String TAG_ITEM = "item";
     public static final String MESS_PASS_TURN = "Passer \nle tour";
+    public static final String RES_WAITING_IMAGE = "./images/waiting.png";
     public static final String MESS_PLAY = "Jouer";
     public static final String MESS_RECALL = "Rappeler";
     public static final String MESS_EXCHANGE = "Échanger";

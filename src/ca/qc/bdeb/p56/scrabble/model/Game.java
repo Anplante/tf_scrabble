@@ -1,5 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
+import ca.qc.bdeb.p56.scrabble.ai.AiGoal;
 import ca.qc.bdeb.p56.scrabble.shared.IDMove;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.shared.Direction;
@@ -38,6 +39,7 @@ public class Game implements Observable {
     private static final int MAX_CONSECUTIVE_SCORELESS_TURN = 6;
     private transient LinkedList<Observateur> observateurs;
     private static final Random randomGenerator = new Random();
+    private boolean waitingNextTurn;
 
     private BoardManager boardManager;
     private List<Player> players;
@@ -48,7 +50,7 @@ public class Game implements Observable {
     private int turn;
 
     public Game(String filePath, List<Player> players) {
-
+        waitingNextTurn = false;
         observateurs = new LinkedList<>();
         movesHistory = new ArrayList<>();
         this.players = players;
@@ -58,6 +60,14 @@ public class Game implements Observable {
         }
 
         loadParameters(filePath);
+    }
+
+    public boolean isWaitingNextTurn() {
+        return waitingNextTurn;
+    }
+
+    public void setWaitingNextTurn(boolean waitingNextTurn) {
+        this.waitingNextTurn = waitingNextTurn;
     }
 
     public Board getBoard() {
@@ -201,6 +211,8 @@ public class Game implements Observable {
 
     public void passTurn() {
 
+        waitingNextTurn = true;
+        aviserObservateurs();
         movesHistory.add(new MoveLog(getActivePlayer(), turn, IDMove.PASS));
         getActivePlayer().selectNextState(IDState.PENDING);
         goToNextState();

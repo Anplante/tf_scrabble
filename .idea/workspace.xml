@@ -2,15 +2,15 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java" line="14" />
-    <bookmark url="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" line="283" />
+    <bookmark url="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" line="284" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e93a873-ab64-4362-b5fe-5856ecefeca3" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/WaitingPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/utility/ConstanteComponentMessage.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/utility/ConstanteComponentMessage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/utility/ConstanteTestName.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/utility/ConstanteTestName.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/ai/AiplayerTest.java" afterPath="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/ai/AiplayerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java" />
     </list>
     <ignored path="tf_scrabble.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,27 +24,27 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/tf_scrabble$ca_qc_bdeb_p56_scrabble_in_tf_scrabble.coverage" NAME="ca.qc.bdeb.p56.scrabble in tf_scrabble Coverage Results" MODIFIED="1475150138778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>ca.qc.bdeb.p56.scrabble.*</FILTER>
+    <SUITE FILE_PATH="coverage/tf_scrabble$GameTest.coverage" NAME="GameTest Coverage Results" MODIFIED="1478156336097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>ca.qc.bdeb.p56.scrabble.model.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/tf_scrabble$Main.coverage" NAME="Main Coverage Results" MODIFIED="1477285850751" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/tf_scrabble$GameTest_testPlayFirstWordAtCenter.coverage" NAME="GameTest.testPlayFirstWordAtCenter Coverage Results" MODIFIED="1478663428055" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>ca.qc.bdeb.p56.scrabble.model.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/tf_scrabble$All_in_tf_scrabble.coverage" NAME="All in tf_scrabble Coverage Results" MODIFIED="1478314536524" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/tf_scrabble$GameTest_testSelectTile.coverage" NAME="GameTest.testSelectTile Coverage Results" MODIFIED="1474215853265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/tf_scrabble$ca_qc_bdeb_p56_scrabble_in_tf_scrabble.coverage" NAME="ca.qc.bdeb.p56.scrabble in tf_scrabble Coverage Results" MODIFIED="1475150138778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>ca.qc.bdeb.p56.scrabble.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/tf_scrabble$BtnSquareTest_testSelectSquareInPlayTileState.coverage" NAME="BtnSquareTest.testSelectSquareInPlayTileState Coverage Results" MODIFIED="1474237943760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>ca.qc.bdeb.p56.scrabble.view.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/tf_scrabble$GameTest.coverage" NAME="GameTest Coverage Results" MODIFIED="1478156336097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>ca.qc.bdeb.p56.scrabble.model.*</FILTER>
-    </SUITE>
+    <SUITE FILE_PATH="coverage/tf_scrabble$Main.coverage" NAME="Main Coverage Results" MODIFIED="1477285850751" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/tf_scrabble$StateExchangeTest_testExchangeOnlyClick.coverage" NAME="StateExchangeTest.testExchangeOnlyClick Coverage Results" MODIFIED="1474513712087" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>ca.qc.bdeb.p56.scrabble.model.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/tf_scrabble$GameTest_testSelectTile.coverage" NAME="GameTest.testSelectTile Coverage Results" MODIFIED="1474215853265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>ca.qc.bdeb.p56.scrabble.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/tf_scrabble$All_in_tf_scrabble__1_.coverage" NAME="All in tf_scrabble (1) Coverage Results" MODIFIED="1473888592508" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/tf_scrabble$BtnSquareTest_testSelectSquareInPlayTileState.coverage" NAME="BtnSquareTest.testSelectSquareInPlayTileState Coverage Results" MODIFIED="1474237943760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>ca.qc.bdeb.p56.scrabble.view.*</FILTER>
+    </SUITE>
   </component>
   <component name="CoverageViewManager">
     <option name="myFlattenPackages" value="true" />
@@ -60,11 +60,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Game.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="396" column="23" selection-start-line="396" selection-start-column="23" selection-end-line="396" selection-end-column="23" />
+            <state relative-caret-position="17">
+              <caret line="204" column="20" selection-start-line="204" selection-start-column="20" selection-end-line="204" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -75,8 +75,18 @@
       <file leaf-file-name="PanelLetterRackZone.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="52" column="41" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="41" />
+            <state relative-caret-position="130">
+              <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WaitingPanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/WaitingPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -85,18 +95,28 @@
       <file leaf-file-name="BoardManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/BoardManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
+            <state relative-caret-position="2312">
               <caret line="147" column="0" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainMenuGUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainMenuGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="814">
-              <caret line="283" column="59" selection-start-line="283" selection-start-column="59" selection-end-line="283" selection-end-column="59" />
+            <state relative-caret-position="457">
+              <caret line="283" column="39" selection-start-line="283" selection-start-column="39" selection-end-line="283" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScrabbleGUI.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="215">
+              <caret line="97" column="10" selection-start-line="97" selection-start-column="10" selection-end-line="97" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -115,32 +135,11 @@
       <file leaf-file-name="AiStateSelectAction.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/ai/AiStateSelectAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="20" column="30" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
+            <state relative-caret-position="374">
+              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
               <folding>
+                <element signature="e#483#484#0" expanded="true" />
                 <element signature="e#527#528#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConstanteComponentMessage.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/utility/ConstanteComponentMessage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="24" column="72" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="72" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DialogBlankTileChoice.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/DialogBlankTileChoice.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -154,18 +153,6 @@
               <folding>
                 <element signature="e#3264#3265#0" expanded="true" />
                 <element signature="e#3301#3302#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Tile.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Tile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding>
-                <element signature="e#656#657#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -200,7 +187,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Dictionary.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/shared/Direction.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/DialogOptionsMenu.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelPlayerInfo.java" />
@@ -216,7 +202,6 @@
         <option value="$PROJECT_DIR$/resources/files/scrabbleParameters.xml" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/utility/ImagesManager.java" />
         <option value="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/model/StateSwaptTileTest.java" />
-        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Board.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ButtonTile.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Tile.java" />
@@ -246,11 +231,13 @@
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/ai/AiStateSelectAction.java" />
         <option value="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/model/BoardManagerTest.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/BoardManager.java" />
-        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" />
         <option value="$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/model/GameTest.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/utility/ConstanteTestName.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/utility/ConstanteComponentMessage.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java" />
+        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/WaitingPanel.java" />
+        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java" />
+        <option value="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" />
       </list>
     </option>
   </component>
@@ -273,8 +260,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1932" />
-    <option name="height" value="1056" />
+    <option name="width" value="1936" />
+    <option name="height" value="1066" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -301,7 +288,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
@@ -614,6 +600,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1471,7 +1458,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1932" height="1056" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1481,27 +1468,27 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2983871" sideWeight="0.43830335" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4062165" sideWeight="0.56169665" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19609967" sideWeight="0.4936034" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.05092091" sideWeight="0.56169665" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5405117" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26068377" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26066098" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32690248" sideWeight="0.45362473" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3217768" sideWeight="0.6598101" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36972573" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32769555" sideWeight="0.45362473" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1603,7 +1590,7 @@
           <option name="timeStamp" value="308" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="311" />
+      <option name="time" value="313" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
@@ -1624,20 +1611,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/files/ListOfName.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/ca/qc/bdeb/p56/scrabble/ai/AiStateTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="515">
@@ -1697,14 +1670,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="34" column="27" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="183" column="0" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1844,7 +1809,7 @@
         <state relative-caret-position="782">
           <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding>
-            <element signature="e#1273#1274#0" expanded="true" />
+            <element signature="e#1273#1274#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1853,7 +1818,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="833">
           <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1869,7 +1833,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/DialogBlankTileChoice.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
+        <state relative-caret-position="697">
           <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1906,45 +1870,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/utility/ConstanteComponentMessage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
+        <state relative-caret-position="408">
           <caret line="24" column="72" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="72" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/ai/AiStateSelectAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="20" column="30" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
-          <folding>
-            <element signature="e#527#528#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/BoardManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
+        <state relative-caret-position="2312">
           <caret line="147" column="0" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="52" column="41" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="396" column="23" selection-start-line="396" selection-start-column="23" selection-end-line="396" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1956,11 +1892,64 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/ai/AiStateSelectAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding>
+            <element signature="e#483#484#0" expanded="true" />
+            <element signature="e#527#528#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/MainMenuGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="814">
-          <caret line="283" column="59" selection-start-line="283" selection-start-column="59" selection-end-line="283" selection-end-column="59" />
+        <state relative-caret-position="457">
+          <caret line="283" column="39" selection-start-line="283" selection-start-column="39" selection-end-line="283" selection-end-column="39" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/utility/Observable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/WaitingPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="97" column="10" selection-start-line="97" selection-start-column="10" selection-end-line="97" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="204" column="20" selection-start-line="204" selection-start-column="20" selection-end-line="204" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
