@@ -7,6 +7,7 @@ import ca.qc.bdeb.p56.scrabble.model.HumanPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
+import ca.qc.bdeb.p56.scrabble.utility.NumberOfPlayer;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -20,6 +21,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -32,6 +35,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static ca.qc.bdeb.p56.scrabble.utility.NumberOfPlayer.FOUR_PLAYER;
+import static ca.qc.bdeb.p56.scrabble.utility.NumberOfPlayer.THREE_PLAYER;
+import static ca.qc.bdeb.p56.scrabble.utility.NumberOfPlayer.TWO_PLAYER;
 
 /**
  * Menu de démarrage de notre scrabble, on demande d'entrer un nom utilisateur , en y incluant le nombre d'adversaire.
@@ -46,7 +53,7 @@ public class MainMenuGUI extends JDialog {
     private static final int LIMIT_OF_PLAYER = 4;
 
     private static final String[] numberOfAi = {"0", "1", "2", "3"};
-    private static final String[] numberOfHuman = {"2", "3", "4"};
+    private static final NumberOfPlayer[] numberOfHuman = {TWO_PLAYER, THREE_PLAYER, FOUR_PLAYER};
     private JPanel panelMenu;
     private List<JTextField> allTextField;
     private JButton btnCreateGame;
@@ -137,11 +144,13 @@ public class MainMenuGUI extends JDialog {
         cmbNumberOfHuman = new JComboBox<>();
         cmbNumberOfHuman.setName(ConstanteTestName.QTE_HUMAN_NAME);
         for (int i = 0; i < numberOfHuman.length; i++) {
-            cmbNumberOfHuman.addItem(numberOfHuman[i]);
+            cmbNumberOfHuman.addItem(numberOfHuman[i].getNumberOfPlayer());
         }
         cmbNumberOfHuman.setVisible(true);
         cmbNumberOfHuman.setLocation(180, 215);
         cmbNumberOfHuman.setSize(100, 25);
+
+        addEventOnComboBox();
 
         cmbBackgroundScrabble = new JComboBox<>();
 
@@ -166,6 +175,33 @@ public class MainMenuGUI extends JDialog {
         panelMenu.add(cmbTheme);
     }
 
+    private void addEventOnComboBox() {
+        ActionListener numberOfHuman = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                NumberOfPlayer numberofPlayer = NumberOfPlayer.fromInteger((int)cmbNumberOfHuman.getSelectedItem());
+
+                switch (numberofPlayer) {
+                    case TWO_PLAYER:
+                        allTextField.get(2).setVisible(false);
+                        allTextField.get(3).setVisible(false);
+                        break;
+                    case THREE_PLAYER:
+                        allTextField.get(2).setVisible(true);
+                        allTextField.get(3).setVisible(false);
+                        break;
+                    case FOUR_PLAYER:
+                        allTextField.get(2).setVisible(true);
+                        allTextField.get(3).setVisible(true);
+                        break;
+                }
+            }
+        };
+
+        cmbNumberOfHuman.addActionListener(numberOfHuman);
+    }
+
     private void initMenuOptions() {
 
         initBtnChooseBackgroundImg();
@@ -188,7 +224,7 @@ public class MainMenuGUI extends JDialog {
     {
         btnExit = new JButton();
         btnExit.setSize(100, 50);
-        btnExit.setLocation(250, 420);
+        btnExit.setLocation(350, 420);
         btnExit.setText(ConstanteComponentMessage.MESS_CANCEL);
         btnExit.setName(ConstanteTestName.CANCEL_NAME);
         panelMenu.add(btnExit);
@@ -312,6 +348,9 @@ public class MainMenuGUI extends JDialog {
             y += 35;
             initializeTextField(i, y);
         }
+
+        allTextField.get(2).setVisible(false);
+        allTextField.get(3).setVisible(false);
     }
 
     private void initializeTextField(int index, int y) {
