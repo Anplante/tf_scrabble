@@ -55,7 +55,6 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         lblName.setText(playerModel.getName());
         lblScore.setText(Integer.toString(playerModel.getScore()));
         this.repaint();
-        this.revalidate();
     }
 
     @Override

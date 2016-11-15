@@ -26,7 +26,7 @@ public class ScrabbleGUI extends JFrame {
     private final int LETTER_RACK_ZONE_HEIGHT;
     private String backgroundPath;
     private PanelLetterRackZone panelLetterRack;
-    private JPanel pnlBoard;
+    private PanelBoard pnlBoard;
     private Game gameModel;
     private DialogOptionsMenu options;
     private MainMenuGUI menu;
@@ -35,7 +35,7 @@ public class ScrabbleGUI extends JFrame {
 
     private JLabel background;
 
-    private JPanel panelInformation;
+    private PanelPlayers panelInformation;
 
 
     public ScrabbleGUI() {
@@ -95,10 +95,12 @@ public class ScrabbleGUI extends JFrame {
 
     private void initializeComponents() {
         createBackground();
-        //createPanelWait();
+        createPanelWait();
         createPanelBoard();
         createPanelLetterRack();
         createPanelInformation();
+
+
     }
 
     private void createPanelWait(){
@@ -124,11 +126,13 @@ public class ScrabbleGUI extends JFrame {
         int x = getWidth() - width;
         y *= 0.5;
 
-        panelInformation = new JPanel();
+        panelInformation = new PanelPlayers();
         panelInformation.setLocation(x, MARGIN);
         panelInformation.setSize(width, y);
         panelInformation.setLayout(new GridLayout(gameModel.getPlayers().size(), 1, MARGIN, MARGIN));
         panelInformation.setOpaque(false);
+        panelInformation.setGame(gameModel);
+        gameModel.ajouterObservateur(panelInformation);
         add(panelInformation);
     }
 
@@ -163,15 +167,17 @@ public class ScrabbleGUI extends JFrame {
 
     private void createPanelBoard() {
 
-        pnlBoard = new JPanel();
+        pnlBoard = new PanelBoard();
 
         int heightBoard = getHeight() - LETTER_RACK_ZONE_HEIGHT - MARGIN;
         int x = (getWidth() - heightBoard) / 2;
         pnlBoard.setLocation(x, MARGIN);
         pnlBoard.setSize(heightBoard, heightBoard);
         add(pnlBoard);
+        pnlBoard.setGame(gameModel);
         initGrid();
         pnlBoard.setName(ConstanteTestName.BOARD_NAME);
+        gameModel.ajouterObservateur(pnlBoard);
     }
 
     private void initGrid() {
