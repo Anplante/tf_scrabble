@@ -119,7 +119,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         add(btnPassTurn);
 
-        btnPassTurn.addActionListener(e -> game.passTurn());
+        btnPassTurn.addActionListener (e -> game.passTurn());
     }
 
     private void initiBtnPlayWord() {
@@ -268,6 +268,15 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             i++;
             x += TILE_DIMENSION.getWidth();
         }
+
+        if(game.isWaitingNextTurn()){
+            setVisible(false);
+            setEnabled(false);
+        }else {
+            setVisible(true);
+            setEnabled(true);
+        }
+
 
         panelLettersRack.repaint();
     }

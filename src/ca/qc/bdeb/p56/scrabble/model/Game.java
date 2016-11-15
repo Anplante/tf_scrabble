@@ -212,7 +212,6 @@ public class Game implements Observable {
     public void passTurn() {
 
         waitingNextTurn = true;
-        aviserObservateurs();
         movesHistory.add(new MoveLog(getActivePlayer(), turn, IDMove.PASS));
         getActivePlayer().selectNextState(IDState.PENDING);
         goToNextState();

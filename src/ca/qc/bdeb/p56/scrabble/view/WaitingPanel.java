@@ -13,7 +13,7 @@ import java.awt.event.KeyListener;
 /**
  * Created by Julien Brosseau on 11/14/2016.
  */
-public class WaitingPanel extends JPanel implements Observateur, KeyListener {
+public class WaitingPanel extends JPanel implements Observateur, KeyListener{
 
     private ScrabbleGUI parent;
     private Game game;
@@ -22,10 +22,14 @@ public class WaitingPanel extends JPanel implements Observateur, KeyListener {
     public WaitingPanel (Dimension dimension, ScrabbleGUI parent){
         setVisible(false);
         this.setEnabled(false);
+        setFocusable(true);
+        requestFocusInWindow();
+        requestFocus();
         setSize(dimension);
         this.parent = parent;
         ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(ConstanteComponentMessage.RES_WAITING_IMAGE));
         add(backgroundLabel = new JLabel(fillingIcon));
+        addKeyListener(this);
     }
 
     public void setGame(Game aGame){
@@ -41,6 +45,9 @@ public class WaitingPanel extends JPanel implements Observateur, KeyListener {
         if(game.isWaitingNextTurn()){
             this.setVisible(true);
             setEnabled(true);
+            setFocusable(true);
+            requestFocusInWindow();
+            requestFocus();
         }else {
             setVisible(false);
             this.setEnabled(false);
@@ -53,18 +60,18 @@ public class WaitingPanel extends JPanel implements Observateur, KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent keyEvent) {
+    public void keyTyped(KeyEvent e) {
 
     }
 
     @Override
-    public void keyPressed(KeyEvent keyEvent) {
+    public void keyPressed(KeyEvent e) {
         game.setWaitingNextTurn(false);
         game.aviserObservateurs();
     }
 
     @Override
-    public void keyReleased(KeyEvent keyEvent) {
+    public void keyReleased(KeyEvent e) {
 
     }
 }

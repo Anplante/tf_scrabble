@@ -224,7 +224,7 @@ public class MainMenuGUI extends JDialog {
     {
         btnExit = new JButton();
         btnExit.setSize(100, 50);
-        btnExit.setLocation(350, 420);
+        btnExit.setLocation(250, 420);
         btnExit.setText(ConstanteComponentMessage.MESS_CANCEL);
         btnExit.setName(ConstanteTestName.CANCEL_NAME);
         panelMenu.add(btnExit);
