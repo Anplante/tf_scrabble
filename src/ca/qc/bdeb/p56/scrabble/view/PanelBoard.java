@@ -25,11 +25,11 @@ public class PanelBoard extends JPanel implements Observateur {
         }else {
             setVisible(true);
             setEnabled(true);
-        }
+        }    
     }
 
     @Override
     public void changementEtat(Enum<?> e, Object o) {
-
+        
     }
 }

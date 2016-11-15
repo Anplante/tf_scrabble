@@ -305,7 +305,6 @@ public class Game implements Observable {
             if (dictionary.checkWordExist(word)) {
                 if (checkForComboWord(tilesPlaced, direction)) {
                     int wordValue = calculateWordPoints(letters);
-                    desactivePremium(letters);
                     getActivePlayer().addPoints(wordValue);
                     movesHistory.add(new MoveLog(getActivePlayer(), turn, word.toString(), wordValue));
                     turn++;
@@ -422,20 +421,13 @@ public class Game implements Observable {
                         wordMultiplier *= premium.getMultiplier();
                         break;
                 }
+                square.setPremium(null);
             }
             points += letterMultiplier * square.getTileOn().getValue();
         }
         points *= wordMultiplier;
 
         return points;
-    }
-
-    private void desactivePremium(List<Square> squares){
-
-        for(Square square : squares)
-        {
-            square.setPremium(null);
-        }
     }
 
     @Override
