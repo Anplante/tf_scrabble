@@ -1,7 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
 import org.junit.After;
@@ -10,7 +9,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +77,7 @@ public class ScrabbleGUITest {
 
         assertEquals(tile.getLetter(), game.getContentSquare(7,7));
 
-        game.playWord();
+        game.selectPlayWordAction();
 
         assertEquals(tile.getValue(), Integer.parseInt(score.getText()));
     }

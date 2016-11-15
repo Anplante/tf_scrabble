@@ -34,45 +34,4 @@ public class BoardManagerTest {
     public void tearDown() throws Exception {
         game = null;
     }
-
-    @Test
-    public void testOnlyCenterCanBePlay()
-    {
-        Square center = game.getSquare(7,7);
-
-        assertEquals(center, boardManager.getSquarePositionAvailableToPlay().get(0));
-    }
-
-    @Test
-    public void testOnlyCenterNeighboursCanBePlay()
-    {
-        Square center = game.getSquare(7,7);
-        center.setLetter(new Tile("l", 2));
-
-        List<Square> centerNeighbours = center.getNeighbours();
-        List<Square> squaresPlayable = boardManager.getSquarePositionAvailableToPlay();
-
-        assertEquals(squaresPlayable, centerNeighbours);
-    }
-
-    @Test
-    public void testOnlySquareAroundWordCanBePlay()
-    {
-        Square center = game.getSquare(7,7);
-        center.setLetter(new Tile("l", 2));
-        Square rightNeighbour = game.getSquare(7,8);
-        rightNeighbour.setLetter(new Tile("l", 2));
-
-        List<Square> playableSquaresExpected = center.getNeighbours();
-
-        playableSquaresExpected.remove(rightNeighbour);
-        playableSquaresExpected.addAll(rightNeighbour.getNeighbours());
-        playableSquaresExpected.remove(center);
-
-        List<Square> squaresPlayable = boardManager.getSquarePositionAvailableToPlay();
-
-        assertEquals(squaresPlayable, playableSquaresExpected);
-
-
-    }
 }

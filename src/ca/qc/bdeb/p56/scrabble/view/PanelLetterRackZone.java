@@ -133,7 +133,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         add(btnPlayWord);
         btnPlayWord.setVisible(false);
-        btnPlayWord.addActionListener(e -> game.playWord());
+        btnPlayWord.addActionListener(e -> game.selectPlayWordAction());
     }
 
 

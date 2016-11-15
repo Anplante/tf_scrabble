@@ -177,7 +177,7 @@ public class GameTest {
         Tile tileTested1 = new Tile("l", 2);
         Tile tileTested2 = new Tile("l", 3);
         Square centerSquare = game.getSquare(7, 7);
-        Square adjacentToCenterSquare = game.getSquare(7,8);
+        Square adjacentToCenterSquare = game.getSquare(7, 8);
         centerSquare.setLetter(tileTested1);
         adjacentToCenterSquare.setLetter(tileTested2);
 
@@ -322,7 +322,7 @@ public class GameTest {
     }
 
     @Test
-    public void testWordsCreatedAddinngOneLetterToTwoWords(){
+    public void testWordsCreatedAddinngOneLetterToTwoWords() {
 
         Square square1 = game.getSquare(0, 0);
         square1.setLetter(new Tile("l", 2));
@@ -392,7 +392,7 @@ public class GameTest {
     }
 
     @Test
-    public void testCalculateNewWordCreatedFromExistingWord(){
+    public void testCalculateNewWordCreatedFromExistingWord() {
         Square square1 = game.getSquare(7, 7);
         square1.setLetter(new Tile("s", 2));
         Square square2 = game.getSquare(7, 8);
@@ -466,20 +466,33 @@ public class GameTest {
         assertFalse(game.playWord(lettersPlayed));
     }
 
-    @Test
-    public void testPlayFirstWordAtCenter()
-    {
-            game.startGame();
-            game.placeAWord();
-
-    }
-
 
     @Test
-    public void testEndOfTheGame()
-    {
+    public void testNotEndOfTheGame() {
+
         game.startGame();
 
         assertFalse(game.checkForEndOfTheGame());
+    }
+
+    @Test
+    public void testEndOfTheGameWhenPlayingOut() {
+
+        game.startGame();
+        game.getActivePlayer().emptyHand();
+        game.emptyBag();
+        assertTrue(game.checkForEndOfTheGame());
+    }
+
+    @Test
+    public void testEndOfTheGameWhenSixConseixConsecutiveScorelessTurn() {
+
+        game.startGame();
+
+        for(int i = 0; i < 6; i++)
+        {
+            game.passTurn();
+        }
+        assertTrue(game.checkForEndOfTheGame());
     }
 }

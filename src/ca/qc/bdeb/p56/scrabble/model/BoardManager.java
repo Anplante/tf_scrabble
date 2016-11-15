@@ -1,5 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
+import ca.qc.bdeb.p56.scrabble.shared.Direction;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -101,102 +102,92 @@ public class BoardManager {
     }
 
     private void initPremiums(Element premiumElement) {
+
         premiums = new TreeMap<>();
 
         NodeList premiumNodes = premiumElement.getElementsByTagName(TAG_PREMIUM);
 
         for (int i = 0; i < premiumNodes.getLength(); i++) {
-            Element activeElement = (Element) premiumNodes.item(i);
 
-            String identifier = activeElement.getAttribute(TAG_NAME);
+            Element activeElement = (Element) premiumNodes.item(i);
             String type = activeElement.getAttribute(TAG_TYPE);
-            int multiplier = Integer.parseInt(activeElement.getAttribute(TAG_MULTIPLIER));
 
             Premium.Type premiumType = premiumTypeMap.get(type);
+            int multiplier = Integer.parseInt(activeElement.getAttribute(TAG_MULTIPLIER));
+
             Premium premium = new Premium(premiumType, multiplier);
+
+            String identifier = activeElement.getAttribute(TAG_NAME);
+
             premiums.put(identifier, premium);
         }
     }
+
+    public Direction checkIfWordIsVerticalOrHorizontal(List<Square> letters) {
+
+        Square square = letters.get(0);
+        Direction direction = Direction.COLUMN;
+
+        if (letters.size() == 1) {
+            if(square.getAdjacentLeft() != null && !square.getAdjacentLeft().isEmpty()
+            || square.getAdjacentRight() != null && !square.getAdjacentRight().isEmpty())
+            {
+                direction = Direction.ROWN;
+            }
+        }
+        else
+        {
+            if (letters.size() > 1) {
+                if (letters.get(1).getPosColumn() != letters.get(0).getPosColumn()) {
+                    direction = Direction.ROWN;
+                }
+            }
+        }
+        return direction;
+    }
+
+
+    public List<Square> formWordWithTilesPlayed(List<Square> lettersPlayed, Direction direction) {
+
+        List<Square> sequenceFound = new ArrayList<>();
+        boolean foundSequenceTilesWithAllLetters = false;
+        Square start;
+
+        if (direction.equals(Direction.COLUMN)) {
+            start = getSquare(0, lettersPlayed.get(0).getPosColumn());
+        } else {
+            start = getSquare(lettersPlayed.get(0).getPosRow(), 0);
+        }
+
+        while (start != null && !foundSequenceTilesWithAllLetters) {
+            if (start.getTileOn() != null) {
+                sequenceFound.add(start);
+            } else {
+                boolean allLettersUtilised = true;
+                int indexLetterPlayed = 0;
+                while (allLettersUtilised && indexLetterPlayed < lettersPlayed.size()) {
+                    if (!sequenceFound.contains(lettersPlayed.get(indexLetterPlayed))) {
+                        sequenceFound.clear();
+                        allLettersUtilised = false;
+                    }
+                    indexLetterPlayed++;
+                }
+                if (allLettersUtilised)
+                    foundSequenceTilesWithAllLetters = true;
+            }
+
+            if (direction.equals(Direction.COLUMN))
+                start = start.getAdjacentDown();
+            else
+                start = start.getAdjacentRight();
+
+        }
+        return sequenceFound;
+    }
+
 
     public Square getSquare(int row, int column) {
         return board.getSquare(row, column);
     }
 
-/*    public List<Square> getSquarePositionAvailableToPlay() {
-
-        List<Square> squaresAvailable = new ArrayList<>();
-        Square centerSquare = board.getSquare(BOARD_CENTER, BOARD_CENTER);
-
-        if (centerSquare.getLetterOn() != null) {
-
-            List<Square> candidats = new ArrayList<>();
-            candidats.add(centerSquare);
-
-            while (!candidats.isEmpty()) {
-
-                Square candidatAnalysed = candidats.get(0);
-                List<Square> neighbours = candidatAnalysed.getNeighbours();
-
-                boolean available = false;
-
-                for (Square neighbour : neighbours) {
-                    if (neighbour.getLetterOn() == null) {
-                        available = true;
-                    }
-                    else{
-                        candidats.add(neighbour);
-                    }
-                }
-
-                if (available && !squaresAvailable.contains(candidatAnalysed)) {
-                    squaresAvailable.add(candidatAnalysed);
-                }
-                candidats.remove(candidatAnalysed);
-            }
-        } else {
-            squaresAvailable.add(centerSquare);
-        }
-        return squaresAvailable;
-    }*/
-
-
-    public List<Square> getSquarePositionAvailableToPlay() {
-
-        List<Square> squaresAvailable = new ArrayList<>();
-
-
-        Square centerSquare = board.getSquare(BOARD_CENTER, BOARD_CENTER);
-
-        List<Square> candidats = new ArrayList<>();
-        List<Square> candidatsAnalysed = new ArrayList<>();
-        candidats.add(centerSquare);
-
-
-        while (!candidats.isEmpty()) {
-
-            Square candidatAnalysing = candidats.get(0);
-
-            if(!candidatsAnalysed.contains(candidatAnalysing))
-            {
-                if( candidatAnalysing != null)
-                {
-                    if (candidatAnalysing.isEmpty()) {
-
-                        if(!squaresAvailable.contains(candidatAnalysing))
-                        {
-                            squaresAvailable.add(candidatAnalysing);
-                        }
-                    } else {
-
-                        List<Square> neighbours = candidatAnalysing.getNeighbours();
-
-                        candidats.addAll(neighbours);
-                    }
-                }
-                candidatsAnalysed.add(candidatAnalysing);
-            }
-            candidats.remove(candidatAnalysing);
-        }
-        return squaresAvailable;
-    }
 }

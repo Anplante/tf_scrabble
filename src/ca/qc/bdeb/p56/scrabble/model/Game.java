@@ -1,6 +1,5 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
-import ca.qc.bdeb.p56.scrabble.ai.AiGoal;
 import ca.qc.bdeb.p56.scrabble.shared.IDMove;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.shared.Direction;
@@ -40,9 +39,7 @@ public class Game implements Observable {
     private transient LinkedList<Observateur> observateurs;
     private static final Random randomGenerator = new Random();
 
-
     private BoardManager boardManager;
-
     private List<Player> players;
     private int activePlayerIndex;
     private static List<Tile> alphabetBag;
@@ -50,16 +47,17 @@ public class Game implements Observable {
     private Dictionary dictionary;
     private int turn;
 
-
     public Game(String filePath, List<Player> players) {
+
         observateurs = new LinkedList<>();
         movesHistory = new ArrayList<>();
-        loadParameters(filePath);
         this.players = players;
 
         for (Player player : players) {
             player.setGame(this);
         }
+
+        loadParameters(filePath);
     }
 
     public Board getBoard() {
@@ -141,10 +139,13 @@ public class Game implements Observable {
     private void initAlphabetBag(Element rootElement) {
 
         alphabetBag = new ArrayList<>();
-
         Element alphabetsElement = (Element) rootElement.getElementsByTagName(TAG_FRENCH_ALPHABET).item(0);
-
         NodeList alphabetsNodes = alphabetsElement.getElementsByTagName(TAG_LETTER);
+        initAllLetters(alphabetsNodes);
+    }
+
+
+    private void initAllLetters(NodeList alphabetsNodes) {
 
         for (int i = 0; i < alphabetsNodes.getLength(); i++) {
             Element activeElement = (Element) alphabetsNodes.item(i);
@@ -158,7 +159,6 @@ public class Game implements Observable {
                 alphabetBag.add(new Tile(character, value));
             }
         }
-
         Collections.shuffle(alphabetBag);
     }
 
@@ -170,7 +170,6 @@ public class Game implements Observable {
 
         return newBoardManager;
     }
-
 
     public void startGame() {
 
@@ -191,11 +190,9 @@ public class Game implements Observable {
         getActivePlayer().nextState();
 
         if (!getActivePlayer().isActivated()) {
-            if(checkForEndOfTheGame())
-            {
-                    // TODO Louis : FIN DE LA PARTIE
-            }
-            else{
+            if (checkForEndOfTheGame()) {
+                // TODO Louis : FIN DE LA PARTIE
+            } else {
                 drawTile();
                 activateNextPlayer();
             }
@@ -273,7 +270,7 @@ public class Game implements Observable {
         aviserObservateurs();
     }
 
-    public void playWord() {
+    public void selectPlayWordAction() {
 
         getActivePlayer().selectNextState(IDState.PENDING);
         if (isReadyForNextPhase()) {
@@ -286,12 +283,10 @@ public class Game implements Observable {
         Direction direction;
         boolean isAWord = false;
 
-        if (tilesPlaced.size() == 1) {
-            direction = findCompleteWordRow(tilesPlaced);
-        } else {
-            direction = findColumnOrRow(tilesPlaced);
-        }
-        List<Square> letters = formWordWithTilesPlayed(tilesPlaced, direction);
+
+        direction = boardManager.checkIfWordIsVerticalOrHorizontal(tilesPlaced);
+
+        List<Square> letters = boardManager.formWordWithTilesPlayed(tilesPlaced, direction);
 
         if (!letters.isEmpty() && letters.size() > 0) {
 
@@ -317,27 +312,6 @@ public class Game implements Observable {
             word.append(letter.getLetterOn());
         }
         return word.toString().toLowerCase();
-    }
-
-    private Direction findCompleteWordRow(List<Square> letters) {
-        Square square = letters.get(0);
-        Square squareLeft = null;
-        Square squareRight = null;
-        Direction direction;
-
-        if (square.getPosColumn() + 1 < 15) {
-            squareLeft = boardManager.getSquare(square.getPosRow(), square.getPosColumn() + 1);
-        }
-        if (square.getPosColumn() - 1 >= 0) {
-            squareRight = boardManager.getSquare(square.getPosRow(), square.getPosColumn() - 1);
-        }
-
-        if ((squareLeft != null && squareLeft.getTileOn() != null) || (squareRight != null && squareRight.getTileOn() != null)) {
-            direction = Direction.ROWN;
-        } else {
-            direction = Direction.COLUMN;
-        }
-        return direction;
     }
 
     // TODO Antoine : refactoring a faire ici
@@ -386,7 +360,6 @@ public class Game implements Observable {
                     allCombinaisonAreValid = false;
                 }
             }
-
             indexTilesPlaced++;
         }
 
@@ -400,58 +373,6 @@ public class Game implements Observable {
         return allCombinaisonAreValid;
     }
 
-    private List<Square> formWordWithTilesPlayed(List<Square> lettersPlayed, Direction direction) {
-
-        List<Square> sequenceFound = new ArrayList<>();
-        boolean foundSequenceTilesWithAllLetters = false;
-        Square start;
-
-        if (direction.equals(Direction.COLUMN)) {
-            start = boardManager.getSquare(0, lettersPlayed.get(0).getPosColumn());
-        } else {
-            start = boardManager.getSquare(lettersPlayed.get(0).getPosRow(), 0);
-        }
-
-        while (start != null && !foundSequenceTilesWithAllLetters) {
-            if (start.getTileOn() != null) {
-                sequenceFound.add(start);
-            } else {
-                boolean allLettersUtilised = true;
-                int indexLetterPlayed = 0;
-                while (allLettersUtilised && indexLetterPlayed < lettersPlayed.size()) {
-                    if (!sequenceFound.contains(lettersPlayed.get(indexLetterPlayed))) {
-                        sequenceFound.clear();
-                        allLettersUtilised = false;
-                    }
-                    indexLetterPlayed++;
-                }
-                if (allLettersUtilised)
-                    foundSequenceTilesWithAllLetters = true;
-            }
-
-            if (direction.equals(Direction.COLUMN))
-                start = start.getAdjacentDown();
-            else
-                start = start.getAdjacentRight();
-
-        }
-
-        return sequenceFound;
-    }
-
-
-    private Direction findColumnOrRow(List<Square> letters) {
-
-        Direction direction = Direction.COLUMN;
-
-        int column = letters.get(0).getPosColumn();
-        if (letters.size() > 1) {
-            if (letters.get(1).getPosColumn() != column) {
-                direction = Direction.ROWN;
-            }
-        }
-        return direction;
-    }
 
     public void recallTiles() {
         getActivePlayer().selectNextState(IDState.SELECT_ACTION);
@@ -572,88 +493,6 @@ public class Game implements Observable {
         goToNextState();
     }
 
-    public void placeAWord() {
-
-        List<Square> squaresPlayable = boardManager.getSquarePositionAvailableToPlay();
-        boolean wordFound = false;
-        AiGoal ai = new AiGoal(this);
-        String validWord;
-        int indexCandidatsSquare = 0;
-
-        while (indexCandidatsSquare < squaresPlayable.size() && !wordFound) {
-            String letters = getPlayerLettersInStringFormat(getActivePlayer());
-            Square start = squaresPlayable.get(indexCandidatsSquare);
-            Square currentSquare = start;
-            List<String> wordsPlayable = ai.getPossibleWord(letters);
-            List<String> tempsWords;
-            String suppLetters = "";
-            while (!currentSquare.getAdjacentRight().isEmpty()) {
-                currentSquare = currentSquare.getAdjacentRight();
-                suppLetters += currentSquare.getLetterOn();
-            }
-
-            if (!suppLetters.isEmpty()) {
-                tempsWords = ai.getPossibleWord(letters);
-                wordsPlayable = removeDuplicateWord(wordsPlayable, tempsWords);
-            }
-
-
-            while (!wordsPlayable.isEmpty() && !wordFound) {
-                String currentWord = wordsPlayable.get(0);
-                int indexLetter = 0;
-                boolean playable = true;
-                while (indexLetter < currentWord.length() && playable) {
-                    if (!currentSquare.isEmpty()) {
-                        if (!currentSquare.getLetterOn().equals(String.valueOf(currentWord.charAt(indexLetter)))) {
-                            playable = false;
-                            indexLetter = 0;
-                        }
-                    }
-                    indexLetter++;
-                }
-                if (playable) {
-                    wordFound = true;
-                    validWord = currentWord;
-                    int index = 0;
-
-                    while (index < validWord.length()) {
-                        if (start.isEmpty()) {
-                            Tile tile = getActivePlayer().getTile(String.valueOf(validWord.charAt(index)).toUpperCase());
-                            start.setLetter(tile);
-                            getActivePlayer().remove(tile);
-                        }
-                        start = start.getAdjacentRight();
-                        index++;
-                    }
-                    aviserObservateurs();
-                } else {
-                    wordsPlayable.remove(currentWord);
-                }
-            }
-        }
-    }
-
-    private List<String> removeDuplicateWord(List<String> original, List<String> newWords) {
-        for (String word : original) {
-            if (newWords.contains(word)) {
-                newWords.remove(word);
-            }
-        }
-        return newWords;
-    }
-
-    private String getPlayerLettersInStringFormat(Player player) {
-        StringBuilder letters = new StringBuilder();
-
-        List<Tile> playerTiles = player.getTiles();
-
-        for (Tile tile : playerTiles) {
-            letters.append(tile.getLetter().toLowerCase());
-        }
-
-        return letters.toString();
-    }
-
     public boolean checkForEndOfTheGame() {
 
         return checkForPlayerPlayingOut() || checkForSixConsecutiveScorelessTurn();
@@ -664,14 +503,14 @@ public class Game implements Observable {
         boolean endOfGame = false;
 
         if (getActivePlayer().getTiles().isEmpty() && alphabetBag.isEmpty()) {
-            calculPlayOutPointsInStandartFormat();
+            calculatePlayOutPointsInStandartFormat();
             endOfGame = true;
         }
 
         return endOfGame;
     }
 
-    private void calculPlayOutPointsInStandartFormat() {
+    private void calculatePlayOutPointsInStandartFormat() {
         Player currentPlayer = getActivePlayer();
 
         for (Player player : players) {
@@ -688,7 +527,7 @@ public class Game implements Observable {
     /**
      * TODO Louis : Si jamais on veut ajouter des modes de jeux différents
      */
-    private void calculPlayOytPointsInTournamentFormat() {
+    private void calculPlayOutPointsInTournamentFormat() {
 
         Player currentPlayer = getActivePlayer();
 
@@ -702,17 +541,14 @@ public class Game implements Observable {
         }
     }
 
-    private boolean checkForSixConsecutiveScorelessTurn()
-    {
+    private boolean checkForSixConsecutiveScorelessTurn() {
         ListIterator<MoveLog> litr = movesHistory.listIterator(movesHistory.size());
 
         int countScorelessTurn = 0;
         int index = 0;
 
-        while(litr.hasPrevious() &&  index < MAX_CONSECUTIVE_SCORELESS_TURN)
-        {
-            if(litr.previous().getWordPoints() == 0)
-            {
+        while (litr.hasPrevious() && index < MAX_CONSECUTIVE_SCORELESS_TURN) {
+            if (litr.previous().getWordPoints() == 0) {
                 countScorelessTurn++;
             }
             index++;

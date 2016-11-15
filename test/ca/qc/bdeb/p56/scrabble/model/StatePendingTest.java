@@ -64,7 +64,7 @@ public class StatePendingTest {
             row++;
         }
         assertEquals(0,  player.getTiles().size());
-        game.playWord();
+        game.selectPlayWordAction();
         game.passTurn();
 
         assertEquals(7, player.getTiles().size());
