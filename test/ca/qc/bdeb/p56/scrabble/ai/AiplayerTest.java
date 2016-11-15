@@ -11,6 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class AiplayerTest {
 
     private Game game;
     private ArrayList<String> listName;
+
 
     @Before
     public void setUp()  throws Exception {

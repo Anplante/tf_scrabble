@@ -234,8 +234,13 @@ public class MainMenuGUI extends JDialog {
 
         players = new ArrayList<>();
         listName = readXMLFiles();
-        player = new HumanPlayer(txtName.getText());
-        players.add(player);
+
+        int numberOfHumanPlayers = cmbNumberOfHuman.getSelectedIndex();
+        numberOfHumanPlayers += 2;
+
+        for (int i = 0; i < numberOfHumanPlayers; i++) {
+            players.add(new HumanPlayer(txtName.getText()));
+        }
 
         int limit = cmbNumberOfAi.getSelectedIndex();
         for (int i = 0; i < limit; i++) {
