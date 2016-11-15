@@ -6,15 +6,8 @@
     <bookmark url="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" description="goToNextState();" line="216" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e93a873-ab64-4362-b5fe-5856ecefeca3" name="Default" comment="Création waiting next turn between players">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelBoard.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelPlayers.java" />
+    <list default="true" id="9e93a873-ab64-4362-b5fe-5856ecefeca3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelLetterRackZone.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelPlayerInfo.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/PanelPlayerInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/WaitingPanel.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/WaitingPanel.java" />
     </list>
     <ignored path="tf_scrabble.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -124,7 +117,7 @@
       <file leaf-file-name="ScrabbleGUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
+            <state relative-caret-position="70">
               <caret line="121" column="43" selection-start-line="121" selection-start-column="43" selection-end-line="121" selection-end-column="43" />
               <folding />
             </state>
@@ -1269,14 +1262,7 @@
       <workItem from="1478801041004" duration="2142000" />
       <workItem from="1478804192737" duration="8616000" />
       <workItem from="1479181263756" duration="1388000" />
-      <workItem from="1479217999370" duration="6009000" />
-    </task>
-    <task id="LOCAL-00004" summary="Début de l'implémentation des tests.">
-      <created>1473737643869</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1473737643869</updated>
+      <workItem from="1479217999370" duration="6041000" />
     </task>
     <task id="LOCAL-00005" summary="J'ai reussis a faire fonctionner mes tests">
       <created>1473888533749</created>
@@ -1614,7 +1600,14 @@
       <option name="project" value="LOCAL" />
       <updated>1479195943642</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Création waiting next turn between players pt2">
+      <created>1479224113492</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1479224113493</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1650,7 +1643,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92571000" />
+    <option name="totallyTimeSpent" value="92603000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1755,7 +1748,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Modifier le keylistener pour un keybinding." />
     <MESSAGE value="J'ai enlevé la classe de swap pour le mettre dans la StatePlayTile afin de diminuer le nombre de vérification à faire." />
     <MESSAGE value="Ajout d'une comboBox pour choisir les background" />
     <MESSAGE value="résolution d'un bug" />
@@ -1780,7 +1772,8 @@
     <MESSAGE value="Ajout d'une classe dialog pour que l'utilisateur puisse choisir une lettre pour un tile vide." />
     <MESSAGE value="Création watiing necxt turn" />
     <MESSAGE value="Création waiting next turn between players" />
-    <option name="LAST_COMMIT_MESSAGE" value="Création waiting next turn between players" />
+    <MESSAGE value="Création waiting next turn between players pt2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Création waiting next turn between players pt2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2167,7 +2160,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
+        <state relative-caret-position="70">
           <caret line="121" column="43" selection-start-line="121" selection-start-column="43" selection-end-line="121" selection-end-column="43" />
           <folding />
         </state>
