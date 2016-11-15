@@ -6,11 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e93a873-ab64-4362-b5fe-5856ecefeca3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/WaitingPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/model/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/utility/ConstanteComponentMessage.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/utility/ConstanteComponentMessage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java" afterPath="$PROJECT_DIR$/src/ca/qc/bdeb/p56/scrabble/view/ScrabbleGUI.java" />
     </list>
     <ignored path="tf_scrabble.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1067,13 +1063,6 @@
       <workItem from="1478804192737" duration="8616000" />
       <workItem from="1479181263756" duration="1388000" />
     </task>
-    <task id="LOCAL-00002" summary="Je sais pas trop ce que j'ai fais, mais j'ai planté le bout que Julien a fait. J'ai essayé de reprendre sa partie que j'ai pu.">
-      <created>1473653610218</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1473653610218</updated>
-    </task>
     <task id="LOCAL-00003" summary="Les lettres du joueurs sont centrés en dessous du board.">
       <created>1473687652295</created>
       <option name="number" value="00003" />
@@ -1410,7 +1399,14 @@
       <option name="project" value="LOCAL" />
       <updated>1479095190775</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Création waiting next turn between players">
+      <created>1479195934558</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1479195934558</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1551,8 +1547,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Le joueur doit placer une lettre sur le meme axe que les autres autres lettres jouees sur le meme tour." />
-    <MESSAGE value="Merge remote-tracking branch 'remotes/origin/master' into TestColors&#10;&#10;Merge massif dune branche" />
     <MESSAGE value="Modifier le keylistener pour un keybinding." />
     <MESSAGE value="J'ai enlevé la classe de swap pour le mettre dans la StatePlayTile afin de diminuer le nombre de vérification à faire." />
     <MESSAGE value="Ajout d'une comboBox pour choisir les background" />
@@ -1576,7 +1570,9 @@
     <MESSAGE value="Travail sur placer un mot sur le board (essaie avec juste les cases a gauche d'une lettre)&#10;" />
     <MESSAGE value="Début de l'implémentation de la gestion de la fin de partie." />
     <MESSAGE value="Ajout d'une classe dialog pour que l'utilisateur puisse choisir une lettre pour un tile vide." />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout d'une classe dialog pour que l'utilisateur puisse choisir une lettre pour un tile vide." />
+    <MESSAGE value="Création watiing necxt turn" />
+    <MESSAGE value="Création waiting next turn between players" />
+    <option name="LAST_COMMIT_MESSAGE" value="Création waiting next turn between players" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
