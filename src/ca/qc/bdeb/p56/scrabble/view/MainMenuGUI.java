@@ -72,25 +72,25 @@ public class MainMenuGUI extends JDialog {
     public static final URL PATH_TO_FILE = Launcher.class.getResource("/files/ListOfName.xml");
 
     public MainMenuGUI(ScrabbleGUI parent) {
+
         super();
         this.parent = parent;
-        initializeFrame();
         initializeComponents();
         initializeSize();
 
+      /*  setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override public void windowClosed(WindowEvent e) {
+                System.out.println("exit");
                 System.exit(0);
             }
-        });
-
-
+        });*/
     }
 
-    private void initializeFrame() {
-        setLayout(null);
-        JFrame fenetre = new JFrame();
-        this.setTitle(ConstanteComponentMessage.TITLE_MENU);
+  /*  private void initializeDialog() {
+
+
+        setTitle(ConstanteComponentMessage.TITLE_MENU);
 
         Insets insets = fenetre.getInsets();
         setSize(new Dimension(insets.left + insets.right + 450,
@@ -98,7 +98,7 @@ public class MainMenuGUI extends JDialog {
 
         fenetre.pack();
         // TODO Louis : Faire en sorte que lorsqu'on ferme le dialogue que le programme se termine.
-    }
+    }*/
 
     private void initializeSize() {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -111,8 +111,12 @@ public class MainMenuGUI extends JDialog {
 
 
     private void initializeComponents() {
-        panelMenu = new JPanel();
-        panelMenu.setLayout(null);
+
+        setSize(parent.getWidth() / 4, parent.getHeight() / 2);
+        setLocationRelativeTo(parent);
+        // setLayout(new BorderLayout());
+        panelMenu = new JPanel(new GridBagLayout());
+        //  panelMenu.setLayout(null);
         addFileChooser();
         addTextBox();
         addLabels();
@@ -168,12 +172,12 @@ public class MainMenuGUI extends JDialog {
     private void initMenuOptions() {
 
         initBtnChooseBackgroundImg();
-        initBtnExit();
         initBtnCreateGame();
+        initBtnExit();
+
     }
 
-    private void initBtnChooseBackgroundImg()
-    {
+    private void initBtnChooseBackgroundImg() {
         btnChooseBackgroundImg = new JButton(ConstanteComponentMessage.ELLIPSIS);
         btnChooseBackgroundImg.setSize(25, 25);
         btnChooseBackgroundImg.setLocation(365, 220);
@@ -183,8 +187,8 @@ public class MainMenuGUI extends JDialog {
             receiveBackground(returnValue);
         });
     }
-    private void initBtnExit()
-    {
+
+    private void initBtnExit() {
         btnExit = new JButton();
         btnExit.setSize(100, 50);
         btnExit.setLocation(250, 325);
@@ -194,8 +198,7 @@ public class MainMenuGUI extends JDialog {
         btnExit.addActionListener(e -> System.exit(0));
     }
 
-    private void initBtnCreateGame()
-    {
+    private void initBtnCreateGame() {
         btnCreateGame = new JButton();
         btnCreateGame.setSize(100, 50);
         btnCreateGame.setText(ConstanteComponentMessage.MESS_CONFIRM);
@@ -351,7 +354,6 @@ public class MainMenuGUI extends JDialog {
 
         return filename.substring(0, extensionIndex);
     }*/
-
     public int getLenghtPlayers() {
         return game.getPlayers().size();
     }

@@ -24,7 +24,7 @@ public class DialogOptionsMenu extends JDialog {
 
     public DialogOptionsMenu(ScrabbleGUI parent) {
 
-        super();
+        super(parent, true);
 
         this.parent = parent;
         setSize(parent.getWidth() / 4, parent.getHeight() / 2);

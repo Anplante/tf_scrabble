@@ -53,6 +53,7 @@ public class BtnSquare extends JButton implements Observateur {
         setFocusable(false);
         changementEtat();
         setPremiumColor();
+
         addActionListener(e -> {
 
             gameModel.playTile(square);
@@ -69,6 +70,8 @@ public class BtnSquare extends JButton implements Observateur {
             }
         });
     }
+
+
 
     @Override
     public void changementEtat() {
