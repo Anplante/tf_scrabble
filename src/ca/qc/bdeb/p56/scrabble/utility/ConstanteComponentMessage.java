@@ -22,6 +22,7 @@ public class ConstanteComponentMessage {
     public static final String MESS_CANCEL = "Annuler";
     public static final String MESS_PLAYER_NAME = "Nom du joueur : ";
     public static final String MESS_NUMBER_OF_AI = "Nombre d'ordinateurs : ";
+    public static final String MESS_NUMBER_OF_HUMAN = "Nombre de joueurs : ";
     public static final String MESS_THEME = "Thème : ";
     public static final String MESS_BACKGROUND = "Background : ";
     public static final String MESS_THEME_CLASSIQUE = "Classique";

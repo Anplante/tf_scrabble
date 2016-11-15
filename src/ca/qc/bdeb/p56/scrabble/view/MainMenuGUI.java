@@ -44,7 +44,8 @@ public class MainMenuGUI extends JDialog {
     private static final int BASIC_THEME = 0;
     private static final int NOBLE_THEME = 1;
 
-    private static final String[] nombreDeAi = {"1", "2", "3"};
+    private static final String[] numberOfAi = {"0", "1", "2", "3"};
+    private static final String[] numberOfHuman = {"2", "3", "4"};
     private JPanel panelMenu;
     private JTextField txtName;
     private JButton btnCreateGame;
@@ -53,7 +54,9 @@ public class MainMenuGUI extends JDialog {
     private JLabel lblName;
     private JButton btnExit;
     private JLabel lblNumberOfAi;
+    private JLabel lblNumberOfHuman;
     private JComboBox cmbNumberOfAi = new JComboBox();
+    private JComboBox cmbNumberOfHuman = new JComboBox();
     private GameManager gameManager;
     private JComboBox<String> cmbBackgroundScrabble;
     private JLabel lblBackground;
@@ -122,12 +125,22 @@ public class MainMenuGUI extends JDialog {
 
         cmbNumberOfAi = new JComboBox();
         cmbNumberOfAi.setName(ConstanteTestName.QTE_AI_NAME);
-        for (int i = 0; i < nombreDeAi.length; i++) {
-            cmbNumberOfAi.addItem(nombreDeAi[i]);
+        for (int i = 0; i < numberOfAi.length; i++) {
+            cmbNumberOfAi.addItem(numberOfAi[i]);
         }
-        cmbNumberOfAi.setVisible(true);
+        // Pour l'instant, on n'affiche pas cette combo box puisqu'on n'a pas de AI
+        cmbNumberOfAi.setVisible(false);
         cmbNumberOfAi.setLocation(180, 120);
         cmbNumberOfAi.setSize(100, 25);
+
+        cmbNumberOfHuman = new JComboBox<>();
+        cmbNumberOfHuman.setName(ConstanteTestName.QTE_HUMAN_NAME);
+        for (int i = 0; i < numberOfHuman.length; i++) {
+            cmbNumberOfHuman.addItem(numberOfHuman[i]);
+        }
+        cmbNumberOfHuman.setVisible(true);
+        cmbNumberOfHuman.setLocation(180, 120);
+        cmbNumberOfHuman.setSize(100, 25);
 
         cmbBackgroundScrabble = new JComboBox<>();
 
@@ -146,6 +159,7 @@ public class MainMenuGUI extends JDialog {
         cmbTheme.setSize(100,25);
 
 
+        panelMenu.add(cmbNumberOfHuman);
         panelMenu.add(cmbNumberOfAi);
         panelMenu.add(cmbBackgroundScrabble);
         panelMenu.add(cmbTheme);
@@ -224,7 +238,6 @@ public class MainMenuGUI extends JDialog {
         players.add(player);
 
         int limit = cmbNumberOfAi.getSelectedIndex();
-        ++limit;
         for (int i = 0; i < limit; i++) {
             players.add(new AiPlayer(listName));
         }
@@ -250,7 +263,14 @@ public class MainMenuGUI extends JDialog {
         lblNumberOfAi.setText(ConstanteComponentMessage.MESS_NUMBER_OF_AI);
         lblNumberOfAi.setLocation(25, 125);
         lblNumberOfAi.setSize(lblNumberOfAi.getPreferredSize());
-        lblNumberOfAi.setVisible(true);
+        // Pour l'instant, on n'affiche pas ce label puisqu'on n'a pas de AI
+        lblNumberOfAi.setVisible(false);
+
+        lblNumberOfHuman = new JLabel();
+        lblNumberOfHuman.setText(ConstanteComponentMessage.MESS_NUMBER_OF_HUMAN);
+        lblNumberOfHuman.setLocation(25, 125);
+        lblNumberOfHuman.setSize(lblNumberOfAi.getPreferredSize());
+        lblNumberOfHuman.setVisible(true);
 
         lblBackground = new JLabel();
         lblBackground.setText(ConstanteComponentMessage.MESS_BACKGROUND);
@@ -266,6 +286,7 @@ public class MainMenuGUI extends JDialog {
 
         panelMenu.add(lblName);
         panelMenu.add(lblNumberOfAi);
+        panelMenu.add(lblNumberOfHuman);
         panelMenu.add(lblBackground);
         panelMenu.add(lblTheme);
     }
