@@ -321,7 +321,7 @@ public class Game implements Observable {
         return word.toString().toLowerCase();
     }
 
-    // TODO Antoine : refactoring a faire ici
+    // TODO Antoine : refactoring a faire ici -
     private boolean checkForComboWord(List<Square> tilesPlaced, Direction direction) {
 
         boolean allCombinaisonAreValid = true;
