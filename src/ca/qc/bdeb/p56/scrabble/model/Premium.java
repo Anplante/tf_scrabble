@@ -15,9 +15,11 @@ public class Premium {
 
     private Type type;
     private int multiplier;
+    private String name;
 
-    public Premium(Type type, int multiplier)
+    public Premium(String name, Type type, int multiplier)
     {
+        this.name = name;
         this.type = type;
         this.multiplier = multiplier;
     }
@@ -29,5 +31,10 @@ public class Premium {
 
     public int getMultiplier(){
         return multiplier;
+    }
+
+    public String getName()
+    {
+        return name;
     }
 }

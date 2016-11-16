@@ -64,14 +64,6 @@ public class Square implements Observable {
         neighbours.add(adjacentRight);
     }
 
-    public List<Square> getNeighbours() {
-        ArrayList<Square> neighbours = new ArrayList<>();
-
-        neighbours.addAll(this.neighbours);
-
-        return neighbours;
-    }
-
     public String getLetterOn() {
         if (tileOn != null) {
             return tileOn.getLetter();

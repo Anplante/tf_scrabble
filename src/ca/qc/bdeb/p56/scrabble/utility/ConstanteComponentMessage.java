@@ -48,6 +48,7 @@ public class ConstanteComponentMessage {
     public static final String TITLE_SELECT_LETTER = "Veuillez choissir une lettre";
     public static final char START_ALPHABET = 'A';
     public static final char END_ALPHABET = 'Z';
+    public static final String DEFAULT_DICT_PATH = "resources/dictionary/fr_dictionary.txt";
 
 
 

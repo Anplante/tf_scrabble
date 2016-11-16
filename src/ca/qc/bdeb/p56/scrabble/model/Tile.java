@@ -23,6 +23,10 @@ public class Tile implements Observable {
         observateurs = new LinkedList<>();
     }
 
+    public void setLetter(String letter) {
+        this.letter = letter;
+    }
+
     public String getLetter()
     {
         return letter;
@@ -66,4 +70,6 @@ public class Tile implements Observable {
     public void aviserObservateurs(Enum<?> e, Object o) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+
 }

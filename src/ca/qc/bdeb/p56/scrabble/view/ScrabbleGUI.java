@@ -32,11 +32,8 @@ public class ScrabbleGUI extends JFrame {
     private MainMenuGUI menu;
     private String imgPath;
     private WaitingPanel pnlWaiting;
-
     private JLabel background;
-
     private PanelPlayers panelInformation;
-
 
     public ScrabbleGUI() {
 
@@ -79,7 +76,7 @@ public class ScrabbleGUI extends JFrame {
         }
 
         this.gameModel = game;
-        createGame();
+        gameModel.startGame();
         initializeComponents();
         addPlayersInfo();
         setVisible(true);
@@ -94,13 +91,12 @@ public class ScrabbleGUI extends JFrame {
     }
 
     private void initializeComponents() {
+
         createBackground();
         createPanelWait();
         createPanelBoard();
         createPanelLetterRack();
         createPanelInformation();
-
-
     }
 
     private void createPanelWait(){
@@ -137,6 +133,7 @@ public class ScrabbleGUI extends JFrame {
     }
 
     private void addPlayersInfo() {
+
         List<Player> players = gameModel.getPlayers();
 
         for (Player player : players) {
@@ -186,7 +183,7 @@ public class ScrabbleGUI extends JFrame {
         int size = pnlBoard.getWidth()/BoardManager.BOARD_SIZE;
         for (int row = 0; row < BoardManager.BOARD_SIZE; row++) {
             for (int column = 0; column < BoardManager.BOARD_SIZE; column++) {
-                BtnSquare square = new BtnSquare(gameModel, row, column, size, imgPath);
+                BtnSquare square = new BtnSquare(gameModel, gameModel.getSquare(row, column), size, imgPath);
                 square.setName(ConstanteTestName.SQUARE_NAME + row + column);
                 pnlBoard.add(square);
             }

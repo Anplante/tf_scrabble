@@ -1,7 +1,8 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
+import ca.qc.bdeb.p56.scrabble.model.Square;
+import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.ImagesManager;
 
 import javax.swing.*;
@@ -13,33 +14,36 @@ import java.net.URL;
  */
 public class DialogBlankTileChoice extends JDialog {
 
-    private ScrabbleGUI parent;
+    private Tile blankTile;
 
-    public DialogBlankTileChoice(ScrabbleGUI parent)
-    {
+    public DialogBlankTileChoice(Tile blankTile) {
         super();
 
-        this.parent = parent;
-        setSize(parent.getWidth() / 4, parent.getHeight() / 2);
-        setLocationRelativeTo(parent);
+        this.blankTile = blankTile;
 
         add(new JLabel(ConstanteComponentMessage.TITLE_SELECT_LETTER));
 
-
     }
 
-    private void initLettersChoice()
-    {
+    private void initLettersChoice() {
         JPanel pnlLettersChoice = new JPanel();
         pnlLettersChoice.setLayout(new GridBagLayout());
 
-        int size = getWidth()/10;
+        int size = getWidth() / 10;
 
-        for (char start = ConstanteComponentMessage.START_ALPHABET; start <=  ConstanteComponentMessage.END_ALPHABET; start++) {
-            String ressource = parent.getImgPath() + start + ConstanteComponentMessage.EXT_PNG;
+        for (char start = ConstanteComponentMessage.START_ALPHABET; start <= ConstanteComponentMessage.END_ALPHABET; start++) {
+            String ressource = ConstanteComponentMessage.DEFAULT_DICT_PATH + start + ConstanteComponentMessage.EXT_PNG;
             URL res = getClass().getClassLoader().getResource(ressource);
             ImageIcon icon = ImagesManager.getIcon(res, size, size);
-           //ButtonTile btnTile = new ButtonTile()
+            JButton btnLetter = new JButton();
+            btnLetter.setIcon(icon);
+            btnLetter.setName(Character.toString(start));
+            btnLetter.addActionListener(actionEvent -> {
+                blankTile.setLetter(btnLetter.getName());
+            });
+            pnlLettersChoice.add(btnLetter);
         }
+
+        add(pnlLettersChoice);
     }
 }

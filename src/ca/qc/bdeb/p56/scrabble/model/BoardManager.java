@@ -79,13 +79,13 @@ public class BoardManager {
         String content = square.getLetterOn();
 
         if (content.isEmpty()) {
-            content += getPremiumSquare(row, column);
+            content += getPremiumNameOnSquare(row, column);
         }
 
         return content;
     }
 
-    public String getPremiumSquare(int row, int column) {
+    public String getPremiumNameOnSquare(int row, int column) {
 
         String value = "";
         Square square = board.getSquare(row, column);
@@ -115,9 +115,8 @@ public class BoardManager {
             Premium.Type premiumType = premiumTypeMap.get(type);
             int multiplier = Integer.parseInt(activeElement.getAttribute(TAG_MULTIPLIER));
 
-            Premium premium = new Premium(premiumType, multiplier);
-
             String identifier = activeElement.getAttribute(TAG_NAME);
+            Premium premium = new Premium(identifier, premiumType, multiplier);
 
             premiums.put(identifier, premium);
         }

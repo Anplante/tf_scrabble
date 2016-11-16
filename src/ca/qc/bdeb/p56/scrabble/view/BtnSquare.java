@@ -1,6 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
+import ca.qc.bdeb.p56.scrabble.model.Premium;
 import ca.qc.bdeb.p56.scrabble.model.Square;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
@@ -21,7 +22,7 @@ public class BtnSquare extends JButton implements Observateur {
     private final static Color COLOR_TW = new Color(252, 179, 87);
     private final static Color COLOR_TL = new Color(91, 187, 71);
     private final static Color COLOR_DW = new Color(238, 49, 50);
-    private final static Color COLOR_CENTER = new Color(255,192,203);
+    private final static Color COLOR_CENTER = new Color(255, 192, 203);
 
     private static final String PATH_IMG_CENTER_STAR = "./images/star.png";
     private static final String TRIPLE_WORD = "TW";
@@ -31,28 +32,22 @@ public class BtnSquare extends JButton implements Observateur {
     private static final String CENTER = "CENTER";
 
     private Game gameModel;
-    private int posRow;
-    private int posColumn;
-    private int size;
     private Square square;
-    private HashMap<String, ImageIcon> icons;
+    private int size;
     private String imgPath;
 
-    public BtnSquare(Game gameModel, int posRow, int posColumn, int size, String pathImg) {
+    public BtnSquare(Game gameModel, Square square, int size, String pathImg) {
 
-        super(gameModel.getPremiumSquare(posRow, posColumn));
+        super();
         imgPath = pathImg;
         this.gameModel = gameModel;
-        this.posRow = posRow;
-        this.posColumn = posColumn;
+        this.square = square;
         this.size = size;
-        this.square = gameModel.getSquare(posRow, posColumn);
         square.ajouterObservateur(BtnSquare.this);
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setBorder(BorderFactory.createEtchedBorder());
         setFocusable(false);
         changementEtat();
-        setPremiumColor();
         addActionListener(e -> {
 
             gameModel.playTile(square);
@@ -61,7 +56,7 @@ public class BtnSquare extends JButton implements Observateur {
                     && gameModel.getActivePlayer().getState().getName().equals(IDState.PLAY_TILE.getName())) {
                 setText("");
                 String valueOnTile = square.getLetterOn();
-                if(valueOnTile.trim().equals("")){
+                if (valueOnTile.trim().equals("")) {
                     valueOnTile = "1";
                 }
                 URL path = getClass().getClassLoader().getResource(imgPath + valueOnTile + ConstanteComponentMessage.EXT_PNG);
@@ -73,7 +68,15 @@ public class BtnSquare extends JButton implements Observateur {
     @Override
     public void changementEtat() {
 
-        String content = gameModel.getContentSquare(posRow, posColumn);
+        String content = square.getLetterOn();
+
+        if (content.isEmpty()) {
+            Premium premium = square.getPremium();
+
+            if (premium != null) {
+                content = premium.getName();
+            }
+        }
 
         if (square != null && square.getTileOn() == null)
             setIcon(null);
@@ -97,7 +100,9 @@ public class BtnSquare extends JButton implements Observateur {
                 break;
             case CENTER:
                 setText("");
+                setBackground(COLOR_CENTER);
                 setIcon(ImagesManager.getIcon(getClass().getClassLoader().getResource(PATH_IMG_CENTER_STAR), size, size));
+                break;
             default:
                 setImage();
                 break;
@@ -105,50 +110,23 @@ public class BtnSquare extends JButton implements Observateur {
         repaint();
     }
 
+
     // temporaire - à changer TODO
-    private void setImage()
-    {
-        if (square.getTileOn() != null ) {
+    private void setImage() {
+        if (square.getTileOn() != null) {
             setText("");
             String valueOnTile = square.getLetterOn();
-            if(valueOnTile.trim().equals("")){
+            if (valueOnTile.trim().equals("")) {
                 valueOnTile = "1";
             }
             URL path = getClass().getClassLoader().getResource(imgPath + valueOnTile + ConstanteComponentMessage.EXT_PNG);
             setIcon(ImagesManager.getIcon(path, size, size));
-        }
-        else if(imgPath.equals(ConstanteComponentMessage.RES_IMAGES_FR_NOBLE)) {
+        } else if (imgPath.equals(ConstanteComponentMessage.RES_IMAGES_FR_NOBLE)) {
             setBackground(Color.lightGray);
-        }else {
-            setBackground(new Color(188,183,122));
+        } else {
+            setBackground(new Color(188, 183, 122));
         }
     }
-
-    private void setPremiumColor() {
-
-        if (square.getPremium() != null) {
-            String content = gameModel.getContentSquare(posRow, posColumn);
-
-            switch (content) {
-                case TRIPLE_LETTER:
-                    setBackground(COLOR_TW);
-                    break;
-                case DOUBLE_WORD:
-                    setBackground(COLOR_DW);
-                    break;
-                case DOUBLE_LETTER:
-                    setBackground(COLOR_DL);
-                    break;
-                case TRIPLE_WORD:
-                    setBackground(COLOR_TL);
-                    break;
-                case CENTER:
-                    setBackground(COLOR_CENTER);
-                default:
-            }
-        }
-    }
-
     @Override
     public void changementEtat(Enum<?> property, Object o) {
         throw new UnsupportedOperationException("Not supported yet.");

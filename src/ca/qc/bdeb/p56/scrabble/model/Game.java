@@ -1,9 +1,9 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
-import ca.qc.bdeb.p56.scrabble.ai.AiGoal;
 import ca.qc.bdeb.p56.scrabble.shared.IDMove;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.shared.Direction;
+import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 import org.w3c.dom.Document;
@@ -30,7 +30,7 @@ public class Game implements Observable {
 
     public static final int MAX_TILES_IN_HAND = 7;
     private static final String TAG_FRENCH_ALPHABET = "frenchAlphabet";
-    private static final String DEFAULT_DICT_PATH = "resources/dictionary/fr_dictionary.txt";
+
     private static final String TAG_LETTER = "letter";
     private static final String TAG_TEXT = "text";
     private static final String TAG_VALUE = "value";
@@ -94,10 +94,6 @@ public class Game implements Observable {
         return boardManager.getContentSquare(row, column);
     }
 
-    public String getPremiumSquare(int row, int column) {
-        return boardManager.getPremiumSquare(row, column);
-    }
-
     public BoardManager getBoardManager() {
         return boardManager;
     }
@@ -119,7 +115,7 @@ public class Game implements Observable {
 
     private void initDictionnary() {
 
-        File dictFile = new File(DEFAULT_DICT_PATH);
+        File dictFile = new File(ConstanteComponentMessage.DEFAULT_DICT_PATH);
 
         dictionary = Dictionary.getINSTANCE();
         dictionary.loadDictinnary(dictFile);
