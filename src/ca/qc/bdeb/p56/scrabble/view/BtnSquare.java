@@ -31,16 +31,14 @@ public class BtnSquare extends JButton implements Observateur {
     private static final String TRIPLE_LETTER = "TL";
     private static final String CENTER = "CENTER";
 
-    private Game gameModel;
     private Square square;
     private int size;
     private String imgPath;
 
-    public BtnSquare(Game gameModel, Square square, int size, String pathImg) {
+    public BtnSquare(Square square, int size, String pathImg) {
 
         super();
         imgPath = pathImg;
-        this.gameModel = gameModel;
         this.square = square;
         this.size = size;
         square.ajouterObservateur(BtnSquare.this);
@@ -48,21 +46,11 @@ public class BtnSquare extends JButton implements Observateur {
         setBorder(BorderFactory.createEtchedBorder());
         setFocusable(false);
         changementEtat();
-        addActionListener(e -> {
+    }
 
-            gameModel.playTile(square);
-
-            if (square.getTileOn() != null
-                    && gameModel.getActivePlayer().getState().getName().equals(IDState.PLAY_TILE.getName())) {
-                setText("");
-                String valueOnTile = square.getLetterOn();
-                if (valueOnTile.trim().equals("")) {
-                    valueOnTile = "1";
-                }
-                URL path = getClass().getClassLoader().getResource(imgPath + valueOnTile + ConstanteComponentMessage.EXT_PNG);
-                setIcon(ImagesManager.getIcon(path, size, size));
-            }
-        });
+    public Square getSelectedSquare()
+    {
+        return square;
     }
 
     @Override
@@ -116,7 +104,7 @@ public class BtnSquare extends JButton implements Observateur {
         if (square.getTileOn() != null) {
             setText("");
             String valueOnTile = square.getLetterOn();
-            if (valueOnTile.trim().equals("")) {
+            if (valueOnTile.isEmpty()) {
                 valueOnTile = "1";
             }
             URL path = getClass().getClassLoader().getResource(imgPath + valueOnTile + ConstanteComponentMessage.EXT_PNG);
@@ -127,6 +115,8 @@ public class BtnSquare extends JButton implements Observateur {
             setBackground(new Color(188, 183, 122));
         }
     }
+
+
     @Override
     public void changementEtat(Enum<?> property, Object o) {
         throw new UnsupportedOperationException("Not supported yet.");

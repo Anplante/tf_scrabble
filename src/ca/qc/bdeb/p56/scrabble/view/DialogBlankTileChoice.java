@@ -16,12 +16,16 @@ public class DialogBlankTileChoice extends JDialog {
 
     private Tile blankTile;
 
-    public DialogBlankTileChoice(Tile blankTile) {
-        super();
 
+    public DialogBlankTileChoice(ScrabbleGUI parent, Tile blankTile) {
+
+        super();
+        setLocationRelativeTo(parent);
+        setSize(parent.getWidth()/4, parent.getHeight()/2);
         this.blankTile = blankTile;
 
         add(new JLabel(ConstanteComponentMessage.TITLE_SELECT_LETTER));
+        initLettersChoice();
 
     }
 
@@ -32,14 +36,15 @@ public class DialogBlankTileChoice extends JDialog {
         int size = getWidth() / 10;
 
         for (char start = ConstanteComponentMessage.START_ALPHABET; start <= ConstanteComponentMessage.END_ALPHABET; start++) {
-            String ressource = ConstanteComponentMessage.DEFAULT_DICT_PATH + start + ConstanteComponentMessage.EXT_PNG;
-            URL res = getClass().getClassLoader().getResource(ressource);
+            String resource = ConstanteComponentMessage.RES_IMAGES_FR_BASIC + start + ConstanteComponentMessage.EXT_PNG;   // TODO Louis : avoir des images sans les valeurs de points
+            URL res = getClass().getClassLoader().getResource(resource);
             ImageIcon icon = ImagesManager.getIcon(res, size, size);
             JButton btnLetter = new JButton();
             btnLetter.setIcon(icon);
             btnLetter.setName(Character.toString(start));
             btnLetter.addActionListener(actionEvent -> {
                 blankTile.setLetter(btnLetter.getName());
+                dispose();
             });
             pnlLettersChoice.add(btnLetter);
         }

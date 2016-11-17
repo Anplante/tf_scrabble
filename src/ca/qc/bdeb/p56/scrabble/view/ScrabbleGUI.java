@@ -1,16 +1,15 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
+import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.ImagesManager;
 
 import java.awt.Image;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.awt.*;
@@ -18,7 +17,7 @@ import java.awt.*;
 /**
  * Created by Louis Luu Lim on 9/7/2016.
  */
-public class ScrabbleGUI extends JFrame {
+public class ScrabbleGUI extends JFrame implements ActionListener {
 
     private static final double RATIO_LETTER_RACK_ZONE = 0.1;
     public static final int MARGIN = 5;
@@ -99,9 +98,9 @@ public class ScrabbleGUI extends JFrame {
         createPanelInformation();
     }
 
-    private void createPanelWait(){
+    private void createPanelWait() {
 
-        pnlWaiting = new WaitingPanel(new Dimension(getWidth(),getHeight()),this);
+        pnlWaiting = new WaitingPanel(new Dimension(getWidth(), getHeight()), this);
         add(pnlWaiting);
         pnlWaiting.setGame(gameModel);
     }
@@ -110,7 +109,7 @@ public class ScrabbleGUI extends JFrame {
 
         background = new JLabel();
         background.setSize(getWidth(), getHeight());
-        background.setIcon(new ImageIcon(new ImageIcon(this.getClass().getResource( ConstanteComponentMessage.PATH_BACKGROUND_RES +
+        background.setIcon(new ImageIcon(new ImageIcon(this.getClass().getResource(ConstanteComponentMessage.PATH_BACKGROUND_RES +
                 backgroundPath)).getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
         setContentPane(background);
     }
@@ -180,26 +179,24 @@ public class ScrabbleGUI extends JFrame {
     private void initGrid() {
 
         pnlBoard.setLayout(new GridLayout(BoardManager.BOARD_SIZE, BoardManager.BOARD_SIZE, 2, 2));
-        int size = pnlBoard.getWidth()/BoardManager.BOARD_SIZE;
+        int size = pnlBoard.getWidth() / BoardManager.BOARD_SIZE;
+
+
         for (int row = 0; row < BoardManager.BOARD_SIZE; row++) {
             for (int column = 0; column < BoardManager.BOARD_SIZE; column++) {
-                BtnSquare square = new BtnSquare(gameModel, gameModel.getSquare(row, column), size, imgPath);
+                BtnSquare square = new BtnSquare(gameModel.getSquare(row, column), size, imgPath);
                 square.setName(ConstanteTestName.SQUARE_NAME + row + column);
+                square.addActionListener(this);
                 pnlBoard.add(square);
             }
         }
-    }
-
-    private void createGame() {
-
-          gameModel.startGame();
     }
 
     private void addKeyBindings() {
 
         JRootPane contentPane = getRootPane();
         contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), ConstanteComponentMessage.ESCAPE_KEY);
-        contentPane.getActionMap().put( ConstanteComponentMessage.ESCAPE_KEY, actionEscape);
+        contentPane.getActionMap().put(ConstanteComponentMessage.ESCAPE_KEY, actionEscape);
     }
 
 
@@ -223,5 +220,23 @@ public class ScrabbleGUI extends JFrame {
     public void returnToMenu() {
         setVisible(false);
         menu.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+
+        BtnSquare squareClicked = (BtnSquare) actionEvent.getSource();
+        Square square = squareClicked.getSelectedSquare();
+
+
+        gameModel.playTile(square);
+
+        if(square.getTileOn() != null && square.getTileOn().getLetter().isEmpty())
+        {
+
+            DialogBlankTileChoice tileChoice = new DialogBlankTileChoice(this, square.getTileOn());
+            tileChoice.setModal(true);
+            tileChoice.setVisible(true);
+        }
     }
 }

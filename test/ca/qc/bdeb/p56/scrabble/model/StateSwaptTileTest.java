@@ -87,22 +87,6 @@ public class StateSwaptTileTest{
 
 
     @Test
-    public void swapTileInHandAndTileOnBoardOfPlaceTest() {
-
-        Square square = game.getSquare(5,5);
-
-        BtnSquare btnSquare = new BtnSquare(game, game.getSquare(5,5), 50, ConstanteComponentMessage.RES_IMAGES_FR_BASIC);
-        btnSquare.setSize(WIDTH, HEIGHT);
-
-        btnTiles.get(2).doClick();
-        btnSquare.doClick();
-
-        assertEquals(6, currentPlayer.getTiles().size());
-
-    }
-
-
-    @Test
     public void testDoubleClick() {
 
         List<Tile> playerTileBeforeExchange = currentPlayer.getTiles();

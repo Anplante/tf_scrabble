@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNotEquals;
  */
 public class BtnSquareTest {
 
-
+    private static final String TRIPLE_LETTER = "TL";
     private BtnSquare btnSquare;
     private ButtonTile btnTile;
     private Game gameModel;
@@ -34,36 +34,18 @@ public class BtnSquareTest {
         java.util.List<Player> players = new ArrayList<Player>();
         players.add(new HumanPlayer("Louis"));
         gameModel = gameManager.createNewGame(players);
-        btnSquare = new BtnSquare(gameModel, gameModel.getSquare(7,7), 50, ConstanteComponentMessage.RES_IMAGES_FR_BASIC);
-        btnSquare.setSize(WIDTH,HEIGHT);
         gameModel.startGame();
     }
 
     @After
     public void tearDown() throws Exception {
-        btnSquare = null;
         gameModel = null;
     }
 
     @Test
-    public void testSelectSquareInPlayTileState() throws AWTException {
+    public void testTripleLetterSquare() throws AWTException {
 
-        Tile tile = new Tile("a", 2);
-        btnTile = new ButtonTile(gameModel, tile, new ImageIcon());
-
-        assertFalse(gameModel.getSquare(7,7).containLetter());
-        btnTile.doClick();
-        btnSquare.doClick();
-        assertEquals(tile.getLetter(), gameModel.getContentSquare(7,7));
-
-    }
-
-
-    @Test
-    public void testSelectSquareInSelectStateAction() throws AWTException {
-
-        assertEquals(IDState.SELECT_ACTION.getName(), gameModel.getState());
-        btnSquare.doClick();
-        assertEquals(IDState.SELECT_ACTION.getName(), gameModel.getState());
+        BtnSquare tripleLetterSquare = new BtnSquare(gameModel.getSquare(1,5), 50, ConstanteComponentMessage.RES_IMAGES_FR_BASIC);
+        assertEquals(TRIPLE_LETTER, tripleLetterSquare.getText());
     }
 }
