@@ -56,6 +56,7 @@ public class MainMenuGUI extends JDialog {
     private static final NumberOfPlayer[] numberOfHuman = {TWO_PLAYER, THREE_PLAYER, FOUR_PLAYER};
     private JPanel panelMenu;
     private List<JTextField> allTextField;
+    private List<JLabel> allLabelOfPlayers;
     private JButton btnCreateGame;
     private JLabel lblTheme;
     private JComboBox cmbTheme;
@@ -186,14 +187,20 @@ public class MainMenuGUI extends JDialog {
                     case TWO_PLAYER:
                         allTextField.get(2).setVisible(false);
                         allTextField.get(3).setVisible(false);
+                        allLabelOfPlayers.get(2).setVisible(false);
+                        allLabelOfPlayers.get(3).setVisible(false);
                         break;
                     case THREE_PLAYER:
                         allTextField.get(2).setVisible(true);
                         allTextField.get(3).setVisible(false);
+                        allLabelOfPlayers.get(2).setVisible(true);
+                        allLabelOfPlayers.get(3).setVisible(false);
                         break;
                     case FOUR_PLAYER:
                         allTextField.get(2).setVisible(true);
                         allTextField.get(3).setVisible(true);
+                        allLabelOfPlayers.get(2).setVisible(true);
+                        allLabelOfPlayers.get(3).setVisible(true);
                         break;
                 }
             }
@@ -295,11 +302,18 @@ public class MainMenuGUI extends JDialog {
     }
 
     private void addLabels() {
-        lblName = new JLabel();
-        lblName.setText(ConstanteComponentMessage.MESS_PLAYER_NAME);
-        lblName.setLocation(25, 25);
-        lblName.setSize(lblName.getPreferredSize());
-        lblName.setVisible(true);
+
+        allLabelOfPlayers = new ArrayList<>();
+        allLabelOfPlayers.add(new JLabel());
+        allLabelOfPlayers.add(new JLabel());
+        allLabelOfPlayers.add(new JLabel());
+        allLabelOfPlayers.add(new JLabel());
+
+        int y = -5;
+        for (int i = 0; i < allLabelOfPlayers.size(); i++) {
+            y += 35;
+            initializeLabel(i, y);
+        }
 
         lblNumberOfAi = new JLabel();
         lblNumberOfAi.setText(ConstanteComponentMessage.MESS_NUMBER_OF_AI);
@@ -326,11 +340,26 @@ public class MainMenuGUI extends JDialog {
         lblTheme.setSize(lblBackground.getPreferredSize());
         lblTheme.setVisible(true);
 
-        panelMenu.add(lblName);
         panelMenu.add(lblNumberOfAi);
         panelMenu.add(lblNumberOfHuman);
         panelMenu.add(lblBackground);
         panelMenu.add(lblTheme);
+
+        for (int i = 0; i < allLabelOfPlayers.size(); i++) {
+            panelMenu.add(allLabelOfPlayers.get(i));
+        }
+
+        allLabelOfPlayers.get(2).setVisible(false);
+        allLabelOfPlayers.get(3).setVisible(false);
+    }
+
+    private void initializeLabel(int index, int y) {
+        JLabel lblOfPlayer = allLabelOfPlayers.get(index);
+        lblOfPlayer.setName(ConstanteTestName.PLAYER_NAME );
+        lblOfPlayer.setText(ConstanteComponentMessage.MESS_NUMBER_OF_HUMAN);
+        lblOfPlayer.setLocation(25, y);
+        lblOfPlayer.setSize(lblOfPlayer.getPreferredSize());
+        lblOfPlayer.setVisible(true);
     }
 
     private void addTextBox() {
@@ -358,6 +387,8 @@ public class MainMenuGUI extends JDialog {
         txtOfPlayer.setName(ConstanteTestName.PLAYER_NAME + " " + index);
         txtOfPlayer.setBounds(150, y, 180, 30);
         txtOfPlayer.setVisible(true);
+
+        allTextField.set(index, txtOfPlayer);
 
         txtOfPlayer.addActionListener(e -> {
             String input = allTextField.get(index).getText();
