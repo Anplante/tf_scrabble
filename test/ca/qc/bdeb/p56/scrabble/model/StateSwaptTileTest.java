@@ -3,7 +3,6 @@ package ca.qc.bdeb.p56.scrabble.model;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
-import ca.qc.bdeb.p56.scrabble.view.BtnSquare;
 import ca.qc.bdeb.p56.scrabble.view.ButtonTile;
 import ca.qc.bdeb.p56.scrabble.view.PanelLetterRackZone;
 import ca.qc.bdeb.p56.scrabble.view.ScrabbleGUI;

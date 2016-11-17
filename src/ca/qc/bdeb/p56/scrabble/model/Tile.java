@@ -48,6 +48,11 @@ public class Tile implements Observable {
         aviserObservateurs();
     }
 
+    public boolean isBlankTile()
+    {
+        return letter.isEmpty() || value == 0;
+    }
+
     @Override
     public void ajouterObservateur(Observateur o) {
             observateurs.clear();

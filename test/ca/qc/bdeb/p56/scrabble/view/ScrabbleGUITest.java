@@ -62,7 +62,7 @@ public class ScrabbleGUITest {
 
         zoneJoueur = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.LETTER_RACK_NAME);
         JPanel board = (JPanel) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.BOARD_NAME);
-        BtnSquare square = (BtnSquare) TestUtils.getChildNamed(board, ConstanteTestName.SQUARE_NAME + centerSquarePos);
+        ButtonSquare square = (ButtonSquare) TestUtils.getChildNamed(board, ConstanteTestName.SQUARE_NAME + centerSquarePos);
         ButtonTile tileJoueur = (ButtonTile) TestUtils.getChildNamed(zoneJoueur, ConstanteTestName.TILE_NAME + playerFirstTilePos);
         player = game.getActivePlayer();
         Tile tile = player.getTiles().get(0);

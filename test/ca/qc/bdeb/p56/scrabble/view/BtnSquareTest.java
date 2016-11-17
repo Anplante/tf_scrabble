@@ -1,13 +1,11 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
-import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
@@ -21,7 +19,7 @@ import static org.junit.Assert.assertNotEquals;
 public class BtnSquareTest {
 
     private static final String TRIPLE_LETTER = "TL";
-    private BtnSquare btnSquare;
+    private ButtonSquare btnSquare;
     private ButtonTile btnTile;
     private Game gameModel;
     private static final int WIDTH = 50;
@@ -45,7 +43,7 @@ public class BtnSquareTest {
     @Test
     public void testTripleLetterSquare() throws AWTException {
 
-        BtnSquare tripleLetterSquare = new BtnSquare(gameModel.getSquare(1,5), 50, ConstanteComponentMessage.RES_IMAGES_FR_BASIC);
+        ButtonSquare tripleLetterSquare = new ButtonSquare(gameModel.getSquare(1,5), 50, ConstanteComponentMessage.RES_IMAGES_FR_BASIC);
         assertEquals(TRIPLE_LETTER, tripleLetterSquare.getText());
     }
 }

@@ -36,12 +36,9 @@ public class ButtonTile extends JButton implements Observateur{
         setBorder(BorderFactory.createEtchedBorder());
         setIcon(icon);
 
-        addActionListener(e -> gameModel.selectLetter(tile));
 
-
-        setTransferHandler(new TransferHandler("Text"));
-
-        addMouseListener(new MouseAdapter() {
+        // Louis : Drag & drop
+   /*     addMouseListener(new MouseAdapter() {
 
             public void mousePressed(MouseEvent e){
 
@@ -50,7 +47,7 @@ public class ButtonTile extends JButton implements Observateur{
                 handle.exportAsDrag(lab, e, TransferHandler.MOVE);
             }
         });
-
+*/
     }
 
     public Tile getTile() {
@@ -60,6 +57,7 @@ public class ButtonTile extends JButton implements Observateur{
     @Override
     public void changementEtat() {
 
+        // TODO Louis : Mettre dans changement d'état avec l'enum d'état
         if (tile.isSelected()) {
             if (gameModel.getActivePlayer().getState().getName() == IDState.EXCHANGE.getName()) {
                 setBackground(REMOVE_COLOR);

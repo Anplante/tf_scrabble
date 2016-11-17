@@ -1,9 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
-import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.Premium;
 import ca.qc.bdeb.p56.scrabble.model.Square;
-import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ImagesManager;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
@@ -11,12 +9,11 @@ import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
-import java.util.HashMap;
 
 /**
  * Created by TheFrenchOne on 9/11/2016.
  */
-public class BtnSquare extends JButton implements Observateur {
+public class ButtonSquare extends JButton implements Observateur {
 
     private final static Color COLOR_DL = new Color(113, 205, 207);
     private final static Color COLOR_TW = new Color(252, 179, 87);
@@ -35,13 +32,13 @@ public class BtnSquare extends JButton implements Observateur {
     private int size;
     private String imgPath;
 
-    public BtnSquare(Square square, int size, String pathImg) {
+    public ButtonSquare(Square square, int size, String pathImg) {
 
         super();
         imgPath = pathImg;
         this.square = square;
         this.size = size;
-        square.ajouterObservateur(BtnSquare.this);
+        square.ajouterObservateur(ButtonSquare.this);
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setBorder(BorderFactory.createEtchedBorder());
         setFocusable(false);

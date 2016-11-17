@@ -1,16 +1,12 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
-import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
-import ca.qc.bdeb.p56.scrabble.utility.ImagesManager;
 
 import java.awt.Image;
 import javax.swing.*;
 import java.awt.event.*;
-import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
 import java.awt.*;
 
@@ -153,7 +149,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener {
         panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack, this);
 
         panelLetterRack.setPlayer(gameModel.getPlayers());
-        panelLetterRack.setGame(gameModel);
+        panelLetterRack.setGameModel(gameModel);
         panelLetterRack.setName(ConstanteTestName.LETTER_RACK_NAME);
         panelLetterRack.setOpaque(false);
         panelLetterRack.changementEtat();
@@ -184,7 +180,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener {
 
         for (int row = 0; row < BoardManager.BOARD_SIZE; row++) {
             for (int column = 0; column < BoardManager.BOARD_SIZE; column++) {
-                BtnSquare square = new BtnSquare(gameModel.getSquare(row, column), size, imgPath);
+                ButtonSquare square = new ButtonSquare(gameModel.getSquare(row, column), size, imgPath);
                 square.setName(ConstanteTestName.SQUARE_NAME + row + column);
                 square.addActionListener(this);
                 pnlBoard.add(square);
@@ -225,18 +221,11 @@ public class ScrabbleGUI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
-        BtnSquare squareClicked = (BtnSquare) actionEvent.getSource();
+        ButtonSquare squareClicked = (ButtonSquare) actionEvent.getSource();
         Square square = squareClicked.getSelectedSquare();
 
 
         gameModel.playTile(square);
 
-        if(square.getTileOn() != null && square.getTileOn().getLetter().isEmpty())
-        {
-
-            DialogBlankTileChoice tileChoice = new DialogBlankTileChoice(this, square.getTileOn());
-            tileChoice.setModal(true);
-            tileChoice.setVisible(true);
-        }
     }
 }

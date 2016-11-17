@@ -17,7 +17,7 @@ import javax.swing.*;
 /**
  * Created by TheFrenchOne on 9/11/2016.
  */
-public class PanelLetterRackZone extends JPanel implements Observateur {
+public class PanelLetterRackZone extends JPanel implements Observateur, ActionListener {
 
 
 
@@ -29,7 +29,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     private final Dimension TILE_DIMENSION;
 
     private Player currentPlayer;
-    private Game game;
+    private Game gameModel;
     private ButtonExchange btnSwapTiles;
     private JButton btnPassTurn;
     private JButton btnPlayWord;
@@ -69,18 +69,18 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         }
     }
 
-    public void setGame(Game aGame) {
-        if (game != null) {
-            game.retirerObservateur(this);
-            game.retirerObservateur(btnSwapTiles);
+    public void setGameModel(Game aGame) {
+        if (gameModel != null) {
+            gameModel.retirerObservateur(this);
+            gameModel.retirerObservateur(btnSwapTiles);
         }
-        game = aGame;
+        gameModel = aGame;
 
 
         initPanelLettersRack();
         initializeOptions();
-        game.ajouterObservateur(this);
-        game.ajouterObservateur(btnSwapTiles);
+        gameModel.ajouterObservateur(this);
+        gameModel.ajouterObservateur(btnSwapTiles);
     }
 
     private void initPanelLettersRack() {
@@ -119,7 +119,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         add(btnPassTurn);
 
-        btnPassTurn.addActionListener (e -> game.passTurn());
+        btnPassTurn.addActionListener (e -> gameModel.passTurn());
     }
 
     private void initiBtnPlayWord() {
@@ -133,7 +133,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         add(btnPlayWord);
         btnPlayWord.setVisible(false);
-        btnPlayWord.addActionListener(e -> game.selectPlayWordAction());
+        btnPlayWord.addActionListener(e -> gameModel.selectPlayWordAction());
     }
 
 
@@ -147,7 +147,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         btnRecall.setLocation(x, POS_Y);
         add(btnRecall);
 
-        btnRecall.addActionListener(actionEvent -> game.recallTiles());
+        btnRecall.addActionListener(actionEvent -> gameModel.recallTiles());
     }
 
     private void initExchangeOption() {
@@ -156,7 +156,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
         int x = OPTIONS_WIDTH + ScrabbleGUI.MARGIN;
         Rectangle bounds = new Rectangle(x, POS_Y, OPTIONS_WIDTH, getHeight());
 
-        btnSwapTiles = new ButtonExchange(ConstanteComponentMessage.MESS_EXCHANGE, game, bounds);
+        btnSwapTiles = new ButtonExchange(ConstanteComponentMessage.MESS_EXCHANGE, gameModel, bounds);
         btnSwapTiles.setName(ConstanteTestName.EXCHANGE_NAME);
         btnSwapTiles.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnSwapTiles.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -180,13 +180,13 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
                 disableAllOtherBtnExchange(true);
                 btnSwapTiles.setText(ConstanteComponentMessage.MESS_EXCHANGE);
             }
-            game.exchangeLetter();
+            gameModel.exchangeLetter();
         });
 
         btnCancelExchange.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                game.cancelExchange();
+                gameModel.cancelExchange();
                 btnSwapTiles.setText(ConstanteComponentMessage.MESS_EXCHANGE);
                 disableAllOtherBtnExchange(true);
             }
@@ -230,8 +230,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     @Override
     public void changementEtat() {
 
-        if (currentPlayer != game.getActivePlayer()) {
-            currentPlayer = game.getActivePlayer();
+        if (currentPlayer != gameModel.getActivePlayer()) {
+            currentPlayer = gameModel.getActivePlayer();
         }
 
         if (currentPlayer.getState().getName() == IDState.PLAY_TILE.getName()) {
@@ -257,11 +257,12 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
 
         for (Tile letter : playerTiles) {
 
-            ButtonTile btnTile = new ButtonTile(game, letter, iconsTile.get(letter.getLetter()));
+            ButtonTile btnTile = new ButtonTile(gameModel, letter, iconsTile.get(letter.getLetter()));
             btnTile.setSize(TILE_DIMENSION);
             btnTile.setLocation(x, POS_Y);
             letter.ajouterObservateur(btnTile);
             btnTile.setName(ConstanteTestName.TILE_NAME + i);
+            btnTile.addActionListener(this);
             //btnTile.addMouseListener(drag);
             //btnTile.addMouseMotionListener(drag);
             panelLettersRack.add(btnTile);
@@ -269,7 +270,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
             x += TILE_DIMENSION.getWidth();
         }
 
-        if(game.isWaitingNextTurn()){
+        if(gameModel.isWaitingNextTurn()){
             setVisible(false);
             setEnabled(false);
         }else {
@@ -301,5 +302,22 @@ public class PanelLetterRackZone extends JPanel implements Observateur {
     @Override
     public void changementEtat(Enum<?> e, Object o) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+
+        ButtonTile tileClicked = (ButtonTile) actionEvent.getSource();
+
+        Tile tileSelected = tileClicked.getTile();
+
+        if(tileSelected.isBlankTile())
+        {
+            DialogBlankTileChoice tileChoice = new DialogBlankTileChoice(parent, tileSelected);
+            tileChoice.setModal(true);
+            tileChoice.setVisible(true);
+        }
+        gameModel.selectLetter(tileSelected);
+
     }
 }

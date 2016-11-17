@@ -28,7 +28,7 @@
             <letter text="X" value="10" amount="1"/>
             <letter text="Y" value="10" amount="1"/>
             <letter text="Z" value="10" amount="1"/>
-            <letter text="" value="0" amount ="2"/>
+            <letter text="" value="0" amount ="50"/>
         </frenchAlphabet>
         <dictionary filename="twl06.txt" />
         <premiums>
