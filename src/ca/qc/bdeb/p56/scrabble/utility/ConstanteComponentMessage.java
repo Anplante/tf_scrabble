@@ -51,6 +51,5 @@ public class ConstanteComponentMessage {
     public static final String DEFAULT_DICT_PATH = "resources/dictionary/fr_dictionary.txt";
 
 
-
-
+    public static final String TITLE_SHUFFLE = "Shuffle";
 }

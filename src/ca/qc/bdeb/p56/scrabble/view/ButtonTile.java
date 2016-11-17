@@ -38,7 +38,7 @@ public class ButtonTile extends JButton implements Observateur{
 
 
         // Louis : Drag & drop
-   /*     addMouseListener(new MouseAdapter() {
+    /*    addMouseListener(new MouseAdapter() {
 
             public void mousePressed(MouseEvent e){
 
@@ -46,8 +46,7 @@ public class ButtonTile extends JButton implements Observateur{
                 TransferHandler handle = lab.getTransferHandler();
                 handle.exportAsDrag(lab, e, TransferHandler.MOVE);
             }
-        });
-*/
+        });*/
     }
 
     public Tile getTile() {

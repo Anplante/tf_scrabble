@@ -191,5 +191,8 @@ public abstract class Player implements Observable {
         return tileWanted;
     }
 
-
+    public void shuffleTiles() {
+        Collections.shuffle(tiles);
+        aviserObservateurs();
+    }
 }

@@ -20,6 +20,7 @@ public class WaitingPanel extends JPanel implements Observateur, KeyListener{
     private JLabel backgroundLabel;
 
     public WaitingPanel (Dimension dimension, ScrabbleGUI parent){
+
         setVisible(false);
         this.setEnabled(false);
         setFocusable(true);

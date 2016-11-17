@@ -1,9 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
-import ca.qc.bdeb.p56.scrabble.model.Game;
-import ca.qc.bdeb.p56.scrabble.model.GameManager;
-import ca.qc.bdeb.p56.scrabble.model.HumanPlayer;
-import ca.qc.bdeb.p56.scrabble.model.Player;
+import ca.qc.bdeb.p56.scrabble.model.*;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
@@ -15,6 +12,7 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -26,9 +24,10 @@ public class PanelLetterRackZoneTest {
 
     private ScrabbleGUI scrabbleGame;
     private Game game;
+    Player currentPlayer;
 
     @Before
-    public void setUp()  throws Exception {
+    public void setUp() throws Exception {
 
         GameManager gameManager = new GameManager();
         List lstPlayer = new ArrayList<Player>();
@@ -40,11 +39,14 @@ public class PanelLetterRackZoneTest {
         game = gameManager.createNewGame(lstPlayer);
         scrabbleGame.setImgPath(ConstanteComponentMessage.RES_IMAGES_FR_BASIC);
         scrabbleGame.createScrabbleGame(game);
+        currentPlayer = game.getActivePlayer();
     }
 
     @After
     public void tearDown() throws Exception {
 
+        game = null;
+        currentPlayer = null;
     }
 
 
@@ -52,11 +54,35 @@ public class PanelLetterRackZoneTest {
     public void testChangePlayer() {
 
         JButton btnFinish = (JButton) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.PASS_TURN_NAME);
-        Player firstPlayer = game.getActivePlayer();
+
         btnFinish.doClick();
-        assertNotEquals(firstPlayer, game.getActivePlayer());
-        btnFinish.doClick();
-        btnFinish.doClick();
-        assertEquals(firstPlayer, game.getActivePlayer());
+        assertNotEquals(currentPlayer, game.getActivePlayer());
+
+        for (int i = 0; i < game.getPlayersLeft() - 1; i++) {
+            btnFinish.doClick();
+        }
+
+        assertEquals(currentPlayer, game.getActivePlayer());
+    }
+
+    @Test
+    public void testShuffleTiles() {
+        JButton btnShuffle = (JButton) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.SHUFFLE_NAME);
+        List<Tile> originalPlayerHandOrder = currentPlayer.getTiles();
+
+        btnShuffle.doClick();
+
+        List<Tile> afterShufflePlayerHandOrder = currentPlayer.getTiles();
+
+        for (Tile tile : afterShufflePlayerHandOrder) {
+            assertTrue(originalPlayerHandOrder.contains(tile));
+        }
+
+        for (int i = 0; i < 1000; i++) {
+            System.out.println(i);
+            Collections.shuffle(afterShufflePlayerHandOrder);
+            assertNotEquals(afterShufflePlayerHandOrder, originalPlayerHandOrder);
+
+        }
     }
 }

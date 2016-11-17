@@ -4,6 +4,7 @@ package ca.qc.bdeb.p56.scrabble.utility;
  * Created by 1467160 on 2016-11-15.
  */
 public enum NumberOfPlayer {
+
     TWO_PLAYER(2),
     THREE_PLAYER(3),
     FOUR_PLAYER(4);
@@ -11,7 +12,7 @@ public enum NumberOfPlayer {
     private int numberOfPlayer;
 
 
-    private NumberOfPlayer(int numberOfPlayer) {
+    NumberOfPlayer(int numberOfPlayer) {
         this.numberOfPlayer = numberOfPlayer;
     }
 

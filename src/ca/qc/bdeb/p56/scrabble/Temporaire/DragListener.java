@@ -1,4 +1,4 @@
-package ca.qc.bdeb.p56.scrabble.Temporaire;
+package ca.qc.bdeb.p56.scrabble.temporaire;
 
 import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
