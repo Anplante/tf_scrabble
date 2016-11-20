@@ -10,11 +10,13 @@ import ca.qc.bdeb.p56.scrabble.shared.IDMove;
 public class MoveLog {
 
     private Player player;
-    private String wordPlayed;
     private IDMove IDMove;
-    private int wordPoints;
     private int pointsAccumulated;
     private int turnPlayed;
+
+    private int numberOfExchangedTile = 0;
+    private int wordPoints = 0;
+    private String wordPlayed = "";
 
     public MoveLog(Player player, int turnPlayed, String word, int point) {
 
@@ -30,10 +32,18 @@ public class MoveLog {
     {
         this.player = player;
         this.turnPlayed = turnPlayed;
-        this.wordPlayed = "";
         this.wordPoints = 0;
         this.pointsAccumulated = player.getScore();
         this.IDMove = IDMove;
+    }
+
+    public MoveLog (Player player, int turnPlayed, int numberOfExchangedTile){
+
+        this.player = player;
+        this.turnPlayed = turnPlayed;
+        this.numberOfExchangedTile = numberOfExchangedTile;
+        this.IDMove = IDMove.EXCHANGED;
+
     }
 
     public Player getPlayer() {

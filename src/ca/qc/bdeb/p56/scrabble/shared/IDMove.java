@@ -5,8 +5,20 @@ package ca.qc.bdeb.p56.scrabble.shared;
  */
 public enum IDMove {
 
-    PLAYED_WORD,
-    EXCHANGED,
-    PASS
+    PLAYED_WORD("Played"),
+    EXCHANGED("Exchanged"),
+    PASSED("Passed"),
+    FORFEITED("Forfeited");
+
+
+    private String name;
+
+    IDMove(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return name;
+    }
 
 }

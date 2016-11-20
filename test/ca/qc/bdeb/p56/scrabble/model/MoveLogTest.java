@@ -40,9 +40,9 @@ public class MoveLogTest {
     @Test
     public void testLogPlayerPassedTurn() {
 
-        MoveLog log = new MoveLog(player, TURN_PLAYED, IDMove.PASS);
+        MoveLog log = new MoveLog(player, TURN_PLAYED, IDMove.PASSED);
 
-        assertEquals(IDMove.PASS, log.getMove());
+        assertEquals(IDMove.PASSED, log.getMove());
         assertEquals(0, log.getWordPoints());
         assertTrue(log.getWordPlayed().isEmpty());
     }

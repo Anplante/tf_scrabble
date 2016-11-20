@@ -1,6 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
-import ca.qc.bdeb.p56.scrabble.temporaire.DragListener;
+
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.model.Player;
@@ -40,6 +40,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
     private JPanel panelLettersRack;
     private ScrabbleGUI parent;
     private HashMap<String, ImageIcon> iconsTile;
+
 
     public PanelLetterRackZone(Rectangle boundsZoneLetterRack, ScrabbleGUI parent) {
 
@@ -217,6 +218,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnCancelExchange.setVisible(!enabler);
     }
 
+    // TODO Louis : Faire en sorte qu'on enleve le joueur et non quitter la partie
     private void initForfeitOption() {
 
         btnForfeit = new JButton(ConstanteComponentMessage.TITLE_SURRENDER);
@@ -252,7 +254,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
             currentPlayer = gameModel.getActivePlayer();
         }
 
-        if (currentPlayer.getState().getName() == IDState.PLAY_TILE.getName()) {
+        if (currentPlayer.getState().equals(IDState.PLAY_TILE)) {
             btnPassTurn.setVisible(false);
             btnShuffleTiles.setVisible(false);
             btnRecall.setVisible(true);

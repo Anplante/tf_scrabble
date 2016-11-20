@@ -13,7 +13,7 @@ public enum IDState {
 
     private String name;
 
-    private IDState(String name)
+    IDState(String name)
     {
         this.name = name;
     }

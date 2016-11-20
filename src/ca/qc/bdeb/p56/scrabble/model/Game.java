@@ -1,5 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
+import ca.qc.bdeb.p56.scrabble.shared.Event;
 import ca.qc.bdeb.p56.scrabble.shared.IDMove;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.shared.Direction;
@@ -48,6 +49,7 @@ public class Game implements Observable {
     private List<MoveLog> movesHistory;
     private Dictionary dictionary;
     private int turn;
+    private List<Player> eliminatedPlayer;
 
     public Game(String filePath, List<Player> players) {
         waitingNextTurn = false;
@@ -208,7 +210,7 @@ public class Game implements Observable {
     public void passTurn() {
 
         waitingNextTurn = true;
-        movesHistory.add(new MoveLog(getActivePlayer(), turn, IDMove.PASS));
+        movesHistory.add(new MoveLog(getActivePlayer(), turn, IDMove.PASSED));
         getActivePlayer().selectNextState(IDState.PENDING);
         goToNextState();
         // TODO Louis : bloquer quand le joueur place un mot ou annuler les autres actions
@@ -463,7 +465,7 @@ public class Game implements Observable {
         }
 
         Collections.shuffle(alphabetBag);
-        movesHistory.add(new MoveLog(getActivePlayer(), turn, IDMove.EXCHANGED));
+        movesHistory.add(new MoveLog(getActivePlayer(), turn, tilesSelected.size()));
         turn++;
     }
 
@@ -564,4 +566,14 @@ public class Game implements Observable {
         return countScorelessTurn == MAX_CONSECUTIVE_SCORELESS_TURN;
     }
 
+    public void forfeit()
+    {
+        if(eliminatedPlayer == null)
+        {
+            eliminatedPlayer = new ArrayList<>();
+        }
+        eliminatedPlayer.add(getActivePlayer());
+        players.remove(getActivePlayer());
+        aviserObservateurs();
+    }
 }
