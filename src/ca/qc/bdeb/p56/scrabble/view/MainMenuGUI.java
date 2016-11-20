@@ -356,7 +356,7 @@ public class MainMenuGUI extends JDialog {
     private void initializeLabel(int index, int y) {
         JLabel lblOfPlayer = allLabelOfPlayers.get(index);
         lblOfPlayer.setName(ConstanteTestName.PLAYER_NAME );
-        lblOfPlayer.setText(ConstanteComponentMessage.MESS_NUMBER_OF_HUMAN);
+        lblOfPlayer.setText(ConstanteComponentMessage.MESS_PLAYER_NAME + ++index + " :");
         lblOfPlayer.setLocation(25, y);
         lblOfPlayer.setSize(lblOfPlayer.getPreferredSize());
         lblOfPlayer.setVisible(true);

@@ -3,12 +3,20 @@ package ca.qc.bdeb.p56.scrabble.model;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
+import sun.misc.Launcher;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -25,7 +33,10 @@ public abstract class Player implements Observable {
     private int score;
     private boolean active;
     private Color playerColor;
+    private BufferedImage playerIcon;
     private transient LinkedList<Observateur> observateurs;
+
+    private static final URL DEFAULT_PLAYER_ICON = Launcher.class.getResource("/images/default.png");
 
     public Player(String name) {
         this.name = name;
@@ -34,6 +45,7 @@ public abstract class Player implements Observable {
         playerColor = new Color(0, 0, 182, 155);
         active = false;
         observateurs = new LinkedList<>();
+        setPlayerIcon(DEFAULT_PLAYER_ICON);
     }
 
     public List<Tile> getTiles() {
@@ -121,6 +133,15 @@ public abstract class Player implements Observable {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public void setPlayerIcon(URL playerIcon) {
+        this.playerIcon = null;
+        try {
+            this.playerIcon = ImageIO.read(playerIcon);
+        } catch (IOException ex) {
+            Logger.getLogger("Impossible de trouver l'image situé à : " + playerIcon).log(Level.SEVERE, null, ex);
+        }
     }
 
     public abstract boolean isHumanPlayer();
