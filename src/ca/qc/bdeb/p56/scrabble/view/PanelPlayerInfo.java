@@ -6,6 +6,10 @@ import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+
+import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 
 /**
  * Created by TheFrenchOne on 9/14/2016.
@@ -19,6 +23,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
     private Player playerModel;
     private JLabel lblName;
     private JLabel lblScore;
+    private BufferedImage playerIcon;
 
     public PanelPlayerInfo(Player player){
 
@@ -33,13 +38,14 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         this.setLayout(null);
         initNameLabel();
         initScoreLabel();
+        createPlayerIcon();
     }
 
     private void initNameLabel() {
         lblName = new JLabel();
         lblName.setFont(fontOfPanel);
         lblName.setText(playerModel.getName());
-        lblName.setBounds(11 , 11 , 100, 25);
+        lblName.setBounds(12 , 61 , 150, 25);
         this.add(lblName);
     }
 
@@ -47,8 +53,15 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         lblScore = new JLabel();
         lblScore.setName(ConstanteTestName.SCORE_NAME);
         lblScore.setFont(fontOfPanel);
-        lblScore.setBounds(50, 50, 25, 25);
+        lblScore.setBounds(100, 31, 25, 25);
         this.add(lblScore);
+    }
+
+    private void createPlayerIcon() {
+        playerIcon = new BufferedImage(50,50, TYPE_INT_ARGB);
+        Graphics2D graphics = playerIcon.createGraphics();
+        AffineTransform transform = AffineTransform.getScaleInstance(0.2, 0.2);
+        graphics.drawRenderedImage(playerModel.getPlayerIcon(), transform);
     }
 
     @Override
@@ -78,7 +91,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
             g.setColor(Color.darkGray);
             setBackground(null);
         }
-        //g.drawRect(0,0, this.getWidth()- 10,this.getHeight() - 1);
+        g.drawImage(playerIcon, 11, 11, this);
         g.dispose();
     }
 }

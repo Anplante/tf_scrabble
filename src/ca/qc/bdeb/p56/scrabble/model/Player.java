@@ -6,6 +6,7 @@ import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 import sun.misc.Launcher;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -141,8 +142,12 @@ public abstract class Player implements Observable {
         try {
             this.playerIcon = ImageIO.read(playerIcon);
         } catch (IOException ex) {
-            Logger.getLogger("Impossible de trouver l'image situé à : " + playerIcon).log(Level.SEVERE, null, ex);
+            Logger.getLogger("Impossible de trouver l'image situé à : " + String.valueOf(playerIcon)).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public BufferedImage getPlayerIcon() {
+        return playerIcon;
     }
 
     public abstract boolean isHumanPlayer();
