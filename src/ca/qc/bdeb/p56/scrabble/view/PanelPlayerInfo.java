@@ -63,8 +63,14 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
 
     @Override
     public void paint(Graphics g) {
+
         super.paint(g);
-        if (playerModel.isActivated()) {
+        if(playerModel.isEliminated())
+        {
+            setBackground(new Color(230, 0, 20));
+        }
+
+        else if (playerModel.isActivated()) {
             g.setColor(Color.green);
             setBackground(new Color(176,224,230));
         }

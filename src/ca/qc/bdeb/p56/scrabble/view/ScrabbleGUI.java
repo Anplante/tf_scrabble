@@ -3,6 +3,7 @@ package ca.qc.bdeb.p56.scrabble.view;
 import ca.qc.bdeb.p56.scrabble.model.*;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
+import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import java.awt.Image;
 import javax.swing.*;
@@ -13,7 +14,7 @@ import java.awt.*;
 /**
  * Created by Louis Luu Lim on 9/7/2016.
  */
-public class ScrabbleGUI extends JFrame implements ActionListener {
+public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
     private static final double RATIO_LETTER_RACK_ZONE = 0.1;
     public static final int MARGIN = 5;
@@ -226,6 +227,16 @@ public class ScrabbleGUI extends JFrame implements ActionListener {
 
 
         gameModel.playTile(square);
+
+    }
+
+    @Override
+    public void changementEtat() {
+
+    }
+
+    @Override
+    public void changementEtat(Enum<?> e, Object o) {
 
     }
 }

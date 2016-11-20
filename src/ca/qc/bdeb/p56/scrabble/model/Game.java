@@ -1,6 +1,5 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
-import ca.qc.bdeb.p56.scrabble.shared.Event;
 import ca.qc.bdeb.p56.scrabble.shared.IDMove;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.shared.Direction;
@@ -49,12 +48,13 @@ public class Game implements Observable {
     private List<MoveLog> movesHistory;
     private Dictionary dictionary;
     private int turn;
-    private List<Player> eliminatedPlayer;
+    private List<Player> eliminatedPlayers;
 
     public Game(String filePath, List<Player> players) {
         waitingNextTurn = false;
         observateurs = new LinkedList<>();
         movesHistory = new ArrayList<>();
+        eliminatedPlayers = new ArrayList<>();
         this.players = players;
 
         for (Player player : players) {
@@ -195,16 +195,24 @@ public class Game implements Observable {
 
     public void goToNextState() {
 
-        getActivePlayer().nextState();
+        do {
+            getActivePlayer().nextState();
 
-        if (!getActivePlayer().isActivated()) {
-            if (checkForEndOfTheGame()) {
-                // TODO Louis : FIN DE LA PARTIE
-            } else {
-                drawTile();
-                activateNextPlayer();
+
+            if (!getActivePlayer().isActivated()) {
+
+                if (checkForEndOfTheGame()) {
+
+                    for(Player p : players)
+                    {
+                        p.setState(new StateEnding(p));
+                    }
+                } else {
+                    drawTile();
+                    activateNextPlayer();
+                }
             }
-        }
+        }while(!getActivePlayer().isActivated());
     }
 
     public void passTurn() {
@@ -504,7 +512,7 @@ public class Game implements Observable {
 
     public boolean checkForEndOfTheGame() {
 
-        return checkForPlayerPlayingOut() || checkForSixConsecutiveScorelessTurn();
+        return checkForPlayerPlayingOut() || checkForSixConsecutiveScorelessTurn() || checkOnlyOnePlayerLeft();
     }
 
     private boolean checkForPlayerPlayingOut() {
@@ -566,14 +574,17 @@ public class Game implements Observable {
         return countScorelessTurn == MAX_CONSECUTIVE_SCORELESS_TURN;
     }
 
-    public void forfeit()
-    {
-        if(eliminatedPlayer == null)
-        {
-            eliminatedPlayer = new ArrayList<>();
-        }
-        eliminatedPlayer.add(getActivePlayer());
-        players.remove(getActivePlayer());
-        aviserObservateurs();
+    private boolean checkOnlyOnePlayerLeft() {
+        return players.size() - eliminatedPlayers.size() == 1;
+    }
+
+    public void forfeit() {
+
+        Player currentPlayer = getActivePlayer();
+
+        eliminatedPlayers.add(currentPlayer);
+        currentPlayer.forfeit();
+        goToNextState();
+
     }
 }

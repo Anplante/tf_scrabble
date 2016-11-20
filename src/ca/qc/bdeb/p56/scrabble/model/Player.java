@@ -35,6 +35,7 @@ public abstract class Player implements Observable {
     private Color playerColor;
     private BufferedImage playerIcon;
     private transient LinkedList<Observateur> observateurs;
+    private boolean isEliminated;
 
     private static final URL DEFAULT_PLAYER_ICON = Launcher.class.getResource("/images/default.png");
 
@@ -44,6 +45,7 @@ public abstract class Player implements Observable {
         // TODO : recevoir une couleur
         playerColor = new Color(0, 0, 182, 155);
         active = false;
+        isEliminated = false;
         observateurs = new LinkedList<>();
         setPlayerIcon(DEFAULT_PLAYER_ICON);
     }
@@ -117,9 +119,8 @@ public abstract class Player implements Observable {
 
     public void nextState() {
         currentState.execute();
-        State newState = currentState.getNextState();
-        currentState = newState;
-        newState.initialize();
+        currentState = currentState.getNextState();
+        currentState.initialize();
         aviserObservateurs();
     }
 
@@ -215,5 +216,16 @@ public abstract class Player implements Observable {
     public void shuffleTiles() {
         Collections.shuffle(tiles);
         aviserObservateurs();
+    }
+
+    public void forfeit() {
+        isEliminated = true;
+        selectNextState(IDState.ENDING);
+        aviserObservateurs();
+    }
+
+    public boolean isEliminated()
+    {
+        return isEliminated;
     }
 }

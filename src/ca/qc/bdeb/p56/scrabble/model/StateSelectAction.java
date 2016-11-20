@@ -56,6 +56,9 @@ public class StateSelectAction extends State {
             case EXCHANGE:
                 newState = new StateExchange(getPlayer());
                 break;
+            case ENDING:
+                newState = new StateEnding(getPlayer());
+                break;
         }
         return newState;
     }

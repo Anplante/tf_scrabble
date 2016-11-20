@@ -236,15 +236,9 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
                     JOptionPane.YES_NO_CANCEL_OPTION);
 
             if (result == JOptionPane.YES_OPTION) {
-                reinitializeGame();
+                gameModel.forfeit();
             }
         });
-    }
-
-
-    private void reinitializeGame() {
-
-        parent.returnToMenu();
     }
 
     @Override
@@ -254,7 +248,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
             currentPlayer = gameModel.getActivePlayer();
         }
 
-        if (currentPlayer.getState().equals(IDState.PLAY_TILE)) {
+        if (currentPlayer.getState().getName().equals(IDState.PLAY_TILE.getName())) {
             btnPassTurn.setVisible(false);
             btnShuffleTiles.setVisible(false);
             btnRecall.setVisible(true);
