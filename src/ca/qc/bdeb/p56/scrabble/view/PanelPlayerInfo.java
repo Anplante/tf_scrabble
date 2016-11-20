@@ -38,6 +38,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
     private void initNameLabel() {
         lblName = new JLabel();
         lblName.setFont(fontOfPanel);
+        lblName.setText(playerModel.getName());
         lblName.setBounds(11 , 11 , 100, 25);
         this.add(lblName);
     }
@@ -52,7 +53,6 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
 
     @Override
     public void changementEtat() {
-        lblName.setText(playerModel.getName());
         lblScore.setText(Integer.toString(playerModel.getScore()));
         this.repaint();
     }
