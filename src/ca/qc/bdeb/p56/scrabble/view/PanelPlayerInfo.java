@@ -14,12 +14,11 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
 
 
     private static final String TEXT_FONT = "Comic Sans MS Bold";
+    private static final Font fontOfPanel = new Font(TEXT_FONT, Font.PLAIN, 15);
 
     private Player playerModel;
     private JLabel lblName;
-    private JLabel lblTitre;
     private JLabel lblScore;
-    private Color playerColor;
 
     public PanelPlayerInfo(Player player){
 
@@ -31,27 +30,28 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
     }
 
     private void initComponents() {
-
         this.setLayout(null);
+        initNameLabel();
+        initScoreLabel();
+    }
+
+    private void initNameLabel() {
         lblName = new JLabel();
-        lblTitre = new JLabel();
+        lblName.setFont(fontOfPanel);
+        lblName.setBounds(11 , 11 , 100, 25);
+        this.add(lblName);
+    }
+
+    private void initScoreLabel() {
         lblScore = new JLabel();
         lblScore.setName(ConstanteTestName.SCORE_NAME);
-        add(lblName);
-        add(lblScore);
-
-        Font font = new Font(TEXT_FONT, Font.PLAIN, 15);
-
-        lblName.setFont(font);
-        lblName.setBounds(11 , 11 ,
-                100, 25);
-        lblScore.setFont(font);
+        lblScore.setFont(fontOfPanel);
         lblScore.setBounds(50, 50, 25, 25);
+        this.add(lblScore);
     }
 
     @Override
     public void changementEtat() {
-
         lblName.setText(playerModel.getName());
         lblScore.setText(Integer.toString(playerModel.getScore()));
         this.repaint();
@@ -64,7 +64,6 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        // TODO Antoine : L'observateur devrait nous dire lequel des jouers est actif et inactif
         if (playerModel.isActivated()) {
             g.setColor(Color.green);
             setBackground(new Color(176,224,230));
