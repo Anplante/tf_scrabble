@@ -141,6 +141,7 @@ public class StatePlayTile extends State {
             case PENDING:
                 boolean isAWord = getGame().playWord(tilesPlaced);
                 if (isAWord) {
+                    getGame().setWaitingNextTurn(true);
                     newState = new StatePending(getPlayer());
                 } else {
                     getGame().recallTiles();
