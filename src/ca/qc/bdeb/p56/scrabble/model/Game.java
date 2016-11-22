@@ -49,9 +49,11 @@ public class Game implements Observable {
     private Dictionary dictionary;
     private int turn;
     private List<Player> eliminatedPlayers;
+    private boolean isEndGame;
 
     public Game(String filePath, List<Player> players) {
         waitingNextTurn = false;
+        isEndGame = false;
         observateurs = new LinkedList<>();
         movesHistory = new ArrayList<>();
         eliminatedPlayers = new ArrayList<>();
@@ -88,6 +90,9 @@ public class Game implements Observable {
         return players.get(activePlayerIndex);
     }
 
+    public boolean isEndGame(){
+        return isEndGame;
+    }
     public Square getSquare(int row, int column) {
         return boardManager.getSquare(row, column);
     }
@@ -203,16 +208,17 @@ public class Game implements Observable {
 
                 if (checkForEndOfTheGame()) {
 
-                    for(Player p : players)
-                    {
-                        p.setState(new StateEnding(p));
-                    }
-                } else {
+                    setEndOfGame();
+                    aviserObservateurs();
+
+                }
+                else {
                     drawTile();
                     activateNextPlayer();
                 }
             }
-        }while(!getActivePlayer().isActivated());
+
+        }while(!getActivePlayer().isActivated() && !isEndGame());
     }
 
     public void passTurn() {
@@ -515,16 +521,24 @@ public class Game implements Observable {
         return checkForPlayerPlayingOut() || checkForSixConsecutiveScorelessTurn() || checkOnlyOnePlayerLeft();
     }
 
-    private boolean checkForPlayerPlayingOut() {
-
-        boolean endOfGame = false;
-
-        if (getActivePlayer().getTiles().isEmpty() && alphabetBag.isEmpty()) {
+    public void setEndOfGame()
+    {
+        if(checkForPlayerPlayingOut())
+        {
             calculatePlayOutPointsInStandartFormat();
-            endOfGame = true;
         }
 
-        return endOfGame;
+        for(Player p : players)
+        {
+            p.setState(new StateEnding(p));
+        }
+
+        isEndGame = true;
+    }
+
+    private boolean checkForPlayerPlayingOut() {
+
+        return  (getActivePlayer().getTiles().isEmpty() && alphabetBag.isEmpty());
     }
 
     private void calculatePlayOutPointsInStandartFormat() {
@@ -559,6 +573,7 @@ public class Game implements Observable {
     }
 
     private boolean checkForSixConsecutiveScorelessTurn() {
+
         ListIterator<MoveLog> litr = movesHistory.listIterator(movesHistory.size());
 
         int countScorelessTurn = 0;

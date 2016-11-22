@@ -72,6 +72,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         }
 
         this.gameModel = game;
+        gameModel.ajouterObservateur(this);
         gameModel.startGame();
         initializeComponents();
         addPlayersInfo();
@@ -233,7 +234,14 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
     @Override
     public void changementEtat() {
-
+        if(gameModel.isEndGame())
+        {
+            StringBuilder message = new StringBuilder();
+            message.append("Joueur : ");
+            message.append(gameModel.getActivePlayer().getName());
+            message.append(" is the winner!");
+            JOptionPane.showConfirmDialog(null, message.toString(), "Victory", JOptionPane.PLAIN_MESSAGE );
+        }
     }
 
     @Override
