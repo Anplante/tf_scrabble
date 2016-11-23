@@ -79,7 +79,6 @@ public class PanelLetterRackZoneTest {
         }
 
         for (int i = 0; i < 1000; i++) {
-            System.out.println(i);
             Collections.shuffle(afterShufflePlayerHandOrder);
             assertNotEquals(afterShufflePlayerHandOrder, originalPlayerHandOrder);
 

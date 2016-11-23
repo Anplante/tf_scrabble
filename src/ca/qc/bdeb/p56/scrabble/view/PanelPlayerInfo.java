@@ -2,6 +2,7 @@ package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
+import ca.qc.bdeb.p56.scrabble.utility.ImagesManager;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import javax.swing.*;
@@ -38,7 +39,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         this.setLayout(null);
         initNameLabel();
         initScoreLabel();
-        createPlayerIcon();
+        playerIcon = ImagesManager.createPlayerIcon(playerModel.getPlayerIcon());
     }
 
     private void initNameLabel() {
@@ -55,13 +56,6 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         lblScore.setFont(fontOfPanel);
         lblScore.setBounds(100, 31, 25, 25);
         this.add(lblScore);
-    }
-
-    private void createPlayerIcon() {
-        playerIcon = new BufferedImage(50,50, TYPE_INT_ARGB);
-        Graphics2D graphics = playerIcon.createGraphics();
-        AffineTransform transform = AffineTransform.getScaleInstance(0.2, 0.2);
-        graphics.drawRenderedImage(playerModel.getPlayerIcon(), transform);
     }
 
     @Override

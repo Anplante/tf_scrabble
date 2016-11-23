@@ -25,6 +25,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -54,31 +55,34 @@ public class MainMenuGUI extends JDialog {
 
     private static final String[] numberOfAi = {"0", "1", "2", "3"};
     private static final NumberOfPlayer[] numberOfHuman = {TWO_PLAYER, THREE_PLAYER, FOUR_PLAYER};
-    private JPanel panelMenu;
+    public static final URL PATH_TO_FILE = Launcher.class.getResource("/files/ListOfName.xml");
+
     private List<JTextField> allTextField;
     private List<JLabel> allLabelOfPlayers;
+    private List<BufferedImage> allIconOfPlayers;
+    private List<Player> players;
+    private JPanel panelMenu;
+    private Game game;
+    private ScrabbleGUI parent;
+
     private JButton btnCreateGame;
-    private JLabel lblTheme;
-    private JComboBox cmbTheme;
-    private JLabel lblName;
     private JButton btnExit;
+    private JButton btnChooseBackgroundImg;
+
     private JLabel lblNumberOfAi;
     private JLabel lblNumberOfHuman;
-    private JComboBox cmbNumberOfAi = new JComboBox();
-    private JComboBox cmbNumberOfHuman = new JComboBox();
-    private GameManager gameManager;
-    private JComboBox<String> cmbBackgroundScrabble;
+    private JLabel lblTheme;
     private JLabel lblBackground;
+
+    private JComboBox cmbTheme;
+    private JComboBox cmbNumberOfAi;
+    private JComboBox cmbNumberOfHuman;
+    private JComboBox<String> cmbBackgroundScrabble;
+
     private JFileChooser fileImage;
-    private JButton btnChooseBackgroundImg;
+
     private ArrayList<String> listName;
-
-    private HumanPlayer player;
-    private List<Player> players;
-    private Game game;
-    ScrabbleGUI parent;
-
-    public static final URL PATH_TO_FILE = Launcher.class.getResource("/files/ListOfName.xml");
+    private GameManager gameManager;
 
     public MainMenuGUI(ScrabbleGUI parent) {
         super();
@@ -127,8 +131,10 @@ public class MainMenuGUI extends JDialog {
         addLabels();
         initMenuOptions();
         addComboBox();
+        addIconsPlayer();
         add(panelMenu);
     }
+
 
     private void addComboBox() {
 
@@ -167,7 +173,7 @@ public class MainMenuGUI extends JDialog {
         cmbTheme.addItem(ConstanteComponentMessage.MESS_THEME_NOBLE);
         cmbTheme.setVisible(true);
         cmbTheme.setLocation(180, 365);
-        cmbTheme.setSize(100,25);
+        cmbTheme.setSize(180,25);
 
 
         panelMenu.add(cmbNumberOfHuman);
@@ -215,6 +221,8 @@ public class MainMenuGUI extends JDialog {
         initBtnExit();
         initBtnCreateGame();
     }
+
+
 
     private void initBtnChooseBackgroundImg()
     {
@@ -353,6 +361,8 @@ public class MainMenuGUI extends JDialog {
         allLabelOfPlayers.get(3).setVisible(false);
     }
 
+
+
     private void initializeLabel(int index, int y) {
         JLabel lblOfPlayer = allLabelOfPlayers.get(index);
         lblOfPlayer.setName(ConstanteTestName.PLAYER_NAME );
@@ -360,6 +370,10 @@ public class MainMenuGUI extends JDialog {
         lblOfPlayer.setLocation(25, y);
         lblOfPlayer.setSize(lblOfPlayer.getPreferredSize());
         lblOfPlayer.setVisible(true);
+    }
+
+    private void addIconsPlayer() {
+
     }
 
     private void addTextBox() {
@@ -412,32 +426,6 @@ public class MainMenuGUI extends JDialog {
         }
         cmbBackgroundScrabble.setSelectedIndex(2);
     }
-
-    /**
-     * Antoine : Future implémentation?
-     *
-     * @return
-     */
-   /* public static String removeExtension(String filenameWithExtension) {
-
-        String separator = System.getProperty(FILE_SEPARATOR);
-        String filename;
-
-        // Remove the path up to the filename.
-        int lastSeparatorIndex = filenameWithExtension.lastIndexOf(separator);
-        if (lastSeparatorIndex == -1) {
-            filename = filenameWithExtension;
-        } else {
-            filename = filenameWithExtension.substring(lastSeparatorIndex + 1);
-        }
-
-        // Remove the extension.
-        int extensionIndex = filename.lastIndexOf(".");
-        if (extensionIndex == -1)
-            return filename;
-
-        return filename.substring(0, extensionIndex);
-    }*/
 
     public int getLenghtPlayers() {
         return game.getPlayers().size();

@@ -388,7 +388,6 @@ public class GameTest {
         lettersPlayed.add(square7);
         lettersPlayed.add(square8);
         assertTrue(game.playWord(lettersPlayed));
-        System.out.println(game.getActivePlayer().getScore());
     }
 
     @Test
