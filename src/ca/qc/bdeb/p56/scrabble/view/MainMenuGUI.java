@@ -30,6 +30,7 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -63,6 +64,7 @@ public class MainMenuGUI extends JDialog {
     private List<JTextField> allTextField;
     private List<JLabel> allLabelOfPlayers;
     private List<BufferedImage> allIconOfPlayers;
+    private List<JButton> allButtonImg;
     private List<Player> players;
     private JPanel panelMenu;
     private Game game;
@@ -198,18 +200,24 @@ public class MainMenuGUI extends JDialog {
                         allTextField.get(3).setVisible(false);
                         allLabelOfPlayers.get(2).setVisible(false);
                         allLabelOfPlayers.get(3).setVisible(false);
+                        allButtonImg.get(2).setVisible(false);
+                        allButtonImg.get(3).setVisible(false);
                         break;
                     case THREE_PLAYER:
                         allTextField.get(2).setVisible(true);
                         allTextField.get(3).setVisible(false);
                         allLabelOfPlayers.get(2).setVisible(true);
                         allLabelOfPlayers.get(3).setVisible(false);
+                        allButtonImg.get(2).setVisible(true);
+                        allButtonImg.get(3).setVisible(false);
                         break;
                     case FOUR_PLAYER:
                         allTextField.get(2).setVisible(true);
                         allTextField.get(3).setVisible(true);
                         allLabelOfPlayers.get(2).setVisible(true);
                         allLabelOfPlayers.get(3).setVisible(true);
+                        allButtonImg.get(2).setVisible(true);
+                        allButtonImg.get(3).setVisible(true);
                         break;
                 }
                 repaint();
@@ -224,8 +232,8 @@ public class MainMenuGUI extends JDialog {
         initBtnChooseBackgroundImg();
         initBtnExit();
         initBtnCreateGame();
+        allButtonImg();
     }
-
 
 
     private void initBtnChooseBackgroundImg()
@@ -264,6 +272,31 @@ public class MainMenuGUI extends JDialog {
             initializeGame();
         });
 
+    }
+
+    private void allButtonImg() {
+        allButtonImg = new ArrayList<>();
+        int y = 45;
+        for (int i = 0; i < LIMIT_OF_PLAYER; i++) {
+            allButtonImg.add(getButtonForIcon(i, y));
+            y += 55;
+        }
+        allButtonImg.get(2).setVisible(false);
+        allButtonImg.get(3).setVisible(false);
+    }
+
+    private JButton getButtonForIcon(int index, int y) {
+        JButton btnImage = new JButton(ConstanteComponentMessage.ELLIPSIS);
+        btnImage.setSize(15, 15);
+        btnImage.setLocation(400, y);
+        panelMenu.add(btnImage);
+        btnImage.addActionListener(e -> {
+            int returnValue = fileImage.showOpenDialog(panelMenu);
+            allIconOfPlayers.set(index, getImageFromDialog(returnValue));
+            repaint();
+        });
+        panelMenu.add(btnImage);
+        return btnImage;
     }
 
     private String getLetttersDirectory(){
@@ -440,6 +473,35 @@ public class MainMenuGUI extends JDialog {
             Logger.getLogger("Impossible de trouver l'image situé à : " + String.valueOf(pathToIcon)).log(Level.SEVERE, null, ex);
         }
         // attention il peut retourner un null
+        return imgPlayer;
+    }
+
+    private BufferedImage getImageFromFile(File fichier) {
+        Path path = Paths.get(fichier.getAbsolutePath());
+        BufferedImage imagePlayer = null;
+        try {
+            imagePlayer =  getImageFromURL(path.toUri().toURL());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            imagePlayer = getImageFromURL(DEFAULT_PLAYER_ICON);
+        }
+        return imagePlayer;
+    }
+
+    private BufferedImage getImageFromDialog(int returnValue) {
+        BufferedImage imgPlayer = null;
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File fichier = fileImage.getSelectedFile();
+            // TODO: filter
+            if (!fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG) || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_PNG)
+                    || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG)) {
+                imgPlayer = getImageFromFile(fichier);
+            } else {
+                JOptionPane.showMessageDialog(panelMenu, ConstanteComponentMessage.MESS_ERROR_LOADING_FILE, ConstanteComponentMessage.MESS_ERROR,
+                        JOptionPane.ERROR_MESSAGE);
+                imgPlayer = getImageFromURL(DEFAULT_PLAYER_ICON);
+            }
+        }
         return imgPlayer;
     }
 
