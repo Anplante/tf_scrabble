@@ -39,7 +39,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         this.setLayout(null);
         initNameLabel();
         initScoreLabel();
-        playerIcon = ImagesManager.createPlayerIcon(playerModel.getPlayerIcon());
+        initIconOfPlayer();
     }
 
     private void initNameLabel() {
@@ -57,6 +57,11 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         lblScore.setBounds(100, 31, 25, 25);
         this.add(lblScore);
     }
+
+    private void initIconOfPlayer() {
+        playerIcon = ImagesManager.createPlayerIcon(playerModel.getPlayerIcon());
+    }
+
 
     @Override
     public void changementEtat() {
