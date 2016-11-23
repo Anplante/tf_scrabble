@@ -148,8 +148,8 @@ public class MainMenuGUI extends JDialog {
         }
         // Pour l'instant, on n'affiche pas cette combo box puisqu'on n'a pas de AI
         cmbNumberOfAi.setVisible(false);
-        cmbNumberOfAi.setLocation(180, 215);
-        cmbNumberOfAi.setSize(100, 25);
+        cmbNumberOfAi.setLocation(150, 235);
+        cmbNumberOfAi.setSize(180, 25);
 
         cmbNumberOfHuman = new JComboBox<>();
         cmbNumberOfHuman.setName(ConstanteTestName.QTE_HUMAN_NAME);
@@ -157,8 +157,8 @@ public class MainMenuGUI extends JDialog {
             cmbNumberOfHuman.addItem(numberOfHuman[i].getNumberOfPlayer());
         }
         cmbNumberOfHuman.setVisible(true);
-        cmbNumberOfHuman.setLocation(180, 215);
-        cmbNumberOfHuman.setSize(100, 25);
+        cmbNumberOfHuman.setLocation(150, 235);
+        cmbNumberOfHuman.setSize(180, 25);
 
         addEventOnComboBox();
 
@@ -167,7 +167,7 @@ public class MainMenuGUI extends JDialog {
         cmbBackgroundScrabble.setName(ConstanteTestName.BACKGROUND_NAME);
         addImageFile();
         cmbBackgroundScrabble.setVisible(true);
-        cmbBackgroundScrabble.setLocation(180, 315);
+        cmbBackgroundScrabble.setLocation(150, 315);
         cmbBackgroundScrabble.setSize(180, 25);
 
         cmbTheme =  new JComboBox();
@@ -175,7 +175,7 @@ public class MainMenuGUI extends JDialog {
         cmbTheme.addItem(ConstanteComponentMessage.MESS_THEME_CLASSIQUE);
         cmbTheme.addItem(ConstanteComponentMessage.MESS_THEME_NOBLE);
         cmbTheme.setVisible(true);
-        cmbTheme.setLocation(180, 365);
+        cmbTheme.setLocation(150, 365);
         cmbTheme.setSize(180,25);
 
 
@@ -212,6 +212,7 @@ public class MainMenuGUI extends JDialog {
                         allLabelOfPlayers.get(3).setVisible(true);
                         break;
                 }
+                repaint();
             }
         };
 
@@ -231,7 +232,7 @@ public class MainMenuGUI extends JDialog {
     {
         btnChooseBackgroundImg = new JButton(ConstanteComponentMessage.ELLIPSIS);
         btnChooseBackgroundImg.setSize(25, 25);
-        btnChooseBackgroundImg.setLocation(365, 315);
+        btnChooseBackgroundImg.setLocation(335, 315);
         panelMenu.add(btnChooseBackgroundImg);
         btnChooseBackgroundImg.addActionListener(e -> {
             int returnValue = fileImage.showOpenDialog(panelMenu);
@@ -242,7 +243,7 @@ public class MainMenuGUI extends JDialog {
     {
         btnExit = new JButton();
         btnExit.setSize(100, 50);
-        btnExit.setLocation(250, 420);
+        btnExit.setLocation(350, 420);
         btnExit.setText(ConstanteComponentMessage.MESS_CANCEL);
         btnExit.setName(ConstanteTestName.CANCEL_NAME);
         panelMenu.add(btnExit);
@@ -254,7 +255,7 @@ public class MainMenuGUI extends JDialog {
         btnCreateGame = new JButton();
         btnCreateGame.setSize(100, 50);
         btnCreateGame.setText(ConstanteComponentMessage.MESS_CONFIRM);
-        btnCreateGame.setLocation(50, 420);
+        btnCreateGame.setLocation(40, 420);
         btnCreateGame.setName(ConstanteTestName.CONFIRM_NAME);
         panelMenu.add(btnCreateGame);
 
@@ -319,9 +320,9 @@ public class MainMenuGUI extends JDialog {
             allLabelOfPlayers.add(new JLabel());
         }
 
-        int y = -5;
+        int y = -25;
         for (int i = 0; i < allLabelOfPlayers.size(); i++) {
-            y += 35;
+            y += 55;
             initializeLabel(i, y);
         }
 
@@ -334,7 +335,7 @@ public class MainMenuGUI extends JDialog {
 
         lblNumberOfHuman = new JLabel();
         lblNumberOfHuman.setText(ConstanteComponentMessage.MESS_NUMBER_OF_HUMAN);
-        lblNumberOfHuman.setLocation(25, 220);
+        lblNumberOfHuman.setLocation(25, 240);
         lblNumberOfHuman.setSize(lblNumberOfAi.getPreferredSize());
         lblNumberOfHuman.setVisible(true);
 
@@ -382,9 +383,9 @@ public class MainMenuGUI extends JDialog {
             allTextField.add(new JTextField("", 30));
         }
 
-        int y = -15;
+        int y = -35;
         for (int i = 0; i < LIMIT_OF_PLAYER; i++) {
-            y += 35;
+            y += 55;
             initializeTextField(i, y);
         }
 
@@ -446,9 +447,9 @@ public class MainMenuGUI extends JDialog {
     public void paint(Graphics g) {
 
         super.paint(g);
-        int spaceBetweenImg = 0;
+        int spaceBetweenImg = 35;
         for (int i = 0; i < cmbNumberOfHuman.getSelectedIndex() + 2; i++) {
-            g.drawImage(allIconOfPlayers.get(i), spaceBetweenImg, spaceBetweenImg, this);
+            g.drawImage(allIconOfPlayers.get(i), 345, spaceBetweenImg, this);
             spaceBetweenImg += 55;
         }
         g.dispose();
