@@ -59,7 +59,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
     }
 
     private void initIconOfPlayer() {
-        playerIcon = ImagesManager.createPlayerIcon(playerModel.getPlayerIcon());
+        playerIcon = playerModel.getPlayerIcon();
     }
 
 

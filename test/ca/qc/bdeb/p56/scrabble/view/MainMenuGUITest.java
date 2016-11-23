@@ -22,6 +22,7 @@ public class MainMenuGUITest {
     private JTextField txtSecondPlayer;
     private JTextField txtThirdPlayer;
     private JTextField txtFourthPlayer;
+    private JButton btnFileChooser;
     private Player player;
     private JComboBox cmbNumberOfPlayer;
     private JComboBox cmbBackgroundImage;
@@ -37,6 +38,7 @@ public class MainMenuGUITest {
         txtSecondPlayer = (JTextField) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME + " 1");
         txtThirdPlayer = (JTextField) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME + " 2");
         txtFourthPlayer = (JTextField) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME + " 3");
+        btnFileChooser = (JButton) TestUtils.getChildNamed(frame, ConstanteTestName.FILE_CHOOSER + "3");
         btnAccept = (JButton) TestUtils.getChildNamed(frame, ConstanteTestName.CONFIRM_NAME);
         cmbNumberOfPlayer = (JComboBox) TestUtils.getChildNamed(frame, ConstanteTestName.QTE_HUMAN_NAME);
         cmbBackgroundImage = (JComboBox) TestUtils.getChildNamed(frame, ConstanteTestName.BACKGROUND_NAME);
@@ -87,5 +89,15 @@ public class MainMenuGUITest {
         assertFalse(txtFourthPlayer.isVisible());
         cmbNumberOfPlayer.setSelectedIndex(2);
         assertTrue(txtFourthPlayer.isVisible());
+    }
+
+    @Test
+    public void testVisibilityOfButtons() {
+        cmbNumberOfPlayer.setSelectedIndex(0);
+        assertFalse(btnFileChooser.isVisible());
+        cmbNumberOfPlayer.setSelectedIndex(1);
+        assertFalse(btnFileChooser.isVisible());
+        cmbNumberOfPlayer.setSelectedIndex(2);
+        assertTrue(btnFileChooser.isVisible());
     }
 }

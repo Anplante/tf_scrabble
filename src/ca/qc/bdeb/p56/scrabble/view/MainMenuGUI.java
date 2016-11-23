@@ -289,6 +289,7 @@ public class MainMenuGUI extends JDialog {
         JButton btnImage = new JButton(ConstanteComponentMessage.ELLIPSIS);
         btnImage.setSize(15, 15);
         btnImage.setLocation(400, y);
+        btnImage.setName(ConstanteTestName.FILE_CHOOSER + index);
         panelMenu.add(btnImage);
         btnImage.addActionListener(e -> {
             int returnValue = fileImage.showOpenDialog(panelMenu);
@@ -329,6 +330,7 @@ public class MainMenuGUI extends JDialog {
 
         for (int i = 0; i < numberOfHumanPlayers; i++) {
             players.add(new HumanPlayer(allTextField.get(i).getText()));
+            players.get(i).setPlayerIcon(allIconOfPlayers.get(i));
         }
 
         int limit = cmbNumberOfAi.getSelectedIndex();
@@ -444,7 +446,7 @@ public class MainMenuGUI extends JDialog {
     private void addIconsPlayer() {
         allIconOfPlayers = new ArrayList<>();
         for (int i = 0; i < LIMIT_OF_PLAYER; i++) {
-            allIconOfPlayers.add(getImageFromURL(DEFAULT_PLAYER_ICON));
+            allIconOfPlayers.add(ImagesManager.getImageFromURL(DEFAULT_PLAYER_ICON));
             allIconOfPlayers.set(i, ImagesManager.createPlayerIcon(allIconOfPlayers.get(i)));
         }
     }
@@ -465,29 +467,6 @@ public class MainMenuGUI extends JDialog {
         cmbBackgroundScrabble.setSelectedIndex(2);
     }
 
-    private BufferedImage getImageFromURL (URL pathToIcon) {
-        BufferedImage imgPlayer = null;
-        try {
-            imgPlayer = ImageIO.read(pathToIcon);
-        } catch (IOException ex) {
-            Logger.getLogger("Impossible de trouver l'image situé à : " + String.valueOf(pathToIcon)).log(Level.SEVERE, null, ex);
-        }
-        // attention il peut retourner un null
-        return imgPlayer;
-    }
-
-    private BufferedImage getImageFromFile(File fichier) {
-        Path path = Paths.get(fichier.getAbsolutePath());
-        BufferedImage imagePlayer = null;
-        try {
-            imagePlayer =  getImageFromURL(path.toUri().toURL());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            imagePlayer = getImageFromURL(DEFAULT_PLAYER_ICON);
-        }
-        return imagePlayer;
-    }
-
     private BufferedImage getImageFromDialog(int returnValue) {
         BufferedImage imgPlayer = null;
         if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -495,11 +474,13 @@ public class MainMenuGUI extends JDialog {
             // TODO: filter
             if (!fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG) || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_PNG)
                     || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG)) {
-                imgPlayer = getImageFromFile(fichier);
+                imgPlayer = ImagesManager.getImageFromFile(fichier);
+                imgPlayer = ImagesManager.createPlayerIcon(imgPlayer);
             } else {
                 JOptionPane.showMessageDialog(panelMenu, ConstanteComponentMessage.MESS_ERROR_LOADING_FILE, ConstanteComponentMessage.MESS_ERROR,
                         JOptionPane.ERROR_MESSAGE);
-                imgPlayer = getImageFromURL(DEFAULT_PLAYER_ICON);
+                imgPlayer = ImagesManager.getImageFromURL(DEFAULT_PLAYER_ICON);
+                imgPlayer = ImagesManager.createPlayerIcon(imgPlayer);
             }
         }
         return imgPlayer;

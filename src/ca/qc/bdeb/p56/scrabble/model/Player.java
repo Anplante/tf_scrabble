@@ -48,7 +48,6 @@ public abstract class Player implements Observable {
         active = false;
         isEliminated = false;
         observateurs = new LinkedList<>();
-        setPlayerIcon(DEFAULT_PLAYER_ICON);
     }
 
     public List<Tile> getTiles() {
@@ -137,13 +136,8 @@ public abstract class Player implements Observable {
         this.active = active;
     }
 
-    public void setPlayerIcon(URL playerIcon) {
-        this.playerIcon = null;
-        try {
-            this.playerIcon = ImageIO.read(playerIcon);
-        } catch (IOException ex) {
-            Logger.getLogger("Impossible de trouver l'image situé à : " + String.valueOf(playerIcon)).log(Level.SEVERE, null, ex);
-        }
+    public void setPlayerIcon(BufferedImage playerIcon) {
+        this.playerIcon = playerIcon;
     }
 
     public BufferedImage getPlayerIcon() {
