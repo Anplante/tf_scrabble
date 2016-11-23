@@ -7,6 +7,7 @@ import ca.qc.bdeb.p56.scrabble.model.HumanPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
+import ca.qc.bdeb.p56.scrabble.utility.ImagesManager;
 import ca.qc.bdeb.p56.scrabble.utility.NumberOfPlayer;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -16,6 +17,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import sun.misc.Launcher;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -56,6 +58,7 @@ public class MainMenuGUI extends JDialog {
     private static final String[] numberOfAi = {"0", "1", "2", "3"};
     private static final NumberOfPlayer[] numberOfHuman = {TWO_PLAYER, THREE_PLAYER, FOUR_PLAYER};
     public static final URL PATH_TO_FILE = Launcher.class.getResource("/files/ListOfName.xml");
+    private static final URL DEFAULT_PLAYER_ICON = Launcher.class.getResource("/images/default.png");
 
     private List<JTextField> allTextField;
     private List<JLabel> allLabelOfPlayers;
@@ -312,10 +315,9 @@ public class MainMenuGUI extends JDialog {
     private void addLabels() {
 
         allLabelOfPlayers = new ArrayList<>();
-        allLabelOfPlayers.add(new JLabel());
-        allLabelOfPlayers.add(new JLabel());
-        allLabelOfPlayers.add(new JLabel());
-        allLabelOfPlayers.add(new JLabel());
+        for (int i = 0; i < LIMIT_OF_PLAYER; i++) {
+            allLabelOfPlayers.add(new JLabel());
+        }
 
         int y = -5;
         for (int i = 0; i < allLabelOfPlayers.size(); i++) {
@@ -372,19 +374,13 @@ public class MainMenuGUI extends JDialog {
         lblOfPlayer.setVisible(true);
     }
 
-    private void addIconsPlayer() {
-
-    }
-
     private void addTextBox() {
         panelMenu.setLocation(0, 0);
         panelMenu.setSize(new Dimension(500, 550));
-
         allTextField = new ArrayList<>();
-        allTextField.add(new JTextField("", 30));
-        allTextField.add(new JTextField("", 30));
-        allTextField.add(new JTextField("", 30));
-        allTextField.add(new JTextField("", 30));
+        for (int i = 0; i < LIMIT_OF_PLAYER; i++) {
+            allTextField.add(new JTextField("", 30));
+        }
 
         int y = -15;
         for (int i = 0; i < LIMIT_OF_PLAYER; i++) {
@@ -411,6 +407,14 @@ public class MainMenuGUI extends JDialog {
         panelMenu.add(txtOfPlayer);
     }
 
+    private void addIconsPlayer() {
+        allIconOfPlayers = new ArrayList<>();
+        for (int i = 0; i < LIMIT_OF_PLAYER; i++) {
+            allIconOfPlayers.add(getImageFromURL(DEFAULT_PLAYER_ICON));
+            allIconOfPlayers.set(i, ImagesManager.createPlayerIcon(allIconOfPlayers.get(i)));
+        }
+    }
+
     private void addImageFile() {
         File theFiles = null;
 
@@ -427,8 +431,27 @@ public class MainMenuGUI extends JDialog {
         cmbBackgroundScrabble.setSelectedIndex(2);
     }
 
-    public int getLenghtPlayers() {
-        return game.getPlayers().size();
+    private BufferedImage getImageFromURL (URL pathToIcon) {
+        BufferedImage imgPlayer = null;
+        try {
+            imgPlayer = ImageIO.read(pathToIcon);
+        } catch (IOException ex) {
+            Logger.getLogger("Impossible de trouver l'image situé à : " + String.valueOf(pathToIcon)).log(Level.SEVERE, null, ex);
+        }
+        // attention il peut retourner un null
+        return imgPlayer;
+    }
+
+    @Override
+    public void paint(Graphics g) {
+
+        super.paint(g);
+        int spaceBetweenImg = 0;
+        for (int i = 0; i < cmbNumberOfHuman.getSelectedIndex() + 2; i++) {
+            g.drawImage(allIconOfPlayers.get(i), spaceBetweenImg, spaceBetweenImg, this);
+            spaceBetweenImg += 55;
+        }
+        g.dispose();
     }
 
     public ArrayList<String> readXMLFiles() {
@@ -477,5 +500,9 @@ public class MainMenuGUI extends JDialog {
                         JOptionPane.ERROR_MESSAGE);
             }
         }
+    }
+
+    public int getLenghtPlayers() {
+        return game.getPlayers().size();
     }
 }
