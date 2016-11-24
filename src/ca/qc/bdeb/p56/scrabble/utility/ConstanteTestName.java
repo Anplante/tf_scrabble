@@ -30,4 +30,7 @@ public class ConstanteTestName {
     public static final String SQUARE_NAME = "Square";
     public static final String INFO_NAME = "Info : ";
     public static final String EXIT_NAME = "Exit";
+    public static final String SHUFFLE_NAME = "Shuffle";
+    public static final String WAITING_PANEL_NAME = "waitingPnl";
+    public static final String FILE_CHOOSER = "fileChooser";
 }

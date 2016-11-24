@@ -1,6 +1,9 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
-import ca.qc.bdeb.p56.scrabble.shared.IDMove;
+import ca.qc.bdeb.p56.scrabble.model.Log.ExchangedLog;
+import ca.qc.bdeb.p56.scrabble.model.Log.MoveLog;
+import ca.qc.bdeb.p56.scrabble.model.Log.PassedLog;
+import ca.qc.bdeb.p56.scrabble.model.Log.WordLog;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,26 +35,45 @@ public class MoveLogTest {
 
         String wordPlayed = "test";
         int wordValue = 10;
-        MoveLog log = new MoveLog(player, TURN_PLAYED, wordPlayed, wordValue);
-
-        assertEquals(IDMove.PLAYED_WORD, log.getMove());
+        MoveLog log = new WordLog(player, wordPlayed, wordValue);
+        player.addPoints(wordValue);
+        assertEquals(wordPlayed, log.getMove());
+        assertEquals(wordValue, log.getMovePoints());
+        assertEquals(wordValue, log.getPointsAccumulated());
     }
 
     @Test
     public void testLogPlayerPassedTurn() {
 
-        MoveLog log = new MoveLog(player, TURN_PLAYED, IDMove.PASS);
+        MoveLog log = new PassedLog(player);
 
-        assertEquals(IDMove.PASS, log.getMove());
-        assertEquals(0, log.getWordPoints());
-        assertTrue(log.getWordPlayed().isEmpty());
+        assertEquals("Passed", log.getMove());
+        assertEquals(0, log.getMovePoints());
     }
 
     @Test
     public void testLogPlayerEchangedLetters() {
 
-        MoveLog log = new MoveLog(player, TURN_PLAYED, IDMove.EXCHANGED);
+        int numbersOfTilesExchanged = 7;
 
-        assertEquals(IDMove.EXCHANGED, log.getMove());
+        MoveLog log = new ExchangedLog(player, numbersOfTilesExchanged);
+
+        assertEquals("Exchanged " + numbersOfTilesExchanged, log.getMove());
+        assertEquals(0, log.getMovePoints());
+    }
+
+    @Test
+    public void testLogAccumulatedPoints() {
+        int pointsBeforeMove = 10;
+        player.addPoints(pointsBeforeMove);
+
+        String wordPlayed = "test";
+        int wordValue = 10;
+        MoveLog log = new WordLog(player, wordPlayed, wordValue);
+        player.addPoints(wordValue);
+
+        assertEquals(wordValue, log.getMovePoints());
+        assertEquals(wordValue + pointsBeforeMove, log.getPointsAccumulated());
+
     }
 }

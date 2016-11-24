@@ -3,12 +3,21 @@ package ca.qc.bdeb.p56.scrabble.model;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
+import sun.misc.Launcher;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -25,7 +34,11 @@ public abstract class Player implements Observable {
     private int score;
     private boolean active;
     private Color playerColor;
+    private BufferedImage playerIcon;
     private transient LinkedList<Observateur> observateurs;
+    private boolean isEliminated;
+
+    private static final URL DEFAULT_PLAYER_ICON = Launcher.class.getResource("/images/default.png");
 
     public Player(String name) {
         this.name = name;
@@ -33,6 +46,7 @@ public abstract class Player implements Observable {
         // TODO : recevoir une couleur
         playerColor = new Color(0, 0, 182, 155);
         active = false;
+        isEliminated = false;
         observateurs = new LinkedList<>();
     }
 
@@ -105,9 +119,8 @@ public abstract class Player implements Observable {
 
     public void nextState() {
         currentState.execute();
-        State newState = currentState.getNextState();
-        currentState = newState;
-        newState.initialize();
+        currentState = currentState.getNextState();
+        currentState.initialize();
         aviserObservateurs();
     }
 
@@ -121,6 +134,14 @@ public abstract class Player implements Observable {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public void setPlayerIcon(BufferedImage playerIcon) {
+        this.playerIcon = playerIcon;
+    }
+
+    public BufferedImage getPlayerIcon() {
+        return playerIcon;
     }
 
     public abstract boolean isHumanPlayer();
@@ -191,5 +212,19 @@ public abstract class Player implements Observable {
         return tileWanted;
     }
 
+    public void shuffleTiles() {
+        Collections.shuffle(tiles);
+        aviserObservateurs();
+    }
 
+    public void forfeit() {
+        isEliminated = true;
+        selectNextState(IDState.ENDING);
+        aviserObservateurs();
+    }
+
+    public boolean isEliminated()
+    {
+        return isEliminated;
+    }
 }

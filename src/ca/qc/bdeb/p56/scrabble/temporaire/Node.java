@@ -1,4 +1,4 @@
-package ca.qc.bdeb.p56.scrabble.Temporaire;
+package ca.qc.bdeb.p56.scrabble.temporaire;
 
 /**
  * Created by TheFrenchOne on 10/29/2016.

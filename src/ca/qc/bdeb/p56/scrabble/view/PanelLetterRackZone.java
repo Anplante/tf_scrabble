@@ -1,5 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
+
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.model.Player;
@@ -20,7 +21,6 @@ import javax.swing.*;
 public class PanelLetterRackZone extends JPanel implements Observateur, ActionListener {
 
 
-
     private final int MAX_TILES_IN_HAND = 7;
     private final double RATIO_TILES_RACK = .5;
     private final int POS_Y = 0;
@@ -36,9 +36,11 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
     private JButton btnRecall;
     private JButton btnForfeit;
     private JButton btnCancelExchange;
+    private JButton btnShuffleTiles;
     private JPanel panelLettersRack;
     private ScrabbleGUI parent;
     private HashMap<String, ImageIcon> iconsTile;
+
 
     public PanelLetterRackZone(Rectangle boundsZoneLetterRack, ScrabbleGUI parent) {
 
@@ -103,6 +105,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         initRecallOption();
         initiBtnPlayWord();
         initPassTurnOption();
+        initShuffleTilesOption();
     }
 
     private void initPassTurnOption() {
@@ -119,7 +122,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
         add(btnPassTurn);
 
-        btnPassTurn.addActionListener (e -> gameModel.passTurn());
+        btnPassTurn.addActionListener(e -> gameModel.passTurn());
     }
 
     private void initiBtnPlayWord() {
@@ -148,6 +151,21 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         add(btnRecall);
 
         btnRecall.addActionListener(actionEvent -> gameModel.recallTiles());
+    }
+
+    private void initShuffleTilesOption() {
+
+        int x = getWidth() - OPTIONS_WIDTH * 2 - ScrabbleGUI.MARGIN;
+        btnShuffleTiles = new JButton(ConstanteComponentMessage.TITLE_SHUFFLE);
+        btnShuffleTiles.setName(ConstanteTestName.SHUFFLE_NAME);
+
+        btnShuffleTiles.setSize(OPTIONS_WIDTH, getHeight());
+        btnShuffleTiles.setLocation(x, POS_Y);
+        add(btnShuffleTiles);
+
+        btnShuffleTiles.addActionListener(e -> {
+            currentPlayer.shuffleTiles();
+        });
     }
 
     private void initExchangeOption() {
@@ -200,6 +218,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnCancelExchange.setVisible(!enabler);
     }
 
+    // TODO Louis : Faire en sorte qu'on enleve le joueur et non quitter la partie
     private void initForfeitOption() {
 
         btnForfeit = new JButton(ConstanteComponentMessage.TITLE_SURRENDER);
@@ -217,14 +236,9 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
                     JOptionPane.YES_NO_CANCEL_OPTION);
 
             if (result == JOptionPane.YES_OPTION) {
-                reinitializeGame();
+                gameModel.forfeit();
             }
         });
-    }
-
-    private void reinitializeGame() {
-
-        parent.returnToMenu();
     }
 
     @Override
@@ -234,14 +248,16 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
             currentPlayer = gameModel.getActivePlayer();
         }
 
-        if (currentPlayer.getState().getName() == IDState.PLAY_TILE.getName()) {
+        if (currentPlayer.getState().getName().equals(IDState.PLAY_TILE.getName())) {
             btnPassTurn.setVisible(false);
+            btnShuffleTiles.setVisible(false);
             btnRecall.setVisible(true);
             btnPlayWord.setVisible(true);
         } else {
             btnRecall.setVisible(false);
             btnPlayWord.setVisible(false);
             btnPassTurn.setVisible(true);
+            btnShuffleTiles.setVisible(true);
         }
 
         for (Component comp : panelLettersRack.getComponents()) {
@@ -253,7 +269,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
         int x = (int) ((MAX_TILES_IN_HAND - playerTiles.size()) * TILE_DIMENSION.getWidth() / 2);
 
-        // DragListener drag = new DragListener();   // Todo Louis : permettre le drag & drop
+        //DragListener drag = new DragListener();   // Todo Louis : permettre le drag & drop
 
         for (Tile letter : playerTiles) {
 
@@ -263,22 +279,14 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
             letter.ajouterObservateur(btnTile);
             btnTile.setName(ConstanteTestName.TILE_NAME + i);
             btnTile.addActionListener(this);
-            //btnTile.addMouseListener(drag);
+            //  btnTile.addMouseListener(drag);
             //btnTile.addMouseMotionListener(drag);
             panelLettersRack.add(btnTile);
             i++;
             x += TILE_DIMENSION.getWidth();
         }
 
-        if(gameModel.isWaitingNextTurn()){
-            setVisible(false);
-            setEnabled(false);
-        }else {
-            setVisible(true);
-            setEnabled(true);
-        }
-
-
+        setVisible(!gameModel.isWaitingNextTurn());
         panelLettersRack.repaint();
     }
 
@@ -287,7 +295,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         iconsTile = new HashMap<>();
         int size = (int) TILE_DIMENSION.getWidth();
 
-        for (char start = ConstanteComponentMessage.START_ALPHABET; start <=  ConstanteComponentMessage.END_ALPHABET; start++) {
+        for (char start = ConstanteComponentMessage.START_ALPHABET; start <= ConstanteComponentMessage.END_ALPHABET; start++) {
             String resource = parent.getImgPath() + start + ConstanteComponentMessage.EXT_PNG;
             URL res = getClass().getClassLoader().getResource(resource);
             ImageIcon icon = ImagesManager.getIcon(res, size, size);
@@ -311,8 +319,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
         Tile tileSelected = tileClicked.getTile();
 
-        if(tileSelected.isBlankTile())
-        {
+        if (tileSelected.isBlankTile()) {
             DialogBlankTileChoice tileChoice = new DialogBlankTileChoice(parent, tileSelected);
             tileChoice.setModal(true);
             tileChoice.setVisible(true);

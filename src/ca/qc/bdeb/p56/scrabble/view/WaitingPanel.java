@@ -20,6 +20,7 @@ public class WaitingPanel extends JPanel implements Observateur, KeyListener{
     private JLabel backgroundLabel;
 
     public WaitingPanel (Dimension dimension, ScrabbleGUI parent){
+
         setVisible(false);
         this.setEnabled(false);
         setFocusable(true);
@@ -33,6 +34,7 @@ public class WaitingPanel extends JPanel implements Observateur, KeyListener{
     }
 
     public void setGame(Game aGame){
+
         if (game != null) {
             game.retirerObservateur(this);
         }
@@ -42,8 +44,9 @@ public class WaitingPanel extends JPanel implements Observateur, KeyListener{
 
     @Override
     public void changementEtat() {
-        if(game.isWaitingNextTurn()){
-            this.setVisible(true);
+
+        if(game.isWaitingNextTurn() && !game.isEndGame()){
+            setVisible(true);
             setEnabled(true);
             setFocusable(true);
             requestFocusInWindow();

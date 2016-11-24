@@ -50,16 +50,4 @@ public class Dictionary {
         return dict.containsValue(word);
     }
 
-
-    /**
-     *
-     *  Louis : En construction
-     */
-
-    private List<String> buildWords(String lettersInHand) {
-
-        List<String> wordsFound = new ArrayList<>();
-
-        return wordsFound;
-    }
 }

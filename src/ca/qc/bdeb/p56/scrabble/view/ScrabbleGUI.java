@@ -3,6 +3,7 @@ package ca.qc.bdeb.p56.scrabble.view;
 import ca.qc.bdeb.p56.scrabble.model.*;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
+import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import java.awt.Image;
 import javax.swing.*;
@@ -13,7 +14,7 @@ import java.awt.*;
 /**
  * Created by Louis Luu Lim on 9/7/2016.
  */
-public class ScrabbleGUI extends JFrame implements ActionListener {
+public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
     private static final double RATIO_LETTER_RACK_ZONE = 0.1;
     public static final int MARGIN = 5;
@@ -29,6 +30,8 @@ public class ScrabbleGUI extends JFrame implements ActionListener {
     private WaitingPanel pnlWaiting;
     private JLabel background;
     private PanelPlayers panelInformation;
+
+    private JScrollPane scrollMoveLog;
 
     public ScrabbleGUI() {
 
@@ -71,6 +74,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener {
         }
 
         this.gameModel = game;
+        gameModel.ajouterObservateur(this);
         gameModel.startGame();
         initializeComponents();
         addPlayersInfo();
@@ -91,12 +95,14 @@ public class ScrabbleGUI extends JFrame implements ActionListener {
         createPanelWait();
         createPanelBoard();
         createPanelLetterRack();
-        createPanelInformation();
+        createPanelPlayersInformation();
+        createPanelMoveLog();
     }
 
     private void createPanelWait() {
 
         pnlWaiting = new WaitingPanel(new Dimension(getWidth(), getHeight()), this);
+        pnlWaiting.setName(ConstanteTestName.WAITING_PANEL_NAME);
         add(pnlWaiting);
         pnlWaiting.setGame(gameModel);
     }
@@ -110,16 +116,17 @@ public class ScrabbleGUI extends JFrame implements ActionListener {
         setContentPane(background);
     }
 
-    private void createPanelInformation() {
+    private void createPanelPlayersInformation() {
 
-        int y = getHeight() - LETTER_RACK_ZONE_HEIGHT;
+        int heigth = getHeight() - LETTER_RACK_ZONE_HEIGHT;
         int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN;
         int x = getWidth() - width;
-        y *= 0.5;
+        width -= MARGIN;
+        heigth *= 0.5;
 
         panelInformation = new PanelPlayers();
         panelInformation.setLocation(x, MARGIN);
-        panelInformation.setSize(width, y);
+        panelInformation.setSize(width, heigth);
         panelInformation.setLayout(new GridLayout(gameModel.getPlayers().size(), 1, MARGIN, MARGIN));
         panelInformation.setOpaque(false);
         panelInformation.setGame(gameModel);
@@ -172,6 +179,25 @@ public class ScrabbleGUI extends JFrame implements ActionListener {
         gameModel.ajouterObservateur(pnlBoard);
     }
 
+
+    private void createPanelMoveLog() {
+
+        int height = getHeight() - LETTER_RACK_ZONE_HEIGHT;
+        int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN * 2;
+        int x = 0 + MARGIN;
+        height *= 0.5;
+
+        TableMoveLog tabMoveLog = new TableMoveLog(gameModel);
+        gameModel.ajouterObservateur(tabMoveLog);
+        scrollMoveLog = new JScrollPane(tabMoveLog);
+
+        scrollMoveLog.setLocation(x, MARGIN);
+
+        scrollMoveLog.setSize(width, height);
+
+        add(scrollMoveLog);
+    }
+
     private void initGrid() {
 
         pnlBoard.setLayout(new GridLayout(BoardManager.BOARD_SIZE, BoardManager.BOARD_SIZE, 2, 2));
@@ -187,6 +213,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener {
             }
         }
     }
+
 
     private void addKeyBindings() {
 
@@ -226,6 +253,22 @@ public class ScrabbleGUI extends JFrame implements ActionListener {
 
 
         gameModel.playTile(square);
+
+    }
+
+    @Override
+    public void changementEtat() {
+        if (gameModel.isEndGame()) {
+            StringBuilder message = new StringBuilder();
+            message.append("Joueur : ");
+            message.append(gameModel.getActivePlayer().getName());
+            message.append(" is the winner!");
+            JOptionPane.showConfirmDialog(null, message.toString(), "Victory", JOptionPane.PLAIN_MESSAGE);
+        }
+    }
+
+    @Override
+    public void changementEtat(Enum<?> e, Object o) {
 
     }
 }

@@ -7,6 +7,7 @@ import ca.qc.bdeb.p56.scrabble.model.HumanPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
+import ca.qc.bdeb.p56.scrabble.utility.ImagesManager;
 import ca.qc.bdeb.p56.scrabble.utility.NumberOfPlayer;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -16,6 +17,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import sun.misc.Launcher;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -25,8 +27,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -54,31 +58,36 @@ public class MainMenuGUI extends JDialog {
 
     private static final String[] numberOfAi = {"0", "1", "2", "3"};
     private static final NumberOfPlayer[] numberOfHuman = {TWO_PLAYER, THREE_PLAYER, FOUR_PLAYER};
-    private JPanel panelMenu;
+    public static final URL PATH_TO_FILE = Launcher.class.getResource("/files/ListOfName.xml");
+    private static final URL DEFAULT_PLAYER_ICON = Launcher.class.getResource("/images/default.png");
+
     private List<JTextField> allTextField;
     private List<JLabel> allLabelOfPlayers;
+    private List<BufferedImage> allIconOfPlayers;
+    private List<JButton> allButtonImg;
+    private List<Player> players;
+    private JPanel panelMenu;
+    private Game game;
+    private ScrabbleGUI parent;
+
     private JButton btnCreateGame;
-    private JLabel lblTheme;
-    private JComboBox cmbTheme;
-    private JLabel lblName;
     private JButton btnExit;
+    private JButton btnChooseBackgroundImg;
+
     private JLabel lblNumberOfAi;
     private JLabel lblNumberOfHuman;
-    private JComboBox cmbNumberOfAi = new JComboBox();
-    private JComboBox cmbNumberOfHuman = new JComboBox();
-    private GameManager gameManager;
-    private JComboBox<String> cmbBackgroundScrabble;
+    private JLabel lblTheme;
     private JLabel lblBackground;
+
+    private JComboBox cmbTheme;
+    private JComboBox cmbNumberOfAi;
+    private JComboBox cmbNumberOfHuman;
+    private JComboBox<String> cmbBackgroundScrabble;
+
     private JFileChooser fileImage;
-    private JButton btnChooseBackgroundImg;
+
     private ArrayList<String> listName;
-
-    private HumanPlayer player;
-    private List<Player> players;
-    private Game game;
-    ScrabbleGUI parent;
-
-    public static final URL PATH_TO_FILE = Launcher.class.getResource("/files/ListOfName.xml");
+    private GameManager gameManager;
 
     public MainMenuGUI(ScrabbleGUI parent) {
         super();
@@ -127,8 +136,10 @@ public class MainMenuGUI extends JDialog {
         addLabels();
         initMenuOptions();
         addComboBox();
+        addIconsPlayer();
         add(panelMenu);
     }
+
 
     private void addComboBox() {
 
@@ -139,8 +150,8 @@ public class MainMenuGUI extends JDialog {
         }
         // Pour l'instant, on n'affiche pas cette combo box puisqu'on n'a pas de AI
         cmbNumberOfAi.setVisible(false);
-        cmbNumberOfAi.setLocation(180, 215);
-        cmbNumberOfAi.setSize(100, 25);
+        cmbNumberOfAi.setLocation(150, 235);
+        cmbNumberOfAi.setSize(180, 25);
 
         cmbNumberOfHuman = new JComboBox<>();
         cmbNumberOfHuman.setName(ConstanteTestName.QTE_HUMAN_NAME);
@@ -148,8 +159,8 @@ public class MainMenuGUI extends JDialog {
             cmbNumberOfHuman.addItem(numberOfHuman[i].getNumberOfPlayer());
         }
         cmbNumberOfHuman.setVisible(true);
-        cmbNumberOfHuman.setLocation(180, 215);
-        cmbNumberOfHuman.setSize(100, 25);
+        cmbNumberOfHuman.setLocation(150, 235);
+        cmbNumberOfHuman.setSize(180, 25);
 
         addEventOnComboBox();
 
@@ -158,7 +169,7 @@ public class MainMenuGUI extends JDialog {
         cmbBackgroundScrabble.setName(ConstanteTestName.BACKGROUND_NAME);
         addImageFile();
         cmbBackgroundScrabble.setVisible(true);
-        cmbBackgroundScrabble.setLocation(180, 315);
+        cmbBackgroundScrabble.setLocation(150, 315);
         cmbBackgroundScrabble.setSize(180, 25);
 
         cmbTheme =  new JComboBox();
@@ -166,8 +177,8 @@ public class MainMenuGUI extends JDialog {
         cmbTheme.addItem(ConstanteComponentMessage.MESS_THEME_CLASSIQUE);
         cmbTheme.addItem(ConstanteComponentMessage.MESS_THEME_NOBLE);
         cmbTheme.setVisible(true);
-        cmbTheme.setLocation(180, 365);
-        cmbTheme.setSize(100,25);
+        cmbTheme.setLocation(150, 365);
+        cmbTheme.setSize(180,25);
 
 
         panelMenu.add(cmbNumberOfHuman);
@@ -189,20 +200,27 @@ public class MainMenuGUI extends JDialog {
                         allTextField.get(3).setVisible(false);
                         allLabelOfPlayers.get(2).setVisible(false);
                         allLabelOfPlayers.get(3).setVisible(false);
+                        allButtonImg.get(2).setVisible(false);
+                        allButtonImg.get(3).setVisible(false);
                         break;
                     case THREE_PLAYER:
                         allTextField.get(2).setVisible(true);
                         allTextField.get(3).setVisible(false);
                         allLabelOfPlayers.get(2).setVisible(true);
                         allLabelOfPlayers.get(3).setVisible(false);
+                        allButtonImg.get(2).setVisible(true);
+                        allButtonImg.get(3).setVisible(false);
                         break;
                     case FOUR_PLAYER:
                         allTextField.get(2).setVisible(true);
                         allTextField.get(3).setVisible(true);
                         allLabelOfPlayers.get(2).setVisible(true);
                         allLabelOfPlayers.get(3).setVisible(true);
+                        allButtonImg.get(2).setVisible(true);
+                        allButtonImg.get(3).setVisible(true);
                         break;
                 }
+                repaint();
             }
         };
 
@@ -214,13 +232,15 @@ public class MainMenuGUI extends JDialog {
         initBtnChooseBackgroundImg();
         initBtnExit();
         initBtnCreateGame();
+        allButtonImg();
     }
+
 
     private void initBtnChooseBackgroundImg()
     {
         btnChooseBackgroundImg = new JButton(ConstanteComponentMessage.ELLIPSIS);
         btnChooseBackgroundImg.setSize(25, 25);
-        btnChooseBackgroundImg.setLocation(365, 315);
+        btnChooseBackgroundImg.setLocation(335, 315);
         panelMenu.add(btnChooseBackgroundImg);
         btnChooseBackgroundImg.addActionListener(e -> {
             int returnValue = fileImage.showOpenDialog(panelMenu);
@@ -231,7 +251,7 @@ public class MainMenuGUI extends JDialog {
     {
         btnExit = new JButton();
         btnExit.setSize(100, 50);
-        btnExit.setLocation(250, 420);
+        btnExit.setLocation(350, 420);
         btnExit.setText(ConstanteComponentMessage.MESS_CANCEL);
         btnExit.setName(ConstanteTestName.CANCEL_NAME);
         panelMenu.add(btnExit);
@@ -243,7 +263,7 @@ public class MainMenuGUI extends JDialog {
         btnCreateGame = new JButton();
         btnCreateGame.setSize(100, 50);
         btnCreateGame.setText(ConstanteComponentMessage.MESS_CONFIRM);
-        btnCreateGame.setLocation(50, 420);
+        btnCreateGame.setLocation(40, 420);
         btnCreateGame.setName(ConstanteTestName.CONFIRM_NAME);
         panelMenu.add(btnCreateGame);
 
@@ -252,6 +272,32 @@ public class MainMenuGUI extends JDialog {
             initializeGame();
         });
 
+    }
+
+    private void allButtonImg() {
+        allButtonImg = new ArrayList<>();
+        int y = 45;
+        for (int i = 0; i < LIMIT_OF_PLAYER; i++) {
+            allButtonImg.add(getButtonForIcon(i, y));
+            y += 55;
+        }
+        allButtonImg.get(2).setVisible(false);
+        allButtonImg.get(3).setVisible(false);
+    }
+
+    private JButton getButtonForIcon(int index, int y) {
+        JButton btnImage = new JButton(ConstanteComponentMessage.ELLIPSIS);
+        btnImage.setSize(15, 15);
+        btnImage.setLocation(400, y);
+        btnImage.setName(ConstanteTestName.FILE_CHOOSER + index);
+        panelMenu.add(btnImage);
+        btnImage.addActionListener(e -> {
+            int returnValue = fileImage.showOpenDialog(panelMenu);
+            allIconOfPlayers.set(index, getImageFromDialog(returnValue));
+            repaint();
+        });
+        panelMenu.add(btnImage);
+        return btnImage;
     }
 
     private String getLetttersDirectory(){
@@ -284,6 +330,7 @@ public class MainMenuGUI extends JDialog {
 
         for (int i = 0; i < numberOfHumanPlayers; i++) {
             players.add(new HumanPlayer(allTextField.get(i).getText()));
+            players.get(i).setPlayerIcon(allIconOfPlayers.get(i));
         }
 
         int limit = cmbNumberOfAi.getSelectedIndex();
@@ -304,14 +351,13 @@ public class MainMenuGUI extends JDialog {
     private void addLabels() {
 
         allLabelOfPlayers = new ArrayList<>();
-        allLabelOfPlayers.add(new JLabel());
-        allLabelOfPlayers.add(new JLabel());
-        allLabelOfPlayers.add(new JLabel());
-        allLabelOfPlayers.add(new JLabel());
+        for (int i = 0; i < LIMIT_OF_PLAYER; i++) {
+            allLabelOfPlayers.add(new JLabel());
+        }
 
-        int y = -5;
+        int y = -25;
         for (int i = 0; i < allLabelOfPlayers.size(); i++) {
-            y += 35;
+            y += 55;
             initializeLabel(i, y);
         }
 
@@ -324,7 +370,7 @@ public class MainMenuGUI extends JDialog {
 
         lblNumberOfHuman = new JLabel();
         lblNumberOfHuman.setText(ConstanteComponentMessage.MESS_NUMBER_OF_HUMAN);
-        lblNumberOfHuman.setLocation(25, 220);
+        lblNumberOfHuman.setLocation(25, 240);
         lblNumberOfHuman.setSize(lblNumberOfAi.getPreferredSize());
         lblNumberOfHuman.setVisible(true);
 
@@ -353,10 +399,12 @@ public class MainMenuGUI extends JDialog {
         allLabelOfPlayers.get(3).setVisible(false);
     }
 
+
+
     private void initializeLabel(int index, int y) {
         JLabel lblOfPlayer = allLabelOfPlayers.get(index);
         lblOfPlayer.setName(ConstanteTestName.PLAYER_NAME );
-        lblOfPlayer.setText(ConstanteComponentMessage.MESS_NUMBER_OF_HUMAN);
+        lblOfPlayer.setText(ConstanteComponentMessage.MESS_PLAYER_NAME + ++index + " :");
         lblOfPlayer.setLocation(25, y);
         lblOfPlayer.setSize(lblOfPlayer.getPreferredSize());
         lblOfPlayer.setVisible(true);
@@ -365,16 +413,14 @@ public class MainMenuGUI extends JDialog {
     private void addTextBox() {
         panelMenu.setLocation(0, 0);
         panelMenu.setSize(new Dimension(500, 550));
-
         allTextField = new ArrayList<>();
-        allTextField.add(new JTextField("", 30));
-        allTextField.add(new JTextField("", 30));
-        allTextField.add(new JTextField("", 30));
-        allTextField.add(new JTextField("", 30));
-
-        int y = -15;
         for (int i = 0; i < LIMIT_OF_PLAYER; i++) {
-            y += 35;
+            allTextField.add(new JTextField("", 30));
+        }
+
+        int y = -35;
+        for (int i = 0; i < LIMIT_OF_PLAYER; i++) {
+            y += 55;
             initializeTextField(i, y);
         }
 
@@ -397,6 +443,14 @@ public class MainMenuGUI extends JDialog {
         panelMenu.add(txtOfPlayer);
     }
 
+    private void addIconsPlayer() {
+        allIconOfPlayers = new ArrayList<>();
+        for (int i = 0; i < LIMIT_OF_PLAYER; i++) {
+            allIconOfPlayers.add(ImagesManager.getImageFromURL(DEFAULT_PLAYER_ICON));
+            allIconOfPlayers.set(i, ImagesManager.createPlayerIcon(allIconOfPlayers.get(i)));
+        }
+    }
+
     private void addImageFile() {
         File theFiles = null;
 
@@ -413,34 +467,35 @@ public class MainMenuGUI extends JDialog {
         cmbBackgroundScrabble.setSelectedIndex(2);
     }
 
-    /**
-     * Antoine : Future implémentation?
-     *
-     * @return
-     */
-   /* public static String removeExtension(String filenameWithExtension) {
-
-        String separator = System.getProperty(FILE_SEPARATOR);
-        String filename;
-
-        // Remove the path up to the filename.
-        int lastSeparatorIndex = filenameWithExtension.lastIndexOf(separator);
-        if (lastSeparatorIndex == -1) {
-            filename = filenameWithExtension;
-        } else {
-            filename = filenameWithExtension.substring(lastSeparatorIndex + 1);
+    private BufferedImage getImageFromDialog(int returnValue) {
+        BufferedImage imgPlayer = null;
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File fichier = fileImage.getSelectedFile();
+            // TODO: filter
+            if (!fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG) || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_PNG)
+                    || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG)) {
+                imgPlayer = ImagesManager.getImageFromFile(fichier);
+                imgPlayer = ImagesManager.createPlayerIcon(imgPlayer);
+            } else {
+                JOptionPane.showMessageDialog(panelMenu, ConstanteComponentMessage.MESS_ERROR_LOADING_FILE, ConstanteComponentMessage.MESS_ERROR,
+                        JOptionPane.ERROR_MESSAGE);
+                imgPlayer = ImagesManager.getImageFromURL(DEFAULT_PLAYER_ICON);
+                imgPlayer = ImagesManager.createPlayerIcon(imgPlayer);
+            }
         }
+        return imgPlayer;
+    }
 
-        // Remove the extension.
-        int extensionIndex = filename.lastIndexOf(".");
-        if (extensionIndex == -1)
-            return filename;
+    @Override
+    public void paint(Graphics g) {
 
-        return filename.substring(0, extensionIndex);
-    }*/
-
-    public int getLenghtPlayers() {
-        return game.getPlayers().size();
+        super.paint(g);
+        int spaceBetweenImg = 35;
+        for (int i = 0; i < cmbNumberOfHuman.getSelectedIndex() + 2; i++) {
+            g.drawImage(allIconOfPlayers.get(i), 345, spaceBetweenImg, this);
+            spaceBetweenImg += 55;
+        }
+        g.dispose();
     }
 
     public ArrayList<String> readXMLFiles() {
@@ -489,5 +544,9 @@ public class MainMenuGUI extends JDialog {
                         JOptionPane.ERROR_MESSAGE);
             }
         }
+    }
+
+    public int getLenghtPlayers() {
+        return game.getPlayers().size();
     }
 }
