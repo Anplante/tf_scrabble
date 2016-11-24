@@ -90,7 +90,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
             g.setColor(Color.darkGray);
             setBackground(null);
         }
-        g.drawImage(playerIcon, 11, 11, this);
+        g.drawImage(playerIcon, 11, 11, 50,50,this);
         g.dispose();
     }
 }

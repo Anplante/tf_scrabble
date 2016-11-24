@@ -36,17 +36,6 @@ public class ImagesManager {
         return icon;
     }
 
-    public static BufferedImage createPlayerIcon(BufferedImage imageToResize) {
-        BufferedImage playerIcon = null;
-        if (imageToResize != null) {
-            playerIcon = new BufferedImage(50,50, TYPE_INT_ARGB);
-            Graphics2D graphics = playerIcon.createGraphics();
-            AffineTransform transform = AffineTransform.getScaleInstance(0.2, 0.2);
-            graphics.drawRenderedImage(imageToResize, transform);
-        }
-        return playerIcon;
-    }
-
     public static BufferedImage getImageFromURL (URL pathToIcon) {
         BufferedImage imgPlayer = null;
         try {

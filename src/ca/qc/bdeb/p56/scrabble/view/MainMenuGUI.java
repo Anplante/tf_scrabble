@@ -293,7 +293,7 @@ public class MainMenuGUI extends JDialog {
         panelMenu.add(btnImage);
         btnImage.addActionListener(e -> {
             int returnValue = fileImage.showOpenDialog(panelMenu);
-            allIconOfPlayers.set(index, getImageFromDialog(returnValue));
+            allIconOfPlayers.set(index, getImageFromDialog(returnValue, index));
             repaint();
         });
         panelMenu.add(btnImage);
@@ -447,7 +447,7 @@ public class MainMenuGUI extends JDialog {
         allIconOfPlayers = new ArrayList<>();
         for (int i = 0; i < LIMIT_OF_PLAYER; i++) {
             allIconOfPlayers.add(ImagesManager.getImageFromURL(DEFAULT_PLAYER_ICON));
-            allIconOfPlayers.set(i, ImagesManager.createPlayerIcon(allIconOfPlayers.get(i)));
+           // allIconOfPlayers.set(i, ImagesManager.createPlayerIcon(allIconOfPlayers.get(i)));
         }
     }
 
@@ -467,7 +467,7 @@ public class MainMenuGUI extends JDialog {
         cmbBackgroundScrabble.setSelectedIndex(2);
     }
 
-    private BufferedImage getImageFromDialog(int returnValue) {
+    private BufferedImage getImageFromDialog(int returnValue, int index) {
         BufferedImage imgPlayer = null;
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File fichier = fileImage.getSelectedFile();
@@ -475,13 +475,14 @@ public class MainMenuGUI extends JDialog {
             if (!fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG) || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_PNG)
                     || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG)) {
                 imgPlayer = ImagesManager.getImageFromFile(fichier);
-                imgPlayer = ImagesManager.createPlayerIcon(imgPlayer);
             } else {
                 JOptionPane.showMessageDialog(panelMenu, ConstanteComponentMessage.MESS_ERROR_LOADING_FILE, ConstanteComponentMessage.MESS_ERROR,
                         JOptionPane.ERROR_MESSAGE);
-                imgPlayer = ImagesManager.getImageFromURL(DEFAULT_PLAYER_ICON);
-                imgPlayer = ImagesManager.createPlayerIcon(imgPlayer);
+                imgPlayer = allIconOfPlayers.get(index);
             }
+        }
+        else {
+            imgPlayer = allIconOfPlayers.get(index);
         }
         return imgPlayer;
     }
@@ -492,7 +493,7 @@ public class MainMenuGUI extends JDialog {
         super.paint(g);
         int spaceBetweenImg = 35;
         for (int i = 0; i < cmbNumberOfHuman.getSelectedIndex() + 2; i++) {
-            g.drawImage(allIconOfPlayers.get(i), 345, spaceBetweenImg, this);
+            g.drawImage(allIconOfPlayers.get(i), 345, spaceBetweenImg,50,50, this);
             spaceBetweenImg += 55;
         }
         g.dispose();
