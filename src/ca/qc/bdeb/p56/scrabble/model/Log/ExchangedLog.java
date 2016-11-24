@@ -11,8 +11,8 @@ public class ExchangedLog extends MoveLog {
 
     private int numberOfExchangedTile;
 
-    public ExchangedLog(Player player, int numberOfExchangedTile) {
-        super(player);
+    public ExchangedLog(Player player, int turnPlayed, int numberOfExchangedTile) {
+        super(player, turnPlayed);
         this.numberOfExchangedTile = numberOfExchangedTile;
     }
 

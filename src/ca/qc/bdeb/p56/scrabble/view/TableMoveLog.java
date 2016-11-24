@@ -9,21 +9,21 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * Created by TheFrenchOne on 11/23/2016.
+ * Created by Louis Luu Lim on 11/23/2016.
  */
 public class TableMoveLog extends JTable implements Observateur {
 
     private static final String ROUND = "Round ";
+    private static final String[] HEADERS = {"Joueur", "Coup", "Pts", "Total"};
+
     private Game gameModel;
     DefaultTableModel dtm = new DefaultTableModel(0, 0);
-    String[] columnNames = {"Joueur", "Coup", "Pts", "Total"};
-
 
     public TableMoveLog(Game gameModel) {
 
         super();
         this.gameModel = gameModel;
-        dtm.setColumnIdentifiers(columnNames);
+        dtm.setColumnIdentifiers(HEADERS);
         setModel(dtm);
 
         addRoundSeparator();
@@ -52,6 +52,6 @@ public class TableMoveLog extends JTable implements Observateur {
     }
 
     private void addMove(MoveLog move){
-        //dtm.addRow(new Object[]{move.getPlayer(), move.getString()});
+        dtm.addRow(new Object[]{move.getPlayer().getName(), move.getMove(), move.getMovePoints(), move.getPointsAccumulated()});
     }
 }

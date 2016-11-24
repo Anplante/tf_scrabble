@@ -188,7 +188,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         height *= 0.5;
 
         TableMoveLog tabMoveLog = new TableMoveLog(gameModel);
-        gameModel.ajouterObservateur(tabMoveLog);
+        gameModel.getLogManager().ajouterObservateur(tabMoveLog);
         scrollMoveLog = new JScrollPane(tabMoveLog);
 
         scrollMoveLog.setLocation(x, MARGIN);

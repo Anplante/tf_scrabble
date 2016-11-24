@@ -9,8 +9,8 @@ public class ForfeitedLog extends MoveLog {
 
     private static final String FORFEITED = "Forfeited";
 
-    public ForfeitedLog(Player player){
-        super(player);
+    public ForfeitedLog(Player player, int turnPlayed){
+        super(player, turnPlayed);
     }
 
     @Override

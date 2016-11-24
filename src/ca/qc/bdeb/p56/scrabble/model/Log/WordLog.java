@@ -10,8 +10,8 @@ public class WordLog extends MoveLog {
     private String wordPlayed;
     private int wordValue;
 
-    public WordLog(Player player, String wordPlayed, int wordValue) {
-        super(player);
+    public WordLog(Player player, int turnPlayed,  String wordPlayed, int wordValue) {
+        super(player, turnPlayed);
         this.wordPlayed = wordPlayed;
         this.wordValue = wordValue;
     }

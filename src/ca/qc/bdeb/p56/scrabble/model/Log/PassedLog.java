@@ -9,8 +9,8 @@ public class PassedLog extends MoveLog {
 
     private static final String PASSED = "Passed";
 
-    public PassedLog(Player player){
-        super(player);
+    public PassedLog(Player player, int turnPlayed){
+        super(player, turnPlayed);
     }
 
     @Override

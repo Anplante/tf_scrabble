@@ -10,11 +10,12 @@ import ca.qc.bdeb.p56.scrabble.model.Player;
 public abstract class MoveLog {
 
     private Player player;
-    private int numberOfExchangedTile = 0;
+    private int turnPlayed;
 
 
-    public MoveLog(Player player){
+    public MoveLog(Player player, int turnPlayed){
         this.player = player;
+        this.turnPlayed = turnPlayed;
     }
 
 
@@ -25,6 +26,8 @@ public abstract class MoveLog {
     public final int getPointsAccumulated() {
         return player.getScore();
     }
+
+    public final int getTurnPlayed(){ return turnPlayed; }
 
     public abstract int getMovePoints();
     public abstract String getMove();

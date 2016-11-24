@@ -35,7 +35,7 @@ public class MoveLogTest {
 
         String wordPlayed = "test";
         int wordValue = 10;
-        MoveLog log = new WordLog(player, wordPlayed, wordValue);
+        MoveLog log = new WordLog(player, 1, wordPlayed, wordValue);
         player.addPoints(wordValue);
         assertEquals(wordPlayed, log.getMove());
         assertEquals(wordValue, log.getMovePoints());
@@ -45,7 +45,7 @@ public class MoveLogTest {
     @Test
     public void testLogPlayerPassedTurn() {
 
-        MoveLog log = new PassedLog(player);
+        MoveLog log = new PassedLog(player, 1);
 
         assertEquals("Passed", log.getMove());
         assertEquals(0, log.getMovePoints());
@@ -56,7 +56,7 @@ public class MoveLogTest {
 
         int numbersOfTilesExchanged = 7;
 
-        MoveLog log = new ExchangedLog(player, numbersOfTilesExchanged);
+        MoveLog log = new ExchangedLog(player, 1, numbersOfTilesExchanged);
 
         assertEquals("Exchanged " + numbersOfTilesExchanged, log.getMove());
         assertEquals(0, log.getMovePoints());
@@ -69,7 +69,7 @@ public class MoveLogTest {
 
         String wordPlayed = "test";
         int wordValue = 10;
-        MoveLog log = new WordLog(player, wordPlayed, wordValue);
+        MoveLog log = new WordLog(player, 1, wordPlayed, wordValue);
         player.addPoints(wordValue);
 
         assertEquals(wordValue, log.getMovePoints());

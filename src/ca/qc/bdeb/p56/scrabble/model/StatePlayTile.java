@@ -166,7 +166,7 @@ public class StatePlayTile extends State {
 
         boolean validMove = true;
 
-        if (getGame().getMovesHistory().isEmpty()) {
+        if (getGame().getLogManager().getMovesHistory().isEmpty()) {
             validMove = verifyFirstWordAtCenter();
         }
 
