@@ -28,6 +28,7 @@ public class GameTest {
 
         List<Player> players = new ArrayList<Player>();
         players.add(new HumanPlayer("Louis"));
+        players.add(new HumanPlayer("Antoine"));
         game = gameManager.createNewGame(players);
 
     }
@@ -56,6 +57,7 @@ public class GameTest {
 
     @Test
     public void testAlphabetBagsSize() {
+
         int sizeAlphabet = game.getlettersLeft();
         game.startGame();
         assertEquals(sizeAlphabet, game.getlettersLeft() + 7 * game.getPlayersLeft());

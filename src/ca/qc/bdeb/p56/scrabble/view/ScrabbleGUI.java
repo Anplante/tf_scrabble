@@ -31,6 +31,8 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
     private JLabel background;
     private PanelPlayers panelInformation;
 
+    private JScrollPane scrollMoveLog;
+
     public ScrabbleGUI() {
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -93,7 +95,8 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         createPanelWait();
         createPanelBoard();
         createPanelLetterRack();
-        createPanelInformation();
+        createPanelPlayersInformation();
+        createPanelMoveLog();
     }
 
     private void createPanelWait() {
@@ -113,16 +116,17 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         setContentPane(background);
     }
 
-    private void createPanelInformation() {
+    private void createPanelPlayersInformation() {
 
-        int y = getHeight() - LETTER_RACK_ZONE_HEIGHT;
+        int heigth = getHeight() - LETTER_RACK_ZONE_HEIGHT;
         int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN;
         int x = getWidth() - width;
-        y *= 0.5;
+        width -= MARGIN;
+        heigth *= 0.5;
 
         panelInformation = new PanelPlayers();
         panelInformation.setLocation(x, MARGIN);
-        panelInformation.setSize(width, y);
+        panelInformation.setSize(width, heigth);
         panelInformation.setLayout(new GridLayout(gameModel.getPlayers().size(), 1, MARGIN, MARGIN));
         panelInformation.setOpaque(false);
         panelInformation.setGame(gameModel);
@@ -175,6 +179,25 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         gameModel.ajouterObservateur(pnlBoard);
     }
 
+
+    private void createPanelMoveLog() {
+
+        int height = getHeight() - LETTER_RACK_ZONE_HEIGHT;
+        int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN * 2;
+        int x = 0 + MARGIN;
+        height *= 0.5;
+
+        TableMoveLog tabMoveLog = new TableMoveLog(gameModel);
+        gameModel.ajouterObservateur(tabMoveLog);
+        scrollMoveLog = new JScrollPane(tabMoveLog);
+
+        scrollMoveLog.setLocation(x, MARGIN);
+
+        scrollMoveLog.setSize(width, height);
+
+        add(scrollMoveLog);
+    }
+
     private void initGrid() {
 
         pnlBoard.setLayout(new GridLayout(BoardManager.BOARD_SIZE, BoardManager.BOARD_SIZE, 2, 2));
@@ -190,6 +213,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
             }
         }
     }
+
 
     private void addKeyBindings() {
 
@@ -234,13 +258,12 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
     @Override
     public void changementEtat() {
-        if(gameModel.isEndGame())
-        {
+        if (gameModel.isEndGame()) {
             StringBuilder message = new StringBuilder();
             message.append("Joueur : ");
             message.append(gameModel.getActivePlayer().getName());
             message.append(" is the winner!");
-            JOptionPane.showConfirmDialog(null, message.toString(), "Victory", JOptionPane.PLAIN_MESSAGE );
+            JOptionPane.showConfirmDialog(null, message.toString(), "Victory", JOptionPane.PLAIN_MESSAGE);
         }
     }
 

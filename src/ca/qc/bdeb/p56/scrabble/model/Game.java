@@ -1,6 +1,9 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
-import ca.qc.bdeb.p56.scrabble.shared.IDMove;
+import ca.qc.bdeb.p56.scrabble.model.Log.ExchangedLog;
+import ca.qc.bdeb.p56.scrabble.model.Log.MoveLog;
+import ca.qc.bdeb.p56.scrabble.model.Log.PassedLog;
+import ca.qc.bdeb.p56.scrabble.model.Log.WordLog;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.shared.Direction;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
@@ -106,6 +109,7 @@ public class Game implements Observable {
     }
 
     public List<MoveLog> getMovesHistory() {
+
         List<MoveLog> moveLogs = new ArrayList<>();
         for (MoveLog moveLog : movesHistory) {
             moveLogs.add(moveLog);
@@ -213,18 +217,29 @@ public class Game implements Observable {
 
                 }
                 else {
+
+                    if(isLastTurnPlayer(getActivePlayer()))
+                    {
+                        turn++;
+                    }
                     drawTile();
                     activateNextPlayer();
+
+
                 }
             }
 
         }while(!getActivePlayer().isActivated() && !isEndGame());
     }
 
+    private boolean isLastTurnPlayer(Player activePlayer) {
+        return activePlayer.equals(players.get(players.size()-1));
+    }
+
     public void passTurn() {
 
         waitingNextTurn = true;
-        movesHistory.add(new MoveLog(getActivePlayer(), turn, IDMove.PASSED));
+        movesHistory.add(new PassedLog(getActivePlayer()));
         getActivePlayer().selectNextState(IDState.PENDING);
         goToNextState();
         // TODO Louis : bloquer quand le joueur place un mot ou annuler les autres actions
@@ -318,7 +333,7 @@ public class Game implements Observable {
                 if (checkForComboWord(tilesPlaced, direction)) {
                     int wordValue = calculateWordPoints(letters);
                     getActivePlayer().addPoints(wordValue);
-                    movesHistory.add(new MoveLog(getActivePlayer(), turn, word.toString(), wordValue));
+                    movesHistory.add(new WordLog(getActivePlayer(), word.toString(), wordValue));
                     turn++;
                     isAWord = true;
                 } else {
@@ -479,7 +494,7 @@ public class Game implements Observable {
         }
 
         Collections.shuffle(alphabetBag);
-        movesHistory.add(new MoveLog(getActivePlayer(), turn, tilesSelected.size()));
+        movesHistory.add(new ExchangedLog(getActivePlayer(), tilesSelected.size()));
         turn++;
     }
 
@@ -555,23 +570,6 @@ public class Game implements Observable {
         }
     }
 
-    /**
-     * TODO Louis : Si jamais on veut ajouter des modes de jeux différents
-     */
-    private void calculPlayOutPointsInTournamentFormat() {
-
-        Player currentPlayer = getActivePlayer();
-
-        for (Player player : players) {
-            List<Tile> tiles = player.getTiles();
-
-            for (Tile tile : tiles) {
-                int value = tile.getValue() * DOUBLE_VALUE;
-                currentPlayer.addPoints(value);
-            }
-        }
-    }
-
     private boolean checkForSixConsecutiveScorelessTurn() {
 
         ListIterator<MoveLog> litr = movesHistory.listIterator(movesHistory.size());
@@ -580,7 +578,7 @@ public class Game implements Observable {
         int index = 0;
 
         while (litr.hasPrevious() && index < MAX_CONSECUTIVE_SCORELESS_TURN) {
-            if (litr.previous().getWordPoints() == 0) {
+            if (litr.previous().getMovePoints() == 0) {
                 countScorelessTurn++;
             }
             index++;
@@ -601,5 +599,9 @@ public class Game implements Observable {
         currentPlayer.forfeit();
         goToNextState();
 
+    }
+
+    public int getTurn() {
+        return turn;
     }
 }

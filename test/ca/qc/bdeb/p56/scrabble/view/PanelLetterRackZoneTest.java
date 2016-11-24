@@ -65,23 +65,4 @@ public class PanelLetterRackZoneTest {
         assertEquals(currentPlayer, game.getActivePlayer());
     }
 
-    @Test
-    public void testShuffleTiles() {
-        JButton btnShuffle = (JButton) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.SHUFFLE_NAME);
-        List<Tile> originalPlayerHandOrder = currentPlayer.getTiles();
-
-        btnShuffle.doClick();
-
-        List<Tile> afterShufflePlayerHandOrder = currentPlayer.getTiles();
-
-        for (Tile tile : afterShufflePlayerHandOrder) {
-            assertTrue(originalPlayerHandOrder.contains(tile));
-        }
-
-        for (int i = 0; i < 1000; i++) {
-            Collections.shuffle(afterShufflePlayerHandOrder);
-            assertNotEquals(afterShufflePlayerHandOrder, originalPlayerHandOrder);
-
-        }
-    }
 }
