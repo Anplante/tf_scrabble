@@ -3,7 +3,7 @@ package ca.qc.bdeb.p56.scrabble.model.Log;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 
 /**
- * Created by TheFrenchOne on 11/23/2016.
+ * Created by Louis Luu Lim on 11/23/2016.
  */
 public class WordLog extends MoveLog {
 

@@ -260,12 +260,12 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
     public void changementEtat() {
         if (gameModel.isEndGame()) {
             StringBuilder message = new StringBuilder();
-            message.append("Joueur : ");
-            message.append(gameModel.getActivePlayer().getName());
-            message.append(" is the winner!");
-            JOptionPane.showConfirmDialog(null, message.toString(), "Victory", JOptionPane.PLAIN_MESSAGE);
+            message.append("Match null");
+            JOptionPane.showConfirmDialog(null, message.toString(), "Fin de la partie", JOptionPane.PLAIN_MESSAGE);
         }
     }
+
+
 
     @Override
     public void changementEtat(Enum<?> e, Object o) {

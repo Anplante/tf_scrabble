@@ -9,7 +9,7 @@ import javax.swing.*;
 import static ca.qc.bdeb.p56.scrabble.shared.IDState.*;
 
 /**
- * Created by 1468636 on 2016-11-15.
+ * Created by Julien Brosseau on 2016-11-15.
  */
 public class PanelBoard extends JPanel implements Observateur {
 

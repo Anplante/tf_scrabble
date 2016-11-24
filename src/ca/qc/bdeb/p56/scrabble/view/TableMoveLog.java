@@ -25,8 +25,6 @@ public class TableMoveLog extends JTable implements Observateur {
         this.gameModel = gameModel;
         dtm.setColumnIdentifiers(HEADERS);
         setModel(dtm);
-
-        addRoundSeparator();
     }
 
     @Override

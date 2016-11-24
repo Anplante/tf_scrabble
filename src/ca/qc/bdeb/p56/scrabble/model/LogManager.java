@@ -84,6 +84,7 @@ public class LogManager implements Observable {
    private void checkIfTurnPlayedIsDifferentRound(int turnPlayed){
 
        if(currentRound != turnPlayed){
+           currentRound = turnPlayed;
            aviserObservateurs(Event.ROTATION_PLAYERS, null);
        }
    }
