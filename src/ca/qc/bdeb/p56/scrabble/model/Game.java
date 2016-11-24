@@ -51,6 +51,7 @@ public class Game implements Observable {
     private List<Player> eliminatedPlayers;
     private boolean isEndGame;
     private LogManager logManager;
+    private Player lastPlayerToPlay;
 
     public Game(String filePath, List<Player> players) {
         waitingNextTurn = false;
@@ -186,6 +187,7 @@ public class Game implements Observable {
     public void startGame() {
 
         activePlayerIndex = randomGenerator.nextInt(players.size());
+        lastPlayerToPlay =  determineLastPlayerToPlay(activePlayerIndex);
         turn = 1;
         initPlayerRack();
 
@@ -194,6 +196,23 @@ public class Game implements Observable {
         }
 
         goToNextState();
+    }
+
+    private Player determineLastPlayerToPlay(int indexFirstPlayer){
+
+        Player player = null;
+
+        if(players.size() > 1){
+            if(indexFirstPlayer != 0 )
+            {
+                player = players.get(indexFirstPlayer - 1);
+            }
+            else{
+                player = players.get(players.size() -1);
+            }
+        }
+
+       return player;
     }
 
 
@@ -228,8 +247,10 @@ public class Game implements Observable {
     }
 
     private boolean isLastTurnPlayer(Player activePlayer) {
-        return activePlayer.equals(players.get(players.size()-1));
+        return activePlayer.equals(lastPlayerToPlay);
     }
+
+
 
     public void passTurn() {
 
@@ -315,7 +336,6 @@ public class Game implements Observable {
 
         Direction direction;
         boolean isAWord = false;
-
 
         direction = boardManager.checkIfWordIsVerticalOrHorizontal(tilesPlaced);
 
@@ -597,6 +617,11 @@ public class Game implements Observable {
         currentPlayer.forfeit();
         goToNextState();
 
+    }
+
+    public List<Player> getWinner()
+    {
+        return null;
     }
 
     public int getTurn() {
