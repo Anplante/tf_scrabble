@@ -4,8 +4,6 @@ import ca.qc.bdeb.p56.scrabble.model.Log.ExchangedLog;
 import ca.qc.bdeb.p56.scrabble.model.Log.MoveLog;
 import ca.qc.bdeb.p56.scrabble.model.Log.PassedLog;
 import ca.qc.bdeb.p56.scrabble.model.Log.WordLog;
-import ca.qc.bdeb.p56.scrabble.model.Player;
-import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.shared.Event;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
