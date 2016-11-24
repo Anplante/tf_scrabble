@@ -489,7 +489,7 @@ public class Game implements Observable {
 
         Collections.shuffle(alphabetBag);
         logManager.addExchangedLog(getActivePlayer(), turn, tilesSelected);
-
+        setWaitingNextTurn(true );
         turn++;
     }
 

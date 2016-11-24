@@ -45,6 +45,15 @@ public class ConstanteComponentMessage {
     public static final String RES_IMAGES_ENG = "./letters/englishDictionaryValue/";
     public static final String RES_IMAGES_FR_BASIC = "./letters/frenchDictionaryValue/Basic/";
     public static final String RES_IMAGES_FR_NOBLE = "./letters/frenchDictionaryValue/Noble/";
+    public static final String RES_BLANKS_FR_NOBLE = "./letters/frenchDictionaryValue/blank_noble";
+    public static final String RES_BLANKS_FR_BASIC = "./letters/frenchDictionaryValue/blank_basic";
+
+    public static final String RES_SWAP = "./images/swap.png";
+    public static final String RES_RETURN = "./images/back.png";
+    public static final String RES_NEXT = "./images/next.png";
+    public static final String RES_SHUFFLE = "./images/shuffle.png";
+    public static final String RES_ABANDON = "./images/abandon.png";
+
     public static final String TITLE_SELECT_LETTER = "Veuillez choissir une lettre";
     public static final char START_ALPHABET = 'A';
     public static final char END_ALPHABET = 'Z';

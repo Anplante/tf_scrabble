@@ -103,6 +103,8 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
         pnlWaiting = new WaitingPanel(new Dimension(getWidth(), getHeight()), this);
         pnlWaiting.setName(ConstanteTestName.WAITING_PANEL_NAME);
+        pnlWaiting = new WaitingPanel(new Dimension(getWidth(),getHeight()),this);
+        pnlWaiting.setName("WaitingPanel");
         add(pnlWaiting);
         pnlWaiting.setGame(gameModel);
     }

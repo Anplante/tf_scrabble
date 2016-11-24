@@ -54,6 +54,7 @@ public class StateExchange extends State {
             case EXCHANGE:
                 if (tilesSelected != null) {
                     getGame().exchangeLetters(tilesSelected);
+
                 } else {
                     // TODO Louis : solution temporaire pour montrer l'erreur. Il faudrait s'entendre sur comment on veut afficher des messages d'erreur
                     JOptionPane.showMessageDialog(new Frame(),

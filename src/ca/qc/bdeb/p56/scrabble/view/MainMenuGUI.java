@@ -447,7 +447,6 @@ public class MainMenuGUI extends JDialog {
         allIconOfPlayers = new ArrayList<>();
         for (int i = 0; i < LIMIT_OF_PLAYER; i++) {
             allIconOfPlayers.add(ImagesManager.getImageFromURL(DEFAULT_PLAYER_ICON));
-           // allIconOfPlayers.set(i, ImagesManager.createPlayerIcon(allIconOfPlayers.get(i)));
         }
     }
 

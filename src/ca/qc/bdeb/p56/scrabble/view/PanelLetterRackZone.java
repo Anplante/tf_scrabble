@@ -30,7 +30,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
     private Player currentPlayer;
     private Game gameModel;
-    private ButtonExchange btnSwapTiles;
+    private ButtonExchange btnExchange;
     private JButton btnPassTurn;
     private JButton btnPlayWord;
     private JButton btnRecall;
@@ -74,7 +74,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
     public void setGameModel(Game aGame) {
         if (gameModel != null) {
             gameModel.retirerObservateur(this);
-            gameModel.retirerObservateur(btnSwapTiles);
+            gameModel.retirerObservateur(btnExchange);
         }
         gameModel = aGame;
 
@@ -82,7 +82,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         initPanelLettersRack();
         initializeOptions();
         gameModel.ajouterObservateur(this);
-        gameModel.ajouterObservateur(btnSwapTiles);
+        gameModel.ajouterObservateur(btnExchange);
     }
 
     private void initPanelLettersRack() {
@@ -108,17 +108,30 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         initShuffleTilesOption();
     }
 
+    private void setImageBtn(JButton btn, String path){
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource(path));
+        Image img = icon.getImage() ;
+        Image newimg = img.getScaledInstance( btn.getWidth(), btn.getHeight(),  java.awt.Image.SCALE_SMOOTH ) ;
+        icon = new ImageIcon( newimg );
+        btn.setIcon(icon);
+    }
+
     private void initPassTurnOption() {
 
         int x = getWidth() - OPTIONS_WIDTH;
-        btnPassTurn = new JButton(ConstanteComponentMessage.MESS_PASS_TURN);
-
+        btnPassTurn = new JButton();
         btnPassTurn.setName(ConstanteTestName.PASS_TURN_NAME);
         btnPassTurn.setSize(OPTIONS_WIDTH, getHeight());
         btnPassTurn.setLocation(x, POS_Y);
         btnPassTurn.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnPassTurn.setHorizontalTextPosition(SwingConstants.CENTER);
         btnPassTurn.setVisible(false);
+        btnPassTurn.setOpaque(false);
+        btnPassTurn.setFocusPainted(false);
+        btnPassTurn.setBorderPainted(false);
+        btnPassTurn.setContentAreaFilled(false);
+        setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        setImageBtn(btnPassTurn,ConstanteComponentMessage.RES_NEXT);
 
         add(btnPassTurn);
 
@@ -129,13 +142,18 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
         int x = getWidth() - OPTIONS_WIDTH;
 
-        btnPlayWord = new JButton(ConstanteComponentMessage.MESS_PLAY);
+        btnPlayWord = new JButton();
         btnPlayWord.setName(ConstanteTestName.PLAY_NAME);
         btnPlayWord.setSize(OPTIONS_WIDTH, getHeight());
         btnPlayWord.setLocation(x, POS_Y);
-
         add(btnPlayWord);
         btnPlayWord.setVisible(false);
+        btnPlayWord.setOpaque(false);
+        btnPlayWord.setFocusPainted(false);
+        btnPlayWord.setBorderPainted(false);
+        btnPlayWord.setContentAreaFilled(false);
+        setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        setImageBtn(btnPlayWord,ConstanteComponentMessage.RES_NEXT);
         btnPlayWord.addActionListener(e -> gameModel.selectPlayWordAction());
     }
 
@@ -156,11 +174,17 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
     private void initShuffleTilesOption() {
 
         int x = getWidth() - OPTIONS_WIDTH * 2 - ScrabbleGUI.MARGIN;
-        btnShuffleTiles = new JButton(ConstanteComponentMessage.TITLE_SHUFFLE);
+        btnShuffleTiles = new JButton();
         btnShuffleTiles.setName(ConstanteTestName.SHUFFLE_NAME);
 
-        btnShuffleTiles.setSize(OPTIONS_WIDTH, getHeight());
         btnShuffleTiles.setLocation(x, POS_Y);
+        btnShuffleTiles.setOpaque(false);
+        btnShuffleTiles.setFocusPainted(false);
+        btnShuffleTiles.setBorderPainted(false);
+        btnShuffleTiles.setContentAreaFilled(false);
+        setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        btnShuffleTiles.setSize(OPTIONS_WIDTH, getHeight());
+        setImageBtn(btnShuffleTiles,ConstanteComponentMessage.RES_SHUFFLE);
         add(btnShuffleTiles);
 
         btnShuffleTiles.addActionListener(e -> {
@@ -174,29 +198,30 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         int x = OPTIONS_WIDTH + ScrabbleGUI.MARGIN;
         Rectangle bounds = new Rectangle(x, POS_Y, OPTIONS_WIDTH, getHeight());
 
-        btnSwapTiles = new ButtonExchange(ConstanteComponentMessage.MESS_EXCHANGE, gameModel, bounds);
-        btnSwapTiles.setName(ConstanteTestName.EXCHANGE_NAME);
-        btnSwapTiles.setVerticalTextPosition(SwingConstants.BOTTOM);
-        btnSwapTiles.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnExchange = new ButtonExchange(ConstanteComponentMessage.MESS_EXCHANGE, gameModel, bounds);
+        btnExchange.setName(ConstanteTestName.EXCHANGE_NAME);
+        btnExchange.setVerticalTextPosition(SwingConstants.BOTTOM);
+        btnExchange.setHorizontalTextPosition(SwingConstants.CENTER);
 
         x = getWidth() - OPTIONS_WIDTH * 2 - ScrabbleGUI.MARGIN;
-        btnCancelExchange = new JButton(ConstanteComponentMessage.MESS_CANCEL);
+        btnCancelExchange = new JButton();
         btnCancelExchange.setVisible(false);
         btnCancelExchange.setName(ConstanteTestName.CANCEL_EXCHANGE_NAME);
         btnCancelExchange.setLocation(x, POS_Y);
         btnCancelExchange.setSize(OPTIONS_WIDTH, getHeight());
+        setImageBtn(btnCancelExchange,ConstanteComponentMessage.RES_RETURN);
 
-        add(btnSwapTiles);
+        add(btnExchange);
         add(btnCancelExchange);
 
-        btnSwapTiles.addActionListener(e -> {
+        btnExchange.addActionListener(e -> {
 
             if (currentPlayer.getState().getName() != IDState.EXCHANGE.getName()) {
-                btnSwapTiles.setText(ConstanteComponentMessage.MESS_CONFIRM);
+                btnExchange.setText(ConstanteComponentMessage.MESS_CONFIRM);
                 disableAllOtherBtnExchange(false);
             } else {
                 disableAllOtherBtnExchange(true);
-                btnSwapTiles.setText(ConstanteComponentMessage.MESS_EXCHANGE);
+                btnExchange.setText(ConstanteComponentMessage.MESS_EXCHANGE);
             }
             gameModel.exchangeLetter();
         });
@@ -205,7 +230,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
             public void actionPerformed(ActionEvent e) {
 
                 gameModel.cancelExchange();
-                btnSwapTiles.setText(ConstanteComponentMessage.MESS_EXCHANGE);
+                btnExchange.setText(ConstanteComponentMessage.MESS_EXCHANGE);
                 disableAllOtherBtnExchange(true);
             }
         });
@@ -221,11 +246,11 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
     // TODO Louis : Faire en sorte qu'on enleve le joueur et non quitter la partie
     private void initForfeitOption() {
 
-        btnForfeit = new JButton(ConstanteComponentMessage.TITLE_SURRENDER);
+        btnForfeit = new JButton();
         btnForfeit.setName(ConstanteTestName.FORFEIT_NAME);
-
         btnForfeit.setSize(OPTIONS_WIDTH, getHeight());
         btnForfeit.setLocation(POS_Y, POS_Y);
+        setImageBtn(btnForfeit,ConstanteComponentMessage.RES_ABANDON);
 
         add(btnForfeit);
         btnForfeit.addActionListener(e -> {
