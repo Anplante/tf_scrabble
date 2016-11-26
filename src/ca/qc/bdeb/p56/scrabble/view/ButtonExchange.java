@@ -69,6 +69,5 @@ public class ButtonExchange extends JButton implements Observateur {
 
     @Override
     public void changementEtat(Enum<?> e, Object o) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

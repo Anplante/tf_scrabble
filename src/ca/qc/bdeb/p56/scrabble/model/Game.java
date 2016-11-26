@@ -92,9 +92,10 @@ public class Game implements Observable {
         return players.get(activePlayerIndex);
     }
 
-    public boolean isEndGame(){
+    public boolean isEndGame() {
         return isEndGame;
     }
+
     public Square getSquare(int row, int column) {
         return boardManager.getSquare(row, column);
     }
@@ -107,8 +108,7 @@ public class Game implements Observable {
         return boardManager;
     }
 
-    public LogManager getLogManager()
-    {
+    public LogManager getLogManager() {
         return logManager;
     }
 
@@ -187,7 +187,7 @@ public class Game implements Observable {
     public void startGame() {
 
         activePlayerIndex = randomGenerator.nextInt(players.size());
-        lastPlayerToPlay =  determineLastPlayerToPlay(activePlayerIndex);
+        lastPlayerToPlay = determineLastPlayerToPlay(activePlayerIndex);
         turn = 1;
         initPlayerRack();
 
@@ -198,21 +198,19 @@ public class Game implements Observable {
         goToNextState();
     }
 
-    private Player determineLastPlayerToPlay(int indexFirstPlayer){
+    private Player determineLastPlayerToPlay(int indexFirstPlayer) {
 
         Player player = null;
 
-        if(players.size() > 1){
-            if(indexFirstPlayer != 0 )
-            {
+        if (players.size() > 1) {
+            if (indexFirstPlayer != 0) {
                 player = players.get(indexFirstPlayer - 1);
-            }
-            else{
-                player = players.get(players.size() -1);
+            } else {
+                player = players.get(players.size() - 1);
             }
         }
 
-       return player;
+        return player;
     }
 
 
@@ -225,13 +223,10 @@ public class Game implements Observable {
                 if (checkForEndOfTheGame()) {
 
                     setEndOfGame();
-                    aviserObservateurs();
 
-                }
-                else {
+                } else {
 
-                    if(isLastTurnPlayer(getActivePlayer()))
-                    {
+                    if (isLastTurnPlayer(getActivePlayer())) {
                         turn++;
                     }
                     drawTile();
@@ -241,13 +236,12 @@ public class Game implements Observable {
                 }
             }
 
-        }while(!getActivePlayer().isActivated() && !isEndGame());
+        } while (!getActivePlayer().isActivated() && !isEndGame());
     }
 
     private boolean isLastTurnPlayer(Player activePlayer) {
         return activePlayer.equals(lastPlayerToPlay);
     }
-
 
 
     public void passTurn() {
@@ -489,7 +483,9 @@ public class Game implements Observable {
 
     @Override
     public void aviserObservateurs(Enum<?> e, Object o) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        for (Observateur ob : observateurs) {
+            ob.changementEtat(e, o);
+        }
     }
 
 
@@ -548,24 +544,25 @@ public class Game implements Observable {
         return checkForPlayerPlayingOut() || checkForSixConsecutiveScorelessTurn() || checkOnlyOnePlayerLeft();
     }
 
-    public void setEndOfGame()
-    {
-        if(checkForPlayerPlayingOut())
-        {
+    public void setEndOfGame() {
+        if (checkForPlayerPlayingOut()) {
             calculatePlayOutPointsInStandartFormat();
         }
 
-        for(Player p : players)
-        {
+        for (Player p : players) {
             p.setState(new StateEnding(p));
         }
 
         isEndGame = true;
+
+        List<Player> winner = getWinner();
+
+        aviserObservateurs(Event.END_GAME, winner);
     }
 
     private boolean checkForPlayerPlayingOut() {
 
-        return  (getActivePlayer().getTiles().isEmpty() && alphabetBag.isEmpty());
+        return (getActivePlayer().getTiles().isEmpty() && alphabetBag.isEmpty());
     }
 
     private void calculatePlayOutPointsInStandartFormat() {
@@ -616,12 +613,47 @@ public class Game implements Observable {
 
     }
 
-    public List<Player> getWinner()
-    {
-        return null;
+    public List<Player> getWinner() {
+
+        players.removeAll(eliminatedPlayers);
+
+        if (players.size() != 1) {
+            players = getPlayerWithTheMostPoints(players);
+        }
+        return players;
     }
 
     public int getTurn() {
         return turn;
+    }
+
+
+    private List<Player> getPlayerWithTheMostPoints(List<Player> players) {
+
+
+        List<Player> candidats = new ArrayList<>();
+
+        if (players != null || !players.isEmpty()) {
+
+            candidats.add(players.get(0));
+
+            if (players.size() > 1) {
+
+
+                for (int i = 1; i < players.size(); i++) {
+
+                    int currentLeaderScore = candidats.get(0).getScore();
+                    int playerScore = players.get(i).getScore();
+
+                    if (currentLeaderScore < playerScore) {
+                        candidats.clear();
+                        candidats.add(players.get(i));
+                    } else if (currentLeaderScore == playerScore) {
+                        candidats.add(players.get(i));
+                    }
+                }
+            }
+        }
+        return candidats;
     }
 }

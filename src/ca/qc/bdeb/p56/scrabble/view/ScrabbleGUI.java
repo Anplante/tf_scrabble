@@ -1,6 +1,8 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
+import ca.qc.bdeb.p56.scrabble.shared.*;
+import ca.qc.bdeb.p56.scrabble.shared.Event;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
@@ -257,17 +259,40 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
     @Override
     public void changementEtat() {
-        if (gameModel.isEndGame()) {
-            StringBuilder message = new StringBuilder();
-            message.append("Match null");
-            JOptionPane.showConfirmDialog(null, message.toString(), "Fin de la partie", JOptionPane.PLAIN_MESSAGE);
-        }
-    }
 
+    }
 
 
     @Override
     public void changementEtat(Enum<?> e, Object o) {
 
+
+        if (e.equals(Event.END_GAME)) {
+
+            List<Player> winner = (List<Player>) o;
+
+            String message;
+            if (winner.size() == 1) {
+                message = winner.get(0).getName() + " est le gagnant!";
+            } else {
+                message = "Match null entre les joueurs ";
+
+
+                for (int i = 0; i < winner.size(); i++) {
+                    message += " " + winner.get(i).getName();
+
+                    if (i + 1 == winner.size()-1) {
+                        message += " et";
+                    } else if (i + 1 < winner.size()) {
+                        message += ",";
+                    }
+                }
+
+                message += ".";
+            }
+
+            JOptionPane.showConfirmDialog(null, message, "Fin de la partie", JOptionPane.PLAIN_MESSAGE);
+
+        }
     }
 }
