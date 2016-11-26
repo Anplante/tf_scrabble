@@ -194,7 +194,6 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         scrollMoveLog.setLocation(x, MARGIN);
 
         scrollMoveLog.setSize(width, height);
-
         add(scrollMoveLog);
     }
 

@@ -220,9 +220,6 @@ public class Game implements Observable {
 
         do {
             getActivePlayer().nextState();
-
-
-            System.out.println(getActivePlayer().getState().getName());
             if (!getActivePlayer().isActivated()) {
 
                 if (checkForEndOfTheGame()) {
