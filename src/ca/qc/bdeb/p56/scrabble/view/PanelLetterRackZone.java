@@ -191,6 +191,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
         btnSwapTiles.addActionListener(e -> {
 
+            // TODO Louis : Utiliser aviserObservateur
             if (currentPlayer.getState().getName() != IDState.EXCHANGE.getName()) {
                 btnSwapTiles.setText(ConstanteComponentMessage.MESS_CONFIRM);
                 disableAllOtherBtnExchange(false);
@@ -201,13 +202,11 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
             gameModel.exchangeLetter();
         });
 
-        btnCancelExchange.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        btnCancelExchange.addActionListener(e -> {
 
-                gameModel.cancelExchange();
-                btnSwapTiles.setText(ConstanteComponentMessage.MESS_EXCHANGE);
-                disableAllOtherBtnExchange(true);
-            }
+            gameModel.cancelExchange();
+            btnSwapTiles.setText(ConstanteComponentMessage.MESS_EXCHANGE);
+            disableAllOtherBtnExchange(true);
         });
     }
 

@@ -222,6 +222,7 @@ public class Game implements Observable {
             getActivePlayer().nextState();
 
 
+            System.out.println(getActivePlayer().getState().getName());
             if (!getActivePlayer().isActivated()) {
 
                 if (checkForEndOfTheGame()) {
@@ -510,7 +511,6 @@ public class Game implements Observable {
         Collections.shuffle(alphabetBag);
         logManager.addExchangedLog(getActivePlayer(), turn, tilesSelected);
 
-        turn++;
     }
 
     public void replacePlayerTilesInOrder(List<Tile> originalOrder) {
