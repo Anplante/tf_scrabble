@@ -538,12 +538,13 @@ public class MainMenuGUI extends JDialog {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File fichier = fileImage.getSelectedFile();
             // TODO: filter
-            if (!fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG) || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_PNG)
-                    || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG)) {
+            if (fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG) || fichier.getName().endsWith(ConstanteComponentMessage.EXT_PNG)
+                    || fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG)) {
                 fichier = new File(fichier.getAbsolutePath());
                 Path path = Paths.get(fichier.getAbsolutePath());
                 allBackgroundPath.add(path.toString());
                 cmbBackgroundScrabble.addItem(path.getFileName().toString());
+                cmbBackgroundScrabble.setSelectedIndex(cmbBackgroundScrabble.getItemCount() - 1);
             } else {
                 JOptionPane.showMessageDialog(panelMenu, ConstanteComponentMessage.MESS_ERROR_LOADING_FILE, ConstanteComponentMessage.MESS_ERROR,
                         JOptionPane.ERROR_MESSAGE);
