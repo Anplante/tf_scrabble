@@ -88,7 +88,6 @@ public class MainMenuGUI extends JDialog {
 
     private ArrayList<String> listName;
     private List<String> allBackgroundPath;
-    private String pathToBackground;
     private GameManager gameManager;
 
     public MainMenuGUI(ScrabbleGUI parent) {
@@ -303,16 +302,13 @@ public class MainMenuGUI extends JDialog {
     }
 
     private String getLetttersDirectory(){
-        String path;
+        String path = ConstanteComponentMessage.RES_IMAGES_FR_BASIC;;
         switch (cmbTheme.getSelectedIndex()){
             case BASIC_THEME:
                 path = ConstanteComponentMessage.RES_IMAGES_FR_BASIC;
                 break;
             case NOBLE_THEME:
                 path = ConstanteComponentMessage.RES_IMAGES_FR_NOBLE;
-                break;
-            default:
-                path = ConstanteComponentMessage.RES_IMAGES_FR_BASIC;
                 break;
         }
         return path;
@@ -333,11 +329,6 @@ public class MainMenuGUI extends JDialog {
         for (int i = 0; i < numberOfHumanPlayers; i++) {
             players.add(new HumanPlayer(allTextField.get(i).getText()));
             players.get(i).setPlayerIcon(allIconOfPlayers.get(i));
-        }
-
-        int limit = cmbNumberOfAi.getSelectedIndex();
-        for (int i = 0; i < limit; i++) {
-            players.add(new AiPlayer(listName));
         }
     }
 
@@ -475,8 +466,8 @@ public class MainMenuGUI extends JDialog {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File fichier = fileImage.getSelectedFile();
             // TODO: filter
-            if (!fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG) || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_PNG)
-                    || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG)) {
+            if (fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG) || fichier.getName().endsWith(ConstanteComponentMessage.EXT_PNG)
+                    || fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG)) {
                 imgPlayer = ImagesManager.getImageFromFile(fichier);
             } else {
                 JOptionPane.showMessageDialog(panelMenu, ConstanteComponentMessage.MESS_ERROR_LOADING_FILE, ConstanteComponentMessage.MESS_ERROR,
