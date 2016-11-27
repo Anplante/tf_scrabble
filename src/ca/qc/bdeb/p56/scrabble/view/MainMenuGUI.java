@@ -423,6 +423,7 @@ public class MainMenuGUI extends JDialog {
 
     private void initializeTextField(int index, int y) {
         JTextField txtOfPlayer = allTextField.get(index);
+        GhostText ghostText = new GhostText(txtOfPlayer, ConstanteComponentMessage.ENTER_PLAYER_NAME);
         txtOfPlayer.setName(ConstanteTestName.PLAYER_NAME + " " + index);
         txtOfPlayer.setBounds(150, y, 180, 30);
         txtOfPlayer.setVisible(true);
