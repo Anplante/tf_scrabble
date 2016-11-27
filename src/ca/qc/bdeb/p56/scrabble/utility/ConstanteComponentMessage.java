@@ -29,7 +29,8 @@ public class ConstanteComponentMessage {
     public static final String MESS_THEME_NOBLE = "Noble";
     public static final String PATH_BACKGROUND_RES = "/background/";
     public static final String EXT_JPG = ".jpg";
-    public static final String MESS_ERROR_LOADING_FILE = "Problème de chargement de fichier";
+    public static final String MESS_ERROR_LOADING_FILE = "Problème de chargement de fichier." +
+            " \nVeuillez utiliser un format acceptable (png, jpeg, jpg)";
     public static final String MESS_ERROR = "Erreur";
     public static final String FILE_SEPARATOR = "file.separator";
     public static final String EXT_PNG = ".png";

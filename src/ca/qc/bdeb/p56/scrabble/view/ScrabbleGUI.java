@@ -104,8 +104,8 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
         background = new JLabel();
         background.setSize(getWidth(), getHeight());
-        background.setIcon(new ImageIcon(new ImageIcon(this.getClass().getResource(ConstanteComponentMessage.PATH_BACKGROUND_RES +
-                backgroundPath)).getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
+        background.setIcon(new ImageIcon(new ImageIcon(backgroundPath)
+                .getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
         setContentPane(background);
     }
 
