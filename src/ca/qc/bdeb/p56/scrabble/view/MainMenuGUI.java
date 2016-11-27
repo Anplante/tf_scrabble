@@ -87,6 +87,8 @@ public class MainMenuGUI extends JDialog {
     private JFileChooser fileImage;
 
     private ArrayList<String> listName;
+    private List<String> allBackgroundPath;
+    private String pathToBackground;
     private GameManager gameManager;
 
     public MainMenuGUI(ScrabbleGUI parent) {
@@ -343,7 +345,7 @@ public class MainMenuGUI extends JDialog {
         gameManager = new GameManager();
         game = gameManager.createNewGame(players);
         parent.setImgPath(getLetttersDirectory());
-        parent.changeBackground(cmbBackgroundScrabble.getSelectedItem().toString());
+        parent.changeBackground(allBackgroundPath.get(cmbBackgroundScrabble.getSelectedIndex()));
         parent.createScrabbleGame(game);
         setVisible(false);
     }
@@ -447,13 +449,13 @@ public class MainMenuGUI extends JDialog {
         allIconOfPlayers = new ArrayList<>();
         for (int i = 0; i < LIMIT_OF_PLAYER; i++) {
             allIconOfPlayers.add(ImagesManager.getImageFromURL(DEFAULT_PLAYER_ICON));
-           // allIconOfPlayers.set(i, ImagesManager.createPlayerIcon(allIconOfPlayers.get(i)));
         }
     }
 
     private void addImageFile() {
         File theFiles = null;
 
+        allBackgroundPath = new ArrayList<>();
         URL url = Launcher.class.getResource(ConstanteComponentMessage.PATH_BACKGROUND_RES);
         try {
             theFiles = new File(url.toURI());
@@ -463,6 +465,7 @@ public class MainMenuGUI extends JDialog {
 
         for (File file : theFiles.listFiles()) {
             cmbBackgroundScrabble.addItem(file.getName());
+            allBackgroundPath.add(file.getAbsolutePath());
         }
         cmbBackgroundScrabble.setSelectedIndex(2);
     }
@@ -539,6 +542,7 @@ public class MainMenuGUI extends JDialog {
                     || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG)) {
                 fichier = new File(fichier.getAbsolutePath());
                 Path path = Paths.get(fichier.getAbsolutePath());
+                allBackgroundPath.add(path.toString());
                 cmbBackgroundScrabble.addItem(path.getFileName().toString());
             } else {
                 JOptionPane.showMessageDialog(panelMenu, ConstanteComponentMessage.MESS_ERROR_LOADING_FILE, ConstanteComponentMessage.MESS_ERROR,
