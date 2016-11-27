@@ -68,10 +68,6 @@ public class Game implements Observable {
         loadParameters(filePath);
     }
 
-    public boolean isWaitingNextTurn() {
-        return waitingNextTurn;
-    }
-
     public void setWaitingNextTurn(boolean waitingNextTurn) {
         this.waitingNextTurn = waitingNextTurn;
     }

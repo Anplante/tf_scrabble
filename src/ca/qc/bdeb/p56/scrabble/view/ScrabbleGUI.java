@@ -24,14 +24,14 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
     private final int LETTER_RACK_ZONE_HEIGHT;
     private String backgroundPath;
     private PanelLetterRackZone panelLetterRack;
-    private PanelBoard pnlBoard;
+    private JPanel pnlBoard;
     private Game gameModel;
     private DialogOptionsMenu options;
     private MainMenuGUI menu;
     private String imgPath;
-    private WaitingPanel pnlWaiting;
+    private DialogWaiting dialogWaiting;
     private JLabel background;
-    private PanelPlayers panelInformation;
+    private JPanel panelInformation;
 
     private JScrollPane scrollMoveLog;
 
@@ -94,19 +94,10 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
     private void initializeComponents() {
 
         createBackground();
-        createPanelWait();
         createPanelBoard();
         createPanelLetterRack();
         createPanelPlayersInformation();
         createPanelMoveLog();
-    }
-
-    private void createPanelWait() {
-
-        pnlWaiting = new WaitingPanel(new Dimension(getWidth(), getHeight()), this);
-        pnlWaiting.setName(ConstanteTestName.WAITING_PANEL_NAME);
-        add(pnlWaiting);
-        pnlWaiting.setGame(gameModel);
     }
 
     private void createBackground() {
@@ -126,13 +117,11 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         width -= MARGIN;
         heigth *= 0.5;
 
-        panelInformation = new PanelPlayers();
+        panelInformation = new JPanel();
         panelInformation.setLocation(x, MARGIN);
         panelInformation.setSize(width, heigth);
         panelInformation.setLayout(new GridLayout(gameModel.getPlayers().size(), 1, MARGIN, MARGIN));
         panelInformation.setOpaque(false);
-        panelInformation.setGame(gameModel);
-        gameModel.ajouterObservateur(panelInformation);
         add(panelInformation);
     }
 
@@ -168,17 +157,15 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
     private void createPanelBoard() {
 
-        pnlBoard = new PanelBoard();
+        pnlBoard = new JPanel();
 
         int heightBoard = getHeight() - LETTER_RACK_ZONE_HEIGHT - MARGIN;
         int x = (getWidth() - heightBoard) / 2;
         pnlBoard.setLocation(x, MARGIN);
         pnlBoard.setSize(heightBoard, heightBoard);
         add(pnlBoard);
-        pnlBoard.setGame(gameModel);
         initGrid();
         pnlBoard.setName(ConstanteTestName.BOARD_NAME);
-        gameModel.ajouterObservateur(pnlBoard);
     }
 
 
@@ -191,6 +178,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
         TableMoveLog tabMoveLog = new TableMoveLog(gameModel);
         gameModel.getLogManager().ajouterObservateur(tabMoveLog);
+        gameModel.getLogManager().ajouterObservateur(this);
         scrollMoveLog = new JScrollPane(tabMoveLog);
 
         scrollMoveLog.setLocation(x, MARGIN);
@@ -281,7 +269,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
                 for (int i = 0; i < winner.size(); i++) {
                     message += " " + winner.get(i).getName();
 
-                    if (i + 1 == winner.size()-1) {
+                    if (i + 1 == winner.size() - 1) {
                         message += " et";
                     } else if (i + 1 < winner.size()) {
                         message += ",";
@@ -293,6 +281,9 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
             JOptionPane.showConfirmDialog(null, message, "Fin de la partie", JOptionPane.PLAIN_MESSAGE);
 
+        } else if (e.equals(Event.MOVE_PLAYED)) {
+            dialogWaiting = new DialogWaiting(getSize());
+            dialogWaiting.setVisible(true);
         }
     }
 }

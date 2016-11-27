@@ -285,7 +285,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
             x += TILE_DIMENSION.getWidth();
         }
 
-        setVisible(!gameModel.isWaitingNextTurn());
         panelLettersRack.repaint();
     }
 
