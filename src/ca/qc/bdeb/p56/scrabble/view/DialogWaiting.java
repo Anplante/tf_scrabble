@@ -16,14 +16,13 @@ public class DialogWaiting extends JDialog implements KeyListener {
 
 
     private Game game;
-    private JLabel backgroundLabel;
 
     public DialogWaiting(Dimension dimension) {
 
         setSize(dimension);
 
         ImageIcon fillingIcon = new ImageIcon(getClass().getClassLoader().getResource(ConstanteComponentMessage.RES_WAITING_IMAGE));
-        add(backgroundLabel = new JLabel(fillingIcon));
+        add(new JLabel(fillingIcon));
         setModal(true);
         setUndecorated(true);
         addKeyListener(this);
@@ -34,7 +33,6 @@ public class DialogWaiting extends JDialog implements KeyListener {
     public void keyTyped(KeyEvent e) {
 
     }
-
     @Override
     public void keyPressed(KeyEvent e) {
         dispose();
