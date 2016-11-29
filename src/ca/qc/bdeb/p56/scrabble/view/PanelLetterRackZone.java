@@ -36,7 +36,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
     private JButton btnRecall;
     private JButton btnForfeit;
     private JButton btnCancelExchange;
-    private JButton btnShuffleTiles;
+    private JButton btnOrderTiles;
     private JPanel panelLettersRack;
     private ScrabbleGUI parent;
     private HashMap<String, ImageIcon> iconsTile;
@@ -105,7 +105,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         initRecallOption();
         initiBtnPlayWord();
         initPassTurnOption();
-        initShuffleTilesOption();
+        initOrderTilesOption();
     }
 
     private void initPassTurnOption() {
@@ -153,18 +153,19 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnRecall.addActionListener(actionEvent -> gameModel.recallTiles());
     }
 
-    private void initShuffleTilesOption() {
+    private void initOrderTilesOption() {
 
         int x = getWidth() - OPTIONS_WIDTH * 2 - ScrabbleGUI.MARGIN;
-        btnShuffleTiles = new JButton(ConstanteComponentMessage.TITLE_SHUFFLE);
-        btnShuffleTiles.setName(ConstanteTestName.SHUFFLE_NAME);
+        btnOrderTiles = new JButton();
+        btnOrderTiles.setName(ConstanteTestName.SHUFFLE_NAME);
 
-        btnShuffleTiles.setSize(OPTIONS_WIDTH, getHeight());
-        btnShuffleTiles.setLocation(x, POS_Y);
-        add(btnShuffleTiles);
+        btnOrderTiles.setSize(OPTIONS_WIDTH, getHeight());
+        btnOrderTiles.setLocation(x, POS_Y);
 
-        btnShuffleTiles.addActionListener(e -> {
-            currentPlayer.shuffleTiles();
+        add(btnOrderTiles);
+
+        btnOrderTiles.addActionListener(e -> {
+            currentPlayer.orderTiles();
         });
     }
 
@@ -249,14 +250,14 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
         if (currentPlayer.getState().getName().equals(IDState.PLAY_TILE.getName())) {
             btnPassTurn.setVisible(false);
-            btnShuffleTiles.setVisible(false);
+            btnOrderTiles.setVisible(false);
             btnRecall.setVisible(true);
             btnPlayWord.setVisible(true);
         } else {
             btnRecall.setVisible(false);
             btnPlayWord.setVisible(false);
             btnPassTurn.setVisible(true);
-            btnShuffleTiles.setVisible(true);
+            btnOrderTiles.setVisible(true);
         }
 
         for (Component comp : panelLettersRack.getComponents()) {

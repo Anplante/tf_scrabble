@@ -51,5 +51,6 @@ public class ConstanteComponentMessage {
     public static final char END_ALPHABET = 'Z';
     public static final String DEFAULT_DICT_PATH = "resources/dictionary/fr_dictionary.txt";
     public static final String ENTER_PLAYER_NAME = "Veuillez entrer un nom...";
-    public static final String TITLE_SHUFFLE = "Shuffle";
+    public static final String TITLE_ORDER = "Ordonner";
+    public static final String RES_ORDER_ICONm = "./images/az.png";
 }

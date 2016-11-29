@@ -12,9 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -212,8 +210,10 @@ public abstract class Player implements Observable {
         return tileWanted;
     }
 
-    public void shuffleTiles() {
-        Collections.shuffle(tiles);
+    public void orderTiles() {
+        if (tiles.size() > 0) {
+            Collections.sort(tiles, (tile, t1) -> tile.getLetter().compareTo(t1.getLetter()));
+        }
         aviserObservateurs();
     }
 
