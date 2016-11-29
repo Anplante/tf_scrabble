@@ -256,34 +256,38 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
 
         if (e.equals(Event.END_GAME)) {
-
             List<Player> winner = (List<Player>) o;
-
-            String message;
-            if (winner.size() == 1) {
-                message = winner.get(0).getName() + " est le gagnant!";
-            } else {
-                message = "Match null entre les joueurs ";
-
-
-                for (int i = 0; i < winner.size(); i++) {
-                    message += " " + winner.get(i).getName();
-
-                    if (i + 1 == winner.size() - 1) {
-                        message += " et";
-                    } else if (i + 1 < winner.size()) {
-                        message += ",";
-                    }
-                }
-
-                message += ".";
-            }
-
-            JOptionPane.showConfirmDialog(null, message, "Fin de la partie", JOptionPane.PLAIN_MESSAGE);
+            showGameResult(winner);
+            panelLetterRack.setVisible(false);
 
         } else if (e.equals(Event.MOVE_PLAYED)) {
             dialogWaiting = new DialogWaiting(getSize());
             dialogWaiting.setVisible(true);
         }
+    }
+
+
+    private void showGameResult(List<Player> winner){
+
+        String message;
+        if (winner.size() == 1) {
+            message = winner.get(0).getName() + " est le gagnant!";
+        } else {
+            message = "Match null entre les joueurs ";
+
+            for (int i = 0; i < winner.size(); i++) {
+                message += " " + winner.get(i).getName();
+
+                if (i + 1 == winner.size() - 1) {
+                    message += " et";
+                } else if (i + 1 < winner.size()) {
+                    message += ",";
+                }
+            }
+
+            message += ".";
+        }
+
+        JOptionPane.showConfirmDialog(null, message, "Fin de la partie", JOptionPane.PLAIN_MESSAGE);
     }
 }
