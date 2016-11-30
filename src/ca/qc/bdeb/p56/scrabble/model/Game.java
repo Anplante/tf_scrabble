@@ -36,11 +36,9 @@ public class Game implements Observable {
     private static final String TAG_TEXT = "text";
     private static final String TAG_VALUE = "value";
     private static final String TAG_AMOUNT = "amount";
-    private static final int DOUBLE_VALUE = 2;
     private static final int MAX_CONSECUTIVE_SCORELESS_TURN = 6;
     private transient LinkedList<Observateur> observateurs;
     private static final Random randomGenerator = new Random();
-    private boolean waitingNextTurn;
 
     private BoardManager boardManager;
     private List<Player> players;
@@ -54,7 +52,6 @@ public class Game implements Observable {
     private Player lastPlayerToPlay;
 
     public Game(String filePath, List<Player> players) {
-        waitingNextTurn = false;
         isEndGame = false;
         observateurs = new LinkedList<>();
         eliminatedPlayers = new ArrayList<>();
@@ -66,10 +63,6 @@ public class Game implements Observable {
         }
 
         loadParameters(filePath);
-    }
-
-    public void setWaitingNextTurn(boolean waitingNextTurn) {
-        this.waitingNextTurn = waitingNextTurn;
     }
 
     public Board getBoard() {
@@ -94,10 +87,6 @@ public class Game implements Observable {
 
     public Square getSquare(int row, int column) {
         return boardManager.getSquare(row, column);
-    }
-
-    public String getContentSquare(int row, int column) {
-        return boardManager.getContentSquare(row, column);
     }
 
     public BoardManager getBoardManager() {
@@ -242,7 +231,6 @@ public class Game implements Observable {
 
     public void passTurn() {
 
-        waitingNextTurn = true;
         logManager.addPassedLog(getActivePlayer(), turn);
         getActivePlayer().selectNextState(IDState.PENDING);
         goToNextState();
@@ -289,8 +277,8 @@ public class Game implements Observable {
         return getActivePlayer().getState().readyForNextState();
     }
 
-    public String getState() {
-        return getActivePlayer().getState().getName();
+    public State getState() {
+        return getActivePlayer().getState();
     }
 
     /**
@@ -562,6 +550,7 @@ public class Game implements Observable {
     }
 
     private void calculatePlayOutPointsInStandartFormat() {
+
         Player currentPlayer = getActivePlayer();
 
         for (Player player : players) {
@@ -605,6 +594,7 @@ public class Game implements Observable {
 
         eliminatedPlayers.add(currentPlayer);
         currentPlayer.forfeit();
+        logManager.addForfeitedLog(currentPlayer, turn);
         goToNextState();
 
     }

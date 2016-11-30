@@ -71,36 +71,6 @@ public class BoardManager {
         }
     }
 
-
-    public String getContentSquare(int row, int column) {
-
-        Square square = board.getSquare(row, column);
-
-        String content = square.getLetterOn();
-
-        if (content.isEmpty()) {
-            content += getPremiumNameOnSquare(row, column);
-        }
-
-        return content;
-    }
-
-    public String getPremiumNameOnSquare(int row, int column) {
-
-        String value = "";
-        Square square = board.getSquare(row, column);
-        Premium premiumContent = square.getPremium();
-
-        if (premiumContent != null) {
-            for (Map.Entry<String, Premium> premium : premiums.entrySet()) {
-                if (premiumContent.equals(premium.getValue())) {
-                    value = premium.getKey();
-                }
-            }
-        }
-        return value;
-    }
-
     private void initPremiums(Element premiumElement) {
 
         premiums = new TreeMap<>();
@@ -144,7 +114,6 @@ public class BoardManager {
         }
         return direction;
     }
-
 
     public List<Square> formWordWithTilesPlayed(List<Square> lettersPlayed, Direction direction) {
 

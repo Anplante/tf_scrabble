@@ -14,7 +14,6 @@ public class StateEnding extends State {
 
     @Override
     protected void selectNextState(IDState stateSelected) {
-
     }
 
     @Override

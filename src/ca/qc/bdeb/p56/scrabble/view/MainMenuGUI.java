@@ -1,6 +1,5 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
-import ca.qc.bdeb.p56.scrabble.ai.AiPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.HumanPlayer;

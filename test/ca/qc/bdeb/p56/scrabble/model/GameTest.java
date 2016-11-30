@@ -1,11 +1,8 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
-import ca.qc.bdeb.p56.scrabble.ai.AiGoal;
-import ca.qc.bdeb.p56.scrabble.shared.IDState;
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
+
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -14,7 +11,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 /**
- * Created by TheFrenchOne on 9/12/2016.
+ * Created by Louis Luu Lim on 9/12/2016.
  */
 public class GameTest {
 
@@ -490,10 +487,53 @@ public class GameTest {
 
         game.startGame();
 
-        for(int i = 0; i < 6; i++)
-        {
+        for (int i = 0; i < 6; i++) {
             game.passTurn();
         }
         assertTrue(game.checkForEndOfTheGame());
+    }
+
+    @Test
+    public void setEndOfTheGameWhenPlayingOut() {
+
+
+        game.startGame();
+        Player currentPlayer = game.getActivePlayer();
+        currentPlayer.emptyHand();
+        game.emptyBag();
+
+        List<Player> players = game.getPlayers();
+        Player opponent;
+
+        if (!players.get(0).equals(currentPlayer)) {
+            opponent = players.get(0);
+        } else {
+            opponent = players.get(1);
+        }
+
+        int expectedPoints = calcultePointOfPlayerHands(opponent);
+
+        game.setEndOfGame();
+
+        assertEquals(expectedPoints, currentPlayer.getScore());
+
+        expectedPoints *= -1;
+
+        assertEquals(expectedPoints, opponent.getScore());
+
+
+    }
+
+    private int calcultePointOfPlayerHands(Player player) {
+
+        int total = 0;
+
+        List<Tile> tiles = player.getTiles();
+
+        for (Tile tile : tiles) {
+            int value = tile.getValue();
+            total += value;;
+        }
+        return total;
     }
 }

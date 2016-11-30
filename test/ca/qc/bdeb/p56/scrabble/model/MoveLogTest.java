@@ -1,9 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
-import ca.qc.bdeb.p56.scrabble.model.Log.ExchangedLog;
-import ca.qc.bdeb.p56.scrabble.model.Log.MoveLog;
-import ca.qc.bdeb.p56.scrabble.model.Log.PassedLog;
-import ca.qc.bdeb.p56.scrabble.model.Log.WordLog;
+import ca.qc.bdeb.p56.scrabble.model.Log.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +13,6 @@ import static org.junit.Assert.assertTrue;
  */
 public class MoveLogTest {
 
-    private final int TURN_PLAYED = 1;
     private Player player;
 
     @Before
@@ -45,10 +41,12 @@ public class MoveLogTest {
     @Test
     public void testLogPlayerPassedTurn() {
 
-        MoveLog log = new PassedLog(player, 1);
+        int turnPlayed = 1;
+        MoveLog log = new PassedLog(player, turnPlayed);
 
         assertEquals("Passed", log.getMove());
         assertEquals(0, log.getMovePoints());
+        assertEquals(turnPlayed, log.getTurnPlayed());
     }
 
     @Test
@@ -75,5 +73,14 @@ public class MoveLogTest {
         assertEquals(wordValue, log.getMovePoints());
         assertEquals(wordValue + pointsBeforeMove, log.getPointsAccumulated());
 
+    }
+
+    @Test
+    public void testLogForfeited(){
+
+        MoveLog log = new ForfeitedLog(player, 1);
+
+        assertEquals("Forfeited", log.getMove());
+        assertEquals(0, log.getMovePoints());
     }
 }

@@ -17,15 +17,21 @@ public enum NumberOfPlayer {
     }
 
     public static NumberOfPlayer fromInteger(int x) {
-        switch(x) {
+
+        NumberOfPlayer number = null;
+
+        switch (x) {
             case 2:
-                return TWO_PLAYER;
+                number = TWO_PLAYER;
+                break;
             case 3:
-                return THREE_PLAYER;
+                number = THREE_PLAYER;
+                break;
             case 4:
-                return FOUR_PLAYER;
+                number = FOUR_PLAYER;
+                break;
         }
-        return null;
+        return number;
     }
 
     public int getNumberOfPlayer() {

@@ -36,8 +36,6 @@ public abstract class Player implements Observable {
     private transient LinkedList<Observateur> observateurs;
     private boolean isEliminated;
 
-    private static final URL DEFAULT_PLAYER_ICON = Launcher.class.getResource("/images/default.png");
-
     public Player(String name) {
         this.name = name;
         tiles = new ArrayList<>();
@@ -87,6 +85,7 @@ public abstract class Player implements Observable {
 
         observateurs.add(ob);
     }
+
 
     @Override
     public void retirerObservateur(Observateur ob) {
@@ -142,8 +141,6 @@ public abstract class Player implements Observable {
         return playerIcon;
     }
 
-    public abstract boolean isHumanPlayer();
-
     public String getName() {
         return name;
     }
@@ -184,30 +181,11 @@ public abstract class Player implements Observable {
         aviserObservateurs();
     }
 
-
-
     /**
      * Pour l'utilisation des tests
      */
     public void emptyHand() {
         tiles.clear();
-    }
-
-    public Tile getTile(String letterWanted) {
-
-        int index = 0;
-        boolean tileFound = false;
-        Tile tileWanted = null;
-
-        while(!tileFound && index < tiles.size())
-        {
-            if(tileFound = tiles.get(index).getLetter().equals(letterWanted))
-            {
-                tileWanted = tiles.get(index);
-            }
-            index++;
-        }
-        return tileWanted;
     }
 
     public void orderTiles() {

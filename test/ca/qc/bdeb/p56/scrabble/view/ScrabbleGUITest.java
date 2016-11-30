@@ -52,33 +52,4 @@ public class ScrabbleGUITest {
 
     }
 
-
-    @Ignore
-    @Test
-    public void testPlayWord()
-    {
-        String centerSquarePos = "77";
-        String playerFirstTilePos = "0";
-
-        zoneJoueur = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.LETTER_RACK_NAME);
-        JPanel board = (JPanel) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.BOARD_NAME);
-        ButtonSquare square = (ButtonSquare) TestUtils.getChildNamed(board, ConstanteTestName.SQUARE_NAME + centerSquarePos);
-        ButtonTile tileJoueur = (ButtonTile) TestUtils.getChildNamed(zoneJoueur, ConstanteTestName.TILE_NAME + playerFirstTilePos);
-        player = game.getActivePlayer();
-        Tile tile = player.getTiles().get(0);
-        PanelPlayerInfo infoJoueur = (PanelPlayerInfo) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.INFO_NAME + player.getName());
-        JLabel score = (JLabel) TestUtils.getChildNamed(infoJoueur, ConstanteTestName.SCORE_NAME);
-
-        assertFalse((game.getSquare(7,7).containLetter()));
-        assertEquals(0, Integer.parseInt(score.getText()));
-
-        tileJoueur.doClick();
-        square.doClick();
-
-        assertEquals(tile.getLetter(), game.getContentSquare(7,7));
-
-        game.selectPlayWordAction();
-
-        assertEquals(tile.getValue(), Integer.parseInt(score.getText()));
-    }
 }
