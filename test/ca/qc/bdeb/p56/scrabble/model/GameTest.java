@@ -464,6 +464,18 @@ public class GameTest {
         assertFalse(game.playWord(lettersPlayed));
     }
 
+    @Test
+    public void testCreateValidWordOnBoard(){
+        Tile tile1 = new Tile("l", 0);
+        Tile tile2 = new Tile("a", 0);
+        game.getActivePlayer().setState(new StateSelectAction(game.getActivePlayer()));
+    }
+
+    @Test
+    public void testCreateInvalidWordOnBoard(){
+        Square square1 = game.getSquare(7, 7);
+        square1.setLetter(new Tile("l", 2));
+    }
 
     @Test
     public void testNotEndOfTheGame() {
