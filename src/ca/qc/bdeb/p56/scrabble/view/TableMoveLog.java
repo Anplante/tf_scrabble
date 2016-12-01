@@ -24,7 +24,7 @@ public class TableMoveLog extends JTable implements Observateur {
     private static final Font FONT = new Font("Serif", Font.BOLD, 20);
 
     private Game gameModel;
-    DefaultTableModel dtm;
+    DefaultTableModel tableModel;
 
     public TableMoveLog(Game gameModel) {
 
@@ -42,7 +42,7 @@ public class TableMoveLog extends JTable implements Observateur {
 
         Component c = super.prepareRenderer(renderer, row, column);
 
-        String text = (String) dtm.getValueAt(row, 0);
+        String text = (String) tableModel.getValueAt(row, 0);
 
         if( text.indexOf(ROUND) != - 1)
         {
@@ -57,15 +57,15 @@ public class TableMoveLog extends JTable implements Observateur {
 
     private void initTableModel() {
 
-        dtm = new DefaultTableModel(0, 0) {
+        tableModel = new DefaultTableModel(0, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
 
-        dtm.setColumnIdentifiers(HEADERS);
-        setModel(dtm);
+        tableModel.setColumnIdentifiers(HEADERS);
+        setModel(tableModel);
 
         JTableHeader header = getTableHeader();
         header.setBackground(COLOR_HEADERS);
@@ -92,10 +92,10 @@ public class TableMoveLog extends JTable implements Observateur {
     }
 
     private void addRoundSeparator() {
-        dtm.addRow(new Object[]{ROUND + gameModel.getTurn()});
+        tableModel.addRow(new Object[]{ROUND + gameModel.getTurn()});
     }
 
     private void addMove(MoveLog move) {
-        dtm.addRow(new Object[]{move.getPlayer().getName(), move.getMove(), move.getMovePoints(), move.getPointsAccumulated()});
+        tableModel.addRow(new Object[]{move.getPlayer().getName(), move.getMove(), move.getMovePoints(), move.getPointsAccumulated()});
     }
 }

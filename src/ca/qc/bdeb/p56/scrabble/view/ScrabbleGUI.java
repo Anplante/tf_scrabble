@@ -147,6 +147,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
             PanelPlayerInfo playerInfo = new PanelPlayerInfo(player);
             playerInfo.setName(ConstanteTestName.INFO_NAME + player.getName());
             panelInformation.add(playerInfo);
+            gameModel.getLogManager().ajouterObservateur(playerInfo);
         }
     }
 
