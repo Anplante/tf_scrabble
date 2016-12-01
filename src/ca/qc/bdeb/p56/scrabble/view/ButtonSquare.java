@@ -127,7 +127,5 @@ public class ButtonSquare extends JButton implements Observateur {
 
     @Override
     public void changementEtat(Enum<?> property, Object o) {
-        String text = (String) o;
-
     }
 }
