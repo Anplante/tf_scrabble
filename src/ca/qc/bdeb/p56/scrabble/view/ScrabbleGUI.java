@@ -1,7 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
-import ca.qc.bdeb.p56.scrabble.shared.*;
 import ca.qc.bdeb.p56.scrabble.shared.Event;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
@@ -32,6 +31,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
     private DialogWaiting dialogWaiting;
     private JLabel background;
     private JPanel panelInformation;
+    private PanelSearchBar panelSearchBar;
     private  JPanel panelInfoWord;
 
     private JScrollPane scrollMoveLog;
@@ -99,6 +99,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         createPanelLetterRack();
         createPanelPlayersInformation();
         createPanelMoveLog();
+        createSearchBar();
         createPanelInfoWord();
 
     }
@@ -115,6 +116,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
     private void createBackground() {
 
         background = new JLabel();
+        background.setName(ConstanteTestName.BACKGROUND);
         background.setSize(getWidth(), getHeight());
         background.setIcon(new ImageIcon(new ImageIcon(backgroundPath)
                 .getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
@@ -197,6 +199,16 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
         scrollMoveLog.setSize(width, height);
         add(scrollMoveLog);
+    }
+
+    private void createSearchBar() {
+        int x = 0 + MARGIN;
+        int y = scrollMoveLog.getHeight() + 25;
+        panelSearchBar = new PanelSearchBar(gameModel);
+        panelSearchBar.setLocation(x, y);
+        panelSearchBar.setSize(294, 115);
+        panelSearchBar.setName(ConstanteTestName.SEARCH_BAR);
+        add(panelSearchBar);
     }
 
     private void initGrid() {

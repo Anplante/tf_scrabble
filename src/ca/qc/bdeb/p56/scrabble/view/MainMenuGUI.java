@@ -325,9 +325,19 @@ public class MainMenuGUI extends JDialog {
         int numberOfHumanPlayers = cmbNumberOfHuman.getSelectedIndex();
         numberOfHumanPlayers += 2;
 
+        removeGhostText();
+
         for (int i = 0; i < numberOfHumanPlayers; i++) {
             players.add(new HumanPlayer(allTextField.get(i).getText()));
             players.get(i).setPlayerIcon(allIconOfPlayers.get(i));
+        }
+    }
+
+    private void removeGhostText() {
+        for (int i = 0; i < allTextField.size(); i++) {
+            if (allTextField.get(i).getText().equals(ConstanteComponentMessage.ENTER_PLAYER_NAME)) {
+                allTextField.get(i).setText("");
+            }
         }
     }
 

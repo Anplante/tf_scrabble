@@ -5,6 +5,7 @@ import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
+import ca.qc.bdeb.p56.scrabble.shared.Event;
 import ca.qc.bdeb.p56.scrabble.utility.*;
 
 import java.awt.*;
@@ -16,7 +17,7 @@ import java.util.List;
 import javax.swing.*;
 
 /**
- * Created by TheFrenchOne on 9/11/2016.
+ * Created by Louis Luu Lim on 9/11/2016.
  */
 public class PanelLetterRackZone extends JPanel implements Observateur, ActionListener {
 
@@ -289,6 +290,18 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         panelLettersRack.repaint();
     }
 
+    @Override
+    public void changementEtat(Enum<?> e, Object o) {
+
+        if (e.equals(Event.SELECT_BLANK_TILE_VALUE)) {
+            Tile tileSelected = (Tile) o;
+            DialogBlankTileChoice tileChoice = new DialogBlankTileChoice(parent, tileSelected);
+            tileChoice.setModal(true);
+            tileChoice.setVisible(true);
+        }
+    }
+
+
     private void initIconsTile() {
 
         iconsTile = new HashMap<>();
@@ -306,9 +319,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
     }
 
-    @Override
-    public void changementEtat(Enum<?> e, Object o) {
-    }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {

@@ -11,15 +11,12 @@ import ca.qc.bdeb.p56.scrabble.shared.IDState;
 public class StateSelectAction extends State {
 
     private Tile tileSelected;
-    private Object modeSelected;
     protected IDState stateSelected;
 
-    private boolean  readyToChange ;
 
     protected StateSelectAction(Player currentPlayer) {
 
         super(currentPlayer, IDState.SELECT_ACTION);
-        readyToChange  = false;
         stateSelected = IDState.SELECT_ACTION;
     }
 

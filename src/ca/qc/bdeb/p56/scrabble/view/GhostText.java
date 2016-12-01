@@ -38,11 +38,6 @@ public class GhostText implements FocusListener, DocumentListener, PropertyChang
         }
     }
 
-    public void delete() {
-        unregisterListeners();
-        textfield.removeFocusListener(this);
-    }
-
     private void registerListeners() {
         textfield.getDocument().addDocumentListener(this);
         textfield.addPropertyChangeListener("foreground", this);
@@ -51,14 +46,6 @@ public class GhostText implements FocusListener, DocumentListener, PropertyChang
     private void unregisterListeners() {
         textfield.getDocument().removeDocumentListener(this);
         textfield.removePropertyChangeListener("foreground", this);
-    }
-
-    public Color getGhostColor() {
-        return ghostColor;
-    }
-
-    public void setGhostColor(Color ghostColor) {
-        this.ghostColor = ghostColor;
     }
 
     private void updateState() {
