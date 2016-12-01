@@ -1,7 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
-import ca.qc.bdeb.p56.scrabble.shared.*;
 import ca.qc.bdeb.p56.scrabble.shared.Event;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
@@ -32,7 +31,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
     private DialogWaiting dialogWaiting;
     private JLabel background;
     private JPanel panelInformation;
-    private PanelSearchBar searchBar;
+    private PanelSearchBar panelSearchBar;
 
     private JScrollPane scrollMoveLog;
 
@@ -193,10 +192,11 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
     private void createSearchBar() {
         int x = 0 + MARGIN;
         int y = scrollMoveLog.getHeight() + 25;
-        searchBar = new PanelSearchBar(gameModel);
-        searchBar.setLocation(x, y);
-        searchBar.setSize(294, 115);
-        add(searchBar);
+        panelSearchBar = new PanelSearchBar(gameModel);
+        panelSearchBar.setLocation(x, y);
+        panelSearchBar.setSize(294, 115);
+        panelSearchBar.setName(ConstanteTestName.SEARCH_BAR);
+        add(panelSearchBar);
     }
 
     private void initGrid() {

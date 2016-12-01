@@ -46,6 +46,7 @@ public class PanelSearchBar extends JPanel {
 
         searchBar = new JTextField("", 30);
         GhostText ghostText = new GhostText(searchBar, ConstanteComponentMessage.ENTER_WORD);
+        searchBar.setName(ConstanteTestName.SEARCH_TXT);
         searchBar.setLocation(0,lblTitle.getHeight());
         searchBar.setSize(SEARCH_BAR_WIDTH, SEARCH_BAR_HEIGHT);
         searchBar.setFont(ROBOTO_FONT);
@@ -60,6 +61,7 @@ public class PanelSearchBar extends JPanel {
         lblResult.setText("");
         lblResult.setFont(FONT_RESULT);
         lblResult.setSize(lblResult.getPreferredSize());
+        lblResult.setName(ConstanteTestName.LBL_RESULT);
         lblResult.setLocation(0,lblTitle.getHeight() + btnSearch.getHeight());
 
         initEvents();
@@ -81,7 +83,7 @@ public class PanelSearchBar extends JPanel {
                 lblResult.setText(ConstanteComponentMessage.VALID_WORD);
                 lblResult.setSize(lblResult.getPreferredSize());
             }
-            else {
+            else if (!searchBar.getText().equals(ConstanteComponentMessage.ENTER_WORD)){
                 lblResult.setText(ConstanteComponentMessage.INVALID_WORD);
                 lblResult.setSize(lblResult.getPreferredSize());
             }
