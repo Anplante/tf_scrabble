@@ -355,7 +355,7 @@ public class Game implements Observable {
                 }
                 currentWord = ConstanteComponentMessage.VALID_WORD_POINTS_START + word + ConstanteComponentMessage.VALID_WORD_POINTS_MID + currentScore + ConstanteComponentMessage.VALID_WORD_POINTS_END;
             } else {
-                currentWord = null;
+                currentWord = ConstanteComponentMessage.INVALID_WORD;
             }
         }
     }
