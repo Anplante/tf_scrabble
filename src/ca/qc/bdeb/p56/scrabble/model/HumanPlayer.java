@@ -9,9 +9,4 @@ public class HumanPlayer extends Player {
         super(name);
         setState(new StatePending(this));
     }
-
-    @Override
-    public boolean isHumanPlayer() {
-        return true;
-    }
 }

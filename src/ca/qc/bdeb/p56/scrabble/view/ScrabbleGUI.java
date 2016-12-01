@@ -1,6 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
+import ca.qc.bdeb.p56.scrabble.shared.Event;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
@@ -22,14 +23,16 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
     private final int LETTER_RACK_ZONE_HEIGHT;
     private String backgroundPath;
     private PanelLetterRackZone panelLetterRack;
-    private PanelBoard pnlBoard;
+    private JPanel pnlBoard;
     private Game gameModel;
     private DialogOptionsMenu options;
     private MainMenuGUI menu;
     private String imgPath;
-    private WaitingPanel pnlWaiting;
+    private DialogWaiting dialogWaiting;
     private JLabel background;
-    private PanelPlayers panelInformation;
+    private JPanel panelInformation;
+    private PanelSearchBar panelSearchBar;
+    private  JPanel panelInfoWord;
 
     private JScrollPane scrollMoveLog;
 
@@ -92,29 +95,31 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
     private void initializeComponents() {
 
         createBackground();
-        createPanelWait();
         createPanelBoard();
         createPanelLetterRack();
         createPanelPlayersInformation();
         createPanelMoveLog();
+        createSearchBar();
+        createPanelInfoWord();
+
     }
 
-    private void createPanelWait() {
-
-        pnlWaiting = new WaitingPanel(new Dimension(getWidth(), getHeight()), this);
-        pnlWaiting.setName(ConstanteTestName.WAITING_PANEL_NAME);
-        pnlWaiting = new WaitingPanel(new Dimension(getWidth(),getHeight()),this);
-        pnlWaiting.setName("WaitingPanel");
-        add(pnlWaiting);
-        pnlWaiting.setGame(gameModel);
+    private void createPanelInfoWord() {
+        panelInfoWord = new PanelInfoWord(gameModel);
+        int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN*2;
+        panelInfoWord.setLocation(MARGIN, scrollMoveLog.getHeight()+25 +panelSearchBar.getHeight());
+        panelInfoWord.setBackground(Color.WHITE);
+        panelInfoWord.setSize(width, 50 );
+        add(panelInfoWord);
     }
 
     private void createBackground() {
 
         background = new JLabel();
+        background.setName(ConstanteTestName.BACKGROUND);
         background.setSize(getWidth(), getHeight());
-        background.setIcon(new ImageIcon(new ImageIcon(this.getClass().getResource(ConstanteComponentMessage.PATH_BACKGROUND_RES +
-                backgroundPath)).getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
+        background.setIcon(new ImageIcon(new ImageIcon(backgroundPath)
+                .getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
         setContentPane(background);
     }
 
@@ -126,13 +131,11 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         width -= MARGIN;
         heigth *= 0.5;
 
-        panelInformation = new PanelPlayers();
+        panelInformation = new JPanel();
         panelInformation.setLocation(x, MARGIN);
         panelInformation.setSize(width, heigth);
         panelInformation.setLayout(new GridLayout(gameModel.getPlayers().size(), 1, MARGIN, MARGIN));
         panelInformation.setOpaque(false);
-        panelInformation.setGame(gameModel);
-        gameModel.ajouterObservateur(panelInformation);
         add(panelInformation);
     }
 
@@ -168,17 +171,15 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
     private void createPanelBoard() {
 
-        pnlBoard = new PanelBoard();
+        pnlBoard = new JPanel();
 
         int heightBoard = getHeight() - LETTER_RACK_ZONE_HEIGHT - MARGIN;
         int x = (getWidth() - heightBoard) / 2;
         pnlBoard.setLocation(x, MARGIN);
         pnlBoard.setSize(heightBoard, heightBoard);
         add(pnlBoard);
-        pnlBoard.setGame(gameModel);
         initGrid();
         pnlBoard.setName(ConstanteTestName.BOARD_NAME);
-        gameModel.ajouterObservateur(pnlBoard);
     }
 
 
@@ -191,13 +192,23 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
         TableMoveLog tabMoveLog = new TableMoveLog(gameModel);
         gameModel.getLogManager().ajouterObservateur(tabMoveLog);
+        gameModel.getLogManager().ajouterObservateur(this);
         scrollMoveLog = new JScrollPane(tabMoveLog);
 
         scrollMoveLog.setLocation(x, MARGIN);
 
         scrollMoveLog.setSize(width, height);
-
         add(scrollMoveLog);
+    }
+
+    private void createSearchBar() {
+        int x = 0 + MARGIN;
+        int y = scrollMoveLog.getHeight() + 15;
+        int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN * 2;
+        panelSearchBar = new PanelSearchBar(gameModel,width);
+        panelSearchBar.setLocation(x, y);
+        panelSearchBar.setName(ConstanteTestName.SEARCH_BAR);
+        add(panelSearchBar);
     }
 
     private void initGrid() {
@@ -260,17 +271,47 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
     @Override
     public void changementEtat() {
-        if (gameModel.isEndGame()) {
-            StringBuilder message = new StringBuilder();
-            message.append("Match null");
-            JOptionPane.showConfirmDialog(null, message.toString(), "Fin de la partie", JOptionPane.PLAIN_MESSAGE);
-        }
-    }
 
+    }
 
 
     @Override
     public void changementEtat(Enum<?> e, Object o) {
 
+
+        if (e.equals(Event.END_GAME)) {
+            List<Player> winner = (List<Player>) o;
+            showGameResult(winner);
+            panelLetterRack.setVisible(false);
+
+        } else if (e.equals(Event.MOVE_PLAYED)) {
+            dialogWaiting = new DialogWaiting(getSize());
+            dialogWaiting.setVisible(true);
+        }
+    }
+
+
+    private void showGameResult(List<Player> winner){
+
+        String message;
+        if (winner.size() == 1) {
+            message = winner.get(0).getName() + " est le gagnant!";
+        } else {
+            message = "Match null entre les joueurs ";
+
+            for (int i = 0; i < winner.size(); i++) {
+                message += " " + winner.get(i).getName();
+
+                if (i + 1 == winner.size() - 1) {
+                    message += " et";
+                } else if (i + 1 < winner.size()) {
+                    message += ",";
+                }
+            }
+
+            message += ".";
+        }
+
+        JOptionPane.showConfirmDialog(null, message, "Fin de la partie", JOptionPane.PLAIN_MESSAGE);
     }
 }

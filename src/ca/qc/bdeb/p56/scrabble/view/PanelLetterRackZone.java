@@ -5,6 +5,7 @@ import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
+import ca.qc.bdeb.p56.scrabble.shared.Event;
 import ca.qc.bdeb.p56.scrabble.utility.*;
 
 import java.awt.*;
@@ -16,7 +17,7 @@ import java.util.List;
 import javax.swing.*;
 
 /**
- * Created by TheFrenchOne on 9/11/2016.
+ * Created by Louis Luu Lim on 9/11/2016.
  */
 public class PanelLetterRackZone extends JPanel implements Observateur, ActionListener {
 
@@ -36,7 +37,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
     private JButton btnRecall;
     private JButton btnForfeit;
     private JButton btnCancelExchange;
-    private JButton btnShuffleTiles;
+    private JButton btnOrderTiles;
     private JPanel panelLettersRack;
     private ScrabbleGUI parent;
     private HashMap<String, ImageIcon> iconsTile;
@@ -105,7 +106,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         initRecallOption();
         initiBtnPlayWord();
         initPassTurnOption();
-        initShuffleTilesOption();
+        initOrderTilesOption();
     }
 
     private void setImageBtn(JButton btn, String path){
@@ -171,12 +172,14 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnRecall.addActionListener(actionEvent -> gameModel.recallTiles());
     }
 
-    private void initShuffleTilesOption() {
+    private void initOrderTilesOption() {
 
         int x = getWidth() - OPTIONS_WIDTH * 2 - ScrabbleGUI.MARGIN;
-        btnShuffleTiles = new JButton();
-        btnShuffleTiles.setName(ConstanteTestName.SHUFFLE_NAME);
+        btnOrderTiles = new JButton();
+        btnOrderTiles.setName(ConstanteTestName.SHUFFLE_NAME);
 
+        btnOrderTiles.setSize(OPTIONS_WIDTH, getHeight());
+        btnOrderTiles.setLocation(x, POS_Y);
         btnShuffleTiles.setLocation(x, POS_Y);
         btnShuffleTiles.setOpaque(false);
         btnShuffleTiles.setFocusPainted(false);
@@ -187,8 +190,10 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         setImageBtn(btnShuffleTiles,ConstanteComponentMessage.RES_SHUFFLE);
         add(btnShuffleTiles);
 
-        btnShuffleTiles.addActionListener(e -> {
-            currentPlayer.shuffleTiles();
+        add(btnOrderTiles);
+
+        btnOrderTiles.addActionListener(e -> {
+            currentPlayer.orderTiles();
         });
     }
 
@@ -216,6 +221,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
         btnExchange.addActionListener(e -> {
 
+            // TODO Louis : Utiliser aviserObservateur
             if (currentPlayer.getState().getName() != IDState.EXCHANGE.getName()) {
                 btnExchange.setText(ConstanteComponentMessage.MESS_CONFIRM);
                 disableAllOtherBtnExchange(false);
@@ -226,8 +232,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
             gameModel.exchangeLetter();
         });
 
-        btnCancelExchange.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        btnCancelExchange.addActionListener(e -> {
 
                 gameModel.cancelExchange();
                 btnExchange.setText(ConstanteComponentMessage.MESS_EXCHANGE);
@@ -275,14 +280,14 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
         if (currentPlayer.getState().getName().equals(IDState.PLAY_TILE.getName())) {
             btnPassTurn.setVisible(false);
-            btnShuffleTiles.setVisible(false);
+            btnOrderTiles.setVisible(false);
             btnRecall.setVisible(true);
             btnPlayWord.setVisible(true);
         } else {
             btnRecall.setVisible(false);
             btnPlayWord.setVisible(false);
             btnPassTurn.setVisible(true);
-            btnShuffleTiles.setVisible(true);
+            btnOrderTiles.setVisible(true);
         }
 
         for (Component comp : panelLettersRack.getComponents()) {
@@ -311,9 +316,20 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
             x += TILE_DIMENSION.getWidth();
         }
 
-        setVisible(!gameModel.isWaitingNextTurn());
         panelLettersRack.repaint();
     }
+
+    @Override
+    public void changementEtat(Enum<?> e, Object o) {
+
+        if (e.equals(Event.SELECT_BLANK_TILE_VALUE)) {
+            Tile tileSelected = (Tile) o;
+            DialogBlankTileChoice tileChoice = new DialogBlankTileChoice(parent, tileSelected);
+            tileChoice.setModal(true);
+            tileChoice.setVisible(true);
+        }
+    }
+
 
     private void initIconsTile() {
 
@@ -332,10 +348,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
     }
 
-    @Override
-    public void changementEtat(Enum<?> e, Object o) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {

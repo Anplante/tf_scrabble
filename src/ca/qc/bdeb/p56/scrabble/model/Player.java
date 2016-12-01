@@ -12,9 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,8 +35,6 @@ public abstract class Player implements Observable {
     private BufferedImage playerIcon;
     private transient LinkedList<Observateur> observateurs;
     private boolean isEliminated;
-
-    private static final URL DEFAULT_PLAYER_ICON = Launcher.class.getResource("/images/default.png");
 
     public Player(String name) {
         this.name = name;
@@ -89,6 +85,7 @@ public abstract class Player implements Observable {
 
         observateurs.add(ob);
     }
+
 
     @Override
     public void retirerObservateur(Observateur ob) {
@@ -144,8 +141,6 @@ public abstract class Player implements Observable {
         return playerIcon;
     }
 
-    public abstract boolean isHumanPlayer();
-
     public String getName() {
         return name;
     }
@@ -186,8 +181,6 @@ public abstract class Player implements Observable {
         aviserObservateurs();
     }
 
-
-
     /**
      * Pour l'utilisation des tests
      */
@@ -195,25 +188,10 @@ public abstract class Player implements Observable {
         tiles.clear();
     }
 
-    public Tile getTile(String letterWanted) {
-
-        int index = 0;
-        boolean tileFound = false;
-        Tile tileWanted = null;
-
-        while(!tileFound && index < tiles.size())
-        {
-            if(tileFound = tiles.get(index).getLetter().equals(letterWanted))
-            {
-                tileWanted = tiles.get(index);
-            }
-            index++;
+    public void orderTiles() {
+        if (tiles.size() > 0) {
+            Collections.sort(tiles, (tile, t1) -> tile.getLetter().compareTo(t1.getLetter()));
         }
-        return tileWanted;
-    }
-
-    public void shuffleTiles() {
-        Collections.shuffle(tiles);
         aviserObservateurs();
     }
 

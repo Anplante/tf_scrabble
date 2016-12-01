@@ -36,11 +36,9 @@ public class Game implements Observable {
     private static final String TAG_TEXT = "text";
     private static final String TAG_VALUE = "value";
     private static final String TAG_AMOUNT = "amount";
-    private static final int DOUBLE_VALUE = 2;
     private static final int MAX_CONSECUTIVE_SCORELESS_TURN = 6;
     private transient LinkedList<Observateur> observateurs;
     private static final Random randomGenerator = new Random();
-    private boolean waitingNextTurn;
 
     private BoardManager boardManager;
     private List<Player> players;
@@ -52,28 +50,23 @@ public class Game implements Observable {
     private boolean isEndGame;
     private LogManager logManager;
     private Player lastPlayerToPlay;
+    private String currentWord;
+    private int currentScore;
 
     public Game(String filePath, List<Player> players) {
-        waitingNextTurn = false;
         isEndGame = false;
         observateurs = new LinkedList<>();
         eliminatedPlayers = new ArrayList<>();
         logManager = new LogManager();
         this.players = players;
+        currentWord = null;
+        currentScore = 0;
 
         for (Player player : players) {
             player.setGame(this);
         }
 
         loadParameters(filePath);
-    }
-
-    public boolean isWaitingNextTurn() {
-        return waitingNextTurn;
-    }
-
-    public void setWaitingNextTurn(boolean waitingNextTurn) {
-        this.waitingNextTurn = waitingNextTurn;
     }
 
     public Board getBoard() {
@@ -92,26 +85,29 @@ public class Game implements Observable {
         return players.get(activePlayerIndex);
     }
 
-    public boolean isEndGame(){
+    public boolean isEndGame() {
         return isEndGame;
     }
+
     public Square getSquare(int row, int column) {
         return boardManager.getSquare(row, column);
-    }
-
-    public String getContentSquare(int row, int column) {
-        return boardManager.getContentSquare(row, column);
     }
 
     public BoardManager getBoardManager() {
         return boardManager;
     }
 
-    public LogManager getLogManager()
-    {
+    public LogManager getLogManager() {
         return logManager;
     }
 
+    public String getCurrentWord(){
+        return currentWord;
+    }
+
+    public int getCurrentScore() {
+        return currentScore;
+    }
 
     private void loadParameters(String filePath) {
         Element rootElement = getRootElement(filePath);
@@ -187,7 +183,7 @@ public class Game implements Observable {
     public void startGame() {
 
         activePlayerIndex = randomGenerator.nextInt(players.size());
-        lastPlayerToPlay =  determineLastPlayerToPlay(activePlayerIndex);
+        lastPlayerToPlay = determineLastPlayerToPlay(activePlayerIndex);
         turn = 1;
         initPlayerRack();
 
@@ -198,21 +194,19 @@ public class Game implements Observable {
         goToNextState();
     }
 
-    private Player determineLastPlayerToPlay(int indexFirstPlayer){
+    private Player determineLastPlayerToPlay(int indexFirstPlayer) {
 
         Player player = null;
 
-        if(players.size() > 1){
-            if(indexFirstPlayer != 0 )
-            {
+        if (players.size() > 1) {
+            if (indexFirstPlayer != 0) {
                 player = players.get(indexFirstPlayer - 1);
-            }
-            else{
-                player = players.get(players.size() -1);
+            } else {
+                player = players.get(players.size() - 1);
             }
         }
 
-       return player;
+        return player;
     }
 
 
@@ -220,20 +214,15 @@ public class Game implements Observable {
 
         do {
             getActivePlayer().nextState();
-
-
             if (!getActivePlayer().isActivated()) {
 
                 if (checkForEndOfTheGame()) {
 
                     setEndOfGame();
-                    aviserObservateurs();
 
-                }
-                else {
+                } else {
 
-                    if(isLastTurnPlayer(getActivePlayer()))
-                    {
+                    if (isLastTurnPlayer(getActivePlayer())) {
                         turn++;
                     }
                     drawTile();
@@ -243,7 +232,7 @@ public class Game implements Observable {
                 }
             }
 
-        }while(!getActivePlayer().isActivated() && !isEndGame());
+        } while (!getActivePlayer().isActivated() && !isEndGame());
     }
 
     private boolean isLastTurnPlayer(Player activePlayer) {
@@ -251,10 +240,8 @@ public class Game implements Observable {
     }
 
 
-
     public void passTurn() {
 
-        waitingNextTurn = true;
         logManager.addPassedLog(getActivePlayer(), turn);
         getActivePlayer().selectNextState(IDState.PENDING);
         goToNextState();
@@ -301,8 +288,8 @@ public class Game implements Observable {
         return getActivePlayer().getState().readyForNextState();
     }
 
-    public String getState() {
-        return getActivePlayer().getState().getName();
+    public State getState() {
+        return getActivePlayer().getState();
     }
 
     /**
@@ -356,6 +343,39 @@ public class Game implements Observable {
             }
         }
         return isAWord;
+    }
+
+    public void calculateCurrentPoints(List<Square> tilesPlaced){
+        Direction direction;
+        boolean isAWord = false;
+        currentScore = 0;
+        direction = boardManager.checkIfWordIsVerticalOrHorizontal(tilesPlaced);
+        List<Square> letters = boardManager.formWordWithTilesPlayed(tilesPlaced, direction);
+        if (!letters.isEmpty() && letters.size() > 0) {
+            String word = createWord(letters);
+            isAWord = dictionary.checkWordExist(word);
+            if (isAWord) {
+                if (checkForComboWord(tilesPlaced, direction)) {
+                    currentScore = calculateWordPoints(letters);
+                }
+            }
+        }
+    }
+
+    public void createCurrentWord(List<Square> tilesPlaced){
+        Direction direction;
+        boolean isAWord = false;
+        String aWord = null;
+        direction = boardManager.checkIfWordIsVerticalOrHorizontal(tilesPlaced);
+        List<Square> letters = boardManager.formWordWithTilesPlayed(tilesPlaced, direction);
+        if (!letters.isEmpty() && letters.size() > 0) {
+            String word = createWord(letters);
+            isAWord = dictionary.checkWordExist(word);
+            if(isAWord){
+                aWord = word;
+            }
+        }
+        currentWord = aWord;
     }
 
     private String createWord(List<Square> letters) {
@@ -437,6 +457,7 @@ public class Game implements Observable {
 
         if (tilesPlaced != null) {
             for (Square tileLocation : tilesPlaced) {
+                tileLocation.getTileOn().selectTile();
                 getActivePlayer().addLetter(tileLocation.getTileOn());
                 tileLocation.setLetter(null);
             }
@@ -491,7 +512,9 @@ public class Game implements Observable {
 
     @Override
     public void aviserObservateurs(Enum<?> e, Object o) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        for (Observateur ob : observateurs) {
+            ob.changementEtat(e, o);
+        }
     }
 
 
@@ -509,8 +532,7 @@ public class Game implements Observable {
 
         Collections.shuffle(alphabetBag);
         logManager.addExchangedLog(getActivePlayer(), turn, tilesSelected);
-        setWaitingNextTurn(true );
-        turn++;
+
     }
 
     public void replacePlayerTilesInOrder(List<Tile> originalOrder) {
@@ -551,27 +573,29 @@ public class Game implements Observable {
         return checkForPlayerPlayingOut() || checkForSixConsecutiveScorelessTurn() || checkOnlyOnePlayerLeft();
     }
 
-    public void setEndOfGame()
-    {
-        if(checkForPlayerPlayingOut())
-        {
+    public void setEndOfGame() {
+        if (checkForPlayerPlayingOut()) {
             calculatePlayOutPointsInStandartFormat();
         }
 
-        for(Player p : players)
-        {
+        for (Player p : players) {
             p.setState(new StateEnding(p));
         }
 
         isEndGame = true;
+
+        List<Player> winner = getWinner();
+
+        aviserObservateurs(Event.END_GAME, winner);
     }
 
     private boolean checkForPlayerPlayingOut() {
 
-        return  (getActivePlayer().getTiles().isEmpty() && alphabetBag.isEmpty());
+        return (getActivePlayer().getTiles().isEmpty() && alphabetBag.isEmpty());
     }
 
     private void calculatePlayOutPointsInStandartFormat() {
+
         Player currentPlayer = getActivePlayer();
 
         for (Player player : players) {
@@ -615,16 +639,52 @@ public class Game implements Observable {
 
         eliminatedPlayers.add(currentPlayer);
         currentPlayer.forfeit();
+        logManager.addForfeitedLog(currentPlayer, turn);
         goToNextState();
 
     }
 
-    public List<Player> getWinner()
-    {
-        return null;
+    public List<Player> getWinner() {
+
+        players.removeAll(eliminatedPlayers);
+
+        if (players.size() != 1) {
+            players = getPlayerWithTheMostPoints(players);
+        }
+        return players;
     }
 
     public int getTurn() {
         return turn;
+    }
+
+
+    private List<Player> getPlayerWithTheMostPoints(List<Player> players) {
+
+
+        List<Player> candidats = new ArrayList<>();
+
+        if (players != null || !players.isEmpty()) {
+
+            candidats.add(players.get(0));
+
+            if (players.size() > 1) {
+
+
+                for (int i = 1; i < players.size(); i++) {
+
+                    int currentLeaderScore = candidats.get(0).getScore();
+                    int playerScore = players.get(i).getScore();
+
+                    if (currentLeaderScore < playerScore) {
+                        candidats.clear();
+                        candidats.add(players.get(i));
+                    } else if (currentLeaderScore == playerScore) {
+                        candidats.add(players.get(i));
+                    }
+                }
+            }
+        }
+        return candidats;
     }
 }

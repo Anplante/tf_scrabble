@@ -29,7 +29,8 @@ public class ConstanteComponentMessage {
     public static final String MESS_THEME_NOBLE = "Noble";
     public static final String PATH_BACKGROUND_RES = "/background/";
     public static final String EXT_JPG = ".jpg";
-    public static final String MESS_ERROR_LOADING_FILE = "Problème de chargement de fichier";
+    public static final String MESS_ERROR_LOADING_FILE = "Problème de chargement de fichier." +
+            " \nVeuillez utiliser un format acceptable (png, jpeg, jpg)";
     public static final String MESS_ERROR = "Erreur";
     public static final String FILE_SEPARATOR = "file.separator";
     public static final String EXT_PNG = ".png";
@@ -58,7 +59,17 @@ public class ConstanteComponentMessage {
     public static final char START_ALPHABET = 'A';
     public static final char END_ALPHABET = 'Z';
     public static final String DEFAULT_DICT_PATH = "resources/dictionary/fr_dictionary.txt";
+    public static final String ENTER_PLAYER_NAME = "Veuillez entrer un nom...";
+    public static final String TITLE_ORDER = "Ordonner";
+    public static final String VALID_WORD_POINTS_START = "Le mot ";
+    public static final String VALID_WORD_POINTS_MID = " donnera ";
+    public static final String VALID_WORD_POINTS_END= " points";
+    public static final String INVALID_WORD_POINTS = "Mot non valide ";
+    public static final String NO_WORD_POINTS = "Placer une lettre";
 
 
-    public static final String TITLE_SHUFFLE = "Shuffle";
+    public static final String RES_ORDER_ICONm = "./images/az.png";
+    public static final String ENTER_WORD = "Entrer un mot...";
+    public static final String VALID_WORD = "Ce mot est valide!!";
+    public static final String INVALID_WORD = "Ce mot est invalide.";
 }

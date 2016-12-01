@@ -1,9 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
-import ca.qc.bdeb.p56.scrabble.model.Log.ExchangedLog;
-import ca.qc.bdeb.p56.scrabble.model.Log.MoveLog;
-import ca.qc.bdeb.p56.scrabble.model.Log.PassedLog;
-import ca.qc.bdeb.p56.scrabble.model.Log.WordLog;
+import ca.qc.bdeb.p56.scrabble.model.Log.*;
 import ca.qc.bdeb.p56.scrabble.shared.Event;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
@@ -17,13 +14,11 @@ import java.util.List;
  */
 public class LogManager implements Observable {
 
-
-
     private List<MoveLog> movesHistory;
     private transient LinkedList<Observateur> observateurs;
     private int currentRound;
 
-    public LogManager(){
+    public LogManager() {
 
         movesHistory = new ArrayList<>();
         observateurs = new LinkedList<>();
@@ -40,7 +35,7 @@ public class LogManager implements Observable {
         return moveLogs;
     }
 
-    
+
     @Override
     public void ajouterObservateur(Observateur o) {
         observateurs.add(o);
@@ -48,7 +43,7 @@ public class LogManager implements Observable {
 
     @Override
     public void retirerObservateur(Observateur o) {
-            observateurs.remove(o);
+        observateurs.remove(o);
     }
 
     @Override
@@ -63,29 +58,39 @@ public class LogManager implements Observable {
         }
     }
 
-    public void addPassedLog(Player player, int turnPlayed) {
+    protected void addPassedLog(Player player, int turnPlayed) {
         checkIfTurnPlayedIsDifferentRound(turnPlayed);
-        movesHistory.add(new PassedLog(player, turnPlayed));
-        aviserObservateurs(Event.MOVE_PLAYED, movesHistory.get(movesHistory.size()-1));
+        MoveLog move = new PassedLog(player, turnPlayed);
+        movesHistory.add(move);
+        aviserObservateurs(Event.MOVE_PLAYED, move);
     }
 
-    public void addWordLog(Player player, int turnPlayed, String word, int wordValue) {
+    protected void addWordLog(Player player, int turnPlayed, String word, int wordValue) {
         checkIfTurnPlayedIsDifferentRound(turnPlayed);
-        movesHistory.add(new WordLog(player, turnPlayed, word, wordValue));
-        aviserObservateurs(Event.MOVE_PLAYED, movesHistory.get(movesHistory.size()-1));
+        MoveLog move = new WordLog(player, turnPlayed, word, wordValue);
+        movesHistory.add(move);
+        aviserObservateurs(Event.MOVE_PLAYED, move);
     }
 
-    public void addExchangedLog(Player player, int turnPlayed, List<Tile> tilesSelected) {
+    protected void addExchangedLog(Player player, int turnPlayed, List<Tile> tilesSelected) {
         checkIfTurnPlayedIsDifferentRound(turnPlayed);
-        movesHistory.add(new ExchangedLog(player, turnPlayed, tilesSelected.size()));
-        aviserObservateurs(Event.MOVE_PLAYED, movesHistory.get(movesHistory.size()-1));
+        MoveLog move = new ExchangedLog(player, turnPlayed, tilesSelected.size());
+        movesHistory.add(move);
+        aviserObservateurs(Event.MOVE_PLAYED, move);
     }
 
-   private void checkIfTurnPlayedIsDifferentRound(int turnPlayed){
+    protected void addForfeitedLog(Player player, int turnPlayed) {
+        checkIfTurnPlayedIsDifferentRound(turnPlayed);
+        MoveLog move = new ForfeitedLog(player, turnPlayed);
+        movesHistory.add(move);
+        aviserObservateurs(Event.MOVE_PLAYED, move);
+    }
 
-       if(currentRound != turnPlayed){
-           currentRound = turnPlayed;
-           aviserObservateurs(Event.ROTATION_PLAYERS, null);
-       }
-   }
+    private void checkIfTurnPlayedIsDifferentRound(int turnPlayed) {
+
+        if (currentRound != turnPlayed) {
+            currentRound = turnPlayed;
+            aviserObservateurs(Event.ROTATION_PLAYERS, null);
+        }
+    }
 }

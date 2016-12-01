@@ -1,6 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Player;
+import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
 import org.junit.After;
@@ -8,6 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.swing.*;
+
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import static org.junit.Assert.*;
 
@@ -23,9 +27,9 @@ public class MainMenuGUITest {
     private JTextField txtThirdPlayer;
     private JTextField txtFourthPlayer;
     private JButton btnFileChooser;
-    private Player player;
     private JComboBox cmbNumberOfPlayer;
     private JComboBox cmbBackgroundImage;
+    private JComboBox cmbTheme;
     private ScrabbleGUI scrabbleGUI;
 
     @Before
@@ -41,8 +45,8 @@ public class MainMenuGUITest {
         btnFileChooser = (JButton) TestUtils.getChildNamed(frame, ConstanteTestName.FILE_CHOOSER + "3");
         btnAccept = (JButton) TestUtils.getChildNamed(frame, ConstanteTestName.CONFIRM_NAME);
         cmbNumberOfPlayer = (JComboBox) TestUtils.getChildNamed(frame, ConstanteTestName.QTE_HUMAN_NAME);
+        cmbTheme = (JComboBox) TestUtils.getChildNamed(frame, ConstanteTestName.THEME_NAME);
         cmbBackgroundImage = (JComboBox) TestUtils.getChildNamed(frame, ConstanteTestName.BACKGROUND_NAME);
-
         cmbBackgroundImage.setSelectedIndex(0);
     }
 
@@ -77,7 +81,11 @@ public class MainMenuGUITest {
         cmbBackgroundImage.setSelectedIndex(0);
         cmbBackgroundImage.setSelectedIndex(1);
         btnAccept.doClick();
-        assertEquals("minuit.jpg", scrabbleGUI.getBackgroundPath());
+        String pathImage = this.getClass().getResource(
+                ConstanteComponentMessage.PATH_BACKGROUND_RES + "minuit.jpg").getPath();
+        pathImage = pathImage.substring(1);
+        pathImage = pathImage.replace('/', '\\');
+        assertEquals(pathImage, scrabbleGUI.getBackgroundPath());
 
     }
 
@@ -99,5 +107,15 @@ public class MainMenuGUITest {
         assertFalse(btnFileChooser.isVisible());
         cmbNumberOfPlayer.setSelectedIndex(2);
         assertTrue(btnFileChooser.isVisible());
+    }
+
+    @Test
+    public void testTheme() {
+        cmbTheme.setSelectedIndex(1);
+        btnAccept.doClick();
+        assertEquals("./letters/frenchDictionaryValue/Noble/", scrabbleGUI.getImgPath());
+        cmbTheme.setSelectedIndex(0);
+        btnAccept.doClick();
+        assertEquals("./letters/frenchDictionaryValue/Basic/", scrabbleGUI.getImgPath());
     }
 }

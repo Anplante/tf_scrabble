@@ -8,7 +8,7 @@ import java.util.LinkedList;
 /**
  * Created by TheFrenchOne on 9/11/2016.
  */
-public class Tile implements Observable {
+public class Tile implements Observable, Comparable<Tile>{
 
     private String letter;
     private int value;
@@ -76,5 +76,8 @@ public class Tile implements Observable {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-
+    @Override
+    public int compareTo(Tile tile) {
+        return 0;
+    }
 }

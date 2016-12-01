@@ -1,6 +1,5 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
-import ca.qc.bdeb.p56.scrabble.ai.AiPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.HumanPlayer;
@@ -87,6 +86,7 @@ public class MainMenuGUI extends JDialog {
     private JFileChooser fileImage;
 
     private ArrayList<String> listName;
+    private List<String> allBackgroundPath;
     private GameManager gameManager;
 
     public MainMenuGUI(ScrabbleGUI parent) {
@@ -301,16 +301,13 @@ public class MainMenuGUI extends JDialog {
     }
 
     private String getLetttersDirectory(){
-        String path;
+        String path = ConstanteComponentMessage.RES_IMAGES_FR_BASIC;;
         switch (cmbTheme.getSelectedIndex()){
             case BASIC_THEME:
                 path = ConstanteComponentMessage.RES_IMAGES_FR_BASIC;
                 break;
             case NOBLE_THEME:
                 path = ConstanteComponentMessage.RES_IMAGES_FR_NOBLE;
-                break;
-            default:
-                path = ConstanteComponentMessage.RES_IMAGES_FR_BASIC;
                 break;
         }
         return path;
@@ -328,14 +325,19 @@ public class MainMenuGUI extends JDialog {
         int numberOfHumanPlayers = cmbNumberOfHuman.getSelectedIndex();
         numberOfHumanPlayers += 2;
 
+        removeGhostText();
+
         for (int i = 0; i < numberOfHumanPlayers; i++) {
             players.add(new HumanPlayer(allTextField.get(i).getText()));
             players.get(i).setPlayerIcon(allIconOfPlayers.get(i));
         }
+    }
 
-        int limit = cmbNumberOfAi.getSelectedIndex();
-        for (int i = 0; i < limit; i++) {
-            players.add(new AiPlayer(listName));
+    private void removeGhostText() {
+        for (int i = 0; i < allTextField.size(); i++) {
+            if (allTextField.get(i).getText().equals(ConstanteComponentMessage.ENTER_PLAYER_NAME)) {
+                allTextField.get(i).setText("");
+            }
         }
     }
 
@@ -343,7 +345,7 @@ public class MainMenuGUI extends JDialog {
         gameManager = new GameManager();
         game = gameManager.createNewGame(players);
         parent.setImgPath(getLetttersDirectory());
-        parent.changeBackground(cmbBackgroundScrabble.getSelectedItem().toString());
+        parent.changeBackground(allBackgroundPath.get(cmbBackgroundScrabble.getSelectedIndex()));
         parent.createScrabbleGame(game);
         setVisible(false);
     }
@@ -430,6 +432,7 @@ public class MainMenuGUI extends JDialog {
 
     private void initializeTextField(int index, int y) {
         JTextField txtOfPlayer = allTextField.get(index);
+        GhostText ghostText = new GhostText(txtOfPlayer, ConstanteComponentMessage.ENTER_PLAYER_NAME);
         txtOfPlayer.setName(ConstanteTestName.PLAYER_NAME + " " + index);
         txtOfPlayer.setBounds(150, y, 180, 30);
         txtOfPlayer.setVisible(true);
@@ -453,6 +456,7 @@ public class MainMenuGUI extends JDialog {
     private void addImageFile() {
         File theFiles = null;
 
+        allBackgroundPath = new ArrayList<>();
         URL url = Launcher.class.getResource(ConstanteComponentMessage.PATH_BACKGROUND_RES);
         try {
             theFiles = new File(url.toURI());
@@ -462,6 +466,7 @@ public class MainMenuGUI extends JDialog {
 
         for (File file : theFiles.listFiles()) {
             cmbBackgroundScrabble.addItem(file.getName());
+            allBackgroundPath.add(file.getAbsolutePath());
         }
         cmbBackgroundScrabble.setSelectedIndex(2);
     }
@@ -471,8 +476,8 @@ public class MainMenuGUI extends JDialog {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File fichier = fileImage.getSelectedFile();
             // TODO: filter
-            if (!fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG) || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_PNG)
-                    || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG)) {
+            if (fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG) || fichier.getName().endsWith(ConstanteComponentMessage.EXT_PNG)
+                    || fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG)) {
                 imgPlayer = ImagesManager.getImageFromFile(fichier);
             } else {
                 JOptionPane.showMessageDialog(panelMenu, ConstanteComponentMessage.MESS_ERROR_LOADING_FILE, ConstanteComponentMessage.MESS_ERROR,
@@ -534,11 +539,13 @@ public class MainMenuGUI extends JDialog {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File fichier = fileImage.getSelectedFile();
             // TODO: filter
-            if (!fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG) || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_PNG)
-                    || !fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG)) {
+            if (fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG) || fichier.getName().endsWith(ConstanteComponentMessage.EXT_PNG)
+                    || fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG)) {
                 fichier = new File(fichier.getAbsolutePath());
                 Path path = Paths.get(fichier.getAbsolutePath());
+                allBackgroundPath.add(path.toString());
                 cmbBackgroundScrabble.addItem(path.getFileName().toString());
+                cmbBackgroundScrabble.setSelectedIndex(cmbBackgroundScrabble.getItemCount() - 1);
             } else {
                 JOptionPane.showMessageDialog(panelMenu, ConstanteComponentMessage.MESS_ERROR_LOADING_FILE, ConstanteComponentMessage.MESS_ERROR,
                         JOptionPane.ERROR_MESSAGE);

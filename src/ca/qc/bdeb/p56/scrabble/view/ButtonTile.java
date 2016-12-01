@@ -58,7 +58,7 @@ public class ButtonTile extends JButton implements Observateur{
 
         // TODO Louis : Mettre dans changement d'état avec l'enum d'état
         if (tile.isSelected()) {
-            if (gameModel.getActivePlayer().getState().getName() == IDState.EXCHANGE.getName()) {
+            if (gameModel.getState().getName().equals(IDState.EXCHANGE.getName())) {
                 setBackground(REMOVE_COLOR);
             } else {
                 setBackground(SELECTED_COLOR);
