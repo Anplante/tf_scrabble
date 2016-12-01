@@ -44,8 +44,6 @@ public class StatePlayTile extends State {
 
             placeTileOnSquare();
         }
-
-
     }
 
     private void placeTileOnSquare() {
@@ -66,7 +64,6 @@ public class StatePlayTile extends State {
         tileSelected = null;
     }
 
-
     @Override
     protected void selectTile(Tile tileSelected) {
 
@@ -84,7 +81,6 @@ public class StatePlayTile extends State {
                 selectNextState(IDState.SELECT_ACTION);
                 readyToChange = true;
             }
-
         }
     }
 

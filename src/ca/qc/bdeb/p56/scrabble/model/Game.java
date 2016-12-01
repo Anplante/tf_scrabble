@@ -341,15 +341,15 @@ public class Game implements Observable {
     }
 
     public void calculateCurrentPoints(List<Square> tilesPlaced){
+
         Direction direction;
-        boolean isAWord = false;
         int currentScore = 0;
         direction = boardManager.checkIfWordIsVerticalOrHorizontal(tilesPlaced);
         List<Square> letters = boardManager.formWordWithTilesPlayed(tilesPlaced, direction);
+
         if (!letters.isEmpty() && letters.size() > 0) {
             String word = createWord(letters);
-            isAWord = dictionary.checkWordExist(word);
-            if (isAWord) {
+            if (dictionary.checkWordExist(word)) {
                 if (checkForComboWord(tilesPlaced, direction)) {
                     currentScore = calculateWordPoints(letters);
                 }

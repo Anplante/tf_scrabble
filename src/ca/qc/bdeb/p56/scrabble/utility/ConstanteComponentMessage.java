@@ -67,8 +67,7 @@ public class ConstanteComponentMessage {
     public static final String VALID_WORD_POINTS_END= " points";
     public static final String INVALID_WORD_POINTS = "Mot non valide ";
     public static final String NO_WORD_POINTS = "Placer une lettre";
-
-
+    
     public static final String RES_ORDER_ICONm = "./images/az.png";
     public static final String ENTER_WORD = "Entrer un mot...";
     public static final String VALID_WORD = "Ce mot est valide!!";
