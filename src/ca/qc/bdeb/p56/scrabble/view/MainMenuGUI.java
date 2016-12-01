@@ -468,7 +468,7 @@ public class MainMenuGUI extends JDialog {
             cmbBackgroundScrabble.addItem(file.getName());
             allBackgroundPath.add(file.getAbsolutePath());
         }
-        cmbBackgroundScrabble.setSelectedIndex(2);
+        cmbBackgroundScrabble.setSelectedIndex(cmbBackgroundScrabble.getItemCount() - 1);
     }
 
     private BufferedImage getImageFromDialog(int returnValue, int index) {
