@@ -192,12 +192,10 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
     private void createSearchBar() {
         int x = 0 + MARGIN;
-        int y = scrollMoveLog.getHeight() + 100;
-        int height = getHeight() - LETTER_RACK_ZONE_HEIGHT;
-        int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN * 2;
+        int y = scrollMoveLog.getHeight() + 25;
         searchBar = new PanelSearchBar(gameModel);
         searchBar.setLocation(x, y);
-        searchBar.setSize(350, 55);
+        searchBar.setSize(294, 115);
         add(searchBar);
     }
 

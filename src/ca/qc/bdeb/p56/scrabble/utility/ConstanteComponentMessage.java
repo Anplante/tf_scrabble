@@ -54,4 +54,6 @@ public class ConstanteComponentMessage {
     public static final String TITLE_ORDER = "Ordonner";
     public static final String RES_ORDER_ICONm = "./images/az.png";
     public static final String ENTER_WORD = "Entrer un mot...";
+    public static final String VALID_WORD = "Ce mot est valide!!";
+    public static final String INVALID_WORD = "Ce mot est invalide.";
 }
