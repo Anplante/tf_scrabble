@@ -1,6 +1,8 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
+import ca.qc.bdeb.p56.scrabble.shared.Event;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
+import ca.qc.bdeb.p56.scrabble.view.DialogBlankTileChoice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
  * Classe qui représente la phase de placer des lettres sur le plateau de jeu. Le joueur peut sélectionner des lettres
  * et les placer. Il peut également choisir d'échanger ses lettres, d'annuler son jeu et reprendre ses lettres ou de
  * passer au prochain tour.
- *
+ * <p>
  * Created by Louis Luu Lim on 9/17/2016.
  */
 public class StatePlayTile extends State {
@@ -18,14 +20,14 @@ public class StatePlayTile extends State {
     private Square squareSelected;
     boolean readyToChange;
     private IDState stateSelected;
-    private List<Square> tilesPlaced;
+    private List<Square> tilesPlacedOnBoardPosition;
     private List<Tile> originalTilesOder;
 
     public StatePlayTile(Player currentPlayer, Tile tileSelected) {
 
         super(currentPlayer, IDState.PLAY_TILE);
         this.tileSelected = tileSelected;
-        tilesPlaced = new ArrayList<>();
+        tilesPlacedOnBoardPosition = new ArrayList<>();
         readyToChange = false;
     }
 
@@ -40,18 +42,23 @@ public class StatePlayTile extends State {
             if (originalTilesOder == null) {
                 originalTilesOder = getPlayer().getTiles();
             }
-          placeTileOnSquare();
+
+            placeTileOnSquare();
         }
     }
 
-    private void placeTileOnSquare()
-    {
-        tilesPlaced.add(squareSelected);
+    private void placeTileOnSquare() {
+
+        tilesPlacedOnBoardPosition.add(squareSelected);
+
+        if (tileSelected.isBlankTile()) {
+            getGame().aviserObservateurs(Event.SELECT_BLANK_TILE_VALUE, tileSelected);
+        }
         squareSelected.setLetter(tileSelected);
         tileSelected.selectTile();
+
         getPlayer().remove(tileSelected);
         getPlayer().aviserObservateurs();
-        tileSelected.selectTile();
         tileSelected = null;
     }
 
@@ -69,7 +76,7 @@ public class StatePlayTile extends State {
             getPlayer().swapTile(tileSelected, this.tileSelected);
             this.tileSelected = null;
 
-            if (tilesPlaced.isEmpty()) {
+            if (tilesPlacedOnBoardPosition.isEmpty()) {
                 selectNextState(IDState.SELECT_ACTION);
                 readyToChange = true;
             }
@@ -92,9 +99,9 @@ public class StatePlayTile extends State {
 
         boolean validMove = true;
 
-        if (!tilesPlaced.isEmpty()) {
+        if (!tilesPlacedOnBoardPosition.isEmpty()) {
 
-            for (Square tilePosition : tilesPlaced) {
+            for (Square tilePosition : tilesPlacedOnBoardPosition) {
                 if (tilePosition.getPosRow() != squareSelected.getPosRow()) {
                     validMove = false;
                     break;
@@ -103,7 +110,7 @@ public class StatePlayTile extends State {
 
             if (!validMove) {
                 validMove = true;
-                for (Square tilePosition : tilesPlaced) {
+                for (Square tilePosition : tilesPlacedOnBoardPosition) {
                     if (tilePosition.getPosColumn() != squareSelected.getPosColumn()) {
                         validMove = false;
                         break;
@@ -118,8 +125,7 @@ public class StatePlayTile extends State {
     @Override
     protected void selectNextState(IDState stateSelected) {
 
-        if (stateSelected == IDState.PENDING)
-        {
+        if (stateSelected == IDState.PENDING) {
             if (!verifyValidWord()) {
                 return;
             }
@@ -139,7 +145,7 @@ public class StatePlayTile extends State {
 
         switch (stateSelected) {
             case PENDING:
-                boolean isAWord = getGame().playWord(tilesPlaced);
+                boolean isAWord = getGame().playWord(tilesPlacedOnBoardPosition);
                 if (isAWord) {
                     newState = new StatePending(getPlayer());
                 } else {
@@ -148,12 +154,12 @@ public class StatePlayTile extends State {
                 }
                 break;
             case EXCHANGE:
-                getGame().recallTiles(tilesPlaced);
+                getGame().recallTiles(tilesPlacedOnBoardPosition);
                 getGame().replacePlayerTilesInOrder(originalTilesOder);
                 newState = new StateExchange(getPlayer());
                 break;
             case SELECT_ACTION:
-                getGame().recallTiles(tilesPlaced);
+                getGame().recallTiles(tilesPlacedOnBoardPosition);
                 getGame().replacePlayerTilesInOrder(originalTilesOder);
                 newState = new StateSelectAction(getPlayer());
                 break;
@@ -177,7 +183,7 @@ public class StatePlayTile extends State {
 
         boolean validMove = false;
 
-        for (Square square : tilesPlaced) {
+        for (Square square : tilesPlacedOnBoardPosition) {
             if (square.isCenter()) {
                 validMove = true;
                 break;
