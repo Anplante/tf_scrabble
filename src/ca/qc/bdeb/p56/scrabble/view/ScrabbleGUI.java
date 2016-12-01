@@ -32,6 +32,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
     private DialogWaiting dialogWaiting;
     private JLabel background;
     private JPanel panelInformation;
+    private PanelSearchBar searchBar;
 
     private JScrollPane scrollMoveLog;
 
@@ -98,11 +99,13 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         createPanelLetterRack();
         createPanelPlayersInformation();
         createPanelMoveLog();
+        createSearchBar();
     }
 
     private void createBackground() {
 
         background = new JLabel();
+        background.setName(ConstanteTestName.BACKGROUND);
         background.setSize(getWidth(), getHeight());
         background.setIcon(new ImageIcon(new ImageIcon(backgroundPath)
                 .getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT)));
@@ -185,6 +188,17 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
         scrollMoveLog.setSize(width, height);
         add(scrollMoveLog);
+    }
+
+    private void createSearchBar() {
+        int x = 0 + MARGIN;
+        int y = scrollMoveLog.getHeight() + 100;
+        int height = getHeight() - LETTER_RACK_ZONE_HEIGHT;
+        int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN * 2;
+        searchBar = new PanelSearchBar(gameModel);
+        searchBar.setLocation(x, y);
+        searchBar.setSize(350, 55);
+        add(searchBar);
     }
 
     private void initGrid() {

@@ -53,4 +53,5 @@ public class ConstanteComponentMessage {
     public static final String ENTER_PLAYER_NAME = "Veuillez entrer un nom...";
     public static final String TITLE_ORDER = "Ordonner";
     public static final String RES_ORDER_ICONm = "./images/az.png";
+    public static final String ENTER_WORD = "Entrer un mot...";
 }

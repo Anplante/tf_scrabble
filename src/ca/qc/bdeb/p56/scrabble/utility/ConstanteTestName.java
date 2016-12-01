@@ -11,6 +11,7 @@ public class ConstanteTestName {
     public static final String QTE_AI_NAME = "Number of Ai";
     public static final String QTE_HUMAN_NAME = "Number of Human";
     public static final String BACKGROUND_NAME = "background";
+    public static final String BACKGROUND = "background of Scrabble";
     public static final String THEME_NAME = "theme";
     public static final String CANCEL_NAME = "Cancel";
     public static final String CONFIRM_NAME = "Confirm";
@@ -33,4 +34,5 @@ public class ConstanteTestName {
     public static final String SHUFFLE_NAME = "Shuffle";
     public static final String WAITING_PANEL_NAME = "waitingPnl";
     public static final String FILE_CHOOSER = "fileChooser";
+    public static final String SEARCH_BUTTON = "searchButton";
 }
