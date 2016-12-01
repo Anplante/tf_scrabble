@@ -457,6 +457,7 @@ public class Game implements Observable {
 
         if (tilesPlaced != null) {
             for (Square tileLocation : tilesPlaced) {
+                tileLocation.getTileOn().selectTile();
                 getActivePlayer().addLetter(tileLocation.getTileOn());
                 tileLocation.setLetter(null);
             }

@@ -56,8 +56,8 @@ public class StatePlayTile extends State {
         }
         squareSelected.setLetter(tileSelected);
         tileSelected.selectTile();
-        getGame().calculateCurrentPoints(tilesPlaced);
-        getGame().createCurrentWord(tilesPlaced);
+        getGame().calculateCurrentPoints(tilesPlacedOnBoardPosition);
+        getGame().createCurrentWord(tilesPlacedOnBoardPosition);
 
         getPlayer().remove(tileSelected);
         getPlayer().aviserObservateurs();

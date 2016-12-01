@@ -54,7 +54,7 @@ public class ConstanteComponentMessage {
     public static final String TITLE_ORDER = "Ordonner";
     public static final String VALID_WORD_POINTS_START = "Le mot ";
     public static final String VALID_WORD_POINTS_MID = " donnera ";
-    public static final String VALID_WORD_POINTS_END= ".";
+    public static final String VALID_WORD_POINTS_END= " points";
     public static final String INVALID_WORD_POINTS = "Mot non valide ";
     public static final String NO_WORD_POINTS = "Placer une lettre";
 

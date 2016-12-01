@@ -1,6 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
+import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
@@ -23,7 +24,7 @@ public class PanelInfoWord extends JPanel implements Observateur{
         add(wordPlayed);
         wordPlayed.setVisible(true);
         wordPlayed.setFont(new Font("Courier New", Font.ITALIC, 20));
-        wordPlayed.setForeground(Color.GRAY);
+        wordPlayed.setForeground(Color.BLACK);
     }
 
 
@@ -31,9 +32,12 @@ public class PanelInfoWord extends JPanel implements Observateur{
     public void changementEtat() {
         if(game.getCurrentWord()!=null){
 
-            wordPlayed.setText(ConstanteComponentMessage.VALID_WORD_POINTS_START + game.getCurrentWord() + ConstanteComponentMessage.VALID_WORD_POINTS_MID + game.getCurrentScore() );
+            wordPlayed.setText(ConstanteComponentMessage.VALID_WORD_POINTS_START + game.getCurrentWord() + ConstanteComponentMessage.VALID_WORD_POINTS_MID + game.getCurrentScore() + ConstanteComponentMessage.VALID_WORD_POINTS_END );
         }else{
             wordPlayed.setText(ConstanteComponentMessage.INVALID_WORD_POINTS);
+        }
+        if(game.getActivePlayer().getState().getName().equals(IDState.PENDING.getName())){
+            wordPlayed.setText(ConstanteComponentMessage.NO_WORD_POINTS);
         }
     }
 

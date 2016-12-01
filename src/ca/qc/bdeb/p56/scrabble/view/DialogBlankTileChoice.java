@@ -16,13 +16,11 @@ import java.net.URL;
 public class DialogBlankTileChoice extends JDialog {
 
     private Tile blankTile;
-    private Game game;
 
 
-    public DialogBlankTileChoice(ScrabbleGUI parent, Tile blankTile, Game game) {
+    public DialogBlankTileChoice(ScrabbleGUI parent, Tile blankTile) {
 
         super();
-        this.game = game;
         setSize(parent.getWidth() / 4, parent.getHeight() / 2);
         this.blankTile = blankTile;
 
@@ -95,7 +93,9 @@ public class DialogBlankTileChoice extends JDialog {
             dispose();
         });
 
+
         pnlLettersChoice.add(btnCancel, gbc);
         add(pnlLettersChoice);
     }
+
 }

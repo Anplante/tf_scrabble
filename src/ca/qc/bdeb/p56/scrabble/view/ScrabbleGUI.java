@@ -106,8 +106,8 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
     private void createPanelInfoWord() {
         panelInfoWord = new PanelInfoWord(gameModel);
-        int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN;
-        panelInfoWord.setLocation(0, 600);
+        int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN*2;
+        panelInfoWord.setLocation(MARGIN, scrollMoveLog.getHeight()+25 +panelSearchBar.getHeight());
         panelInfoWord.setBackground(Color.WHITE);
         panelInfoWord.setSize(width, 50 );
         add(panelInfoWord);
@@ -203,10 +203,10 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
     private void createSearchBar() {
         int x = 0 + MARGIN;
-        int y = scrollMoveLog.getHeight() + 25;
-        panelSearchBar = new PanelSearchBar(gameModel);
+        int y = scrollMoveLog.getHeight() + 15;
+        int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN * 2;
+        panelSearchBar = new PanelSearchBar(gameModel,width);
         panelSearchBar.setLocation(x, y);
-        panelSearchBar.setSize(294, 115);
         panelSearchBar.setName(ConstanteTestName.SEARCH_BAR);
         add(panelSearchBar);
     }
