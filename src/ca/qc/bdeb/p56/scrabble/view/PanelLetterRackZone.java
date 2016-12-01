@@ -109,11 +109,11 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         initOrderTilesOption();
     }
 
-    private void setImageBtn(JButton btn, String path){
+    private void setImageBtn(JButton btn, String path) {
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource(path));
-        Image img = icon.getImage() ;
-        Image newimg = img.getScaledInstance( btn.getWidth(), btn.getHeight(),  java.awt.Image.SCALE_SMOOTH ) ;
-        icon = new ImageIcon( newimg );
+        Image img = icon.getImage();
+        Image newimg = img.getScaledInstance(btn.getWidth(), btn.getHeight(), java.awt.Image.SCALE_SMOOTH);
+        icon = new ImageIcon(newimg);
         btn.setIcon(icon);
     }
 
@@ -131,8 +131,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnPassTurn.setFocusPainted(false);
         btnPassTurn.setBorderPainted(false);
         btnPassTurn.setContentAreaFilled(false);
-        setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-        setImageBtn(btnPassTurn,ConstanteComponentMessage.RES_NEXT);
+        setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        setImageBtn(btnPassTurn, ConstanteComponentMessage.RES_NEXT);
 
         add(btnPassTurn);
 
@@ -153,8 +153,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnPlayWord.setFocusPainted(false);
         btnPlayWord.setBorderPainted(false);
         btnPlayWord.setContentAreaFilled(false);
-        setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-        setImageBtn(btnPlayWord,ConstanteComponentMessage.RES_NEXT);
+        setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        setImageBtn(btnPlayWord, ConstanteComponentMessage.RES_NEXT);
         btnPlayWord.addActionListener(e -> gameModel.selectPlayWordAction());
     }
 
@@ -180,15 +180,15 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
         btnOrderTiles.setSize(OPTIONS_WIDTH, getHeight());
         btnOrderTiles.setLocation(x, POS_Y);
-        btnShuffleTiles.setLocation(x, POS_Y);
-        btnShuffleTiles.setOpaque(false);
-        btnShuffleTiles.setFocusPainted(false);
-        btnShuffleTiles.setBorderPainted(false);
-        btnShuffleTiles.setContentAreaFilled(false);
-        setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-        btnShuffleTiles.setSize(OPTIONS_WIDTH, getHeight());
-        setImageBtn(btnShuffleTiles,ConstanteComponentMessage.RES_SHUFFLE);
-        add(btnShuffleTiles);
+        btnOrderTiles.setLocation(x, POS_Y);
+        btnOrderTiles.setOpaque(false);
+        btnOrderTiles.setFocusPainted(false);
+        btnOrderTiles.setBorderPainted(false);
+        btnOrderTiles.setContentAreaFilled(false);
+        setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        btnOrderTiles.setSize(OPTIONS_WIDTH, getHeight());
+        setImageBtn(btnOrderTiles, ConstanteComponentMessage.RES_AZ);
+        add(btnOrderTiles);
 
         add(btnOrderTiles);
 
@@ -214,7 +214,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnCancelExchange.setName(ConstanteTestName.CANCEL_EXCHANGE_NAME);
         btnCancelExchange.setLocation(x, POS_Y);
         btnCancelExchange.setSize(OPTIONS_WIDTH, getHeight());
-        setImageBtn(btnCancelExchange,ConstanteComponentMessage.RES_RETURN);
+        setImageBtn(btnCancelExchange, ConstanteComponentMessage.RES_RETURN);
 
         add(btnExchange);
         add(btnCancelExchange);
@@ -234,10 +234,9 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
         btnCancelExchange.addActionListener(e -> {
 
-                gameModel.cancelExchange();
-                btnExchange.setText(ConstanteComponentMessage.MESS_EXCHANGE);
-                disableAllOtherBtnExchange(true);
-            }
+            gameModel.cancelExchange();
+            btnExchange.setText(ConstanteComponentMessage.MESS_EXCHANGE);
+            disableAllOtherBtnExchange(true);
         });
     }
 
@@ -255,7 +254,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnForfeit.setName(ConstanteTestName.FORFEIT_NAME);
         btnForfeit.setSize(OPTIONS_WIDTH, getHeight());
         btnForfeit.setLocation(POS_Y, POS_Y);
-        setImageBtn(btnForfeit,ConstanteComponentMessage.RES_ABANDON);
+        setImageBtn(btnForfeit, ConstanteComponentMessage.RES_ABANDON);
 
         add(btnForfeit);
         btnForfeit.addActionListener(e -> {

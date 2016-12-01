@@ -7,6 +7,7 @@ import ca.qc.bdeb.p56.scrabble.utility.ImagesManager;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import javax.swing.*;
+import javax.xml.stream.Location;
 import java.awt.*;
 import java.net.URL;
 
@@ -45,6 +46,14 @@ public class ButtonSquare extends JButton implements Observateur {
         changementEtat();
     }
 
+    public int getPositionX(){
+        return  getX();
+    }
+
+    public int getPositionY(){
+        return  getY();
+    }
+
     public Square getSelectedSquare()
     {
         return square;
@@ -62,6 +71,8 @@ public class ButtonSquare extends JButton implements Observateur {
                 content = premium.getName();
             }
         }
+
+
 
         if (square != null && square.getTileOn() == null)
             setIcon(null);
@@ -116,6 +127,7 @@ public class ButtonSquare extends JButton implements Observateur {
 
     @Override
     public void changementEtat(Enum<?> property, Object o) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String text = (String) o;
+
     }
 }

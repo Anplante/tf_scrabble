@@ -2,8 +2,9 @@ package ca.qc.bdeb.p56.scrabble.model;
 
 import ca.qc.bdeb.p56.scrabble.shared.Event;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
-import ca.qc.bdeb.p56.scrabble.view.DialogBlankTileChoice;
+import ca.qc.bdeb.p56.scrabble.view.PopUpPointage;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +46,8 @@ public class StatePlayTile extends State {
 
             placeTileOnSquare();
         }
+
+
     }
 
     private void placeTileOnSquare() {
@@ -57,8 +60,6 @@ public class StatePlayTile extends State {
         squareSelected.setLetter(tileSelected);
         tileSelected.selectTile();
         getGame().calculateCurrentPoints(tilesPlacedOnBoardPosition);
-        getGame().createCurrentWord(tilesPlacedOnBoardPosition);
-
         getPlayer().remove(tileSelected);
         getPlayer().aviserObservateurs();
         getGame().aviserObservateurs();

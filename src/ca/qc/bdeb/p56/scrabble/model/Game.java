@@ -51,7 +51,6 @@ public class Game implements Observable {
     private LogManager logManager;
     private Player lastPlayerToPlay;
     private String currentWord;
-    private int currentScore;
 
     public Game(String filePath, List<Player> players) {
         isEndGame = false;
@@ -60,7 +59,6 @@ public class Game implements Observable {
         logManager = new LogManager();
         this.players = players;
         currentWord = null;
-        currentScore = 0;
 
         for (Player player : players) {
             player.setGame(this);
@@ -105,9 +103,6 @@ public class Game implements Observable {
         return currentWord;
     }
 
-    public int getCurrentScore() {
-        return currentScore;
-    }
 
     private void loadParameters(String filePath) {
         Element rootElement = getRootElement(filePath);
@@ -348,7 +343,7 @@ public class Game implements Observable {
     public void calculateCurrentPoints(List<Square> tilesPlaced){
         Direction direction;
         boolean isAWord = false;
-        currentScore = 0;
+        int currentScore = 0;
         direction = boardManager.checkIfWordIsVerticalOrHorizontal(tilesPlaced);
         List<Square> letters = boardManager.formWordWithTilesPlayed(tilesPlaced, direction);
         if (!letters.isEmpty() && letters.size() > 0) {
@@ -358,24 +353,11 @@ public class Game implements Observable {
                 if (checkForComboWord(tilesPlaced, direction)) {
                     currentScore = calculateWordPoints(letters);
                 }
+                currentWord = ConstanteComponentMessage.VALID_WORD_POINTS_START + word + ConstanteComponentMessage.VALID_WORD_POINTS_MID + currentScore + ConstanteComponentMessage.VALID_WORD_POINTS_END;
+            } else {
+                currentWord = null;
             }
         }
-    }
-
-    public void createCurrentWord(List<Square> tilesPlaced){
-        Direction direction;
-        boolean isAWord = false;
-        String aWord = null;
-        direction = boardManager.checkIfWordIsVerticalOrHorizontal(tilesPlaced);
-        List<Square> letters = boardManager.formWordWithTilesPlayed(tilesPlaced, direction);
-        if (!letters.isEmpty() && letters.size() > 0) {
-            String word = createWord(letters);
-            isAWord = dictionary.checkWordExist(word);
-            if(isAWord){
-                aWord = word;
-            }
-        }
-        currentWord = aWord;
     }
 
     private String createWord(List<Square> letters) {

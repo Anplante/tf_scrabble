@@ -54,6 +54,7 @@ public class ConstanteComponentMessage {
     public static final String RES_NEXT = "./images/next.png";
     public static final String RES_SHUFFLE = "./images/shuffle.png";
     public static final String RES_ABANDON = "./images/abandon.png";
+    public static final String RES_AZ = "./images/az.png";
 
     public static final String TITLE_SELECT_LETTER = "Veuillez choissir une lettre";
     public static final char START_ALPHABET = 'A';
@@ -61,8 +62,8 @@ public class ConstanteComponentMessage {
     public static final String DEFAULT_DICT_PATH = "resources/dictionary/fr_dictionary.txt";
     public static final String ENTER_PLAYER_NAME = "Veuillez entrer un nom...";
     public static final String TITLE_ORDER = "Ordonner";
-    public static final String VALID_WORD_POINTS_START = "Le mot ";
-    public static final String VALID_WORD_POINTS_MID = " donnera ";
+    public static final String VALID_WORD_POINTS_START = "Le mot '";
+    public static final String VALID_WORD_POINTS_MID = "' donnera ";
     public static final String VALID_WORD_POINTS_END= " points";
     public static final String INVALID_WORD_POINTS = "Mot non valide ";
     public static final String NO_WORD_POINTS = "Placer une lettre";

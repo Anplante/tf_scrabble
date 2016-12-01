@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -25,5 +27,24 @@ public class PlayerTest {
         player = null;
     }
 
+    @Test
+
+    public void orderTilesTest(){
+        Tile firstTile = new Tile(" ",0);
+        Tile secondTile = new Tile("a",0);
+        Tile thirdTile = new Tile("z",0);
+        player.addLetter(firstTile);
+        player.addLetter(secondTile);
+        player.addLetter(thirdTile);
+
+        player.orderTiles();
+
+        List<Tile> tiles = player.getTiles();
+
+        assertEquals(tiles.get(0),firstTile);
+        assertEquals(tiles.get(1),secondTile);
+        assertEquals(tiles.get(2),thirdTile);
+
+    }
 
 }
