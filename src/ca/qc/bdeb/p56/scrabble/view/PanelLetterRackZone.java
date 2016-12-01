@@ -318,7 +318,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         Tile tileSelected = tileClicked.getTile();
 
         if (tileSelected.isBlankTile()) {
-            DialogBlankTileChoice tileChoice = new DialogBlankTileChoice(parent, tileSelected);
+            DialogBlankTileChoice tileChoice = new DialogBlankTileChoice(parent, tileSelected,gameModel);
             tileChoice.setModal(true);
             tileChoice.setVisible(true);
         }

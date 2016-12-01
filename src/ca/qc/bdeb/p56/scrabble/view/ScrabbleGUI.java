@@ -32,6 +32,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
     private DialogWaiting dialogWaiting;
     private JLabel background;
     private JPanel panelInformation;
+    private  JPanel panelInfoWord;
 
     private JScrollPane scrollMoveLog;
 
@@ -98,6 +99,17 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         createPanelLetterRack();
         createPanelPlayersInformation();
         createPanelMoveLog();
+        createPanelInfoWord();
+
+    }
+
+    private void createPanelInfoWord() {
+        panelInfoWord = new PanelInfoWord(gameModel);
+        int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN;
+        panelInfoWord.setLocation(0, 600);
+        panelInfoWord.setBackground(Color.WHITE);
+        panelInfoWord.setSize(width, 50 );
+        add(panelInfoWord);
     }
 
     private void createBackground() {

@@ -49,8 +49,11 @@ public class StatePlayTile extends State {
         tilesPlaced.add(squareSelected);
         squareSelected.setLetter(tileSelected);
         tileSelected.selectTile();
+        getGame().calculateCurrentPoints(tilesPlaced);
+        getGame().createCurrentWord(tilesPlaced);
         getPlayer().remove(tileSelected);
         getPlayer().aviserObservateurs();
+        getGame().aviserObservateurs();
         tileSelected.selectTile();
         tileSelected = null;
     }

@@ -52,5 +52,12 @@ public class ConstanteComponentMessage {
     public static final String DEFAULT_DICT_PATH = "resources/dictionary/fr_dictionary.txt";
     public static final String ENTER_PLAYER_NAME = "Veuillez entrer un nom...";
     public static final String TITLE_ORDER = "Ordonner";
+    public static final String VALID_WORD_POINTS_START = "Le mot ";
+    public static final String VALID_WORD_POINTS_MID = " donnera ";
+    public static final String VALID_WORD_POINTS_END= ".";
+    public static final String INVALID_WORD_POINTS = "Mot non valide ";
+    public static final String NO_WORD_POINTS = "Placer une lettre";
+
+
     public static final String RES_ORDER_ICONm = "./images/az.png";
 }
