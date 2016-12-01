@@ -33,6 +33,8 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
     private JLabel lblScoreTitle;
     private JLabel lblCoupTitle;
     private JLabel lblCoupJoue;
+    private JLabel lblPointsTitle;
+    private JLabel lblPoints;
 
     public PanelPlayerInfo(Player player){
 
@@ -50,6 +52,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         initIconOfPlayer();
         initScoreLabel();
         initPlayedLabel();
+        initPointsLabel();
     }
 
     private void initNameLabel() {
@@ -97,6 +100,24 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         this.add(lblCoupJoue);
     }
 
+    private void initPointsLabel() {
+        lblPointsTitle = new JLabel();
+        lblPointsTitle.setFont(fontOfPanel);
+        lblPointsTitle.setText("");
+        lblPointsTitle.setLocation(lblCoupTitle.getWidth() + 10, 125);
+        lblPointsTitle.setSize(lblPointsTitle.getPreferredSize());
+
+        lblPoints = new JLabel();
+        lblPoints.setFont(fontOfPanel);
+        lblPoints.setText("");
+        lblPoints.setLocation(lblCoupTitle.getWidth() + 55, 125);
+        lblPoints.setSize(lblCoupJoue.getPreferredSize());
+
+
+        this.add(lblPointsTitle);
+        this.add(lblPoints);
+    }
+
     private void initIconOfPlayer() {
         playerIcon = playerModel.getPlayerIcon();
     }
@@ -119,9 +140,20 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
 
             if(move.getPlayer().equals(playerModel))
             {
-
                 lblCoupJoue.setText(move.getMove());
                 lblCoupJoue.setSize(lblCoupJoue.getPreferredSize());
+                if (move.getMovePoints() != 0) {
+                    lblPointsTitle.setText("pour ");
+                    lblPointsTitle.setSize(lblPointsTitle.getPreferredSize());
+                    lblPoints.setText(Integer.toString(move.getMovePoints()) + " points");
+                    lblPoints.setSize(lblPoints.getPreferredSize());
+                }
+                else {
+                    lblPoints.setText("");
+                    lblPoints.setSize(lblPoints.getPreferredSize());
+                    lblPointsTitle.setText("");
+                    lblPointsTitle.setSize(lblPointsTitle.getPreferredSize());
+                }
             }
         }
     }
