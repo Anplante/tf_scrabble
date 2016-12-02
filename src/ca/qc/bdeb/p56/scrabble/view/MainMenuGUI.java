@@ -188,40 +188,37 @@ public class MainMenuGUI extends JDialog {
     }
 
     private void addEventOnComboBox() {
-        ActionListener numberOfHuman = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        ActionListener numberOfHuman = e -> {
 
-                NumberOfPlayer numberofPlayer = NumberOfPlayer.fromInteger((int)cmbNumberOfHuman.getSelectedItem());
+            NumberOfPlayer numberofPlayer = NumberOfPlayer.fromInteger((int)cmbNumberOfHuman.getSelectedItem());
 
-                switch (numberofPlayer) {
-                    case TWO_PLAYER:
-                        allTextField.get(2).setVisible(false);
-                        allTextField.get(3).setVisible(false);
-                        allLabelOfPlayers.get(2).setVisible(false);
-                        allLabelOfPlayers.get(3).setVisible(false);
-                        allButtonImg.get(2).setVisible(false);
-                        allButtonImg.get(3).setVisible(false);
-                        break;
-                    case THREE_PLAYER:
-                        allTextField.get(2).setVisible(true);
-                        allTextField.get(3).setVisible(false);
-                        allLabelOfPlayers.get(2).setVisible(true);
-                        allLabelOfPlayers.get(3).setVisible(false);
-                        allButtonImg.get(2).setVisible(true);
-                        allButtonImg.get(3).setVisible(false);
-                        break;
-                    case FOUR_PLAYER:
-                        allTextField.get(2).setVisible(true);
-                        allTextField.get(3).setVisible(true);
-                        allLabelOfPlayers.get(2).setVisible(true);
-                        allLabelOfPlayers.get(3).setVisible(true);
-                        allButtonImg.get(2).setVisible(true);
-                        allButtonImg.get(3).setVisible(true);
-                        break;
-                }
-                repaint();
+            switch (numberofPlayer) {
+                case TWO_PLAYER:
+                    allTextField.get(2).setVisible(false);
+                    allTextField.get(3).setVisible(false);
+                    allLabelOfPlayers.get(2).setVisible(false);
+                    allLabelOfPlayers.get(3).setVisible(false);
+                    allButtonImg.get(2).setVisible(false);
+                    allButtonImg.get(3).setVisible(false);
+                    break;
+                case THREE_PLAYER:
+                    allTextField.get(2).setVisible(true);
+                    allTextField.get(3).setVisible(false);
+                    allLabelOfPlayers.get(2).setVisible(true);
+                    allLabelOfPlayers.get(3).setVisible(false);
+                    allButtonImg.get(2).setVisible(true);
+                    allButtonImg.get(3).setVisible(false);
+                    break;
+                case FOUR_PLAYER:
+                    allTextField.get(2).setVisible(true);
+                    allTextField.get(3).setVisible(true);
+                    allLabelOfPlayers.get(2).setVisible(true);
+                    allLabelOfPlayers.get(3).setVisible(true);
+                    allButtonImg.get(2).setVisible(true);
+                    allButtonImg.get(3).setVisible(true);
+                    break;
             }
+            repaint();
         };
 
         cmbNumberOfHuman.addActionListener(numberOfHuman);
@@ -408,8 +405,6 @@ public class MainMenuGUI extends JDialog {
         allLabelOfPlayers.get(3).setVisible(false);
     }
 
-
-
     private void initializeLabel(int index, int y) {
         JLabel lblOfPlayer = allLabelOfPlayers.get(index);
         lblOfPlayer.setName(ConstanteTestName.PLAYER_NAME );
@@ -439,6 +434,7 @@ public class MainMenuGUI extends JDialog {
 
     private void initializeTextField(int index, int y) {
         JTextField txtOfPlayer = allTextField.get(index);
+
         GhostText ghostText = new GhostText(txtOfPlayer, ConstanteComponentMessage.ENTER_PLAYER_NAME);
         txtOfPlayer.setName(ConstanteTestName.PLAYER_NAME + " " + index);
         txtOfPlayer.setBounds(150, y, 180, 30);
@@ -475,11 +471,11 @@ public class MainMenuGUI extends JDialog {
             cmbBackgroundScrabble.addItem(file.getName());
             allBackgroundPath.add(file.getAbsolutePath());
         }
-        cmbBackgroundScrabble.setSelectedIndex(2);
+        cmbBackgroundScrabble.setSelectedIndex(cmbBackgroundScrabble.getItemCount() - 1);
     }
 
     private BufferedImage getImageFromDialog(int returnValue, int index) {
-        BufferedImage imgPlayer = null;
+        BufferedImage imgPlayer;
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File fichier = fileImage.getSelectedFile();
             // TODO: filter

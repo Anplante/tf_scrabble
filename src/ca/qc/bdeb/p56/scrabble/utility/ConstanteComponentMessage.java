@@ -46,12 +46,28 @@ public class ConstanteComponentMessage {
     public static final String RES_IMAGES_ENG = "./letters/englishDictionaryValue/";
     public static final String RES_IMAGES_FR_BASIC = "./letters/frenchDictionaryValue/Basic/";
     public static final String RES_IMAGES_FR_NOBLE = "./letters/frenchDictionaryValue/Noble/";
+    public static final String RES_BLANKS_FR_NOBLE = "./letters/frenchDictionaryValue/blank_noble";
+    public static final String RES_BLANKS_FR_BASIC = "./letters/frenchDictionaryValue/blank_basic";
+
+    public static final String RES_SWAP = "./images/swap.png";
+    public static final String RES_RETURN = "./images/back.png";
+    public static final String RES_NEXT = "./images/next.png";
+    public static final String RES_SHUFFLE = "./images/shuffle.png";
+    public static final String RES_ABANDON = "./images/abandon.png";
+    public static final String RES_AZ = "./images/az.png";
+
     public static final String TITLE_SELECT_LETTER = "Veuillez choissir une lettre";
     public static final char START_ALPHABET = 'A';
     public static final char END_ALPHABET = 'Z';
     public static final String DEFAULT_DICT_PATH = "resources/dictionary/fr_dictionary.txt";
     public static final String ENTER_PLAYER_NAME = "Veuillez entrer un nom...";
     public static final String TITLE_ORDER = "Ordonner";
+    public static final String VALID_WORD_POINTS_START = "Le mot '";
+    public static final String VALID_WORD_POINTS_MID = "' donnera ";
+    public static final String VALID_WORD_POINTS_END= " points";
+    public static final String INVALID_WORD_POINTS = "Mot non valide ";
+    public static final String NO_WORD_POINTS = "Placer une lettre";
+    
     public static final String RES_ORDER_ICONm = "./images/az.png";
     public static final String ENTER_WORD = "Entrer un mot...";
     public static final String VALID_WORD = "Ce mot est valide!!";

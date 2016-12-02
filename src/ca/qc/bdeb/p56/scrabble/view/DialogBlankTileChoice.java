@@ -1,5 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
+import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.Square;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
@@ -20,7 +21,6 @@ public class DialogBlankTileChoice extends JDialog {
     public DialogBlankTileChoice(ScrabbleGUI parent, Tile blankTile) {
 
         super();
-
         setSize(parent.getWidth() / 4, parent.getHeight() / 2);
         this.blankTile = blankTile;
 
@@ -34,7 +34,6 @@ public class DialogBlankTileChoice extends JDialog {
     }
 
     private void initLettersChoice() {
-
         JPanel pnlLettersChoice = new JPanel();
         pnlLettersChoice.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -94,7 +93,9 @@ public class DialogBlankTileChoice extends JDialog {
             dispose();
         });
 
+
         pnlLettersChoice.add(btnCancel, gbc);
         add(pnlLettersChoice);
     }
+
 }

@@ -2,7 +2,6 @@ package ca.qc.bdeb.p56.scrabble.model;
 
 import ca.qc.bdeb.p56.scrabble.shared.Event;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
-import ca.qc.bdeb.p56.scrabble.view.DialogBlankTileChoice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,12 +55,14 @@ public class StatePlayTile extends State {
         }
         squareSelected.setLetter(tileSelected);
         tileSelected.selectTile();
-
+        getGame().calculateCurrentPoints(tilesPlacedOnBoardPosition);
+        getGame().aviserObservateurs();
         getPlayer().remove(tileSelected);
         getPlayer().aviserObservateurs();
+        getGame().aviserObservateurs();
+        tileSelected.selectTile();
         tileSelected = null;
     }
-
 
     @Override
     protected void selectTile(Tile tileSelected) {
@@ -80,7 +81,6 @@ public class StatePlayTile extends State {
                 selectNextState(IDState.SELECT_ACTION);
                 readyToChange = true;
             }
-
         }
     }
 

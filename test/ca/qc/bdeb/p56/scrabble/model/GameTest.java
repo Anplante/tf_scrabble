@@ -1,6 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
 
+import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -464,6 +465,31 @@ public class GameTest {
         assertFalse(game.playWord(lettersPlayed));
     }
 
+    @Test
+    public void testCreateValidWordOnBoard(){
+        Tile tile1 = new Tile("l", 0);
+        Tile tile2 = new Tile("a", 0);
+        Square square1 = game.getSquare(7, 7);
+        Square square2 = game.getSquare(7, 8);
+
+        game.getActivePlayer().setState(new StatePlayTile(game.getActivePlayer(),tile1));
+        game.getActivePlayer().selectSquare(square1);
+        game.getActivePlayer().setState(new StatePlayTile(game.getActivePlayer(),tile2));
+        game.getActivePlayer().selectSquare(square2);
+        String expected = "Le mot 'la' donnera 0 points";
+        assertEquals(expected,game.getCurrentWord());
+    }
+
+    @Test
+    public void testCreateInvalidWordOnBoard(){
+        Tile tile1 = new Tile("p", 0);
+        Square square1 = game.getSquare(7, 7);
+
+        game.getActivePlayer().setState(new StatePlayTile(game.getActivePlayer(),tile1));
+        game.getActivePlayer().selectSquare(square1);
+        String expected = ConstanteComponentMessage.INVALID_WORD;
+        assertEquals(expected,game.getCurrentWord());
+    }
 
     @Test
     public void testNotEndOfTheGame() {

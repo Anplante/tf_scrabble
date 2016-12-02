@@ -23,15 +23,15 @@ public class PanelSearchBar extends JPanel {
     private static final URL DEFAULT_SEARCH_ICON = Launcher.class.getResource("/images/search.png");
     private static final int SEARCH_BAR_HEIGHT = 45;
     private static final int BTN_SEARCH_SIZE = SEARCH_BAR_HEIGHT - 1;
-    private static final int SEARCH_BAR_WIDTH = 250;
     private Game gameModel;
     private JTextField searchBar;
     private JButton btnSearch;
     private JLabel lblTitle;
     private JLabel lblResult;
 
-    public PanelSearchBar(Game gameModel) {
+    public PanelSearchBar(Game gameModel,int width) {
         this.gameModel = gameModel;
+        setSize(width, 115);
         setLayout(null);
         initComponents();
     }
@@ -44,11 +44,12 @@ public class PanelSearchBar extends JPanel {
         lblTitle.setSize(lblTitle.getPreferredSize());
         lblTitle.setLocation(0,0);
 
+
         searchBar = new JTextField("", 30);
         GhostText ghostText = new GhostText(searchBar, ConstanteComponentMessage.ENTER_WORD);
         searchBar.setName(ConstanteTestName.SEARCH_TXT);
         searchBar.setLocation(0,lblTitle.getHeight());
-        searchBar.setSize(SEARCH_BAR_WIDTH, SEARCH_BAR_HEIGHT);
+        searchBar.setSize(getWidth()- BTN_SEARCH_SIZE, SEARCH_BAR_HEIGHT);
         searchBar.setFont(ROBOTO_FONT);
 
         btnSearch = new JButton();
@@ -56,6 +57,8 @@ public class PanelSearchBar extends JPanel {
         btnSearch.setLocation(searchBar.getWidth(), lblTitle.getHeight());
         btnSearch.setName(ConstanteTestName.SEARCH_BUTTON);
         btnSearch.setIcon(ImagesManager.getIcon(DEFAULT_SEARCH_ICON, BTN_SEARCH_SIZE,BTN_SEARCH_SIZE));
+
+
 
         lblResult = new JLabel();
         lblResult.setText("");

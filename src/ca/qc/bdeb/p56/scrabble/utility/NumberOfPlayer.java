@@ -16,11 +16,11 @@ public enum NumberOfPlayer {
         this.numberOfPlayer = numberOfPlayer;
     }
 
-    public static NumberOfPlayer fromInteger(int x) {
+    public static NumberOfPlayer fromInteger(int playerNumber) {
 
         NumberOfPlayer number = null;
 
-        switch (x) {
+        switch (playerNumber) {
             case 2:
                 number = TWO_PLAYER;
                 break;

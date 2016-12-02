@@ -50,6 +50,7 @@ public class Game implements Observable {
     private boolean isEndGame;
     private LogManager logManager;
     private Player lastPlayerToPlay;
+    private String currentWord;
 
     public Game(String filePath, List<Player> players) {
         isEndGame = false;
@@ -57,6 +58,7 @@ public class Game implements Observable {
         eliminatedPlayers = new ArrayList<>();
         logManager = new LogManager();
         this.players = players;
+        currentWord = null;
 
         for (Player player : players) {
             player.setGame(this);
@@ -95,6 +97,10 @@ public class Game implements Observable {
 
     public LogManager getLogManager() {
         return logManager;
+    }
+
+    public String getCurrentWord(){
+        return currentWord;
     }
 
 
@@ -334,6 +340,26 @@ public class Game implements Observable {
         return isAWord;
     }
 
+    public void calculateCurrentPoints(List<Square> tilesPlaced){
+
+        Direction direction;
+        int currentScore = 0;
+        direction = boardManager.checkIfWordIsVerticalOrHorizontal(tilesPlaced);
+        List<Square> letters = boardManager.formWordWithTilesPlayed(tilesPlaced, direction);
+
+        if (!letters.isEmpty() && letters.size() > 0) {
+            String word = createWord(letters);
+            if (dictionary.checkWordExist(word)) {
+                if (checkForComboWord(tilesPlaced, direction)) {
+                    currentScore = calculateWordPoints(letters);
+                }
+                currentWord = ConstanteComponentMessage.VALID_WORD_POINTS_START + word + ConstanteComponentMessage.VALID_WORD_POINTS_MID + currentScore + ConstanteComponentMessage.VALID_WORD_POINTS_END;
+            } else {
+                currentWord = ConstanteComponentMessage.INVALID_WORD;
+            }
+        }
+    }
+
     private String createWord(List<Square> letters) {
         StringBuilder word = new StringBuilder();
         for (Square letter : letters) {
@@ -413,6 +439,7 @@ public class Game implements Observable {
 
         if (tilesPlaced != null) {
             for (Square tileLocation : tilesPlaced) {
+                tileLocation.getTileOn().selectTile();
                 getActivePlayer().addLetter(tileLocation.getTileOn());
                 tileLocation.setLetter(null);
             }

@@ -37,6 +37,7 @@ public class ImagesManager {
     }
 
     public static BufferedImage getImageFromURL (URL pathToIcon) {
+
         BufferedImage imgPlayer = null;
         try {
             imgPlayer = ImageIO.read(pathToIcon);
@@ -44,13 +45,14 @@ public class ImagesManager {
             Logger.getLogger("Impossible de trouver l'image situé à : "
                     + String.valueOf(pathToIcon)).log(Level.SEVERE, null, ex);
         }
-        // attention il peut retourner un null
+
         return imgPlayer;
     }
 
     public static BufferedImage getImageFromFile(File fichier) {
+
         Path path = Paths.get(fichier.getAbsolutePath());
-        BufferedImage imagePlayer = null;
+        BufferedImage imagePlayer;
         try {
             imagePlayer =  getImageFromURL(path.toUri().toURL());
         } catch (MalformedURLException e) {

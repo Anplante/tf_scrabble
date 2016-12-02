@@ -30,7 +30,10 @@
             <letter text="Z" value="10" amount="1"/>
             <letter text="" value="0" amount ="2"/>
         </frenchAlphabet>
+
         <dictionary filename="twl06.txt" />
+
+
         <premiums>
             <premium name="TW" type="wordscore" multiplier="3" />
             <premium name="DW" type="wordscore" multiplier="2" />
