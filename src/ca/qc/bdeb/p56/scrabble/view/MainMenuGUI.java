@@ -314,7 +314,14 @@ public class MainMenuGUI extends JDialog {
     }
 
     private void addFileChooser() {
+        LookAndFeel defaultLook = UIManager.getLookAndFeel();
+        setFileDialogLook(UIManager.getSystemLookAndFeelClassName());
         fileImage = new JFileChooser();
+        try {
+            UIManager.setLookAndFeel(defaultLook);
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setPlayer() {
@@ -550,6 +557,20 @@ public class MainMenuGUI extends JDialog {
                 JOptionPane.showMessageDialog(panelMenu, ConstanteComponentMessage.MESS_ERROR_LOADING_FILE, ConstanteComponentMessage.MESS_ERROR,
                         JOptionPane.ERROR_MESSAGE);
             }
+        }
+    }
+
+    private void setFileDialogLook(String lookAndFeel) {
+        try {
+            UIManager.setLookAndFeel(lookAndFeel);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
         }
     }
 
