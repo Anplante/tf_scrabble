@@ -1,5 +1,9 @@
 package ca.qc.bdeb.p56.scrabble.utility;
 
+import javax.annotation.Resource;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 /**
  * Interface contenant les contenants pour les noms des components.
  * <p>
@@ -7,41 +11,42 @@ package ca.qc.bdeb.p56.scrabble.utility;
  */
 public class ConstanteComponentMessage {
 
-    public static final String OPT_QUITTER_TITLE = "Quitter";
-    public static final String MESS_CONFIRM_EXIT = "Voulez-vous vraiment quitter?";
-    public static final String TITLE_MESS_EXIT = "Fermeture de l'application";
-    public static final String TITLE_SURRENDER = "Abandonner";
-    public static final String MESS_CONFIRM_ACTION = "Voulez-vous continuer?";
-    public static final String MESS_SURRENDER_GAME = "Abandon de partie";
-    public static final String MESS_DEFEAT = "Vous avez perdu";
-    public static final String MESS_END_GAME = "Fin de la partie";
-    public static final String TITLE_RETURN_GAME = "Retourner au jeu";
-    public static final String ESCAPE_KEY = "Escape";
-    public static final String TITLE_MENU = "Menu";
-    public static final String MESS_CONFIRM = "Confirmer";
-    public static final String MESS_CANCEL = "Annuler";
-    public static final String MESS_PLAYER_NAME = "Nom du joueur ";
-    public static final String MESS_NUMBER_OF_AI = "Nombre d'ordinateurs : ";
-    public static final String MESS_NUMBER_OF_HUMAN = "Nombre de joueurs : ";
-    public static final String MESS_THEME = "Thème : ";
-    public static final String MESS_BACKGROUND = "Background : ";
-    public static final String MESS_THEME_CLASSIQUE = "Classique";
-    public static final String MESS_THEME_NOBLE = "Noble";
+    private static final Locale locale = new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
+    private static final ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
+
+    public static final String OPT_QUITTER_TITLE = messages.getString("Quit");
+    public static final String MESS_CONFIRM_EXIT = messages.getString("Confirmation_Quit");
+    public static final String TITLE_MESS_EXIT = messages.getString("App_Closure");
+    public static final String TITLE_SURRENDER = messages.getString("Abandon");
+    public static final String MESS_CONFIRM_ACTION = messages.getString("Confirm_Action");
+    public static final String MESS_SURRENDER_GAME = messages.getString("Surrender_Game");
+    public static final String MESS_DEFEAT = messages.getString("Lost");
+    public static final String MESS_END_GAME = messages.getString("End_Game");
+    public static final String TITLE_RETURN_GAME = messages.getString("Return");
+    public static final String ESCAPE_KEY = messages.getString("Escape_Key");
+    public static final String TITLE_MENU = messages.getString("Title_Menu");
+    public static final String MESS_CONFIRM = messages.getString("Confirm");
+    public static final String MESS_CANCEL = messages.getString("Cancel");
+    public static final String MESS_NUMBER_OF_AI = messages.getString("Number_Of_Ai");
+    public static final String MESS_NUMBER_OF_HUMAN = messages.getString("Number_Of_Player");
+    public static final String MESS_THEME = messages.getString("Theme");
+    public static final String MESS_BACKGROUND = messages.getString("Background");
+    public static final String MESS_THEME_CLASSIQUE = messages.getString("Classic");
+    public static final String MESS_THEME_NOBLE = messages.getString("Noble");
     public static final String PATH_BACKGROUND_RES = "/background/";
     public static final String EXT_JPG = ".jpg";
-    public static final String MESS_ERROR_LOADING_FILE = "Problème de chargement de fichier." +
-            " \nVeuillez utiliser un format acceptable (png, jpeg, jpg)";
-    public static final String MESS_ERROR = "Erreur";
+    public static final String MESS_ERROR_LOADING_FILE = messages.getString("Error_Loading_File");
+    public static final String MESS_ERROR = messages.getString("Error");
     public static final String FILE_SEPARATOR = "file.separator";
     public static final String EXT_PNG = ".png";
     public static final String TAG_NAME = "name";
     public static final String TAG_ITEM = "item";
-    public static final String MESS_PASS_TURN = "Passer \nle tour";
+    public static final String MESS_PASS_TURN = messages.getString("Pass_Turn");
     public static final String RES_WAITING_IMAGE = "./images/waiting.png";
-    public static final String MESS_PLAY = "Jouer";
-    public static final String MESS_RECALL = "Rappeler";
-    public static final String MESS_EXCHANGE = "Échanger";
-    public static final String MESS_RESTART_GAME  = "Voulez-vous recommencer la partie?";
+    public static final String MESS_PLAY = messages.getString("Play");
+    public static final String MESS_RECALL = messages.getString("Recall");;
+    public static final String MESS_EXCHANGE = messages.getString("Echanger");
+    public static final String MESS_RESTART_GAME  = messages.getString("Replay");
     public static final String ELLIPSIS = "...";
     public static final String RES_IMAGES_ENG = "./letters/englishDictionaryValue/";
     public static final String RES_IMAGES_FR_BASIC = "./letters/frenchDictionaryValue/Basic/";
@@ -56,20 +61,20 @@ public class ConstanteComponentMessage {
     public static final String RES_ABANDON = "./images/abandon.png";
     public static final String RES_AZ = "./images/az.png";
 
-    public static final String TITLE_SELECT_LETTER = "Veuillez choissir une lettre";
+    public static final String TITLE_SELECT_LETTER = messages.getString("Select_Letter");
     public static final char START_ALPHABET = 'A';
     public static final char END_ALPHABET = 'Z';
     public static final String DEFAULT_DICT_PATH = "resources/dictionary/fr_dictionary.txt";
-    public static final String ENTER_PLAYER_NAME = "Veuillez entrer un nom...";
+    public static final String ENTER_PLAYER_NAME = messages.getString("Enter_Name");
     public static final String TITLE_ORDER = "Ordonner";
-    public static final String VALID_WORD_POINTS_START = "Le mot '";
-    public static final String VALID_WORD_POINTS_MID = "' donnera ";
-    public static final String VALID_WORD_POINTS_END= " points";
-    public static final String INVALID_WORD_POINTS = "Mot non valide ";
-    public static final String NO_WORD_POINTS = "Placer une lettre";
+    public static final String VALID_WORD_POINTS_START = messages.getString("Start_Word");
+    public static final String VALID_WORD_POINTS_MID = messages.getString("Mid_Word");
+    public static final String VALID_WORD_POINTS_END= messages.getString("End_Word");
+    public static final String INVALID_WORD_POINTS = messages.getString("Non_Valid");
+    public static final String NO_WORD_POINTS = messages.getString("Place_Letter");
     
     public static final String RES_ORDER_ICONm = "./images/az.png";
-    public static final String ENTER_WORD = "Entrer un mot...";
-    public static final String VALID_WORD = "Ce mot est valide!!";
-    public static final String INVALID_WORD = "Ce mot est invalide.";
+    public static final String ENTER_WORD = messages.getString("Enter_Word");
+    public static final String VALID_WORD = messages.getString("Valid_Word");
+    public static final String INVALID_WORD = messages.getString("Invalid_Word");
 }

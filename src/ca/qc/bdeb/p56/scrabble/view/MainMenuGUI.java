@@ -34,8 +34,11 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -55,6 +58,8 @@ public class MainMenuGUI extends JDialog {
     private static final int NOBLE_THEME = 1;
     private static final int LIMIT_OF_PLAYER = 4;
 
+    private static final Locale locale = new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
+    private static final ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
     private static final String[] numberOfAi = {"0", "1", "2", "3"};
     private static final NumberOfPlayer[] numberOfHuman = {TWO_PLAYER, THREE_PLAYER, FOUR_PLAYER};
     public static final URL PATH_TO_FILE = Launcher.class.getResource("/files/ListOfName.xml");
@@ -316,8 +321,9 @@ public class MainMenuGUI extends JDialog {
         fileImage = new JFileChooser();
         try {
             UIManager.setLookAndFeel(defaultLook);
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException ex) {
+            // C'est littéralement impossible que ce code se rendre ici
+            Logger.getLogger("Wrong Look and Feel choosen").log(Level.SEVERE, null, ex);
         }
     }
 
@@ -408,7 +414,7 @@ public class MainMenuGUI extends JDialog {
     private void initializeLabel(int index, int y) {
         JLabel lblOfPlayer = allLabelOfPlayers.get(index);
         lblOfPlayer.setName(ConstanteTestName.PLAYER_NAME );
-        lblOfPlayer.setText(ConstanteComponentMessage.MESS_PLAYER_NAME + ++index + " :");
+        lblOfPlayer.setText(MessageFormat.format(messages.getString("Player_Name"), ++index));
         lblOfPlayer.setLocation(25, y);
         lblOfPlayer.setSize(lblOfPlayer.getPreferredSize());
         lblOfPlayer.setVisible(true);
