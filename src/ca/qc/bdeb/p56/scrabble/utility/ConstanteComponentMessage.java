@@ -67,9 +67,6 @@ public class ConstanteComponentMessage {
     public static final String DEFAULT_DICT_PATH = "resources/dictionary/fr_dictionary.txt";
     public static final String ENTER_PLAYER_NAME = messages.getString("Enter_Name");
     public static final String TITLE_ORDER = "Ordonner";
-    public static final String VALID_WORD_POINTS_START = messages.getString("Start_Word");
-    public static final String VALID_WORD_POINTS_MID = messages.getString("Mid_Word");
-    public static final String VALID_WORD_POINTS_END= messages.getString("End_Word");
     public static final String INVALID_WORD_POINTS = messages.getString("Non_Valid");
     public static final String NO_WORD_POINTS = messages.getString("Place_Letter");
     
@@ -77,4 +74,5 @@ public class ConstanteComponentMessage {
     public static final String ENTER_WORD = messages.getString("Enter_Word");
     public static final String VALID_WORD = messages.getString("Valid_Word");
     public static final String INVALID_WORD = messages.getString("Invalid_Word");
+
 }

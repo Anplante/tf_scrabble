@@ -17,6 +17,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.*;
 import java.util.List;
 import java.util.logging.Level;
@@ -353,7 +354,9 @@ public class Game implements Observable {
                 if (checkForComboWord(tilesPlaced, direction)) {
                     currentScore = calculateWordPoints(letters);
                 }
-                currentWord = ConstanteComponentMessage.VALID_WORD_POINTS_START + word + ConstanteComponentMessage.VALID_WORD_POINTS_MID + currentScore + ConstanteComponentMessage.VALID_WORD_POINTS_END;
+                Locale locale = new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
+                ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
+                currentWord = MessageFormat.format(messages.getString("Word"), word, currentScore);
             } else {
                 currentWord = ConstanteComponentMessage.INVALID_WORD;
             }

@@ -106,8 +106,6 @@ public class MainMenuGUI extends JDialog {
                 System.exit(0);
             }
         });
-
-
     }
 
     private void initializeFrame() {
@@ -397,6 +395,7 @@ public class MainMenuGUI extends JDialog {
         lblTheme.setLocation(25, 370);
         lblTheme.setSize(lblBackground.getPreferredSize());
         lblTheme.setVisible(true);
+        lblTheme.setName(ConstanteTestName.LBL_THEME);
 
         panelMenu.add(lblNumberOfAi);
         panelMenu.add(lblNumberOfHuman);
@@ -413,7 +412,7 @@ public class MainMenuGUI extends JDialog {
 
     private void initializeLabel(int index, int y) {
         JLabel lblOfPlayer = allLabelOfPlayers.get(index);
-        lblOfPlayer.setName(ConstanteTestName.PLAYER_NAME );
+        lblOfPlayer.setName(ConstanteTestName.PLAYER_NAME + index );
         lblOfPlayer.setText(MessageFormat.format(messages.getString("Player_Name"), ++index));
         lblOfPlayer.setLocation(25, y);
         lblOfPlayer.setSize(lblOfPlayer.getPreferredSize());

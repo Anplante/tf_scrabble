@@ -38,4 +38,6 @@ public class ConstanteTestName {
     public static String SEARCH_BAR = "search bar";
     public static String SEARCH_TXT = "search field";
     public static String LBL_RESULT = "result of search";
+    public static String LBL_THEME = "Theme";
+    public static String LBL_PLAYER = "player test";
 }
