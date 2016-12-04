@@ -1,11 +1,12 @@
 package ca.qc.bdeb.p56.scrabble.shared;
 
 /**
- * Created by TheFrenchOne on 9/12/2016.
+ * Enum représant les différents états du joueur pendant la partie.
+ *
+ * Created by Louis Luu Lim on 9/12/2016.
  */
 public enum IDState {
 
-    DRAW("Draw"),
     PENDING("Wait"),
     SELECT_ACTION("Select action"),
     EXCHANGE("Exchange"),

@@ -6,6 +6,7 @@ import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
 import ca.qc.bdeb.p56.scrabble.view.ButtonTile;
 import ca.qc.bdeb.p56.scrabble.view.PanelLetterRackZone;
 import ca.qc.bdeb.p56.scrabble.view.ScrabbleGUI;
+import ca.qc.bdeb.p56.scrabble.view.Theme;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,7 +52,7 @@ public class StateSwaptTileTest{
 
         scrabbleGame = new ScrabbleGUI();
         scrabbleGame.setBackgroundPath("simplistic.png");
-        scrabbleGame.setImgPath(ConstanteComponentMessage.RES_IMAGES_FR_BASIC);
+        scrabbleGame.setGameTheme(Theme.BASIC);
         scrabbleGame.createScrabbleGame(game);
 
         panelTested = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.LETTER_RACK_NAME);

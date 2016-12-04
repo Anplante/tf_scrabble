@@ -13,12 +13,14 @@ import java.util.List;
 import java.awt.*;
 
 /**
+ * Fenêtre de jeu principal du jeu de Scrabble.
+ *
  * Created by Louis Luu Lim on 9/7/2016.
  */
 public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
     private static final double RATIO_LETTER_RACK_ZONE = 0.1;
-    public static final int MARGIN = 5;
+    protected static final int MARGIN = 5;
 
     private final int LETTER_RACK_ZONE_HEIGHT;
     private String backgroundPath;
@@ -27,7 +29,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
     private Game gameModel;
     private DialogOptionsMenu options;
     private MainMenuGUI menu;
-    private String imgPath;
+    private Theme theme;
     private DialogWaiting dialogWaiting;
     private JLabel background;
     private JPanel panelInformation;
@@ -84,12 +86,12 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         setVisible(true);
     }
 
-    public String getImgPath() {
-        return imgPath;
+    public Theme getTheme() {
+        return theme;
     }
 
-    public void setImgPath(String imgPath) {
-        this.imgPath = imgPath;
+    public void setGameTheme(Theme theme) {
+        this.theme = theme;
     }
 
     private void initializeComponents() {
@@ -188,7 +190,6 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
         int height = getHeight() - LETTER_RACK_ZONE_HEIGHT;
         int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN * 2;
-        int x = 0 + MARGIN;
         height *= 0.5;
 
         TableMoveLog tabMoveLog = new TableMoveLog(gameModel);
@@ -196,18 +197,18 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         gameModel.getLogManager().ajouterObservateur(this);
         scrollMoveLog = new JScrollPane(tabMoveLog);
 
-        scrollMoveLog.setLocation(x, MARGIN);
+        scrollMoveLog.setLocation(MARGIN, MARGIN);
 
         scrollMoveLog.setSize(width, height);
         add(scrollMoveLog);
     }
 
     private void createSearchBar() {
-        int x = 0 + MARGIN;
+
         int y = scrollMoveLog.getHeight() + 15;
         int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN * 2;
         panelSearchBar = new PanelSearchBar(gameModel,width);
-        panelSearchBar.setLocation(x, y);
+        panelSearchBar.setLocation(MARGIN, y);
         panelSearchBar.setName(ConstanteTestName.SEARCH_BAR);
         add(panelSearchBar);
     }
@@ -220,7 +221,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
         for (int row = 0; row < BoardManager.BOARD_SIZE; row++) {
             for (int column = 0; column < BoardManager.BOARD_SIZE; column++) {
-                ButtonSquare square = new ButtonSquare(gameModel.getSquare(row, column), size, imgPath);
+                ButtonSquare square = new ButtonSquare(gameModel.getSquare(row, column), size, theme);
                 square.setName(ConstanteTestName.SQUARE_NAME + row + column);
                 square.addActionListener(this);
                 pnlBoard.add(square);

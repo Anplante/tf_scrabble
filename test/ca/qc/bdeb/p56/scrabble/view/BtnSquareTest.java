@@ -19,11 +19,7 @@ import static org.junit.Assert.assertNotEquals;
 public class BtnSquareTest {
 
     private static final String TRIPLE_LETTER = "TL";
-    private ButtonSquare btnSquare;
-    private ButtonTile btnTile;
     private Game gameModel;
-    private static final int WIDTH = 50;
-    private static final int HEIGHT = 50;
 
     @Before
     public void setUp() throws Exception {
@@ -43,7 +39,7 @@ public class BtnSquareTest {
     @Test
     public void testTripleLetterSquare() throws AWTException {
 
-        ButtonSquare tripleLetterSquare = new ButtonSquare(gameModel.getSquare(1,5), 50, ConstanteComponentMessage.RES_IMAGES_FR_BASIC);
+        ButtonSquare tripleLetterSquare = new ButtonSquare(gameModel.getSquare(1,5), 50, Theme.BASIC);
         assertEquals(TRIPLE_LETTER, tripleLetterSquare.getText());
     }
 }

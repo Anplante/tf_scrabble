@@ -7,14 +7,15 @@ import ca.qc.bdeb.p56.scrabble.utility.ImagesManager;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import javax.swing.*;
-import javax.xml.stream.Location;
 import java.awt.*;
 import java.net.URL;
 
 /**
- * Created by TheFrenchOne on 9/11/2016.
+ * Classe qui permet la création d'une case du plateau de jeu de Scrabble.
+ *
+ * Created by Louis Luu Lim on 9/11/2016.
  */
-public class ButtonSquare extends JButton implements Observateur {
+class ButtonSquare extends JButton implements Observateur {
 
     private final static Color COLOR_DL = new Color(113, 205, 207);
     private final static Color COLOR_TW = new Color(252, 179, 87);
@@ -31,12 +32,12 @@ public class ButtonSquare extends JButton implements Observateur {
 
     private Square square;
     private int size;
-    private String imgPath;
+    private Theme theme;
 
-    public ButtonSquare(Square square, int size, String pathImg) {
+    protected ButtonSquare(Square square, int size, Theme theme) {
 
         super();
-        imgPath = pathImg;
+        this.theme = theme;
         this.square = square;
         this.size = size;
         square.ajouterObservateur(ButtonSquare.this);
@@ -54,7 +55,7 @@ public class ButtonSquare extends JButton implements Observateur {
         return  getY();
     }
 
-    public Square getSelectedSquare()
+    protected Square getSelectedSquare()
     {
         return square;
     }
@@ -115,9 +116,9 @@ public class ButtonSquare extends JButton implements Observateur {
             if (valueOnTile.isEmpty()) {
                 valueOnTile = "1";
             }
-            URL path = getClass().getClassLoader().getResource(imgPath + valueOnTile + ConstanteComponentMessage.EXT_PNG);
+            URL path = getClass().getClassLoader().getResource(theme.getThemeFolderPath() + valueOnTile + ConstanteComponentMessage.EXT_PNG);
             setIcon(ImagesManager.getIcon(path, size, size));
-        } else if (imgPath.equals(ConstanteComponentMessage.RES_IMAGES_FR_NOBLE)) {
+        } else if (theme.getThemeFolderPath().equals(ConstanteComponentMessage.RES_IMAGES_FR_NOBLE)) {
             setBackground(Color.lightGray);
         } else {
             setBackground(new Color(188, 183, 122));

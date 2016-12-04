@@ -16,20 +16,17 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import sun.misc.Launcher;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -89,8 +86,6 @@ public class MainMenuGUI extends JDialog {
     private JComboBox<String> cmbBackgroundScrabble;
 
     private JFileChooser fileImage;
-
-    private ArrayList<String> listName;
     private List<String> allBackgroundPath;
     private GameManager gameManager;
 
@@ -102,7 +97,8 @@ public class MainMenuGUI extends JDialog {
         initializeSize();
 
         addWindowListener(new WindowAdapter() {
-            @Override public void windowClosed(WindowEvent e) {
+            @Override
+            public void windowClosed(WindowEvent e) {
                 System.exit(0);
             }
         });
@@ -158,6 +154,7 @@ public class MainMenuGUI extends JDialog {
 
         cmbNumberOfHuman = new JComboBox<>();
         cmbNumberOfHuman.setName(ConstanteTestName.QTE_HUMAN_NAME);
+        
         for (int i = 0; i < numberOfHuman.length; i++) {
             cmbNumberOfHuman.addItem(numberOfHuman[i].getNumberOfPlayer());
         }
@@ -175,13 +172,13 @@ public class MainMenuGUI extends JDialog {
         cmbBackgroundScrabble.setLocation(150, 315);
         cmbBackgroundScrabble.setSize(180, 25);
 
-        cmbTheme =  new JComboBox();
+        cmbTheme = new JComboBox();
         cmbTheme.setName(ConstanteTestName.THEME_NAME);
         cmbTheme.addItem(ConstanteComponentMessage.MESS_THEME_CLASSIQUE);
         cmbTheme.addItem(ConstanteComponentMessage.MESS_THEME_NOBLE);
         cmbTheme.setVisible(true);
         cmbTheme.setLocation(150, 365);
-        cmbTheme.setSize(180,25);
+        cmbTheme.setSize(180, 25);
 
 
         panelMenu.add(cmbNumberOfHuman);
@@ -193,7 +190,7 @@ public class MainMenuGUI extends JDialog {
     private void addEventOnComboBox() {
         ActionListener numberOfHuman = e -> {
 
-            NumberOfPlayer numberofPlayer = NumberOfPlayer.fromInteger((int)cmbNumberOfHuman.getSelectedItem());
+            NumberOfPlayer numberofPlayer = NumberOfPlayer.fromInteger((int) cmbNumberOfHuman.getSelectedItem());
 
             switch (numberofPlayer) {
                 case TWO_PLAYER:
@@ -236,8 +233,7 @@ public class MainMenuGUI extends JDialog {
     }
 
 
-    private void initBtnChooseBackgroundImg()
-    {
+    private void initBtnChooseBackgroundImg() {
         btnChooseBackgroundImg = new JButton(ConstanteComponentMessage.ELLIPSIS);
         btnChooseBackgroundImg.setSize(25, 25);
         btnChooseBackgroundImg.setLocation(335, 315);
@@ -247,8 +243,8 @@ public class MainMenuGUI extends JDialog {
             receiveBackground(returnValue);
         });
     }
-    private void initBtnExit()
-    {
+
+    private void initBtnExit() {
         btnExit = new JButton();
         btnExit.setSize(100, 50);
         btnExit.setLocation(350, 420);
@@ -258,8 +254,7 @@ public class MainMenuGUI extends JDialog {
         btnExit.addActionListener(e -> System.exit(0));
     }
 
-    private void initBtnCreateGame()
-    {
+    private void initBtnCreateGame() {
         btnCreateGame = new JButton();
         btnCreateGame.setSize(100, 50);
         btnCreateGame.setText(ConstanteComponentMessage.MESS_CONFIRM);
@@ -300,17 +295,19 @@ public class MainMenuGUI extends JDialog {
         return btnImage;
     }
 
-    private String getLetttersDirectory(){
-        String path = ConstanteComponentMessage.RES_IMAGES_FR_BASIC;;
-        switch (cmbTheme.getSelectedIndex()){
-            case BASIC_THEME:
-                path = ConstanteComponentMessage.RES_IMAGES_FR_BASIC;
-                break;
+    private Theme getLetttersTheme() {
+
+        Theme theme;
+        switch (cmbTheme.getSelectedIndex()) {
             case NOBLE_THEME:
-                path = ConstanteComponentMessage.RES_IMAGES_FR_NOBLE;
+                theme = Theme.NOBLE;
+                break;
+
+            default:
+                theme = Theme.BASIC;
                 break;
         }
-        return path;
+        return theme;
     }
 
     private void addFileChooser() {
@@ -328,7 +325,6 @@ public class MainMenuGUI extends JDialog {
     private void setPlayer() {
 
         players = new ArrayList<>();
-        listName = readXMLFiles();
 
         int numberOfHumanPlayers = cmbNumberOfHuman.getSelectedIndex();
         numberOfHumanPlayers += 2;
@@ -342,9 +338,10 @@ public class MainMenuGUI extends JDialog {
     }
 
     private void removeGhostText() {
-        for (int i = 0; i < allTextField.size(); i++) {
-            if (allTextField.get(i).getText().equals(ConstanteComponentMessage.ENTER_PLAYER_NAME)) {
-                allTextField.get(i).setText("");
+
+        for (JTextField textField : allTextField) {
+            if (textField.getText().equals(ConstanteComponentMessage.ENTER_PLAYER_NAME)) {
+                textField.setText("");
             }
         }
     }
@@ -352,7 +349,7 @@ public class MainMenuGUI extends JDialog {
     private void initializeGame() {
         gameManager = new GameManager();
         game = gameManager.createNewGame(players);
-        parent.setImgPath(getLetttersDirectory());
+        parent.setGameTheme(getLetttersTheme());
         parent.changeBackground(allBackgroundPath.get(cmbBackgroundScrabble.getSelectedIndex()));
         parent.createScrabbleGame(game);
         setVisible(false);
@@ -402,8 +399,8 @@ public class MainMenuGUI extends JDialog {
         panelMenu.add(lblBackground);
         panelMenu.add(lblTheme);
 
-        for (int i = 0; i < allLabelOfPlayers.size(); i++) {
-            panelMenu.add(allLabelOfPlayers.get(i));
+        for (JLabel playerLabel : allLabelOfPlayers) {
+            panelMenu.add(playerLabel);
         }
 
         allLabelOfPlayers.get(2).setVisible(false);
@@ -412,7 +409,7 @@ public class MainMenuGUI extends JDialog {
 
     private void initializeLabel(int index, int y) {
         JLabel lblOfPlayer = allLabelOfPlayers.get(index);
-        lblOfPlayer.setName(ConstanteTestName.PLAYER_NAME + index );
+        lblOfPlayer.setName(ConstanteTestName.PLAYER_NAME + index);
         lblOfPlayer.setText(MessageFormat.format(messages.getString("Player_Name"), ++index));
         lblOfPlayer.setLocation(25, y);
         lblOfPlayer.setSize(lblOfPlayer.getPreferredSize());
@@ -492,8 +489,7 @@ public class MainMenuGUI extends JDialog {
                         JOptionPane.ERROR_MESSAGE);
                 imgPlayer = allIconOfPlayers.get(index);
             }
-        }
-        else {
+        } else {
             imgPlayer = allIconOfPlayers.get(index);
         }
         return imgPlayer;
@@ -505,42 +501,10 @@ public class MainMenuGUI extends JDialog {
         super.paint(g);
         int spaceBetweenImg = 35;
         for (int i = 0; i < cmbNumberOfHuman.getSelectedIndex() + 2; i++) {
-            g.drawImage(allIconOfPlayers.get(i), 345, spaceBetweenImg,50,50, this);
+            g.drawImage(allIconOfPlayers.get(i), 345, spaceBetweenImg, 50, 50, this);
             spaceBetweenImg += 55;
         }
         g.dispose();
-    }
-
-    public ArrayList<String> readXMLFiles() {
-
-        ArrayList<String> listOfName = new ArrayList<>();
-        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-        try {
-            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-            Document documentOfName = docBuilder.parse(new File(PATH_TO_FILE.toURI()));
-            documentOfName.getDocumentElement().normalize();
-            NodeList nodeOfName = documentOfName.getElementsByTagName(ConstanteComponentMessage.TAG_ITEM);
-
-            for (int i = 0; i < nodeOfName.getLength(); i++) {
-                Node itemName = nodeOfName.item(i);
-                if (itemName.getNodeType() == Node.ELEMENT_NODE) {
-                    Element aiName = (Element) itemName;
-                    listOfName.add(aiName.getElementsByTagName(ConstanteComponentMessage.TAG_NAME).item(0).getTextContent());
-                }
-            }
-            // TODO Antoine : donner du feedback à l'utilisateur
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(docBuilderFactory.toString()).log(Level.SEVERE, null, ex);
-        } catch (SAXParseException ex) {
-            Logger.getLogger(PATH_TO_FILE.toString()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(PATH_TO_FILE.toString()).log(Level.SEVERE, null, ex);
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(PATH_TO_FILE.toString()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(docBuilderFactory.toString()).log(Level.SEVERE, null, ex);
-        }
-        return listOfName;
     }
 
     private void receiveBackground(int returnValue) {

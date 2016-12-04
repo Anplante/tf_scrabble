@@ -1,6 +1,5 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
-import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
@@ -9,9 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.swing.*;
-
-import java.net.URISyntaxException;
-import java.net.URL;
 
 import static org.junit.Assert.*;
 
@@ -113,9 +109,9 @@ public class MainMenuGUITest {
     public void testTheme() {
         cmbTheme.setSelectedIndex(1);
         btnAccept.doClick();
-        assertEquals("./letters/frenchDictionaryValue/Noble/", scrabbleGUI.getImgPath());
+        assertEquals("./letters/frenchDictionaryValue/Noble/", scrabbleGUI.getTheme().getThemeFolderPath());
         cmbTheme.setSelectedIndex(0);
         btnAccept.doClick();
-        assertEquals("./letters/frenchDictionaryValue/Basic/", scrabbleGUI.getImgPath());
+        assertEquals("./letters/frenchDictionaryValue/Basic/", scrabbleGUI.getTheme().getThemeFolderPath());
     }
 }

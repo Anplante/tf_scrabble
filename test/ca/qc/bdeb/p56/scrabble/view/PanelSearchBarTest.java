@@ -12,8 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.swing.*;
-import javax.xml.soap.Text;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +40,7 @@ public class PanelSearchBarTest {
         scrabbleGame = new ScrabbleGUI();
         scrabbleGame.setBackgroundPath("scrabble.png");
         game = gameManager.createNewGame(lstPlayer);
-        scrabbleGame.setImgPath(ConstanteComponentMessage.RES_IMAGES_FR_BASIC);
+        scrabbleGame.setGameTheme(Theme.BASIC);
         scrabbleGame.createScrabbleGame(game);
 
         panelSearchBar = (PanelSearchBar) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.SEARCH_BAR);

@@ -43,7 +43,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
     private HashMap<String, ImageIcon> iconsTile;
 
 
-    public PanelLetterRackZone(Rectangle boundsZoneLetterRack, ScrabbleGUI parent) {
+    protected PanelLetterRackZone(Rectangle boundsZoneLetterRack, ScrabbleGUI parent) {
 
         super();
 
@@ -72,7 +72,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         }
     }
 
-    public void setGameModel(Game aGame) {
+    protected void setGameModel(Game aGame) {
         if (gameModel != null) {
             gameModel.retirerObservateur(this);
             gameModel.retirerObservateur(btnExchange);
@@ -298,8 +298,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
         int x = (int) ((MAX_TILES_IN_HAND - playerTiles.size()) * TILE_DIMENSION.getWidth() / 2);
 
-        //DragListener drag = new DragListener();   // Todo Louis : permettre le drag & drop
-
         for (Tile letter : playerTiles) {
 
             ButtonTile btnTile = new ButtonTile(gameModel, letter, iconsTile.get(letter.getLetter()));
@@ -308,8 +306,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
             letter.ajouterObservateur(btnTile);
             btnTile.setName(ConstanteTestName.TILE_NAME + i);
             btnTile.addActionListener(this);
-            //  btnTile.addMouseListener(drag);
-            //btnTile.addMouseMotionListener(drag);
             panelLettersRack.add(btnTile);
             i++;
             x += TILE_DIMENSION.getWidth();
@@ -323,7 +319,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
         if (e.equals(Event.SELECT_BLANK_TILE_VALUE)) {
             Tile tileSelected = (Tile) o;
-            DialogBlankTileChoice tileChoice = new DialogBlankTileChoice(parent, tileSelected);
+            DialogBlankTileChoice tileChoice = new DialogBlankTileChoice(parent, tileSelected, parent.getTheme());
             tileChoice.setModal(true);
             tileChoice.setVisible(true);
         }
@@ -335,14 +331,16 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         iconsTile = new HashMap<>();
         int size = (int) TILE_DIMENSION.getWidth();
 
+        String themFolder = parent.getTheme().getThemeFolderPath();
+
         for (char start = ConstanteComponentMessage.START_ALPHABET; start <= ConstanteComponentMessage.END_ALPHABET; start++) {
-            String resource = parent.getImgPath() + start + ConstanteComponentMessage.EXT_PNG;
+            String resource = themFolder + start + ConstanteComponentMessage.EXT_PNG;
             URL res = getClass().getClassLoader().getResource(resource);
             ImageIcon icon = ImagesManager.getIcon(res, size, size);
             iconsTile.put(Character.toString(start), icon);
         }
         iconsTile.put("",
-                ImagesManager.getIcon(getClass().getClassLoader().getResource(parent.getImgPath()
+                ImagesManager.getIcon(getClass().getClassLoader().getResource(themFolder
                         + "1" + ConstanteComponentMessage.EXT_PNG), size, size));
 
     }

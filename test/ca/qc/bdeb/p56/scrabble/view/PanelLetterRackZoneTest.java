@@ -10,9 +10,7 @@ import org.junit.Test;
 
 import javax.swing.*;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -24,20 +22,20 @@ public class PanelLetterRackZoneTest {
 
     private ScrabbleGUI scrabbleGame;
     private Game game;
-    Player currentPlayer;
+    private Player currentPlayer;
 
     @Before
     public void setUp() throws Exception {
 
         GameManager gameManager = new GameManager();
-        List lstPlayer = new ArrayList<Player>();
+        List<Player> lstPlayer = new ArrayList<Player>();
         lstPlayer.add(new HumanPlayer("Antoine"));
         lstPlayer.add(new HumanPlayer("Louis"));
         lstPlayer.add(new HumanPlayer("Julien"));
         scrabbleGame = new ScrabbleGUI();
         scrabbleGame.setBackgroundPath("simplistic.png");
         game = gameManager.createNewGame(lstPlayer);
-        scrabbleGame.setImgPath(ConstanteComponentMessage.RES_IMAGES_FR_BASIC);
+        scrabbleGame.setGameTheme(Theme.BASIC);
         scrabbleGame.createScrabbleGame(game);
         currentPlayer = game.getActivePlayer();
     }

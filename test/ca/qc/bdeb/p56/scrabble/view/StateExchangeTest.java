@@ -41,7 +41,7 @@ public class StateExchangeTest{
 
         game = gameManager.createNewGame(lstPlayer);
         scrabbleGame = new ScrabbleGUI();
-        scrabbleGame.setImgPath(ConstanteComponentMessage.RES_IMAGES_FR_BASIC);
+        scrabbleGame.setGameTheme(Theme.BASIC);
         scrabbleGame.setBackgroundPath("simplistic.png");
         scrabbleGame.createScrabbleGame(game);
 
