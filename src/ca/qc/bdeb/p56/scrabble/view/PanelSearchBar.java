@@ -12,12 +12,17 @@ import java.awt.event.KeyAdapter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Created by Antoine on 11/27/2016.
  */
 public class PanelSearchBar extends JPanel {
 
+    private static final Locale locale = new Locale(System.getProperty("user.language"),
+            System.getProperty("user.country"));
+    private static final ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
     private static final Font ROBOTO_FONT = loadFont("Roboto-Bold.ttf").deriveFont(Font.BOLD, 25);
     private static final Font FONT_RESULT = loadFont("Roboto-Light.ttf").deriveFont(Font.PLAIN, 25);
     private static final URL DEFAULT_SEARCH_ICON = Launcher.class.getResource("/images/search.png");
@@ -39,7 +44,7 @@ public class PanelSearchBar extends JPanel {
     private void initComponents() {
 
         lblTitle = new JLabel();
-        lblTitle.setText("Dictionnaire");
+        lblTitle.setText(messages.getString("Dictionnary"));
         lblTitle.setFont(ROBOTO_FONT);
         lblTitle.setSize(lblTitle.getPreferredSize());
         lblTitle.setLocation(0,0);

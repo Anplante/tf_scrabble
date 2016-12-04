@@ -11,6 +11,8 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.List;
 import java.awt.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Fenêtre de jeu principal du jeu de Scrabble.
@@ -19,6 +21,9 @@ import java.awt.*;
  */
 public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
+    private static final Locale locale = new Locale(System.getProperty("user.language"),
+            System.getProperty("user.country"));
+    private static final ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
     private static final double RATIO_LETTER_RACK_ZONE = 0.1;
     protected static final int MARGIN = 5;
 
@@ -297,15 +302,15 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
         String message;
         if (winner.size() == 1) {
-            message = winner.get(0).getName() + " est le gagnant!";
+            message = winner.get(0).getName() + messages.getString("Winner");
         } else {
-            message = "Match null entre les joueurs ";
+            message = messages.getString("Null_Game");
 
             for (int i = 0; i < winner.size(); i++) {
                 message += " " + winner.get(i).getName();
 
                 if (i + 1 == winner.size() - 1) {
-                    message += " et";
+                    message += messages.getString("And");
                 } else if (i + 1 < winner.size()) {
                     message += ",";
                 }
@@ -314,6 +319,6 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
             message += ".";
         }
 
-        JOptionPane.showConfirmDialog(null, message, "Fin de la partie", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showConfirmDialog(null, message, messages.getString("End_Game"), JOptionPane.PLAIN_MESSAGE);
     }
 }

@@ -14,6 +14,8 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.net.URL;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 
@@ -22,7 +24,9 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
  */
 public class PanelPlayerInfo extends JPanel implements Observateur{
 
-
+    private static final Locale locale = new Locale(System.getProperty("user.language"),
+            System.getProperty("user.country"));
+    private static final ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
     private static final String TEXT_FONT = "Comic Sans MS Bold";
     private static final Font fontOfPanel = new Font(TEXT_FONT, Font.PLAIN, 15);
 
@@ -68,7 +72,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
 
         lblScoreTitle = new JLabel();
         lblScoreTitle.setFont(fontOfPanel);
-        lblScoreTitle.setText("Score : ");
+        lblScoreTitle.setText(messages.getString("Score"));
         lblScoreTitle.setLocation(5, 75);
         lblScoreTitle.setSize(lblScoreTitle.getPreferredSize());
 
@@ -85,7 +89,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
     private void initPlayedLabel() {
         lblCoupTitle = new JLabel();
         lblCoupTitle.setFont(fontOfPanel);
-        lblCoupTitle.setText("Dernier coup joué : ");
+        lblCoupTitle.setText(messages.getString("Last_Move"));
         lblCoupTitle.setLocation(5, 100);
         lblCoupTitle.setSize(lblCoupTitle.getPreferredSize());
 
@@ -143,9 +147,9 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
                 lblCoupJoue.setText(move.getMove());
                 lblCoupJoue.setSize(lblCoupJoue.getPreferredSize());
                 if (move.getMovePoints() != 0) {
-                    lblPointsTitle.setText("pour ");
+                    lblPointsTitle.setText(messages.getString("For"));
                     lblPointsTitle.setSize(lblPointsTitle.getPreferredSize());
-                    lblPoints.setText(Integer.toString(move.getMovePoints()) + " points");
+                    lblPoints.setText(Integer.toString(move.getMovePoints()) + " " + messages.getString("Points_Space"));
                     lblPoints.setSize(lblPoints.getPreferredSize());
                 }
                 else {

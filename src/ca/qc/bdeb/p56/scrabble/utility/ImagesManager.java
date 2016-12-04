@@ -13,6 +13,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +27,9 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
  */
 public class ImagesManager {
 
+    private static final Locale locale = new Locale(System.getProperty("user.language"),
+            System.getProperty("user.country"));
+    private static final ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
     private static final URL DEFAULT_PLAYER_ICON = Launcher.class.getResource("/images/default.png");
 
     public static ImageIcon getIcon(URL path, int width, int height)
@@ -42,7 +47,7 @@ public class ImagesManager {
         try {
             imgPlayer = ImageIO.read(pathToIcon);
         } catch (IOException ex) {
-            Logger.getLogger("Impossible de trouver l'image situé à : "
+            Logger.getLogger(messages.getString("Error_Finding_File") + " "
                     + String.valueOf(pathToIcon)).log(Level.SEVERE, null, ex);
         }
 

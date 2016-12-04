@@ -19,7 +19,9 @@ import java.util.ResourceBundle;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by TheFrenchOne on 10/24/2016.
+ *  Classe test s'occupant de confirmer certains traductions, note : quand on set le language au début, ce language
+ *
+ * Created by TheFrenchOne on 10/24/2016. Edited by Antoine
  */
 public class LocalizationTest {
 
@@ -37,15 +39,9 @@ public class LocalizationTest {
 
         System.setProperty("user.language", "fr");
         messages = ResourceBundle.getBundle("strings", Locale.getDefault());
-        GameManager gameManager = new GameManager();
-
-        List<Player> players = new ArrayList<Player>();
-        players.add(new HumanPlayer("Louis"));
-        players.add(new HumanPlayer("Antoine"));
-        game = gameManager.createNewGame(players);
 
         scrabbleGUI = new ScrabbleGUI();
-        scrabbleGUI.setBackgroundPath("simplistic.png");
+        scrabbleGUI.setBackgroundPath("sunburst.jpg");
         frame = scrabbleGUI.getMenu();
 
         txtFirstPlayer = (JTextField) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME + " 0");
@@ -69,8 +65,4 @@ public class LocalizationTest {
         assertEquals("Veuillez entrer un nom...", txtFirstPlayer.getText());
     }
 
-
-    private Locale getLocaleFromString(String language, String country) {
-        return new Locale(language, country);
-    }
 }

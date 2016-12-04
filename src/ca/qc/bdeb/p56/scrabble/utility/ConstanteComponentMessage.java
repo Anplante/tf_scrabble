@@ -45,7 +45,7 @@ public class ConstanteComponentMessage {
     public static final String RES_WAITING_IMAGE = "./images/waiting.png";
     public static final String MESS_PLAY = messages.getString("Play");
     public static final String MESS_RECALL = messages.getString("Recall");;
-    public static final String MESS_EXCHANGE = messages.getString("Echanger");
+    public static final String MESS_EXCHANGE = messages.getString("Exchange");
     public static final String MESS_RESTART_GAME  = messages.getString("Replay");
     public static final String ELLIPSIS = "...";
     public static final String RES_IMAGES_ENG = "./letters/englishDictionaryValue/";

@@ -10,14 +10,22 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Created by Louis Luu Lim on 11/23/2016.
  */
 public class TableMoveLog extends JTable implements Observateur {
 
-    private static final String ROUND = "Tour ";
-    private static final String[] HEADERS = {"Joueur", "Coup", "Pts", "Total"};
+
+    private static final Locale locale = new Locale(System.getProperty("user.language"),
+            System.getProperty("user.country"));
+    private static final ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
+
+    private static final String ROUND = messages.getString("Round");
+    private static final String[] HEADERS = {messages.getString("Player"), messages.getString("Move"),
+            messages.getString("Points"), messages.getString("Total")};
     private static final Color COLOR_HEADERS = new Color(188, 252, 250);
     private static final Color COLOR_ROW_ROUND= new Color(161, 212, 252);
     private static final Color COLOR_ROW_MOVE = new Color(165, 250, 252);
