@@ -1,5 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
+import ca.qc.bdeb.p56.scrabble.shared.Language;
+
 import java.io.File;
 import java.util.List;
 
@@ -10,16 +12,21 @@ import java.util.List;
  */
 public class GameManager {
 
-    private Game game;
-
     private final String DEFAULT_GAME_PARAMS = "resources/files/scrabbleParameters.xml";
+
+    private Game game;
 
     public GameManager() {
         game = null;
     }
 
-    public Game createNewGame(List<Player> players) {
-        game = new Game(DEFAULT_GAME_PARAMS, players);
+    public Game createNewGame(List<Player> players, Language languageChoice) {
+        game = new Game(players);
+        game.setLanguage(languageChoice);
+        game.setParameters(DEFAULT_GAME_PARAMS);
+        
         return game;
     }
+
+
 }

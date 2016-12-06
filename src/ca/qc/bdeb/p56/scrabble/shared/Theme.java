@@ -1,4 +1,4 @@
-package ca.qc.bdeb.p56.scrabble.view;
+package ca.qc.bdeb.p56.scrabble.shared;
 
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 

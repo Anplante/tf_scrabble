@@ -1,5 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
+import ca.qc.bdeb.p56.scrabble.shared.Language;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import org.junit.After;
 import org.junit.Before;
@@ -28,7 +29,7 @@ public class StatePlayTileTest {
 
         List<Player> players = new ArrayList<Player>();
         players.add(new HumanPlayer("Louis"));
-        game = gameManager.createNewGame(players);
+        game = gameManager.createNewGame(players, Language.FRENCH);
         game.startGame();
         activePlayer = game.getActivePlayer();
         centerSquare = game.getBoard().getSquare(7, 7);

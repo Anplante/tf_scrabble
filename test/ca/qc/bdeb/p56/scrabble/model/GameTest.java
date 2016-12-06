@@ -1,13 +1,17 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
 
+import ca.qc.bdeb.p56.scrabble.shared.Language;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static org.junit.Assert.*;
 
@@ -27,8 +31,7 @@ public class GameTest {
         List<Player> players = new ArrayList<Player>();
         players.add(new HumanPlayer("Louis"));
         players.add(new HumanPlayer("Antoine"));
-        game = gameManager.createNewGame(players);
-
+        game = gameManager.createNewGame(players, Language.FRENCH);
     }
 
     @After
@@ -492,7 +495,9 @@ public class GameTest {
         game.getActivePlayer().selectSquare(square1);
         game.getActivePlayer().setState(new StatePlayTile(game.getActivePlayer(),tile2));
         game.getActivePlayer().selectSquare(square2);
-        String expected = "Le mot 'la' donnera 0 points";
+        Locale locale = new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
+        ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
+        String expected =  MessageFormat.format(messages.getString("Word"),"la", 0);
         assertEquals(expected, game.getCurrentWord());
     }
 

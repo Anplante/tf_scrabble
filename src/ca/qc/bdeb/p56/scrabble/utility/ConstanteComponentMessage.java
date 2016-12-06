@@ -1,6 +1,5 @@
 package ca.qc.bdeb.p56.scrabble.utility;
 
-import javax.annotation.Resource;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -49,15 +48,14 @@ public class ConstanteComponentMessage {
     public static final String MESS_RESTART_GAME  = messages.getString("Replay");
     public static final String ELLIPSIS = "...";
     public static final String RES_IMAGES_ENG = "./letters/englishDictionaryValue/";
-    public static final String RES_IMAGES_FR_BASIC = "./letters/frenchDictionaryValue/Basic/";
-    public static final String RES_IMAGES_FR_NOBLE = "./letters/frenchDictionaryValue/Noble/";
+    public static final String RES_IMAGES_FR_BASIC = "./letters/frenchDictionaryValue/basic/";
+    public static final String RES_IMAGES_FR_NOBLE = "./letters/frenchDictionaryValue/noble/";
     public static final String RES_BLANKS_FR_NOBLE = "./letters/frenchDictionaryValue/blank_noble";
     public static final String RES_BLANKS_FR_BASIC = "./letters/frenchDictionaryValue/blank_basic";
 
     public static final String RES_SWAP = "./images/swap.png";
     public static final String RES_RETURN = "./images/back.png";
     public static final String RES_NEXT = "./images/next.png";
-    public static final String RES_SHUFFLE = "./images/shuffle.png";
     public static final String RES_ABANDON = "./images/abandon.png";
     public static final String RES_AZ = "./images/az.png";
 
@@ -69,8 +67,7 @@ public class ConstanteComponentMessage {
     public static final String TITLE_ORDER = "Ordonner";
     public static final String INVALID_WORD_POINTS = messages.getString("Non_Valid");
     public static final String NO_WORD_POINTS = messages.getString("Place_Letter");
-    
-    public static final String RES_ORDER_ICONm = "./images/az.png";
+
     public static final String ENTER_WORD = messages.getString("Enter_Word");
     public static final String VALID_WORD = messages.getString("Valid_Word");
     public static final String INVALID_WORD = messages.getString("Invalid_Word");

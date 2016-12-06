@@ -1,5 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
+import ca.qc.bdeb.p56.scrabble.shared.Language;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +25,7 @@ public class SquareTest {
 
         List<Player> players = new ArrayList<Player>();
         players.add(new HumanPlayer("Louis"));
-        game = gameManager.createNewGame(players);
+        game = gameManager.createNewGame(players, Language.FRENCH);
 
     }
 

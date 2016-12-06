@@ -109,9 +109,9 @@ public class MainMenuGUITest {
     public void testTheme() {
         cmbTheme.setSelectedIndex(1);
         btnAccept.doClick();
-        assertEquals("./letters/frenchDictionaryValue/Noble/", scrabbleGUI.getTheme().getThemeFolderPath());
+        assertEquals("./letters/frenchDictionaryValue/noble/", scrabbleGUI.getTheme().getThemeFolderPath());
         cmbTheme.setSelectedIndex(0);
         btnAccept.doClick();
-        assertEquals("./letters/frenchDictionaryValue/Basic/", scrabbleGUI.getTheme().getThemeFolderPath());
+        assertEquals("./letters/frenchDictionaryValue/basic/", scrabbleGUI.getTheme().getThemeFolderPath());
     }
 }

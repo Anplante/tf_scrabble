@@ -5,6 +5,7 @@ import ca.qc.bdeb.p56.scrabble.model.Square;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ImagesManager;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
+import ca.qc.bdeb.p56.scrabble.shared.Theme;
 
 import javax.swing.*;
 import java.awt.*;

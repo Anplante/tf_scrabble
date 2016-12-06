@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-    <game>
+<game>
+    <french>
         <frenchAlphabet>
             <letter text="A" value="1" amount="9"/>
             <letter text="B" value="3" amount="2"/>
@@ -11,7 +12,7 @@
             <letter text="G" value="2" amount="2"/>
             <letter text="H" value="4" amount="2"/>
             <letter text="I" value="1" amount="8"/>
-            <letter text="J" value="8"  amount="1"/>
+            <letter text="J" value="8" amount="1"/>
             <letter text="K" value="10" amount="1"/>
             <letter text="L" value="1" amount="5"/>
             <letter text="M" value="2" amount="3"/>
@@ -28,84 +29,121 @@
             <letter text="X" value="10" amount="1"/>
             <letter text="Y" value="10" amount="1"/>
             <letter text="Z" value="10" amount="1"/>
-            <letter text="" value="0" amount ="2"/>
+            <letter text="" value="0" amount="2"/>
         </frenchAlphabet>
 
-        <dictionary filename="twl06.txt" />
+        <dictionary filename="twl06.txt"/>
+
+    </french>
+
+    <english>
+        <englishAlphabet>
+            <letter text="A" value="1" amount="9"/>
+            <letter text="B" value="3" amount="2"/>
+            <letter text="C" value="3" amount="2"/>
+            <letter text="D" value="2" amount="4"/>
+            <letter text="E" value="1" amount="12"/>
+            <letter text="F" value="4" amount="2"/>
+            <letter text="G" value="2" amount="3"/>
+            <letter text="H" value="4" amount="2"/>
+            <letter text="I" value="1" amount="9"/>
+            <letter text="J" value="8" amount="1"/>
+            <letter text="K" value="5" amount="1"/>
+            <letter text="L" value="1" amount="4"/>
+            <letter text="M" value="3" amount="2"/>
+            <letter text="N" value="1" amount="6"/>
+            <letter text="O" value="1" amount="8"/>
+            <letter text="P" value="3" amount="2"/>
+            <letter text="Q" value="10" amount="1"/>
+            <letter text="R" value="1" amount="6"/>
+            <letter text="S" value="1" amount="4"/>
+            <letter text="T" value="1" amount="6"/>
+            <letter text="U" value="1" amount="4"/>
+            <letter text="V" value="4" amount="2"/>
+            <letter text="W" value="4" amount="2"/>
+            <letter text="X" value="8" amount="1"/>
+            <letter text="Y" value="4" amount="2"/>
+            <letter text="Z" value="10" amount="1"/>
+            <letter text="" value="0" amount="2"/>
+        </englishAlphabet>
+
+        <dictionary filename="twl06.txt"/>
+
+    </english>
 
 
-        <premiums>
-            <premium name="TW" type="wordscore" multiplier="3" />
-            <premium name="DW" type="wordscore" multiplier="2" />
-            <premium name="TL" type="letterscore" multiplier="3" />
-            <premium name="DL" type="letterscore" multiplier="2" />
-            <premium name="CENTER" type="wordscore" multiplier="2" />
-        </premiums>
-        <board>
-            <premium row="7" col="7" name="CENTER"/>
+    <premiums>
+        <premium name="TW" type="wordscore" multiplier="3"/>
+        <premium name="DW" type="wordscore" multiplier="2"/>
+        <premium name="TL" type="letterscore" multiplier="3"/>
+        <premium name="DL" type="letterscore" multiplier="2"/>
+        <premium name="CENTER" type="wordscore" multiplier="2"/>
+    </premiums>
+    <board>
+        <premium row="7" col="7" name="CENTER"/>
 
-            <premium row="0" col="0" name="TW" />
-            <premium row="0" col="7" name="TW" />
-            <premium row="0" col="14" name="TW" />
-            <premium row="7" col="0" name="TW" />
-            <premium row="7" col="14" name="TW" />
-            <premium row="14" col="0" name="TW" />
-            <premium row="14" col="7" name="TW" />
-            <premium row="14" col="14" name="TW" />
+        <premium row="0" col="0" name="TW"/>
+        <premium row="0" col="7" name="TW"/>
+        <premium row="0" col="14" name="TW"/>
+        <premium row="7" col="0" name="TW"/>
+        <premium row="7" col="14" name="TW"/>
+        <premium row="14" col="0" name="TW"/>
+        <premium row="14" col="7" name="TW"/>
+        <premium row="14" col="14" name="TW"/>
 
-            <premium row="0" col="3" name="DL"/>
-            <premium row="0" col="11" name="DL"/>
-            <premium row="2" col="6" name="DL"/>
-            <premium row="2" col="8" name="DL"/>
-            <premium row="3" col="0" name="DL"/>
-            <premium row="3" col="7" name="DL"/>
-            <premium row="3" col="14" name="DL"/>
-            <premium row="6" col="2" name="DL"/>
-            <premium row="6" col="6" name="DL"/>
-            <premium row="6" col="8" name="DL"/>
-            <premium row="6" col="12" name="DL"/>
-            <premium row="7" col="3" name="DL"/>
-            <premium row="7" col="11" name="DL"/>
-            <premium row="8" col="2" name="DL"/>
-            <premium row="8" col="6" name="DL"/>
-            <premium row="8" col="8" name="DL"/>
-            <premium row="8" col="12" name="DL"/>
-            <premium row="11" col="0" name="DL"/>
-            <premium row="11" col="7" name="DL"/>
-            <premium row="11" col="14" name="DL"/>
-            <premium row="12" col="6" name="DL"/>
-            <premium row="12" col="8" name="DL"/>
-            <premium row="14" col="3" name="DL"/>
-            <premium row="14" col="11" name="DL"/>
+        <premium row="0" col="3" name="DL"/>
+        <premium row="0" col="11" name="DL"/>
+        <premium row="2" col="6" name="DL"/>
+        <premium row="2" col="8" name="DL"/>
+        <premium row="3" col="0" name="DL"/>
+        <premium row="3" col="7" name="DL"/>
+        <premium row="3" col="14" name="DL"/>
+        <premium row="6" col="2" name="DL"/>
+        <premium row="6" col="6" name="DL"/>
+        <premium row="6" col="8" name="DL"/>
+        <premium row="6" col="12" name="DL"/>
+        <premium row="7" col="3" name="DL"/>
+        <premium row="7" col="11" name="DL"/>
+        <premium row="8" col="2" name="DL"/>
+        <premium row="8" col="6" name="DL"/>
+        <premium row="8" col="8" name="DL"/>
+        <premium row="8" col="12" name="DL"/>
+        <premium row="11" col="0" name="DL"/>
+        <premium row="11" col="7" name="DL"/>
+        <premium row="11" col="14" name="DL"/>
+        <premium row="12" col="6" name="DL"/>
+        <premium row="12" col="8" name="DL"/>
+        <premium row="14" col="3" name="DL"/>
+        <premium row="14" col="11" name="DL"/>
 
-            <premium row="1" col="5" name="TL"/>
-            <premium row="1" col="9" name="TL"/>
-            <premium row="5" col="1" name="TL"/>
-            <premium row="5" col="5" name="TL"/>
-            <premium row="5" col="9" name="TL"/>
-            <premium row="5" col="13" name="TL"/>
-            <premium row="9" col="1" name="TL"/>
-            <premium row="9" col="5" name="TL"/>
-            <premium row="9" col="9" name="TL"/>
-            <premium row="9" col="13" name="TL"/>
-            <premium row="13" col="5" name="TL"/>
-            <premium row="13" col="9" name="TL"/>
+        <premium row="1" col="5" name="TL"/>
+        <premium row="1" col="9" name="TL"/>
+        <premium row="5" col="1" name="TL"/>
+        <premium row="5" col="5" name="TL"/>
+        <premium row="5" col="9" name="TL"/>
+        <premium row="5" col="13" name="TL"/>
+        <premium row="9" col="1" name="TL"/>
+        <premium row="9" col="5" name="TL"/>
+        <premium row="9" col="9" name="TL"/>
+        <premium row="9" col="13" name="TL"/>
+        <premium row="13" col="5" name="TL"/>
+        <premium row="13" col="9" name="TL"/>
 
-            <premium row="1" col="1" name="DW"/>
-            <premium row="1" col="13" name="DW"/>
-            <premium row="2" col="2" name="DW"/>
-            <premium row="2" col="12" name="DW"/>
-            <premium row="3" col="3" name="DW"/>
-            <premium row="3" col="11" name="DW"/>
-            <premium row="4" col="4" name="DW"/>
-            <premium row="4" col="10" name="DW"/>
-            <premium row="10" col="4" name="DW"/>
-            <premium row="10" col="10" name="DW"/>
-            <premium row="11" col="3" name="DW"/>
-            <premium row="11" col="11" name="DW"/>
-            <premium row="12" col="2" name="DW"/>
-            <premium row="12" col="12" name="DW"/>
-            <premium row="13" col="1" name="DW"/>
-            <premium row="13" col="13" name="DW"/>
-        </board>
-    </game>
+        <premium row="1" col="1" name="DW"/>
+        <premium row="1" col="13" name="DW"/>
+        <premium row="2" col="2" name="DW"/>
+        <premium row="2" col="12" name="DW"/>
+        <premium row="3" col="3" name="DW"/>
+        <premium row="3" col="11" name="DW"/>
+        <premium row="4" col="4" name="DW"/>
+        <premium row="4" col="10" name="DW"/>
+        <premium row="10" col="4" name="DW"/>
+        <premium row="10" col="10" name="DW"/>
+        <premium row="11" col="3" name="DW"/>
+        <premium row="11" col="11" name="DW"/>
+        <premium row="12" col="2" name="DW"/>
+        <premium row="12" col="12" name="DW"/>
+        <premium row="13" col="1" name="DW"/>
+        <premium row="13" col="13" name="DW"/>
+    </board>
+</game>

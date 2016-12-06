@@ -5,6 +5,7 @@ import ca.qc.bdeb.p56.scrabble.shared.Event;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
+import ca.qc.bdeb.p56.scrabble.shared.Theme;
 
 import java.awt.Image;
 import javax.swing.*;
@@ -77,13 +78,16 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
     public void createScrabbleGame(Game game) {
 
+
         if (gameModel != null) {
             remove(panelInformation);
             remove(panelLetterRack);
             remove(pnlBoard);
         }
 
+
         this.gameModel = game;
+
         gameModel.ajouterObservateur(this);
         gameModel.startGame();
         initializeComponents();

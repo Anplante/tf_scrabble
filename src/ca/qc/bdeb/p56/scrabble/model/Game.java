@@ -4,6 +4,7 @@ import ca.qc.bdeb.p56.scrabble.model.Log.*;
 import ca.qc.bdeb.p56.scrabble.shared.Event;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 import ca.qc.bdeb.p56.scrabble.shared.Direction;
+import ca.qc.bdeb.p56.scrabble.shared.Language;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
@@ -22,6 +23,9 @@ import java.util.*;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static ca.qc.bdeb.p56.scrabble.shared.Language.ENGLISH;
+import static ca.qc.bdeb.p56.scrabble.shared.Language.FRENCH;
 
 /**
  * Classe du jeu de scrabbleé
@@ -52,8 +56,9 @@ public class Game implements Observable {
     private LogManager logManager;
     private Player lastPlayerToPlay;
     private String currentWord;
+    private String language;
 
-    public Game(String filePath, List<Player> players) {
+    public Game(List<Player> players) {
         isEndGame = false;
         observateurs = new LinkedList<>();
         eliminatedPlayers = new ArrayList<>();
@@ -64,8 +69,6 @@ public class Game implements Observable {
         for (Player player : players) {
             player.setGame(this);
         }
-
-        loadParameters(filePath);
     }
 
     public Board getBoard() {
@@ -100,7 +103,7 @@ public class Game implements Observable {
         return logManager;
     }
 
-    public String getCurrentWord(){
+    public String getCurrentWord() {
         return currentWord;
     }
 
@@ -144,7 +147,7 @@ public class Game implements Observable {
     private void initAlphabetBag(Element rootElement) {
 
         alphabetBag = new ArrayList<>();
-        Element alphabetsElement = (Element) rootElement.getElementsByTagName(TAG_FRENCH_ALPHABET).item(0);
+        Element alphabetsElement = (Element) rootElement.getElementsByTagName(language).item(0);
         NodeList alphabetsNodes = alphabetsElement.getElementsByTagName(TAG_LETTER);
         initAllLetters(alphabetsNodes);
     }
@@ -342,7 +345,7 @@ public class Game implements Observable {
         return isAWord;
     }
 
-    public void calculateCurrentPoints(List<Square> tilesPlaced){
+    public void calculateCurrentPoints(List<Square> tilesPlaced) {
 
         Direction direction;
         int currentScore = 0;
@@ -364,7 +367,6 @@ public class Game implements Observable {
             }
         }
     }
-
 
 
     private String createWord(List<Square> letters) {
@@ -483,7 +485,7 @@ public class Game implements Observable {
 
     private void removePremiums(List<Square> squares) {
 
-        for(Square square : squares){
+        for (Square square : squares) {
             square.setPremium(null);
         }
 
@@ -683,5 +685,15 @@ public class Game implements Observable {
             }
         }
         return candidats;
+    }
+
+    public void setLanguage(Language language) {
+
+        this.language = language.getLanguage();
+    }
+
+    public void setParameters(String parameters) {
+
+        loadParameters(parameters);
     }
 }

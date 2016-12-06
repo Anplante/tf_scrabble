@@ -42,7 +42,7 @@ public class StatePlayTile extends State {
         // Si le joueur sélectionne une autre case pour déplacer la lettre sélectionné auparavant sur le board
         else if (checkIfPlayerwantsToMoveATileOnBoard(squareSelected)) {
 
-            if(checkIfPlayerCanMoveTileOnBoard(squareSelected)){
+            if (checkIfPlayerCanMoveTileOnBoard(squareSelected)) {
                 swapTileOfPlace(this.squareSelected, squareSelected);
                 this.squareSelected = null;
             }
@@ -62,36 +62,32 @@ public class StatePlayTile extends State {
         }
     }
 
-    private void swapTileOfPlace(Square pointA, Square pointB){
+    private void swapTileOfPlace(Square pointA, Square pointB) {
 
         Tile tempTile = pointA.getTileOn();
         pointA.setLetter(pointB.getTileOn());
         pointB.setLetter(tempTile);
 
-        if(!tilesPlacedOnBoardPosition.contains(pointB)) {
+        if (!tilesPlacedOnBoardPosition.contains(pointB)) {
             tilesPlacedOnBoardPosition.remove(pointA);
             tilesPlacedOnBoardPosition.add(pointB);
         }
     }
 
-    private boolean checkIfPlayerWantsSelectATileToMoveOnBoard(Square squareSelected)
-    {
+    private boolean checkIfPlayerWantsSelectATileToMoveOnBoard(Square squareSelected) {
         return this.tileSelected == null && this.squareSelected == null && checkIfContentOnSquaresCanBeSwap(squareSelected);
     }
 
-    private boolean checkIfPlayerwantsToMoveATileOnBoard(Square squareSelected)
-    {
+    private boolean checkIfPlayerwantsToMoveATileOnBoard(Square squareSelected) {
         return tileSelected == null && this.squareSelected != null && this.squareSelected != squareSelected;
     }
 
-    private boolean checkIfPlayerCanMoveTileOnBoard(Square squareSelected)
-    {
-        return letterOnSameAxe(squareSelected);
+    private boolean checkIfPlayerCanMoveTileOnBoard(Square squareSelected) {
+        return letterOnSameAxe(squareSelected) && checkIfContentOnSquaresCanBeSwap(squareSelected);
     }
 
-    private boolean checkIfContentOnSquaresCanBeSwap(Square squareSelected)
-    {
-        return tilesPlacedOnBoardPosition.contains(squareSelected);
+    private boolean checkIfContentOnSquaresCanBeSwap(Square squareSelected) {
+        return tilesPlacedOnBoardPosition.contains(squareSelected) || !squareSelected.containLetter();
     }
 
     private void placeTileOnSquare() {

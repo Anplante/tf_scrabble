@@ -35,6 +35,7 @@ public class ConstanteTestName {
     public static final String WAITING_PANEL_NAME = "waitingPnl";
     public static final String FILE_CHOOSER = "fileChooser";
     public static final String SEARCH_BUTTON = "searchButton";
+    public static final String LANGUAGE_NAME = "language";
     public static String SEARCH_BAR = "search bar";
     public static String SEARCH_TXT = "search field";
     public static String LBL_RESULT = "result of search";

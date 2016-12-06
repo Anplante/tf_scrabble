@@ -1,7 +1,8 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
+import ca.qc.bdeb.p56.scrabble.shared.Language;
+import ca.qc.bdeb.p56.scrabble.shared.Theme;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class BtnSquareTest {
         GameManager gameManager = new GameManager();
         java.util.List<Player> players = new ArrayList<Player>();
         players.add(new HumanPlayer("Louis"));
-        gameModel = gameManager.createNewGame(players);
+        gameModel = gameManager.createNewGame(players, Language.FRENCH);
         gameModel.startGame();
     }
 

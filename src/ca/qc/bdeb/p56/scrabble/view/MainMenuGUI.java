@@ -4,29 +4,18 @@ import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.HumanPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Player;
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
-import ca.qc.bdeb.p56.scrabble.utility.ImagesManager;
-import ca.qc.bdeb.p56.scrabble.utility.NumberOfPlayer;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
+import ca.qc.bdeb.p56.scrabble.shared.Language;
+import ca.qc.bdeb.p56.scrabble.shared.Theme;
+import ca.qc.bdeb.p56.scrabble.utility.*;
 import sun.misc.Launcher;
 
 import javax.swing.*;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -51,7 +40,9 @@ import static ca.qc.bdeb.p56.scrabble.utility.NumberOfPlayer.TWO_PLAYER;
  */
 public class MainMenuGUI extends JDialog {
 
-    private static final int BASIC_THEME = 0;
+
+    private static final int ENGLISH = 1;
+    private static final int FRENCH = 0;
     private static final int NOBLE_THEME = 1;
     private static final int LIMIT_OF_PLAYER = 4;
 
@@ -79,10 +70,12 @@ public class MainMenuGUI extends JDialog {
     private JLabel lblNumberOfHuman;
     private JLabel lblTheme;
     private JLabel lblBackground;
+    private JLabel lblLanguage;
 
     private JComboBox cmbTheme;
     private JComboBox cmbNumberOfAi;
     private JComboBox cmbNumberOfHuman;
+    private JComboBox cmbLanguage;
     private JComboBox<String> cmbBackgroundScrabble;
 
     private JFileChooser fileImage;
@@ -111,7 +104,7 @@ public class MainMenuGUI extends JDialog {
 
         Insets insets = fenetre.getInsets();
         setSize(new Dimension(insets.left + insets.right + 500,
-                insets.top + insets.bottom + 550));
+                insets.top + insets.bottom + 600));
 
         fenetre.pack();
         // TODO Louis : Faire en sorte que lorsqu'on ferme le dialogue que le programme se termine.
@@ -126,8 +119,8 @@ public class MainMenuGUI extends JDialog {
         setResizable(false);
     }
 
-
     private void initializeComponents() {
+
         panelMenu = new JPanel();
         panelMenu.setLayout(null);
         addFileChooser();
@@ -138,7 +131,6 @@ public class MainMenuGUI extends JDialog {
         addIconsPlayer();
         add(panelMenu);
     }
-
 
     private void addComboBox() {
 
@@ -180,11 +172,19 @@ public class MainMenuGUI extends JDialog {
         cmbTheme.setLocation(150, 365);
         cmbTheme.setSize(180, 25);
 
+        cmbLanguage = new JComboBox();
+        cmbLanguage.setName(ConstanteTestName.LANGUAGE_NAME);
+        cmbLanguage.addItem(messages.getString("French"));
+        cmbLanguage.addItem(messages.getString("English"));
+        cmbLanguage.setVisible(true);
+        cmbLanguage.setLocation(150, 415);
+        cmbLanguage.setSize(180, 25);
 
         panelMenu.add(cmbNumberOfHuman);
         panelMenu.add(cmbNumberOfAi);
         panelMenu.add(cmbBackgroundScrabble);
         panelMenu.add(cmbTheme);
+        panelMenu.add(cmbLanguage);
     }
 
     private void addEventOnComboBox() {
@@ -247,18 +247,19 @@ public class MainMenuGUI extends JDialog {
     private void initBtnExit() {
         btnExit = new JButton();
         btnExit.setSize(100, 50);
-        btnExit.setLocation(350, 420);
-        btnExit.setText(ConstanteComponentMessage.MESS_CANCEL);
+        btnExit.setLocation(350, 470);
+        btnExit.setText(messages.getString("Quit"));
         btnExit.setName(ConstanteTestName.CANCEL_NAME);
         panelMenu.add(btnExit);
         btnExit.addActionListener(e -> System.exit(0));
     }
 
     private void initBtnCreateGame() {
+
         btnCreateGame = new JButton();
         btnCreateGame.setSize(100, 50);
         btnCreateGame.setText(ConstanteComponentMessage.MESS_CONFIRM);
-        btnCreateGame.setLocation(40, 420);
+        btnCreateGame.setLocation(40, 470);
         btnCreateGame.setName(ConstanteTestName.CONFIRM_NAME);
         panelMenu.add(btnCreateGame);
 
@@ -310,6 +311,17 @@ public class MainMenuGUI extends JDialog {
         return theme;
     }
 
+    private Language getLanguage() {
+
+        Language languageChoice = Language.FRENCH;
+        switch (cmbLanguage.getSelectedIndex()) {
+            case ENGLISH:
+                languageChoice = Language.ENGLISH;
+                break;
+        }
+        return languageChoice;
+    }
+
     private void addFileChooser() {
         LookAndFeel defaultLook = UIManager.getLookAndFeel();
         setFileDialogLook(UIManager.getSystemLookAndFeelClassName());
@@ -348,7 +360,8 @@ public class MainMenuGUI extends JDialog {
 
     private void initializeGame() {
         gameManager = new GameManager();
-        game = gameManager.createNewGame(players);
+
+        game = gameManager.createNewGame(players, getLanguage());
         parent.setGameTheme(getLetttersTheme());
         parent.changeBackground(allBackgroundPath.get(cmbBackgroundScrabble.getSelectedIndex()));
         parent.createScrabbleGame(game);
@@ -394,10 +407,16 @@ public class MainMenuGUI extends JDialog {
         lblTheme.setVisible(true);
         lblTheme.setName(ConstanteTestName.LBL_THEME);
 
+        lblLanguage = new JLabel();
+        lblLanguage.setText(messages.getString("Language"));
+        lblLanguage.setLocation(25, 420);
+        lblLanguage.setSize(lblLanguage.getPreferredSize());
+
         panelMenu.add(lblNumberOfAi);
         panelMenu.add(lblNumberOfHuman);
         panelMenu.add(lblBackground);
         panelMenu.add(lblTheme);
+        panelMenu.add(lblLanguage);
 
         for (JLabel playerLabel : allLabelOfPlayers) {
             panelMenu.add(playerLabel);

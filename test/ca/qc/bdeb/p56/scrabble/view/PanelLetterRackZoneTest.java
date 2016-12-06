@@ -1,9 +1,10 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
+import ca.qc.bdeb.p56.scrabble.shared.Language;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
+import ca.qc.bdeb.p56.scrabble.shared.Theme;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class PanelLetterRackZoneTest {
         lstPlayer.add(new HumanPlayer("Julien"));
         scrabbleGame = new ScrabbleGUI();
         scrabbleGame.setBackgroundPath("simplistic.png");
-        game = gameManager.createNewGame(lstPlayer);
+        game = gameManager.createNewGame(lstPlayer, Language.FRENCH);
         scrabbleGame.setGameTheme(Theme.BASIC);
         scrabbleGame.createScrabbleGame(game);
         currentPlayer = game.getActivePlayer();
