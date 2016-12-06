@@ -148,25 +148,41 @@ public class GameTest {
 
     @Test
     public void testUsePremiumTwice() {
+
         game.startGame();
+        Player activePlayer = game.getActivePlayer();
 
-        Tile tileTested = new Tile("l", 2);
+        Tile tile1 = new Tile("l", 2);
+        Tile tile2 = new Tile("a", 2);
 
-        Square tripleWordPremiumSquare = game.getSquare(0, 0);
-        tripleWordPremiumSquare.setLetter(tileTested);
+        Square tripleWordSquare = game.getSquare(0, 0);
+        tripleWordSquare.setLetter(tile1);
+        Square noPremiumSquare = game.getSquare(1, 0);
+        noPremiumSquare.setLetter(tile2);
 
         List<Square> lettersPlayed = new ArrayList<>();
 
-        lettersPlayed.add(tripleWordPremiumSquare);
+        lettersPlayed.add(tripleWordSquare);
+        lettersPlayed.add(noPremiumSquare);
 
-        int values = game.calculateWordPoints(lettersPlayed);
+        game.playWord(lettersPlayed);
 
-        assertEquals(6, values);
 
-        values = game.calculateWordPoints(lettersPlayed);
+        int playerCurrentScore = activePlayer.getScore();
 
-        assertEquals(2, values);
+        assertEquals((tile1.getValue() + tile2.getValue()) * 3, playerCurrentScore);
 
+        lettersPlayed.remove(tripleWordSquare);
+        noPremiumSquare = game.getSquare(0, 1);
+
+        tile2 = new Tile("a", 2);
+        noPremiumSquare.setLetter(tile2);
+
+
+        game.playWord(lettersPlayed);
+
+
+        assertEquals(tile1.getValue() + tile2.getValue(), activePlayer.getScore() - playerCurrentScore);
     }
 
     @Test
@@ -477,7 +493,7 @@ public class GameTest {
         game.getActivePlayer().setState(new StatePlayTile(game.getActivePlayer(),tile2));
         game.getActivePlayer().selectSquare(square2);
         String expected = "Le mot 'la' donnera 0 points";
-        assertEquals(expected,game.getCurrentWord());
+        assertEquals(expected, game.getCurrentWord());
     }
 
     @Test

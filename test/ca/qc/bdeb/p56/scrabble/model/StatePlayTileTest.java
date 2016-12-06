@@ -32,8 +32,6 @@ public class StatePlayTileTest {
         game.startGame();
         activePlayer = game.getActivePlayer();
         centerSquare = game.getBoard().getSquare(7, 7);
-
-
     }
 
     @After
@@ -103,6 +101,12 @@ public class StatePlayTileTest {
         game.selectLetter(secondTilePlayed);
         game.playTile(differentAxeSquare);
         assertTrue(activePlayer.getTiles().contains(secondTilePlayed));
+    }
+
+    @Test
+    public void testMoveTileOnBoard(){
+
 
     }
+
 }

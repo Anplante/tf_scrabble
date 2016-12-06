@@ -330,6 +330,7 @@ public class Game implements Observable {
             if (dictionary.checkWordExist(word)) {
                 if (checkForComboWord(tilesPlaced, direction)) {
                     int wordValue = calculateWordPoints(letters);
+                    removePremiums(letters);
                     getActivePlayer().addPoints(wordValue);
                     logManager.addWordLog(getActivePlayer(), turn, word, wordValue);
                     isAWord = true;
@@ -353,6 +354,7 @@ public class Game implements Observable {
             if (dictionary.checkWordExist(word)) {
                 if (checkForComboWord(tilesPlaced, direction)) {
                     currentScore = calculateWordPoints(letters);
+
                 }
                 Locale locale = new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
                 ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
@@ -362,6 +364,8 @@ public class Game implements Observable {
             }
         }
     }
+
+
 
     private String createWord(List<Square> letters) {
         StringBuilder word = new StringBuilder();
@@ -468,13 +472,21 @@ public class Game implements Observable {
                         wordMultiplier *= premium.getMultiplier();
                         break;
                 }
-                square.setPremium(null);
+
             }
             points += letterMultiplier * square.getTileOn().getValue();
         }
         points *= wordMultiplier;
 
         return points;
+    }
+
+    private void removePremiums(List<Square> squares) {
+
+        for(Square square : squares){
+            square.setPremium(null);
+        }
+
     }
 
     @Override

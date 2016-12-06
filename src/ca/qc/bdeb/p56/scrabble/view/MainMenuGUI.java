@@ -154,7 +154,7 @@ public class MainMenuGUI extends JDialog {
 
         cmbNumberOfHuman = new JComboBox<>();
         cmbNumberOfHuman.setName(ConstanteTestName.QTE_HUMAN_NAME);
-        
+
         for (int i = 0; i < numberOfHuman.length; i++) {
             cmbNumberOfHuman.addItem(numberOfHuman[i].getNumberOfPlayer());
         }

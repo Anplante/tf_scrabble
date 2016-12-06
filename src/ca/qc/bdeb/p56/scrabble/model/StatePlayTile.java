@@ -34,16 +34,64 @@ public class StatePlayTile extends State {
     @Override
     protected void selectSquare(Square squareSelected) {
 
-        this.squareSelected = squareSelected;
 
-        if (isValidMove() && tileSelected != null) {
-
-            if (originalTilesOder == null) {
-                originalTilesOder = getPlayer().getTiles();
-            }
-
-            placeTileOnSquare();
+        // Si le joueur sélectionne une lettre sur le board pour le déplacer
+        if (checkIfPlayerWantsSelectATileToMoveOnBoard(squareSelected)) {
+            this.squareSelected = squareSelected;
         }
+        // Si le joueur sélectionne une autre case pour déplacer la lettre sélectionné auparavant sur le board
+        else if (checkIfPlayerwantsToMoveATileOnBoard(squareSelected)) {
+
+            if(checkIfPlayerCanMoveTileOnBoard(squareSelected)){
+                swapTileOfPlace(this.squareSelected, squareSelected);
+                this.squareSelected = null;
+            }
+        }
+        // Sinon, il veut jouer une lettre sur le board
+        else {
+            this.squareSelected = squareSelected;
+            if (isValidMove() && tileSelected != null) {
+
+                if (originalTilesOder == null) {
+                    originalTilesOder = getPlayer().getTiles();
+                }
+
+                placeTileOnSquare();
+            }
+            this.squareSelected = null;
+        }
+    }
+
+    private void swapTileOfPlace(Square pointA, Square pointB){
+
+        Tile tempTile = pointA.getTileOn();
+        pointA.setLetter(pointB.getTileOn());
+        pointB.setLetter(tempTile);
+
+        if(!tilesPlacedOnBoardPosition.contains(pointB)) {
+            tilesPlacedOnBoardPosition.remove(pointA);
+            tilesPlacedOnBoardPosition.add(pointB);
+        }
+    }
+
+    private boolean checkIfPlayerWantsSelectATileToMoveOnBoard(Square squareSelected)
+    {
+        return this.tileSelected == null && this.squareSelected == null && checkIfContentOnSquaresCanBeSwap(squareSelected);
+    }
+
+    private boolean checkIfPlayerwantsToMoveATileOnBoard(Square squareSelected)
+    {
+        return tileSelected == null && this.squareSelected != null && this.squareSelected != squareSelected;
+    }
+
+    private boolean checkIfPlayerCanMoveTileOnBoard(Square squareSelected)
+    {
+        return letterOnSameAxe(squareSelected);
+    }
+
+    private boolean checkIfContentOnSquaresCanBeSwap(Square squareSelected)
+    {
+        return tilesPlacedOnBoardPosition.contains(squareSelected);
     }
 
     private void placeTileOnSquare() {
@@ -88,14 +136,14 @@ public class StatePlayTile extends State {
 
         boolean validMove = false;
 
-        if (!squareSelected.containLetter() && letterOnSameAxe()) {
+        if (!squareSelected.containLetter() && letterOnSameAxe(squareSelected)) {
             validMove = true;
         }
 
         return validMove;
     }
 
-    private boolean letterOnSameAxe() {
+    private boolean letterOnSameAxe(Square squareSelected) {
 
         boolean validMove = true;
 
@@ -107,7 +155,6 @@ public class StatePlayTile extends State {
                     break;
                 }
             }
-
             if (!validMove) {
                 validMove = true;
                 for (Square tilePosition : tilesPlacedOnBoardPosition) {
