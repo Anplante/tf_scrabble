@@ -4,7 +4,10 @@ import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.HumanPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Player;
+import ca.qc.bdeb.p56.scrabble.shared.Language;
+import ca.qc.bdeb.p56.scrabble.shared.Theme;
 import ca.qc.bdeb.p56.scrabble.view.MainMenuGUI;
+import ca.qc.bdeb.p56.scrabble.view.PanelSearchBar;
 import ca.qc.bdeb.p56.scrabble.view.ScrabbleGUI;
 import org.junit.After;
 import org.junit.Before;
@@ -32,22 +35,17 @@ public class LocalizationTest {
     private JTextField txtFirstPlayer;
     private JLabel lblSecondPlayer;
     private JLabel lblTheme;
-    private ResourceBundle messages;
+    private JLabel lblResult;
+    private JButton btnSearch;
+    private JTextField searchBar;
+
+    private PanelSearchBar panelSearchBar;
 
     @Before
     public void setUp() throws Exception {
 
-        System.setProperty("user.language", "fr");
-        messages = ResourceBundle.getBundle("strings", Locale.getDefault());
-
-        scrabbleGUI = new ScrabbleGUI();
-        scrabbleGUI.setBackgroundPath("sunburst.jpg");
-        frame = scrabbleGUI.getMenu();
-
-        txtFirstPlayer = (JTextField) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME + " 0");
-        btnAccept = (JButton) TestUtils.getChildNamed(frame, ConstanteTestName.CONFIRM_NAME);
-        lblTheme = (JLabel) TestUtils.getChildNamed(frame, ConstanteTestName.LBL_THEME);
-        lblSecondPlayer = (JLabel) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME + "1");
+        setLocale("fr");
+        refreshScrabble();
     }
 
     @After
@@ -66,21 +64,51 @@ public class LocalizationTest {
     }
 
     @Test
+    public void testPanelSearchBarInFrench() {
+        searchBar.setText("BoNjoUrs");
+        btnSearch.doClick();
+        assertEquals("Ce mot est valide!!", lblResult.getText());
+        searchBar.setText("asdgasd");
+        btnSearch.doClick();
+        assertEquals("Ce mot est invalide.", lblResult.getText());
+    }
+
+    @Test
     public void testMainMenuInEnglish() {
-        Locale.setDefault(new Locale("en"));
-        System.setProperty("user.language", "eng");
+        setLocale("en");
+        refreshScrabble();
+        assertEquals("Confirm", btnAccept.getText());
+        assertEquals("Theme :", lblTheme.getText());
+        assertEquals("Name of player 2 :", lblSecondPlayer.getText());
+        assertEquals("Enter a name...", txtFirstPlayer.getText());
+    }
+
+
+
+    private void setLocale(String language) {
+        Locale.setDefault(new Locale(language));
+    }
+
+    private void refreshScrabble() {
+        GameManager gameManager = new GameManager();
+        List lstPlayer = new ArrayList<Player>();
+        lstPlayer.add(new HumanPlayer("Antoine"));
+        lstPlayer.add(new HumanPlayer("Louis"));
         scrabbleGUI = new ScrabbleGUI();
         scrabbleGUI.setBackgroundPath("sunburst.jpg");
-        MainMenuGUI frame = scrabbleGUI.getMenu();
+        frame = scrabbleGUI.getMenu();
+        game = gameManager.createNewGame(lstPlayer, Language.FRENCH);
+        scrabbleGUI.setGameTheme(Theme.BASIC);
+        scrabbleGUI.createScrabbleGame(game);
 
         txtFirstPlayer = (JTextField) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME + " 0");
         btnAccept = (JButton) TestUtils.getChildNamed(frame, ConstanteTestName.CONFIRM_NAME);
         lblTheme = (JLabel) TestUtils.getChildNamed(frame, ConstanteTestName.LBL_THEME);
         lblSecondPlayer = (JLabel) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME + "1");
-        assertEquals("Confirm", btnAccept.getText());
-//        assertEquals("Thème :", lblTheme.getText());
-//        assertEquals("Nom du joueur 2 :", lblSecondPlayer.getText());
-//        assertEquals("Veuillez entrer un nom...", txtFirstPlayer.getText());
+        panelSearchBar = (PanelSearchBar) TestUtils.getChildNamed(scrabbleGUI, ConstanteTestName.SEARCH_BAR);
+        btnSearch = (JButton) TestUtils.getChildNamed(panelSearchBar, ConstanteTestName.SEARCH_BUTTON);
+        searchBar = (JTextField) TestUtils.getChildNamed(panelSearchBar, ConstanteTestName.SEARCH_TXT);
+        lblResult = (JLabel) TestUtils.getChildNamed(panelSearchBar, ConstanteTestName.LBL_RESULT);
     }
 
 }
