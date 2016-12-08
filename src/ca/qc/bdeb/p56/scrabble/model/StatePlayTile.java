@@ -44,8 +44,9 @@ public class StatePlayTile extends State {
 
             if (checkIfPlayerCanMoveTileOnBoard(squareSelected)) {
                 swapTileOfPlace(this.squareSelected, squareSelected);
-                this.squareSelected = null;
             }
+
+            this.squareSelected = null;
         }
         // Sinon, il veut jouer une lettre sur le board
         else {
@@ -75,7 +76,7 @@ public class StatePlayTile extends State {
     }
 
     private boolean checkIfPlayerWantsSelectATileToMoveOnBoard(Square squareSelected) {
-        return this.tileSelected == null && this.squareSelected == null && checkIfContentOnSquaresCanBeSwap(squareSelected);
+        return this.tileSelected == null && this.squareSelected == null &&  tilesPlacedOnBoardPosition.contains(squareSelected);
     }
 
     private boolean checkIfPlayerwantsToMoveATileOnBoard(Square squareSelected) {
