@@ -1,9 +1,9 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
-import ca.qc.bdeb.p56.scrabble.utility.ImagesManager;
+import ca.qc.bdeb.p56.scrabble.model.StateSelectAction;
+import ca.qc.bdeb.p56.scrabble.shared.IDState;
+import ca.qc.bdeb.p56.scrabble.utility.*;
 import sun.misc.Launcher;
 
 import javax.swing.*;
@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Antoine on 11/27/2016.
  */
-public class PanelSearchBar extends JPanel {
+public class PanelSearchBar extends JPanel implements Observateur {
 
     private static final Locale locale = new Locale(System.getProperty("user.language"),
             System.getProperty("user.country"));
@@ -104,5 +104,19 @@ public class PanelSearchBar extends JPanel {
         } catch (IOException | FontFormatException e) {
             throw new RuntimeException("Could not load " + resourceName, e);
         }
+    }
+
+    @Override
+    public void changementEtat() {
+        if(gameModel.getActivePlayer().getState().getName().equals(IDState.PENDING.getName())){
+            searchBar.setText("");
+            GhostText ghostText = new GhostText(searchBar, ConstanteComponentMessage.ENTER_WORD);
+            lblResult.setText("");
+        }
+    }
+
+    @Override
+    public void changementEtat(Enum<?> e, Object o) {
+
     }
 }

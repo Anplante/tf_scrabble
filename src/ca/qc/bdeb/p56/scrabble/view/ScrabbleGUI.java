@@ -219,6 +219,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         panelSearchBar = new PanelSearchBar(gameModel,width);
         panelSearchBar.setLocation(MARGIN, y);
         panelSearchBar.setName(ConstanteTestName.SEARCH_BAR);
+        gameModel.ajouterObservateur(panelSearchBar);
         add(panelSearchBar);
     }
 
