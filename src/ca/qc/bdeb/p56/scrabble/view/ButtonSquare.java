@@ -33,12 +33,12 @@ class ButtonSquare extends JButton implements Observateur {
 
     private Square square;
     private int size;
-    private Theme theme;
+    private String theme;
 
-    protected ButtonSquare(Square square, int size, Theme theme) {
+    protected ButtonSquare(Square square, int size, String themePath) {
 
         super();
-        this.theme = theme;
+        this.theme = themePath;
         this.square = square;
         this.size = size;
         square.ajouterObservateur(ButtonSquare.this);
@@ -113,19 +113,34 @@ class ButtonSquare extends JButton implements Observateur {
     private void setImage() {
         if (square.getTileOn() != null) {
             setText("");
+
+            String pathTheme ="";
             String valueOnTile = square.getLetterOn();
-            if (valueOnTile.isEmpty()) {
-                valueOnTile = "1";
+
+
+            if (square.getTileOn().isBlankTile()) {
+                pathTheme = theme + getBlanksPath(theme);
             }
-            URL path = getClass().getClassLoader().getResource(theme.getThemeFolderPath() + valueOnTile + ConstanteComponentMessage.EXT_PNG);
+            else{
+                pathTheme = theme;
+
+            }
+            String res = pathTheme +"/" + valueOnTile + ConstanteComponentMessage.EXT_PNG;
+            URL path = getClass().getClassLoader().getResource(res);
             setIcon(ImagesManager.getIcon(path, size, size));
-        } else if (theme.getThemeFolderPath().equals(ConstanteComponentMessage.RES_IMAGES_FR_NOBLE)) {
+        } else if (theme.equals(ConstanteComponentMessage.RES_IMAGES_NOBLE)) {
             setBackground(Color.lightGray);
         } else {
             setBackground(new Color(188, 183, 122));
         }
     }
-
+    private String getBlanksPath(String themePath){
+        if(themePath.contains("NOBLE")){
+            return ConstanteComponentMessage.RES_BLANKS_NOBLE;
+        }else {
+            return ConstanteComponentMessage.RES_BLANKS_BASIC;
+        }
+    }
 
     @Override
     public void changementEtat(Enum<?> property, Object o) {

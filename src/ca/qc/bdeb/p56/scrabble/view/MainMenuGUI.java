@@ -363,6 +363,7 @@ public class MainMenuGUI extends JDialog {
 
         game = gameManager.createNewGame(players, getLanguage());
         parent.setGameTheme(getLetttersTheme());
+        game.createImagePath(parent.getTheme());
         parent.changeBackground(allBackgroundPath.get(cmbBackgroundScrabble.getSelectedIndex()));
         parent.createScrabbleGame(game);
         setVisible(false);

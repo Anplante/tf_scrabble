@@ -6,8 +6,8 @@ package ca.qc.bdeb.p56.scrabble.shared;
  */
 public enum Language {
 
-    FRENCH("frenchAlphabet"),
-    ENGLISH("englishAlphabet");
+    FRENCH("french"),
+    ENGLISH("english");
 
     private String language;
 

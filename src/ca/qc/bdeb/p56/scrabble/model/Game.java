@@ -1,10 +1,7 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
 import ca.qc.bdeb.p56.scrabble.model.Log.*;
-import ca.qc.bdeb.p56.scrabble.shared.Event;
-import ca.qc.bdeb.p56.scrabble.shared.IDState;
-import ca.qc.bdeb.p56.scrabble.shared.Direction;
-import ca.qc.bdeb.p56.scrabble.shared.Language;
+import ca.qc.bdeb.p56.scrabble.shared.*;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
@@ -24,8 +21,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static ca.qc.bdeb.p56.scrabble.shared.Language.ENGLISH;
-import static ca.qc.bdeb.p56.scrabble.shared.Language.FRENCH;
+
 
 /**
  * Classe du jeu de scrabbleé
@@ -35,7 +31,7 @@ import static ca.qc.bdeb.p56.scrabble.shared.Language.FRENCH;
 public class Game implements Observable {
 
     public static final int MAX_TILES_IN_HAND = 7;
-    private static final String TAG_FRENCH_ALPHABET = "frenchAlphabet";
+
 
     private static final String TAG_LETTER = "letter";
     private static final String TAG_TEXT = "text";
@@ -56,7 +52,8 @@ public class Game implements Observable {
     private LogManager logManager;
     private Player lastPlayerToPlay;
     private String currentWord;
-    private String language;
+    private Language language;
+    private String imageThemePath;
 
     public Game(List<Player> players) {
         isEndGame = false;
@@ -71,6 +68,7 @@ public class Game implements Observable {
         }
     }
 
+    public Language getLanguage() { return language;}
     public Board getBoard() {
         return boardManager.getBoard();
     }
@@ -144,10 +142,32 @@ public class Game implements Observable {
         return rootElement;
     }
 
+    public void createImagePath(Theme gameTheme){
+
+        //FIXME: SWITCH
+        StringBuilder imageThemePath = new StringBuilder();
+        if(language.getLanguage().equals(Language.ENGLISH.getLanguage())){
+            imageThemePath.append(ConstanteComponentMessage.RES_ROOT_ENGLISH);
+        } else {
+            imageThemePath.append(ConstanteComponentMessage.RES_ROOT_FRENCH);
+        }
+        if(gameTheme.equals(Theme.BASIC)){
+            imageThemePath.append(ConstanteComponentMessage.RES_IMAGES_BASIC);
+        } else {
+            imageThemePath.append(ConstanteComponentMessage.RES_IMAGES_NOBLE);
+        }
+        this.imageThemePath = imageThemePath.toString();
+    }
+
+    public String getImageThemePath(){ return imageThemePath; }
+
     private void initAlphabetBag(Element rootElement) {
 
         alphabetBag = new ArrayList<>();
-        Element alphabetsElement = (Element) rootElement.getElementsByTagName(language).item(0);
+
+        Element languageElement = (Element) rootElement.getElementsByTagName(language.getLanguage()).item(0);
+        Element alphabetsElement = (Element) languageElement.getElementsByTagName("alphabet").item(0);
+
         NodeList alphabetsNodes = alphabetsElement.getElementsByTagName(TAG_LETTER);
         initAllLetters(alphabetsNodes);
     }
@@ -686,9 +706,11 @@ public class Game implements Observable {
         return candidats;
     }
 
+
+
     public void setLanguage(Language language) {
 
-        this.language = language.getLanguage();
+        this.language = language;
     }
 
     public void setParameters(String parameters) {

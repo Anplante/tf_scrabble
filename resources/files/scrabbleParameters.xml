@@ -2,7 +2,7 @@
 
 <game>
     <french>
-        <frenchAlphabet>
+        <alphabet>
             <letter text="A" value="1" amount="9"/>
             <letter text="B" value="3" amount="2"/>
             <letter text="C" value="3" amount="2"/>
@@ -29,15 +29,15 @@
             <letter text="X" value="10" amount="1"/>
             <letter text="Y" value="10" amount="1"/>
             <letter text="Z" value="10" amount="1"/>
-            <letter text="" value="0" amount="2"/>
-        </frenchAlphabet>
+            <letter text="" value="0" amount="500"/>
+        </alphabet>
 
-        <dictionary filename="twl06.txt"/>
+        <dictionary filename="./dictionary/fr_dictionary.txt"/>
 
     </french>
 
     <english>
-        <englishAlphabet>
+        <alphabet>
             <letter text="A" value="1" amount="9"/>
             <letter text="B" value="3" amount="2"/>
             <letter text="C" value="3" amount="2"/>
@@ -64,10 +64,10 @@
             <letter text="X" value="8" amount="1"/>
             <letter text="Y" value="4" amount="2"/>
             <letter text="Z" value="10" amount="1"/>
-            <letter text="" value="0" amount="2"/>
-        </englishAlphabet>
+            <letter text="" value="0" amount="500"/>
+        </alphabet>
 
-        <dictionary filename="twl06.txt"/>
+        <dictionary filename="./dictionary/eng_dictionary.txt"/>
 
     </english>
 

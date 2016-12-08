@@ -168,7 +168,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         int witdhBoard = pnlBoard.getWidth();
 
         Rectangle boundsZoneLetterRack = new Rectangle(x, y + MARGIN, witdhBoard, LETTER_RACK_ZONE_HEIGHT - MARGIN * 2);
-        panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack, this);
+        panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack, this,gameModel);
 
         panelLetterRack.setPlayer(gameModel.getPlayers());
         panelLetterRack.setGameModel(gameModel);
@@ -229,7 +229,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
         for (int row = 0; row < BoardManager.BOARD_SIZE; row++) {
             for (int column = 0; column < BoardManager.BOARD_SIZE; column++) {
-                ButtonSquare square = new ButtonSquare(gameModel.getSquare(row, column), size, theme);
+                ButtonSquare square = new ButtonSquare(gameModel.getSquare(row, column), size, gameModel.getImageThemePath());
                 square.setName(ConstanteTestName.SQUARE_NAME + row + column);
                 square.addActionListener(this);
                 pnlBoard.add(square);

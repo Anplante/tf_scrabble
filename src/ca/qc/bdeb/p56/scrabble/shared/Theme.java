@@ -9,8 +9,8 @@ import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
  */
 public enum Theme {
 
-    BASIC(ConstanteComponentMessage.RES_IMAGES_FR_BASIC),
-    NOBLE(ConstanteComponentMessage.RES_IMAGES_FR_NOBLE);
+    BASIC(ConstanteComponentMessage.RES_IMAGES_BASIC),
+    NOBLE(ConstanteComponentMessage.RES_IMAGES_NOBLE);
 
     private String folderPath;
 

@@ -20,14 +20,14 @@ class DialogBlankTileChoice extends JDialog {
     private Tile blankTile;
     private final ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
 
-    protected DialogBlankTileChoice(ScrabbleGUI parent, Tile blankTile, Theme theme) {
+    protected DialogBlankTileChoice(ScrabbleGUI parent, Tile blankTile, String theme) {
 
         super();
         setSize(parent.getWidth() / 4, parent.getHeight() / 2);
         this.blankTile = blankTile;
 
         add(new JLabel(messages.getString("Select_Letter")));
-        initLettersChoice(theme.getThemeFolderPath());
+        initLettersChoice(theme);
 
         setUndecorated(true);
         pack();
@@ -41,12 +41,12 @@ class DialogBlankTileChoice extends JDialog {
         // TODO LOUIS Refactor
         JPanel pnlLettersChoice = new JPanel();
         pnlLettersChoice.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = gbc.gridy = 0;
+        GridBagConstraints gridConstraints = new GridBagConstraints();
+        gridConstraints.gridx = gridConstraints.gridy = 0;
         int size = getWidth() / 10;
         Dimension prefSize = new Dimension(size, size);
         for (char start = ConstanteComponentMessage.START_ALPHABET; start <= ConstanteComponentMessage.END_ALPHABET - 2; start++) {
-            String resource = resFolder + start + ConstanteComponentMessage.EXT_PNG;
+            String resource = resFolder + getBlanksPath(resFolder)  +start + ConstanteComponentMessage.EXT_PNG;
             URL res = getClass().getClassLoader().getResource(resource);
             ImageIcon icon = ImagesManager.getIcon(res, size, size);
             JButton btnLetter = new JButton();
@@ -58,19 +58,19 @@ class DialogBlankTileChoice extends JDialog {
                 blankTile.setLetter(btnLetter.getName());
                 dispose();
             });
-            pnlLettersChoice.add(btnLetter, gbc);
+            pnlLettersChoice.add(btnLetter, gridConstraints);
 
-            gbc.gridx++;
-            if(gbc.gridx == 6)
+            gridConstraints.gridx++;
+            if(gridConstraints.gridx == 6)
             {
-                gbc.gridx = 0;
-                gbc.gridy++;
+                gridConstraints.gridx = 0;
+                gridConstraints.gridy++;
             }
         }
 
-        gbc.gridx = 2;
+        gridConstraints.gridx = 2;
         for(char start = ConstanteComponentMessage.END_ALPHABET - 1; start <= ConstanteComponentMessage.END_ALPHABET ;start++){
-            String resource = resFolder + start + ConstanteComponentMessage.EXT_PNG;
+            String resource = resFolder +  getBlanksPath(resFolder) + start + ConstanteComponentMessage.EXT_PNG;
             URL res = getClass().getClassLoader().getResource(resource);
             ImageIcon icon = ImagesManager.getIcon(res, size, size);
             JButton btnLetter = new JButton();
@@ -83,14 +83,14 @@ class DialogBlankTileChoice extends JDialog {
                 dispose();
             });
 
-            pnlLettersChoice.add(btnLetter, gbc);
-            gbc.gridx++;
+            pnlLettersChoice.add(btnLetter, gridConstraints);
+            gridConstraints.gridx++;
         }
 
         prefSize = new Dimension(size*2, size);
-        gbc.gridx = 2;
-        gbc.gridy++;
-        gbc.gridwidth = 2;
+        gridConstraints.gridx = 2;
+        gridConstraints.gridy++;
+        gridConstraints.gridwidth = 2;
         JButton btnCancel = new JButton("Annuler");
         btnCancel.setPreferredSize(prefSize);
         btnCancel.setMinimumSize(prefSize);
@@ -98,7 +98,14 @@ class DialogBlankTileChoice extends JDialog {
             dispose();
         });
 
-        pnlLettersChoice.add(btnCancel, gbc);
+        pnlLettersChoice.add(btnCancel, gridConstraints);
         add(pnlLettersChoice);
+    }
+    private String getBlanksPath(String themePath){
+        if(themePath.contains("noble")){
+            return ConstanteComponentMessage.RES_BLANKS_NOBLE;
+        }else {
+            return ConstanteComponentMessage.RES_BLANKS_BASIC;
+        }
     }
 }

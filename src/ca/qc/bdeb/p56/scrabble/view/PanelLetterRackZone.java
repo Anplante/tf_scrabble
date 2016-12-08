@@ -48,11 +48,12 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
     private HashMap<String, ImageIcon> iconsTile;
 
 
-    protected PanelLetterRackZone(Rectangle boundsZoneLetterRack, ScrabbleGUI parent) {
+    protected PanelLetterRackZone(Rectangle boundsZoneLetterRack, ScrabbleGUI parent,Game game) {
 
         super();
 
         this.parent = parent;
+        this.gameModel = game;
         setLayout(null);
         setBounds(boundsZoneLetterRack);
         LETTERS_RACK_WIDTH = (int) (getWidth() * RATIO_TILES_RACK);
@@ -114,8 +115,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         initOrderTilesOption();
     }
 
-    private void setImageBtn(JButton btn, String path) {
-        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource(path));
+    private void setImageBtn(JButton btn, String path) {        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource(path));
+
         Image img = icon.getImage();
         Image newimg = img.getScaledInstance(btn.getWidth(), btn.getHeight(), java.awt.Image.SCALE_SMOOTH);
         icon = new ImageIcon(newimg);
@@ -324,7 +325,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
         if (e.equals(Event.SELECT_BLANK_TILE_VALUE)) {
             Tile tileSelected = (Tile) o;
-            DialogBlankTileChoice tileChoice = new DialogBlankTileChoice(parent, tileSelected, parent.getTheme());
+            DialogBlankTileChoice tileChoice = new DialogBlankTileChoice(parent, tileSelected, gameModel.getImageThemePath());
             tileChoice.setModal(true);
             tileChoice.setVisible(true);
         }
@@ -336,17 +337,17 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         iconsTile = new HashMap<>();
         int size = (int) TILE_DIMENSION.getWidth();
 
-        String themFolder = parent.getTheme().getThemeFolderPath();
+        String themFolder = gameModel.getImageThemePath();
 
         for (char start = ConstanteComponentMessage.START_ALPHABET; start <= ConstanteComponentMessage.END_ALPHABET; start++) {
-            String resource = themFolder + start + ConstanteComponentMessage.EXT_PNG;
+            String resource = themFolder + "/"+ start + ConstanteComponentMessage.EXT_PNG;
             URL res = getClass().getClassLoader().getResource(resource);
             ImageIcon icon = ImagesManager.getIcon(res, size, size);
             iconsTile.put(Character.toString(start), icon);
         }
         iconsTile.put("",
-                ImagesManager.getIcon(getClass().getClassLoader().getResource(themFolder
-                        + "1" + ConstanteComponentMessage.EXT_PNG), size, size));
+                ImagesManager.getIcon(getClass().getClassLoader().getResource(themFolder + "/"+
+                         "1" + ConstanteComponentMessage.EXT_PNG), size, size));
 
     }
 
