@@ -16,6 +16,8 @@ import org.junit.Test;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -26,12 +28,17 @@ import static org.junit.Assert.assertTrue;
  */
 public class PanelSearchBarTest {
 
+    private static final Locale locale = new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
+    private static final ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
     private ScrabbleGUI scrabbleGame;
     private Game game;
     private PanelSearchBar panelSearchBar;
+
     private JButton btnSearch;
     private JTextField searchBar;
     private JLabel lblResult;
+    private PanelLetterRackZone panelRacks;
+    private JButton btnPass;
 
     @Before
     public void setUp()  throws Exception {
@@ -45,10 +52,13 @@ public class PanelSearchBarTest {
         scrabbleGame.setGameTheme(Theme.BASIC);
         scrabbleGame.createScrabbleGame(game);
 
+
         panelSearchBar = (PanelSearchBar) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.SEARCH_BAR);
+        panelRacks = (PanelLetterRackZone) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.LETTER_RACK_NAME);
         btnSearch = (JButton) TestUtils.getChildNamed(panelSearchBar, ConstanteTestName.SEARCH_BUTTON);
         searchBar = (JTextField) TestUtils.getChildNamed(panelSearchBar, ConstanteTestName.SEARCH_TXT);
         lblResult = (JLabel) TestUtils.getChildNamed(panelSearchBar, ConstanteTestName.LBL_RESULT);
+        btnPass = (JButton) TestUtils.getChildNamed(panelRacks, ConstanteTestName.PASS_TURN_NAME);
 
     }
 
@@ -72,6 +82,14 @@ public class PanelSearchBarTest {
         searchBar.setText("asdfsadfs");
         btnSearch.doClick();
         assertTrue(lblResult.getText().equals(ConstanteComponentMessage.INVALID_WORD));
+    }
+
+    @Test
+    public void testSearchResetAfterEndOfTurn(){
+        searchBar.setText("BoNjoUrs");
+        btnSearch.doClick();
+        btnPass.doClick();
+        assertEquals(messages.getString("Enter_Word"),searchBar.getText());
     }
 
 }
