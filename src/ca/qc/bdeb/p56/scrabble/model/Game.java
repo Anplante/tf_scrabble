@@ -347,6 +347,7 @@ public class Game implements Observable {
 
     public void calculateCurrentPoints(List<Square> tilesPlaced) {
 
+        ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
         Direction direction;
         int currentScore = 0;
         direction = boardManager.checkIfWordIsVerticalOrHorizontal(tilesPlaced);
@@ -359,11 +360,9 @@ public class Game implements Observable {
                     currentScore = calculateWordPoints(letters);
 
                 }
-                Locale locale = new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
-                ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
                 currentWord = MessageFormat.format(messages.getString("Word"), word, currentScore);
             } else {
-                currentWord = ConstanteComponentMessage.INVALID_WORD;
+                currentWord = messages.getString("Invalid_Word");
             }
         }
     }

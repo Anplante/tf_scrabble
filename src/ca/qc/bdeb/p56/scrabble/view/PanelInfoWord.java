@@ -8,18 +8,21 @@ import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Created by Julien Brosseau on 11/30/2016.
  */
 public class PanelInfoWord extends JPanel implements Observateur{
 
+    private final ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
     private JLabel wordPlayed;
     private Game game;
 
     public PanelInfoWord (Game game){
         this.game = game;
-        wordPlayed = new JLabel(ConstanteComponentMessage.NO_WORD_POINTS);
+        wordPlayed = new JLabel(messages.getString("Place_Letter"));
         game.ajouterObservateur(this);
         add(wordPlayed);
         wordPlayed.setVisible(true);
@@ -34,10 +37,10 @@ public class PanelInfoWord extends JPanel implements Observateur{
 
             wordPlayed.setText(game.getCurrentWord());
         }else{
-            wordPlayed.setText(ConstanteComponentMessage.INVALID_WORD_POINTS);
+            wordPlayed.setText(messages.getString("Non_Valid"));
         }
         if(game.getActivePlayer().getState().getName().equals(IDState.PENDING.getName())){
-            wordPlayed.setText(ConstanteComponentMessage.NO_WORD_POINTS);
+            wordPlayed.setText(messages.getString("Place_Letter"));
         }
     }
 

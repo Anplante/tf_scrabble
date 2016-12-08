@@ -14,7 +14,11 @@ import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.*;
+
+import static com.sun.org.apache.xml.internal.serializer.utils.Utils.messages;
 
 /**
  * Created by Louis Luu Lim on 9/11/2016.
@@ -22,6 +26,7 @@ import javax.swing.*;
 public class PanelLetterRackZone extends JPanel implements Observateur, ActionListener {
 
 
+    private ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
     private final int MAX_TILES_IN_HAND = 7;
     private final double RATIO_TILES_RACK = .5;
     private final int POS_Y = 0;
@@ -163,7 +168,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
         int x = getWidth() - OPTIONS_WIDTH * 2 - ScrabbleGUI.MARGIN;
 
-        btnRecall = new JButton(ConstanteComponentMessage.MESS_RECALL);
+        btnRecall = new JButton(messages.getString("Recall"));
         btnRecall.setName(ConstanteTestName.RECALL_NAME);
         btnRecall.setSize(OPTIONS_WIDTH, getHeight());
         btnRecall.setLocation(x, POS_Y);
@@ -203,7 +208,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         int x = OPTIONS_WIDTH + ScrabbleGUI.MARGIN;
         Rectangle bounds = new Rectangle(x, POS_Y, OPTIONS_WIDTH, getHeight());
 
-        btnExchange = new ButtonExchange(ConstanteComponentMessage.MESS_EXCHANGE, gameModel, bounds);
+        btnExchange = new ButtonExchange(messages.getString("Exchange"), gameModel, bounds);
         btnExchange.setName(ConstanteTestName.EXCHANGE_NAME);
         btnExchange.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnExchange.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -223,11 +228,11 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
             // TODO Louis : Utiliser aviserObservateur
             if (currentPlayer.getState().getName() != IDState.EXCHANGE.getName()) {
-                btnExchange.setText(ConstanteComponentMessage.MESS_CONFIRM);
+                btnExchange.setText(messages.getString("Confirm"));
                 disableAllOtherBtnExchange(false);
             } else {
                 disableAllOtherBtnExchange(true);
-                btnExchange.setText(ConstanteComponentMessage.MESS_EXCHANGE);
+                btnExchange.setText(messages.getString("Exchange"));
             }
             gameModel.exchangeLetter();
         });
@@ -235,7 +240,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnCancelExchange.addActionListener(e -> {
 
             gameModel.cancelExchange();
-            btnExchange.setText(ConstanteComponentMessage.MESS_EXCHANGE);
+            btnExchange.setText(messages.getString("Exchange"));
             disableAllOtherBtnExchange(true);
         });
     }
@@ -260,8 +265,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnForfeit.addActionListener(e -> {
 
             int result = JOptionPane.showConfirmDialog(null,
-                    ConstanteComponentMessage.MESS_RESTART_GAME,
-                    ConstanteComponentMessage.TITLE_SURRENDER,
+                    messages.getString("Replay"),
+                    messages.getString("Abandon"),
                     JOptionPane.YES_NO_CANCEL_OPTION);
 
             if (result == JOptionPane.YES_OPTION) {

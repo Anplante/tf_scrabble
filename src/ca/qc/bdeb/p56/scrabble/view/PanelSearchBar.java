@@ -20,9 +20,7 @@ import java.util.ResourceBundle;
  */
 public class PanelSearchBar extends JPanel implements Observateur {
 
-    private static final Locale locale = new Locale(System.getProperty("user.language"),
-            System.getProperty("user.country"));
-    private static final ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
+    private final ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
     private static final Font ROBOTO_FONT = loadFont("Roboto-Bold.ttf").deriveFont(Font.BOLD, 25);
     private static final Font FONT_RESULT = loadFont("Roboto-Light.ttf").deriveFont(Font.PLAIN, 25);
     private static final URL DEFAULT_SEARCH_ICON = Launcher.class.getResource("/images/search.png");
@@ -51,7 +49,7 @@ public class PanelSearchBar extends JPanel implements Observateur {
 
 
         searchBar = new JTextField("", 30);
-        GhostText ghostText = new GhostText(searchBar, ConstanteComponentMessage.ENTER_WORD);
+        GhostText ghostText = new GhostText(searchBar, messages.getString("Enter_Word"));
         searchBar.setName(ConstanteTestName.SEARCH_TXT);
         searchBar.setLocation(0,lblTitle.getHeight());
         searchBar.setSize(getWidth()- BTN_SEARCH_SIZE, SEARCH_BAR_HEIGHT);
@@ -87,12 +85,12 @@ public class PanelSearchBar extends JPanel implements Observateur {
         });
         btnSearch.addActionListener(e -> {
             if (gameModel.isValidWord(searchBar.getText().toLowerCase()) &&
-            !searchBar.getText().equals(ConstanteComponentMessage.ENTER_WORD)) {
-                lblResult.setText(ConstanteComponentMessage.VALID_WORD);
+            !searchBar.getText().equals(messages.getString("Enter_Word"))) {
+                lblResult.setText(messages.getString("Valid_Word"));
                 lblResult.setSize(lblResult.getPreferredSize());
             }
-            else if (!searchBar.getText().equals(ConstanteComponentMessage.ENTER_WORD)){
-                lblResult.setText(ConstanteComponentMessage.INVALID_WORD);
+            else if (!searchBar.getText().equals(messages.getString("Enter_Word"))){
+                lblResult.setText(messages.getString("Invalid_Word"));
                 lblResult.setSize(lblResult.getPreferredSize());
             }
         });
@@ -110,7 +108,7 @@ public class PanelSearchBar extends JPanel implements Observateur {
     public void changementEtat() {
         if(gameModel.getActivePlayer().getState().getName().equals(IDState.PENDING.getName())){
             searchBar.setText("");
-            GhostText ghostText = new GhostText(searchBar, ConstanteComponentMessage.ENTER_WORD);
+            GhostText ghostText = new GhostText(searchBar, messages.getString("Enter_Word"));
             lblResult.setText("");
         }
     }

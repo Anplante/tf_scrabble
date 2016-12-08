@@ -20,6 +20,7 @@ import static org.junit.Assert.*;
  */
 public class GameTest {
 
+    private final ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
     private Game game;
 
 
@@ -508,7 +509,7 @@ public class GameTest {
 
         game.getActivePlayer().setState(new StatePlayTile(game.getActivePlayer(),tile1));
         game.getActivePlayer().selectSquare(square1);
-        String expected = ConstanteComponentMessage.INVALID_WORD;
+        String expected = messages.getString("Invalid_Word");
         assertEquals(expected,game.getCurrentWord());
     }
 

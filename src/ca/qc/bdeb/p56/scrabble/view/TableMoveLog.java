@@ -19,9 +19,7 @@ import java.util.ResourceBundle;
 public class TableMoveLog extends JTable implements Observateur {
 
 
-    private static final Locale locale = new Locale(System.getProperty("user.language"),
-            System.getProperty("user.country"));
-    private static final ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
+    private static final ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
 
     private static final String ROUND = messages.getString("Round");
     private static final String[] HEADERS = {messages.getString("Player"), messages.getString("Move"),

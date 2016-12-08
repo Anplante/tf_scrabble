@@ -22,9 +22,7 @@ import java.util.ResourceBundle;
  */
 public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
-    private static final Locale locale = new Locale(System.getProperty("user.language"),
-            System.getProperty("user.country"));
-    private static final ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
+    private final ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
     private static final double RATIO_LETTER_RACK_ZONE = 0.1;
     protected static final int MARGIN = 5;
 
@@ -66,7 +64,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    private final AbstractAction actionEscape = new AbstractAction(ConstanteComponentMessage.ESCAPE_KEY) {
+    private final AbstractAction actionEscape = new AbstractAction(messages.getString("Title_Menu")) {
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -243,8 +241,8 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
     private void addKeyBindings() {
 
         JRootPane contentPane = getRootPane();
-        contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), ConstanteComponentMessage.ESCAPE_KEY);
-        contentPane.getActionMap().put(ConstanteComponentMessage.ESCAPE_KEY, actionEscape);
+        contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), messages.getString("Title_Menu"));
+        contentPane.getActionMap().put(messages.getString("Title_Menu"), actionEscape);
     }
 
 

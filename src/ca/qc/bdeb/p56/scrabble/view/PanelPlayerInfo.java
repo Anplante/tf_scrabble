@@ -24,9 +24,7 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
  */
 public class PanelPlayerInfo extends JPanel implements Observateur{
 
-    private static final Locale locale = new Locale(System.getProperty("user.language"),
-            System.getProperty("user.country"));
-    private static final ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
+    private final ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
     private static final String TEXT_FONT = "Comic Sans MS Bold";
     private static final Font fontOfPanel = new Font(TEXT_FONT, Font.PLAIN, 15);
 

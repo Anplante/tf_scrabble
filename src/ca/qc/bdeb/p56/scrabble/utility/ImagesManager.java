@@ -27,9 +27,7 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
  */
 public class ImagesManager {
 
-    private static final Locale locale = new Locale(System.getProperty("user.language"),
-            System.getProperty("user.country"));
-    private static final ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
+    private  static final ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
     private static final URL DEFAULT_PLAYER_ICON = Launcher.class.getResource("/images/default.png");
 
     public static ImageIcon getIcon(URL path, int width, int height)

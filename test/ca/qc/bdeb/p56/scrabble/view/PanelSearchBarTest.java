@@ -28,8 +28,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class PanelSearchBarTest {
 
-    private static final Locale locale = new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
-    private static final ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
+    private final ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
     private ScrabbleGUI scrabbleGame;
     private Game game;
     private PanelSearchBar panelSearchBar;
@@ -77,11 +76,11 @@ public class PanelSearchBarTest {
     public void testSearchIsCorrect() {
         searchBar.setText("BoNjoUrs");
         btnSearch.doClick();
-        assertTrue(lblResult.getText().equals(ConstanteComponentMessage.VALID_WORD));
+        assertTrue(lblResult.getText().equals(messages.getString("Valid_Word")));
 
         searchBar.setText("asdfsadfs");
         btnSearch.doClick();
-        assertTrue(lblResult.getText().equals(ConstanteComponentMessage.INVALID_WORD));
+        assertTrue(lblResult.getText().equals(messages.getString("Invalid_Word")));
     }
 
     @Test

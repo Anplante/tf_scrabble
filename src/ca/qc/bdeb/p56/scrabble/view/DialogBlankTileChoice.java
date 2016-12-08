@@ -7,6 +7,8 @@ import ca.qc.bdeb.p56.scrabble.shared.Theme;
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Fenêtre permettant de demander à l'utilisateur la valeur qu'il désire pour une tile vide.
@@ -16,7 +18,7 @@ import java.net.URL;
 class DialogBlankTileChoice extends JDialog {
 
     private Tile blankTile;
-
+    private final ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
 
     protected DialogBlankTileChoice(ScrabbleGUI parent, Tile blankTile, Theme theme) {
 
@@ -24,7 +26,7 @@ class DialogBlankTileChoice extends JDialog {
         setSize(parent.getWidth() / 4, parent.getHeight() / 2);
         this.blankTile = blankTile;
 
-        add(new JLabel(ConstanteComponentMessage.TITLE_SELECT_LETTER));
+        add(new JLabel(messages.getString("Select_Letter")));
         initLettersChoice(theme.getThemeFolderPath());
 
         setUndecorated(true);

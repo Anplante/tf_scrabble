@@ -46,8 +46,8 @@ public class MainMenuGUI extends JDialog {
     private static final int NOBLE_THEME = 1;
     private static final int LIMIT_OF_PLAYER = 4;
 
-    private static final Locale locale = new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
-    private static final ResourceBundle messages = ResourceBundle.getBundle("strings", locale);
+
+    private ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
     private static final String[] numberOfAi = {"0", "1", "2", "3"};
     private static final NumberOfPlayer[] numberOfHuman = {TWO_PLAYER, THREE_PLAYER, FOUR_PLAYER};
     public static final URL PATH_TO_FILE = Launcher.class.getResource("/files/ListOfName.xml");
@@ -100,7 +100,7 @@ public class MainMenuGUI extends JDialog {
     private void initializeFrame() {
         setLayout(null);
         JFrame fenetre = new JFrame();
-        this.setTitle(ConstanteComponentMessage.TITLE_MENU);
+        this.setTitle(messages.getString("Title_Menu"));
 
         Insets insets = fenetre.getInsets();
         setSize(new Dimension(insets.left + insets.right + 500,
@@ -166,8 +166,8 @@ public class MainMenuGUI extends JDialog {
 
         cmbTheme = new JComboBox();
         cmbTheme.setName(ConstanteTestName.THEME_NAME);
-        cmbTheme.addItem(ConstanteComponentMessage.MESS_THEME_CLASSIQUE);
-        cmbTheme.addItem(ConstanteComponentMessage.MESS_THEME_NOBLE);
+        cmbTheme.addItem(messages.getString("Classic"));
+        cmbTheme.addItem(messages.getString("Noble"));
         cmbTheme.setVisible(true);
         cmbTheme.setLocation(150, 365);
         cmbTheme.setSize(180, 25);
@@ -258,7 +258,7 @@ public class MainMenuGUI extends JDialog {
 
         btnCreateGame = new JButton();
         btnCreateGame.setSize(100, 50);
-        btnCreateGame.setText(ConstanteComponentMessage.MESS_CONFIRM);
+        btnCreateGame.setText(messages.getString("Confirm"));
         btnCreateGame.setLocation(40, 470);
         btnCreateGame.setName(ConstanteTestName.CONFIRM_NAME);
         panelMenu.add(btnCreateGame);
@@ -352,7 +352,7 @@ public class MainMenuGUI extends JDialog {
     private void removeGhostText() {
 
         for (JTextField textField : allTextField) {
-            if (textField.getText().equals(ConstanteComponentMessage.ENTER_PLAYER_NAME)) {
+            if (textField.getText().equals(messages.getString("Enter_Name"))) {
                 textField.setText("");
             }
         }
@@ -382,26 +382,26 @@ public class MainMenuGUI extends JDialog {
         }
 
         lblNumberOfAi = new JLabel();
-        lblNumberOfAi.setText(ConstanteComponentMessage.MESS_NUMBER_OF_AI);
+        lblNumberOfAi.setText(messages.getString("Number_Of_Ai"));
         lblNumberOfAi.setLocation(25, 220);
         lblNumberOfAi.setSize(lblNumberOfAi.getPreferredSize());
         // Pour l'instant, on n'affiche pas ce label puisqu'on n'a pas de AI
         lblNumberOfAi.setVisible(false);
 
         lblNumberOfHuman = new JLabel();
-        lblNumberOfHuman.setText(ConstanteComponentMessage.MESS_NUMBER_OF_HUMAN);
+        lblNumberOfHuman.setText(messages.getString("Number_Of_Player"));
         lblNumberOfHuman.setLocation(25, 240);
         lblNumberOfHuman.setSize(lblNumberOfAi.getPreferredSize());
         lblNumberOfHuman.setVisible(true);
 
         lblBackground = new JLabel();
-        lblBackground.setText(ConstanteComponentMessage.MESS_BACKGROUND);
+        lblBackground.setText(messages.getString("Background"));
         lblBackground.setLocation(25, 320);
         lblBackground.setSize(lblBackground.getPreferredSize());
         lblBackground.setVisible(true);
 
         lblTheme = new JLabel();
-        lblTheme.setText(ConstanteComponentMessage.MESS_THEME);
+        lblTheme.setText(messages.getString("Theme"));
         lblTheme.setLocation(25, 370);
         lblTheme.setSize(lblBackground.getPreferredSize());
         lblTheme.setVisible(true);
@@ -456,7 +456,7 @@ public class MainMenuGUI extends JDialog {
     private void initializeTextField(int index, int y) {
         JTextField txtOfPlayer = allTextField.get(index);
 
-        GhostText ghostText = new GhostText(txtOfPlayer, ConstanteComponentMessage.ENTER_PLAYER_NAME);
+        GhostText ghostText = new GhostText(txtOfPlayer, messages.getString("Enter_Name"));
         txtOfPlayer.setName(ConstanteTestName.PLAYER_NAME + " " + index);
         txtOfPlayer.setBounds(150, y, 180, 30);
         txtOfPlayer.setVisible(true);
@@ -504,7 +504,7 @@ public class MainMenuGUI extends JDialog {
                     || fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG)) {
                 imgPlayer = ImagesManager.getImageFromFile(fichier);
             } else {
-                JOptionPane.showMessageDialog(panelMenu, ConstanteComponentMessage.MESS_ERROR_LOADING_FILE, ConstanteComponentMessage.MESS_ERROR,
+                JOptionPane.showMessageDialog(panelMenu, messages.getString("Error_Loading_File"), messages.getString("Error"),
                         JOptionPane.ERROR_MESSAGE);
                 imgPlayer = allIconOfPlayers.get(index);
             }
@@ -538,7 +538,7 @@ public class MainMenuGUI extends JDialog {
                 cmbBackgroundScrabble.addItem(path.getFileName().toString());
                 cmbBackgroundScrabble.setSelectedIndex(cmbBackgroundScrabble.getItemCount() - 1);
             } else {
-                JOptionPane.showMessageDialog(panelMenu, ConstanteComponentMessage.MESS_ERROR_LOADING_FILE, ConstanteComponentMessage.MESS_ERROR,
+                JOptionPane.showMessageDialog(panelMenu, messages.getString("Error_Loading_File"), messages.getString("Error"),
                         JOptionPane.ERROR_MESSAGE);
             }
         }
