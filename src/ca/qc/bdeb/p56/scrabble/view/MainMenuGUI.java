@@ -106,6 +106,7 @@ public class MainMenuGUI extends JDialog {
                 insets.top + insets.bottom + 600));
 
         fenetre.pack();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         // TODO Louis : Faire en sorte que lorsqu'on ferme le dialogue que le programme se termine.
     }
 
