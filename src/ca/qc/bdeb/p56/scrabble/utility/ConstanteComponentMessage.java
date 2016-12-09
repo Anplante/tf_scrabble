@@ -1,8 +1,5 @@
 package ca.qc.bdeb.p56.scrabble.utility;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 /**
  * Interface contenant les contenants pour les noms des components.
  * <p>
@@ -15,8 +12,8 @@ public class ConstanteComponentMessage {
     public static final String EXT_PNG = ".png";
     public static final String RES_WAITING_IMAGE = "./images/waiting.png";
     public static final String ELLIPSIS = "...";
-    public static final String RES_ROOT_ENGLISH = "./englishDictionaryValue";
-    public static final String RES_ROOT_FRENCH = "./frenchDictionaryValue";
+    public static final String RES_ROOT_ENGLISH = "letters/englishDictionaryValue";
+    public static final String RES_ROOT_FRENCH = "letters/frenchDictionaryValue";
     public static final String RES_IMAGES_BASIC = "/basic";
     public static final String RES_IMAGES_NOBLE = "/noble";
     public static final String RES_BLANKS_NOBLE = "/blank_noble/";

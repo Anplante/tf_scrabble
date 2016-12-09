@@ -321,7 +321,6 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
     public void createImagePath(Theme theme){
 
-        //FIXME: SWITCH
         StringBuilder imageThemePath = new StringBuilder();
 
 

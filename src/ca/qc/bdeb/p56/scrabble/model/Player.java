@@ -31,7 +31,6 @@ public abstract class Player implements Observable {
     private State currentState;
     private int score;
     private boolean active;
-    private Color playerColor;
     private BufferedImage playerIcon;
     private transient LinkedList<Observateur> observateurs;
     private boolean isEliminated;
@@ -39,8 +38,6 @@ public abstract class Player implements Observable {
     public Player(String name) {
         this.name = name;
         tiles = new ArrayList<>();
-        // TODO : recevoir une couleur
-        playerColor = new Color(0, 0, 182, 155);
         active = false;
         isEliminated = false;
         observateurs = new LinkedList<>();
@@ -169,10 +166,6 @@ public abstract class Player implements Observable {
     public boolean canDraw() {
 
         return tiles.size() < Game.MAX_TILES_IN_HAND;
-    }
-
-    public Color getColor() {
-        return this.playerColor;
     }
 
     public void swapTile(Tile backupTile, Tile tileSelected) {
