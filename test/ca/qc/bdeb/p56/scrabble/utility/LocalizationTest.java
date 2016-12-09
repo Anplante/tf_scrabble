@@ -44,7 +44,7 @@ public class LocalizationTest {
     public void setUp() throws Exception {
 
         setLocale("fr");
-        refreshScrabble();
+        refreshMainMenu();
     }
 
     @After
@@ -63,7 +63,18 @@ public class LocalizationTest {
     }
 
     @Test
+    public void testMainMenuInEnglish() {
+        setLocale("en");
+        refreshMainMenu();
+        refreshScrabble();
+        assertEquals("Confirm", btnAccept.getText());
+        assertEquals("Theme :", lblTheme.getText());
+        assertEquals("Name of player 2 :", lblSecondPlayer.getText());
+    }
+
+    @Test
     public void testPanelSearchBarInFrench() {
+        refreshScrabble();
         searchBar.setText("BoNjoUrs");
         btnSearch.doClick();
         assertEquals("Ce mot est valide!!", lblResult.getText());
@@ -72,15 +83,6 @@ public class LocalizationTest {
         assertEquals("Ce mot est invalide.", lblResult.getText());
     }
 
-    @Test
-    public void testMainMenuInEnglish() {
-        setLocale("en");
-        refreshScrabble();
-        assertEquals("Confirm", btnAccept.getText());
-        assertEquals("Theme :", lblTheme.getText());
-        assertEquals("Name of player 2 :", lblSecondPlayer.getText());
-        assertEquals("Enter a name...", txtFirstPlayer.getText());
-    }
 
 
 
@@ -93,22 +95,27 @@ public class LocalizationTest {
         List<Player> lstPlayer = new ArrayList<>();
         lstPlayer.add(new HumanPlayer("Antoine"));
         lstPlayer.add(new HumanPlayer("Louis"));
-        scrabbleGUI = new ScrabbleGUI();
-        scrabbleGUI.setTestMode(true);
-        scrabbleGUI.setBackgroundPath("sunburst.jpg");
-        frame = scrabbleGUI.getMenu();
+        refreshMainMenu();
         game = gameManager.createNewGame(lstPlayer, Language.FRENCH);
         scrabbleGUI.setGameTheme(Theme.BASIC);
         scrabbleGUI.createScrabbleGame(game);
 
-        txtFirstPlayer = (JTextField) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME + " 0");
-        btnAccept = (JButton) TestUtils.getChildNamed(frame, ConstanteTestName.CONFIRM_NAME);
-        lblTheme = (JLabel) TestUtils.getChildNamed(frame, ConstanteTestName.LBL_THEME);
-        lblSecondPlayer = (JLabel) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME + "1");
         panelSearchBar = (PanelSearchBar) TestUtils.getChildNamed(scrabbleGUI, ConstanteTestName.SEARCH_BAR);
         btnSearch = (JButton) TestUtils.getChildNamed(panelSearchBar, ConstanteTestName.SEARCH_BUTTON);
         searchBar = (JTextField) TestUtils.getChildNamed(panelSearchBar, ConstanteTestName.SEARCH_TXT);
         lblResult = (JLabel) TestUtils.getChildNamed(panelSearchBar, ConstanteTestName.LBL_RESULT);
+    }
+
+    private void refreshMainMenu() {
+        frame = null;
+        scrabbleGUI = new ScrabbleGUI();
+        scrabbleGUI.setTestMode(true);
+        scrabbleGUI.setBackgroundPath("sunburst.png");
+        frame = scrabbleGUI.getMenu();
+        txtFirstPlayer = (JTextField) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME + " 0");
+        btnAccept = (JButton) TestUtils.getChildNamed(frame, ConstanteTestName.CONFIRM_NAME);
+        lblTheme = (JLabel) TestUtils.getChildNamed(frame, ConstanteTestName.LBL_THEME);
+        lblSecondPlayer = (JLabel) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME + "1");
     }
 
 }
