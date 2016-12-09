@@ -138,6 +138,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnPassTurn.setFocusPainted(false);
         btnPassTurn.setBorderPainted(false);
         btnPassTurn.setContentAreaFilled(false);
+        btnPassTurn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         setImageBtn(btnPassTurn, ConstanteComponentMessage.RES_NEXT);
 
@@ -160,6 +161,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnPlayWord.setFocusPainted(false);
         btnPlayWord.setBorderPainted(false);
         btnPlayWord.setContentAreaFilled(false);
+        btnPlayWord.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         setImageBtn(btnPlayWord, ConstanteComponentMessage.RES_NEXT);
         btnPlayWord.addActionListener(e -> gameModel.selectPlayWordAction());
@@ -174,6 +176,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnRecall.setName(ConstanteTestName.RECALL_NAME);
         btnRecall.setSize(OPTIONS_WIDTH, getHeight());
         btnRecall.setLocation(x, POS_Y);
+        btnRecall.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         add(btnRecall);
 
         btnRecall.addActionListener(actionEvent -> gameModel.recallTiles());
@@ -192,6 +195,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnOrderTiles.setFocusPainted(false);
         btnOrderTiles.setBorderPainted(false);
         btnOrderTiles.setContentAreaFilled(false);
+        btnOrderTiles.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         btnOrderTiles.setSize(OPTIONS_WIDTH, getHeight());
         setImageBtn(btnOrderTiles, ConstanteComponentMessage.RES_AZ);
@@ -214,6 +218,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnExchange.setName(ConstanteTestName.EXCHANGE_NAME);
         btnExchange.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnExchange.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnExchange.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         x = getWidth() - OPTIONS_WIDTH * 2 - ScrabbleGUI.MARGIN;
         btnCancelExchange = new JButton();
@@ -221,6 +226,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnCancelExchange.setName(ConstanteTestName.CANCEL_EXCHANGE_NAME);
         btnCancelExchange.setLocation(x, POS_Y);
         btnCancelExchange.setSize(OPTIONS_WIDTH, getHeight());
+        btnCancelExchange.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setImageBtn(btnCancelExchange, ConstanteComponentMessage.RES_RETURN);
 
         add(btnExchange);
@@ -262,7 +268,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnForfeit.setSize(OPTIONS_WIDTH, getHeight());
         btnForfeit.setLocation(POS_Y, POS_Y);
         setImageBtn(btnForfeit, ConstanteComponentMessage.RES_ABANDON);
-
+        btnForfeit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         add(btnForfeit);
         btnForfeit.addActionListener(e -> {
 
@@ -325,19 +331,15 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
     public void changementEtat(Enum<?> e, Object o) {
 
         if (e.equals(Event.SELECT_BLANK_TILE_VALUE)) {
-            Tile tileSelected = (Tile) o;
-
             if(!testMode)
             {
+                Tile tileSelected = (Tile) o;
                 DialogBlankTileChoice tileChoice = new DialogBlankTileChoice(parent, tileSelected, imageThemePath);
                 tileChoice.setModal(true);
                 tileChoice.setVisible(true);
             }
-
         }
     }
-
-    public void setTestMode(boolean mode){ testMode = mode;}
 
     private void initIconsTile() {
 

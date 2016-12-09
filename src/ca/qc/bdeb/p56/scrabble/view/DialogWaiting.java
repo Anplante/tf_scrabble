@@ -29,6 +29,7 @@ public class DialogWaiting extends JDialog implements KeyListener {
     public void keyTyped(KeyEvent e) {
 
     }
+
     @Override
     public void keyPressed(KeyEvent e) {
         dispose();
@@ -38,4 +39,5 @@ public class DialogWaiting extends JDialog implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
+    
 }

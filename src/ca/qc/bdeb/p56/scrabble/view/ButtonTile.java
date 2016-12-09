@@ -36,17 +36,6 @@ public class ButtonTile extends JButton implements Observateur{
         setBorder(BorderFactory.createEtchedBorder());
         setIcon(icon);
 
-
-        // Louis : Drag & drop
-    /*    addMouseListener(new MouseAdapter() {
-
-            public void mousePressed(MouseEvent e){
-
-                JComponent lab = (JComponent)e.getSource();
-                TransferHandler handle = lab.getTransferHandler();
-                handle.exportAsDrag(lab, e, TransferHandler.MOVE);
-            }
-        });*/
     }
 
     public Tile getTile() {
