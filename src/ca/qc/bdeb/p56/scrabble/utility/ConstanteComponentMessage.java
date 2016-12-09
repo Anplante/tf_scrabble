@@ -26,7 +26,7 @@ public class ConstanteComponentMessage {
 
     public static final char START_ALPHABET = 'A';
     public static final char END_ALPHABET = 'Z';
-    public static final String DEFAULT_DICT_PATH = "resources/dictionary/fr_dictionary.txt";
 
 
+    public static final String RES_RECALL = "./images/recall.png" ;
 }

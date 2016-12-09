@@ -32,6 +32,7 @@ public class ImagesManager {
 
     public static ImageIcon getIcon(URL path, int width, int height)
     {
+
         ImageIcon fillingIcon = new ImageIcon(path);
         Image img = fillingIcon.getImage();
         Image newImage = img.getScaledInstance(width,height, java.awt.Image.SCALE_SMOOTH);

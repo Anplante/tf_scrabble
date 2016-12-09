@@ -49,6 +49,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
     private String imageThemePath;
     private boolean testMode = false;
 
+
     protected PanelLetterRackZone(Rectangle boundsZoneLetterRack, ScrabbleGUI parent, Game game, String imageThemePath) {
 
         super();
@@ -116,11 +117,11 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         initOrderTilesOption();
     }
 
-    private void setImageBtn(JButton btn, String path) {        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource(path));
+    private void setImageBtn(JButton btn, String path) {
 
-        Image img = icon.getImage();
-        Image newimg = img.getScaledInstance(btn.getWidth(), btn.getHeight(), java.awt.Image.SCALE_SMOOTH);
-        icon = new ImageIcon(newimg);
+        URL url = getClass().getClassLoader().getResource(path);
+
+        ImageIcon icon = ImagesManager.getIcon(url, btn.getWidth(), btn.getHeight());
         btn.setIcon(icon);
     }
 
@@ -176,7 +177,12 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnRecall.setName(ConstanteTestName.RECALL_NAME);
         btnRecall.setSize(OPTIONS_WIDTH, getHeight());
         btnRecall.setLocation(x, POS_Y);
+        btnRecall.setOpaque(false);
+        btnRecall.setFocusPainted(false);
+        btnRecall.setBorderPainted(false);
+        btnRecall.setContentAreaFilled(false);
         btnRecall.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        setImageBtn(btnRecall, ConstanteComponentMessage.RES_RECALL);
         add(btnRecall);
 
         btnRecall.addActionListener(actionEvent -> gameModel.recallTiles());
@@ -219,6 +225,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnExchange.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnExchange.setHorizontalTextPosition(SwingConstants.CENTER);
         btnExchange.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btnExchange.setBackground(new Color(91, 187, 71));
 
         x = getWidth() - OPTIONS_WIDTH * 2 - ScrabbleGUI.MARGIN;
         btnCancelExchange = new JButton();

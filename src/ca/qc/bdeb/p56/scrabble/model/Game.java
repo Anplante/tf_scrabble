@@ -53,6 +53,7 @@ public class Game implements Observable {
     private Player lastPlayerToPlay;
     private String currentWord;
     private Language language;
+    private String dictionaryFilePath;
 
     public Game(List<Player> players) {
         isEndGame = false;
@@ -109,16 +110,9 @@ public class Game implements Observable {
         Element rootElement = getRootElement(filePath);
         initAlphabetBag(rootElement);
         boardManager = createBoard(rootElement);
-        initDictionnary();
     }
 
-    private void initDictionnary() {
 
-        File dictFile = new File(ConstanteComponentMessage.DEFAULT_DICT_PATH);
-
-        dictionary = Dictionary.getINSTANCE();
-        dictionary.loadDictinnary(dictFile);
-    }
 
     private Element getRootElement(String path) {
 
@@ -147,9 +141,21 @@ public class Game implements Observable {
 
         Element languageElement = (Element) rootElement.getElementsByTagName(language.getLanguage()).item(0);
         Element alphabetsElement = (Element) languageElement.getElementsByTagName("alphabet").item(0);
-
+        Element dictionaryElement = (Element) languageElement.getElementsByTagName("dictionary").item(0);
         NodeList alphabetsNodes = alphabetsElement.getElementsByTagName(TAG_LETTER);
         initAllLetters(alphabetsNodes);
+        initDictionnary(dictionaryElement);
+    }
+
+    private void initDictionnary(Element dictionaryElement ) {
+
+
+
+        String path = dictionaryElement.getAttribute("filename");
+        File dictFile = new File(path);
+
+        dictionary = Dictionary.getINSTANCE();
+        dictionary.loadDictinnary(dictFile);
     }
 
 

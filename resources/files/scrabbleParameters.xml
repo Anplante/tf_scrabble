@@ -32,7 +32,7 @@
             <letter text="" value="0" amount="2"/>
         </alphabet>
 
-        <dictionary filename="./dictionary/fr_dictionary.txt"/>
+        <dictionary filename="./resources/dictionary/fr_dictionary.txt"/>
 
     </french>
 
@@ -67,7 +67,7 @@
             <letter text="" value="0" amount="2"/>
         </alphabet>
 
-        <dictionary filename="./dictionary/eng_dictionary.txt"/>
+        <dictionary filename="./resources/dictionary/eng_dictionary.txt"/>
 
     </english>
 

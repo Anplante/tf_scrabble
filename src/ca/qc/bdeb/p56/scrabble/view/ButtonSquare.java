@@ -17,10 +17,10 @@ import java.net.URL;
  */
 class ButtonSquare extends JButton implements Observateur {
 
-    private final static Color COLOR_DL = new Color(113, 205, 207);
-    private final static Color COLOR_TW = new Color(252, 179, 87);
-    private final static Color COLOR_TL = new Color(91, 187, 71);
-    private final static Color COLOR_DW = new Color(238, 49, 50);
+    private final static Color COLOR_DL = new Color(166, 213, 234);
+    private final static Color COLOR_TL = new Color(230, 60, 52);
+    private final static Color COLOR_TW = new Color(20, 145, 234);
+    private final static Color COLOR_DW = new Color(234, 169, 166);
     private final static Color COLOR_CENTER = new Color(255, 192, 203);
 
     private static final String PATH_IMG_CENTER_STAR = "./images/star.png";
