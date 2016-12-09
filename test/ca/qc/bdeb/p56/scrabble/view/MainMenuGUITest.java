@@ -32,6 +32,7 @@ public class MainMenuGUITest {
     public void setUp()  throws Exception {
 
         scrabbleGUI = new ScrabbleGUI();
+        scrabbleGUI.setTestMode(true);
         scrabbleGUI.setBackgroundPath("simplistic.png");
         frame = scrabbleGUI.getMenu();
         txtFirstPlayer = (JTextField) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME + " 0");
@@ -109,9 +110,9 @@ public class MainMenuGUITest {
     public void testTheme() {
         cmbTheme.setSelectedIndex(1);
         btnAccept.doClick();
-        assertEquals("./letters/frenchDictionaryValue/noble/", scrabbleGUI.getTheme().getThemeFolderPath());
+        assertEquals("/noble", scrabbleGUI.getTheme().getThemeFolderPath());
         cmbTheme.setSelectedIndex(0);
         btnAccept.doClick();
-        assertEquals("./letters/frenchDictionaryValue/basic/", scrabbleGUI.getTheme().getThemeFolderPath());
+        assertEquals("/basic", scrabbleGUI.getTheme().getThemeFolderPath());
     }
 }

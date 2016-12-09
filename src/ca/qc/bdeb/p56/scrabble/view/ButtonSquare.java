@@ -5,7 +5,6 @@ import ca.qc.bdeb.p56.scrabble.model.Square;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ImagesManager;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
-import ca.qc.bdeb.p56.scrabble.shared.Theme;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +34,7 @@ class ButtonSquare extends JButton implements Observateur {
     private int size;
     private String theme;
 
-    protected ButtonSquare(Square square, int size, String themePath) {
+    ButtonSquare(Square square, int size, String themePath) {
 
         super();
         this.theme = themePath;
@@ -46,14 +45,6 @@ class ButtonSquare extends JButton implements Observateur {
         setBorder(BorderFactory.createEtchedBorder());
         setFocusable(false);
         changementEtat();
-    }
-
-    public int getPositionX(){
-        return  getX();
-    }
-
-    public int getPositionY(){
-        return  getY();
     }
 
     protected Square getSelectedSquare()
@@ -73,8 +64,6 @@ class ButtonSquare extends JButton implements Observateur {
                 content = premium.getName();
             }
         }
-
-
 
         if (square != null && square.getTileOn() == null)
             setIcon(null);
@@ -111,10 +100,11 @@ class ButtonSquare extends JButton implements Observateur {
 
     // temporaire - à changer TODO
     private void setImage() {
+
         if (square.getTileOn() != null) {
             setText("");
 
-            String pathTheme ="";
+            String pathTheme;
             String valueOnTile = square.getLetterOn();
 
 
@@ -125,10 +115,11 @@ class ButtonSquare extends JButton implements Observateur {
                 pathTheme = theme;
 
             }
-            String res = pathTheme +"/" + valueOnTile + ConstanteComponentMessage.EXT_PNG;
+            String res = pathTheme + "/" + valueOnTile + ConstanteComponentMessage.EXT_PNG;
             URL path = getClass().getClassLoader().getResource(res);
             setIcon(ImagesManager.getIcon(path, size, size));
-        } else if (theme.equals(ConstanteComponentMessage.RES_IMAGES_NOBLE)) {
+        }
+        else if (theme.equals(ConstanteComponentMessage.RES_IMAGES_NOBLE)) {
             setBackground(Color.lightGray);
         } else {
             setBackground(new Color(188, 183, 122));

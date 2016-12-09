@@ -1,4 +1,4 @@
-package ca.qc.bdeb.p56.scrabble.shared;
+package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 
@@ -21,6 +21,11 @@ public enum Theme {
     public String getThemeFolderPath()
     {
         return folderPath;
+    }
+
+    public String getThemeFolderPathForEmptyTile()
+    {
+        return "";
     }
 
 }

@@ -5,10 +5,10 @@ import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.HumanPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.shared.Language;
-import ca.qc.bdeb.p56.scrabble.shared.Theme;
 import ca.qc.bdeb.p56.scrabble.view.MainMenuGUI;
 import ca.qc.bdeb.p56.scrabble.view.PanelSearchBar;
 import ca.qc.bdeb.p56.scrabble.view.ScrabbleGUI;
+import ca.qc.bdeb.p56.scrabble.view.Theme;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +17,6 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 import static org.junit.Assert.assertEquals;
 
@@ -91,10 +90,11 @@ public class LocalizationTest {
 
     private void refreshScrabble() {
         GameManager gameManager = new GameManager();
-        List lstPlayer = new ArrayList<Player>();
+        List<Player> lstPlayer = new ArrayList<>();
         lstPlayer.add(new HumanPlayer("Antoine"));
         lstPlayer.add(new HumanPlayer("Louis"));
         scrabbleGUI = new ScrabbleGUI();
+        scrabbleGUI.setTestMode(true);
         scrabbleGUI.setBackgroundPath("sunburst.jpg");
         frame = scrabbleGUI.getMenu();
         game = gameManager.createNewGame(lstPlayer, Language.FRENCH);

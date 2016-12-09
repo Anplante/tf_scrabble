@@ -2,10 +2,10 @@ package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.*;
 import ca.qc.bdeb.p56.scrabble.shared.Event;
+import ca.qc.bdeb.p56.scrabble.shared.Language;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
-import ca.qc.bdeb.p56.scrabble.shared.Theme;
 
 import java.awt.Image;
 import javax.swing.*;
@@ -25,7 +25,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
     private final ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
     private static final double RATIO_LETTER_RACK_ZONE = 0.1;
     protected static final int MARGIN = 5;
-
+    private boolean testMode = false;
     private final int LETTER_RACK_ZONE_HEIGHT;
     private String backgroundPath;
     private PanelLetterRackZone panelLetterRack;
@@ -39,6 +39,8 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
     private JPanel panelInformation;
     private PanelSearchBar panelSearchBar;
     private  JPanel panelInfoWord;
+
+    private String imageThemePath;
 
     private JScrollPane scrollMoveLog;
 
@@ -64,6 +66,10 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    public void setTestMode (boolean mode)
+    {
+        testMode = mode;
+    }
     private final AbstractAction actionEscape = new AbstractAction(messages.getString("Title_Menu")) {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -85,7 +91,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
 
         this.gameModel = game;
-
+        createImagePath(theme);
         gameModel.ajouterObservateur(this);
         gameModel.startGame();
         initializeComponents();
@@ -95,6 +101,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
     public Theme getTheme() {
         return theme;
+
     }
 
     public void setGameTheme(Theme theme) {
@@ -168,8 +175,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         int witdhBoard = pnlBoard.getWidth();
 
         Rectangle boundsZoneLetterRack = new Rectangle(x, y + MARGIN, witdhBoard, LETTER_RACK_ZONE_HEIGHT - MARGIN * 2);
-        panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack, this,gameModel);
-
+        panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack, this,gameModel, imageThemePath);
         panelLetterRack.setPlayer(gameModel.getPlayers());
         panelLetterRack.setGameModel(gameModel);
         panelLetterRack.setName(ConstanteTestName.LETTER_RACK_NAME);
@@ -229,7 +235,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
         for (int row = 0; row < BoardManager.BOARD_SIZE; row++) {
             for (int column = 0; column < BoardManager.BOARD_SIZE; column++) {
-                ButtonSquare square = new ButtonSquare(gameModel.getSquare(row, column), size, gameModel.getImageThemePath());
+                ButtonSquare square = new ButtonSquare(gameModel.getSquare(row, column), size, imageThemePath);
                 square.setName(ConstanteTestName.SQUARE_NAME + row + column);
                 square.addActionListener(this);
                 pnlBoard.add(square);
@@ -295,11 +301,37 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
             panelLetterRack.setVisible(false);
 
         } else if (e.equals(Event.MOVE_PLAYED)) {
-            dialogWaiting = new DialogWaiting(getSize());
-            dialogWaiting.setVisible(true);
+
+            if(!testMode)
+            {
+                dialogWaiting = new DialogWaiting(getSize());
+                dialogWaiting.setVisible(true);
+            }
+
         }
     }
 
+
+    public void createImagePath(Theme theme){
+
+        //FIXME: SWITCH
+        StringBuilder imageThemePath = new StringBuilder();
+
+
+        Language gameLanguage = gameModel.getLanguage();
+
+        switch (gameLanguage)
+        {
+            case ENGLISH:
+                imageThemePath.append(ConstanteComponentMessage.RES_ROOT_ENGLISH);
+                break;
+            default:
+                imageThemePath.append(ConstanteComponentMessage.RES_ROOT_FRENCH);
+                break;
+        }
+        imageThemePath.append(theme.getThemeFolderPath());
+        this.imageThemePath = imageThemePath.toString();
+    }
 
     private void showGameResult(List<Player> winner){
 

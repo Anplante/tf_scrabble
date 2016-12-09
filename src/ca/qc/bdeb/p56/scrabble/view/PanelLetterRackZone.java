@@ -46,12 +46,13 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
     private JPanel panelLettersRack;
     private ScrabbleGUI parent;
     private HashMap<String, ImageIcon> iconsTile;
+    private String imageThemePath;
+    private boolean testMode = false;
 
-
-    protected PanelLetterRackZone(Rectangle boundsZoneLetterRack, ScrabbleGUI parent,Game game) {
+    protected PanelLetterRackZone(Rectangle boundsZoneLetterRack, ScrabbleGUI parent, Game game, String imageThemePath) {
 
         super();
-
+        this.imageThemePath = imageThemePath;
         this.parent = parent;
         this.gameModel = game;
         setLayout(null);
@@ -325,19 +326,25 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
         if (e.equals(Event.SELECT_BLANK_TILE_VALUE)) {
             Tile tileSelected = (Tile) o;
-            DialogBlankTileChoice tileChoice = new DialogBlankTileChoice(parent, tileSelected, gameModel.getImageThemePath());
-            tileChoice.setModal(true);
-            tileChoice.setVisible(true);
+
+            if(!testMode)
+            {
+                DialogBlankTileChoice tileChoice = new DialogBlankTileChoice(parent, tileSelected, imageThemePath);
+                tileChoice.setModal(true);
+                tileChoice.setVisible(true);
+            }
+
         }
     }
 
+    public void setTestMode(boolean mode){ testMode = mode;}
 
     private void initIconsTile() {
 
         iconsTile = new HashMap<>();
         int size = (int) TILE_DIMENSION.getWidth();
 
-        String themFolder = gameModel.getImageThemePath();
+        String themFolder = imageThemePath;
 
         for (char start = ConstanteComponentMessage.START_ALPHABET; start <= ConstanteComponentMessage.END_ALPHABET; start++) {
             String resource = themFolder + "/"+ start + ConstanteComponentMessage.EXT_PNG;

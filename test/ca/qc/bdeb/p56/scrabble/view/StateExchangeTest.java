@@ -4,7 +4,6 @@ import ca.qc.bdeb.p56.scrabble.model.*;
 import ca.qc.bdeb.p56.scrabble.shared.Language;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
-import ca.qc.bdeb.p56.scrabble.shared.Theme;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,13 +34,14 @@ public class StateExchangeTest{
 
         GameManager gameManager = new GameManager();
 
-        List lstPlayer = new ArrayList<Player>();
+        List<Player> lstPlayer = new ArrayList<>();
         lstPlayer.add(new HumanPlayer("Antoine"));
         lstPlayer.add(new HumanPlayer("Louis"));
         lstPlayer.add(new HumanPlayer("Julien"));
 
         game = gameManager.createNewGame(lstPlayer, Language.FRENCH);
         scrabbleGame = new ScrabbleGUI();
+        scrabbleGame.setTestMode(true);
         scrabbleGame.setGameTheme(Theme.BASIC);
         scrabbleGame.setBackgroundPath("simplistic.png");
         scrabbleGame.createScrabbleGame(game);

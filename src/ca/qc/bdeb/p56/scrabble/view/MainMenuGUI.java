@@ -5,7 +5,6 @@ import ca.qc.bdeb.p56.scrabble.model.GameManager;
 import ca.qc.bdeb.p56.scrabble.model.HumanPlayer;
 import ca.qc.bdeb.p56.scrabble.model.Player;
 import ca.qc.bdeb.p56.scrabble.shared.Language;
-import ca.qc.bdeb.p56.scrabble.shared.Theme;
 import ca.qc.bdeb.p56.scrabble.utility.*;
 import sun.misc.Launcher;
 
@@ -363,7 +362,6 @@ public class MainMenuGUI extends JDialog {
 
         game = gameManager.createNewGame(players, getLanguage());
         parent.setGameTheme(getLetttersTheme());
-        game.createImagePath(parent.getTheme());
         parent.changeBackground(allBackgroundPath.get(cmbBackgroundScrabble.getSelectedIndex()));
 
         parent.createScrabbleGame(game);

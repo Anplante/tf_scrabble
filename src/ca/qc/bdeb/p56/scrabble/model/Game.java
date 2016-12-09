@@ -53,7 +53,6 @@ public class Game implements Observable {
     private Player lastPlayerToPlay;
     private String currentWord;
     private Language language;
-    private String imageThemePath;
 
     public Game(List<Player> players) {
         isEndGame = false;
@@ -141,25 +140,6 @@ public class Game implements Observable {
 
         return rootElement;
     }
-
-    public void createImagePath(Theme gameTheme){
-
-        //FIXME: SWITCH
-        StringBuilder imageThemePath = new StringBuilder();
-        if(language.getLanguage().equals(Language.ENGLISH.getLanguage())){
-            imageThemePath.append(ConstanteComponentMessage.RES_ROOT_ENGLISH);
-        } else {
-            imageThemePath.append(ConstanteComponentMessage.RES_ROOT_FRENCH);
-        }
-        if(gameTheme.equals(Theme.BASIC)){
-            imageThemePath.append(ConstanteComponentMessage.RES_IMAGES_BASIC);
-        } else {
-            imageThemePath.append(ConstanteComponentMessage.RES_IMAGES_NOBLE);
-        }
-        this.imageThemePath = imageThemePath.toString();
-    }
-
-    public String getImageThemePath(){ return imageThemePath; }
 
     private void initAlphabetBag(Element rootElement) {
 
@@ -264,7 +244,6 @@ public class Game implements Observable {
         logManager.addPassedLog(getActivePlayer(), turn);
         getActivePlayer().selectNextState(IDState.PENDING);
         goToNextState();
-        // TODO Louis : bloquer quand le joueur place un mot ou annuler les autres actions
     }
 
     private void activateNextPlayer() {

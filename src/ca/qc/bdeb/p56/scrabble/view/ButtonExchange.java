@@ -40,7 +40,7 @@ public class ButtonExchange extends JButton implements Observateur {
     }
 
 
-    public void initComponents() {
+    private void initComponents() {
 
         setIcon(new ImageIcon(bagImg.getScaledInstance(getWidth() / 2, getHeight() / 2, Image.SCALE_SMOOTH)));
         lblNumberLetter = new JLabel();

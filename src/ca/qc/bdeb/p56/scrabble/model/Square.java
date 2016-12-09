@@ -108,6 +108,7 @@ public class Square implements Observable {
     }
 
     public boolean containLetter() {
+
         return tileOn != null;
     }
 

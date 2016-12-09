@@ -6,7 +6,7 @@ import ca.qc.bdeb.p56.scrabble.utility.TestUtils;
 import ca.qc.bdeb.p56.scrabble.view.ButtonTile;
 import ca.qc.bdeb.p56.scrabble.view.PanelLetterRackZone;
 import ca.qc.bdeb.p56.scrabble.view.ScrabbleGUI;
-import ca.qc.bdeb.p56.scrabble.shared.Theme;
+import ca.qc.bdeb.p56.scrabble.view.Theme;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +43,7 @@ public class StateSwaptTileTest{
 
         GameManager gameManager = new GameManager();
 
-        List lstPlayer = new ArrayList<Player>();
+        List<Player> lstPlayer = new ArrayList<>();
         lstPlayer.add(new HumanPlayer("Antoine"));
         lstPlayer.add(new HumanPlayer("Louis"));
         lstPlayer.add(new HumanPlayer("Julien"));
@@ -51,6 +51,7 @@ public class StateSwaptTileTest{
         game = gameManager.createNewGame(lstPlayer, Language.FRENCH);
 
         scrabbleGame = new ScrabbleGUI();
+        scrabbleGame.setTestMode(true);
         scrabbleGame.setBackgroundPath("simplistic.png");
         scrabbleGame.setGameTheme(Theme.BASIC);
         scrabbleGame.createScrabbleGame(game);

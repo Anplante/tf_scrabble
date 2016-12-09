@@ -14,9 +14,6 @@ import java.awt.event.KeyListener;
  */
 public class DialogWaiting extends JDialog implements KeyListener {
 
-
-    private Game game;
-
     public DialogWaiting(Dimension dimension) {
 
         setSize(dimension);
@@ -27,7 +24,6 @@ public class DialogWaiting extends JDialog implements KeyListener {
         setUndecorated(true);
         addKeyListener(this);
     }
-
 
     @Override
     public void keyTyped(KeyEvent e) {
