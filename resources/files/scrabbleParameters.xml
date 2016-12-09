@@ -29,7 +29,7 @@
             <letter text="X" value="10" amount="1"/>
             <letter text="Y" value="10" amount="1"/>
             <letter text="Z" value="10" amount="1"/>
-            <letter text="" value="0" amount="500"/>
+            <letter text="" value="0" amount="2"/>
         </alphabet>
 
         <dictionary filename="./dictionary/fr_dictionary.txt"/>
@@ -64,7 +64,7 @@
             <letter text="X" value="8" amount="1"/>
             <letter text="Y" value="4" amount="2"/>
             <letter text="Z" value="10" amount="1"/>
-            <letter text="" value="0" amount="500"/>
+            <letter text="" value="0" amount="2"/>
         </alphabet>
 
         <dictionary filename="./dictionary/eng_dictionary.txt"/>

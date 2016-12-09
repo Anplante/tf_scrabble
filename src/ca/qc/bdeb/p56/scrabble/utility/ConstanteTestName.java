@@ -32,13 +32,11 @@ public class ConstanteTestName {
     public static final String INFO_NAME = "Info : ";
     public static final String EXIT_NAME = "Exit";
     public static final String ORDER_NAME = "Order";
-    public static final String WAITING_PANEL_NAME = "waitingPnl";
     public static final String FILE_CHOOSER = "fileChooser";
     public static final String SEARCH_BUTTON = "searchButton";
     public static final String LANGUAGE_NAME = "language";
-    public static String SEARCH_BAR = "search bar";
-    public static String SEARCH_TXT = "search field";
-    public static String LBL_RESULT = "result of search";
-    public static String LBL_THEME = "Theme";
-    public static String LBL_PLAYER = "player test";
+    public static final String SEARCH_BAR = "search bar";
+    public static final String SEARCH_TXT = "search field";
+    public static final String LBL_RESULT = "result of search";
+    public static final String LBL_THEME = "Theme";
 }

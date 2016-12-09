@@ -568,9 +568,28 @@ public class GameTest {
         expectedPoints *= -1;
 
         assertEquals(expectedPoints, opponent.getScore());
+    }
+
+    @Test
+    public void testEndOfGameWhenOnlyOnePlayerLeft(){
+
+        game.startGame();
+
+        List<Player> players = game.getPlayers();
+        Player currentPlayer = game.getActivePlayer();
+        game.forfeit();
+        assertTrue(game.isEndGame());
+
+        players.remove(currentPlayer);
+
+
+        List<Player> winner = game.getWinner();
+        assertEquals(winner, players);
 
 
     }
+
+
 
     private int calcultePointOfPlayerHands(Player player) {
 
@@ -584,4 +603,6 @@ public class GameTest {
         }
         return total;
     }
+
+
 }

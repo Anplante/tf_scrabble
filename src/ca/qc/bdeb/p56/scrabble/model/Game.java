@@ -216,7 +216,6 @@ public class Game implements Observable {
             if (!getActivePlayer().isActivated()) {
 
                 if (checkForEndOfTheGame()) {
-
                     setEndOfGame();
 
                 } else {
@@ -226,12 +225,10 @@ public class Game implements Observable {
                     }
                     drawTile();
                     activateNextPlayer();
-
-
                 }
             }
 
-        } while (!getActivePlayer().isActivated() && !isEndGame());
+        } while (!isEndGame() && !getActivePlayer().isActivated());
     }
 
     private boolean isLastTurnPlayer(Player activePlayer) {

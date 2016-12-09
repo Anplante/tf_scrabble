@@ -105,9 +105,66 @@ public class StatePlayTileTest {
     }
 
     @Test
-    public void testMoveTileOnBoard(){
+    public void testSwapTile(){
 
 
+        Tile firstTilePlayed  = activePlayer.getTiles().get(0);
+        Tile secondTilePlayed = activePlayer.getTiles().get(1);
+
+        Square firstSquarePosition = game.getSquare(7,7);
+        Square secondSquarePosition = game.getSquare(7,8);
+
+        game.selectLetter(firstTilePlayed);
+        game.playTile(firstSquarePosition);
+
+        game.selectLetter(secondTilePlayed);
+        game.playTile(secondSquarePosition);
+
+        assertEquals(firstTilePlayed, firstSquarePosition.getTileOn());
+        assertEquals(secondTilePlayed, secondSquarePosition.getTileOn());
+
+        game.playTile(firstSquarePosition);
+        game.playTile(secondSquarePosition);
+
+        assertEquals(firstTilePlayed, secondSquarePosition.getTileOn());
+        assertEquals(secondTilePlayed, firstSquarePosition.getTileOn() );
+    }
+
+
+    @Test
+    public void testMoveTileOnBoard()
+    {
+        Tile tilePlayed = activePlayer.getTiles().get(0);
+        Square firstSquarePosition = game.getSquare(7,7);
+        Square secondSquarePosition = game.getSquare(7,8);
+        game.selectLetter(tilePlayed);
+        game.playTile(firstSquarePosition);
+
+        assertEquals(tilePlayed,firstSquarePosition.getTileOn());
+        assertNull(secondSquarePosition.getTileOn());
+
+        game.playTile(firstSquarePosition);
+        game.playTile(secondSquarePosition);
+
+        assertEquals(tilePlayed,secondSquarePosition.getTileOn());
+        assertNull(firstSquarePosition.getTileOn());
+    }
+
+
+    @Test
+    public void testGoToPhaseExchange(){
+
+        Tile tilePlayed = activePlayer.getTiles().get(0);
+        Square squarePlayed = game.getSquare(7,7);
+
+        game.selectLetter(tilePlayed);
+        game.playTile(squarePlayed);
+
+        game.exchangeLetter();
+
+        assertNull(squarePlayed.getTileOn());
+
+        assertTrue(activePlayer.getTiles().contains(tilePlayed));
     }
 
 }

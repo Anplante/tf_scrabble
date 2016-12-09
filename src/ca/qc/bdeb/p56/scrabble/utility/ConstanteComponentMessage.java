@@ -10,21 +10,10 @@ import java.util.ResourceBundle;
  */
 public class ConstanteComponentMessage {
 
-    private static final Locale locale = new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
-    private static final ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
-
     public static final String PATH_BACKGROUND_RES = "/background/";
     public static final String EXT_JPG = ".jpg";
-    public static final String FILE_SEPARATOR = "file.separator";
-    public static final String MESS_ERROR_LOADING_FILE = messages.getString("Error_Loading_File");
-    public static final String MESS_ERROR = messages.getString("Error");
     public static final String EXT_PNG = ".png";
-    public static final String TAG_NAME = "name";
-    public static final String TAG_ITEM = "item";
     public static final String RES_WAITING_IMAGE = "./images/waiting.png";
-    public static final String MESS_RECALL = messages.getString("Recall");;
-    public static final String MESS_EXCHANGE = messages.getString("Exchange");
-    public static final String MESS_RESTART_GAME  = messages.getString("Replay");
     public static final String ELLIPSIS = "...";
     public static final String RES_ROOT_ENGLISH = "./englishDictionaryValue";
     public static final String RES_ROOT_FRENCH = "./frenchDictionaryValue";

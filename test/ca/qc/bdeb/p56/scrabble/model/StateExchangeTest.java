@@ -67,4 +67,20 @@ public class StateExchangeTest {
         game.cancelExchange();
         assertTrue(currentPlayer.getTiles().contains(tile));
     }
+
+    @Test
+    public void testDeselectTileForExchange()
+    {
+
+        Tile cancelledTileForExchange = currentPlayer.getTiles().get(0);
+
+        game.selectLetter(cancelledTileForExchange);
+        game.selectLetter(currentPlayer.getTiles().get(1));
+
+        game.selectLetter(currentPlayer.getTiles().get(0));
+        game.exchangeLetter();
+
+        assertTrue(currentPlayer.getTiles().contains(cancelledTileForExchange));
+
+    }
 }
