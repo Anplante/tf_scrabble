@@ -59,17 +59,24 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
         addKeyBindings();
 
-
         menu = new MainMenuGUI(this);
-        menu.setName(ConstanteTestName.MENU_NAME);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        menu.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent windowEvent) {
+                System.exit(0);
+            }
+        });
+        menu.setVisible(true);
+
+
     }
 
     public void setTestMode (boolean mode)
     {
         testMode = mode;
     }
+
     private final AbstractAction actionEscape = new AbstractAction(messages.getString("Title_Menu")) {
         @Override
         public void actionPerformed(ActionEvent e) {

@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URISyntaxException;
@@ -107,7 +108,6 @@ public class MainMenuGUI extends JDialog {
 
         fenetre.pack();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        // TODO Louis : Faire en sorte que lorsqu'on ferme le dialogue que le programme se termine.
     }
 
     private void initializeSize() {
@@ -500,7 +500,7 @@ public class MainMenuGUI extends JDialog {
         BufferedImage imgPlayer;
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File fichier = fileImage.getSelectedFile();
-            // TODO: filter
+
             if (fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG) || fichier.getName().endsWith(ConstanteComponentMessage.EXT_PNG)
                     || fichier.getName().endsWith(ConstanteComponentMessage.EXT_JPG)) {
                 imgPlayer = ImagesManager.getImageFromFile(fichier);
@@ -562,4 +562,5 @@ public class MainMenuGUI extends JDialog {
     public int getLenghtPlayers() {
         return game.getPlayers().size();
     }
+
 }

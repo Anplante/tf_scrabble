@@ -73,6 +73,8 @@ public class StatePlayTile extends State {
             tilesPlacedOnBoardPosition.remove(pointA);
             tilesPlacedOnBoardPosition.add(pointB);
         }
+        getGame().calculateCurrentPoints(tilesPlacedOnBoardPosition);
+        getGame().aviserObservateurs();
     }
 
     private boolean checkIfPlayerWantsSelectATileToMoveOnBoard(Square squareSelected) {
@@ -98,13 +100,17 @@ public class StatePlayTile extends State {
         if (tileSelected.isBlankTile()) {
             getGame().aviserObservateurs(Event.SELECT_BLANK_TILE_VALUE, tileSelected);
         }
-        squareSelected.setLetter(tileSelected);
-        tileSelected.selectTile();
-        getGame().calculateCurrentPoints(tilesPlacedOnBoardPosition);
-        getGame().aviserObservateurs();
-        getPlayer().remove(tileSelected);
-        getPlayer().aviserObservateurs();
-        getGame().aviserObservateurs();
+        if(!tileSelected.getLetter().isEmpty())
+        {
+            squareSelected.setLetter(tileSelected);
+            tileSelected.selectTile();
+            getGame().calculateCurrentPoints(tilesPlacedOnBoardPosition);
+            getGame().aviserObservateurs();
+            getPlayer().remove(tileSelected);
+            getPlayer().aviserObservateurs();
+            getGame().aviserObservateurs();
+
+        }
         tileSelected.selectTile();
         tileSelected = null;
     }
