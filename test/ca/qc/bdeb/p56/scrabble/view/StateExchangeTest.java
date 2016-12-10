@@ -87,9 +87,7 @@ public class StateExchangeTest{
 
         btnEchanger.doClick();
 
-
         assertNotEquals(playerTileBeforeExchange, currentPlayer.getTiles());
-
     }
 
     @Test

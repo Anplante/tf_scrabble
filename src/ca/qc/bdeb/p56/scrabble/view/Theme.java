@@ -22,10 +22,4 @@ public enum Theme {
     {
         return folderPath;
     }
-
-    public String getThemeFolderPathForEmptyTile()
-    {
-        return "";
-    }
-
 }

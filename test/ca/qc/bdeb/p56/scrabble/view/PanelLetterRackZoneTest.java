@@ -10,9 +10,6 @@ import org.junit.Test;
 
 import javax.swing.*;
 
-import java.awt.*;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +28,7 @@ public class PanelLetterRackZoneTest {
     public void setUp() throws Exception {
 
         GameManager gameManager = new GameManager();
-        List<Player> lstPlayer = new ArrayList<Player>();
+        List<Player> lstPlayer = new ArrayList<>();
         lstPlayer.add(new HumanPlayer("Antoine"));
         lstPlayer.add(new HumanPlayer("Louis"));
         lstPlayer.add(new HumanPlayer("Julien"));
@@ -42,7 +39,6 @@ public class PanelLetterRackZoneTest {
         scrabbleGame.setGameTheme(Theme.BASIC);
         scrabbleGame.createScrabbleGame(game);
         currentPlayer = game.getActivePlayer();
-        scrabbleGame.setTestMode(true);
     }
 
     @After
@@ -58,9 +54,6 @@ public class PanelLetterRackZoneTest {
 
         JButton btnFinish = (JButton) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.PASS_TURN_NAME);
 
-
-
-
         btnFinish.doClick();
         assertNotEquals(currentPlayer, game.getActivePlayer());
 
@@ -70,6 +63,18 @@ public class PanelLetterRackZoneTest {
         }
 
         assertEquals(currentPlayer, game.getActivePlayer());
+    }
+
+    @Test
+    public void testEndGameAfterSixScorelessTurn()
+    {
+        JButton btnFinish = (JButton) TestUtils.getChildNamed(scrabbleGame, ConstanteTestName.PASS_TURN_NAME);
+
+        for(int i = 0; i < 6; i++){
+            btnFinish.doClick();
+        }
+
+        assertTrue(game.checkForEndOfTheGame());
     }
 
 }

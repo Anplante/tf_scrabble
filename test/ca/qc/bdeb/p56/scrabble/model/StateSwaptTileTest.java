@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 /**
  * Created by Julien Brosseau on 10/6/2016.
@@ -29,8 +28,6 @@ public class StateSwaptTileTest{
     private List<ButtonTile> btnTiles;
     private ScrabbleGUI scrabbleGame;
     private JPanel letterRack;
-    private static final int WIDTH = 50;
-    private static final int HEIGHT = 50;
 
 
     private Player currentPlayer;
@@ -65,10 +62,6 @@ public class StateSwaptTileTest{
         for (int i = 0; i < currentPlayer.getLettersCount(); i++) {
             btnTiles.add((ButtonTile) TestUtils.getChildNamed(letterRack, ConstanteTestName.TILE_NAME + i));
         }
-    }
-
-    @After
-    public void tearDown() throws Exception {
     }
 
     @Test

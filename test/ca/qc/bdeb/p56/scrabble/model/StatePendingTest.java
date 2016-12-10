@@ -24,7 +24,7 @@ public class StatePendingTest {
 
         GameManager gameManager = new GameManager();
 
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         players.add(new HumanPlayer("Louis"));
         players.add(new HumanPlayer("Julien"));
         game = gameManager.createNewGame(players, Language.FRENCH);

@@ -2,7 +2,6 @@ package ca.qc.bdeb.p56.scrabble.model;
 
 
 import ca.qc.bdeb.p56.scrabble.shared.Language;
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +28,7 @@ public class GameTest {
 
         GameManager gameManager = new GameManager();
 
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         players.add(new HumanPlayer("Louis"));
         players.add(new HumanPlayer("Antoine"));
         game = gameManager.createNewGame(players, Language.FRENCH);
@@ -599,7 +598,7 @@ public class GameTest {
 
         for (Tile tile : tiles) {
             int value = tile.getValue();
-            total += value;;
+            total += value;
         }
         return total;
     }

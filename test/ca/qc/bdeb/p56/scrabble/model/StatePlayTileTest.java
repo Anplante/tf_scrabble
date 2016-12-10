@@ -1,7 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.model;
 
 import ca.qc.bdeb.p56.scrabble.shared.Language;
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNull;
 
 /**
  * Created by TheFrenchOne on 10/4/2016.
@@ -27,7 +25,7 @@ public class StatePlayTileTest {
 
         GameManager gameManager = new GameManager();
 
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         players.add(new HumanPlayer("Louis"));
         game = gameManager.createNewGame(players, Language.FRENCH);
         game.startGame();

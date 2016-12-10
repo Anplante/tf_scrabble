@@ -2,7 +2,6 @@ package ca.qc.bdeb.p56.scrabble.model;
 
 import ca.qc.bdeb.p56.scrabble.model.Log.*;
 import ca.qc.bdeb.p56.scrabble.shared.*;
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 import org.w3c.dom.Document;
@@ -17,10 +16,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.*;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 
 /**
@@ -53,7 +50,6 @@ public class Game implements Observable {
     private Player lastPlayerToPlay;
     private String currentWord;
     private Language language;
-    private String dictionaryFilePath;
 
     public Game(List<Player> players) {
         isEndGame = false;
@@ -68,7 +64,10 @@ public class Game implements Observable {
         }
     }
 
-    public Language getLanguage() { return language;}
+    public Language getLanguage() {
+        return language;
+    }
+
     public Board getBoard() {
         return boardManager.getBoard();
     }
@@ -93,10 +92,6 @@ public class Game implements Observable {
         return boardManager.getSquare(row, column);
     }
 
-    public BoardManager getBoardManager() {
-        return boardManager;
-    }
-
     public LogManager getLogManager() {
         return logManager;
     }
@@ -113,7 +108,6 @@ public class Game implements Observable {
     }
 
 
-
     private Element getRootElement(String path) {
 
         Element rootElement = null;
@@ -127,9 +121,9 @@ public class Game implements Observable {
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(dbFactory.toString()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {
-            Logger.getLogger(path.toString()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(path).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(path.toString()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(path).log(Level.SEVERE, null, ex);
         }
 
         return rootElement;
@@ -147,9 +141,7 @@ public class Game implements Observable {
         initDictionnary(dictionaryElement);
     }
 
-    private void initDictionnary(Element dictionaryElement ) {
-
-
+    private void initDictionnary(Element dictionaryElement) {
 
         String path = dictionaryElement.getAttribute("filename");
         File dictFile = new File(path);
@@ -259,10 +251,10 @@ public class Game implements Observable {
 
         for (int i = 0; i < MAX_TILES_IN_HAND; i++) {
 
-            for (int j = 0; j < players.size(); j++) {
-
+            for(Player player : players)
+            {
                 Tile tile = alphabetBag.get(randomGenerator.nextInt(alphabetBag.size()));
-                players.get(j).addLetter(tile);
+                player.addLetter(tile);
                 alphabetBag.remove(tile);
             }
         }
@@ -378,7 +370,6 @@ public class Game implements Observable {
         return word.toString().toLowerCase();
     }
 
-    // TODO Antoine : refactoring a faire ici -
     private boolean checkForComboWord(List<Square> tilesPlaced, Direction direction) {
 
         boolean allCombinaisonAreValid = true;
@@ -559,7 +550,8 @@ public class Game implements Observable {
 
     public void exchangeLetter() {
         getActivePlayer().selectNextState(IDState.EXCHANGE);
-        goToNextState();
+        if (isReadyForNextPhase())
+            goToNextState();
     }
 
     public void cancelExchange() {
@@ -687,7 +679,6 @@ public class Game implements Observable {
         }
         return candidats;
     }
-
 
 
     public void setLanguage(Language language) {

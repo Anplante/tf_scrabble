@@ -18,8 +18,6 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.*;
 
-import static com.sun.org.apache.xml.internal.serializer.utils.Utils.messages;
-
 /**
  * Created by Louis Luu Lim on 9/11/2016.
  */
@@ -241,8 +239,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
 
         btnExchange.addActionListener(e -> {
 
-            // TODO Louis : Utiliser aviserObservateur
-            if (currentPlayer.getState().getName() != IDState.EXCHANGE.getName()) {
+            if (!currentPlayer.getState().getName().equals(IDState.EXCHANGE.getName())) {
                 btnExchange.setText(messages.getString("Confirm"));
                 disableAllOtherBtnExchange(false);
             } else {
@@ -250,6 +247,8 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
                 btnExchange.setText(messages.getString("Exchange"));
             }
             gameModel.exchangeLetter();
+
+
         });
 
         btnCancelExchange.addActionListener(e -> {
@@ -267,7 +266,6 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         btnCancelExchange.setVisible(!enabler);
     }
 
-    // TODO Louis : Faire en sorte qu'on enleve le joueur et non quitter la partie
     private void initForfeitOption() {
 
         btnForfeit = new JButton();
@@ -338,8 +336,7 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
     public void changementEtat(Enum<?> e, Object o) {
 
         if (e.equals(Event.SELECT_BLANK_TILE_VALUE)) {
-            if(!testMode)
-            {
+            if (!testMode) {
                 Tile tileSelected = (Tile) o;
                 DialogBlankTileChoice tileChoice = new DialogBlankTileChoice(parent, tileSelected, imageThemePath);
                 tileChoice.setModal(true);
@@ -356,14 +353,14 @@ public class PanelLetterRackZone extends JPanel implements Observateur, ActionLi
         String themFolder = imageThemePath;
 
         for (char start = ConstanteComponentMessage.START_ALPHABET; start <= ConstanteComponentMessage.END_ALPHABET; start++) {
-            String resource = themFolder + "/"+ start + ConstanteComponentMessage.EXT_PNG;
+            String resource = themFolder + "/" + start + ConstanteComponentMessage.EXT_PNG;
             URL res = getClass().getClassLoader().getResource(resource);
             ImageIcon icon = ImagesManager.getIcon(res, size, size);
             iconsTile.put(Character.toString(start), icon);
         }
         iconsTile.put("",
-                ImagesManager.getIcon(getClass().getClassLoader().getResource(themFolder + "/"+
-                         "1" + ConstanteComponentMessage.EXT_PNG), size, size));
+                ImagesManager.getIcon(getClass().getClassLoader().getResource(themFolder + "/" +
+                        "1" + ConstanteComponentMessage.EXT_PNG), size, size));
 
     }
 

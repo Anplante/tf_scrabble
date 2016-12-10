@@ -2,9 +2,7 @@ package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
-import ca.qc.bdeb.p56.scrabble.utility.Observable;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +32,6 @@ public class PanelInfoWord extends JPanel implements Observateur{
     @Override
     public void changementEtat() {
         if(game.getCurrentWord()!=null){
-
             wordPlayed.setText(game.getCurrentWord());
         }else{
             wordPlayed.setText(messages.getString("Non_Valid"));
@@ -46,7 +43,5 @@ public class PanelInfoWord extends JPanel implements Observateur{
 
     @Override
     public void changementEtat(Enum<?> e, Object o) {
-
     }
-
 }

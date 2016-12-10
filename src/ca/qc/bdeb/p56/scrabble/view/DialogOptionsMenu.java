@@ -1,6 +1,5 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 
 import javax.swing.*;
@@ -19,12 +18,15 @@ public class DialogOptionsMenu extends JDialog {
 
     private final ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
     private JButton btnReturnGame;
+    private JButton btnReturnToMenu;
     private JButton btnQuitGame;
+    private ScrabbleGUI parent;
 
     public DialogOptionsMenu(ScrabbleGUI parent) {
 
         super();
 
+        this.parent = parent;
         setSize(parent.getWidth() / 4, parent.getHeight() / 2);
         setLocationRelativeTo(parent);
         setLayout(new GridLayout(0, 1, 10, 10));
@@ -36,6 +38,7 @@ public class DialogOptionsMenu extends JDialog {
 
     private void iniComponents() {
         initOptReturnGame();
+        initOptReturnToMenu();
         initOptQuitGame();
         addKeybindings();
     }
@@ -51,6 +54,24 @@ public class DialogOptionsMenu extends JDialog {
                     messages.getString("App_Closure"), JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (i == 0) {
                 System.exit(0);
+            }
+        });
+    }
+
+    private void initOptReturnToMenu() {
+
+        btnReturnToMenu = new JButton( messages.getString("App_Closure"));
+        btnReturnToMenu.setName(ConstanteTestName.ABANDON_NAME);
+        add(btnReturnToMenu);
+
+        btnReturnToMenu.addActionListener(actionEvent -> {
+            int i = JOptionPane.showConfirmDialog(new Frame(),  messages.getString("Confirm_Action"),
+                    messages.getString("Surrender_Game"), JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (i == 0) {
+                JOptionPane.showMessageDialog(null, messages.getString("Lost"),
+                        messages.getString("End_Game"), JOptionPane.INFORMATION_MESSAGE);
+                parent.returnToMenu();
+                dispose();
             }
         });
     }

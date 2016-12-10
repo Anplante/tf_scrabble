@@ -7,7 +7,6 @@ import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
-import java.awt.Image;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.ResourceBundle;
 
 /**
  * Fenêtre de jeu principal du jeu de Scrabble.
- *
+ * <p>
  * Created by Louis Luu Lim on 9/7/2016.
  */
 public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
@@ -38,7 +37,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
     private JLabel background;
     private JPanel panelInformation;
     private PanelSearchBar panelSearchBar;
-    private  JPanel panelInfoWord;
+    private JPanel panelInfoWord;
 
     private String imageThemePath;
 
@@ -60,7 +59,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         addKeyBindings();
 
         menu = new MainMenuGUI(this);
-
+        menu.setName(ConstanteTestName.MENU_NAME);
         menu.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent windowEvent) {
@@ -72,8 +71,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
     }
 
-    public void setTestMode (boolean mode)
-    {
+    public void setTestMode(boolean mode) {
         testMode = mode;
     }
 
@@ -129,10 +127,10 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
     private void createPanelInfoWord() {
         panelInfoWord = new PanelInfoWord(gameModel);
-        int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN*2;
-        panelInfoWord.setLocation(MARGIN, scrollMoveLog.getHeight()+25 +panelSearchBar.getHeight());
+        int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN * 2;
+        panelInfoWord.setLocation(MARGIN, scrollMoveLog.getHeight() + 25 + panelSearchBar.getHeight());
         panelInfoWord.setBackground(Color.WHITE);
-        panelInfoWord.setSize(width, 50 );
+        panelInfoWord.setSize(width, 50);
         add(panelInfoWord);
     }
 
@@ -182,7 +180,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         int witdhBoard = pnlBoard.getWidth();
 
         Rectangle boundsZoneLetterRack = new Rectangle(x, y + MARGIN, witdhBoard, LETTER_RACK_ZONE_HEIGHT - MARGIN * 2);
-        panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack, this,gameModel, imageThemePath);
+        panelLetterRack = new PanelLetterRackZone(boundsZoneLetterRack, this, gameModel, imageThemePath);
         panelLetterRack.setPlayer(gameModel.getPlayers());
         panelLetterRack.setGameModel(gameModel);
         panelLetterRack.setName(ConstanteTestName.LETTER_RACK_NAME);
@@ -227,7 +225,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
         int y = scrollMoveLog.getHeight() + 15;
         int width = ((getWidth() - getHeight() + LETTER_RACK_ZONE_HEIGHT) / 2) - MARGIN * 2;
-        panelSearchBar = new PanelSearchBar(gameModel,width);
+        panelSearchBar = new PanelSearchBar(gameModel, width);
         panelSearchBar.setLocation(MARGIN, y);
         panelSearchBar.setName(ConstanteTestName.SEARCH_BAR);
         gameModel.ajouterObservateur(panelSearchBar);
@@ -287,9 +285,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         ButtonSquare squareClicked = (ButtonSquare) actionEvent.getSource();
         Square square = squareClicked.getSelectedSquare();
 
-
         gameModel.playTile(square);
-
     }
 
     @Override
@@ -309,8 +305,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
         } else if (e.equals(Event.MOVE_PLAYED)) {
 
-            if(!testMode)
-            {
+            if (!testMode) {
                 dialogWaiting = new DialogWaiting(getSize());
                 dialogWaiting.setVisible(true);
             }
@@ -318,16 +313,14 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         }
     }
 
-
-    public void createImagePath(Theme theme){
+    public void createImagePath(Theme theme) {
 
         StringBuilder imageThemePath = new StringBuilder();
 
 
         Language gameLanguage = gameModel.getLanguage();
 
-        switch (gameLanguage)
-        {
+        switch (gameLanguage) {
             case ENGLISH:
                 imageThemePath.append(ConstanteComponentMessage.RES_ROOT_ENGLISH);
                 break;
@@ -339,7 +332,7 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
         this.imageThemePath = imageThemePath.toString();
     }
 
-    private void showGameResult(List<Player> winner){
+    private void showGameResult(List<Player> winner) {
 
         String message;
         if (winner.size() == 1) {
@@ -359,7 +352,8 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
             message += ".";
         }
-
-        JOptionPane.showConfirmDialog(null, message, messages.getString("End_Game"), JOptionPane.PLAIN_MESSAGE);
+        if (!testMode) {
+            JOptionPane.showConfirmDialog(null, message, messages.getString("End_Game"), JOptionPane.PLAIN_MESSAGE);
+        }
     }
 }

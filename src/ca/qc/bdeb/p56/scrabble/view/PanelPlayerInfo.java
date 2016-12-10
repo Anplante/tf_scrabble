@@ -2,22 +2,15 @@ package ca.qc.bdeb.p56.scrabble.view;
 
 import ca.qc.bdeb.p56.scrabble.model.Log.MoveLog;
 import ca.qc.bdeb.p56.scrabble.model.Player;
-import ca.qc.bdeb.p56.scrabble.shared.*;
 import ca.qc.bdeb.p56.scrabble.shared.Event;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteTestName;
-import ca.qc.bdeb.p56.scrabble.utility.ImagesManager;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
-import sun.misc.Launcher;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
-import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 
 /**
  * Created by TheFrenchOne on 9/14/2016.

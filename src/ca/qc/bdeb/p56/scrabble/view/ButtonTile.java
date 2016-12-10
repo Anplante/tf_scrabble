@@ -3,15 +3,10 @@ package ca.qc.bdeb.p56.scrabble.view;
 import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.model.Tile;
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
-import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
 import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  * Created by TheFrenchOne on 9/12/2016.
@@ -23,7 +18,6 @@ public class ButtonTile extends JButton implements Observateur{
     private static final Color SELECTED_COLOR = Color.green;
     private Game gameModel;
     private Tile tile;
-
 
     public ButtonTile(Game gameModel, Tile tile, ImageIcon icon) {
 
@@ -45,7 +39,6 @@ public class ButtonTile extends JButton implements Observateur{
     @Override
     public void changementEtat() {
 
-        // TODO Louis : Mettre dans changement d'état avec l'enum d'état
         if (tile.isSelected()) {
             if (gameModel.getState().getName().equals(IDState.EXCHANGE.getName())) {
                 setBackground(REMOVE_COLOR);

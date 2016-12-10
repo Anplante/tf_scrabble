@@ -5,10 +5,8 @@ package ca.qc.bdeb.p56.scrabble.shared;
  */
 public enum Event {
 
-    CONFIRMATION,
     END_GAME,
     MOVE_PLAYED,
     ROTATION_PLAYERS,
-    SELECT_BLANK_TILE_VALUE,
-    WORD_POSITION
+    SELECT_BLANK_TILE_VALUE
 }

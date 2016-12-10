@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 public class Dictionary {
 
     private static Dictionary INSTANCE;
-
     private HashMap<Integer, String> dict = new HashMap<>();
 
     private Dictionary() {
@@ -26,7 +25,6 @@ public class Dictionary {
         }
         return INSTANCE;
     }
-
 
     public void loadDictinnary(File file) {
 
@@ -49,5 +47,4 @@ public class Dictionary {
     public boolean checkWordExist(String word) {
         return dict.containsValue(word);
     }
-
 }

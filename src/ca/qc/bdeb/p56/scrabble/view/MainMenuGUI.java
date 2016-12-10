@@ -13,7 +13,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URISyntaxException;
@@ -42,7 +41,6 @@ public class MainMenuGUI extends JDialog {
 
 
     private static final int ENGLISH = 1;
-    private static final int FRENCH = 0;
     private static final int NOBLE_THEME = 1;
     private static final int LIMIT_OF_PLAYER = 4;
 
@@ -50,7 +48,6 @@ public class MainMenuGUI extends JDialog {
     private ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
     private static final String[] numberOfAi = {"0", "1", "2", "3"};
     private static final NumberOfPlayer[] numberOfHuman = {TWO_PLAYER, THREE_PLAYER, FOUR_PLAYER};
-    public static final URL PATH_TO_FILE = Launcher.class.getResource("/files/ListOfName.xml");
     private static final URL DEFAULT_PLAYER_ICON = Launcher.class.getResource("/images/default.png");
 
     private List<JTextField> allTextField;
@@ -136,6 +133,8 @@ public class MainMenuGUI extends JDialog {
 
         cmbNumberOfAi = new JComboBox();
         cmbNumberOfAi.setName(ConstanteTestName.QTE_AI_NAME);
+
+
         for (int i = 0; i < numberOfAi.length; i++) {
             cmbNumberOfAi.addItem(numberOfAi[i]);
         }

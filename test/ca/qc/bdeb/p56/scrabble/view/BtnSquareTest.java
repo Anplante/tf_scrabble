@@ -11,8 +11,6 @@ import java.awt.*;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 
 /**
  * Created by Louis Luu Lim on 9/18/2016.
@@ -27,7 +25,7 @@ public class BtnSquareTest {
     public void setUp() throws Exception {
 
         GameManager gameManager = new GameManager();
-        java.util.List<Player> players = new ArrayList<Player>();
+        java.util.List<Player> players = new ArrayList<>();
         players.add(new HumanPlayer("Louis"));
         gameModel = gameManager.createNewGame(players, Language.FRENCH);
         gameModel.startGame();

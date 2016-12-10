@@ -2,7 +2,6 @@ package ca.qc.bdeb.p56.scrabble.model;
 
 import ca.qc.bdeb.p56.scrabble.shared.Language;
 
-import java.io.File;
 import java.util.List;
 
 /**

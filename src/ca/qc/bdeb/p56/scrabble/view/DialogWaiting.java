@@ -1,8 +1,6 @@
 package ca.qc.bdeb.p56.scrabble.view;
 
-import ca.qc.bdeb.p56.scrabble.model.Game;
 import ca.qc.bdeb.p56.scrabble.utility.ConstanteComponentMessage;
-import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 
 import javax.swing.*;
 import java.awt.*;

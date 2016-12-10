@@ -19,7 +19,6 @@ public class MainMenuGUITest {
     private MainMenuGUI frame;
     private JButton btnAccept;
     private JTextField txtFirstPlayer;
-    private JTextField txtSecondPlayer;
     private JTextField txtThirdPlayer;
     private JTextField txtFourthPlayer;
     private JButton btnFileChooser;
@@ -36,7 +35,6 @@ public class MainMenuGUITest {
         scrabbleGUI.setBackgroundPath("simplistic.png");
         frame = scrabbleGUI.getMenu();
         txtFirstPlayer = (JTextField) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME + " 0");
-        txtSecondPlayer = (JTextField) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME + " 1");
         txtThirdPlayer = (JTextField) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME + " 2");
         txtFourthPlayer = (JTextField) TestUtils.getChildNamed(frame, ConstanteTestName.PLAYER_NAME + " 3");
         btnFileChooser = (JButton) TestUtils.getChildNamed(frame, ConstanteTestName.FILE_CHOOSER + "3");

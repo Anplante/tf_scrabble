@@ -53,7 +53,7 @@ public class ButtonExchange extends JButton implements Observateur {
 
     private String stringCreator() {
 
-        StringBuffer text = new StringBuffer();
+        StringBuilder text = new StringBuilder();
 
         for (int i = 0; i < getWidth() / 2 / 5 - 1; i++) {
             text.append(" ");

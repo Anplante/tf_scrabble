@@ -2,10 +2,7 @@ package ca.qc.bdeb.p56.scrabble.model;
 
 import ca.qc.bdeb.p56.scrabble.shared.IDState;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,20 +20,28 @@ public class StateExchange extends State {
     public StateExchange(Player player) {
         super(player, IDState.EXCHANGE);
         stateSelected = IDState.EXCHANGE;
+        tilesSelected = new ArrayList<>();
         readyForNextPhase = false;
     }
 
     @Override
     protected void selectNextState(IDState stateSelected) {
         this.stateSelected = stateSelected;
-        readyForNextPhase = true;
+
+        switch (stateSelected) {
+            case EXCHANGE:
+                readyForNextPhase = checkCanExchange();
+                break;
+            default:
+                readyForNextPhase = true;
+                break;
+        }
     }
+
 
     @Override
     protected void selectTile(Tile tile) {
-        if (tilesSelected == null) {
-            tilesSelected = new ArrayList<>();
-        }
+
         if (tile.isSelected()) {
             tile.selectTile();
             tilesSelected.remove(tile);
@@ -47,27 +52,14 @@ public class StateExchange extends State {
         }
     }
 
-    @Override
-    protected void execute() {
+    private boolean checkCanExchange() {
+        return !tilesSelected.isEmpty();
+    }
 
-        switch (stateSelected) {
-            case EXCHANGE:
-                if (tilesSelected != null) {
-                    getGame().exchangeLetters(tilesSelected);
+    private void cancelExchange() {
 
-                } else {
-                    // TODO Louis : solution temporaire pour montrer l'erreur. Il faudrait s'entendre sur comment on veut afficher des messages d'erreur
-                    JOptionPane.showMessageDialog(new Frame(),
-                            "Aucune tuile n'a été sélectionné à supprimer",
-                            "Action invalide",
-                            JOptionPane.ERROR_MESSAGE);
-                }
-                break;
-        }
-        if (tilesSelected != null) {
-            for (Tile tile : tilesSelected) {
-                tile.selectTile();
-            }
+        for (Tile tile : tilesSelected) {
+            tile.selectTile();
         }
     }
 
@@ -78,9 +70,11 @@ public class StateExchange extends State {
 
         switch (stateSelected) {
             case SELECT_ACTION:
+                cancelExchange();
                 newState = new StateSelectAction(getPlayer());
                 break;
             case EXCHANGE:
+                getGame().exchangeLetters(tilesSelected);
                 newState = new StatePending(getPlayer());
                 break;
         }

@@ -97,16 +97,13 @@ class ButtonSquare extends JButton implements Observateur {
         repaint();
     }
 
-
-    // temporaire - à changer TODO
     private void setImage() {
 
         if (square.getTileOn() != null) {
-            setText("");
 
+            setText("");
             String pathTheme;
             String valueOnTile = square.getLetterOn();
-
 
             if (square.getTileOn().isBlankTile()) {
                 pathTheme = theme + getBlanksPath(theme);
@@ -119,7 +116,7 @@ class ButtonSquare extends JButton implements Observateur {
             URL path = getClass().getClassLoader().getResource(res);
             setIcon(ImagesManager.getIcon(path, size, size));
         }
-        else if (theme.equals(ConstanteComponentMessage.RES_IMAGES_NOBLE)) {
+        else if (theme.contains(ConstanteComponentMessage.RES_IMAGES_NOBLE)) {
             setBackground(Color.lightGray);
         } else {
             setBackground(new Color(188, 183, 122));
