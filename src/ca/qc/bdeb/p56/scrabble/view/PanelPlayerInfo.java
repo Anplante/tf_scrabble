@@ -54,7 +54,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         lblName = new JLabel();
         lblName.setFont(fontOfPanel);
         lblName.setText(": " + playerModel.getName());
-        lblName.setLocation(75, 25);
+        lblName.setLocation(125, 75);
         lblName.setSize(lblName.getPreferredSize());
         this.add(lblName);
     }
@@ -63,14 +63,14 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
 
         lblScoreTitle = new JLabel();
         lblScoreTitle.setFont(fontOfPanel);
-        lblScoreTitle.setText(messages.getString("Score"));
-        lblScoreTitle.setLocation(5, 75);
+        lblScoreTitle.setText(messages.getString("Score") + " ");
+        lblScoreTitle.setLocation(5, 125);
         lblScoreTitle.setSize(lblScoreTitle.getPreferredSize());
 
         lblScore = new JLabel();
         lblScore.setName(ConstanteTestName.SCORE_NAME);
         lblScore.setFont(fontOfPanel);
-        lblScore.setLocation(lblScoreTitle.getWidth(),75);
+        lblScore.setLocation(lblScoreTitle.getWidth(),125);
         lblScore.setSize(lblScore.getPreferredSize());
 
         this.add(lblScoreTitle);
@@ -81,13 +81,13 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         lblCoupTitle = new JLabel();
         lblCoupTitle.setFont(fontOfPanel);
         lblCoupTitle.setText(messages.getString("Last_Move"));
-        lblCoupTitle.setLocation(5, 100);
+        lblCoupTitle.setLocation(5, 150);
         lblCoupTitle.setSize(lblCoupTitle.getPreferredSize());
 
         lblCoupJoue = new JLabel();
         lblCoupJoue.setFont(fontOfPanel);
         lblCoupJoue.setText("------");
-        lblCoupJoue.setLocation(lblCoupTitle.getWidth() + 10, 100);
+        lblCoupJoue.setLocation(lblCoupTitle.getWidth() + 10, 150);
         lblCoupJoue.setSize(lblCoupJoue.getPreferredSize());
 
 
@@ -99,13 +99,13 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         lblPointsTitle = new JLabel();
         lblPointsTitle.setFont(fontOfPanel);
         lblPointsTitle.setText("");
-        lblPointsTitle.setLocation(lblCoupTitle.getWidth() + 10, 125);
+        lblPointsTitle.setLocation(lblCoupTitle.getWidth() + 10, 175);
         lblPointsTitle.setSize(lblPointsTitle.getPreferredSize());
 
         lblPoints = new JLabel();
         lblPoints.setFont(fontOfPanel);
         lblPoints.setText("");
-        lblPoints.setLocation(lblCoupTitle.getWidth() + 55, 125);
+        lblPoints.setLocation(lblCoupTitle.getWidth() + 55, 175);
         lblPoints.setSize(lblCoupJoue.getPreferredSize());
 
 
@@ -170,7 +170,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
             g.setColor(Color.darkGray);
             setBackground(null);
         }
-        g.drawImage(playerIcon, 11, 11, 50,50,this);
+        g.drawImage(playerIcon, 11, 11, 100,100,this);
         g.dispose();
     }
 }

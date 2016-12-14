@@ -154,7 +154,15 @@ public class ScrabbleGUI extends JFrame implements ActionListener, Observateur {
 
         panelInformation = new JPanel();
         panelInformation.setLocation(x, MARGIN);
-        panelInformation.setSize(width, heigth);
+        if (gameModel.getPlayers().size() == 2) {
+            panelInformation.setSize(width, heigth + 100);
+        }
+        else if (gameModel.getPlayers().size() == 3) {
+            panelInformation.setSize(width, heigth + 175);
+        }
+        else {
+            panelInformation.setSize(width, heigth + 250);
+        }
         panelInformation.setLayout(new GridLayout(gameModel.getPlayers().size(), 1, MARGIN, MARGIN));
         panelInformation.setOpaque(false);
         add(panelInformation);
