@@ -66,7 +66,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
 
         lblScoreTitle = new JLabel();
         lblScoreTitle.setFont(ROBOTO_FONT);
-        lblScoreTitle.setText(messages.getString("Score") + " ");
+        lblScoreTitle.setText(messages.getString("Score") + "   ");
         lblScoreTitle.setLocation(5, 125);
         lblScoreTitle.setSize(lblScoreTitle.getPreferredSize());
 

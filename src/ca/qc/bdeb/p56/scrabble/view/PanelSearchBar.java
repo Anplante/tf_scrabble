@@ -106,7 +106,6 @@ public class PanelSearchBar extends JPanel implements Observateur {
     public void changementEtat() {
         if(gameModel.getActivePlayer().getState().getName().equals(IDState.PENDING.getName())){
             searchBar.setText("");
-            GhostText ghostText = new GhostText(searchBar, messages.getString("Enter_Word"));
             lblResult.setText("");
         }
     }
