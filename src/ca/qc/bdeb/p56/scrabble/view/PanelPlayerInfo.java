@@ -9,6 +9,8 @@ import ca.qc.bdeb.p56.scrabble.utility.Observateur;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -18,8 +20,9 @@ import java.util.ResourceBundle;
 public class PanelPlayerInfo extends JPanel implements Observateur{
 
     private final ResourceBundle messages = ResourceBundle.getBundle("strings", Locale.getDefault());
+    private static final Font ROBOTO_FONT = loadFont("Roboto-Bold.ttf").deriveFont(Font.PLAIN, 20);
     private static final String TEXT_FONT = "Comic Sans MS Bold";
-    private static final Font fontOfPanel = new Font(TEXT_FONT, Font.PLAIN, 15);
+    private static final Font fontOfPanel = new Font(TEXT_FONT, Font.PLAIN, 18);
 
     private Player playerModel;
     private JLabel lblName;
@@ -52,7 +55,7 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
 
     private void initNameLabel() {
         lblName = new JLabel();
-        lblName.setFont(fontOfPanel);
+        lblName.setFont(ROBOTO_FONT);
         lblName.setText(": " + playerModel.getName());
         lblName.setLocation(125, 75);
         lblName.setSize(lblName.getPreferredSize());
@@ -62,14 +65,14 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
     private void initScoreLabel() {
 
         lblScoreTitle = new JLabel();
-        lblScoreTitle.setFont(fontOfPanel);
+        lblScoreTitle.setFont(ROBOTO_FONT);
         lblScoreTitle.setText(messages.getString("Score") + " ");
         lblScoreTitle.setLocation(5, 125);
         lblScoreTitle.setSize(lblScoreTitle.getPreferredSize());
 
         lblScore = new JLabel();
         lblScore.setName(ConstanteTestName.SCORE_NAME);
-        lblScore.setFont(fontOfPanel);
+        lblScore.setFont(ROBOTO_FONT);
         lblScore.setLocation(lblScoreTitle.getWidth(),125);
         lblScore.setSize(lblScore.getPreferredSize());
 
@@ -79,13 +82,13 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
 
     private void initPlayedLabel() {
         lblCoupTitle = new JLabel();
-        lblCoupTitle.setFont(fontOfPanel);
+        lblCoupTitle.setFont(ROBOTO_FONT);
         lblCoupTitle.setText(messages.getString("Last_Move"));
         lblCoupTitle.setLocation(5, 150);
         lblCoupTitle.setSize(lblCoupTitle.getPreferredSize());
 
         lblCoupJoue = new JLabel();
-        lblCoupJoue.setFont(fontOfPanel);
+        lblCoupJoue.setFont(ROBOTO_FONT);
         lblCoupJoue.setText("------");
         lblCoupJoue.setLocation(lblCoupTitle.getWidth() + 10, 150);
         lblCoupJoue.setSize(lblCoupJoue.getPreferredSize());
@@ -97,13 +100,13 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
 
     private void initPointsLabel() {
         lblPointsTitle = new JLabel();
-        lblPointsTitle.setFont(fontOfPanel);
+        lblPointsTitle.setFont(ROBOTO_FONT);
         lblPointsTitle.setText("");
         lblPointsTitle.setLocation(lblCoupTitle.getWidth() + 10, 175);
         lblPointsTitle.setSize(lblPointsTitle.getPreferredSize());
 
         lblPoints = new JLabel();
-        lblPoints.setFont(fontOfPanel);
+        lblPoints.setFont(ROBOTO_FONT);
         lblPoints.setText("");
         lblPoints.setLocation(lblCoupTitle.getWidth() + 55, 175);
         lblPoints.setSize(lblCoupJoue.getPreferredSize());
@@ -172,5 +175,13 @@ public class PanelPlayerInfo extends JPanel implements Observateur{
         }
         g.drawImage(playerIcon, 11, 11, 100,100,this);
         g.dispose();
+    }
+
+    private static Font loadFont(String resourceName) {
+        try (InputStream inputStream = PanelSearchBar.class.getResourceAsStream("/fonts/" + resourceName)) {
+            return Font.createFont(Font.TRUETYPE_FONT, inputStream);
+        } catch (IOException | FontFormatException e) {
+            throw new RuntimeException("Could not load " + resourceName, e);
+        }
     }
 }
